@@ -4,7 +4,6 @@ public class AnoBissexto {
 	/**
 	 * @param args
 	 * @author Pedro Paulo Vezzá Campos  - 0123A
-	 * Teste: O sistema de SVN funciona realmente?
 	 */
 	public static void main(String[] args) {
 		Scanner anoInput = new Scanner(System.in);
