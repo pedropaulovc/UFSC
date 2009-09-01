@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="file:/C:/Program%20Files/eclipse/plugins/br.ufsc.edugraf.dix_2008.9.5/transformacao/dix.xml"?>
+<página nome="LeitorFeeds">
+  <aplique nome="LeitorFeedJadix" classe="controleJadix.ApliqueLeitorFeed" esquerda="0" topo="0" altura="0" largura="0" />
+</página>
