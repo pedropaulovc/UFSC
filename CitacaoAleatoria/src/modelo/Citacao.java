@@ -1,6 +1,6 @@
 package modelo;
 
-public class Citacao implements InterfaceCitacao {
+public class Citacao{
 	private String citacao;
 
 	public Citacao(String citacao){
