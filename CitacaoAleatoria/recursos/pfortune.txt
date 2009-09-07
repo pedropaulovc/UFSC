@@ -1,0 +1,1813 @@
+"Vossas mensagens serão carinhosamente arquivadas no log '/dev/null'"
+%
+"Viva cada dia como se fosse o último; um dia, você acerta..."
+%
+"Um gato preto cruzando o seu caminho, significa que o animal está indo a algum lugar."
+%
+"Vote no que promete menos. A decepção será menor."
+%
+"Um conservador é alguém que crê na reforma. Mas não agora."
+%
+"Um computador sem COBOL e FORTRAN é como um bolo de chocolate sem ketchup e mostarda."
+%
+"Tradução de 'nightmare': égua noturna."
+%
+"Todos podem vencer, a não ser que haja uma segunda pessoa."
+%
+"Se tempo fosse dinheiro, meu relógio seria milionário.
+%
+"Se a mensagem não estiver clara, aumente o brilho da tela."
+%
+"Sabe o que eu acho? Coisas perdidas."
+%
+"Quando um não quer, dois obrigam."
+%
+"Qualquer programa baseado na competência do usuário foi mal programado."
+%
+"Processamento de dados é como navio pirata: só tem homem, canhão e bacalhau."
+%
+"Prato do dia: bife Espião (frio, duro e com nervos de aço)."
+%
+"praga111 meu shift estragou111"
+%
+"Preserve o verde! Use monitores CGA."
+%
+"Confiamos em Deus; todos os outros tem de pagar em dinheiro."
+%
+"Fluxograma: direção em que cresce o capim."
+%
+"File not found. Serve alcatra, freguês ?"
+%
+"Faça upgrade no seu micro: troque o winchester por um AR-15."
+%
+"Faça seu candidato trabalhar: não vote nele."
+%
+"Eu sempre me achei meio indeciso, mas agora... não sei... sei lá..."
+%
+"Eu não sou um completo idiota, algumas partes estão faltando."
+%
+"Eu acreditava no sistema. Até que formataram a minha família..."
+%
+"Eu estou em forma... redondo é uma forma, não ?"
+%
+Reporter:  - "Joao Pinto, prognosticos para este encontro?" Joao Pinto: - "Prognosticos só no fim do jogo." - João Pinto, jogador de futebol de Portugal
+%
+No fim de um jogo em que o F.C.Porto ganhou: Reporter:  - "Joao Pinto, felizes com mais esta vitoria?" Joao Pinto:- "Sim, estamos felizes porque estamos contentes." - João Pinto, jogador de futebol de Portugal
+%
+Ouve-se Costinha, com a bola na mão, dizer "Pró caralho!": "Muito bem, Costinha a incentivar os companheiros, a mandá-los para a frente!" Comentadores da R.T.P. - Portugal
+%
+Jornalista:"Então João Pinto, o que é que achou do jogo?" - J.P.:"Eu não achei nada, mas o Semedo achou um pente" - João Pinto, jogador de futebol de Portugal
+%
+Após varios erros consecutivos do árbitro:- "...e o árbitro foi agora atingido por um objecto estranho, provavelmente atirado por um TELESPECTADOR..." Comentadores da R.T.P. - Portugal
+%
+"Estou vendo aqui companheiros portadores de deficiência física. Estou vendo o Arnaldo Godoy sentado, tentando me olhar, mas ele não pode me olhar porque ele é cego. Estou aqui à tua esquerda, viu, Arnaldo! Agora, você está olhando pra mim... " - Luís Inácio Lula da Silva - Fonte: Site da Radiobras, 27/06/2003.
+%
+"Não é mérito, mas, pela primeira vez na história da República, a República tem um presidente e um vice-presidente que não têm diploma universitário. Possivelmente, se nós tivéssemos, poderíamos fazer muito mais." - Luís Inácio Lula da Silva - Fonte:Primeira Leitura 13/09/2003 e Radiobrás.
+%
+"Estou otimista porque estamos reduzindo as taxas de interesses dentro do Brasil." - Luís Inácio Lula da Silva Falando à Cúpula das Américas em Moterrey, a 13 de janeiro de 2004. "Tasa de interés" significa, em espanhol, taxa de juros. "Taxas de interesse" não significa nada em língua alguma. - Fonte: Estadão -13 de janeiro de 2004.
+%
+"Há males que vêm para bem". - Luís Inácio Lula da Silva, ao agradecer ao presidente da Rússia pelo apoio que seu país estava dando às investigações do acidente de Alcântara, quando morreram 19 técnicos. Fonte: Vários jornais.
+%
+"Aprendi a contar até dez, apesar de só ter nove dedos, que é para não cometer erros. Um erro em qualquer outro governo é mais um erro. No nosso, não pode acontecer." - Luís Inácio Lula da Silva, no lançamento do Plano Safra para a Agricultura Familiar, em 24/07/2003). Fonte: Vários jornais.
+%
+"Eu sou filho de uma mulher que nasceu analfabeta." - Luís Inácio Lula da Silva falando no Dia Internacional da Mulher, em 8 de março de 2004. Fonte: Radiobrás da data e vários jornais.
+%
+"Estou com uma dor no pé, mas não posso nem mancar, para a imprensa não dizer que estou mancando porque estou num encontro com os companheiros portadores de deficiência". - Luís Inácio Lula da Silva, no encontro com atletas paraolímpicos, em dezembro de 2003. Fonte: Unifolha de Campo Grande, 02/12/1002 e Tribuna da Imprensa, 04/12/2003.
+%
+"Um brinde à felicidade do presidente Al Assad". - Luís Inácio Lula da Silva, num encontro com o presidente sírio, que não se levantou nem ergueu a taça porque os muçulmanos não ingerem bebidas alcoólicas. Fonte: Tribuna da Imprensa, 04/12/2003.
+%
+"Quando Napoleão foi à China". - Luís Inácio Lula da Silva - Citado por Miriam Leitão, em O Globo, 01/05/2004 e lido em vários jornais.
+%
+"Daqui a dois ou três anos possivelmente não estaremos aqui, talvez sejam outros. E nem será o Tony Blair que estará convidando, será outra pessoa". - Luís Inácio Lula da Silva, em reunião de Chefes de Estado em Londres, onde o regime é parlamentarista e o mandato do primeiro-ministro não tem prazo para acabar. O Globo, 15/07/2003 e jornais do mundo inteiro.
+%
+"Pobre do país que precisa de heróis para defender a dignidade. Pobre do país que precisa de mártires para defender a liberdade ou de mortos para defender a vida." - Luís Inácio Lula da Silva, falando em 29 de junho, na abertura da Conferência Nacional dos Direitos Humanos. Fonte: Site da Radiobras e vários jornais.
+%
+"O governo tenta fazer o simples, porque o difícil é difícil." - Luís Inácio Lula da Silva, na 1ª Conferência Nacional do Esporte, em 17 de junho de 2004. Fonte: Folha de São Paulo, 18/07/2004.
+%
+"O Atlântico é apenas "um rio caudaloso, de praias de areias brancas", que une os dois países." - Luís Inácio Lula da Silva, falando no Gabão sobre a aproximação entre o Brasil e aquele país. Fonte: O Estado de São Paulo, 27/07/2004.
+%
+"Cumprimento o presidente da Mercedes-Benz... Pois eu quero dizer na frente do presidente da Mercedes-Benz (...)". - Luís Inácio Lula da Silva, falando no Palácio do Planalto, em 6 de fevereiro de 2004, ao presidente mundial da General Motors, Richard Wagoner. Fonte: Folha OnLine de 07/02/2004.
+%
+"Socorro! Sou um prisioneiro na fábrica de biscoitos chinês" - http://www.weirdfortunecookies.com
+%
+"Sua natureza emocional é forte e emocional" - http://www.weirdfortunecookies.com
+%
+"Quidquid latine dictum sit, altum sonatur."
+%
+"Lorem ipsum dolor sit amet. Consecteuter adisplicing elit."
+%
+"Aliquid melius quam pessimum optimum non est."
+%
+"Der Horizont vieler Menschen ist ein Kreis mit Radius Null" -- und das nennen sie ihren Standpunkt.
+%
+"Ego sum ens omnipotens."
+%
+"Forsan et haec olim meminisse juvabit."
+%
+"Hodie natus est radici frater."
+%
+"Honi soit la vache qui rit."
+%
+"Klatu barada nikto."
+%
+"Mieux vaut tard que jamais!"
+%
+"Qvid me anxivs svm?"
+%
+"Raffiniert ist der Herrgott aber boshaft ist er nicht." (Albert Einstein)
+%
+"Regnant populi."
+%
+"Semper en excretus"
+%
+"SEMPER UBI SUB UBI!!!!"
+%
+"Sillema sillema nika su"
+%
+"Suaviter in modo, fortiter in re. Se non e vero, e ben trovato."
+%
+"Sum quod eris."
+%
+"Tout choses sont dites deja, mais comme personne n'ecoute, il faut toujours recommencer." (A. Gide)
+%
+"Verba volant, scripta manent!"
+%
+"Ah meu Deus! Aliens do espaço! Não me comam, eu tenho mulher e filhos! Coma eles."(Homer J. Simpson)
+%
+"Aqui diz que é para cães, mas cães não sabem ler."(Homer J. Simpson)
+%
+"Penso, logo me canso."
+%
+"Quanto mais sei, mais sei que nada sei."
+%
+"A cabra da minha vizinha é melhor que a minha."
+%
+"Casa-te e verás: perderás o sono e mal dormirás."
+%
+"Tempo não é dinheiro, pois eu tenho dinheiro e não tenho tempo."
+%
+"Beijar uma miúda que fuma é como lamber um cinzeiro."
+%
+"A escola é de todos: estraga a tua parte."
+%
+"Não sou supersticioso porque dá azar."
+%
+"O animal sabe, mas o homem sabe que sabe."
+%
+"As coincidências são acasos com sentido."
+%
+"Quanto mais conheço os homens, mais gosto do meu cão. Quanto mais conheço a minha cadela, mais gosto das mulheres!"
+%
+"O meu coracao só tem uma cor: azul-e-branco."(Joao Pinto,capitao do F.C.P. ao receber um prémio)
+%
+"Reporter:  - 'Joao Pinto, prognosticos para este encontro?' Joao Pinto:- 'Prognosticos só no fim do jogo.'"
+%
+"O homem nasce, cresce, apaixona-se, fica burro e casa-se."
+%
+"Os animais são todos iguais, mas uns são mais iguais que outros." (George Orwell)
+%
+"Nenhum dinheiro desapareceu. Existiam apenas ativos não existentes". (Da defesa do magnata italiano Calisto Tanzi,  proprietário da Parmalat, preso na Itália)
+%
+"The Linux philosophy is to laugh in the face of danger. Oops. Wrong one. Do it yourself. That's it." (Linus Torvalds)
+%
+"Linux doesn't exist. Everyone knows Linux is an unlicensed version of Unix." (Kieran O'Shaughnessy)
+%
+"The two main design principles of the NeXT machine appear to be revenge and spite." (Don Lancaster)
+%
+"Operating systems are like underwear - nobody really wants to look at them." (Bill Joy)
+%
+"I've noticed lately that the paranoid fear of computers becoming intelligent and taking over the world has almost entirely disappeared from the common culture. Near as I can tell, this coincides with the release of MS-DOS." (Larry DeLuca)
+%
+"If you have any trouble sounding condescending, find a Unix user to show you how it's done." (Scott Adams)
+%
+"If the designers of X-Windows built cars, there would be no fewer than five steering wheels hidden about the cockpit, none of which followed the same principles -- but you'd be able to shift gears with your car stereo. Useful feature, that." (Marcus J Ranum)
+%
+"Develop for it? I'll piss on it. [the NeXT Computer]" (Bill Gates)
+%
+"Unix has been feverishly evolving for over 20 years, sort of like bacteria in a cesspool, only less attractive." (John Levine)
+%
+"And on the monitor, these words appear: My name is VAXymandius, thing of pings. Look on my logic, ye coders, and despair!" (Dave Weingart)
+%
+"Every mistake in the computer industry gets made at least 3 times: once by mainframe folks, once by minicomputer folks, and at least once by microprocessor folks." (John Mashey)
+%
+"Unix and C are the ultimate computer viruses." (Richard P Gabriel)
+%
+"Now that we have all this useful information, it would be nice to be able to do something with it. (Actually, it can be emotionally fulfilling just to get information. This is usually only true, however, if you have the social life of a kumquat.)" (UNIX Programmer's Manual)
+%
+"The Windows API has done more to retard skill development than anything since COBOL maintenance." (Larry O'Brien)
+%
+"The purpose of the icons, the purpose of the entire OS X look and feel, is to keep the customer happy during that critical period between the time of sale and the time the check clears." (Bruce Tognazini)
+%
+"In 1971 when I joined the staff of the MIT Artificial Intelligence lab, all of us who helped develop the operating system software, we called ourselves hackers." (Richard Stallman)
+%
+"AI has been brain-dead since the 1970s." (Marvin Minsky)
+%
+"Linux is just a file system and a file manager." (Steve Ballmer)
+%
+"UNIX is an operating system, OS/2 is half an operating system, Windows is a shell, and DOS is a boot partition virus." (Peter Coffin)
+%
+"When you say: 'I wrote a program that crashed Windows', people just stare at you blankly and say: 'Hey, I got those with the system -- for free.'" (Linus Torvalds)
+%
+"Every operating system out there is about equal. We all suck." (Brian Valentine of Microsoft)
+%
+"It's not the technology, folks, it's the people. When we trace [the errors] back, it's always human error." (Bob Herbold of Microsoft)
+%
+"Hoaxes use weaknesses in human behaviour to ensure they are replicated and distributed. In other words, hoaxes prey on the Human Operating System." (Stewart Kirkpatrick)
+%
+"It used to be said that AIX looks like one space alien discovered Unix, and described it to another different space alien who then implemented AIX. But their universal translators were broken and they'd had to gesture a lot." (Paul Tomblin)
+%
+"All stable processes we shall predict. All unstable processes we shall control." (John von Neumann)
+%
+"Applicants must also have extensive knowledge of UNIX, although they should have sufficiently good programming taste to not consider this an achievement." (MIT job advertisement)
+%
+"As it exists, the Finder is simply a very fast file clerk with the IQ of a turnip." (Don Crabb)
+%
+"OS is a truly remarkable operating system. It's possible to destroy days of work with a single misplaced space, so alertness in the programming staff is encouraged. The best way to approach the system is through a keypunch. Some people claim there is a Time Sharing system that runs on OS/370, but after careful study I have come to the conclusion that they were mistaken." (Ed Post)
+%
+"Just about every computer on the market today runs Unix, except the Mac (and nobody cares about it)." (Bill Joy in 1985)
+%
+"In pioneer days they used oxen for heavy pulling, and when one ox couldn't budge a log, they didn't try to grow a larger ox. We shouldn't be trying for bigger computers, but for more systems of computers." (Rear Admiral Grace Hopper)
+%
+"What would you rather have to plow a field - two strong oxen or 1,024 chickens? (Seymour Cray)
+%
+"Java is the most distressing thing to happen to computing since MS-DOS." (Alan Kay)
+%
+"Some people have told me they don't think a fat penguin really embodies the grace of Linux, which just tells me they have never seen an angry penguin charging at them in excess of 100mph." (Linus Torvalds)
+%
+"Giving the Linus Torvalds Award to the Free Software Foundation is a bit like giving the Han Solo Award to the Rebel Alliance." (Richard Stallman)
+%
+"Any general system law will have at least two peculiar exceptions." (Gerald Weinberg)
+%
+"Anyone who has attended a USENIX conference in a fancy hotel can tell you that a sentence like "You're one of those computer people, aren't you?" is roughly equivalent to "Look, another amazingly mobile form of slime mold!" in the mouth of a hotel cocktail waitress." (Elizabeth Zwicky)
+%
+"I think it would be pretty bizarre if OS/2 finds any popularity." (Bill Gates)
+%
+"A UNIX signature isn't a return address, it's the ASCII equivalent of a black velvet clown painting. It's a rectangle of carets surrounding a quote from a literary giant of weeniedom like Heinlein or Dr. Who." (Chris Maeda)
+%
+"Saying that XP is the most stable MS OS is like saying that asparagus is the most articulate vegetable." (Dave Barry)
+%
+"While programs written for Sun machines won't run unmodified on Intel-based computers, Sun said the two packages will be completely compatible and that software companies can convert a program from one system to the other through a fairly straightforward and automated process known as recompiling." (San Jose Mercury News)
+%
+"SCCS is the source-code motel -- your code checks in but it never checks out." (Ken Thompson)
+%
+"Mosaic is the 1990s equivalent of forcing friends to sit through slides of your trip to Florida - painful for everyone but the host." (Steve Steinberg)
+%
+"AOL is like the cockroach left after the nuclear bomb hits. They know how to survive." (Jan Horsfall)
+%
+"With infrastructure goods, there can be just one. MS-DOS won over the Macintosh OS, and that was that. MS-DOS transitioned to Windows, and the dominance continued." (Don Norman)
+%
+"Never ask what sort of computer a guy drives. If he's a Mac user, he'll tell you. If not, why embarrass him?" (Tom Clancy)
+%
+"It's no coincidence that the most popular PC books go by names like "Windows for Dummies". Detroit doesn't sell books like "Oldsmobiles for Idiots" or "A Foul-Up's Guide to Fords"." (Patrick L Anderson)
+%
+"One of the main advantages of Unix over, say, MVS, is the tremendous number of features Unix lacks." (Chris Torek)
+%
+"Of course, Linus didn't sit down in a vacuum and suddenly type in the Linux source code.... He had my book.... But the code was his. The proof of this is that he messed the design up." (Andrew Tanenbaum)
+%
+"Ok, I admit it. I was just a front-man for the real fathers of Linux, the Tooth Fairy and Santa Claus." (Linus Torvalds)
+%
+"Ninety percent of computer users use DOS. I'd rather tell them to do drugs." (Scott McNealy)
+%
+"Unfortunately, perceptions of the Linux community are shaped by Web sites such as www.slashdot.org, where self-styled experts who have the collective IQ of an AOL CD post inflammatory propaganda." (Pankaj Chowdhry)
+%
+"In 1984 mainstream users were choosing VMS over UNIX. Ten years later they are choosing Windows over UNIX. What part of that message aren't you getting?" (Tom Payne)
+%
+"The sad and sobering fact is, our current personal computers -- the Macintosh included -- are amazingly fragile nightmare kludges of delicate interactions that only barely work right most of the time." (Steve Gibson)
+%
+"JCL is a crazed assembly language programmer's idea of what a command language should look like: verbose, tedious and error-prone. AND UPPER CASE." (Geoff Collyer)
+%
+"The multiple stupidities of even the latest designs, such as Microsoft's Windows 2000 or Apple's OS X, show either an unjustifiable ignorance of or a near-criminal avoidance of what we do know [about existing engineering methods for designing human-computer interfaces]." (Jef Raskin)
+%
+"Although the Buddhists will tell you that desire is the root of suffering, my personal experience leads me to point the finger at system administration." (Philip Greenspun)
+%
+"Unix is a glorified video game. People don't do Serious Work on Unix systems: they send jokes around the world on UUCP-net and write Adventure games and research papers." (Ed Post)
+%
+"UNIX is snake oil." (Ken Olsen in 1987) [Olsen says he was misquoted.]
+%
+"The beauty of mechanical problems is that they are often visible to the naked and untrained eye. If white smoke is rising from a disk drive, that is probably where the problem lies (unless your disk drive has just elected the new Pope)." (John Bear)
+%
+"We just don't think a Linux partition on a mainframe makes a lot of sense. It's kind of like having a trailer park in the back of your estate." (Scott McNealy)
+%
+"Today's PC mistakes were made on the mainframe in 1967 and fixed by 1968." (Greg Price)
+%
+"I'm not one of those who think Bill Gates is the devil. I simply suspect that if Microsoft ever met up with the devil, it wouldn't need an interpreter." (Nicholas Petreley)
+%
+"See, you not only have to be a good coder to create a system like Linux, you have to be a sneaky bastard, too." (Linus Torvalds)
+%
+"There's a simple way to find out if an operating system has been well designed. When you get an error message, go to the help system and look up the exact words in that message to see if there was enough of a concept of an architecture that they have a consistent vocabulary to talk about what's broken." (Bill Joy)
+%
+"Se perguntarem: 'Quantos sois vós?' respondereis: 'Somos um só.'."
+%
+Desculpa do dia: "Velocidade do processador."
+%
+Desculpa do dia: "Radiação eletromagnética sendo emitidas dos satélites."
+%
+Desculpa do dia: "Eletricidade estática vindo da cueca/calcinha do(a) usuário(a)."
+%
+Desculpa do dia: "Eletricidade estática vindo do crachá de plástico."
+%
+Desculpa do dia: "Superaquecimento Global."
+%
+Desculpa do dia: "Interferencia magnética vindo do cartão de crédito."
+%
+Desculpa do dia: "Problema de junta."
+%
+Desculpa do dia: "Alguém estava calculando o pi no servidor."
+%
+Desculpa do dia: "Eletros muito gordos ficaram presos nos fios."
+%
+Desculpa do dia: "O fio está entupido. Tente assoprar."
+%
+Desculpa do dia: "O radiador da CPU quebrou."
+%
+Desculpa do dia: "Roteador positron quebrou."
+%
+Desculpa do dia: "Interferencia dos telefones celulares."
+%
+Desculpa do dia: "Problema de BIOS (Bicho Ignorante Operando o Sistema)"
+%
+Desculpa do dia: "As placas tectônicas estão superaquecidas."
+%
+Desculpa do dia: "Mas é assim que é pra funcionar."
+%
+Desculpa do dia: "A secretária ligou o secador de cabelos na rede elétrica estabilizada."
+%
+Desculpa do dia: "Culpa das atividades terroristas."
+%
+Desculpa do dia: "O chefe esqueceu a senha do sistema."
+%
+Desculpa do dia: "Muita emissão de Bogons."
+%
+Desculpa do dia: "Mudança no eixo de rotação da terra."
+%
+Desculpa do dia: "Partículas de raios cósmicos entraram dentro do HD."
+%
+Desculpa do dia: "Os técnicos fizeram pipoca com o cabo de energia do servidor."
+%
+Desculpa do dia: "O encanador confuindiu o painel de cabos com decoração."
+%
+Desculpa do dia: "O sistema não está aterrado completamente. Enterre seu computador."
+%
+Desculpa do dia: "Recalibração da CPU."
+%
+Desculpa do dia: "É uma limitação de design."
+%
+Desculpa do dia: "Isso é uma função não documentada do Windows."
+%
+Desculpa do dia: "Perda de energia eletromagnética."
+%
+Desculpa do dia: "Cortes de orçamento."
+%
+Desculpa do dia: "Formigas kamikaze entraram na fonte de energia."
+%
+Desculpa do dia: "Técnicos em greve por falta de café."
+%
+Desculpa do dia: "Monitor conectado na porta serial."
+%
+Desculpa do dia: "Pulsos eletromagnéticos da frança, devido testes nucleares."
+%
+Desculpa do dia: "A impressora pensa que é um roteador."
+%
+Desculpa do dia: "O roteador pensa que é uma impressora."
+%
+Desculpa do dia: "São os hackers da Serbia."
+%
+Desculpa do dia: "Bill Gates é testemunha de Jeová, e nada pode funcionar nesse dia sagrado."
+%
+Desculpa do dia: "Rede lenta devido muita gente jogando deathmatch nela."
+%
+Desculpa do dia: "Emails pornográficos no servidor. A PF está confiscando tudo."
+%
+Desculpa do dia: "CNC (Cérebro não-conectado)."
+%
+Desculpa do dia: "CUNC (Cérebro do usuário não conectado)."
+%
+Desculpa do dia: "CPNT (Cérebro tem que pegar no tranco)."
+%
+Desculpa do dia: "Discos rodando ao contrário. Mude o jumper hemisférico."
+%
+Desculpa do dia: "Falta de computrons."
+%
+Desculpa do dia: "Furou o pneu do trem que trazia o carregamento de Compzrots."
+%
+Desculpa do dia: "Processos zumbi caçando o processador."
+%
+Desculpa do dia: "Não foi possivel encotrar a telca 'Any'."
+%
+Desculpa do dia: "Pacotes broadcast indo em direção errada."
+%
+Desculpa do dia: "O nosso /dev/null está sobrecarregado."
+%
+Desculpa do dia: "Pseudo-usuário em pseudo-computador."
+%
+Desculpa do dia: "O monitor precisa de mais uma caixa de reposição de pixels."
+%
+Desculpa do dia: "Dinâmicas quânticas afetando os transistores."
+%
+Desculpa do dia: "A Policia Federal está checando todo o tráfego em busca de narcóticos."
+%
+Desculpa do dia: "A conta da internet não foi paga, e então cortaram-na."
+%
+Desculpa do dia: "Você tem que mudar o idioma do sistema para Finlandês."
+%
+Desculpa do dia: "Alta ação nuclear na sua área."
+%
+Desculpa do dia: "Recursividade. Ligue-me se acontecer de novo."
+%
+Desculpa do dia: "Alguém achou que o grande botão vermelho fosse prá acender a luz."
+%
+Desculpa do dia: "O servidor precisa de férias. Ele já tá ficando velho."
+%
+Desculpa do dia: "Essa função não é suportada pelo sistema. Mas o Bill Gates me afirmou que no próximo patch vai estar pronta."
+%
+Desculpa do dia: "O tráfego de neutrons está com a polaridade invertida."
+%
+Desculpa do dia: "Ionização do ar condicionado."
+%
+Desculpa do dia: "Alguém está fazendo broadcasts de pacotes sem rumo, e o roteador não sabe o que fazer."
+%
+Desculpa do dia: "Voltagem platônica muito baixa no tubo demodulador."
+%
+Desculpa do dia: "O software trabalha em Mph, mas o SO é em Km/h."
+%
+Desculpa do dia: "O usuário configurou o programa para calcular a taxa de download em Km/h."
+%
+Desculpa do dia: "Deve ser culpa da tempestade que nós tivemos (ontem) (semana passada) (mês passado) (ano passado)."
+%
+Desculpa do dia: "Nossos bits/bytes/troços acabaram. Próxima remessa chega na semana que vem."
+%
+Desculpa do dia: "Interferencia das radiações lunares."
+%
+Desculpa do dia: "Você precisa instalar uma interface LPDM (RTFM)."
+%
+Desculpa do dia: "Um cara prendeu a gravata na impressora. Se alguém mandar imprimir mais alguma coisa, ele vai ser impresso junto."
+%
+Desculpa do dia: "Estamos fazendo um upgrade no /dev/null."
+%
+Desculpa do dia: "O news ficou ultrapassado."
+%
+Desculpa do dia: "Seu modem não fala Português."
+%
+Desculpa do dia: "O servidor entrou em greve."
+%
+Desculpa do dia: "O navegador afundou."
+%
+Desculpa do dia: "Tava funcionando até você mexer."
+%
+Desculpa do dia: "Seu capacitador de fluxo queimou."
+%
+Desculpa do dia: "O firewall está superaquecido."
+%
+Desculpa do dia: "Seu processo não atende os padrões da ISO9000."
+%
+Desculpa do dia: "Seu processo não passou nos testes do INMETRO."
+%
+Desculpa do dia: "Você precisa trocar sua placa VESA para uma placa MASTERCARD."
+%
+Desculpa do dia: "Ataques de elfos."
+%
+Desculpa do dia: "Seu computador não devolveu os bits que ele pegou da Internet."
+%
+Desculpa do dia: "Servidor deprimido. Precisa de um Prozak."
+%
+Desculpa do dia: "As pilhas AA no relógio da parede está mandando interferencia magnéticas."
+%
+Desculpa do dia: "O servidor falhou. Tenho que localizar o satélite manualmente."
+%
+Desculpa do dia: "Interferencia entre o teclado e a cadeira."
+%
+Desculpa do dia: "Problema na peça na frente do teclado."
+%
+Desculpa do dia: "Vazamento no conduíte de Plasma."
+%
+Desculpa do dia: "Processadores paralelos rodando em série."
+%
+Desculpa do dia: "Vírus devido aos computadores praticarem sexo não-seguro."
+%
+Desculpa do dia: "Cortes de orçamento nos obrigaram a vender todos os cabos de força da sala dos servidores."
+%
+Desculpa do dia: "Estamos escanenado a internet contra vírus."
+%
+Desculpa do dia: "Os técnicos não estão disponíveis, porque estão em uma reunião para discutir o por que eles nunca estão disponíveis."
+%
+Desculpa do dia: "Técnicos ocupados combatendo o SPAM."
+%
+Desculpa do dia: "Você recebeu o bit de parada."
+%
+Desculpa do dia: "Firmware update na máquina de café."
+%
+Desculpa do dia: "A internet se fechou para manutenção."
+%
+Desculpa do dia: "Mailer-daemon está ocupado queimando seu email no inferno."
+%
+Desculpa do dia: "De acordo com a microsoft, é assim mesmo."
+%
+Desculpa do dia: "Oscilações astropneumáticas no bebedouro."
+%
+Desculpa do dia: "Embale todo o sistema em papel aluminio para resolver o problema."
+%
+Desculpa do dia: "Você precisa digitar 'mv * /dev/null'."
+%
+Desculpa do dia: "Sua licença do Kernel expirou."
+%
+Desculpa do dia: "Estamos fazendo Feng-Shui na sala dos servidores."
+%
+Desculpa do dia: "Jupiter está alinhado com Marte."
+%
+"x²+2x+1", disse Jesus a seus apóstolos.
+"O que é isso, Jesus?", retrucou um deles.
+"Apenas uma parábola"
+%
+"Aonde você quer ir hoje?"
+%
+"É melhor com a borboleta!"
+%
+"Ladrão que rouba ladrão tem taglines de montão."
+%
+"Oi, você está na secretária eletrônica do Fulano. Ele não está em casa neste momento, mas o que quer que você queira falar com ele, você pode me contar. Nós somos muito íntimos e repartimos todas as nossas experiências."
+%
+"Toda partícula que voa sempre encontra um olho."
+%
+"Uma maneira de se parar um cavalo de corrida é apostar nele."
+%
+"Você sempre acha algo no último lugar que você procura."
+%
+"Nada é tão bom que alguém, em algum lugar, não irá odiar."
+%
+"Uma pessoa saudável é aquela que não foi suficientemente examinada."
+%
+"Existem dois tipos de esparadrapo: o que não gruda, e o que não sai."
+%
+"Por mais tomadas que se tenham em casa, os móveis estão sempre na frente."
+%
+"Lei de Murphy no ciclismo: Não importa para onde você vai; é sempre morro acima e contra o vento."
+%
+"Se a experiência funcionou na primeira tentativa, tem algo errado."
+%
+"Quando um erro é descoberto e corrigido a tempo, depois se descobre que não estava errado."
+%
+"Não importa o que sai errado, sempre dará a impressão de certo."
+%
+"Se você está se sentindo bem, não se preocupe. Isso passa."
+%
+"Quem sai na chuva se molha."
+%
+"O material é danificado na proporção direta do seu valor."
+%
+"As coisas podem piorar, você é que não tem imaginação."
+%
+"O pessimista só vê o sol como fazedor de sombras."
+%
+"O pessimista se queixa do vento, o otimista espera que ele mude, o realista ajusta as velas e quem conhece Murphy não faz nada."
+%
+"A informação mais necessária é sempre a menos disponível."
+%
+"Lei da experiência: não vai funcionar."
+%
+"Se alguma coisa pode dar errado, dará. E mais, dará errado da pior maneira, no pior momento e de modo que cause o maior dano possível."
+%
+"Alô, você acabou de colaborar com R$100,00 debitados em sua conta telefônica, muito obrigado pela sua ligação."
+%
+"O nascer é o primeiro passo para o morrer."
+%
+"Sorria... amanhã será pior."
+%
+"Minha mulher fugiu com meu melhor amigo. Sinto falta dele."
+%
+"A sensação é boa, mas a posição é ridícula!"
+%
+"Garotas, ao lerem essa tagline considerem-se cantadas!"
+%
+"As melhores coisas da vida são grátis. Caro é o motel."
+%
+"Se gosto de sexo? Já nasci na cama com uma mulher."
+%
+"As mulheres são como os fósforos: para acendê-las é preciso esfregá-las."
+%
+"Dessa vez foi verdade! Eva para Adão : 'Você foi o primeiro'."
+%
+"Mulher de amigo meu é igual a muro alto: é perigoso mas eu trepo!"
+%
+"Assédio sexual só é crime quando o cara é feio."
+%
+"Mulheres não ligam quando você faz 'psiu'. Faça 'bi-bi' que funciona."
+%
+"Se Deus fez algo melhor que mulher, ficou com ele."
+%
+"Menstruação é ruim, mas o pior é quando ela não vem."
+%
+"Mulher não tira Carteira de Habilitação, tira porte de arma!"
+%
+"Mulher não tira Carteira de Habilitação, tira porte de arma!"
+%
+"Ladrões levam seu dinheiro ou sua vida; mulheres levam os dois."
+%
+"Mulheres existem para serem amadas, não para serem entendidas."
+%
+"Defina universo e dê três exemplos."
+%
+"Rosas são vermelhas, o céu é azul, alguns poemas rimam, mas não esse." 
+%
+"Aqueles que podem, fazem. Aqueles que não podem, supervisionam."
+%
+"A mensagem subliminar de hoje é: ' '."
+%
+"Não existem ateus numa pane de avião."
+%
+"Fechado para almoço. Se eu não voltar até às 5: Fechado para jantar."
+%
+"Ninguém mais é feio depois das duas da manhã."
+%
+"Qualquer idiota é capaz de pintar um quadro. Mas só um gênio é capaz de vendê-lo."
+%
+"No avião, o medo é passageiro."
+%
+"Mosquito esperto não vai ao teatro"
+%
+"Que Deus me proteja dos meus amigos. Das amigas, cuido eu."
+%
+"Como sentar 4 gaúchos num banquinho: Vire-o de ponta cabeça"
+%
+"Quando se ouve um homem falar de seu amor por seu país, podem crer que ele espera ser pago por isto."
+%
+"A vantagem de ter péssima memória é divertir-se muitas vezes com as mesmas coisas boas como se fosse a primeira vez."
+%
+"Há três espécies de mentiras: mentiras, mentiras deslavadas e estatísticas."
+%
+"Coloque o cinto-de-segurança, vou tentar algo novo."
+%
+"Crente não vê televisão porque não acredita em imagens."
+%
+"Ao chegar no litoral do Brasil, o colono português ficou maravilhado, pois nunca tinha visto o mar."
+%
+"Cinqüenta por cento dos doentes morrem de médico."
+%
+"Em terra de cegos o rei convence os outros de que tem um olho."
+%
+"Quando os pais resolvem deixar de ser quadrados, a filha fica redonda."
+%
+"A vida é um eterno Upgrade."
+%
+"Recebi e-mails, logo existo!"
+%
+"BAHIA SOFTWARES orgulhosamente apresenta: HoloDOOM 3."
+%
+"Papel higiênico é igual a tempo de acesso: acaba quando você mais precisa."
+%
+"Quem é esse ALL, que recebe um monte de mensagens?"
+%
+"Gere fractais em seu monitor: Aproxime um ímã da tela."
+%
+"Você tem um micro? O meu é enorme..."
+%
+'droga11 meu shift nào funciona111' 
+%
+"Buááááá... Minhas taglines acabaram... chuif!"
+%
+"Taglines: édificilsercriativocomtãopoucoespaçodisponívelparaescrever."
+%
+".adanibober odnes enilgaT ...edraugA"
+%
+"ria. Tagline Giratória. Tagline Giratória. Tagline Giratória. Taglin"
+%
+"Tagline checada contra vírus by TagScan 2.01"
+%
+"Quanto vale esta TAG? Não, Não responda, ligue já (011) 1406"
+%
+"3ø¢|¢æÜË(r)×ÃgÜ¢: Tagline encriptada. R$ 1000,00 de recompensa."
+%
+"T A G L I N E - E S P A Ç O S A ."
+%
+"Tagline COM COMPLEXO DE INFERIORIDADE."
+%
+ ":.:..::..:::.:::::..:..:.:..:..::::.:...:: --> Tag em Braile."
+%
+ "..../:\............. Formigas indo pro formigueiro."
+%
+ "################### <-- Arranhe aqui e veja o seu prêmio."
+%
+ "... . .... .. .... .... <-- Tagline com fonte tamanho 1."
+%
+ "(((((((((((((TAGLINE)))))))))))))(((((((((((((HIPNÓTICA)))))))))))))"
+%
+"Por que lemos da esquerda para a direita se viramos as páginas da direita para a esquerda?"
+%
+"Quem é Arte? E por que a vida imita esse cara?"
+%
+"E se não existissem situações hipotéticas?"
+%
+"O otimista fala que nós vivemos no melhor dos planetas. O pessimista teme que isso seja verdade."
+%
+"Você sabe que está ficando velho quando as velas começam a custar mais caro que o bolo."
+%
+"Se você tem que perguntar quanto custa, é porque não pode comprar."
+%
+"É preciso que tudo mude para que tudo permaneça como está."
+%
+"Existem três tipos de pessoas: O Idiota que não aprende com os próprios erros; o Esperto que aprende com seus erros, e o Sábio que aprende com os erros dos outros."
+%
+"Nada como uma boa dose de outra mulher para fazer um homem apreciar mais sua esposa."
+%
+"O fardo do casamento é tão pesado que precisa de dois para carregá-lo, às vezes, três."
+%
+"Casamento: uma comunidade que consiste em um homem, uma mulher e uma amante, num total de duas pessoas."
+%
+"O casamento é o preço que os homens pagam pelo sexo; o sexo é o preço que as mulheres pagam pelo casamento."
+%
+"Eu conheço uma boa tagline quando roubo uma."
+%
+"Parei de beber! Depois de amanhã faz dois dias."
+%
+"Eu adoro meus amigos, suas irmãs, mais ainda!"
+%
+"Quando eu era jovem, pensava que o dinheiro era a coisa mais importante do mundo. Hoje, tenho certeza."
+%
+"Levei vinte anos para fazer sucesso da noite para o dia."
+%
+"Bebo para tornar as outras pessoas interessantes."
+%
+"O que nos outros eu chamo de pecado, para mim é experiência."
+%
+"Se eu pudesse voltar à juventude, cometeria todos aqueles erros de novo. Só que mais cedo."
+%
+"Invejo as pessoas que bebem. Pelo menos têm alguma coisa em que botar a culpa."
+%
+"Não sou seu tio, não gosto de Mentex e não tenho trocado."
+%
+"Não tenho vícios. Só bebo e fumo quando eu jogo."
+%
+"Eu me amo e não sou correspondido."
+%
+"Sexo é hereditário: Se seus pais não fizeram, há uma grande chance de você também não fazer."
+%
+"A calcinha não é a melhor coisa do mundo, mas está bem perto."
+%
+"O importante é o que importa não importa como."
+%
+"A Advocacia é a maneira legal de burlar a Justiça."
+%
+"Chato: Uma pessoa que fala quando deveria estar ouvindo."
+%
+"Lógica: método sistemático de chegar a conclusão errada com confiança."
+%
+"Gato: um autômato flexível e indestrutível, fornecido pela natureza para ser chutado quando as coisas vão mal no círculo doméstico."
+%
+"O mais nobre de todos os cachorros é o cachorro-quente: ele alimenta a mão que o morde."
+%
+"Filosofia: Respostas obscuras para questões insolúveis."
+%
+"Bibliotecas: Não há respostas, apenas referências cruzadas."
+%
+"Advogado: Forma larval de um político."
+%
+"Lixo: coisas que jogamos fora. Coisas: lixo que guardamos."
+%
+"Uma celebridade é uma pessoa que trabalha duro a vida inteira para se tornar conhecida, e depois passa a usar óculos escuros para não ser conhecida."
+%
+"Os conservadores são pessimistas quanto ao futuro e otimistas quanto ao passado."
+%
+"Um repórter de rock é um jornalista que não sabe escrever, entrevistando gente que não sabe falar, para pessoas que não sabem ler."
+%
+"A arte da Medicina consiste em distrair enquanto a Natureza cuida da doença."
+%
+"Um expert é um homem que parou de pensar. Para que pensar, se ele é um expert?"
+%
+"Loteria: acho que, jogando ou não, você tem a mesma chance de ganhar."
+%
+"O que é um intelectual? Apenas um homem que descobriu alguma coisa mais interessante do que as mulheres."
+%
+"O asterisco nada mais é do que um ponto final Hippie."
+%
+"O X é um Y feliz."
+%
+"Aproveite meu conselho, eu não o uso mesmo."
+%
+"Une-te aos bons e serás um deles. Ou fica aqui conosco mesmo."
+%
+"Fingir ser simpático deforma o rosto."
+%
+"Quando não restar nenhuma outra opção, leia o manual."
+%
+"Nunca diga, eu não posso; diga, nós não podemos."
+%
+"Ser canhoto é fácil, o difícil é ser direito."
+%
+"A melhor maneira de prever o futuro é inventá-lo."
+%
+"É fazendo muita merda que se aduba a vida."
+%
+"Não ensine porcos a cantar. Você perde seu tempo e incomoda o porco."
+%
+"Nunca empreste dinheiro a amigos. Causa amnésia!"
+%
+"Nunca confie em um cozinheiro magrela."
+%
+"Não tente pagar os seus impostos com um sorriso. Os fiscais preferem em dinheiro."
+%
+"Não se ache horrível pela manhã. Acorde ao meio-dia."
+%
+"Pinte os cabelos de preto para os encontros amorosos e de branco para as reuniões de negócios."
+%
+"Eu já tive muito dinheiro, mas gastei metade dele em coisas futéis. A outra metade gastei com mulheres e cerveja."
+%
+"Há duas ocasiões na vida em que uma pessoa não deve jogar: quando não tiver posses para isso, e quando tiver."
+%
+"Não despreze a masturbação, é fazer sexo com a pessoa que você mais ama."
+%
+"Nunca tenha filhos, só netos."
+%
+"Beba moderamente, mesmo que em grandes quantidades."
+%
+"Dizem que no Sul tem muito macho, cada um tem o seu!"
+%
+"Sabe o que é 95? Será a idade de Bill Gates quando Windows ficar pronto..." 
+%
+"Quando o homem fala de sexo pra mulher é Assédio Sexual. Mas quando a mulher fala sobre sexo para o homem são R$3.95 por minuto!!!"
+%
+"Em São Paulo, um homem é atropelado a cada cinco minutos. Além de não ter tempo pra mais nada, o cara deve estar todo quebrado."
+%
+"Sorria, é a segunda melhor coisa que você pode fazer com seus lábios."
+%
+"Faça uma Loira sorrir no sábado! Conte uma piada na quinta."
+%
+"Hakuna Matata"
+%
+"Windows NT=Not Today (Not Tomorrow)!"
+%
+"Windows NT=No Thanks!"
+%
+"Windows NT=Nice Try!"
+%
+"Você está conectado a muito tempo, quando o ícone de previsão de tempo mostra 'Chuva', e você pensa: 'Ridículo, não está chovendo'. Até que você se vira para a janela e olha prá chuva"
+%
+"Você está conectado a muito tempo quando você desconecta por quatro minutos pra tomar um café e a Compania Telefônica manda um técnico na sua casa, achando ter havido problema com sua linha!"
+%
+"Você está conectado a muito tempo quando você pergunta a um amigo o que é aquela coisa redonda, amarela e brilhante ali em cima e ele responde que é o Sol!"
+%
+"O chato quando está com tosse nunca vai ao médico. Vai ao teatro."
+%
+"Eu cnsigo diigtar 400 caractreres pro minuo1."
+%
+"O estrupo é uma forma de violência contra a gramática!"
+%
+"A informatica chegou para resolver problemas, que antes nao existiam."
+%
+"Nao trafique, nao mate, nao estupre... sem antes comprar um juiz."
+%
+"Se voce vive querendo passar os outros para tras, cuidado com o bafo na nuca."
+%
+"Funcionarios Publicos: Nunca tantos fizeram tao pouco em tanto tempo."
+%
+"Sorria, isto faz as pessoas imaginarem no que voce esta pensando."
+%
+"Acho q penso, logo, acho q existo !"
+%
+"oi !!! oi !!!!!! OOOOOIIIIIIIII !!!! oitenta, oitenta e um..."
+%
+"O maior problema de um computador está entre a tela do monitor e a cadeira."
+%
+"Os computadores nao merecem confianca. Os humanos menos ainda."
+%
+"Eu tinha uma vida antes... Agora eu tenho um computador."
+%
+"Abencoados sejam os pessimistas, pois eles fizeram backups."
+%
+"Preserve o verde: use monitores CGA!"
+%
+"Basic é como catapora, pega-se quando criança..."
+%
+"Já sorriu para o seu computador hoje? Ah, já?! Que ridículo..."
+%
+"Eu indeciso? Não tenho certeza."
+%
+"Se a mensagem não estiver clara, aumente o brilho da tela."
+%
+"Chato é aquele que você fala: aparece lá em casa! E ele aparece!!!"
+%
+"Até um imbecil passa por inteligente se ficar calado..."
+%
+"Se o mundo for uma versão beta, nós devemos ser os bugs..."
+%
+"Não confunda modem com modess; o slot é diferente."
+%
+"Não conserte o que não está estragado."
+%
+"Fico no micro o dia inteiro. Não tenho amigos. Mas AMIGA eu tenho!"
+%
+"Feia por fora, bonita por dentro? Vire do avesso!"
+%
+"Faça os olhos de uma loira brilharem. Acenda uma lanterna na orelha dela!"
+%
+"Dize-me com quem andas e, se for uma loira peituda, irei contigo..."
+%
+"Dize-me com quem andas e te direi se vou contigo..."
+%
+"Drogas? Pra que, já tenho o Windows..."
+%
+"Evite ver um idiota todos os dias. Quebre o espelho."
+%
+"Evite confisco do seu dinheiro: Gaste tudo!"
+%
+"Evite uma vida sedentária: Beba água!"
+%
+"Ela disse: Ou eu ou o computador.... Sinto saudades dela!"
+%
+"/=*=\<-- Cuidado, se você tivesse um TK85, isso seria uma nave inimiga!"
+%
+"-------> Corte aqui, e destrua o seu monitor. <--------"
+%
+"Um programa sem bugs é um conceito teórico abstrato."
+%
+"As estatísticas comprovam: 90% das estatísticas são inventadas."
+%
+"Tem muito sangue no meu álcool..."
+%
+"Lembre-se sempre: você é único, assim como todo mundo!"
+%
+"Errar é humano, mas mugir é bovino."
+%
+"'Ninguém nunca irá precisar mais do que 640K'" - Bill Gates, 1981"
+%
+"Definição de patch: Tirar os velhos bugs, e colocar novos..."
+%
+"Melhor processo de compressão: 'rm -rf /*' = 100% de compressão."
+%
+"Meu software nunca tem bugs... Ele só desenvolve funções aleatórias."
+%
+"Não seja tão mente-aberta, o seu cérebro pode cair..."
+%
+"Para que fazer backups? Apenas os incompetentes perdem informações!"
+%
+"Programar é uma forma de arte que luta de volta..."
+%
+"Perguntar se computadores conseguem pensar é o mesmo que perguntar se submarinos podem nadar..."
+%
+"Se DEBUG é o processo com o qual se remove bugs, então PROGRAMAR deve ser o processo com o qual se coloca bugs..."
+%
+"Bug?? Isso não é um bug, é uma função!"
+%
+"Ele diz: "Insira o disco #3", mas só cabe dois!!!"
+%
+"Poucas mulheres admitem a sua idade... Poucos homens agem como pessoas da sua idade..."
+%
+"O segredo do universo é 4@*&^^^ KERNEL PANIC"
+%
+"Por que que sempre que você está andando de carro e procurando um endereço, você abaixa o volume do som?"
+%
+"Por que os cigarros são vendidos num posto de gasolina se ali é proibido fumar?"
+%
+"Por que você precisa uma carteira de motorista para comprar bebida se você não pode beber e dirigir?"
+%
+"Todos têm o direito de ser burros, o problema é que alguns abusam."
+%
+"Só quem diz que o álcool não é bom para o pensamento é quem nunca pensou bêbado."
+%
+"Se um cão bater à sua porta, não atenda! Cães não batem à porta."
+%
+"Se mulher fosse dinheiro, eu vivia pedindo esmola."
+%
+"A partida de futebol entre cavalos terminou em patada."
+%
+"Onde quer que você esteja, você sempre estará lá!"
+%
+"Oba, Doutor! Quer dizer que não preciso mais usar óculos? --Isso mesmo. De agora em diante só cachorro e bengala."
+%
+"O Senhor é o meu pastor e fica latindo a noite inteira no quintal."
+%
+"O pessimista é um otimista experiente e arrependido."
+%
+"O Brasil está em nossas mãos... E não adianta lavar!!"
+%
+"Não tenho tudo para ser feliz mas um muambeiro ficou de me arrumar!"
+%
+"Não brinque com fogo! Ele é chato e egoísta, não sabe brincar"
+%
+"Não pude me controlar. Eles eram tão grandes, arredondados, firmes e bonitos que eu tive que tocá-los. Aí ela começou a gritar: 'Meus olhos!, Meus olhos!', e quebrou todo o clima :/"
+%
+"Meu computador não conversa... computa!"
+%
+"Ingleis eu não çêi, mais em portuguêz eu çou féra."
+%
+"Hoje eu tentei desenhar minha própria sombra. Não consegui! :( Meu braço não parava de se mexer...)"
+%
+"Existe vida inteligente na Terra? Lógico, mas estou só de passagem..."
+%
+"Existem duas regras pra ter sucesso na vida: 1° Nunca diga tudo que você sabe."
+%
+"Fumar é muito bom: acaba com todos os fumantes."
+%
+"Goze a vida, afinal você nasceu de uma gozada!"
+%
+"Herrá é Umano!"
+%
+"Eu gostaria de criar homepages, mas não sei o que elas comem."
+%
+"Eles dizem com ternura, O QUE VALE É A INTENÇÃO!! E te dão um cheque sem fundos, do fundo do coração;"
+%
+"Dentre todas as pessoas que conheci, você certamente é uma delas."
+%
+"Cada vez sobra mais mês no fim do dinheiro."
+%
+"BIOS: Bicho Ignorante Operando o Sistema."
+%
+"Através das brincadeiras é que se revelam as grandes verdades."
+%
+"APRENDA A PENSAR! Assim você terá algo pra fazer quando o computador estiver desligado."
+%
+"Antigos espíritos do mau, tranformem essa TAG decadente em MUNRRAH!"
+%
+"Ama teu próximo! Ainda mais se for uma loira de olhos azuis!"
+%
+"A vida nas grandes cidades está cada vez mais desumana. Os mudos já não se falam, os cegos nem se olham, e os manetas não se cumprimentam mais!"
+%
+"A fila do lado sempre anda mais rápido."
+%
+"Mulher reclama da dor do parto porque nunca levou chute no saco."
+%
+"O dinheiro não tem a mínima importância, desde que a gente tenha muito."
+%
+"Aqueles que bebem pra esquecer. Favor pagar adiantado."
+%
+"A esperança é a última que morre. Mas morre!"
+%
+"Esta é uma Tagline espelho><ohlepse enilgaT amu è atsE"
+%
+"Backup não encontrado: (H)a! H(a)! Ha(!)."
+%
+"Saiu meu boletim: (E)scondo, (M)ostro com orgulho, (T)aco fogo?"
+%
+"Após o uso, favor rebobinar a tagline."
+%
+"Diga não às drogas, apague seu Windows."
+%
+"Já notaram como o Windows roda rápido? Nem eu!"
+%
+"O Windows não é ruim, é só esperar ele ficar pronto."
+%
+"O Windows é tão lento, tão lento, que não tem tempo de resposta, tem é prazo de entrega."
+%
+"No casamento: meu bem! No divórcio: meus bens!"
+%
+"Acredita em reencarnação? Me dê R$50.000 e lhe pago na próxima!"
+%
+"Pode falar, minha boca é um túmulo. Sente só o cheiro."
+%
+"Canela: Dispositivo para achar móveis no escuro."
+%
+"Nunca se deve bater em um homem caído, a não ser que você tenha certeza de que ele vai se levantar."
+%
+"Não adianta balançar, o último pingo é sempre na cueca."
+%
+"Dê emoção à sua vida: Faça pipocas com a panela aberta!"
+%
+"Os computadores não são inteligentes. Eles só pensam que são!"
+%
+"Seja legal com seus filhos. Eles que vão escolher seu asilo."
+%
+"É claro que sou metido. Se não fosse, seria de proveta."
+%
+"Eu sou um ninguém, ninguém é perfeito, portanto, eu sou perfeito."
+%
+"Existem 24 horas num dia... E 24 cervejas numa caixa.. Coincidência?!"
+%
+"Metade do meu dinheiro gastei com mulheres e cerveja, o resto desperdicei." - De um cliente de um Restaurante de Blumenau
+%
+"Um brinde à cerveja, a causa e a solução de todos os nossos problemas na vida." - Homer Simpson
+%
+"Cerveja faz mal, quando falta."
+%
+"Mulher grávida vive reclamando de barriga cheia."
+%
+"Já que o amor é cego, o jeito é apalpar!"
+%
+"Quer um Chokito? Então põe o dedo na tomadita!"
+%
+"Quem dá aos pobres fica com fama de bicha."
+%
+"Jamais deixe seu computador saber que você está com pressa!"
+%
+"Quem é esse General Failure? Por que ele fica lendo meu disco?"
+%
+"Coma merda. Um bilhão de moscas não podem estar erradas."
+%
+"Camisinha furada. (A)bortar, (I)gnorar, (C)asar?"
+%
+"This tagline is SHAREWARE. Please send me U$10."
+%
+"Os nerds são pessoas normais, que tomam sorvete pela testa como todo mundo!"
+%
+"Entendendo as mulheres, Cap. III: Elas dizem que fingem os orgasmos porque os homens fingem as preliminares.
+%
+"Kernel Panic"
+%
+"Segmentation fault"
+%
+"Feel the power of 64 bit LinuxCore"
+%
+"Hoje não tem citações"
+%
+"Ato romântico para um metaleiro: cantar 'Still Loving You', do Scorpions"
+%
+"Que a força esteja com você"
+%
+"O amor é uma chama que se nutre de suas fagulhas" - Filosofia Barata
+%
+"O tempo é uma chama que se nutre de suas fagulhas" - Folosofia Barata
+%
+"A vida é uma chama que se nutre de suas fagulhas" - Filosofia Barata
+%
+"Respeite o artigo 13 da Constituição, que determina que a língua no Brasil é a portuguesa."
+%
+"Evite acidentes: faça de propósito!"
+%
+"Há 41 anos sou apaixonado pela mesma mulher. Se minha mulher descobrir, ela me mata." - Henny Youngman
+%
+"Meus amigos da faculdade transavam com qualquer coisa que se mexesse. Até hoje não entendo como eles podem se limitar tanto." - Emo Philips, comediante americano.
+%
+"É um relógio maravilhoso, feito de ouro. Tenho orgulho dele. Meu avô, no seu leito de morte, me vendeu este relógio." - Woody Allen
+%
+"Isto faz parte da minha introspecção mística..." - Do ainda não ministro Gilberto Gil, ao levar um flagrante por porte de maconha durante um show, em Floripa - 1976.
+%
+"Nós eramos viciados profissionais cujo hobby era tocar." - Joe Perry (Aerosmith)
+%
+"A vida é curta demais para ser normal"
+%
+"Lula não sabe dirigir brasília, mas eu sei" - Colado em uma brasília (carro) velha.
+%
+"Meu coração, só guarda ódio e coisas futéis. Ao ver vocês assim, com essas caras de inutéis" - Uma das músicas do Zorak
+%
+"Eu vou chutar tua cabeça até te arrebentar! Depois repido tudo isso até te esmagar! Porque, eu nunca aprendo essa lição. Abra a porta idiota, é o Zorak. Eu vou te estraçalhar!!!" - Uma das músicas do Zorak
+%
+"Se as pessoas são boas só por temerem o castigo e almejarem uma recompensa, então realmente somos um grupo muito desprezível." Albert Einstein
+%
+"Não adianta se esforçar. Por melhor que você seja em alguma coisa, sempre existirão um milhão de pessoas melhores do que você!" - Homer Jay Simpson
+%
+"Você deu o melhor de si e falhou miseravelmente. A lição é: Não tente jamais!" - Homer Jay Simpson
+%
+"Nada que precise de mais de 12 passos vale a pena" - Homer Jay Simpson
+%
+"Eu sou o que sou e nada vai fazer eu continuar sendo." - Homer Jay Simpson
+%
+"A iniciativa é o primeiro passo para o fracasso." - Homer Jay Simpson
+%
+"Preciso de suprimentos. Um barril de chopp e seis cervejas pra eu aguentar até abrirem o barril." - Homer Jay Simpson
+%
+"Se você não gosta do seu serviço, você não faz greves, você simplismente continua indo todo o dia e faz o serviço de má-vontade, é assim que funciona na América" - Homer Jay Simpson, Episódio 2F19:'The PTA Disbands'.
+%
+"A vingança nunca é plena: mata a alma e a envenena." - Seu Madruga
+%
+"Não há nada mais trabalhoso do que viver sem trabalhar." - Seu Madruga
+%
+"Não existe trabalho ruim. O ruim é ter que trabalhar." - Seu Madruga
+%
+"As pessoas boas devem amar seus inimigos. Mas amar os idiotas é quase impossível." - Seu Madruga
+%
+"Você me deixa pasmado com tanta inteligência, que manifestação tão clara de inteligência, o que que eu vou dizer? Que bárbaro você é!" - Seu madruga ao Chaves, no episódio 'Seu Madruga, O leitero'.
+%
+"Ai, mas os cachorinhos são tão lindos, são tão bonitos que se parecem com você." - Chiquinha ao Seu Madruga, no episódio 'Seu Madruga, O leitero'.
+%
+"Senhor delegado, deu entrada no Pronto-Socorro Municipal o cidadão, vítima de 'gargalhada'. 'Gargalhada' no peito, no rosto e nas
+costas. Segue anexo um 'gargalho' de garrafa." - Relatório Policial
+%
+"Ocorreu um 'abalroamento de pessoas. Os conduzidos, além da algazarra, ainda xingavam a todos com palavra de baixo 'escalão.'" - 
+Relatório Policial
+%
+"O condutor do veículo colocava em risco a segurança das pessoas, pois estava dando 'cavalo de Paulo' na rua." - Relatório Policial
+%
+"Chegando ao local, encontramos a vítima caída ao solo, aparentando ter cometido um 'homicídio contra si mesmo'". - Relatório Policial
+%
+"No histórico da ocorrência, constava como objeto apreendido: duas latas de cera 'Odd' e uma lata de cera 'PPO'." (Uma das latas estava de cabeça para baixo) - Relatório Policial
+%
+"O conduzido, que foi preso em flagrante, disse que era inocente na acusação e que não estava passando de 'bode respiratório'." - Relatório Policial
+%
+"O cadáver apresentava sinais de estar morto." - Relatório Policial
+%
+"Foi apreendido um quilo de lingüiça 'perfumada'." - Relatório Policial
+%
+"Mulher é tão bom, mas tão bom, que quem não gosta tem que tomar no cú mesmo." 
+%
+"Não tem porque ser pessimista. Não vai funcionar mesmo..."
+%
+"Não roube! O Governo não gosta de concorrência."
+%
+"O mundo precisa de mais gênios humildes! Hoje em dia somos poucos..."
+%
+"Dívida pra mim é sagrada. Deus lhe pague!"
+%
+"Convencido? EU?? Antes eu era convencido... Hoje, sou perfeito!"
+%
+"Queria ser pobre um dia na vida... Porque ser todo dia é foda."
+%
+"Se o horário oficial no Brasil é o de Brasília, por que a gente tem que trabalhar na segunda e na sexta?"
+%
+"Cheque sem fundo é uma coisa que não compensa."
+%
+"Agora estou fazendo a dieta da sopa. Deu sopa, eu como!" 
+%
+"Mate-se de estudar e serás um cadaver culto."
+%
+"Não sou um completo inutil, pelo menos sirvo de mal exemplo."
+%
+"Haverá um dia em que todos voltaremos a ser felizes: O dia em que Rosinha será apenas uma flor, Garotinho será apenas uma criança e Lula apenas um molusco."
+%
+"O homem é um ser tão dependente que, até pra ser corno, precisa da ajuda da mulher."
+%
+"Justo mesmo é o sutiã: oprime os grandes, levanta os caídos e protege os pequenos."
+%
+"Feliz é o dono do sex shop que pode dizer aos seus clientes: "pegue suas coisas e vá se foder". E o cliente ainda sai feliz."
+%
+"Se homossexualismo fosse normal... Deus teria criado Adão e Ivo"
+%
+"Malandro é o pato, que já nasce com os dedos colados para não usar aliança.!"
+%
+"Existem 10 tipos de pessoas, as que sabem contar e as que não."
+%
+"Existem 10 tipos de pessoas, as que sabem binário e as que não."
+%
+"Se dinheiro falasse, o meu diria tchau."
+%
+"Carioca é assim: já nem liga mais para bala perdida. Entra por um ouvido e sai pelo outro."
+%
+"Bebo porque sou egocêntrico. Gosto quando o mundo gira ao meu redor."
+%
+"Se um dia sentir um enorme vazio dentro de você, vá comer!"
+%
+"Sempre que possível, converse com um saco de cimento. Nessa vida só devemos acreditar no que pode ser concreto."
+%
+"Se for dirigir, não beba. Se for beber, me chama!"
+%
+"A juventude que está perdida é a de hoje. Porque a de ontem já ficou velha e tem a maior inveja."
+%
+"A lesma é lenta. Ainda bem. E se esse bicho nojento corresse?"
+%
+"Amadores construíram a Arca; profissionais, o Titanic."
+%
+"As pessoas casam-se por falta de juizo; Separam-se por falta de paciencia; E casam-se novamente por falta de memória."
+%
+"Bicha é igual carbono, faz ligação para todos os lados."
+%
+"Computador é que nem carroça. Sempre tem um burro na frente."
+%
+"Computadores nunca vão substituir a estupidez humana."
+%
+"Experiência é o que faz com que uma pessoa cometa novos erros em vez de velhos."
+%
+"Faltei por motivo de luto. Você não imagina como eu luto contra a preguiça."
+%
+"Há 3 maneiras de se conseguir que algo seja feito: faça você mesmo, contrate alguém para fazê-lo ou proíba seus filhos de fazê-lo."
+%
+"Não beba dirigindo! Você pode derrubar a cerveja."
+%
+"Minha idéia de pessoa agradável é a de quem concorda comigo."
+%
+"O Brasil é feito por nós. Só falta agora desatar esses nós."
+%
+"O cérebro é uma coisa maravilhosa. Todos deveriam ter um."
+%
+"Para quem está se afogando, jacaré é tronco."
+%
+"Queimadura de Terceiro Grau é aquela que ocorre em Curso Universitário."
+%
+"Quem coleciona citações não tem idéias próprias."
+%
+"Se precisarem de mim, contem comigo! UM, DOIS, TRÊS, QUATRO..."
+%
+"Sogra não tem problemas no trânsito, vassoura não engarrafa"
+%
+"Um chato nunca perde o seu tempo. Perde o dos outros."
+%
+"Às vezes eu penso que o sinal mais forte da existência de vida inteligente em outra parte do universo, é que eles nunca entraram em contato conosco."
+%
+"Eu bebo pra ficar ruim mesmo, porque se fosse para ficar bom eu tomava remédio"
+%
+"Deixei a bebida. O ruim é que não lembro onde."
+%
+"Por que perder tempo aprendendo quando a ignorância é instantânea?"
+%
+"Amigos vêm e se vão, inimigos se acumulam"
+%
+"Quero morrer como meu avô: dormindo... e não gritando como os passageiros do ônibus que ele dirigia"
+%
+"Aonde vamos parar? Até Papai Noel anda saindo com veados"
+%
+"Existem três tipos de pessoas: as que sabem contar e as que não sabem"
+%
+"Todos os cogumelos são comestíveis. Alguns só uma vez"
+%
+"Mulher feia e urubu comigo é na pedrada"
+%
+"Se me vir abraçado com mulher feia, aparta que é briga"
+%
+"Pobre parado é suspeito, correndo é ladrão"
+%
+"Dinheiro e mulher bonita só vejo na mão dos outros"
+%
+"Quando Jesus retornar ao mundo, se ele vier parar no brasil, é melhor ele vir armado"
+%
+"Se não puder ajudar, atrapalhe! Afinal o importante é participar."
+%
+"A bebida desperta o poeta que há em cada um de nós."
+%
+"A ciência é infalível, quem se engana são os sábios!"
+%
+"A diferença entre um credor e um devedor é que o primeiro tem uma memória muito melhor!"
+%
+"Cana na roça é pinga; pinga na cidade é cana."
+%
+"Coceira de rico é alergia, de pobre é sarna!"
+%
+"Em terra de cego quem tem um olho é caolho."
+%
+"Na vida tudo é passageiro, menos o motorista e o cobrador."
+%
+"O dinheiro não traz felicidade, então, de todo o seu pra mim e seja feliz."
+%
+"Quem dá aos pobres empresta a Deus e quem empresta ao Governo dá adeus."
+%
+"Se andar fosse bom, o carteiro seria imortal."
+%
+"Se não gosta do jeito que dirijo, saia da calçada."
+%
+"Eu fumo mas não trago. Quem traz é um amigo meu."
+%
+"Tudo aquilo que algum idiota diz que é urgente, é algo que este imbecil não fez em tempo hábil e quer que você se vire para fazer em tempo recorde!"
+%
+"A cana só dá açucar depois de passar por grandes apertos."
+%
+"Cabelo ruim é igual a corinthiano... ou tá armado ou tá preso."
+%
+"Se você é capaz de sorrir quando tudo deu errado, é porque já descobriu em quem por a culpa."
+%
+"Se tudo o que é bom dura pouco, eu já deveria ter morrido há muito tempo."
+%
+"Ainda bem que o Produto Interno é Bruto, porque se fosse Líquido o presidente beberia".
+%
+"Ele é mais liso do que um bagre ensaboado." - Fernando Chiarelli ao Baleia Rossi, depois que o mesmo não respondeu sua pergunta.
+%
+"Comecei uma dieta, cortei bebidas e comidas pesadas, e em 14 dias, perdi duas semanas." - Tim Maia
+%
+"Nunca tive problemas com drogas. Só com a polícia..." - Keith Richards
+%
+"Jamais diga uma mentira que não possa provar." - Millor Fernandes
+%
+"Democracia é quando eu mando em você; ditadura é quando você manda em mim." - Millor Fernandes
+%
+"Não é que eu tenha medo de morrer. É que eu não quero estar lá na hora em que isso acontecer." - Woody Allen
+%
+"Errar é humano. Culpar outra pessoa é política." - Hubert H. Humphrey
+%
+"Muitas coisas na vida são mais importantes do que o dinheiro, mas custam tão caro..." - Groucho Marx
+%
+"Prefiro o paraíso pelo clima e o inferno pela companhia." - Mark Twain
+%
+"Se meus inimigos pararem de dizer mentiras a meu respeito, eu paro de dizer verdades a respeito deles." - A. Stevenson
+%
+"Quando morrer, quero ser velada de bruços para as pessoas me reconhecerem." - Rita Cadillac
+%
+"Pessimista: alguém que se queixa do barulho quando a sorte lhe bate à porta." - Farmer's Digest
+%
+"Acordei cedo hoje. Pulei da cama às 6h, dei uma bela caminhada até a janela e voltei para a cama às 6h05. Depois, fiquei durante dez minutos debaixo do chuveiro frio. Amanhã pretendo abrir a torneira." - Henry Young
+%
+"Os solteiros ricos deveriam pagar o dobro de impostos. Não é justo que alguns homens sejam mais felizes do que os outros." - Oscar Wilde
+%
+"Se um homem tomar a sua mulher, não há melhor vingança do que deixá-lo ficar com ela." - Sacha Guitry
+%
+"As pessoas que não estão apaixonadas são incapazes de entender como um homem inteligente pode sofrer por causa de uma simples mulher. É o mesmo que se espantar com o fato de uma pessoa sofrer de cólera por causa de uma criatura tão insignificante quanto um bacilo comum." - Marcel Proust
+%
+"Atrás de um homem bem sucedido existe sempre uma mulher. E atrás desta, existe a mulher dele." - Groucho Marx
+%
+"Uma mulher demora 20 anos para fazer do seu filho um homem, e outra mulher leva 20 segundos para fazer dele um tolo." - Helen Rowland
+%
+"Nunca confie em uma mulher que diz sua verdadeira idade. Uma mulher que diz isso é capaz de dizer qualquer coisa." - Oscar Wilde
+%
+"Sabe o que significa voltar para casa à noite e encontrar uma mulher que lhe dá amor, afeto e ternura? Significa que você entrou na casa errada, só isso." - Henny Young)
+%
+"Às vezes a gente pensa que está dizendo bobagens e está fazendo poesia." - Mário Quintana
+%
+"Eu não sou homem, sou jornalista!" - Kajuru, quando quase levou porrada dum boxeador, ao vivo na Band.
+%
+"Se o Diabo existe, ele é Americano, por isso a gente canta em Inglês." - Massacration, do Hermes e Renato, explicando como eles 'invocam o Diabo'.
+%
+"Agradeço a Deus por esta incrível máquina voadora!" - Adesivo colado em uma Kombi Cinza bem velha, estacionada uma vez na Henrique Dumont com a Itapura - Ribeirão Preto.
+%
+"O Lula é o meu pastor, por isso estou pastando!" - Adesivo colado em um carro, Gol(f) vermelho, em Brasília - DF.
+%
+"Tenho o maior orgulho de jogar na terra onde cristo nasceu." (Claudiomiro, ex-meia do inter de porto alegre, ao chegar em belém do pará Para disputar uma partida contra o paysandu, pelo brasileirão de 72)
+%
+"Nem que eu tivesse dois pulmões eu alcançava essa bola." (Bradock, amigo de romário, reclamando de um passe longo)
+%
+"No méxico que é bom. Lá a gente recebe semanalmente de 15 em 15 dias." (Ferreira, ex-ponta esquerda do santos)
+%
+"Quando o jogo está a mil, minha naftalina sobe." (Jardel, ex-atacante do vasco, grêmio e da seleção, hoje no galatasaray da Turquia)
+%
+"Clássico é clássico e vice-versa." (Jardel)
+%
+"O meu clube estava a beira do precipício, mas tomou a decisão correta: deu Um passo a frente." (João pinto, jogador do benfica de  portugal)
+%
+"A moto eu vou vender e o rádio eu vou dar para a minha avó." (Biro biro, ex-jogador do corinthians, ao responder a um repórter o que iria Fazer com o "motoradio" que ganhou como melhor jogador da partida)
+%
+"Eu desconcordo com o que você disse." (Vladimir, ex-meia do corinthians, em uma entrevista na rádio record)
+%
+"Na bahia é todo mundo muito simpático. É um povo muito hospitalar." (Zanata, baiano, ex-lateral do fluminense, ao comentar sobre a hospitalidade do povo baiano)
+%
+"Jogador tem que ser completo como o pato, que é um bicho aquático e Gramático." (Vicente matheus, eterno presidente do corinthians)"
+%
+"O difícil como vocês sabem, não é fácil." (Vicente matheus)
+%
+"Haja o que hajar o corinthians vai ser campeão." (Vicente matheus)
+%
+"Eu gostaria de ter estudado latim, assim eu poderia me comunicar melhor com o povo da América Latina". - George W Bush
+%
+"A grande maioria de nossas importações vem de fora do país." - George W Bush
+%
+"Se não tivermos sucesso,  corremos  o risco de fracassarmos." - George W Bush
+%
+"O Holocausto foi um período obsceno na História da nossa nação. Quero dizer, na História deste século. Mas todos vivemos neste século. Eu não vivi nesse século." - George W Bush
+%
+"Uma palavra resume provavelmente a responsabilidade de qualquer governante. E essa palavra é "estar preparado". - George W Bush
+%
+"Nós temos um firme compromisso com a OTAN. Nós fazemos parte da OTAN. Nós temos um firme compromisso com a Europa. Nós fazemos parte da Europa."  - George W Bush
+%
+"O assassino matou 30 mortos." - Rodapé do Telejornal da SIC, Portugal
+%
+"Foi assassinado, mas não se sabe se está morto." - Jornalista da TVI, Portugal
+%
+"Estão zero graus negativos." - Jornalista da TVI
+%
+"Quatro hectares de trigo foram queimados... - Em princípio trata-se de um Incêndio." - Lídia Moreno - Rádio voz de Arganil, Portugal
+%
+"Chega agora a informação... o jogador que há pouco saiu lesionado, foi vítima de uma fractura craniana no joelho." - A meio de um relato de futebol, Portugal
+%
+"Um morreu e outro está morto". - Jornal da noite, Manuela Moura Guedes, Portugal
+%
+"A nova terapia traz esperanças a todos os que morrem de câncer a cada ano." - Jornal do Brasil, RJ
+%
+"Apesar da meteorologia estar em greve, o tempo esfriou ontem intensamente." - Jornal O GLOBO, RJ
+%
+"Os sete artistas compõem um trio de talento." - Jornal EXTRA, RJ
+%
+"A vítima foi estrangulada a golpes de facão." - Jornal O DIA, RJ
+%
+"Os nossos leitores nos desculparão por esse erro indesculpável." - Jornal O GLOBO, RJ
+%
+"No corredor do hospital psiquiátrico os doentes corriam como loucos." - Jornal O DIA, RJ
+%
+"Ela contraiu a doença na época que ainda estava viva." - JORNAL DO BRASIL, RJ
+%
+"Parece que ela foi morta pelo seu assassino." - Jornal EXTRA, RJ
+%
+"Ferido no joelho, ele perdeu a cabeça." - Jornal O DIA, RJ
+%
+"O acidente foi no triste e célebre Retângulo das Bermudas." - Jornal EXTRA, RJ. (Puxa, pensei que era um triangulo.)
+%
+"O velho reformado, antes de apertar o pescoço da mulher até a morte, se suicidou." - Jornal O DIA, RJ.
+%
+"A polícia e a justiça são as duas mãos de um mesmo braço." - Jornal EXTRA, RJ. (Por isso é essa aberração.)
+%
+"Depois de algum tempo, a água corrente foi instalada no cemitério, para a satisfação dos habitantes." - JORNAL DO BRASIL, RJ
+%
+"Há muitos redatores que, para quem veio do nada, são muito fiéis às suas origens." - O GLOBO, RJ
+%
+"O aumento do desemprego foi de 0% em novembro." - Publicada uma vez em um jornal do Rio de Janeiro
+%
+"O presidente de honra é um jovem septuagenário de 81 anos." - Publicada uma vez em um jornal do Rio de Janeiro
+%
+"Na chegada da polícia, o cadáver se encontrava rigorosamente imóvel." - Publicada uma vez em um jornal do Rio de Janeiro
+%
+"O cadáver foi encontrado morto dentro do carro." - Publicada uma vez em um jornal do Rio de Janeiro
+%
+"Prefeito de interior vai dormir bem, e acorda morto." - Publicada uma vez em um jornal do Rio de Janeiro. (Ele acorda?)
+%
+"Lavoisier foi guilhotinado por ter inventado o oxigênio." - Vestibulando Desconhecido, 2000
+%
+"O nervo ótico transmite idéias luminosas." - Vestibulando Desconhecido, 2000
+%
+"O vento é uma imensa quantidade de ar." - Vestibulando Desconhecido, 2000
+%
+"O terremoto é um pequeno movimento de terras não cultivadas." - Vestibulando Desconhecido, 2000
+%
+"Os egípcios antigos desenvolveram a arte funerária para que os mortos pudessem viver melhor." - Vestibulando Desconhecido, 2000
+%
+"Péricles foi o principal ditador da democracia grega." - Vestibulando Desconhecido, 2000
+%
+"O problema fundamental do terceiro mundo é a superabundância de necessidades." - Vestibulando Desconhecido, 2000
+%
+"O petróleo apareceu há muitos séculos, numa época em que os peixes se afogavam dentro d'água." - Vestibulando Desconhecido, 2000
+%
+"A principal função da raiz é se enterrar." - Vestibulando Desconhecido, 2000
+%
+"A igreja vem perdendo muita clientela." - Vestibulando Desconhecido, 2000
+%
+"O Sol nos dá luz, calor e turistas." - Vestibulando Desconhecido, 2000
+%
+"As aves têm na boca um dente chamado bico." - Vestibulando Desconhecido, 2000
+%
+"A unidade de força é o Newton, que significa a força que se tem que realizar em um metro da unidade de tempo, no sentido contrário." - Vestibulando Desconhecido, 2000
+%
+"Lenda é toda narração em prosa de um tema confuso." - Vestibulando Desconhecido, 2000
+%
+"A harpa é uma asa que toca." - Vestibulando Desconhecido, 2000
+%
+"A febre amarela foi trazida da China por Marco Polo." - Vestibulando Desconhecido, 2000
+%
+"Os ruminantes se distinguem dos outros animais porque o que comem, comem por duas vezes." - Vestibulando Desconhecido, 2000
+%
+"O coração é o único órgão que não deixa de funcionar 24 horas por dia." - Vestibulando Desconhecido, 2000
+%
+"Quando um animal irracional não tem água para beber, só sobrevive se for empalhado." - Vestibulando Desconhecido, 2000
+%
+"A insônia consiste em dormir ao contrário." - Vestibulando Desconhecido, 2000
+%
+"A arquitetura gótica se notabilizou por fazer edifícios verticais." - Vestibulando Desconhecido, 2000
+%
+"A diferença entre o Romantismo e o Realismo é que os românticos escrevem romances e os realistas nos mostram como está a situação do país." - Vestibulando Desconhecido, 2000
+%
+"O Chile é um país muito alto e magro." - Vestibulando Desconhecido, 2000
+%
+"As múmias tinham um profundo conhecimento de Anatomia." - Vestibulando Desconhecido, 2000
+%
+"O batismo é uma espécie de detergente do pecado original." - Vestibulando Desconhecido, 2000
+%
+"Na Grécia, a democracia funcionava muito bem, porque os que não estavam de acordo, se envenenavam." - Vestibulando Desconhecido, 2000
+%
+"A prosopopéia é o começo de uma epopéia." - Vestibulando Desconhecido, 2000
+%
+"Os crustáceos fora d'água respiram como podem." - Vestibulando Desconhecido, 2000
+%
+"Os hermafroditas nascem unidos pelo corpo." - Vestibulando Desconhecido, 2000
+%
+"As glândulas salivares só trabalham quando a gente têm vontade de cuspir." - Vestibulando Desconhecido, 2000
+%
+"A fé é uma graça através da qual podemos ver o que não vemos." - Vestibulando Desconhecido, 2000
+%
+"Os estuários e os deltas foram os primeiros habitantes da Mesopotâmia." - Vestibulando Desconhecido, 2000
+%
+"O objetivo da Sociedade Anônima é ter muitas fábricas desconhecidas." - Vestibulando Desconhecido, 2000
+%
+"A Previdência Social assegura o direito à enfermidade coletiva." - Vestibulando Desconhecido, 2000
+%
+"O Ateísmo é uma religião anônima." - Vestibulando Desconhecido, 2000
+%
+"A respiração anaeróbica é a respiração sem ar, que não deve passar de três minutos." - Vestibulando Desconhecido, 2000
+%
+"O calor é a quantidade de calorias armazenadas numa unidade de tempo." - Vestibulando Desconhecido, 2000
+%
+"Antes de ser criada a Justiça, todo mundo era injusto." - Vestibulando Desconhecido, 2000
+%
+"Caracteres sexuais secundários são as modificações morfológicas sofridas por um indivíduo após manter relações sexuais." - Vestibulando Desconhecido, 2000
+%
+"Sobrevivência de um aborto vivo (título)." - Redação de um vestibulando desconhecido, UFRJ - 2000
+%
+"O Brasil é um país abastardo com um futuro promissório." - Redação de um vestibulando desconhecido, UFRJ - 2000
+%
+"O maior matrimônio do país é a Educação." - Redação de um vestibulando desconhecido, UFRJ - 2000
+%
+"Precisamos tirar as fendas dos olhos para enxergar com clareza o número de famigerados que almenta (sic)." - Redação de um vestibulando desconhecido, UFRJ - 2000
+%
+"Os analfabetos nunca tiveram chance de voltar à escola." - Redação de um vestibulando desconhecido, UFRJ - 2000
+%
+"O bem star (sic) dos abtantes endependente (sic) de roça, religião, sexo e vegetarianos, está preocudan-do-nos." - Redação de um vestibulando desconhecido, UFRJ - 2000
+%
+"É preciso melhorar as indiferenças sociais e promover o saneamento de muitas pessoas." - Redação de um vestibulando desconhecido, UFRJ - 2000
+%
+"Também preoculpa (sic) o avanço regesssivo da violência." - Redação de um vestibulando desconhecido, UFRJ - 2000
+%
+"Segundo Darcy Gonçalves (Darcy Ribeiro) e o juiz Nicolau de Melo Neto (Nicolau dos Santos Neto)." - Redação de um vestibulando desconhecido, UFRJ - 2000
+%
+"E o presidente onde está? Certamente em sua cadeira, fumando baseado e conversando com o presidente dos EUA." - Redação de um vestibulando desconhecido, UFRJ - 2000
+%
+"O hino nacional francês se chama La Mayonèse..." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"Tiradentes, depois de morto, foi decapitulado." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"Resposta a uma pergunta: "Não cei"." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"Entres os índios de América, destacam-se os aztecas, os incas, os pirineus, etc." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"A História se divide em 4: Antiga, Média, Moderna e Momentânea (esta, a dos nossos dias)." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"Em Esparta as crianças que nasciam mortas eram sacrificadas." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"Resposta à pergunta: "Que entende por helenização?": "Não entendo nada"." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"No começo os índios eram muito atrazados mas com o tempo foram se sifilizando." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"Entre os povos orientais os casamentos eram feitos "no escuro" e os noivos só se conheciam na hora h." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"Então o governo precisou contratar oficiais para fortalecer o exército da marinha." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"Em homenagem a Gutenberg, fizeram na Alemanha uma estátua, tirando uma folha do prelo, com os dizeres: "e a luz foi iluminada"." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"No tempo colonial o Brasil só dependia do café e de outros produtos extremamente vegetarianos." - Prova de História de um vestibulando desconhecido, UFRJ - 2000
+%
+"A capital de Portugal é Luiz Boa." - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"A Geografia Humana estuda o homem em que vivemos." - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"O Brasil é um país muito aguado pela chuva." - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"Na América do Norte tem mais de 100.000 Km de estradas de ferro cimentadas.' - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"Oceano é onde nasce o Sol; onde ele nasce é o nascente e onde desce decente." - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"Na América Central há países como a República do Minicana." - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"A Terra é um dos planetas mais conhecidos no mundo." - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"As constelações servem para esclarecer a noite." - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"As principais cidades da América do Norte são Argentina e Estados Unidos." - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"Expansivas são as pessoas tangarelas." - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"O clima de São Paulo é assim: quando faz frio é inverno; quando faz calor é verão; quando tem flores é primavera; quando tem frutas é outono e quando chove é inundação." - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"Os plantetas são 9: Mercúrio, Venus,Terra, Marte. Os outros 5 eu sabia mas como esqueci agora e está na hora de entregar a prova, o sr. não vai esperar eu lembrar, vai? (e espero que não vai abaixar a nota por causa disso)." - Prova de Geografia de um vestibulando desconhecido, UFRJ - 2000
+%
+"(...) quanto à opinião pública, podemos dizer que ela é mutável. Por exemplo: na hora do parto, a mulher pode optar pelo aborto." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"A comunicação é importante porque comunica algo entre duas ou mais pessoas que querem se comunicar." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"O problema da comunicação social no Brasil é que ela é dirigida por brasileiros, deveríamos trazer os  americanos." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"O endomarketing é como se fosse o marketing endovenoso." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"Eu acho que a resposta é não. Como o professor deve ter pensado numa armadilha, respondo que é sim." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"O público mixto é composto por aquelas pessoas que entram e saem da empresa. Ou seja nunca estão totalmente dentro, nem totalmente fora." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"(a questão dizia que a afirmativa era CORRETA, pedia a justificativa somente). "Disconcordo com a questão. Ela não pode ser positiva. Nunca fiz prova que o professor dissesse que era afirmativa uma questão. Deve ser uma pegadinha, tipo do Faustão." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"A comunicassão social e feita de mim para voçês." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"A televisão é influenciativa em nossas vidas. Quantas vezes não compramos um tênis porque vemos na TV? A programação deveria ser mais educante(...)." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"A empresa e o público ixterno caminhão juntos, incluindo aí a emprensa." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"O proficional de comunicação tem um mercado bundante a sua disposição, afinal, todos se comunicam na terra(...)." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"O ruído realmente atrapalha muito a comunicação. Aqui na universidade fico atordoado quando passa o trem, quase não ouço o professor. As salas deveriam ser à prova de som." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"O fidibeque é a mesma coisa que a retroinformação, ou seja a informação que vem por trás." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"A comunicação é uma junção da verdade com a falsidade, afinal fofoca é uma coisa feia e é comunicação." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"Faço comunicação porque acho importante ser comunicadora, mas não acho importante ler jornal (suja a mão), nem ficar em casa vendo TV. Acho melhor me comunicar entre si." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"A comunicação é moderna porque usa modernidades da atualidade." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"Os principais meios utilizados pelas comunicação são: meios orais (que são falados), meios auditivos (que são ouvidos) e mais tácteis (que são sentidos)." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"A comunicação é de massa porque precisamos utilizar a massa cinzenta para compreendê-la." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"Marketing em português é mercado, marketing pessoal, portanto é o mercado que freqüentamos." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"Ao utilizarmos a comunicação nos comunicamos." - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"Se a comunicação é pessoal, envolvendo o emissor e o receptor, como podemos pensar em comunicação empresarial? A empresa se expressa por si só?" - Vestibulando desconhecido de Comunicação da UFF, 2000
+%
+"Antigamente ao bater uma carroça na outra dificilmente alguém morria, hoje após a evolução, milhares morrem em acidentes de carro." - Vestibulando, Unicamp - 2003
+%
+"O homem progrediu as custas de outros, como Frankstein, que deu vida a uma criatura, adquiriu a evolução mas não teve bom êxito com o monstro criado. Já que este monstro não tinha noção da sua força e deformação." - Vestibulando, Unicamp - 2003
+%
+"E o Homo Sapiens continua seu progresso: desmatando, poluindo e usando desinfetantes, só para dar cheirinho no seu banheiro." - Vestibulando, Unicamp - 2003
+%
+"Eu, particularmente, desenvolvi uma cabacidade de raciocínio e argumentação incríveis." - Vestibulando, Unicamp - 2003
+%
+"Como diz o ditado: é duro agradar a pobres e troianos." - Vestibulando, Unicamp - 2003
+%
+"Todos os seres evoluem, cada um com a sua evolução, pois somos todos individualistas." - Vestibulando, Unicamp - 2003
+%
+"Os próprios seres humanos somos mudanças ambulantes." - Vestibulando, Unicamp - 2003
+%
+"Sonhamos com um mundo melhor, visto que o dinossauro cedeu lugar ao cachorro, gato..." - Vestibulando, Unicamp - 2003
+%
+"Os aminoácidos foram os primeiros habitantes da terra..." - Vestibulando, Unicamp - 2003
+%
+"A cultura mudou, os costumes mudaram, até os dentes dos nossos bisavós eram diferentes, temos dentes a menos." - Vestibulando, Unicamp - 2003
+%
+"O macaco é descendente do homem." - Vestibulando, Unicamp - 2003
+%
+"Tivemos uma longa conversa de cinco minutos..." - Vestibulando, Unicamp - 2003
+%
+"Hoje sou antropófago..." - Vestibulando, Unicamp - 2003
+%
+"Já está muito de difícil de achar os pandas na Amazônia." - Prova do ENEM
+%
+"Na verdade, nem todo desmatamento é tão ruim. Por exemplo, o do Aeds Egipte seria um bom benefício para o Brasil." - Prova do ENEM
+%
+"...eles matam não somente os animais mas também os matança de aves peixes também precisam acabar ... os pequenos animalzinhos morrem queimados e asfixados." - Prova do ENEM
+%
+"Isso tudo é devido ao raios ultra-violentos que recebemos todo dia." - Prova do ENEM
+%
+"Tudo isso colaborou com a estinção do micro-leão dourado." - Prova do ENEM
+%
+"Imaginem a bandeira do Brasil. O azul representa o céu, o verde representa as matas, e o amarelo o ouro. O ouro já foi roubado e as matas estão quase se indo. No dia em que roubarem nosso céu, ficaremos sem bandeira." - Prova do ENEM
+%
+"Ultimamente não se fala em outro assunto anonser sobre o araras azuls que ficavam sob voando as matas." - Prova do ENEM
+%
+"...são formados pelas bacias esferográficas." - Prova do ENEM
+%
+"Os homens brasileiros, estão acabando com tudo, as árvores para desmartar para fazer tauba e outra coisa." - Prova do ENEM
+%
+"O seringueiro tira borracha das árvores, mas não nunca derrubam as seringas." - Prova do ENEM
+%
+"Vamos deixar de sermos egoístas e pensarmos um pouco mais em nós mesmos." - Prova do ENEM
+%
+"O sero mano tem uma missão..." - Prova do ENEM
+%
+"O Euninho já provocar secas e enchentes calamitosas..." - Prova do ENEM
+%
+"Enquanto isso os zoutros ... tudo baixo nive..." - Prova do ENEM
+%
+"A Xuxa hoje se prelcupa com a situação dos animais." - Prova do ENEM
+%
+"O problema ainda é maior se tratando da camada Diozônio!" - Prova do ENEM
+%
+"Não preserve apenas o meio ambiente e sim todo ele." - Prova do ENEM
+%
+"É um problema de muita gravidez." - Prova do ENEM
+%
+"A TV possui um grau elevadíssimo de informações que nos enriquece de uma maneira pobre, pois se tornamos uns viciados deste veículo de comunicação." - Vestibular 2003, UNIP
+%
+"A TV no entanto é um consumo que devemos consumir para nossa formação, informação e deformação." - Vestibular 2003, UNIP
+%
+"A TV se estiver ligada pode formar uma série de imagens, já desligada não..." - Vestibular 2003, UNIP
+%
+"A TV deforma não só os sofás por motivo da pessoa ficar bastante tempo intertida como também as vista..." - Vestibular 2003, UNIP
+%
+"A televisão passa para as pessoas que a vida é um conto de fábulas e com isso fabrica muitas cabeças..." - Vestibular 2003, UNIP
+%
+"Sempre ou quase sempre a TV está mais perto de nosco... fazendo com que o telespectador solte o seu lado obscuro..." - Vestibular 2003, UNIP
+%
+"A TV deforma a coluna, os músculos e o organismo em geral." - Vestibular 2003, UNIP
+%
+"A televisão é um meio de comunicação, audição e porque não dizer de locomoção." - Vestibular 2003, UNIP
+%
+"A TV é o oxigênio que forma nossas idéias." - Vestibular 2003, UNIP
+%
+"A TV ezerce poder, levando informações diárias e porque não dizer horárias." - Vestibular 2003, UNIP
+%
+"E nós estamos nos diluindo a cada dia e não se pode dizer que a TV não tem nada a ver com isso..." - Vestibular 2003, UNIP
+%
+"A televisão leva fatos a trilhares de pessoas..." - Vestibular 2003, UNIP
+%
+"A TV acomoda aos teles inspectadores..." - Vestibular 2003, UNIP
+%
+"A televisão pode ser definida como uma faca de trez gumes. Ela tanto pode formar, como informar, como deformar." - Vestibular 2003, UNIP
+%
+"A finalidade das Cruzadas era passear pelo deserto em busca de aventuras." - Algum Vestibulando
+%
+"Anchieta ficou como refém entre os índios, lá ele escreveu o poema à VirgemLuís - Alves de Lima e Silva pela sua bravura recebeu o nobre título de 'Caxias'." - Algum Vestibulando
+%
+"Com o descobrimento da bússola, os marinheiros puderam se afundar no mar." - Algum Vestibulando
+%
+"Antigamente, antes da invenção da imprensa, a leitura era sacrilégio dos ricos." - Algum Vestibulando
+%
+"A luta de classes entre os romanos foi a maior luta de todos os tempos." - Algum Vestibulando
+%
+"Os índios brasileiros tinham medo dos animais domésticos; eles só gostavam de animais ferozes." - Algum Vestibulando
+%
+"As raças têm muita diferença entre si: assim uns têm nariz chato, outros igual de papagaio, outros arrebitados, etc." - Algum Vestibulando
+%
+"Horizonte é onde que parece que é o fim do mundo." - Algum Vestibulando
+%
+"O horizonte é até aonde a nossa vista alcança e conforme a gente vai andando ele também vai." - Algum Vestibulando
+%
+"O Brasil é um dos países mais intensos do mundo." - Algum Vestibulando
+%
+"A alimentação é o meio de digerirmos o corpo." - Algum Vestibulando
+%
+"Influência do meio sobre o homem: exemplo - o fato de uma pessoa estar rindo e a colega não sabendo porque a outra ri, põem-se a rir também, é a influência." - Algum Vestibulando
+%
+"Ângulo é duas linhas que vão indo e se encontram." - Algum Vestibulando
+%
+"Triângulo são os filhos trigêmeos do ângulo." - Algum Vestibulando
+%
+"Tangente é quando a bola passa raspando no jogo de futebol. Ela também tem o nome de trave." - Algum Vestibulando
+%
+"Conjunto vazio é aquele em que os músicos não sabem nada de música e tocam 'na orelhada'." - Algum Vestibulando
+%
+"Objeto direto é quando a gente ganha um presente diretamente da pessoa que dá; e indireto, a pessoa não pode entregar e manda outro dar." - Algum Vestibulando
+%
+"Sujeito é a pessoa com quem estamos falando." - Algum Vestibulando
+%
+"Preposição é quando uma pessoa coloca um objeto antes de a gente mandar." - Algum Vestibulando
+%
+"Artigo é qualquer tipo de mercadoria. Assim, quando vamos a uma loja e o balconista quer vender mesmo, ele diz assim: 'Este artigo é o melhor da praça'." - Algum Vestibulando
+%
+"A morte do jornalista que apareceu morto." - Algum Vestibulando
+%
+"A água vai passar do estado líquido para o físico." - Algum Vestibulando
+%
+"Ele tem dois filhos homens e uma filha mulher." - Algum Vestibulando
+%
+No intervalo de uma palestra sobre informática se encontram no banheiro o %Sr. Linus, Bill Gates e Steve Jobs. Após uma rápida passagem pelo mictório, o Sr. Linus lava cuidadosamente as mãos, se vira para Bill Gates e diz:
+- Nós, da Linux, somos perfeccionistas.
+Bill Gates também lava meticulosamente as mãos, tomando cuidado de esfregar %bem entre os dedos e por baixo da unha. Lança um olhar desafiador para o Sr. %Linus e exclama:
+- Nós, da Microsoft, somos perfeccionistas e detalhistas!
+Nesse momento, Steve Jobs, que estava dando as costas para a ridícula cena, %se dirige à saída do banheiro. Ao uníssono, Linus e Gates lhe perguntam:
+- Steve, você não vai lavar as mãos?
+E Steve Jobs respondeu, secamente:
+- Nós, da Apple, não mijamos na mão!
+%
