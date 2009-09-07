@@ -1,8 +1,9 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-public class ListaCitacoes {
+public class ListaCitacoes extends ListaCitacoesAbstrata {
 	private ArrayList<Citacao> citacoes;
 	
 	public ListaCitacoes() {
@@ -20,4 +21,10 @@ public class ListaCitacoes {
 	public int qtdCitacoes(){
 		return citacoes.size();
 	}
+	
+	public Citacao escolherCitacaoAleatoria(){
+		Random random = new Random();
+		return citacoes.get(random.nextInt(citacoes.size()));
+	}
+
 }
