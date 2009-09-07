@@ -11,7 +11,7 @@ public class Citacao {
 		this.citacao = citacao;
 	}
 
-	public String obterCitacao() {
+	public String toString() {
 		return citacao;
 	}
 

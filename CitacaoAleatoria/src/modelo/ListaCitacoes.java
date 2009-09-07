@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class ListaCitacoes {
 	private ArrayList<Citacao> citacoes;
 	
+	public ListaCitacoes() {
+		citacoes = new ArrayList<Citacao>();
+	}
+	
 	public void adicionarCitacao(Citacao citacao){
 		citacoes.add(citacao);
 	}

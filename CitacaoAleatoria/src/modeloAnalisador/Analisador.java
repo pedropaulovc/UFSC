@@ -1,4 +1,4 @@
-package modelo;
+package modeloAnalisador;
 
 public class Analisador {
 
