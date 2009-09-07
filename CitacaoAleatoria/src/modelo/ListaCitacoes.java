@@ -3,7 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ListaCitacoes extends ListaCitacoesAbstrata {
+public class ListaCitacoes {
 	private ArrayList<Citacao> citacoes;
 	
 	public ListaCitacoes() {
