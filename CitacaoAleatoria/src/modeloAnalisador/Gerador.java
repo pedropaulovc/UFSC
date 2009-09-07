@@ -9,24 +9,21 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 
-import modelo.Citacao;
-import modelo.ListaCitacoes;
-
 public class Gerador {
-	private String arquivo;
+	private String arquivoFonte;
 	private String codificacao;
 
-	public Gerador(String arquivo, String codificacao) {
-		this.arquivo = arquivo;
+	public Gerador(String arquivoFonte, String codificacao) {
+		this.arquivoFonte = arquivoFonte;
 		this.codificacao = codificacao;
 	}
 
-	private String obterArquivo() throws FileNotFoundException,
+	public String obterArquivo() throws FileNotFoundException,
 			UnsupportedEncodingException, IOException {
 		StringBuffer sb = new StringBuffer();
 
 		Reader in = new BufferedReader(new InputStreamReader(
-				new FileInputStream(new File(arquivo)), codificacao));
+				new FileInputStream(new File(arquivoFonte)), codificacao));
 
 		int ch;
 		while ((ch = in.read()) != -1) {
@@ -34,20 +31,6 @@ public class Gerador {
 		}
 
 		return sb.toString();
-	}
-
-	public ListaCitacoes gerar(String expressaoRegular)
-			throws FileNotFoundException, UnsupportedEncodingException,
-			IOException {
-		
-		String[] stringDividida = obterArquivo().split(expressaoRegular);
-		ListaCitacoes lc = new ListaCitacoes();
-
-		for (String sd : stringDividida) {
-			lc.adicionarCitacao(new Citacao(sd));
-		}
-		
-		return lc;
 	}
 
 }
