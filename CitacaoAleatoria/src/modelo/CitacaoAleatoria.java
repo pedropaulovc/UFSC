@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import modeloAnalisador.Analisador;
 
 public class CitacaoAleatoria {
 	public static void main(String[] args) {
