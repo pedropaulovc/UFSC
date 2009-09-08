@@ -1,13 +1,12 @@
 package modelo;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 
 public class Baixador {
 	private String caminhoArquivoFonte;
@@ -22,8 +21,12 @@ public class Baixador {
 			UnsupportedEncodingException, IOException {
 		StringBuffer sb = new StringBuffer();
 
-		Reader in = new BufferedReader(new InputStreamReader(
-				new FileInputStream(new File(caminhoArquivoFonte)), codificacao));
+		// Reader in = new BufferedReader(new InputStreamReader(
+		// new FileInputStream(new File(caminhoArquivoFonte)), codificacao));
+
+		Reader in = new BufferedReader(new InputStreamReader(new URL(
+				caminhoArquivoFonte).openConnection().getInputStream(),
+				codificacao));
 
 		int ch;
 		while ((ch = in.read()) != -1) {

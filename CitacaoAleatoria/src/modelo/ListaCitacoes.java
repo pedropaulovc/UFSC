@@ -22,9 +22,9 @@ public class ListaCitacoes {
 		return citacoes.size();
 	}
 	
-	public Citacao escolherCitacaoAleatoria(){
+	public Citacao obterCitacaoAleatoria(){
 		Random random = new Random();
-		return citacoes.get(random.nextInt(citacoes.size()));
+		return citacoes.get(random.nextInt(citacoes.size())).clone();
 	}
 
 }
