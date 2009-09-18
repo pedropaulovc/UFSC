@@ -1,19 +1,21 @@
 package biblioteca;
 
-public class Exemplar implements Cloneable {
-	private TipoSituacao situacao;
+public class Exemplar {
+	private Situacao situacao;
 	private int volume;
+	private String localizacao;
 	
-	public Exemplar(int volume, TipoSituacao situacao){
+	public Exemplar(int volume, Situacao situacao, String localizacao){
 		this.situacao = situacao;
 		this.volume = volume;
+		this.alterarLocalizacao(localizacao);
 	}
 	
-	public void alterarSituacao(TipoSituacao situacao){
+	public void alterarSituacao(Situacao situacao){
 		this.situacao = situacao;
 	}
-	
-	public TipoSituacao obterSituacao(){
+
+	public Situacao obterSituacao(){
 		return situacao;
 	}
 	
@@ -23,6 +25,15 @@ public class Exemplar implements Cloneable {
 	
 	public void alterarVolume(int volume){
 		this.volume = volume;
+	}
+	
+
+	public void alterarLocalizacao(String localizacao) {
+		this.localizacao = localizacao;
+	}
+
+	public String obterLocalizacao() {
+		return localizacao;
 	}
 	
 	public String toString(){

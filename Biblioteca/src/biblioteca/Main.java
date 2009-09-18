@@ -2,20 +2,13 @@ package biblioteca;
 
 public class Main {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		ListaModelo<Integer> ls = new ListaModelo<Integer>();
+		Situacao situacao = new Situacao();
+		Exemplar exemplar = new Exemplar(1, situacao, "localizado");
+		NumeroChamada numeroChamada = new NumeroChamada("Numero chamada");
+		Edicao edicao = new Edicao(exemplar, numeroChamada, 1900);
+		Documento documento = new Documento("titulo", "autor", edicao);
 		
-		System.out.println(ls.tamanho());
-		ls.adicionar(9999);
-		System.out.println(ls.tamanho());
-		System.out.println(ls.obter(0));
-		System.out.println(ls.tamanho());
-		System.out.println(ls.remover(0));
-		System.out.println(ls.tamanho());
-		
+		System.out.println(documento.toString());
 	}
-
 }

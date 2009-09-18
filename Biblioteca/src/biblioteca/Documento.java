@@ -1,81 +1,58 @@
 package biblioteca;
 
-import java.util.List;
-
-public abstract class Documento implements Cloneable {
+public class Documento {
 	private String titulo;
-	private int anoPublicacao;
 	private String autor;
-	private String localizacaoEstante;
-	private NumeroChamada numeroChamada;
-	private List<Exemplar> exemplares;
-
-	public Documento(String titulo, int anoPublicacao, String autor,
-			String localizacaoEstante, NumeroChamada numeroChamada,
-			List<Exemplar> exemplares) {
+	private ListaDe<Edicao> edicoes;
+	
+	public Documento (String titulo, String autor, Edicao edicao){
 		this.titulo = titulo;
-		this.anoPublicacao = anoPublicacao;
 		this.autor = autor;
-		this.localizacaoEstante = localizacaoEstante;
-		this.numeroChamada = numeroChamada;
-		this.exemplares = exemplares;
+		this.edicoes = new ListaDe<Edicao>();
+		this.edicoes.adicionar(edicao);
 	}
 
-	public void alterarAnoPublicacao(int anoPublicacao) {
-		this.anoPublicacao = anoPublicacao;
+	public Documento(String titulo, String autor, ListaDe<Edicao> edicoes) {
+		this.titulo = titulo;
+		this.autor = autor;
+		this.edicoes = edicoes;
 	}
 
 	public void alterarAutor(String autor) {
 		this.autor = autor;
 	}
 
-	public void alterarLocalizacaoEstante(String localizacaoEstante) {
-		this.localizacaoEstante = localizacaoEstante;
-	}
-
 	public void alterarTiulo(String titulo) {
 		this.titulo = titulo;
-	}
-
-	public void adicionarExemplar(Exemplar exemplar) {
-		this.exemplares.add(exemplar);
-	}
-
-	public int obterAnoPublicacao() {
-		return anoPublicacao;
 	}
 
 	public String obterAutor() {
 		return autor;
 	}
 
-	public String obterLocalizacaoEstante() {
-		return localizacaoEstante;
-	}
-
 	public String obterTitulo() {
 		return titulo;
 	}
 
-	public void alterarNumeroChamada(NumeroChamada numeroChamada) {
-		this.numeroChamada = numeroChamada;
-
+	public void alterarEdicoes(ListaDe<Edicao> edicoes) {
+		this.edicoes = edicoes;
 	}
 
-	public NumeroChamada obterNumeroChamada() {
-		return numeroChamada.clone();
+	public ListaDe<Edicao> obterEdicoes() {
+		return edicoes;
 	}
 
-	public Exemplar obterExemplar(int exemplar) {
-		return exemplares.get(exemplar).clone();
+	public String toString() {
+		return titulo + " do autor " + autor + ". Há " + edicoes.tamanho()
+				+ " edições desse documento.";
 	}
 
-	public Exemplar removerExemplar(int exemplar) {
-		return exemplares.remove(exemplar);
+	public Documento clone() {
+		try {
+			return (Documento) super.clone();
+		} catch (CloneNotSupportedException excecao) {
+			return this;
+		}
 	}
-
-	public int qtdExemplares() {
-		return exemplares.size();
-	}
-
+	
 }

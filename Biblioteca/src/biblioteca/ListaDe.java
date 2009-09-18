@@ -3,11 +3,11 @@ package biblioteca;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaModelo<Tipo> {
+public class ListaDe<Tipo> {
 	List<Tipo> lista = new ArrayList<Tipo>();
 	
-	public void adicionar(Tipo e){
-		lista.add(e);
+	public boolean adicionar(Tipo e){
+		return lista.add(e);
 	}
 	
 	public Tipo remover(int e){
