@@ -6,10 +6,10 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ListaString ls = new ListaString();
+		ListaModelo<Integer> ls = new ListaModelo<Integer>();
 		
 		System.out.println(ls.tamanho());
-		ls.adicionar("oi");
+		ls.adicionar(9999);
 		System.out.println(ls.tamanho());
 		System.out.println(ls.obter(0));
 		System.out.println(ls.tamanho());
