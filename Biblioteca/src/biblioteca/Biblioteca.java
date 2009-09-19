@@ -2,11 +2,11 @@ package biblioteca;
 
 public class Biblioteca {
 	private String nome;
-	private ListaDe<Documento> acervo;
+	private ListaDe<Arquivavel> acervo;
 
 	public Biblioteca(String nome) {
 		this.nome = nome;
-		acervo = new ListaDe<Documento>();
+		acervo = new ListaDe<Arquivavel>();
 	}
 
 	public String obterNome() {
@@ -17,16 +17,16 @@ public class Biblioteca {
 		return acervo.tamanho();
 	}
 
-	public boolean adicionarDocumento(Documento d) {
-		return acervo.adicionar(d);
+	public boolean adicionar(Arquivavel a) {
+		return acervo.adicionar(a);
 	}
 
-	public Documento obterDocumento(int d) {
-		return acervo.obter(d);
+	public Arquivavel obter(int a) {
+		return acervo.obter(a).clone();
 	}
 
-	public Documento removerDocumento(int d) {
-		return acervo.remover(d);
+	public Arquivavel remover(int a) {
+		return acervo.remover(a).clone();
 	}
 
 	public String toString() {

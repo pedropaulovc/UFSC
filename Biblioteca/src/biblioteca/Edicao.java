@@ -33,7 +33,7 @@ public class Edicao {
 	}
 
 	public NumeroChamada obterNumeroChamada() {
-		return numeroChamada;
+		return numeroChamada.clone();
 	}
 
 	public void alterarExemplares(ListaDe<Exemplar> exemplares) {
@@ -41,7 +41,7 @@ public class Edicao {
 	}
 
 	public ListaDe<Exemplar> obterExemplares() {
-		return exemplares;
+		return exemplares.clone();
 	}
 
 	public String toString() {

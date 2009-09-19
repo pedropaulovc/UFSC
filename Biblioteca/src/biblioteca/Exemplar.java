@@ -16,7 +16,7 @@ public class Exemplar {
 	}
 
 	public Situacao obterSituacao(){
-		return situacao;
+		return situacao.clone();
 	}
 	
 	public int obterVolume(){

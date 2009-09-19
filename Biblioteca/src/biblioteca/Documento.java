@@ -39,7 +39,7 @@ public class Documento {
 	}
 
 	public ListaDe<Edicao> obterEdicoes() {
-		return edicoes;
+		return edicoes.clone();
 	}
 
 	public String toString() {

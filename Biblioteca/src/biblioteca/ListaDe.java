@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaDe<Tipo> {
-	List<Tipo> lista = new ArrayList<Tipo>();
+	private List<Tipo> lista = new ArrayList<Tipo>();
 	
 	public boolean adicionar(Tipo e){
 		return lista.add(e);
@@ -20,5 +20,12 @@ public class ListaDe<Tipo> {
 	
 	public Tipo obter(int e){
 		return lista.get(e);
+	}
+	
+	public ListaDe<Tipo> clone(){
+		ListaDe<Tipo> listaClone = new ListaDe<Tipo>();
+		for(int i = 0; i < lista.size(); i++)
+			listaClone.adicionar(lista.get(i));
+		return listaClone;
 	}
 }

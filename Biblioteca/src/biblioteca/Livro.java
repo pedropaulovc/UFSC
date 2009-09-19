@@ -1,12 +1,10 @@
 package biblioteca;
 
-
-public class Livro {
+public class Livro extends Arquivavel {
 	private int qtdCapitulos;
-	private Documento documentoOriginal;
 	
-	public Livro(Documento documentoOriginal, int qtdCapitulos) {
-		this.alterarDocumentoOriginal(documentoOriginal);
+	public Livro(Documento documento, int qtdCapitulos) {
+		super(documento);
 		this.qtdCapitulos = qtdCapitulos;
 	}
 	
@@ -17,24 +15,12 @@ public class Livro {
 	public int obterQtdCapitulos() {
 		return qtdCapitulos;
 	}
-
-	public void alterarDocumentoOriginal(Documento documentoOriginal) {
-		this.documentoOriginal = documentoOriginal;
-	}
-
-	public Documento obterDocumentoOriginal() {
-		return documentoOriginal;
-	}
 	
 	public String toString(){
-		return documentoOriginal.toString() + " Possui " + qtdCapitulos + "capítulos.";
+		return super.toString() + " Possui " + qtdCapitulos + " capítulos.";
 	}
 	
 	public Livro clone(){
-		try {
-			return (Livro) super.clone();
-		} catch (CloneNotSupportedException excecao) {
-			return this;
-		}
+		return new Livro(super.obterDocumento().clone(), qtdCapitulos);
 	}
 }
