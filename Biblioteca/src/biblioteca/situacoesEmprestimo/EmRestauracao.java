@@ -1,4 +1,4 @@
-package biblioteca.situacoes;
+package biblioteca.situacoesEmprestimo;
 
 import java.util.Date;
 

@@ -1,7 +1,7 @@
 package biblioteca;
 
-import biblioteca.situacoes.Disponivel;
-import biblioteca.situacoes.Situacao;
+import biblioteca.situacoesEmprestimo.Disponivel;
+import biblioteca.situacoesEmprestimo.Situacao;
 
 public class Exemplar {
 	private Situacao situacao;

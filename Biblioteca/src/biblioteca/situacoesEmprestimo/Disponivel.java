@@ -1,4 +1,4 @@
-package biblioteca.situacoes;
+package biblioteca.situacoesEmprestimo;
 
 public class Disponivel implements Situacao {
 	public Disponivel clone(){
