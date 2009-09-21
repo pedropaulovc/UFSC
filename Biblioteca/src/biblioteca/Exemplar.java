@@ -1,5 +1,6 @@
 package biblioteca;
 
+import biblioteca.situacoes.Disponivel;
 import biblioteca.situacoes.Situacao;
 
 public class Exemplar {
@@ -18,7 +19,11 @@ public class Exemplar {
 	}
 
 	public Situacao obterSituacao(){
-		return situacao.clone();
+		return situacao;
+	}
+	
+	public boolean podeSerEmprestado(){
+		return situacao instanceof Disponivel;
 	}
 	
 	public int obterVolume(){

@@ -30,7 +30,7 @@ public class Biblioteca {
 	public Arquivavel remover(int a) {
 		return acervo.remover(a).clone();
 	}
-
+	
 	public String toString() {
 		return nome + ". Possui acervo de " + tamanhoAcervo() + " documentos.";
 	}
