@@ -2,8 +2,8 @@ package biblioteca;
 
 import biblioteca.arquivaveis.Dissertacao;
 import biblioteca.arquivaveis.Livro;
+import biblioteca.situacoes.Disponivel;
 import biblioteca.situacoes.Emprestado;
-import biblioteca.situacoes.Situacao;
 
 public class Main {
 

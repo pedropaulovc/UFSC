@@ -1,12 +1,18 @@
 package biblioteca.situacoes;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 public class Emprestado implements Situacao {
-	private Date dataDevolucao;
+	private GregorianCalendar dataDevolucao;
 	
 	public Emprestado(){
-		dataDevolucao = new Date();
+		calcularDataDevolucao();
+	}
+
+	private void calcularDataDevolucao() {
+		dataDevolucao = new GregorianCalendar();
+		dataDevolucao.add(Calendar.DAY_OF_YEAR, 15);
 	}
 	
 	public Situacao clone(){
