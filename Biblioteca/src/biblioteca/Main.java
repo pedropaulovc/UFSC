@@ -5,7 +5,6 @@ import biblioteca.arquivaveis.Livro;
 import biblioteca.situacoes.Emprestado;
 import biblioteca.situacoes.Situacao;
 
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -20,10 +19,10 @@ public class Main {
 		Edicao edicao2 = new Edicao(exemplar2, new NumeroChamada("2233.44(12)"), 2005);
 		Documento documento2 = new Documento("Telix", "Melgarejo, Luís Fernando Bier", edicao2);
 		Dissertacao dissertacao = new Dissertacao(documento2, "Mazzucco Júnior, José");
-		
+
 		biblioteca.adicionar(livro);
 		biblioteca.adicionar(dissertacao);
-		
+
 		System.out.println(biblioteca.toString());
 		System.out.println(livro.toString());
 		System.out.println(dissertacao.toString());
