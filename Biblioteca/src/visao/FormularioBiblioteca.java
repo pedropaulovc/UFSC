@@ -5,7 +5,6 @@ import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
 
 public class FormularioBiblioteca {
-
 	private PaginaDix pagina;
 
 	public FormularioBiblioteca(PaginaDix pagina) {

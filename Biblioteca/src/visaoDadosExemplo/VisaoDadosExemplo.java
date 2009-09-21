@@ -1,6 +1,6 @@
-package visao;
+package visaoDadosExemplo;
 
-import controle.TratadorDadosExemplo;
+import controleDadosExemplo.TratadorDadosExemplo;
 import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
