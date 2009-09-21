@@ -12,6 +12,7 @@ public class Titulo {
 	}
 
 	private void criarTitulo() {
-		pagina.criarComponente(TiposDeComponentesDix.ETIQUETA, "tituloPagina");		
+		pagina.criarComponente(TiposDeComponentesDix.ETIQUETA, "tituloPagina")
+		.fixarTopo(20).fixarEsquerda(500).fixarTexto("Sistema de Controle de Biblioteca");
 	}
 }
