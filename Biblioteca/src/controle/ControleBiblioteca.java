@@ -6,12 +6,18 @@ import biblioteca.Biblioteca;
 public class ControleBiblioteca {
 
 	private Biblioteca biblioteca;
-	private VisaoBiblioteca visaoBiblioteca;
+	private VisaoBiblioteca visao;
 
 	public ControleBiblioteca(Biblioteca biblioteca,
 			VisaoBiblioteca visaoBiblioteca) {
 		this.biblioteca = biblioteca;
-		this.visaoBiblioteca = visaoBiblioteca;
+		this.visao = visaoBiblioteca;
+
+		adicionarTratadoresEventos();
+	}
+
+	private void adicionarTratadoresEventos() {
+		
 	}
 
 }

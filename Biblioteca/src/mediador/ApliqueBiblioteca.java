@@ -14,8 +14,8 @@ public class ApliqueBiblioteca extends Aplique {
 	public void iniciar() {
 		PaginaDix pagina = this.obterPaginaDix();
 		
-		Biblioteca biblioteca = new Biblioteca("Biblioteca Central");
 		VisaoBiblioteca visaoBiblioteca = new VisaoBiblioteca(pagina);
+		Biblioteca biblioteca = new Biblioteca("Biblioteca Central", visaoBiblioteca);
 		new ControleBiblioteca(biblioteca, visaoBiblioteca);
 		
 		DadosExemplo dadosDeExemplo = new DadosExemplo(biblioteca);

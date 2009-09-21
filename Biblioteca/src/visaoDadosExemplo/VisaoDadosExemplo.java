@@ -5,7 +5,6 @@ import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
 
-
 public class VisaoDadosExemplo {
 	private PaginaDix pagina;
 	private ComponenteDix botaoDadosExemplo;

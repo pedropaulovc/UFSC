@@ -1,14 +1,18 @@
 package biblioteca;
 
+import visao.VisaoBiblioteca;
 import biblioteca.arquivaveis.Arquivavel;
 
 public class Biblioteca {
 	private String nome;
 	private ListaDe<Arquivavel> acervo;
+	private VisaoBiblioteca visao;
 
-	public Biblioteca(String nome) {
+	public Biblioteca(String nome, VisaoBiblioteca visao) {
 		this.nome = nome;
+		this.visao = visao;
 		acervo = new ListaDe<Arquivavel>();
+		atualizarEstatisticas();
 	}
 
 	public String obterNome() {
@@ -20,7 +24,9 @@ public class Biblioteca {
 	}
 
 	public boolean adicionar(Arquivavel a) {
-		return acervo.adicionar(a);
+		boolean foiAdicionado = acervo.adicionar(a);
+		atualizarEstatisticas();
+		return foiAdicionado;
 	}
 
 	public Arquivavel obter(int a) {
@@ -28,10 +34,16 @@ public class Biblioteca {
 	}
 
 	public Arquivavel remover(int a) {
-		return acervo.remover(a).clone();
+		Arquivavel removido =  acervo.remover(a).clone();
+		atualizarEstatisticas();
+		return removido;
 	}
-	
+
 	public String toString() {
 		return nome + ". Possui acervo de " + tamanhoAcervo() + " documentos.";
+	}
+
+	public void atualizarEstatisticas() {
+		visao.atualizarEstatisticas(toString());
 	}
 }

@@ -16,7 +16,7 @@ public class FormularioBiblioteca {
 		ComponenteDix tituloDocumento = pagina.criarComponente(
 				TiposDeComponentesDix.CAMPO_DE_TEXTO, "tituloDocumento");
 		tituloDocumento.fixarTopo(60).fixarEsquerda(20).fixarTexto("Título do documento");
-
 	}
-
+	
+	
 }
