@@ -1,5 +1,7 @@
 package biblioteca;
 
+import biblioteca.arquivaveis.Arquivavel;
+
 public class Biblioteca {
 	private String nome;
 	private ListaDe<Arquivavel> acervo;

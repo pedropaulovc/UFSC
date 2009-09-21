@@ -1,4 +1,4 @@
-package biblioteca;
+package biblioteca.dadosExemplo;
 
 public class DadosDeExemplo {
 

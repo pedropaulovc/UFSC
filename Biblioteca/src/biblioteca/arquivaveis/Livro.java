@@ -1,4 +1,6 @@
-package biblioteca;
+package biblioteca.arquivaveis;
+
+import biblioteca.Documento;
 
 public class Livro extends Arquivavel {
 	private int qtdCapitulos;

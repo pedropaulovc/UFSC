@@ -1,5 +1,9 @@
 package biblioteca;
 
+import biblioteca.arquivaveis.Dissertacao;
+import biblioteca.arquivaveis.Livro;
+import biblioteca.situacoes.Situacao;
+
 
 public class Main {
 

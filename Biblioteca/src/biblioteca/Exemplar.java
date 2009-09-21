@@ -1,5 +1,7 @@
 package biblioteca;
 
+import biblioteca.situacoes.Situacao;
+
 public class Exemplar {
 	private Situacao situacao;
 	private int volume;

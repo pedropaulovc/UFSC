@@ -1,4 +1,6 @@
-package biblioteca;
+package biblioteca.arquivaveis;
+
+import biblioteca.Documento;
 
 public class Dissertacao extends Arquivavel {
 	private String orientador;

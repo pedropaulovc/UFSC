@@ -1,4 +1,6 @@
-package biblioteca;
+package biblioteca.arquivaveis;
+
+import biblioteca.Documento;
 
 public abstract class Arquivavel {
 	private Documento documento;

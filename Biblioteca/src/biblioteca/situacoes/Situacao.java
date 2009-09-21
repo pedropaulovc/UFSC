@@ -1,4 +1,4 @@
-package biblioteca;
+package biblioteca.situacoes;
 
 public class Situacao {
 	public Situacao clone(){
