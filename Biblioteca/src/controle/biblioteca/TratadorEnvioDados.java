@@ -1,12 +1,6 @@
 package controle.biblioteca;
 
 import modelo.biblioteca.Biblioteca;
-import modelo.biblioteca.Documento;
-import modelo.biblioteca.Edicao;
-import modelo.biblioteca.Exemplar;
-import modelo.biblioteca.NumeroChamada;
-import modelo.biblioteca.arquivaveis.Livro;
-import modelo.biblioteca.situacoesEmprestimo.Emprestado;
 import visao.biblioteca.FormularioBiblioteca;
 import visao.biblioteca.VisaoBiblioteca;
 import edugraf.jadix.eventos.EventoSimples;

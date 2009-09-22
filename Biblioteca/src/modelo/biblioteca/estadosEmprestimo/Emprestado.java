@@ -1,4 +1,4 @@
-package modelo.biblioteca.situacoesEmprestimo;
+package modelo.biblioteca.estadosEmprestimo;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 

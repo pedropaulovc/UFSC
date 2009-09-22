@@ -1,7 +1,7 @@
 package modelo.biblioteca;
 
-import modelo.biblioteca.situacoesEmprestimo.Disponivel;
-import modelo.biblioteca.situacoesEmprestimo.Situacao;
+import modelo.biblioteca.estadosEmprestimo.Disponivel;
+import modelo.biblioteca.estadosEmprestimo.Situacao;
 
 public class Exemplar {
 	private Situacao situacao;

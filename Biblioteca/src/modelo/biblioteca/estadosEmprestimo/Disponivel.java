@@ -1,4 +1,4 @@
-package modelo.biblioteca.situacoesEmprestimo;
+package modelo.biblioteca.estadosEmprestimo;
 
 public class Disponivel implements Situacao {
 	public Disponivel clone(){

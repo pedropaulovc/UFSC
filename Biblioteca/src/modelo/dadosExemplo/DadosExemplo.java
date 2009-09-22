@@ -7,8 +7,8 @@ import modelo.biblioteca.Exemplar;
 import modelo.biblioteca.NumeroChamada;
 import modelo.biblioteca.arquivaveis.Dissertacao;
 import modelo.biblioteca.arquivaveis.Livro;
-import modelo.biblioteca.situacoesEmprestimo.Disponivel;
-import modelo.biblioteca.situacoesEmprestimo.Emprestado;
+import modelo.biblioteca.estadosEmprestimo.Disponivel;
+import modelo.biblioteca.estadosEmprestimo.Emprestado;
 
 public class DadosExemplo {
 	private Biblioteca biblioteca;
