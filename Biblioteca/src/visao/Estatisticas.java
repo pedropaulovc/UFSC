@@ -3,7 +3,6 @@ package visao;
 import edugraf.jadix.componentesDix.TipoComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
-import edugraf.jadix.fachada.TratadorDixAbstrato;
 
 public class Estatisticas {
 	
@@ -18,14 +17,10 @@ public class Estatisticas {
 	private void criarEtiquetaEstatisticas(){
 		estatisticasBiblioteca = pagina.criarComponente(
 				TiposDeComponentesDix.ETIQUETA, "estatisticasBiblioteca");
-		estatisticasBiblioteca.fixarTopo(500).fixarEsquerda(20).fixarTexto("Estatísticas da biblioteca");
+		estatisticasBiblioteca.fixarTopo(500).fixarEsquerda(20);
 	}
 	
 	public void exibirEstatisticas(String texto){
 		estatisticasBiblioteca.fixarTexto(texto);
-	}
-
-	public void adicionarTratadorEventos(TratadorDixAbstrato tratador) {
-		estatisticasBiblioteca.adicionarTratadorDeEventos(tratador);
 	}
 }

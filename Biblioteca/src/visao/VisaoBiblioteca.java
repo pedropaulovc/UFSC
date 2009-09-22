@@ -4,8 +4,8 @@ import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
 
 public class VisaoBiblioteca {
-	private FormularioBiblioteca formulario;
 	private Estatisticas estatisticas;
+	private FormularioBiblioteca formulario;
 
 	public VisaoBiblioteca(PaginaDix pagina) {
 		new Titulo(pagina);
@@ -17,7 +17,16 @@ public class VisaoBiblioteca {
 		estatisticas.exibirEstatisticas(texto);
 	}
 	
-	public void adicionarTratadorEstatisticas(TratadorDixAbstrato tratador){
-		estatisticas.adicionarTratadorEventos(tratador);
+	public void adicionarTratadorEnvioDados(TratadorDixAbstrato tratador){
+		formulario.adicionarTratadorEventos(tratador);
+	}
+	
+	public FormularioBiblioteca obterFormulario(){
+		return formulario.clone();
+	}
+
+	public void adicionarTratadorTipoDocumento(
+			TratadorDixAbstrato tratador) {
+		formulario.adicionarTratadorTipoDocumento(tratador);
 	}
 }

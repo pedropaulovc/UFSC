@@ -20,7 +20,7 @@ public class VisaoDadosExemplo {
 	
 	private ComponenteDix criarBotaoDadosExemplo() {
 		botaoDadosExemplo = pagina.criarComponente(TiposDeComponentesDix.BOTÃO, "botaoDadosExemplo");
-		botaoDadosExemplo.fixarTopo(30).fixarEsquerda(100).fixarTexto("Usar Dados Padrão");
+		botaoDadosExemplo.fixarTopo(50).fixarEsquerda(200).fixarTexto("Usar Dados de Exemplo");
 		return botaoDadosExemplo;
 	}
 	
