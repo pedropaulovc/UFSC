@@ -1,11 +1,11 @@
 package mediador;
 
-import controle.ControleBiblioteca;
-import controleDadosExemplo.TratadorDadosExemplo;
-import dadosExemplo.DadosExemplo;
-import visao.VisaoBiblioteca;
-import visaoDadosExemplo.VisaoDadosExemplo;
-import biblioteca.Biblioteca;
+import modelo.biblioteca.Biblioteca;
+import modelo.dadosExemplo.DadosExemplo;
+import controle.DadosExemplo.TratadorDadosExemplo;
+import controle.biblioteca.ControleBiblioteca;
+import visao.biblioteca.VisaoBiblioteca;
+import visao.dadosExemplo.VisaoDadosExemplo;
 import edugraf.jadix.Aplique;
 import edugraf.jadix.fachada.PaginaDix;
 
