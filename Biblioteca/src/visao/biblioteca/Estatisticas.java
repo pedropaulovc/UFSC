@@ -1,4 +1,4 @@
-package visao;
+package visao.biblioteca;
 
 import edugraf.jadix.componentesDix.TipoComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;

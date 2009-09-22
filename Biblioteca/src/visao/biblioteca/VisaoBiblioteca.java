@@ -1,4 +1,4 @@
-package visao;
+package visao.biblioteca;
 
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
