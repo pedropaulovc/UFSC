@@ -3,7 +3,6 @@ package visao;
 import java.util.ArrayList;
 import java.util.List;
 
-import edugraf.jadix.componentesDix.TipoComponenteDix;
 import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
@@ -13,8 +12,7 @@ public class FormularioBiblioteca {
 	private PaginaDix pagina;
 	private ComponenteDix botaoEnviar, tituloDocumento, autorDocumento,
 			numeroChamada, numeroCapitulos, anoPublicacao, volume, localizacao,
-			situacao, tipoDocumento;
-	private TipoComponenteDix orientador;
+			situacao, tipoDocumento, orientador;
 
 	public FormularioBiblioteca(PaginaDix pagina) {
 		this.pagina = pagina;
