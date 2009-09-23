@@ -9,19 +9,20 @@ import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
 
-public class ListaEscolhaDocumento extends CampoFormulario {
+public class ListaEscolhaDocumento extends CampoAbstratoFormulario {
 
 	public ListaEscolhaDocumento(PaginaDix pagina) {
 		super(pagina);
 	}
 
 	@Override
-	public void criarCampo(PaginaDix pagina, ComponenteDix componente) {
-		componente = pagina.criarComponente(
+	public ComponenteDix criarCampo(PaginaDix pagina) {
+		ComponenteDix componente = pagina.criarComponente(
 				TiposDeComponentesDix.LISTA_DE_ESCOLHA, "tipoDocumento");
 		componente.fixarTopo(320).fixarEsquerda(200).fixarLargura(150)
 				.fixarLegenda("Tipo de Documento");
 		componente.fixarLista(criarListaDocumentos());
+		return componente;
 	}
 
 	private List<String> criarListaDocumentos() {

@@ -2,17 +2,16 @@ package visao.biblioteca.formulario;
 
 import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
-import edugraf.jadix.fachada.TiposDeComponentesDix;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
 
-public abstract class CampoFormulario {
+public abstract class CampoAbstratoFormulario {
 	private ComponenteDix componente;
 	
-	public CampoFormulario(PaginaDix pagina){
-		criarCampo(pagina, componente);
+	public CampoAbstratoFormulario(PaginaDix pagina){
+		componente = criarCampo(pagina);
 	}
 
-	public abstract void criarCampo(PaginaDix pagina, ComponenteDix componente);
+	public abstract ComponenteDix criarCampo(PaginaDix pagina);
 	
 	public String obterTexto(){
 		return componente.obterTexto();
