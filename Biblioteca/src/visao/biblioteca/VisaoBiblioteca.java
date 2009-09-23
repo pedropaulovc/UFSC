@@ -1,5 +1,6 @@
 package visao.biblioteca;
 
+import visao.biblioteca.formulario.FormularioBiblioteca;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
 
@@ -8,7 +9,7 @@ public class VisaoBiblioteca {
 	private FormularioBiblioteca formulario;
 
 	public VisaoBiblioteca(PaginaDix pagina) {
-		new Titulo(pagina);
+		new TituloPagina(pagina);
 		formulario = new FormularioBiblioteca(pagina);
 		estatisticas = new Estatisticas(pagina);
 	}
@@ -17,16 +18,16 @@ public class VisaoBiblioteca {
 		estatisticas.exibirEstatisticas(texto);
 	}
 	
-	public void adicionarTratadorEnvioDados(TratadorDixAbstrato tratador){
+/*	public void adicionarTratadorEnvioDados(TratadorDixAbstrato tratador){
 		formulario.adicionarTratadorEventos(tratador);
-	}
+	}*/
 	
 	public FormularioBiblioteca obterFormulario(){
 		return formulario.clone();
 	}
 
-	public void adicionarTratadorTipoDocumento(
+/*	public void adicionarTratadorTipoDocumento(
 			TratadorDixAbstrato tratador) {
 		formulario.adicionarTratadorTipoDocumento(tratador);
-	}
+	}*/
 }

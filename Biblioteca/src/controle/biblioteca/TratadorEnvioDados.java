@@ -1,8 +1,8 @@
 package controle.biblioteca;
 
 import modelo.biblioteca.Biblioteca;
-import visao.biblioteca.FormularioBiblioteca;
 import visao.biblioteca.VisaoBiblioteca;
+import visao.biblioteca.formulario.FormularioBiblioteca;
 import edugraf.jadix.eventos.EventoSimples;
 import edugraf.jadix.eventos.nomes.NomeDeEventosSimples;
 import edugraf.jadix.fachada.TratadorDixAbstrato;

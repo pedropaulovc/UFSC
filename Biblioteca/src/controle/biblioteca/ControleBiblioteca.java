@@ -13,12 +13,12 @@ public class ControleBiblioteca {
 		this.biblioteca = biblioteca;
 		this.visao = visaoBiblioteca;
 
-		adicionarTratadoresEventos();
+		//adicionarTratadoresEventos();
 	}
 
-	private void adicionarTratadoresEventos() {
+/*	private void adicionarTratadoresEventos() {
 		visao.adicionarTratadorEnvioDados(new TratadorEnvioDados(biblioteca, visao));
 		visao.adicionarTratadorTipoDocumento(new TratadorTipoDocumento(visao));
-	}
+	}*/
 
 }

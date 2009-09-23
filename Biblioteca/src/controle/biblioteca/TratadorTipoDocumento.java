@@ -1,15 +1,15 @@
 package controle.biblioteca;
 
-import visao.biblioteca.FormularioBiblioteca;
 import visao.biblioteca.VisaoBiblioteca;
+import visao.biblioteca.formulario.FormularioBiblioteca;
 import edugraf.jadix.eventos.EventoDeSelecao;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
 
 public class TratadorTipoDocumento extends TratadorDixAbstrato {
 	private FormularioBiblioteca formulario;
 
-	public TratadorTipoDocumento(VisaoBiblioteca visao) {
-		formulario = visao.obterFormulario();
+	public TratadorTipoDocumento(FormularioBiblioteca formulario) {
+		this.formulario = formulario;
 	}
 
 	//TODO: Fatorar esse código fedorento...
@@ -25,8 +25,6 @@ public class TratadorTipoDocumento extends TratadorDixAbstrato {
 			formulario.tornarVisiveisCamposOpcionaisDeTese();
 		} else if (textoDaOpcao.equals("TCC")){
 			formulario.tornarVisiveisCamposOpcionaisDeTCC();
-		} else if (textoDaOpcao.equals("Revista")){
-			formulario.tornarVisiveisCamposOpcionaisDeRevista();
 		}
 	}
 }
