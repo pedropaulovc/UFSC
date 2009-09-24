@@ -1,4 +1,4 @@
-package mediador;
+package aplique;
 
 import modelo.biblioteca.Biblioteca;
 import modelo.dadosExemplo.DadosExemplo;
