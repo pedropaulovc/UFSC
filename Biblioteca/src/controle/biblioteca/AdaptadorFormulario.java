@@ -1,61 +1,66 @@
 package controle.biblioteca;
 
-import java.lang.reflect.Constructor;
-
-import modelo.biblioteca.Biblioteca;
 import modelo.biblioteca.Documento;
 import modelo.biblioteca.Edicao;
 import modelo.biblioteca.Exemplar;
-import modelo.biblioteca.MapaDe;
 import modelo.biblioteca.NumeroChamada;
 import modelo.biblioteca.arquivaveis.Arquivavel;
-import modelo.biblioteca.arquivaveis.ArquivavelNulo;
 import modelo.biblioteca.estadosEmprestimo.Situacao;
-import modelo.biblioteca.estadosEmprestimo.SituacaoNula;
 import visao.biblioteca.VisaoBiblioteca;
-import visao.biblioteca.formulario.CampoAbstratoFormulario;
-import visao.biblioteca.formulario.FormularioBiblioteca;
+import visao.biblioteca.formulario.documento.CamposDocumento;
+import visao.biblioteca.formulario.edicao.CamposEdicao;
+import visao.biblioteca.formulario.exemplar.CamposExemplar;
 
 public class AdaptadorFormulario {
-	private Biblioteca biblioteca;
-	private FormularioBiblioteca formulario;
-	private MapaDe<String, CampoAbstratoFormulario> mapa;
-	private Documento documento;
+	private CamposDocumento camposDocumento;
+	private CamposEdicao camposEdicao;
+	private CamposExemplar camposExemplar;
 
-	public AdaptadorFormulario(Biblioteca biblioteca, VisaoBiblioteca visao) {
-		this.biblioteca = biblioteca;
-		this.mapa = visao.obterFormulario().obterCampos();
+	public AdaptadorFormulario(VisaoBiblioteca visao) {
+		this.camposDocumento = visao.obterFormulario().obterCamposDocumento();
+		this.camposEdicao = visao.obterFormulario().obterCamposEdicao();
+		this.camposExemplar = visao.obterFormulario().obterCamposExemplar();
 	}
 
-	public void adaptar() {
-		Exemplar exemplar = new Exemplar(Integer.parseInt(mapa.obter("Volume")
-				.obterTexto()), instanciarSituacao(), mapa.obter("Localização")
-				.obterTexto());
-		Edicao edicao = new Edicao(exemplar, new NumeroChamada(mapa.obter(
-				"Numero Chamada").obterTexto()), Integer.parseInt(mapa.obter(
-				"Ano Publicacao").obterTexto()));
-		documento = new Documento(mapa.obter("Titulo").obterTexto(), mapa
-				.obter("Autor").obterTexto(), edicao);
-
-		//biblioteca.adicionar(instanciarArquivavel());
+	public Documento adaptar() {
+		return criarDocumento();
 	}
 
+	private Exemplar criarExemplar() {
+		return new Exemplar(adaptarSituacao(), camposExemplar
+				.obterLocalizacao());
+	}
 
-	private Situacao instanciarSituacao() {
-		String nomeDaClasse = mapa.obter("Lista Escolha Situacao").obterTexto();
-		Situacao classeInstanciada = new SituacaoNula();
+	private Edicao criarEdicao() {
+		return new Edicao(criarExemplar(), criarNumeroChamada(),
+				criarAnoPublicacao());
+	}
 
-		try {
-			classeInstanciada = (Situacao) Class.forName(nomeDaClasse)
-					.newInstance();
-		} catch (InstantiationException e) {
-			System.out.println("InstantiationException" + e.getMessage());
-		} catch (IllegalAccessException e) {
-			System.out.println("IllegalAccessException" + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			System.out.println("ClassNotFoundException" + e.getMessage());
-		}
+	private Documento criarDocumento() {
+		return new Documento(camposDocumento.obterTitulo(), camposDocumento
+				.obterAutor(), adaptarArquivavel(), criarEdicao());
+	}
 
-		return classeInstanciada;
+	private int criarAnoPublicacao() {
+		return AdaptadorDeString.converterParaInt(camposEdicao
+				.obterAnoPublicacao());
+	}
+
+	private NumeroChamada criarNumeroChamada() {
+		return new NumeroChamada(camposEdicao.obterNumeroChamada());
+	}
+
+	private Situacao adaptarSituacao() {
+		String situacao = AdaptadorDeString
+				.adaptarParaMaiusculasSemEspacos(camposExemplar
+						.obterSituacao());
+		return Enum.valueOf(Situacao.class, situacao);
+	}
+
+	private Arquivavel adaptarArquivavel() {
+		String arquivavel = AdaptadorDeString
+				.adaptarParaMaiusculasSemEspacos(camposDocumento
+						.obterTipoDocumento());
+		return Enum.valueOf(Arquivavel.class, arquivavel);
 	}
 }

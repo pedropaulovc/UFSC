@@ -1,17 +1,16 @@
 package modelo.biblioteca;
 
-import modelo.biblioteca.arquivaveis.Arquivavel;
 import visao.biblioteca.VisaoBiblioteca;
 
 public class Biblioteca {
 	private String nome;
-	private ListaDe<Arquivavel> acervo;
+	private ListaDe<Documento> acervo;
 	private VisaoBiblioteca visao;
 
 	public Biblioteca(String nome, VisaoBiblioteca visao) {
 		this.nome = nome;
 		this.visao = visao;
-		acervo = new ListaDe<Arquivavel>();
+		acervo = new ListaDe<Documento>();
 		atualizarEstatisticas();
 	}
 
@@ -23,20 +22,18 @@ public class Biblioteca {
 		return acervo.tamanho();
 	}
 
-	public boolean adicionar(Arquivavel a) {
-		boolean foiAdicionado = acervo.adicionar(a);
+	public void adicionar(Documento documento) {
+		acervo.adicionar(documento);
 		atualizarEstatisticas();
-		return foiAdicionado;
 	}
 
-	public Arquivavel obter(int a) {
-		return acervo.obter(a).clone();
+	public Documento obter(int a) {
+		return acervo.obter(a);
 	}
 
-	public Arquivavel remover(int a) {
-		Arquivavel removido =  acervo.remover(a).clone();
+	public void remover(int a) {
+		acervo.remover(a);
 		atualizarEstatisticas();
-		return removido;
 	}
 
 	public String toString() {

@@ -5,10 +5,8 @@ import modelo.biblioteca.Documento;
 import modelo.biblioteca.Edicao;
 import modelo.biblioteca.Exemplar;
 import modelo.biblioteca.NumeroChamada;
-import modelo.biblioteca.arquivaveis.Dissertacao;
-import modelo.biblioteca.arquivaveis.Livro;
-import modelo.biblioteca.estadosEmprestimo.Disponivel;
-import modelo.biblioteca.estadosEmprestimo.Emprestado;
+import modelo.biblioteca.arquivaveis.Arquivavel;
+import modelo.biblioteca.estadosEmprestimo.Situacao;
 
 public class DadosExemplo {
 	private Biblioteca biblioteca;
@@ -18,18 +16,16 @@ public class DadosExemplo {
 	}
 	
 	public void popularBiblioteca(){
-		Exemplar exemplar = new Exemplar(2, new Emprestado(), "Estante 2");
+		Exemplar exemplar = new Exemplar(Situacao.EMPRESTADO, "Estante 2");
 		Edicao edicao = new Edicao(exemplar, new NumeroChamada("1234.33(44)"), 2009);
-		Documento documento = new Documento("Cálculo B", "Stewart, James", edicao);
-		Livro livro = new Livro(documento, 4);
+		Documento documento = new Documento("Cálculo B", "Stewart, James", Arquivavel.LIVRO, edicao);
 		
-		Exemplar exemplar2 = new Exemplar(1, new Disponivel(), "Estante 3");
+		Exemplar exemplar2 = new Exemplar(Situacao.DISPONÍVEL, "Estante 3");
 		Edicao edicao2 = new Edicao(exemplar2, new NumeroChamada("2233.44(12)"), 2005);
-		Documento documento2 = new Documento("Telix", "Melgarejo, Luís Fernando Bier", edicao2);
-		Dissertacao dissertacao = new Dissertacao(documento2, "Mazzucco Júnior, José");
+		Documento documento2 = new Documento("Telix", "Melgarejo, Luís Fernando Bier", Arquivavel.DISSERTAÇÃO ,edicao2);
 
-		biblioteca.adicionar(livro);
-		biblioteca.adicionar(dissertacao);
+		biblioteca.adicionar(documento);
+		biblioteca.adicionar(documento2);
 	}
 
 }

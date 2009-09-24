@@ -26,8 +26,4 @@ public class VisaoBiblioteca {
 		return formulario;
 	}
 
-	public void adicionarTratadorTipoDocumento(TratadorDixAbstrato tratador) {
-		formulario.adicionarTratadorTipoDocumento(tratador);
-	}
-
 }

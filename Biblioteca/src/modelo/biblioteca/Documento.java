@@ -1,20 +1,25 @@
 package modelo.biblioteca;
 
+import modelo.biblioteca.arquivaveis.Arquivavel;
+
 public class Documento {
 	private String titulo;
 	private String autor;
 	private ListaDe<Edicao> edicoes;
-	
-	public Documento (String titulo, String autor, Edicao edicao){
+	private Arquivavel tipo;
+
+	public Documento(String titulo, String autor, Arquivavel tipo, Edicao edicao) {
 		this.titulo = titulo;
 		this.autor = autor;
+		this.tipo = tipo;
 		this.edicoes = new ListaDe<Edicao>();
 		this.edicoes.adicionar(edicao);
 	}
 
-	public Documento(String titulo, String autor, ListaDe<Edicao> edicoes) {
+	public Documento(String titulo, String autor, Arquivavel tipo, ListaDe<Edicao> edicoes) {
 		this.titulo = titulo;
 		this.autor = autor;
+		this.tipo = tipo;
 		this.edicoes = edicoes;
 	}
 
@@ -42,6 +47,14 @@ public class Documento {
 		return edicoes.clone();
 	}
 
+	public void alterarTipo(Arquivavel tipo) {
+		this.tipo = tipo;
+	}
+
+	public Arquivavel obterTipo() {
+		return tipo;
+	}
+
 	public String toString() {
 		return titulo + " do autor " + autor + ". Há " + edicoes.tamanho()
 				+ " edições desse documento.";
@@ -54,5 +67,5 @@ public class Documento {
 			return this;
 		}
 	}
-	
+
 }

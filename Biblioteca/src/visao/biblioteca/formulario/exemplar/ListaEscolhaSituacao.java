@@ -1,8 +1,10 @@
-package visao.biblioteca.formulario;
+package visao.biblioteca.formulario.exemplar;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.biblioteca.estadosEmprestimo.Situacao;
+import visao.biblioteca.formulario.CampoAbstratoFormulario;
 import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
@@ -27,10 +29,9 @@ public class ListaEscolhaSituacao extends CampoAbstratoFormulario {
 	private List<String> criarListaSituacoes() {
 		List<String> listaSituacoes = new ArrayList<String>();
 		
-		listaSituacoes.add("Consulta Local");
-		listaSituacoes.add("Disponível");
-		listaSituacoes.add("Em Restauração");
-		listaSituacoes.add("Emprestado");
+		for(Situacao situacao : Situacao.values()){
+			listaSituacoes.add(situacao.toString());
+		}
 		
 		return listaSituacoes;
 	}

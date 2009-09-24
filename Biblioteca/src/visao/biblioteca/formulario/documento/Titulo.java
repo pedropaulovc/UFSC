@@ -1,5 +1,6 @@
-package visao.biblioteca.formulario;
+package visao.biblioteca.formulario.documento;
 
+import visao.biblioteca.formulario.CampoAbstratoFormulario;
 import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;

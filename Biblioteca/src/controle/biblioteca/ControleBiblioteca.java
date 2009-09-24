@@ -18,6 +18,5 @@ public class ControleBiblioteca {
 
 	private void adicionarTratadoresEventos() {
 		visao.adicionarTratadorEnvioDados(new TratadorEnvioDados(biblioteca, visao));
-		visao.adicionarTratadorTipoDocumento(new TratadorTipoDocumento(visao));
 	}
 }

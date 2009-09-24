@@ -1,78 +1,46 @@
 package visao.biblioteca.formulario;
 
-import modelo.biblioteca.ListaDe;
-import modelo.biblioteca.MapaDe;
-import controle.biblioteca.TratadorEnvioDados;
-import controle.biblioteca.TratadorTipoDocumento;
-import edugraf.jadix.fachada.ComponenteDix;
+import visao.biblioteca.formulario.documento.CamposDocumento;
+import visao.biblioteca.formulario.edicao.CamposEdicao;
+import visao.biblioteca.formulario.exemplar.CamposExemplar;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
 
 public class FormularioBiblioteca {
 	private PaginaDix pagina;
-	private Orientador orientador;
-	private NumeroCapitulos numeroCapitulos;
 	private BotaoEnviar botaoEnviar;
-	private ListaEscolhaDocumento listaEscolhaDocumento;
-	private MapaDe<String, CampoAbstratoFormulario> mapa;
-	
+	private CamposDocumento camposDocumento;
+	private CamposEdicao camposEdicao;
+	private CamposExemplar camposExemplar;
+
 	public FormularioBiblioteca(PaginaDix pagina) {
 		this.pagina = pagina;
-		this.mapa = new MapaDe<String, CampoAbstratoFormulario>();
 		montarFormulario();
 	}
 
 	private void montarFormulario() {
-		mapa.adicionar("Titulo", new Titulo(pagina)); 
-		mapa.adicionar("Autor", new Autor(pagina));
-		mapa.adicionar("Numero Chamada", new NumeroChamada(pagina));
-		numeroCapitulos = new NumeroCapitulos(pagina);
-		mapa.adicionar("Numero Capitulos", numeroCapitulos);
-		mapa.adicionar("Ano Publicacao", new AnoPublicacao(pagina));
-		mapa.adicionar("Volume", new Volume(pagina));
-		mapa.adicionar("Localizacao", new Localizacao(pagina));
-		mapa.adicionar("Lista Escolha Situacao", new ListaEscolhaSituacao(pagina));
-		listaEscolhaDocumento = new ListaEscolhaDocumento(pagina);
-		mapa.adicionar("Lista Escolha Documento", listaEscolhaDocumento);
-		orientador = new Orientador(pagina);
-		mapa.adicionar("Orientador", orientador);
+		camposDocumento = new CamposDocumento(pagina);
+		camposEdicao = new CamposEdicao(pagina);
+		camposExemplar = new CamposExemplar(pagina);
 		botaoEnviar = new BotaoEnviar(pagina);
-		mapa.adicionar("Botao Enviar", botaoEnviar); 
 	}
-	
-	public MapaDe<String, CampoAbstratoFormulario> obterCampos(){
-		return mapa;
-	}
-	
-	public void adicionarTratadorEnvioDados(TratadorDixAbstrato tratador){
+
+	public void adicionarTratadorEnvioDados(TratadorDixAbstrato tratador) {
 		botaoEnviar.adicionarTratadorEventos(tratador);
 	}
-	
-	public void adicionarTratadorTipoDocumento(TratadorDixAbstrato tratador){
-		listaEscolhaDocumento.adicionarTratadorEventos(tratador);
-	}
-	
-	public void tornarInvisiveisCamposOpcionais() {
-		numeroCapitulos.tornarInvisivel();
-		orientador.tornarInvisivel();
+
+	public CamposDocumento obterCamposDocumento() {
+		return camposDocumento;
 	}
 
-	public void tornarVisiveisCamposOpcionaisDeLivro() {
-		numeroCapitulos.tornarVisivel();
+	public CamposEdicao obterCamposEdicao() {
+		return camposEdicao;
 	}
 
-	public void tornarVisiveisCamposOpcionaisDeDissertacao() {
-		orientador.tornarVisivel();
+	public CamposExemplar obterCamposExemplar() {
+		return camposExemplar;
 	}
 
-	public void tornarVisiveisCamposOpcionaisDeTese() {
-		orientador.tornarVisivel();
-	}
-
-	public void tornarVisiveisCamposOpcionaisDeTCC() {
-		orientador.tornarVisivel();
-	}
-	
 	public FormularioBiblioteca clone() {
 		try {
 			return (FormularioBiblioteca) super.clone();

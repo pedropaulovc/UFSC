@@ -1,7 +1,11 @@
-package visao.biblioteca.formulario;
+package visao.biblioteca.formulario.documento;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import modelo.biblioteca.arquivaveis.Arquivavel;
+
+import visao.biblioteca.formulario.CampoAbstratoFormulario;
 
 import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
@@ -25,12 +29,9 @@ public class ListaEscolhaDocumento extends CampoAbstratoFormulario {
 
 	private List<String> criarListaDocumentos() {
 		List<String> listaDocumentos = new ArrayList<String>();
-
-		listaDocumentos.add("Livro");
-		listaDocumentos.add("Revista");
-		listaDocumentos.add("TCC");
-		listaDocumentos.add("Tese");
-		listaDocumentos.add("Dissertação");
+		for(Arquivavel arquivavel : Arquivavel.values()){
+			listaDocumentos.add(arquivavel.toString());
+		}
 
 		return listaDocumentos;
 	}
