@@ -3,7 +3,6 @@ package visao.biblioteca.formulario;
 import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
-import edugraf.jadix.fachada.TratadorDixAbstrato;
 
 public class BotaoEnviar extends CampoAbstratoFormulario {
 

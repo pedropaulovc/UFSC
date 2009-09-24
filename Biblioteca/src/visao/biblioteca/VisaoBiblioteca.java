@@ -13,21 +13,21 @@ public class VisaoBiblioteca {
 		formulario = new FormularioBiblioteca(pagina);
 		estatisticas = new Estatisticas(pagina);
 	}
-	
-	public void atualizarEstatisticas (String texto){
+
+	public void atualizarEstatisticas(String texto) {
 		estatisticas.exibirEstatisticas(texto);
 	}
-	
-/*	public void adicionarTratadorEnvioDados(TratadorDixAbstrato tratador){
-		formulario.adicionarTratadorEventos(tratador);
-	}*/
-	
-	public FormularioBiblioteca obterFormulario(){
-		return formulario.clone();
+
+	public void adicionarTratadorEnvioDados(TratadorDixAbstrato tratador) {
+		formulario.adicionarTratadorEnvioDados(tratador);
 	}
 
-/*	public void adicionarTratadorTipoDocumento(
-			TratadorDixAbstrato tratador) {
+	public FormularioBiblioteca obterFormulario() {
+		return formulario;
+	}
+
+	public void adicionarTratadorTipoDocumento(TratadorDixAbstrato tratador) {
 		formulario.adicionarTratadorTipoDocumento(tratador);
-	}*/
+	}
+
 }

@@ -3,8 +3,6 @@ package visao.biblioteca.formulario;
 import java.util.ArrayList;
 import java.util.List;
 
-import controle.biblioteca.TratadorTipoDocumento;
-
 import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;

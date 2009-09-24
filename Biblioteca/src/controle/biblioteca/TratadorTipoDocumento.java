@@ -8,8 +8,8 @@ import edugraf.jadix.fachada.TratadorDixAbstrato;
 public class TratadorTipoDocumento extends TratadorDixAbstrato {
 	private FormularioBiblioteca formulario;
 
-	public TratadorTipoDocumento(FormularioBiblioteca formulario) {
-		this.formulario = formulario;
+	public TratadorTipoDocumento(VisaoBiblioteca visao) {
+		this.formulario = visao.obterFormulario();
 	}
 
 	//TODO: Fatorar esse código fedorento...
