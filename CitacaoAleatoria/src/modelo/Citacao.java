@@ -16,10 +16,6 @@ public class Citacao{
 	}
 
 	public Citacao clone() {
-		try {
-			return (Citacao) super.clone();
-		} catch (Exception e) {
-			return this;
-		}
+		return new Citacao(citacao);
 	}
 }

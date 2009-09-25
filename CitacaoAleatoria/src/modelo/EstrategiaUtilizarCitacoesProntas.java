@@ -4,12 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class Gerador {
+public class EstrategiaUtilizarCitacoesProntas {
 	public void gerarCitacoes(String arquivoFonte, String codificacao,
 			String expressaoRegular, ListaCitacoes lc) throws FileNotFoundException,
 			UnsupportedEncodingException, IOException {
 
-		String[] stringDividida = new Baixador(arquivoFonte, codificacao)
+		String[] stringDividida = new EstrategiaBaixarArquivo(arquivoFonte, codificacao)
 				.obterArquivo().split(expressaoRegular);
 		
 		for (String sd : stringDividida) {
