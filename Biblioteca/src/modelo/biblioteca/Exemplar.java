@@ -32,10 +32,6 @@ public class Exemplar {
 	}
 	
 	public Exemplar clone(){
-		try {
-			return (Exemplar) super.clone();
-		} catch (CloneNotSupportedException excecao) {
-			return this;
-		}
+		return new Exemplar(situacao, localizacao);
 	}
 }

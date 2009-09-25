@@ -50,10 +50,6 @@ public class Edicao {
 	}
 
 	public Edicao clone() {
-		try {
-			return (Edicao) super.clone();
-		} catch (CloneNotSupportedException excecao) {
-			return this;
-		}
+		return new Edicao(exemplares.clone(), numeroChamada.clone(), anoPublicacao);
 	}
 }

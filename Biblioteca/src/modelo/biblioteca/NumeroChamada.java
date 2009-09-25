@@ -12,10 +12,6 @@ public class NumeroChamada {
 	}
 
 	public NumeroChamada clone() {
-		try {
-			return (NumeroChamada) super.clone();
-		} catch (CloneNotSupportedException e) {
-			return this;
-		}
+		return new NumeroChamada(numeroChamada);
 	}
 }

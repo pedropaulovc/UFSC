@@ -60,18 +60,12 @@ public class Documento {
 	public String toString() {
 		return titulo.toUpperCase()
 				+ ", "
-				+ AdaptadorDeString
-						.adaptarParaMinusculasComEspacos(tipo
-								.toString()) + " do autor " + autor + ". Há "
+				+ AdaptadorDeString.adaptarParaMinusculasComEspacos(tipo
+						.toString()) + " do autor " + autor + ". Há "
 				+ edicoes.tamanho() + " edições desse documento.";
 	}
 
 	public Documento clone() {
-		try {
-			return (Documento) super.clone();
-		} catch (CloneNotSupportedException excecao) {
-			return this;
-		}
+		return new Documento(titulo, autor, tipo, edicoes.clone());
 	}
-
 }

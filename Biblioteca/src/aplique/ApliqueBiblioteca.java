@@ -4,8 +4,8 @@ import modelo.biblioteca.Biblioteca;
 import modelo.dadosExemplo.DadosExemplo;
 import visao.biblioteca.VisaoBiblioteca;
 import visao.dadosExemplo.VisaoDadosExemplo;
-import controle.DadosExemplo.ControleDadosExemplo;
 import controle.biblioteca.ControleBiblioteca;
+import controle.DadosExemplo.ControleDadosExemplo;
 import edugraf.jadix.Aplique;
 import edugraf.jadix.fachada.PaginaDix;
 

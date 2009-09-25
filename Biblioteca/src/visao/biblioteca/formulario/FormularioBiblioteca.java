@@ -40,12 +40,4 @@ public class FormularioBiblioteca {
 	public CamposExemplar obterCamposExemplar() {
 		return camposExemplar;
 	}
-
-	public FormularioBiblioteca clone() {
-		try {
-			return (FormularioBiblioteca) super.clone();
-		} catch (CloneNotSupportedException excecao) {
-			return this;
-		}
-	}
 }
