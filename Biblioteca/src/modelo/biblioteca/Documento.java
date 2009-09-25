@@ -1,5 +1,6 @@
 package modelo.biblioteca;
 
+import util.AdaptadorDeString;
 import modelo.biblioteca.arquivaveis.Arquivavel;
 
 public class Documento {
@@ -16,7 +17,8 @@ public class Documento {
 		this.edicoes.adicionar(edicao);
 	}
 
-	public Documento(String titulo, String autor, Arquivavel tipo, ListaDe<Edicao> edicoes) {
+	public Documento(String titulo, String autor, Arquivavel tipo,
+			ListaDe<Edicao> edicoes) {
 		this.titulo = titulo;
 		this.autor = autor;
 		this.tipo = tipo;
@@ -56,8 +58,12 @@ public class Documento {
 	}
 
 	public String toString() {
-		return titulo + " do autor " + autor + ". Há " + edicoes.tamanho()
-				+ " edições desse documento.";
+		return titulo.toUpperCase()
+				+ ", "
+				+ AdaptadorDeString
+						.adaptarParaMinusculasComEspacos(tipo
+								.toString()) + " do autor " + autor + ". Há "
+				+ edicoes.tamanho() + " edições desse documento.";
 	}
 
 	public Documento clone() {

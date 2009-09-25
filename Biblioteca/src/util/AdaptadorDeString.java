@@ -1,4 +1,4 @@
-package controle.biblioteca;
+package util;
 
 public class AdaptadorDeString {
 	public static String adaptarParaMaiusculasSemEspacos(String texto) {

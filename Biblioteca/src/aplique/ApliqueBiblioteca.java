@@ -2,10 +2,10 @@ package aplique;
 
 import modelo.biblioteca.Biblioteca;
 import modelo.dadosExemplo.DadosExemplo;
-import controle.DadosExemplo.TratadorDadosExemplo;
-import controle.biblioteca.ControleBiblioteca;
 import visao.biblioteca.VisaoBiblioteca;
 import visao.dadosExemplo.VisaoDadosExemplo;
+import controle.DadosExemplo.ControleDadosExemplo;
+import controle.biblioteca.ControleBiblioteca;
 import edugraf.jadix.Aplique;
 import edugraf.jadix.fachada.PaginaDix;
 
@@ -20,6 +20,6 @@ public class ApliqueBiblioteca extends Aplique {
 		
 		DadosExemplo dadosDeExemplo = new DadosExemplo(biblioteca);
 		VisaoDadosExemplo visaoDadosDeExemplo = new VisaoDadosExemplo(pagina);
-		new TratadorDadosExemplo(dadosDeExemplo, visaoDadosDeExemplo);
+		new ControleDadosExemplo(dadosDeExemplo, visaoDadosDeExemplo);
 	}
 }

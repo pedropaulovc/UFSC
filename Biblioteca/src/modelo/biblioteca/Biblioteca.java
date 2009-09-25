@@ -25,6 +25,7 @@ public class Biblioteca {
 	public void adicionar(Documento documento) {
 		acervo.adicionar(documento);
 		atualizarEstatisticas();
+		exibirAcervo();
 	}
 
 	public Documento obter(int a) {
@@ -42,5 +43,9 @@ public class Biblioteca {
 
 	public void atualizarEstatisticas() {
 		visao.atualizarEstatisticas(toString());
+	}
+	
+	public void exibirAcervo(){
+		visao.atualizarAcervo(acervo);
 	}
 }

@@ -45,8 +45,7 @@ public class Edicao {
 	}
 
 	public String toString() {
-		return "Edição do ano " + anoPublicacao + ". Número de chamada: "
-				+ numeroChamada + ". Há " + exemplares.tamanho()
+		return "Edição do ano " + anoPublicacao + ". " + numeroChamada + ". Há " + exemplares.tamanho()
 				+ " exemplares dessa edição.";
 	}
 

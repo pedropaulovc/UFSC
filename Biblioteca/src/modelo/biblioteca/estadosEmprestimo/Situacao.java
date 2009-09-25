@@ -1,6 +1,6 @@
 package modelo.biblioteca.estadosEmprestimo;
 
-import controle.biblioteca.AdaptadorDeString;
+import util.AdaptadorDeString;
 
 public enum Situacao {
 	DISPONÍVEL, CONSULTA_LOCAL, EMPRESTADO, EM_RESTAURAÇÃO;

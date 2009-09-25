@@ -6,6 +6,7 @@ import modelo.biblioteca.Exemplar;
 import modelo.biblioteca.NumeroChamada;
 import modelo.biblioteca.arquivaveis.Arquivavel;
 import modelo.biblioteca.estadosEmprestimo.Situacao;
+import util.AdaptadorDeString;
 import visao.biblioteca.VisaoBiblioteca;
 import visao.biblioteca.formulario.documento.CamposDocumento;
 import visao.biblioteca.formulario.edicao.CamposEdicao;
