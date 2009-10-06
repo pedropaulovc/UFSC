@@ -24,12 +24,13 @@ public class LiquidificadorComAlimentoMedio extends Cenario {
 
 	public void quando() {
 		éEscolhidaVelocidade3Ou4();
+		éDesligadoOLiquidificador();
 	}
 
 	public void então() {
 		háAlimentoLiquidificado();
 	}
-	
+
 	private void existeUmLiquidificador() {
 		liquidificador = new Liquidificador();
 
@@ -57,8 +58,13 @@ public class LiquidificadorComAlimentoMedio extends Cenario {
 		liquidificador.ligarVelocidade(3);
 	}
 
+	private void éDesligadoOLiquidificador() {
+		liquidificador.desligar();
+	}
+
 	@Test
 	public void háAlimentoLiquidificado() {
-		Assert.assertTrue(liquidificador.obterLiquidificado() instanceof AlimentoLiquidificado);
+		Assert
+				.assertTrue(liquidificador.obterLiquidificado() instanceof AlimentoLiquidificado);
 	}
 }
