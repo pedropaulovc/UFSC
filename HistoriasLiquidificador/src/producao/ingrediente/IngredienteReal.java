@@ -1,6 +1,6 @@
-package producao;
+package producao.ingrediente;
 
-public class IngredienteReal implements Ingrediente {
+public abstract class IngredienteReal implements Ingrediente {
 	private String ingrediente;
 
 	public IngredienteReal(String ingrediente){

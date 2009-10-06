@@ -1,4 +1,4 @@
-package producao;
+package producao.ingrediente;
 
 public interface Ingrediente {
 	public String obterIngrediente();

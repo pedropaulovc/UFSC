@@ -6,10 +6,10 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import producao.alimento.AlimentoLiquidificado;
-import producao.ingrediente.IngredienteMacio;
+import producao.ingrediente.IngredienteDuro;
 import producao.liquidificador.Liquidificador;
 
-public class LiquidificadorComAlimentoMacio extends Cenario {
+public class LiquidificadorComAlimentoDuro extends Cenario {
 
 	private Liquidificador liquidificador;
 
@@ -18,12 +18,12 @@ public class LiquidificadorComAlimentoMacio extends Cenario {
 		existeUmLiquidificador();
 		liquidificadorEstáLigadoNaTomada();
 		oCopoEstáEncaixado();
-		HáIngredientesMaciosNoCopo();
+		HáIngredientesMédiosNoCopo();
 		aTampaEstáTravada();
 	}
 
 	public void quando() {
-		éEscolhidaVelocidade1Ou2();
+		éEscolhidaVelocidade5();
 	}
 
 	public void então() {
@@ -37,15 +37,14 @@ public class LiquidificadorComAlimentoMacio extends Cenario {
 
 	private void liquidificadorEstáLigadoNaTomada() {
 		liquidificador.ligarNaTomada();
-
 	}
 
 	private void oCopoEstáEncaixado() {
 		liquidificador.encaixarCopo();
 	}
 
-	private void HáIngredientesMaciosNoCopo() {
-		liquidificador.adicionarIngrediente(new IngredienteMacio("banana"));
+	private void HáIngredientesMédiosNoCopo() {
+		liquidificador.adicionarIngrediente(new IngredienteDuro("gelo"));
 	}
 
 	private void aTampaEstáTravada() {
@@ -53,8 +52,8 @@ public class LiquidificadorComAlimentoMacio extends Cenario {
 
 	}
 
-	private void éEscolhidaVelocidade1Ou2() {
-		liquidificador.ligarVelocidade(2);
+	private void éEscolhidaVelocidade5() {
+		liquidificador.ligarVelocidade(5);
 	}
 
 	@Test

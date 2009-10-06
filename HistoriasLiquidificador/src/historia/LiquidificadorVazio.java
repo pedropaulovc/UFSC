@@ -3,9 +3,9 @@ package historia;
 import org.junit.Test;
 
 import junit.framework.Assert;
-import producao.AlimentoNulo;
-import producao.IngredienteNulo;
-import producao.Liquidificador;
+import producao.alimento.AlimentoNulo;
+import producao.ingrediente.IngredienteNulo;
+import producao.liquidificador.Liquidificador;
 import infra.Cenario;
 
 public class LiquidificadorVazio extends Cenario {
@@ -23,6 +23,7 @@ public class LiquidificadorVazio extends Cenario {
 
 	public void quando() {
 		éEscolhidaQualquerVelocidade();
+		éDesligadoOLiquidificador();
 	}
 
 	public void então() {
@@ -56,9 +57,14 @@ public class LiquidificadorVazio extends Cenario {
 		liquidificador.ligarVelocidade(4);
 	}
 
+	private void éDesligadoOLiquidificador() {
+		liquidificador.desligar();
+	}
+
 	@Test
 	public void nãoHáAlimentoLiquidificado() {
-		Assert.assertTrue(liquidificador.obterLiquidificado() instanceof AlimentoNulo);
+		Assert
+				.assertTrue(liquidificador.obterLiquidificado() instanceof AlimentoNulo);
 	}
 
 }

@@ -1,4 +1,4 @@
-package producao;
+package producao.liquidificador;
 
 public class Tampa {
 

@@ -1,4 +1,7 @@
-package producao;
+package producao.liquidificador;
+
+import producao.ListaDe;
+import producao.ingrediente.Ingrediente;
 
 
 public class Copo {
@@ -23,6 +26,6 @@ public class Copo {
 	}
 
 	public ListaDe<Ingrediente> obterListaIngredientes() {
-		return listaIngredientes.clone();
+		return listaIngredientes;
 	}
 }

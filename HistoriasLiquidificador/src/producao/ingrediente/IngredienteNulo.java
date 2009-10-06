@@ -1,4 +1,4 @@
-package producao;
+package producao.ingrediente;
 
 public class IngredienteNulo implements Ingrediente {
 

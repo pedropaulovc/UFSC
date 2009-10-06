@@ -1,4 +1,7 @@
-package producao;
+package producao.alimento;
+
+import producao.ListaDe;
+import producao.ingrediente.Ingrediente;
 
 
 public class AlimentoNulo implements Alimento {

@@ -1,11 +1,12 @@
-package producao;
+package producao.alimento;
 
+import producao.ListaDe;
+import producao.ingrediente.Ingrediente;
 
-public class AlimentoLiquidificado implements Alimento {
-
+public abstract class AlimentoReal implements Alimento {
 	private ListaDe<Ingrediente> listaIngredientes;
 
-	public AlimentoLiquidificado(ListaDe<Ingrediente> listaIngredientes) {
+	public AlimentoReal(ListaDe<Ingrediente> listaIngredientes) {
 		this.listaIngredientes = listaIngredientes;
 	}
 
