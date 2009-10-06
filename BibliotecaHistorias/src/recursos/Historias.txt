@@ -1,0 +1,3 @@
+ - É possível criar bibliotecas diferentes
+ - É possível alterar o nome da biblioteca
+ - É possível adicionar qualquer coisa arquivável
