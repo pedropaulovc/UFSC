@@ -1,3 +1,15 @@
- - É possível criar bibliotecas diferentes
- - É possível alterar o nome da biblioteca
+ - É possível criar sistemas de arquivamento diferentes
+ - O sistema inicia com nenhum arquivável
  - É possível adicionar qualquer coisa arquivável
+ - É possível remover qualquer coisa arquivável
+ - É possível que cada arquivável possua estados diferentes (Emprestado, vendido...)
+ - É possível que cada arquivável possua campos personalizados
+ - É possível buscar por campos
+ 
+ 
+ - É possível armazenar os dados do arquivo
+ 
+
+ 
+ Ideias
+ - Transformar de biblioteca em videolocadora
