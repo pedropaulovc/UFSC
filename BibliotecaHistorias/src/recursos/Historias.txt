@@ -1,9 +1,9 @@
  - É possível criar sistemas de arquivamento diferentes
- - O sistema inicia com nenhum arquivável
- - É possível adicionar qualquer coisa arquivável
+OK - O sistema inicia com nenhum arquivável
+ - É possível adicionar apenas um tipo de coisa arquivável
  - É possível remover qualquer coisa arquivável
  - É possível que cada arquivável possua estados diferentes (Emprestado, vendido...)
- - É possível que cada arquivável possua campos personalizados
+ - É possível o arquivável possui campos personalizados 
  - É possível buscar por campos
  
  
