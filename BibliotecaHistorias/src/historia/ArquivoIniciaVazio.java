@@ -6,7 +6,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import producao.Livro;
-import producao.acervo.Acervo;
+import producao.acervo.AcervoDeLivro;
 import producao.acervo.TipoAcervo;
 
 public class ArquivoIniciaVazio extends Cenario {
@@ -26,7 +26,7 @@ public class ArquivoIniciaVazio extends Cenario {
 	}
 
 	private void existeUmAcervoDeLivros() {
-		acervo = new Acervo<Livro>(Livro.class);
+		acervo = new AcervoDeLivro();
 	}
 	
 	private void pedeTamanhoAcervo() {

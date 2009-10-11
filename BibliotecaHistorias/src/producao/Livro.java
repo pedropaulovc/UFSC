@@ -5,6 +5,7 @@ public class Livro {
 	private String autor;
 	private String editora;
 	private int anoPublicacao;
+	private Estado estado;
 	
 	public void alterarTitulo(String titulo) {
 		this.titulo = titulo;
@@ -36,5 +37,13 @@ public class Livro {
 
 	public int obterAnoPublicacao() {
 		return anoPublicacao;
+	}
+
+	public void alterarEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public Estado obterEstado() {
+		return estado;
 	}
 }

@@ -1,17 +1,19 @@
 package producao.acervo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import producao.Livro;
+import producao.busca.Buscador;
 
 public class AcervoDeLivro extends Acervo<Livro> {
-	public AcervoDeLivro(Class<Livro> classe) {
-		super(classe);
+
+	public List<Livro> buscaExataAutor(String autorBuscado){
+		List<Livro> resultados = new ArrayList<Livro>(); 
+		for(Livro l : super.obterLista())
+			if(Buscador.buscaExata(l.obterAutor(), autorBuscado))
+				resultados.add(l);
+		return resultados;
 	}
 
-	public ListaDe<Integer> buscarAutor(String autor){
-		ListaDe<Integer> lista = new ListaDe<Integer>();
-		for(int i = 0; i < super.tamanho(); i++)
-			if(autor.equals(super.obter(i)))
-				lista.adicionar(new Integer(i));
-		return lista;
-	}
 }
