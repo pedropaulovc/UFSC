@@ -10,7 +10,7 @@ import producao.Livro;
 import producao.acervo.AcervoDeLivro;
 import infra.Cenario;
 
-public class BuscaExataEmLivrosPorAutor extends Cenario {
+public class BuscaPorPalavraEmLivrosPorAutor extends Cenario {
 	private AcervoDeLivro acervo;
 	private Livro livroCriado;
 
@@ -20,7 +20,7 @@ public class BuscaExataEmLivrosPorAutor extends Cenario {
 	}
 
 	public void quando() {
-		buscadoLivroPorAutor();
+		buscadoLivroPorPalavraPorAutor();
 	}
 
 	public void então() {
@@ -35,7 +35,7 @@ public class BuscaExataEmLivrosPorAutor extends Cenario {
 		livroCriado = new Livro();
 		livroCriado.alterarTitulo("Livro do José");
 		livroCriado.alterarAnoPublicacao(1900);
-		livroCriado.alterarAutor("Autor José");
+		livroCriado.alterarAutor("Jose Dos Santos");
 		livroCriado.alterarEditora("Editora do Brasil");
 	}
 
@@ -44,14 +44,14 @@ public class BuscaExataEmLivrosPorAutor extends Cenario {
 		acervo.adicionar(livroCriado);
 	}
 
-	private void buscadoLivroPorAutor() {
-		acervo.buscaAutorExato("Autor José");
+	private void buscadoLivroPorPalavraPorAutor() {
+		acervo.buscaAutorPorPalavra("Jose");
 	}
 
 	@Test
 	public void obtemListaDeLivrosCorrespondentes() {
 		List<Livro> listaEsperada = new ArrayList<Livro>();
 		listaEsperada.add(livroCriado);
-		Assert.assertEquals(listaEsperada, acervo.buscaAutorExato("Autor José"));
+		Assert.assertEquals(listaEsperada, acervo.buscaAutorPorPalavra("Dos"));
 	}
 }
