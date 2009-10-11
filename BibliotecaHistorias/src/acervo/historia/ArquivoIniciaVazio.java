@@ -5,10 +5,10 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import biblioteca.AcervoDeLivro;
-import biblioteca.Livro;
+import biblioteca.producao.AcervoDeLivro;
+import biblioteca.producao.Livro;
 
-import acervo.producao.acervo.TipoAcervo;
+import acervo.producao.TipoAcervo;
 
 
 public class ArquivoIniciaVazio extends Cenario {

@@ -6,8 +6,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import biblioteca.AcervoDeLivro;
-import biblioteca.Livro;
+import biblioteca.producao.AcervoDeLivro;
+import biblioteca.producao.Livro;
 
 
 import infra.Cenario;

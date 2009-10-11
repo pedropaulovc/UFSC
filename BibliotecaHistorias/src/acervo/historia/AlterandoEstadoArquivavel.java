@@ -4,10 +4,10 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import biblioteca.AcervoDeLivro;
-import biblioteca.Disponivel;
-import biblioteca.Estado;
-import biblioteca.Livro;
+import acervo.producao.Estado;
+import biblioteca.producao.AcervoDeLivro;
+import biblioteca.producao.Disponivel;
+import biblioteca.producao.Livro;
 
 
 import infra.Cenario;
