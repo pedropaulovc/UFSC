@@ -1,4 +1,4 @@
-package acervo.producao.acervo;
+package acervo.producao;
 
 import java.util.List;
 
