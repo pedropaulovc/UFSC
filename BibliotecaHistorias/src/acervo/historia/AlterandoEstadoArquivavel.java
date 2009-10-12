@@ -1,21 +1,17 @@
 package acervo.historia;
 
+import infra.Cenario;
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import acervo.producao.Estado;
 import biblioteca.producao.AcervoDeLivro;
-import biblioteca.producao.Disponivel;
 import biblioteca.producao.Livro;
-
-
-import infra.Cenario;
+import biblioteca.producao.Livro.EstadoEmprestimo;
 
 public class AlterandoEstadoArquivavel extends Cenario {
 	private AcervoDeLivro acervo;
 	private Livro livroObtido;
-	private Estado estado;
 
 	public void dadoQue() {
 		existeUmAcervoDeLivros();
@@ -50,11 +46,11 @@ public class AlterandoEstadoArquivavel extends Cenario {
 
 	private void alterarEstadoLivro() {
 		livroObtido = acervo.obter(0);
-		livroObtido.alterarEstado(estado = new Disponivel());
+		livroObtido.alterarEstado(EstadoEmprestimo.DISPONIVEL);
 	}
 	
 	@Test
 	public void estadoSeráODefinido() {
-		Assert.assertSame(estado, livroObtido.obterEstado());
+		Assert.assertSame(EstadoEmprestimo.DISPONIVEL, livroObtido.obterEstado());
 	}
 }
