@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import biblioteca.producao.AcervoDeLivro;
 import biblioteca.producao.Livro;
-import biblioteca.producao.Livro.EstadoEmprestimo;
 
 public class DataDevolucaoDe15Dias extends Cenario {
 
@@ -27,12 +26,12 @@ public class DataDevolucaoDe15Dias extends Cenario {
 	}
 
 	public void então() {
+		oLivroFoiEmprestado();
 		dataDevoluçãoÉDe15Dias();
 	}
 
 	private void existeUmAcervoDeLivro() {
 		acervo = new AcervoDeLivro();
-
 	}
 
 	private void criarLivroEmprestado() {
@@ -41,7 +40,7 @@ public class DataDevolucaoDe15Dias extends Cenario {
 		livroCriado.alterarAnoPublicacao(1900);
 		livroCriado.alterarAutor("Autor José");
 		livroCriado.alterarEditora("Editora do Brasil");
-		livroCriado.alterarEstado(EstadoEmprestimo.EMPRESTADO);
+		livroCriado.emprestar();
 	}
 
 	private void háUmLivroEmprestadoNoAcervo() {
@@ -62,6 +61,11 @@ public class DataDevolucaoDe15Dias extends Cenario {
 	@Test
 	public void dataDevoluçãoÉDe15Dias() {
 		Assert.assertEquals(livroCriado.obterDataDevolucao(), criarData15DiasAdiante());
+	}
+	
+	@Test
+	public void oLivroFoiEmprestado(){
+		Assert.assertTrue(livroCriado.estaEmprestado());
 	}
 
 }

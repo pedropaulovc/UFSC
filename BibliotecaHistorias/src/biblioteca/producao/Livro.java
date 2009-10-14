@@ -16,6 +16,10 @@ public class Livro implements TipoArquivavel {
 	
 	public enum EstadoEmprestimo {EMPRESTADO, DISPONIVEL, CONSULTA_LOCAL, EM_RESTAURAÇÃO}
 	
+	public Livro(){
+		estado = EstadoEmprestimo.DISPONIVEL;
+	}
+	
 	public void alterarTitulo(String titulo) {
 		this.titulo = titulo;
 	}
@@ -48,21 +52,33 @@ public class Livro implements TipoArquivavel {
 		return anoPublicacao;
 	}
 	
-	public void alterarEstado(EstadoEmprestimo estado){
-		this.estado = estado;
-		
-		if(estado.equals(EstadoEmprestimo.EMPRESTADO)){
+	public boolean emprestar(){
+		if(estado.equals(EstadoEmprestimo.DISPONIVEL)){
+			estado = EstadoEmprestimo.EMPRESTADO;
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, tempoDevolucao);
 			dataDevolucao = cal.getTime();
+			return true;
 		}
+		return false;
 	}
 	
-	public EstadoEmprestimo obterEstado(){
-		return estado;
+	public boolean devolver(){
+		if(estado.equals(EstadoEmprestimo.EMPRESTADO)){
+			estado = EstadoEmprestimo.DISPONIVEL;
+			return true;
+		}
+		return false;
 	}
 	
 	public Date obterDataDevolucao(){
 		return dataDevolucao;
+	}
+
+	public boolean estaEmprestado() {
+		if(estado.equals(EstadoEmprestimo.EMPRESTADO)){
+			return true;
+		}
+		return false;
 	}
 }
