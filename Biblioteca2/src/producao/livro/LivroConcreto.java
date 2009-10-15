@@ -4,12 +4,13 @@ import java.util.List;
 
 import producao.documento.AnoPublicacao;
 import producao.documento.Autor;
+import producao.documento.DocumentoAbstrato;
 import producao.documento.Edicao;
 import producao.documento.Editora;
 import producao.documento.NumeroChamada;
 import producao.documento.Titulo;
 
-public class LivroConcreto implements Livro {
+public class LivroConcreto extends DocumentoAbstrato implements Livro {
 	private Titulo titulo;
 	private List<Autor> listaAutores;
 	private Edicao edicao;
