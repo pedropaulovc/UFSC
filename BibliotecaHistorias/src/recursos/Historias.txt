@@ -1,10 +1,66 @@
- - É possível criar sistemas de arquivamento diferentes
+Um usuário pode:
+	- Emprestar um livro por uma data predefinida, se o livro estiver disponível (EmprestarDocumento)
+	- Pesquisar por autor, título, e qualquer campo que quiser (PesquisarDocumento)
+	- Devolver um livro dentro ou fora do prazo (EmprestarDocumento)
+	- Saber quando um documento estará disponível (ObterDadosDocumento)
+	- Ver informações sobre um documento específico (ObterDadosDocumento)
+	- Saber a quantidade de documentos arquivados (VerQuantidadeDocumentos)
+Um administrador pode:
+	- Criar um novo tipo de documento. (AdicionarTipoDocumento)
+	- Adicionar um documento ao acervo da biblioteca (AdicionarDocumento)
+	- Remover um documento do acervo da biblioteca (RemoverDocumento)
+	- Transferir um exemplar para Restauração, Consulta Local e Vice-Versa 
+		(TornarExemplarConsultaLocal TornarExemplarEmRestauracao)
+Uma biblioteca é:
+	- Um acervo de documentos diversos (AdicionarDocumento)
+Um documento é:
+	- Um conjunto de exemplares de diversas edições do mesmo documento 
+		(AdicionarExemplaresDiferentesEmEdicao e AdicionarExemplaresDiferentesEmEdicao) 
+	- Pode estar emprestado, disponível, consulta local, restauração (ObterEstadoDocumento)
+Um livro possui: (CriarLivro)
+	- Título, Lista de Autores, Edição, Número de chamada, Ano de publicação, Editora
+Uma revista possui: (CriarRevista)
+	- Título, Edição, Número de chamada, Ano de publicação, Editora
+Um TCC/Dissertação/Teste possui: (CriarTese)
+	- Título, Lista de Autores, Orientador, Número de chamada, Ano de publicação
+Um mapa possui: (CriarMapa)
+	- Título, Escala, Editora
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK - É possível criar sistemas de arquivamento diferentes
 OK - O sistema inicia com nenhum arquivável
- - É possível adicionar apenas um tipo de coisa arquivável
- - É possível remover qualquer coisa arquivável
- - É possível que cada arquivável possua estados diferentes (Emprestado, vendido...)
- - É possível o arquivável possui campos personalizados 
- - É possível buscar por campos
+OK - É possível adicionar apenas um tipo de coisa arquivável
+OK - É possível remover qualquer coisa arquivável
+OK - É possível que cada arquivável possua estados diferentes (Emprestado, vendido...)
+OK - É possível o arquivável possui campos personalizados 
+OK - É possível buscar por campos
  
  
  - É possível armazenar os dados do arquivo
