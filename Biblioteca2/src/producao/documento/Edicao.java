@@ -1,5 +1,5 @@
 package producao.documento;
 
-public interface Edicao {
+public interface Edicao extends Dado {
 
 }

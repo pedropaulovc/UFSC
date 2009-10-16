@@ -1,5 +1,5 @@
 package producao.documento;
 
-public interface NumeroChamada {
+public interface NumeroChamada extends Dado {
 
 }

@@ -1,5 +1,5 @@
 package producao.documento;
 
-public interface Editora {
+public interface Editora extends Dado {
 
 }

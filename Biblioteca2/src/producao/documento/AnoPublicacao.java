@@ -1,5 +1,5 @@
 package producao.documento;
 
-public interface AnoPublicacao {
+public interface AnoPublicacao extends Dado {
 
 }

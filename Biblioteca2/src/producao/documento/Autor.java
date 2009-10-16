@@ -1,5 +1,5 @@
 package producao.documento;
 
-public interface Autor {
+public interface Autor extends Dado {
 
 }
