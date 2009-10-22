@@ -1,14 +1,19 @@
 package producao.livro;
 
 public class Edicao implements TipoEdicao {
-	private String edicao;
 
-	public Edicao(String edicao){
-		this.edicao = edicao;
+	private TipoDadosEdicao dados;
+
+	public Edicao(TipoDadosEdicao dados){
+		this.dados = dados;
 	}
 	
-	public String toString(){
-		return edicao;
+	public TipoAnoPublicacao obterAnoPublicacao() {
+		return dados.obterAnoPublicacao();
 	}
-	
+
+	@Override
+	public TipoNomeEditora obterEditora() {
+		return dados.obterEditora();
+	}	
 }

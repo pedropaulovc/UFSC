@@ -1,9 +1,15 @@
 package producao.livro;
 
-
 public interface TipoLivro {
-	public TipoAnoPublicacao obterAnoPublicacao();
 	public TipoAutor obterAutor();
-	public TipoNomeEditora obterEditora();
+
 	public TipoTitulo obterTitulo();
+
+	public boolean adicionarEdicao(TipoEdicao edicao);
+
+	public TipoEdicao obterEdicao(int edicao);
+
+	public TipoEdicao removerEdicao(int edicao);
+
+	public int qtdEdicoes();
 }

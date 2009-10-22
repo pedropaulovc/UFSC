@@ -34,7 +34,7 @@ public class CriarLivro extends Cenario {
 	}
 
 	private void haDadosValidosDeUmLivro() {
-		dados = new DadosLivro("Nome do Título;Nome do Autor;Nome da Editora;1999");
+		dados = new DadosLivro("Nome do Título;Nome do Autor");
 	}
 	
 	private void criarUmNovoLivroComOsDados() {
@@ -45,7 +45,5 @@ public class CriarLivro extends Cenario {
 	public void receboUmNovoLivroComOsMesmosDados() {
 		assertEquals(dados.obterTitulo(), livro.obterTitulo());
 		assertEquals(dados.obterAutor(), livro.obterAutor());
-		assertEquals(dados.obterEditora(), livro.obterEditora());
-		assertEquals(dados.obterAnoPublicacao(), livro.obterAnoPublicacao());
 	}
 }

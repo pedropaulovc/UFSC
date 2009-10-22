@@ -36,7 +36,7 @@ public class TornarLivroArquivavel extends Cenario {
 
 	private void existemDadosValidosDoLivro() {
 		dl = new DadosLivro(
-				"Nome do Título;Nome do Autor;Nome da Editora;1999");
+				"Nome do Título;Nome do Autor");
 	}
 
 	private void existemDadosValidosDeArquivoDoLivro() {
@@ -51,8 +51,6 @@ public class TornarLivroArquivavel extends Cenario {
 	public void receboUmNovoLivroComOsMesmosDados() {
 		assertEquals(dl.obterTitulo(), l.obterTitulo());
 		assertEquals(dl.obterAutor(), l.obterAutor());
-		assertEquals(dl.obterEditora(), l.obterEditora());
-		assertEquals(dl.obterAnoPublicacao(), l.obterAnoPublicacao());
 		assertEquals(dal.obterNumeroChamada(), l.obterNumeroChamada());
 	}
 }

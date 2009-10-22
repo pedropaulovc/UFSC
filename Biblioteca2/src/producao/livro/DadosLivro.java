@@ -4,23 +4,19 @@ package producao.livro;
 public class DadosLivro implements TipoDadosLivro {
 	private TipoTitulo titulo;
 	private TipoAutor autor;
-	private TipoNomeEditora editora;
-	private TipoAnoPublicacao anoPublicacao;
 
 	/**
 	 * @param dados: Uma string contendo os dados do livro, separados por ponto vírgula e
-	 * na ordem "Título;Autor;Editora;Ano de Publicação"
+	 * na ordem "Título;Autor"
 	 */
 	public DadosLivro(String dados){
 		assert(dados != null);		
 		
 		String[] dadosSeparados = dados.split(";");
-		assert(dadosSeparados.length == 4);
-		
+		assert(dadosSeparados.length == 2);
+
 		this.titulo = new Titulo(dadosSeparados[0]);
 		this.autor = new Autor(dadosSeparados[1]);
-		this.editora = new NomeEditora(dadosSeparados[2]);
-		this.anoPublicacao = new AnoPublicacao(dadosSeparados[3]);
 	}
 	
 	public TipoTitulo obterTitulo(){
@@ -29,13 +25,5 @@ public class DadosLivro implements TipoDadosLivro {
 	
 	public TipoAutor obterAutor(){
 		return autor;
-	}
-	
-	public TipoNomeEditora obterEditora(){
-		return editora;
-	}
-	
-	public TipoAnoPublicacao obterAnoPublicacao(){
-		return anoPublicacao;
 	}
 }
