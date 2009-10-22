@@ -1,25 +1,32 @@
 package producao.livro;
 
-import java.util.List;
+import producao.documento.TipoAnoPublicacao;
+import producao.documento.TipoAutor;
+import producao.documento.TipoNomeEditora;
+import producao.documento.TipoTitulo;
 
-import producao.documento.AnoPublicacao;
-import producao.documento.Autor;
-import producao.documento.Edicao;
-import producao.documento.Editora;
-import producao.documento.NumeroChamada;
-import producao.documento.Titulo;
+public class Livro implements TipoLivro {
+	private TipoDadosLivro dados;
 
-public interface Livro {
-	List<Autor> obterAutores();
-	Titulo obterTitulo();
-	Edicao obterEdicao();
-	AnoPublicacao obterAnoPublicacao();
-	NumeroChamada obterNumeroChamada();
-	Editora obterEditora();
-	void alterarTitulo(Titulo titulo);
-	void alterarListaAutores(List<Autor> listaAutores);
-	void alterarEdicao(Edicao edicao);
-	void alterarAnoPublicacao(AnoPublicacao anoPublicacao);
-	void alterarNumeroChamada(NumeroChamada numeroChamada);
-	void alterarEditora(Editora editora);
+	public Livro(TipoDadosLivro dados){
+		this.dados = dados;
+	}
+
+	public TipoAnoPublicacao obterAnoPublicacao() {
+		return dados.obterAnoPublicacao();
+	}
+
+	public TipoAutor obterAutor() {
+		return dados.obterAutor();
+	}
+
+	public TipoNomeEditora obterEditora() {
+		return dados.obterEditora();
+	}
+
+	public TipoTitulo obterTitulo() {
+		return dados.obterTitulo();
+	}
+	
+	
 }

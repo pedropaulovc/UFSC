@@ -1,66 +1,51 @@
 package historia;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
+import infra.Cenario;
 
 import org.junit.Test;
 
-import producao.documento.AnoPublicacaoConcreto;
-import producao.documento.AutorConcreto;
-import producao.documento.EdicaoConcreta;
-import producao.documento.EditoraConcreta;
-import producao.documento.NumeroChamadaConcreto;
-import producao.documento.TituloConcreto;
-import producao.livro.ConstrutorDeLivro;
-import producao.livro.Livro;
-import infra.Cenario;
+import producao.livro.DadosLivro;
+import producao.livro.Editora;
+import producao.livro.TipoDadosLivro;
+import producao.livro.TipoEditora;
+import producao.livro.TipoLivro;
 
 public class CriarLivro extends Cenario {
-	private ConstrutorDeLivro c;
-	private Livro l;
+	private TipoLivro livro;
+	private TipoEditora editora;
+	private TipoDadosLivro dados;
 
 	public void dadoQue() {
-		existeUmConstrutorDeLivro();
+		existeUmaEditora();
+		haDadosValidosDeUmLivro();
 	}
 
 	public void quando() {
-		mandoCriarUmLivroNovo();
+		criarUmNovoLivroComOsDados();
 	}
 
 	public void então() {
-		receboUmNovoLivro();
+		receboUmNovoLivroComOsMesmosDados();
 	}
 
-	private void existeUmConstrutorDeLivro() {
-		c = new ConstrutorDeLivro();
-
+	private void existeUmaEditora() {
+		editora = new Editora();
 	}
 
-	private void mandoCriarUmLivroNovo() {
-		c.alterarTitulo(new TituloConcreto("Título"));
-		c.alterarAutor(new AutorConcreto("Autor"));
-		c.alterarEdicao(new EdicaoConcreta("2a ed."));
-		c.alterarAnoPublicacao(new AnoPublicacaoConcreto(1999));
-		c.alterarNumeroChamada(new NumeroChamadaConcreto("Número chamada 123"));
-		c.alterarEditora(new EditoraConcreta("Editora"));
-
-		l = c.obterLivro();
+	private void haDadosValidosDeUmLivro() {
+		dados = new DadosLivro("Nome do Título;Nome do Autor;Nome da Editora;1999");
+	}
+	
+	private void criarUmNovoLivroComOsDados() {
+		livro = editora.criarLivro(dados);
 	}
 
 	@Test
-	public void receboUmNovoLivro() {
-		Assert.assertEquals(l.obterTitulo().toString(), new TituloConcreto(
-				"Título").toString());
-		
-		Assert.assertEquals(l.obterEdicao().toString(), new EdicaoConcreta(
-				"2a ed.").toString());
-		
-		Assert.assertEquals(l.obterAnoPublicacao().toString(),
-				new AnoPublicacaoConcreto(1999).toString());
-		
-		Assert.assertEquals(l.obterNumeroChamada().toString(),
-				new NumeroChamadaConcreto("Número chamada 123").toString());
-		
-		Assert.assertEquals(l.obterEditora().toString(), new EditoraConcreta(
-				"Editora").toString());
+	public void receboUmNovoLivroComOsMesmosDados() {
+		assertEquals(dados.obterTitulo(), livro.obterTitulo());
+		assertEquals(dados.obterAutor(), livro.obterAutor());
+		assertEquals(dados.obterEditora(), livro.obterEditora());
+		assertEquals(dados.obterAnoPublicacao(), livro.obterAnoPublicacao());
 	}
 }

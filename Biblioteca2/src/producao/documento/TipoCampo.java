@@ -1,5 +1,5 @@
 package producao.documento;
 
-public interface Dado {
+public interface TipoCampo {
 	String toString();
 }

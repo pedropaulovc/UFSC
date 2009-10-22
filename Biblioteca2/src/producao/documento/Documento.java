@@ -1,8 +1,15 @@
 package producao.documento;
 
-public interface Documento {
-	boolean emprestar();
-	boolean devolver();
-	Dado obterDado(Campo campo);
-	void adicionarDado(Campo campo, Dado dado);
+public class Documento implements TipoDocumento {
+
+	public boolean devolver() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean emprestar() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
