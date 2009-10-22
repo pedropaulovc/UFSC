@@ -1,13 +1,5 @@
 package producao.livro;
 
-import producao.documento.AnoPublicacao;
-import producao.documento.Autor;
-import producao.documento.NomeEditora;
-import producao.documento.TipoAnoPublicacao;
-import producao.documento.TipoAutor;
-import producao.documento.TipoNomeEditora;
-import producao.documento.TipoTitulo;
-import producao.documento.Titulo;
 
 public class DadosLivro implements TipoDadosLivro {
 	private TipoTitulo titulo;

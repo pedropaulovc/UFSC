@@ -1,4 +1,4 @@
-package producao.documento;
+package producao.livro;
 
 public class NomeEditora implements TipoNomeEditora {
 

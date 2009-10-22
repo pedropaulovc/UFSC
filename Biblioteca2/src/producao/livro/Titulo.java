@@ -1,4 +1,4 @@
-package producao.documento;
+package producao.livro;
 
 public class Titulo implements TipoTitulo {
 
