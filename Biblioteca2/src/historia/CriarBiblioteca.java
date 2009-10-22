@@ -1,19 +1,22 @@
 package historia;
 
-import junit.framework.Assert;
+import static junit.framework.Assert.*;
 
 import org.junit.Test;
 
 import producao.Biblioteca;
+import producao.ConfiguracaoBiblioteca;
+import producao.TipoConfiguracaoBiblioteca;
 
 import infra.Cenario;
 
 public class CriarBiblioteca extends Cenario {
 
-	private Biblioteca biblioteca;
+	private Biblioteca b;
+	private TipoConfiguracaoBiblioteca configuração;
 
 	public void dadoQue() {
-
+		existemConfiguraçõesValidasBiblioteca();
 	}
 
 	public void quando() {
@@ -22,14 +25,30 @@ public class CriarBiblioteca extends Cenario {
 
 	public void então() {
 		bibliotecaPassaAExistir();
+		bibliotecaPossuiUmNome();
+		bibliotecaPossuiNenhumLivroNoAcervo();
 	}
 
+	private void existemConfiguraçõesValidasBiblioteca() {
+		configuração = new ConfiguracaoBiblioteca("Biblioteca Central");
+	}
+	
 	private void crioUmaBiblioteca() {
-		biblioteca = new Biblioteca();
+		b = new Biblioteca(configuração);
 	}
-
+	
 	@Test
 	public void bibliotecaPassaAExistir() {
-		Assert.assertNotNull(biblioteca);
+		assertNotNull(b);
+	}
+	
+	@Test
+	public void bibliotecaPossuiUmNome() {
+		assertEquals("Biblioteca Central", b.obterNome().toString());
+	}
+	
+	@Test
+	public void bibliotecaPossuiNenhumLivroNoAcervo() {
+		assertEquals(0, b.tamanho());
 	}
 }

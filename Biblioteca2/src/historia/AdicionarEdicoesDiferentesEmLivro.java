@@ -2,7 +2,7 @@ package historia;
 
 import infra.Cenario;
 
-public class RemoverDocumento extends Cenario {
+public class AdicionarEdicoesDiferentesEmLivro extends Cenario {
 	public void dadoQue() {
 
 	}
