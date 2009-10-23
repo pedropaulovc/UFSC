@@ -6,13 +6,14 @@ import org.junit.Test;
 
 import producao.Biblioteca;
 import producao.ConfiguracaoBiblioteca;
+import producao.TipoBiblioteca;
 import producao.TipoConfiguracaoBiblioteca;
 
 import infra.Cenario;
 
 public class CriarBiblioteca extends Cenario {
 
-	private Biblioteca b;
+	private TipoBiblioteca b;
 	private TipoConfiguracaoBiblioteca configuração;
 
 	public void dadoQue() {

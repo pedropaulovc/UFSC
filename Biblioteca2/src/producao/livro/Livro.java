@@ -32,8 +32,8 @@ public class Livro implements TipoLivro {
 		return listaExemplares.get(i - 1);
 	}
 
-	@Override
 	public TipoExemplar removerExemplar(int i) {
 		return listaExemplares.remove(i - 1);
 	}
+
 }
