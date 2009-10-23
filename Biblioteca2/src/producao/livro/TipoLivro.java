@@ -5,11 +5,12 @@ public interface TipoLivro {
 
 	public TipoTitulo obterTitulo();
 
-	public boolean adicionarEdicao(TipoEdicao edicao);
+	public int qtdExemplares();
 
-	public TipoEdicao obterEdicao(int edicao);
+	public boolean adicionarExemplar(TipoDadosExemplar dadosExemplar);
 
-	public TipoEdicao removerEdicao(int edicao);
+	public TipoExemplar obterExemplar(int i);
 
-	public int qtdEdicoes();
+	public TipoExemplar removerExemplar(int i);
+	
 }

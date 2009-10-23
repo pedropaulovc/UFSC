@@ -10,4 +10,5 @@ public class Editora implements TipoEditora {
 			DadosArquivoLivro dadosArquivo) {
 		return new LivroArquivavel(dados, dadosArquivo);
 	}
+
 }

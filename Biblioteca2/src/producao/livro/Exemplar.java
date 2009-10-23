@@ -1,10 +1,10 @@
 package producao.livro;
 
-public class Edicao implements TipoEdicao {
+public class Exemplar implements TipoExemplar {
+	
+	private TipoDadosExemplar dados;
 
-	private TipoDadosEdicao dados;
-
-	public Edicao(TipoDadosEdicao dados){
+	public Exemplar(TipoDadosExemplar dados){
 		this.dados = dados;
 	}
 	
@@ -12,8 +12,8 @@ public class Edicao implements TipoEdicao {
 		return dados.obterAnoPublicacao();
 	}
 
-	@Override
 	public TipoNomeEditora obterEditora() {
 		return dados.obterEditora();
-	}	
+	}
+
 }

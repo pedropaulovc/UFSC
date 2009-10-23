@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Livro implements TipoLivro {
 	private TipoDadosLivro dados;
-	private List<TipoEdicao> listaEdicoes;
+	private List<TipoExemplar> listaExemplares;
 
 	public Livro(TipoDadosLivro dados) {
 		this.dados = dados;
-		this.listaEdicoes = new ArrayList<TipoEdicao>();
+		this.listaExemplares = new ArrayList<TipoExemplar>();
 	}
 
 	public TipoAutor obterAutor() {
@@ -20,22 +20,20 @@ public class Livro implements TipoLivro {
 		return dados.obterTitulo();
 	}
 
-	public boolean adicionarEdicao(TipoEdicao edicao) {
-		return listaEdicoes.add(edicao);
+	public int qtdExemplares() {
+		return listaExemplares.size();
 	}
 
-	public TipoEdicao obterEdicao(int edicao) {
-		assert (edicao > 0);
-		return listaEdicoes.get(edicao - 1);
+	public boolean adicionarExemplar(TipoDadosExemplar dadosExemplar) {
+		return listaExemplares.add(new Exemplar(dadosExemplar));
 	}
 
-	public TipoEdicao removerEdicao(int edicao) {
-		assert (edicao > 0);
-		return listaEdicoes.remove(edicao - 1);
+	public TipoExemplar obterExemplar(int i) {
+		return listaExemplares.get(i - 1);
 	}
 
-	public int qtdEdicoes() {
-		return listaEdicoes.size();
+	@Override
+	public TipoExemplar removerExemplar(int i) {
+		return listaExemplares.remove(i - 1);
 	}
-
 }
