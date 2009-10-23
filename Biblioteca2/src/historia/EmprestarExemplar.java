@@ -2,7 +2,7 @@ package historia;
 
 import infra.Cenario;
 
-public class EmprestarLivro extends Cenario {
+public class EmprestarExemplar extends Cenario {
 	public void dadoQue() {
 
 	}

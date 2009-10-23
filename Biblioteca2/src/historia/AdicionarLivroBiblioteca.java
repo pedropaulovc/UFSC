@@ -1,6 +1,6 @@
 package historia;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -17,44 +17,52 @@ import producao.livro.TipoEditora;
 import producao.livro.TipoLivro;
 import infra.Cenario;
 
-public class RemoverLivro extends Cenario {
+public class AdicionarLivroBiblioteca extends Cenario {
 	private TipoBiblioteca b;
 	private TipoLivro livro;
 
 	public void dadoQue() {
-		existeUmaBibliotecaComUmLivro();
+		existeUmaBibliotecaComNenhumLivro();
+		existeUmLivro();
 	}
 
 	public void quando() {
-		removeOLivro();
+		adicionaLivroNaBiblioteca();
 	}
 
 	public void então() {
-		bibliotecaFicaComNenhumLivro();
+		aBibliotecaPossuiUmLivro();
+		éPossívelObterOLivroArmazenado();
 	}
 
-	private void existeUmaBibliotecaComUmLivro() {
+	@Test
+	public void existeUmaBibliotecaComNenhumLivro() {
 		TipoConfiguracaoBiblioteca configuração = new ConfiguracaoBiblioteca(
 				"Biblioteca Central");
 		b = new Biblioteca(configuração);
 		
+		assertEquals(0, b.tamanho());
+	}
+
+	private void existeUmLivro() {
 		TipoEditora editora = new Editora();
 		TipoDadosLivro dados = new DadosLivro("Nome do Título;Nome do Autor");
 		livro = editora.criarLivro(dados);
 		TipoDadosExemplar dadosExemplar = new DadosExemplar("3a edicao;1999");
 		livro.adicionarExemplar(dadosExemplar);
-		
-		b.adicionar(livro);
-		
-		assertEquals(1, b.tamanho());
 	}
 
-	private void removeOLivro() {
-		b.removerLivro(1);
+	private void adicionaLivroNaBiblioteca() {
+		b.adicionar(livro);
 	}
 
 	@Test
-	public void bibliotecaFicaComNenhumLivro() {
-		assertEquals(0, b.tamanho());
+	public void aBibliotecaPossuiUmLivro() {
+		assertEquals(1, b.tamanho());
+	}
+
+	@Test
+	public void éPossívelObterOLivroArmazenado() {
+		assertEquals(livro, b.obterLivro(1));
 	}
 }

@@ -24,7 +24,7 @@ public class AdicionarExemplarEmLivro extends Cenario {
 	}
 
 	public void quando() {
-		editoraAdicionaExemplarAUmLivro();
+		adicionaExemplarAoLivro();
 	}
 
 	public void então() {
@@ -47,7 +47,7 @@ public class AdicionarExemplarEmLivro extends Cenario {
 		dadosExemplar = new DadosExemplar("3a edicao;1999");
 	}
 
-	private void editoraAdicionaExemplarAUmLivro() {
+	private void adicionaExemplarAoLivro() {
 		livro.adicionarExemplar(dadosExemplar);
 	}
 
