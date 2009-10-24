@@ -1,5 +1,6 @@
 package producao.livro;
 
-public interface TipoEditoraBiblioteca {
-	TipoLivroArquivavel criarLivro(TipoDadosLivro dados);
+public interface TipoEditoraBiblioteca extends TipoEditora {
+	public TipoLivroComExemplaresArquivaveis criarLivroComExemplaresArquivaveis(
+			TipoDadosLivro dados);
 }

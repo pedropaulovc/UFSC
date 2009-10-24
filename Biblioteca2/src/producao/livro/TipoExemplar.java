@@ -4,6 +4,4 @@ public interface TipoExemplar {
 	public TipoAnoPublicacao obterAnoPublicacao();
 	
 	public TipoNomeEditora obterEditora();
-
-	public TipoIdentificacao obterId();
 }

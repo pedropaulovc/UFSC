@@ -11,10 +11,10 @@ import producao.livro.EditoraBiblioteca;
 import producao.livro.TipoDadosExemplar;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoEditoraBiblioteca;
-import producao.livro.TipoLivroArquivavel;
+import producao.livro.TipoLivroComExemplaresArquivaveis;
 
 public class RemoverExemplarEmLivro extends Cenario {
-	private TipoLivroArquivavel livro;
+	private TipoLivroComExemplaresArquivaveis livro;
 
 	public void dadoQue() {
 		existeUmLivroComUmExemplar();
@@ -31,7 +31,7 @@ public class RemoverExemplarEmLivro extends Cenario {
 	private void existeUmLivroComUmExemplar() {
 		TipoEditoraBiblioteca editora = new EditoraBiblioteca();
 		TipoDadosLivro dados = new DadosLivro("Nome do Título;Nome do Autor");
-		livro = editora.criarLivro(dados);
+		livro = editora.criarLivroComExemplaresArquivaveis(dados);
 		
 		TipoDadosExemplar dadosExemplar = new DadosExemplar("Editora;1999");
 		

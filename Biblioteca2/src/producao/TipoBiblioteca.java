@@ -1,15 +1,15 @@
 package producao;
 
-import producao.livro.TipoLivroArquivavel;
+import producao.livro.TipoLivroComExemplaresArquivaveis;
 
 public interface TipoBiblioteca {
 	public TipoNomeBiblioteca obterNome();
 	
 	public int tamanho();
 
-	public boolean adicionar(TipoLivroArquivavel livro);
+	public boolean adicionar(TipoLivroComExemplaresArquivaveis livro);
 
-	public TipoLivroArquivavel obterLivro(int i);
+	public TipoLivroComExemplaresArquivaveis obterLivro(int i);
 
-	public TipoLivroArquivavel removerLivro(int i);
+	public TipoLivroComExemplaresArquivaveis removerLivro(int i);
 }

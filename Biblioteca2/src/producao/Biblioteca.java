@@ -3,16 +3,16 @@ package producao;
 import java.util.ArrayList;
 import java.util.List;
 
-import producao.livro.TipoLivroArquivavel;
+import producao.livro.TipoLivroComExemplaresArquivaveis;
 
 public class Biblioteca implements TipoBiblioteca {
 
 	private TipoConfiguracaoBiblioteca configuracao;
-	private List<TipoLivroArquivavel> listaLivros;
+	private List<TipoLivroComExemplaresArquivaveis> listaLivros;
 
 	public Biblioteca(TipoConfiguracaoBiblioteca configuração) {
 		this.configuracao = configuração;
-		this.listaLivros = new ArrayList<TipoLivroArquivavel>();
+		this.listaLivros = new ArrayList<TipoLivroComExemplaresArquivaveis>();
 	}
 
 	public TipoNomeBiblioteca obterNome() {
@@ -23,15 +23,15 @@ public class Biblioteca implements TipoBiblioteca {
 		return listaLivros.size();
 	}
 
-	public boolean adicionar(TipoLivroArquivavel livro) {
+	public boolean adicionar(TipoLivroComExemplaresArquivaveis livro) {
 		return listaLivros.add(livro);
 	}
 
-	public TipoLivroArquivavel obterLivro(int i) {
+	public TipoLivroComExemplaresArquivaveis obterLivro(int i) {
 		return listaLivros.get(i - 1);
 	}
 
-	public TipoLivroArquivavel removerLivro(int i) {
+	public TipoLivroComExemplaresArquivaveis removerLivro(int i) {
 		return listaLivros.remove(i - 1);
 	}
 }

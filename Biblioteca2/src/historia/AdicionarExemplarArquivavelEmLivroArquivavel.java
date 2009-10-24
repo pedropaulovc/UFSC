@@ -7,18 +7,18 @@ import org.junit.Test;
 
 import producao.livro.DadosExemplar;
 import producao.livro.DadosLivro;
-import producao.livro.Editora;
+import producao.livro.EditoraBiblioteca;
 import producao.livro.TipoDadosExemplar;
 import producao.livro.TipoDadosLivro;
-import producao.livro.TipoEditora;
-import producao.livro.TipoLivroComExemplares;
+import producao.livro.TipoEditoraBiblioteca;
+import producao.livro.TipoLivroComExemplaresArquivaveis;
 
-public class AdicionarExemplarEmLivro extends Cenario {
-	private TipoLivroComExemplares livro;
+public class AdicionarExemplarArquivavelEmLivroArquivavel extends Cenario {
+	private TipoLivroComExemplaresArquivaveis livro;
 	private TipoDadosExemplar dadosExemplar;
 
 	public void dadoQue() {
-		existeUmLivroSemExemplares();
+		existeUmLivroArquivavelSemExemplaresArquivaveis();
 		existemDadosDeExemplar();
 	}
 
@@ -33,11 +33,11 @@ public class AdicionarExemplarEmLivro extends Cenario {
 	}
 
 	@Test
-	public void existeUmLivroSemExemplares() {
-		TipoEditora editora = new Editora();
+	public void existeUmLivroArquivavelSemExemplaresArquivaveis() {
+		TipoEditoraBiblioteca editora = new EditoraBiblioteca();
 
 		TipoDadosLivro dados = new DadosLivro("Nome do Título;Nome do Autor");
-		livro = editora.criarLivroComExemplares(dados);
+		livro = editora.criarLivroComExemplaresArquivaveis(dados);
 
 		assertEquals(0, livro.qtdExemplares());
 	}
@@ -51,7 +51,7 @@ public class AdicionarExemplarEmLivro extends Cenario {
 	}
 
 	@Test
-	public void exemplarPossuiMesmosDadosFornecidos() {
+	public void exemplarPossuiMesmosDadosFornecidos() {		
 		assertEquals(dadosExemplar.obterAnoPublicacao(), livro.obterAnoPublicacaoExemplar(1));
 		assertEquals(dadosExemplar.obterEditora(), livro.obterNomeEditoraExemplar(1));
 	}
