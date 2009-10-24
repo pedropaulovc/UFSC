@@ -6,14 +6,15 @@ import infra.Cenario;
 import org.junit.Test;
 
 import producao.livro.DadosLivro;
-import producao.livro.Editora;
+import producao.livro.EditoraBiblioteca;
 import producao.livro.TipoDadosLivro;
-import producao.livro.TipoEditora;
+import producao.livro.TipoEditoraBiblioteca;
 import producao.livro.TipoLivro;
+import producao.livro.TipoLivroArquivavel;
 
 public class CriarLivro extends Cenario {
-	private TipoLivro livro;
-	private TipoEditora editora;
+	private TipoLivroArquivavel livro;
+	private TipoEditoraBiblioteca editora;
 	private TipoDadosLivro dados;
 
 	public void dadoQue() {
@@ -30,7 +31,7 @@ public class CriarLivro extends Cenario {
 	}
 
 	private void existeUmaEditora() {
-		editora = new Editora();
+		editora = new EditoraBiblioteca();
 	}
 
 	private void haDadosValidosDeUmLivro() {

@@ -1,6 +1,7 @@
 package historia;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import infra.Cenario;
 
 import org.junit.Test;
 
@@ -10,16 +11,15 @@ import producao.TipoBiblioteca;
 import producao.TipoConfiguracaoBiblioteca;
 import producao.livro.DadosExemplar;
 import producao.livro.DadosLivro;
-import producao.livro.Editora;
+import producao.livro.EditoraBiblioteca;
 import producao.livro.TipoDadosExemplar;
 import producao.livro.TipoDadosLivro;
-import producao.livro.TipoEditora;
-import producao.livro.TipoLivro;
-import infra.Cenario;
+import producao.livro.TipoEditoraBiblioteca;
+import producao.livro.TipoLivroArquivavel;
 
 public class AdicionarLivroBiblioteca extends Cenario {
 	private TipoBiblioteca b;
-	private TipoLivro livro;
+	private TipoLivroArquivavel livro;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComNenhumLivro();
@@ -45,7 +45,7 @@ public class AdicionarLivroBiblioteca extends Cenario {
 	}
 
 	private void existeUmLivro() {
-		TipoEditora editora = new Editora();
+		TipoEditoraBiblioteca editora = new EditoraBiblioteca();
 		TipoDadosLivro dados = new DadosLivro("Nome do Título;Nome do Autor");
 		livro = editora.criarLivro(dados);
 		TipoDadosExemplar dadosExemplar = new DadosExemplar("3a edicao;1999");

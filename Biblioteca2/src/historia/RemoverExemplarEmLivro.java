@@ -7,14 +7,14 @@ import org.junit.Test;
 
 import producao.livro.DadosExemplar;
 import producao.livro.DadosLivro;
-import producao.livro.Editora;
+import producao.livro.EditoraBiblioteca;
 import producao.livro.TipoDadosExemplar;
 import producao.livro.TipoDadosLivro;
-import producao.livro.TipoEditora;
-import producao.livro.TipoLivro;
+import producao.livro.TipoEditoraBiblioteca;
+import producao.livro.TipoLivroArquivavel;
 
 public class RemoverExemplarEmLivro extends Cenario {
-	private TipoLivro livro;
+	private TipoLivroArquivavel livro;
 
 	public void dadoQue() {
 		existeUmLivroComUmExemplar();
@@ -29,7 +29,7 @@ public class RemoverExemplarEmLivro extends Cenario {
 	}
 
 	private void existeUmLivroComUmExemplar() {
-		TipoEditora editora = new Editora();
+		TipoEditoraBiblioteca editora = new EditoraBiblioteca();
 		TipoDadosLivro dados = new DadosLivro("Nome do Título;Nome do Autor");
 		livro = editora.criarLivro(dados);
 		
