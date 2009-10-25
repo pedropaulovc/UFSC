@@ -11,4 +11,6 @@ public interface TipoLivroComExemplares extends TipoLivro {
 	public TipoNomeEditora obterNomeEditoraExemplar(TipoIdentificacaoExemplar exemplar);
 
 	public TipoDadosExemplar obterDadosExemplar(TipoIdentificacaoExemplar exemplar);
+	
+	public boolean contemExemplar(TipoIdentificacaoExemplar exemplar);
 }

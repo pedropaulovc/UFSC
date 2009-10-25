@@ -40,4 +40,8 @@ public class LivroComExemplares extends Livro implements
 		mapaExemplares.remove(exemplar);
 	}
 
+	public boolean contemExemplar(TipoIdentificacaoExemplar idExemplar) {
+		return mapaExemplares.containsKey(idExemplar);
+	}
+
 }

@@ -50,7 +50,7 @@ public class AdicionarExemplarEmLivroDaBiblioteca extends Cenario {
 
 	@Test
 	public void exemplarPossuiMesmosDadosFornecidos() {
-		assertEquals(dadosExemplar, b.obterDadosExemplar(idLivro, idExemplar));
+		assertEquals(dadosExemplar, b.obterDadosExemplar(idExemplar));
 	}
 
 	@Test
@@ -60,7 +60,8 @@ public class AdicionarExemplarEmLivroDaBiblioteca extends Cenario {
 
 	@Test
 	public void livroPermiteRemoverExemplar() {
-		b.removerExemplar(idLivro, idExemplar);
+		b.removerExemplar(idExemplar);
 		assertEquals(0, b.qtdExemplares(idLivro));
 	}
+	
 }

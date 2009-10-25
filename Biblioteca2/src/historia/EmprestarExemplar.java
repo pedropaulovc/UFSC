@@ -1,6 +1,16 @@
 package historia;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static producao.livro.EstadoEmprestimo.EMPRESTADO;
+
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import infra.Cenario;
+
+import org.junit.Test;
+
 import producao.Biblioteca;
 import producao.ConfiguracaoBiblioteca;
 import producao.TipoBiblioteca;
@@ -43,14 +53,20 @@ public class EmprestarExemplar extends Cenario {
 	}
 
 	private void emprestarOExemplar() {
-		//b.emprestar(idExemplar);
+		b.emprestar(idExemplar);
 	}
 
-	private void oExemplarFicaráEmprestado() {
-		//b.obterEstadoExemplar(idExemplar);
+	@Test
+	public void oExemplarFicaráEmprestado() {
+		assertTrue(EMPRESTADO.equals(b.obterEstadoExemplar(idExemplar)));
 	}
 
-	private void oPrazoDeDevolucaoÉDe15Dias() {
-		//b.prazoDevolucao(idExemplar);
+	@Test
+	public void oPrazoDeDevolucaoÉDe15Dias() {
+		GregorianCalendar calendario = new GregorianCalendar();
+		calendario.set(GregorianCalendar.DAY_OF_MONTH, 15);
+		Date quinzeDiasDepois = calendario.getTime();
+		
+		assertEquals(quinzeDiasDepois, b.prazoDevolucao(idExemplar));
 	}
 }

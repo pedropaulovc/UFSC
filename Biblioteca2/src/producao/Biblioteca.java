@@ -1,9 +1,12 @@
 package producao;
 
+import java.security.InvalidParameterException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import producao.livro.EditoraBiblioteca;
+import producao.livro.EstadoEmprestimo;
 import producao.livro.TipoDadosExemplarArquivavel;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoEditoraBiblioteca;
@@ -34,20 +37,20 @@ public class Biblioteca implements TipoBiblioteca {
 	public TipoIdentificacaoLivro adicionar(TipoDadosLivro dadosLivro) {
 		mapaLivros.put(dadosLivro.obterIdentificacao(), editora
 				.criarLivroComExemplaresArquivaveis(dadosLivro));
-		
+
 		return dadosLivro.obterIdentificacao();
 	}
 
-	public TipoIdentificacaoExemplar adicionarExemplar(TipoIdentificacaoLivro livro,
+	public TipoIdentificacaoExemplar adicionarExemplar(
+			TipoIdentificacaoLivro livro,
 			TipoDadosExemplarArquivavel dadosExemplar) {
 		mapaLivros.get(livro).adicionarExemplar(dadosExemplar);
-		
+
 		return dadosExemplar.obterIdentificacao();
 	}
 
-	public TipoDadosExemplarArquivavel obterDadosExemplar(
-			TipoIdentificacaoLivro livro, TipoIdentificacaoExemplar exemplar) {
-		return mapaLivros.get(livro).obterDadosExemplar(exemplar);
+	public TipoDadosExemplarArquivavel obterDadosExemplar(TipoIdentificacaoExemplar exemplar) {
+		return buscarLivro(exemplar).obterDadosExemplar(exemplar);
 	}
 
 	public TipoDadosLivro obterDadosLivro(TipoIdentificacaoLivro livro) {
@@ -58,12 +61,33 @@ public class Biblioteca implements TipoBiblioteca {
 		return mapaLivros.get(livro).qtdExemplares();
 	}
 
-	public void removerExemplar(TipoIdentificacaoLivro livro,
-			TipoIdentificacaoExemplar exemplar) {
-		mapaLivros.get(livro).removerExemplar(exemplar);
+	public void removerExemplar(TipoIdentificacaoExemplar exemplar) {
+		buscarLivro(exemplar).removerExemplar(exemplar);
 	}
 
 	public void removerLivro(TipoIdentificacaoLivro livro) {
 		mapaLivros.remove(livro);
+	}
+
+	private TipoLivroComExemplaresArquivaveis buscarLivro(TipoIdentificacaoExemplar exemplar){
+		String mensagemErro = "Identificação fornecida não existe no acervo";
+		
+		for(TipoLivroComExemplaresArquivaveis l : mapaLivros.values())
+			if(l.contemExemplar(exemplar))
+				return l;
+		throw new InvalidParameterException(mensagemErro);
+	}
+
+	public boolean emprestar(TipoIdentificacaoExemplar idExemplar) {
+		return buscarLivro(idExemplar).emprestar(idExemplar);		
+	}
+
+	public EstadoEmprestimo obterEstadoExemplar(
+			TipoIdentificacaoExemplar idExemplar) {
+		return buscarLivro(idExemplar).obterEstado(idExemplar);
+	}
+
+	public Date prazoDevolucao(TipoIdentificacaoExemplar idExemplar) {
+		return buscarLivro(idExemplar).obterPrazoDevolucao(idExemplar);
 	}
 }
