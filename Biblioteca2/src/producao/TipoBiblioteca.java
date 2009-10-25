@@ -1,12 +1,11 @@
 package producao;
 
-import java.util.Date;
-
 import producao.livro.EstadoEmprestimo;
 import producao.livro.TipoDadosExemplarArquivavel;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoIdentificacaoExemplar;
 import producao.livro.TipoIdentificacaoLivro;
+import producao.livro.TipoPrazoDevolucao;
 
 public interface TipoBiblioteca {
 	public TipoNomeBiblioteca obterNome();
@@ -32,5 +31,7 @@ public interface TipoBiblioteca {
 
 	public EstadoEmprestimo obterEstadoExemplar(TipoIdentificacaoExemplar idExemplar);
 
-	public Date prazoDevolucao(TipoIdentificacaoExemplar idExemplar);
+	public TipoPrazoDevolucao obterPrazoDevolucao(TipoIdentificacaoExemplar idExemplar);
+
+	public boolean devolver(TipoIdentificacaoExemplar idExemplar);
 }

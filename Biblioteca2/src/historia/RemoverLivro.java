@@ -28,7 +28,7 @@ public class RemoverLivro extends Cenario {
 	}
 
 	private void existeUmaBibliotecaComUmLivro() {
-		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central"));
+		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central;15"));
 
 		id = b.adicionar(new DadosLivro("Nome do Título;Nome do Autor"));
 

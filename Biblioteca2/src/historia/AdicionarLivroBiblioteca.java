@@ -33,7 +33,7 @@ public class AdicionarLivroBiblioteca extends Cenario {
 
 	@Test
 	public void existeUmaBibliotecaComNenhumLivro() {
-		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central"));
+		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central;15"));
 
 		assertEquals(0, b.tamanho());
 	}

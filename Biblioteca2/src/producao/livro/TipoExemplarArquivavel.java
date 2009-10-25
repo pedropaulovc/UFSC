@@ -1,6 +1,5 @@
 package producao.livro;
 
-import java.util.Date;
 
 public interface TipoExemplarArquivavel extends TipoExemplar {
 	public TipoNumeroChamada obterNumeroChamada();
@@ -9,9 +8,11 @@ public interface TipoExemplarArquivavel extends TipoExemplar {
 	
 	public TipoDadosExemplarArquivavel obterDados();
 
-	public boolean emprestar();
+	public boolean emprestar(int prazo);
 
 	public EstadoEmprestimo obterEstado();
 
-	public Date obterPrazoDevolucao();
+	public TipoPrazoDevolucao obterPrazoDevolucao();
+
+	public boolean devolver();
 }

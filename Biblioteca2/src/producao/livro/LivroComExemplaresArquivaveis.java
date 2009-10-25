@@ -1,6 +1,5 @@
 package producao.livro;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,15 +48,20 @@ public class LivroComExemplaresArquivaveis extends Livro implements
 		return mapaExemplares.containsKey(idExemplar);
 	}
 
-	public boolean emprestar(TipoIdentificacaoExemplar idExemplar) {
-		return mapaExemplares.get(idExemplar).emprestar();
+	public boolean emprestar(TipoIdentificacaoExemplar idExemplar, int prazo) {
+		return mapaExemplares.get(idExemplar).emprestar(prazo);
 	}
 
 	public EstadoEmprestimo obterEstado(TipoIdentificacaoExemplar idExemplar) {
 		return mapaExemplares.get(idExemplar).obterEstado();
 	}
 
-	public Date obterPrazoDevolucao(TipoIdentificacaoExemplar idExemplar) {
+	public TipoPrazoDevolucao obterPrazoDevolucao(TipoIdentificacaoExemplar idExemplar) {
 		return mapaExemplares.get(idExemplar).obterPrazoDevolucao();
+	}
+
+	@Override
+	public boolean devolver(TipoIdentificacaoExemplar idExemplar) {
+		return mapaExemplares.get(idExemplar).devolver();
 	}
 }

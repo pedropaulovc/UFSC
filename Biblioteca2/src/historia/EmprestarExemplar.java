@@ -3,10 +3,6 @@ package historia;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static producao.livro.EstadoEmprestimo.EMPRESTADO;
-
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import infra.Cenario;
 
 import org.junit.Test;
@@ -16,6 +12,7 @@ import producao.ConfiguracaoBiblioteca;
 import producao.TipoBiblioteca;
 import producao.livro.DadosExemplarArquivavel;
 import producao.livro.DadosLivro;
+import producao.livro.PrazoDevolucao;
 import producao.livro.TipoIdentificacaoExemplar;
 import producao.livro.TipoIdentificacaoLivro;
 
@@ -40,7 +37,7 @@ public class EmprestarExemplar extends Cenario {
 	}
 
 	private void existeUmaBiblioteca() {
-		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central"));
+		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central;15"));
 	}
 
 	private void aBibliotecaPossuiUmLivro() {
@@ -62,11 +59,7 @@ public class EmprestarExemplar extends Cenario {
 	}
 
 	@Test
-	public void oPrazoDeDevolucaoÉDe15Dias() {
-		GregorianCalendar calendario = new GregorianCalendar();
-		calendario.set(GregorianCalendar.DAY_OF_MONTH, 15);
-		Date quinzeDiasDepois = calendario.getTime();
-		
-		assertEquals(quinzeDiasDepois, b.prazoDevolucao(idExemplar));
+	public void oPrazoDeDevolucaoÉDe15Dias() {		
+		assertEquals(new PrazoDevolucao(15), b.obterPrazoDevolucao(idExemplar));
 	}
 }

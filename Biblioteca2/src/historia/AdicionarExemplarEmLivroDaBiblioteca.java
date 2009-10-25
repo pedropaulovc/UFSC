@@ -36,7 +36,7 @@ public class AdicionarExemplarEmLivroDaBiblioteca extends Cenario {
 	}
 
 	private void existeUmaBiblioteca() {
-		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central"));
+		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central;15"));
 	}
 
 	public void aBibliotecaPossuiUmLivroSemExemplares() {
