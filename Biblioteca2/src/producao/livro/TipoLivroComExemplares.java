@@ -10,4 +10,6 @@ public interface TipoLivroComExemplares extends TipoLivro {
 	public TipoAnoPublicacao obterAnoPublicacaoExemplar(int i);
 	
 	public TipoNomeEditora obterNomeEditoraExemplar(int i);
+	
+	public TipoDadosExemplar obterDadosExemplar(int i);
 }

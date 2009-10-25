@@ -31,4 +31,8 @@ public class LivroComExemplares extends Livro implements TipoLivroComExemplares 
 		return listaExemplares.get(i - 1).obterAnoPublicacao();
 	}
 
+	public TipoDadosExemplar obterDadosExemplar(int i) {
+		return listaExemplares.get(i - 1).obterDados();
+	}
+
 }

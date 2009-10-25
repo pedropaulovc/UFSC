@@ -15,4 +15,8 @@ public class Livro implements TipoLivro {
 	public TipoTitulo obterTitulo() {
 		return dados.obterTitulo();
 	}
+	
+	public TipoDadosLivro obterDados(){
+		return dados;
+	}
 }

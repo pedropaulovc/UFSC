@@ -1,15 +1,24 @@
 package producao;
 
-import producao.livro.TipoLivroComExemplaresArquivaveis;
+import producao.livro.TipoDadosExemplar;
+import producao.livro.TipoDadosLivro;
 
 public interface TipoBiblioteca {
 	public TipoNomeBiblioteca obterNome();
 	
 	public int tamanho();
 
-	public boolean adicionar(TipoLivroComExemplaresArquivaveis livro);
+	public boolean adicionar(TipoDadosLivro livro);
+	
+	public boolean adicionarExemplar(int livro, TipoDadosExemplar exemplar);
 
-	public TipoLivroComExemplaresArquivaveis obterLivro(int i);
+	public void removerLivro(int i);
+	
+	public TipoDadosLivro obterDadosLivro(int i);
+	
+	public TipoDadosExemplar obterDadosExemplar(int livro, int exemplar);
+	
+	public int qtdExemplares(int livro);
 
-	public TipoLivroComExemplaresArquivaveis removerLivro(int i);
+	public void removerExemplar(int livro, int exemplar);
 }

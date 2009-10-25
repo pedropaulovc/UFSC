@@ -36,4 +36,8 @@ public class LivroComExemplaresArquivaveis extends Livro implements
 	public TipoNomeEditora obterNomeEditoraExemplar(int i) {
 		return listaExemplares.get(i - 1).obterEditora();
 	}
+
+	public TipoDadosExemplar obterDadosExemplar(int i) {
+		return listaExemplares.get(i - 1).obterDados();
+	}
 }

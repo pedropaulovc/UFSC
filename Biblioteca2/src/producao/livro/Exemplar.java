@@ -16,4 +16,8 @@ public class Exemplar implements TipoExemplar {
 		return dados.obterEditora();
 	}
 
+	public TipoDadosExemplar obterDados() {
+		return dados;
+	}
+
 }

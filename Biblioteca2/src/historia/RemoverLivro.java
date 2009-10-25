@@ -8,16 +8,10 @@ import org.junit.Test;
 import producao.Biblioteca;
 import producao.ConfiguracaoBiblioteca;
 import producao.TipoBiblioteca;
-import producao.TipoConfiguracaoBiblioteca;
 import producao.livro.DadosLivro;
-import producao.livro.EditoraBiblioteca;
-import producao.livro.TipoDadosLivro;
-import producao.livro.TipoEditoraBiblioteca;
-import producao.livro.TipoLivroComExemplaresArquivaveis;
 
 public class RemoverLivro extends Cenario {
 	private TipoBiblioteca b;
-	private TipoLivroComExemplaresArquivaveis livro;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComUmLivro();
@@ -32,16 +26,10 @@ public class RemoverLivro extends Cenario {
 	}
 
 	private void existeUmaBibliotecaComUmLivro() {
-		TipoConfiguracaoBiblioteca configuração = new ConfiguracaoBiblioteca(
-				"Biblioteca Central");
-		b = new Biblioteca(configuração);
-		
-		TipoEditoraBiblioteca editora = new EditoraBiblioteca();
-		TipoDadosLivro dados = new DadosLivro("Nome do Título;Nome do Autor");
-		livro = editora.criarLivroComExemplaresArquivaveis(dados);
-		
-		b.adicionar(livro);
-		
+		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central"));
+
+		b.adicionar(new DadosLivro("Nome do Título;Nome do Autor"));
+
 		assertEquals(1, b.tamanho());
 	}
 
