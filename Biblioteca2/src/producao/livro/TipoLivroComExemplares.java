@@ -3,11 +3,12 @@ package producao.livro;
 public interface TipoLivroComExemplares extends TipoLivro {
 	public int qtdExemplares();
 
-	public TipoExemplar removerExemplar(int i);
-	
-	public TipoAnoPublicacao obterAnoPublicacaoExemplar(int i);
-	
-	public TipoNomeEditora obterNomeEditoraExemplar(int i);
-	
-	public TipoDadosExemplar obterDadosExemplar(int i);
+	public void removerExemplar(TipoIdentificacao exemplar);
+
+	public TipoAnoPublicacao obterAnoPublicacaoExemplar(
+			TipoIdentificacao exemplar);
+
+	public TipoNomeEditora obterNomeEditoraExemplar(TipoIdentificacao exemplar);
+
+	public TipoDadosExemplar obterDadosExemplar(TipoIdentificacao exemplar);
 }

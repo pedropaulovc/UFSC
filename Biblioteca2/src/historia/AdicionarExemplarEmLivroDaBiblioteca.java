@@ -11,10 +11,14 @@ import producao.TipoBiblioteca;
 import producao.livro.DadosExemplarArquivavel;
 import producao.livro.DadosLivro;
 import producao.livro.TipoDadosExemplarArquivavel;
+import producao.livro.TipoDadosLivro;
+import producao.livro.TipoIdentificacao;
 
 public class AdicionarExemplarEmLivroDaBiblioteca extends Cenario {
 	private TipoDadosExemplarArquivavel dadosExemplar;
 	private TipoBiblioteca b;
+	private TipoDadosLivro dadosLivro;
+	private TipoIdentificacao idLivro, idExemplar;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();
@@ -36,28 +40,32 @@ public class AdicionarExemplarEmLivroDaBiblioteca extends Cenario {
 	}
 
 	public void aBibliotecaPossuiUmLivroSemExemplares() {
-		b.adicionar(new DadosLivro("Nome do Título;Nome do Autor"));
+		dadosLivro = new DadosLivro("Nome do Título;Nome do Autor");
+		idLivro = dadosLivro.obterIdentificacao();
+		
+		b.adicionar(dadosLivro);
 	}
 
 	private void adicionaExemplarAoLivro() {
 		dadosExemplar = new DadosExemplarArquivavel(
 				"Editora;1999;Numero Chamada");
-		b.adicionarExemplar(1, dadosExemplar);
+		idExemplar = dadosExemplar.obterIdentificacao();
+		b.adicionarExemplar(idLivro, dadosExemplar);
 	}
 
 	@Test
 	public void exemplarPossuiMesmosDadosFornecidos() {
-		assertEquals(dadosExemplar, b.obterDadosExemplar(1, 1));
+		assertEquals(dadosExemplar, b.obterDadosExemplar(idLivro, idExemplar));
 	}
 
 	@Test
 	public void livroPossuiUmExemplar() {
-		assertEquals(1, b.qtdExemplares(1));
+		assertEquals(1, b.qtdExemplares(idLivro));
 	}
 
 	@Test
 	public void livroPermiteRemoverExemplar() {
-		b.removerExemplar(1, 1);
-		assertEquals(0, b.qtdExemplares(1));
+		b.removerExemplar(idLivro, idExemplar);
+		assertEquals(0, b.qtdExemplares(idLivro));
 	}
 }

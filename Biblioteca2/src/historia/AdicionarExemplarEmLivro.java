@@ -52,18 +52,18 @@ public class AdicionarExemplarEmLivro extends Cenario {
 
 	@Test
 	public void exemplarPossuiMesmosDadosFornecidos() {
-		assertEquals(dadosExemplar.obterAnoPublicacao(), livro.obterAnoPublicacaoExemplar(1));
-		assertEquals(dadosExemplar.obterEditora(), livro.obterNomeEditoraExemplar(1));
+		assertEquals(dadosExemplar, livro.obterDadosExemplar(dadosExemplar
+				.obterIdentificacao()));
 	}
 
 	@Test
 	public void livroPossuiUmExemplar() {
-		assertEquals(1,livro.qtdExemplares());
+		assertEquals(1, livro.qtdExemplares());
 	}
 
 	@Test
 	public void livroPermiteRemoverExemplar() {
-		livro.removerExemplar(1);
+		livro.removerExemplar(dadosExemplar.obterIdentificacao());
 		assertEquals(0, livro.qtdExemplares());
 	}
 }

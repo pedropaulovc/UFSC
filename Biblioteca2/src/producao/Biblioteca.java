@@ -1,59 +1,64 @@
 package producao;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import producao.livro.EditoraBiblioteca;
 import producao.livro.TipoDadosExemplarArquivavel;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoEditoraBiblioteca;
+import producao.livro.TipoIdentificacao;
 import producao.livro.TipoLivroComExemplaresArquivaveis;
 
 public class Biblioteca implements TipoBiblioteca {
 
 	private TipoConfiguracaoBiblioteca configuracao;
-	private List<TipoLivroComExemplaresArquivaveis> listaLivros;
+	private Map<TipoIdentificacao, TipoLivroComExemplaresArquivaveis> mapaLivros;
 	private TipoEditoraBiblioteca editora;
 
 	public Biblioteca(TipoConfiguracaoBiblioteca configuração) {
 		this.configuracao = configuração;
-		this.listaLivros = new ArrayList<TipoLivroComExemplaresArquivaveis>();
+		this.mapaLivros = new HashMap<TipoIdentificacao, TipoLivroComExemplaresArquivaveis>();
 		this.editora = new EditoraBiblioteca();
 	}
 
-	public boolean adicionar(TipoDadosLivro dados) {
-		return listaLivros.add(editora.criarLivroComExemplaresArquivaveis(dados));
-	}
-
-	public boolean adicionarExemplar(int livro, TipoDadosExemplarArquivavel dadosExemplar) {
-		return listaLivros.get(livro - 1).adicionarExemplar(dadosExemplar);
-	}
-	
 	public TipoNomeBiblioteca obterNome() {
 		return configuracao.obterNomeBiblioteca();
 	}
 
 	public int tamanho() {
-		return listaLivros.size();
+		return mapaLivros.size();
 	}
 
-	public void removerLivro(int i) {
-		listaLivros.remove(i - 1);
-	}
-	
-	public TipoDadosLivro obterDadosLivro(int i){
-		return listaLivros.get(i - 1).obterDados();
-	}
-	
-	public TipoDadosExemplarArquivavel obterDadosExemplar(int livro, int exemplar){
-		return listaLivros.get(livro - 1).obterDadosExemplar(exemplar);
+	public void adicionar(TipoDadosLivro dadosLivro) {
+		mapaLivros.put(dadosLivro.obterIdentificacao(), editora
+				.criarLivroComExemplaresArquivaveis(dadosLivro));
 	}
 
-	public int qtdExemplares(int livro) {
-		return listaLivros.get(livro - 1).qtdExemplares();
+	public void adicionarExemplar(TipoIdentificacao livro,
+			TipoDadosExemplarArquivavel dadosExemplar) {
+		mapaLivros.get(livro).adicionarExemplar(dadosExemplar);
 	}
 
-	public void removerExemplar(int livro, int exemplar) {
-		listaLivros.get(livro - 1).removerExemplar(exemplar);
+	public TipoDadosExemplarArquivavel obterDadosExemplar(
+			TipoIdentificacao livro, TipoIdentificacao exemplar) {
+		return mapaLivros.get(livro).obterDadosExemplar(exemplar);
+	}
+
+	public TipoDadosLivro obterDadosLivro(TipoIdentificacao livro) {
+		return mapaLivros.get(livro).obterDados();
+	}
+
+	public int qtdExemplares(TipoIdentificacao livro) {
+		return mapaLivros.get(livro).qtdExemplares();
+	}
+
+	public void removerExemplar(TipoIdentificacao livro,
+			TipoIdentificacao exemplar) {
+		mapaLivros.get(livro).removerExemplar(exemplar);
+	}
+
+	public void removerLivro(TipoIdentificacao livro) {
+		mapaLivros.remove(livro);
 	}
 }

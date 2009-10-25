@@ -4,7 +4,6 @@ import infra.Cenario;
 import producao.Biblioteca;
 import producao.ConfiguracaoBiblioteca;
 import producao.TipoBiblioteca;
-import producao.livro.DadosExemplarArquivavel;
 import producao.livro.DadosLivro;
 
 public class EmprestarExemplar extends Cenario {
@@ -35,7 +34,7 @@ public class EmprestarExemplar extends Cenario {
 	}
 
 	private void oLivroPossuiUmExemplarDisponivel() {
-		b.adicionarExemplar(1, new DadosExemplarArquivavel("3a Edição;1999"));
+		//b.adicionarExemplar(1, new DadosExemplarArquivavel("3a Edição;1999"));
 	}
 
 	private void aIdentificacaoDoExemplarÉConhecida() {

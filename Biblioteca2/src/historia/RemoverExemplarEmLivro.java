@@ -11,13 +11,17 @@ import producao.livro.EditoraBiblioteca;
 import producao.livro.TipoDadosExemplarArquivavel;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoEditoraBiblioteca;
+import producao.livro.TipoIdentificacao;
 import producao.livro.TipoLivroComExemplaresArquivaveis;
 
 public class RemoverExemplarEmLivro extends Cenario {
 	private TipoLivroComExemplaresArquivaveis livro;
+	private TipoDadosExemplarArquivavel dadosExemplar;
+	private TipoIdentificacao id;
 
 	public void dadoQue() {
 		existeUmLivroComUmExemplar();
+		conheceOIdDoExemplar();
 	}
 
 	public void quando() {
@@ -33,7 +37,7 @@ public class RemoverExemplarEmLivro extends Cenario {
 		TipoDadosLivro dados = new DadosLivro("Nome do Título;Nome do Autor");
 		livro = editora.criarLivroComExemplaresArquivaveis(dados);
 
-		TipoDadosExemplarArquivavel dadosExemplar = new DadosExemplarArquivavel(
+		dadosExemplar = new DadosExemplarArquivavel(
 				"Editora;1999;Numero Chamada");
 
 		livro.adicionarExemplar(dadosExemplar);
@@ -41,8 +45,12 @@ public class RemoverExemplarEmLivro extends Cenario {
 		assertEquals(1, livro.qtdExemplares());
 	}
 
+	private void conheceOIdDoExemplar() {
+		id = dadosExemplar.obterIdentificacao();
+	}
+	
 	private void removerExemplar() {
-		livro.removerExemplar(1);
+		livro.removerExemplar(id);
 	}
 
 	@Test

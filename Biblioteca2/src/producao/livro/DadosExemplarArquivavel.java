@@ -3,8 +3,6 @@ package producao.livro;
 public class DadosExemplarArquivavel extends DadosExemplar implements TipoDadosExemplarArquivavel {
 
 	private TipoNumeroChamada numeroChamada;
-	private TipoIdentificacao id;
-
 	/**
 	 * @param dados: Uma string contendo os dados do exemplar arquivável,
 	 * separados por ponto vírgula e na ordem
@@ -18,11 +16,6 @@ public class DadosExemplarArquivavel extends DadosExemplar implements TipoDadosE
 		assert (dadosSeparados.length == 3);
 		
 		numeroChamada = new NumeroChamada(dadosSeparados[2]);
-		id = new Identificacao();
-	}
-
-	public TipoIdentificacao obterIdentificacao() {
-		return id;
 	}
 
 	public TipoNumeroChamada obterNumeroChamada() {

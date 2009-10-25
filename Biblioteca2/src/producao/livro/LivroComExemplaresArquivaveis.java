@@ -1,48 +1,44 @@
 package producao.livro;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LivroComExemplaresArquivaveis extends Livro implements
 		TipoLivroComExemplaresArquivaveis {
 
-	private List<TipoExemplarArquivavel> listaExemplares;
+	private Map<TipoIdentificacao, TipoExemplarArquivavel> mapaExemplares;
 
 	public LivroComExemplaresArquivaveis(TipoDadosLivro dados) {
 		super(dados);
-		this.listaExemplares = new ArrayList<TipoExemplarArquivavel>();
+		this.mapaExemplares = new HashMap<TipoIdentificacao, TipoExemplarArquivavel>();
 	}
 
 	public int qtdExemplares() {
-		return listaExemplares.size();
+		return mapaExemplares.size();
 	}
 
-	public boolean adicionarExemplar(TipoDadosExemplarArquivavel dadosExemplar) {
-		return listaExemplares.add(new ExemplarArquivavel(dadosExemplar));
+	public void adicionarExemplar(TipoDadosExemplarArquivavel dadosExemplar) {
+		mapaExemplares.put(dadosExemplar.obterIdentificacao(), new ExemplarArquivavel(dadosExemplar));
 	}
 
-	public TipoExemplarArquivavel removerExemplar(int i) {
-		return listaExemplares.remove(i - 1);
+	public TipoAnoPublicacao obterAnoPublicacaoExemplar(
+			TipoIdentificacao exemplar) {
+		return mapaExemplares.get(exemplar).obterAnoPublicacao();
 	}
 
-	public TipoIdentificacao obterIdentificacaoExemplar(int i) {
-		return listaExemplares.get(i - 1).obterIdentificacao();
+	public TipoDadosExemplarArquivavel obterDadosExemplar(TipoIdentificacao exemplar) {
+		return mapaExemplares.get(exemplar).obterDados();
 	}
 
-	public TipoAnoPublicacao obterAnoPublicacaoExemplar(int i) {
-		return listaExemplares.get(i - 1).obterAnoPublicacao();
+	public TipoNomeEditora obterNomeEditoraExemplar(TipoIdentificacao exemplar) {
+		return mapaExemplares.get(exemplar).obterEditora();
 	}
 
-	public TipoNomeEditora obterNomeEditoraExemplar(int i) {
-		return listaExemplares.get(i - 1).obterEditora();
+	public void removerExemplar(TipoIdentificacao exemplar) {
+		mapaExemplares.remove(exemplar);
 	}
 
-	public TipoDadosExemplarArquivavel obterDadosExemplar(int i) {
-		return listaExemplares.get(i - 1).obterDados();
-	}
-
-	@Override
-	public TipoNumeroChamada obterNumeroChamada(int i) {
-		return listaExemplares.get(i - 1).obterNumeroChamada();
+	public TipoNumeroChamada obterNumeroChamada(TipoIdentificacao exemplar) {
+		return mapaExemplares.get(exemplar).obterNumeroChamada();
 	}
 }

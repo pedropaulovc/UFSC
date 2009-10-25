@@ -51,6 +51,6 @@ public class AdicionarLivroBiblioteca extends Cenario {
 
 	@Test
 	public void éPossívelObterOsDadosDoLivroArmazenado() {
-		assertEquals(dados, b.obterDadosLivro(1));
+		assertEquals(dados, b.obterDadosLivro(dados.obterIdentificacao()));
 	}
 }

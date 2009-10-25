@@ -7,19 +7,21 @@ import org.junit.Test;
 
 import producao.livro.DadosExemplarArquivavel;
 import producao.livro.DadosLivro;
-import producao.livro.EditoraBiblioteca;
-import producao.livro.TipoDadosExemplarArquivavel;
+import producao.livro.Editora;
 import producao.livro.TipoDadosLivro;
-import producao.livro.TipoEditoraBiblioteca;
+import producao.livro.TipoEditora;
 import producao.livro.TipoIdentificacao;
-import producao.livro.TipoLivroComExemplaresArquivaveis;
+import producao.livro.TipoLivroComExemplaresNaoArquivaveis;
 
-public class ExemplaresArquivaveisDiferentesPossuemIdsDiferentes extends
+public class ExemplaresDiferentesPossuemIdsDiferentes extends
 		Cenario {
-	private TipoLivroComExemplaresArquivaveis l;
+
+	private TipoLivroComExemplaresNaoArquivaveis l;
+	private DadosExemplarArquivavel dadosExemplar1;
+	private DadosExemplarArquivavel dadosExemplar2;
 
 	public void dadoQue() {
-		existeUmLivro();
+		existeUmLivroComExemplares();
 	}
 
 	public void quando() {
@@ -30,27 +32,27 @@ public class ExemplaresArquivaveisDiferentesPossuemIdsDiferentes extends
 		osIdsDosExemplaresSerãoDiferentes();
 	}
 
-	private void existeUmLivro() {
-		TipoEditoraBiblioteca editora = new EditoraBiblioteca();
+	private void existeUmLivroComExemplares() {
+		TipoEditora editora = new Editora();
 
 		TipoDadosLivro dadosLivro = new DadosLivro("Título;Autor");
-		l = editora.criarLivroComExemplaresArquivaveis(dadosLivro);
+		l = editora.criarLivroComExemplares(dadosLivro);
 	}
 
 	private void adicionarDoisExemplaresAoLivro() {
-		TipoDadosExemplarArquivavel dadosExemplar1 = new DadosExemplarArquivavel(
+		dadosExemplar1 = new DadosExemplarArquivavel(
 				"Editora;1999;Numero Chamada");
 		l.adicionarExemplar(dadosExemplar1);
 
-		TipoDadosExemplarArquivavel dadosExemplar2 = new DadosExemplarArquivavel(
+		dadosExemplar2 = new DadosExemplarArquivavel(
 				"Editora;1999;Numero Chamada");
 		l.adicionarExemplar(dadosExemplar2);
 	}
 
 	@Test
 	public void osIdsDosExemplaresSerãoDiferentes() {
-		TipoIdentificacao idExemplar1 = l.obterIdentificacaoExemplar(1);
-		TipoIdentificacao idExemplar2 = l.obterIdentificacaoExemplar(2);
+		TipoIdentificacao idExemplar1 = dadosExemplar1.obterIdentificacao();
+		TipoIdentificacao idExemplar2 = dadosExemplar2.obterIdentificacao();
 
 		assertFalse(idExemplar1.equals(idExemplar2));
 	}

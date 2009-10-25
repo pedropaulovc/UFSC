@@ -1,38 +1,41 @@
 package producao.livro;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class LivroComExemplares extends Livro implements TipoLivroComExemplaresNaoArquivaveis {
-	private List<TipoExemplar> listaExemplares;
+public class LivroComExemplares extends Livro implements
+		TipoLivroComExemplaresNaoArquivaveis {
+	private Map<TipoIdentificacao, TipoExemplar> mapaExemplares;
 
 	public LivroComExemplares(TipoDadosLivro dados) {
 		super(dados);
-		this.listaExemplares = new ArrayList<TipoExemplar>();
+		this.mapaExemplares = new HashMap<TipoIdentificacao, TipoExemplar>();
 	}
 
 	public int qtdExemplares() {
-		return listaExemplares.size();
+		return mapaExemplares.size();
 	}
 
-	public boolean adicionarExemplar(TipoDadosExemplar dadosExemplar) {
-		return listaExemplares.add(new Exemplar(dadosExemplar));
+	public void adicionarExemplar(TipoDadosExemplar dadosExemplar) {
+		mapaExemplares.put(dadosExemplar.obterIdentificacao(),
+				new Exemplar(dadosExemplar));
 	}
 
-	public TipoExemplar removerExemplar(int i) {
-		return listaExemplares.remove(i - 1);
+	public TipoAnoPublicacao obterAnoPublicacaoExemplar(
+			TipoIdentificacao exemplar) {
+		return mapaExemplares.get(exemplar).obterAnoPublicacao();
 	}
 
-	public TipoNomeEditora obterNomeEditoraExemplar(int i) {
-		return listaExemplares.get(i - 1).obterEditora();
+	public TipoDadosExemplar obterDadosExemplar(TipoIdentificacao exemplar) {
+		return mapaExemplares.get(exemplar).obterDados();
 	}
 
-	public TipoAnoPublicacao obterAnoPublicacaoExemplar(int i) {
-		return listaExemplares.get(i - 1).obterAnoPublicacao();
+	public TipoNomeEditora obterNomeEditoraExemplar(TipoIdentificacao exemplar) {
+		return mapaExemplares.get(exemplar).obterEditora();
 	}
 
-	public TipoDadosExemplar obterDadosExemplar(int i) {
-		return listaExemplares.get(i - 1).obterDados();
+	public void removerExemplar(TipoIdentificacao exemplar) {
+		mapaExemplares.remove(exemplar);
 	}
 
 }
