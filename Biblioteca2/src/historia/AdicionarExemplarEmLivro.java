@@ -11,11 +11,13 @@ import producao.livro.Editora;
 import producao.livro.TipoDadosExemplar;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoEditora;
+import producao.livro.TipoIdentificacao;
 import producao.livro.TipoLivroComExemplaresNaoArquivaveis;
 
 public class AdicionarExemplarEmLivro extends Cenario {
 	private TipoLivroComExemplaresNaoArquivaveis livro;
 	private TipoDadosExemplar dadosExemplar;
+	private TipoIdentificacao idExemplar;
 
 	public void dadoQue() {
 		existeUmLivroSemExemplares();
@@ -47,13 +49,12 @@ public class AdicionarExemplarEmLivro extends Cenario {
 	}
 
 	private void adicionaExemplarAoLivro() {
-		livro.adicionarExemplar(dadosExemplar);
+		idExemplar = livro.adicionarExemplar(dadosExemplar);
 	}
 
 	@Test
 	public void exemplarPossuiMesmosDadosFornecidos() {
-		assertEquals(dadosExemplar, livro.obterDadosExemplar(dadosExemplar
-				.obterIdentificacao()));
+		assertEquals(dadosExemplar, livro.obterDadosExemplar(idExemplar));
 	}
 
 	@Test
@@ -63,7 +64,7 @@ public class AdicionarExemplarEmLivro extends Cenario {
 
 	@Test
 	public void livroPermiteRemoverExemplar() {
-		livro.removerExemplar(dadosExemplar.obterIdentificacao());
+		livro.removerExemplar(idExemplar);
 		assertEquals(0, livro.qtdExemplares());
 	}
 }

@@ -9,9 +9,9 @@ public interface TipoBiblioteca {
 
 	public int tamanho();
 
-	public void adicionar(TipoDadosLivro livro);
+	public TipoIdentificacao adicionar(TipoDadosLivro livro);
 
-	public void adicionarExemplar(TipoIdentificacao livro,
+	public TipoIdentificacao adicionarExemplar(TipoIdentificacao livro,
 			TipoDadosExemplarArquivavel exemplar);
 
 	public void removerLivro(TipoIdentificacao livro);

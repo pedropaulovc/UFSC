@@ -16,9 +16,11 @@ public class LivroComExemplares extends Livro implements
 		return mapaExemplares.size();
 	}
 
-	public void adicionarExemplar(TipoDadosExemplar dadosExemplar) {
+	public TipoIdentificacao adicionarExemplar(TipoDadosExemplar dadosExemplar) {
 		mapaExemplares.put(dadosExemplar.obterIdentificacao(),
 				new Exemplar(dadosExemplar));
+		
+		return dadosExemplar.obterIdentificacao();
 	}
 
 	public TipoAnoPublicacao obterAnoPublicacaoExemplar(

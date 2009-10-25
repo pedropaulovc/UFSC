@@ -21,7 +21,6 @@ public class RemoverExemplarEmLivro extends Cenario {
 
 	public void dadoQue() {
 		existeUmLivroComUmExemplar();
-		conheceOIdDoExemplar();
 	}
 
 	public void quando() {
@@ -40,13 +39,9 @@ public class RemoverExemplarEmLivro extends Cenario {
 		dadosExemplar = new DadosExemplarArquivavel(
 				"Editora;1999;Numero Chamada");
 
-		livro.adicionarExemplar(dadosExemplar);
+		id = livro.adicionarExemplar(dadosExemplar);
 
 		assertEquals(1, livro.qtdExemplares());
-	}
-
-	private void conheceOIdDoExemplar() {
-		id = dadosExemplar.obterIdentificacao();
 	}
 	
 	private void removerExemplar() {

@@ -13,12 +13,11 @@ import producao.livro.TipoEditora;
 import producao.livro.TipoIdentificacao;
 import producao.livro.TipoLivroComExemplaresNaoArquivaveis;
 
-public class ExemplaresDiferentesPossuemIdsDiferentes extends
-		Cenario {
+public class ExemplaresDiferentesPossuemIdsDiferentes extends Cenario {
 
 	private TipoLivroComExemplaresNaoArquivaveis l;
-	private DadosExemplarArquivavel dadosExemplar1;
-	private DadosExemplarArquivavel dadosExemplar2;
+	private TipoIdentificacao idExemplar1;
+	private TipoIdentificacao idExemplar2;
 
 	public void dadoQue() {
 		existeUmLivroComExemplares();
@@ -40,20 +39,15 @@ public class ExemplaresDiferentesPossuemIdsDiferentes extends
 	}
 
 	private void adicionarDoisExemplaresAoLivro() {
-		dadosExemplar1 = new DadosExemplarArquivavel(
-				"Editora;1999;Numero Chamada");
-		l.adicionarExemplar(dadosExemplar1);
+		idExemplar1 = l.adicionarExemplar(new DadosExemplarArquivavel(
+				"Editora;1999;Numero Chamada"));
 
-		dadosExemplar2 = new DadosExemplarArquivavel(
-				"Editora;1999;Numero Chamada");
-		l.adicionarExemplar(dadosExemplar2);
+		idExemplar2 = l.adicionarExemplar(new DadosExemplarArquivavel(
+		"Editora;1999;Numero Chamada"));
 	}
 
 	@Test
 	public void osIdsDosExemplaresSerãoDiferentes() {
-		TipoIdentificacao idExemplar1 = dadosExemplar1.obterIdentificacao();
-		TipoIdentificacao idExemplar2 = dadosExemplar2.obterIdentificacao();
-
 		assertFalse(idExemplar1.equals(idExemplar2));
 	}
 }

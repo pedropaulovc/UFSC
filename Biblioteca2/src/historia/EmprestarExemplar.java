@@ -4,16 +4,19 @@ import infra.Cenario;
 import producao.Biblioteca;
 import producao.ConfiguracaoBiblioteca;
 import producao.TipoBiblioteca;
+import producao.livro.DadosExemplarArquivavel;
 import producao.livro.DadosLivro;
+import producao.livro.TipoIdentificacao;
 
 public class EmprestarExemplar extends Cenario {
 	private TipoBiblioteca b;
+	private TipoIdentificacao idLivro;
+	private TipoIdentificacao idExemplar;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();
 		aBibliotecaPossuiUmLivro();
 		oLivroPossuiUmExemplarDisponivel();
-		aIdentificacaoDoExemplarÉConhecida();
 	}
 
 	public void quando() {
@@ -22,7 +25,7 @@ public class EmprestarExemplar extends Cenario {
 
 	public void então() {
 		oExemplarFicaráEmprestado();
-		oPrazoDeDevolcaoÉDe15Dias();
+		oPrazoDeDevolucaoÉDe15Dias();
 	}
 
 	private void existeUmaBiblioteca() {
@@ -30,29 +33,23 @@ public class EmprestarExemplar extends Cenario {
 	}
 
 	private void aBibliotecaPossuiUmLivro() {
-		b.adicionar(new DadosLivro("Título Livro;Nome Autor"));
+		idLivro = b.adicionar(new DadosLivro("Título Livro;Nome Autor"));
 	}
 
 	private void oLivroPossuiUmExemplarDisponivel() {
-		//b.adicionarExemplar(1, new DadosExemplarArquivavel("3a Edição;1999"));
-	}
-
-	private void aIdentificacaoDoExemplarÉConhecida() {
-
+		idExemplar = b.adicionarExemplar(idLivro, new DadosExemplarArquivavel(
+				"3a Edição;1999;Numero Chamada"));
 	}
 
 	private void emprestarOExemplar() {
-		// TODO Auto-generated method stub
-
+		//b.emprestar(idExemplar);
 	}
 
 	private void oExemplarFicaráEmprestado() {
-		// TODO Auto-generated method stub
-
+		//b.obterEstadoExemplar(idExemplar);
 	}
 
-	private void oPrazoDeDevolcaoÉDe15Dias() {
-		// TODO Auto-generated method stub
-
+	private void oPrazoDeDevolucaoÉDe15Dias() {
+		//b.prazoDevolucao(idExemplar);
 	}
 }

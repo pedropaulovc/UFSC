@@ -30,14 +30,18 @@ public class Biblioteca implements TipoBiblioteca {
 		return mapaLivros.size();
 	}
 
-	public void adicionar(TipoDadosLivro dadosLivro) {
+	public TipoIdentificacao adicionar(TipoDadosLivro dadosLivro) {
 		mapaLivros.put(dadosLivro.obterIdentificacao(), editora
 				.criarLivroComExemplaresArquivaveis(dadosLivro));
+		
+		return dadosLivro.obterIdentificacao();
 	}
 
-	public void adicionarExemplar(TipoIdentificacao livro,
+	public TipoIdentificacao adicionarExemplar(TipoIdentificacao livro,
 			TipoDadosExemplarArquivavel dadosExemplar) {
 		mapaLivros.get(livro).adicionarExemplar(dadosExemplar);
+		
+		return dadosExemplar.obterIdentificacao();
 	}
 
 	public TipoDadosExemplarArquivavel obterDadosExemplar(

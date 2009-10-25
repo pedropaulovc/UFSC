@@ -2,7 +2,7 @@ package producao.livro;
 
 public interface TipoLivroComExemplaresArquivaveis extends
 		TipoLivroComExemplares {
-	public void adicionarExemplar(TipoDadosExemplarArquivavel dadosExemplar);
+	public TipoIdentificacao adicionarExemplar(TipoDadosExemplarArquivavel dadosExemplar);
 
 	public TipoNumeroChamada obterNumeroChamada(TipoIdentificacao exemplar);
 	

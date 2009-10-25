@@ -10,10 +10,12 @@ import producao.ConfiguracaoBiblioteca;
 import producao.TipoBiblioteca;
 import producao.livro.DadosLivro;
 import producao.livro.TipoDadosLivro;
+import producao.livro.TipoIdentificacao;
 
 public class AdicionarLivroBiblioteca extends Cenario {
 	private TipoBiblioteca b;
 	private TipoDadosLivro dados;
+	private TipoIdentificacao idLivro;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComNenhumLivro();
@@ -41,7 +43,7 @@ public class AdicionarLivroBiblioteca extends Cenario {
 	}
 
 	private void adicionaLivroNaBiblioteca() {
-		b.adicionar(dados);
+		idLivro = b.adicionar(dados);
 	}
 
 	@Test
@@ -51,6 +53,6 @@ public class AdicionarLivroBiblioteca extends Cenario {
 
 	@Test
 	public void éPossívelObterOsDadosDoLivroArmazenado() {
-		assertEquals(dados, b.obterDadosLivro(dados.obterIdentificacao()));
+		assertEquals(dados, b.obterDadosLivro(idLivro));
 	}
 }
