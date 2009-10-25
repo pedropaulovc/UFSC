@@ -8,12 +8,12 @@ import org.junit.Test;
 import producao.Biblioteca;
 import producao.ConfiguracaoBiblioteca;
 import producao.TipoBiblioteca;
-import producao.livro.DadosExemplar;
+import producao.livro.DadosExemplarArquivavel;
 import producao.livro.DadosLivro;
-import producao.livro.TipoDadosExemplar;
+import producao.livro.TipoDadosExemplarArquivavel;
 
 public class AdicionarExemplarEmLivroDaBiblioteca extends Cenario {
-	private TipoDadosExemplar dadosExemplar;
+	private TipoDadosExemplarArquivavel dadosExemplar;
 	private TipoBiblioteca b;
 
 	public void dadoQue() {
@@ -34,24 +34,25 @@ public class AdicionarExemplarEmLivroDaBiblioteca extends Cenario {
 	private void existeUmaBiblioteca() {
 		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central"));
 	}
-	
+
 	public void aBibliotecaPossuiUmLivroSemExemplares() {
 		b.adicionar(new DadosLivro("Nome do Título;Nome do Autor"));
 	}
 
 	private void adicionaExemplarAoLivro() {
-		dadosExemplar = new DadosExemplar("Editora;1999");
+		dadosExemplar = new DadosExemplarArquivavel(
+				"Editora;1999;Numero Chamada");
 		b.adicionarExemplar(1, dadosExemplar);
 	}
 
 	@Test
-	public void exemplarPossuiMesmosDadosFornecidos() {		
+	public void exemplarPossuiMesmosDadosFornecidos() {
 		assertEquals(dadosExemplar, b.obterDadosExemplar(1, 1));
 	}
 
 	@Test
 	public void livroPossuiUmExemplar() {
-		assertEquals(1,b.qtdExemplares(1));
+		assertEquals(1, b.qtdExemplares(1));
 	}
 
 	@Test

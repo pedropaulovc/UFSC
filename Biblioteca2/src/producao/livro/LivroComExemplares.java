@@ -3,7 +3,7 @@ package producao.livro;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LivroComExemplares extends Livro implements TipoLivroComExemplares {
+public class LivroComExemplares extends Livro implements TipoLivroComExemplaresNaoArquivaveis {
 	private List<TipoExemplar> listaExemplares;
 
 	public LivroComExemplares(TipoDadosLivro dados) {

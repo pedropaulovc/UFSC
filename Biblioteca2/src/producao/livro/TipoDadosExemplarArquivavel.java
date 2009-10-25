@@ -1,9 +1,7 @@
 package producao.livro;
 
-public interface TipoExemplarArquivavel extends TipoExemplar {
+public interface TipoDadosExemplarArquivavel extends TipoDadosExemplar {
 	public TipoNumeroChamada obterNumeroChamada();
 	
 	public TipoIdentificacao obterIdentificacao();
-	
-	public TipoDadosExemplarArquivavel obterDados();
 }

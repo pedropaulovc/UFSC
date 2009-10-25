@@ -1,14 +1,22 @@
 package producao.livro;
 
 public class ExemplarArquivavel extends Exemplar implements TipoExemplarArquivavel {
-	private TipoIdentificacao id;
+	private TipoDadosExemplarArquivavel dados;
 
-	public ExemplarArquivavel(TipoDadosExemplar dados) {
+	public ExemplarArquivavel(TipoDadosExemplarArquivavel dados) {
 		super(dados);
-		this.id = new Identificacao();
+		this.dados = dados;
 	}
 
-	public TipoIdentificacao obterId() {
-		return id;
+	public TipoIdentificacao obterIdentificacao() {
+		return dados.obterIdentificacao();
+	}
+
+	public TipoNumeroChamada obterNumeroChamada() {
+		return dados.obterNumeroChamada();
+	}
+	
+	public TipoDadosExemplarArquivavel obterDados(){
+		return dados;
 	}
 }

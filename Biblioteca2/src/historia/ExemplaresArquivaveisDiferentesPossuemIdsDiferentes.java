@@ -5,16 +5,17 @@ import infra.Cenario;
 
 import org.junit.Test;
 
-import producao.livro.DadosExemplar;
+import producao.livro.DadosExemplarArquivavel;
 import producao.livro.DadosLivro;
 import producao.livro.EditoraBiblioteca;
-import producao.livro.TipoDadosExemplar;
+import producao.livro.TipoDadosExemplarArquivavel;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoEditoraBiblioteca;
 import producao.livro.TipoIdentificacao;
 import producao.livro.TipoLivroComExemplaresArquivaveis;
 
-public class ExemplaresArquivaveisDiferentesPossuemIdsDiferentes extends Cenario {
+public class ExemplaresArquivaveisDiferentesPossuemIdsDiferentes extends
+		Cenario {
 	private TipoLivroComExemplaresArquivaveis l;
 
 	public void dadoQue() {
@@ -31,16 +32,18 @@ public class ExemplaresArquivaveisDiferentesPossuemIdsDiferentes extends Cenario
 
 	private void existeUmLivro() {
 		TipoEditoraBiblioteca editora = new EditoraBiblioteca();
-		
+
 		TipoDadosLivro dadosLivro = new DadosLivro("Título;Autor");
 		l = editora.criarLivroComExemplaresArquivaveis(dadosLivro);
 	}
 
 	private void adicionarDoisExemplaresAoLivro() {
-		TipoDadosExemplar dadosExemplar1 = new DadosExemplar("Editora;1999");
+		TipoDadosExemplarArquivavel dadosExemplar1 = new DadosExemplarArquivavel(
+				"Editora;1999;Numero Chamada");
 		l.adicionarExemplar(dadosExemplar1);
 
-		TipoDadosExemplar dadosExemplar2 = new DadosExemplar("Editora;1999");
+		TipoDadosExemplarArquivavel dadosExemplar2 = new DadosExemplarArquivavel(
+				"Editora;1999;Numero Chamada");
 		l.adicionarExemplar(dadosExemplar2);
 	}
 

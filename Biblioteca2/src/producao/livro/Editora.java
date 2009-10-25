@@ -6,7 +6,8 @@ public class Editora implements TipoEditora {
 		return new Livro(dados);
 	}
 
-	public TipoLivroComExemplares criarLivroComExemplares(TipoDadosLivro dados) {
+	public TipoLivroComExemplaresNaoArquivaveis criarLivroComExemplares(
+			TipoDadosLivro dados) {
 		return new LivroComExemplares(dados);
 	}
 

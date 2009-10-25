@@ -17,7 +17,7 @@ public class LivroComExemplaresArquivaveis extends Livro implements
 		return listaExemplares.size();
 	}
 
-	public boolean adicionarExemplar(TipoDadosExemplar dadosExemplar) {
+	public boolean adicionarExemplar(TipoDadosExemplarArquivavel dadosExemplar) {
 		return listaExemplares.add(new ExemplarArquivavel(dadosExemplar));
 	}
 
@@ -26,7 +26,7 @@ public class LivroComExemplaresArquivaveis extends Livro implements
 	}
 
 	public TipoIdentificacao obterIdentificacaoExemplar(int i) {
-		return listaExemplares.get(i - 1).obterId();
+		return listaExemplares.get(i - 1).obterIdentificacao();
 	}
 
 	public TipoAnoPublicacao obterAnoPublicacaoExemplar(int i) {
@@ -37,7 +37,12 @@ public class LivroComExemplaresArquivaveis extends Livro implements
 		return listaExemplares.get(i - 1).obterEditora();
 	}
 
-	public TipoDadosExemplar obterDadosExemplar(int i) {
+	public TipoDadosExemplarArquivavel obterDadosExemplar(int i) {
 		return listaExemplares.get(i - 1).obterDados();
+	}
+
+	@Override
+	public TipoNumeroChamada obterNumeroChamada(int i) {
+		return listaExemplares.get(i - 1).obterNumeroChamada();
 	}
 }

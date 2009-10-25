@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import producao.livro.EditoraBiblioteca;
-import producao.livro.TipoDadosExemplar;
+import producao.livro.TipoDadosExemplarArquivavel;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoEditoraBiblioteca;
 import producao.livro.TipoLivroComExemplaresArquivaveis;
@@ -25,7 +25,7 @@ public class Biblioteca implements TipoBiblioteca {
 		return listaLivros.add(editora.criarLivroComExemplaresArquivaveis(dados));
 	}
 
-	public boolean adicionarExemplar(int livro, TipoDadosExemplar dadosExemplar) {
+	public boolean adicionarExemplar(int livro, TipoDadosExemplarArquivavel dadosExemplar) {
 		return listaLivros.get(livro - 1).adicionarExemplar(dadosExemplar);
 	}
 	
@@ -45,7 +45,7 @@ public class Biblioteca implements TipoBiblioteca {
 		return listaLivros.get(i - 1).obterDados();
 	}
 	
-	public TipoDadosExemplar obterDadosExemplar(int livro, int exemplar){
+	public TipoDadosExemplarArquivavel obterDadosExemplar(int livro, int exemplar){
 		return listaLivros.get(livro - 1).obterDadosExemplar(exemplar);
 	}
 
@@ -53,9 +53,7 @@ public class Biblioteca implements TipoBiblioteca {
 		return listaLivros.get(livro - 1).qtdExemplares();
 	}
 
-	@Override
 	public void removerExemplar(int livro, int exemplar) {
 		listaLivros.get(livro - 1).removerExemplar(exemplar);
 	}
-
 }

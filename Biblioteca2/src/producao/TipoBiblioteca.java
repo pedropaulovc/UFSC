@@ -1,6 +1,6 @@
 package producao;
 
-import producao.livro.TipoDadosExemplar;
+import producao.livro.TipoDadosExemplarArquivavel;
 import producao.livro.TipoDadosLivro;
 
 public interface TipoBiblioteca {
@@ -10,13 +10,13 @@ public interface TipoBiblioteca {
 
 	public boolean adicionar(TipoDadosLivro livro);
 	
-	public boolean adicionarExemplar(int livro, TipoDadosExemplar exemplar);
+	public boolean adicionarExemplar(int livro, TipoDadosExemplarArquivavel exemplar);
 
 	public void removerLivro(int i);
 	
 	public TipoDadosLivro obterDadosLivro(int i);
 	
-	public TipoDadosExemplar obterDadosExemplar(int livro, int exemplar);
+	public TipoDadosExemplarArquivavel obterDadosExemplar(int livro, int exemplar);
 	
 	public int qtdExemplares(int livro);
 
