@@ -11,13 +11,13 @@ import producao.livro.EditoraBiblioteca;
 import producao.livro.TipoDadosExemplarArquivavel;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoEditoraBiblioteca;
-import producao.livro.TipoIdentificacao;
+import producao.livro.TipoIdentificacaoExemplar;
 import producao.livro.TipoLivroComExemplaresArquivaveis;
 
 public class RemoverExemplarEmLivro extends Cenario {
 	private TipoLivroComExemplaresArquivaveis livro;
 	private TipoDadosExemplarArquivavel dadosExemplar;
-	private TipoIdentificacao id;
+	private TipoIdentificacaoExemplar id;
 
 	public void dadoQue() {
 		existeUmLivroComUmExemplar();

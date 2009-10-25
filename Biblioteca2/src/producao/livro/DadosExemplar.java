@@ -6,7 +6,7 @@ public class DadosExemplar implements TipoDadosExemplar {
 	private String[] dadosSeparados;
 	private TipoAnoPublicacao anoPublicacao;
 	private TipoNomeEditora editora;
-	private TipoIdentificacao id;
+	private TipoIdentificacaoExemplar id;
 
 	/**
 	 * @param dados: Uma string contendo os dados do exemplar, separados por ponto vírgula e
@@ -18,7 +18,7 @@ public class DadosExemplar implements TipoDadosExemplar {
 
 		editora = new NomeEditora(dadosSeparados[0]);
 		anoPublicacao = new AnoPublicacao(dadosSeparados[1]);
-		id = new Identificacao();
+		id = new IdentificacaoExemplar();
 	}
 
 	public TipoAnoPublicacao obterAnoPublicacao() {
@@ -30,7 +30,7 @@ public class DadosExemplar implements TipoDadosExemplar {
 	}
 	
 
-	public TipoIdentificacao obterIdentificacao() {
+	public TipoIdentificacaoExemplar obterIdentificacao() {
 		return id;
 	}
 

@@ -11,13 +11,13 @@ import producao.livro.Editora;
 import producao.livro.TipoDadosExemplar;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoEditora;
-import producao.livro.TipoIdentificacao;
+import producao.livro.TipoIdentificacaoExemplar;
 import producao.livro.TipoLivroComExemplaresNaoArquivaveis;
 
 public class AdicionarExemplarEmLivro extends Cenario {
 	private TipoLivroComExemplaresNaoArquivaveis livro;
 	private TipoDadosExemplar dadosExemplar;
-	private TipoIdentificacao idExemplar;
+	private TipoIdentificacaoExemplar idExemplar;
 
 	public void dadoQue() {
 		existeUmLivroSemExemplares();

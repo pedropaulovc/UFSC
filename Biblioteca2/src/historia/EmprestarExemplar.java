@@ -6,12 +6,13 @@ import producao.ConfiguracaoBiblioteca;
 import producao.TipoBiblioteca;
 import producao.livro.DadosExemplarArquivavel;
 import producao.livro.DadosLivro;
-import producao.livro.TipoIdentificacao;
+import producao.livro.TipoIdentificacaoExemplar;
+import producao.livro.TipoIdentificacaoLivro;
 
 public class EmprestarExemplar extends Cenario {
 	private TipoBiblioteca b;
-	private TipoIdentificacao idLivro;
-	private TipoIdentificacao idExemplar;
+	private TipoIdentificacaoLivro idLivro;
+	private TipoIdentificacaoExemplar idExemplar;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();

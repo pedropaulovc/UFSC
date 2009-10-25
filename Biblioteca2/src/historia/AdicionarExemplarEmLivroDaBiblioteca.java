@@ -11,12 +11,14 @@ import producao.TipoBiblioteca;
 import producao.livro.DadosExemplarArquivavel;
 import producao.livro.DadosLivro;
 import producao.livro.TipoDadosExemplarArquivavel;
-import producao.livro.TipoIdentificacao;
+import producao.livro.TipoIdentificacaoExemplar;
+import producao.livro.TipoIdentificacaoLivro;
 
 public class AdicionarExemplarEmLivroDaBiblioteca extends Cenario {
 	private TipoDadosExemplarArquivavel dadosExemplar;
 	private TipoBiblioteca b;
-	private TipoIdentificacao idLivro, idExemplar;
+	private TipoIdentificacaoLivro idLivro;
+	private TipoIdentificacaoExemplar idExemplar;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();
@@ -42,8 +44,8 @@ public class AdicionarExemplarEmLivroDaBiblioteca extends Cenario {
 	}
 
 	private void adicionaExemplarAoLivro() {
-		idExemplar = b.adicionarExemplar(idLivro, new DadosExemplarArquivavel(
-				"Editora;1999;Numero Chamada"));
+		dadosExemplar = new DadosExemplarArquivavel("Editora;1999;Numero Chamada");
+		idExemplar = b.adicionarExemplar(idLivro, dadosExemplar);
 	}
 
 	@Test

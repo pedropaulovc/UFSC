@@ -5,5 +5,5 @@ public interface TipoDadosLivro {
 
 	public TipoAutor obterAutor();
 	
-	public TipoIdentificacao obterIdentificacao();
+	public TipoIdentificacaoLivro obterIdentificacao();
 }

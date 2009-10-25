@@ -4,7 +4,7 @@ package producao.livro;
 public class DadosLivro implements TipoDadosLivro {
 	private TipoTitulo titulo;
 	private TipoAutor autor;
-	private TipoIdentificacao id;
+	private TipoIdentificacaoLivro id;
 
 	/**
 	 * @param dados: Uma string contendo os dados do livro, separados por ponto vírgula e
@@ -18,7 +18,7 @@ public class DadosLivro implements TipoDadosLivro {
 
 		this.titulo = new Titulo(dadosSeparados[0]);
 		this.autor = new Autor(dadosSeparados[1]);
-		this.id = new Identificacao();
+		this.id = new IdentificacaoLivro();
 	}
 	
 	public TipoTitulo obterTitulo(){
@@ -29,7 +29,7 @@ public class DadosLivro implements TipoDadosLivro {
 		return autor;
 	}
 	
-	public TipoIdentificacao obterIdentificacao(){
+	public TipoIdentificacaoLivro obterIdentificacao(){
 		return id;
 	}
 }

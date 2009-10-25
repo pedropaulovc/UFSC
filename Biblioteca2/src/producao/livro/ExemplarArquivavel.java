@@ -8,7 +8,7 @@ public class ExemplarArquivavel extends Exemplar implements TipoExemplarArquivav
 		this.dados = dados;
 	}
 
-	public TipoIdentificacao obterIdentificacao() {
+	public TipoIdentificacaoExemplar obterIdentificacao() {
 		return dados.obterIdentificacao();
 	}
 

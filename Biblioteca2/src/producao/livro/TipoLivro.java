@@ -5,7 +5,7 @@ public interface TipoLivro {
 
 	public TipoTitulo obterTitulo();
 	
-	public TipoIdentificacao obterIdentificacao();
+	public TipoIdentificacaoLivro obterIdentificacao();
 	
 	public TipoDadosLivro obterDados();
 }

@@ -16,7 +16,7 @@ public class Livro implements TipoLivro {
 		return dados.obterTitulo();
 	}
 	
-	public TipoIdentificacao obterIdentificacao(){
+	public TipoIdentificacaoLivro obterIdentificacao(){
 		return dados.obterIdentificacao();
 	}
 	

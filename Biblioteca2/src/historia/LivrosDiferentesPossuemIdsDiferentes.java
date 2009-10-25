@@ -9,7 +9,7 @@ import producao.livro.DadosLivro;
 import producao.livro.Editora;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoEditora;
-import producao.livro.TipoIdentificacao;
+import producao.livro.TipoIdentificacaoLivro;
 import producao.livro.TipoLivro;
 
 public class LivrosDiferentesPossuemIdsDiferentes extends
@@ -46,8 +46,8 @@ public class LivrosDiferentesPossuemIdsDiferentes extends
 
 	@Test
 	public void osIdsDosLivrosSerãoDiferentes() {
-		TipoIdentificacao idLivro1 = livro1.obterIdentificacao();
-		TipoIdentificacao idLivro2 = livro2.obterIdentificacao();
+		TipoIdentificacaoLivro idLivro1 = livro1.obterIdentificacao();
+		TipoIdentificacaoLivro idLivro2 = livro2.obterIdentificacao();
 
 		assertFalse(idLivro1.equals(idLivro2));
 	}

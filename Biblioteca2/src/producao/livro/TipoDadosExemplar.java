@@ -5,5 +5,5 @@ public interface TipoDadosExemplar {
 
 	public TipoNomeEditora obterEditora();
 	
-	public TipoIdentificacao obterIdentificacao();
+	public TipoIdentificacaoExemplar obterIdentificacao();
 }

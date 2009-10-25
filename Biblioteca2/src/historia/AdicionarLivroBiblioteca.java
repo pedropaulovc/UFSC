@@ -10,12 +10,12 @@ import producao.ConfiguracaoBiblioteca;
 import producao.TipoBiblioteca;
 import producao.livro.DadosLivro;
 import producao.livro.TipoDadosLivro;
-import producao.livro.TipoIdentificacao;
+import producao.livro.TipoIdentificacaoLivro;
 
 public class AdicionarLivroBiblioteca extends Cenario {
 	private TipoBiblioteca b;
 	private TipoDadosLivro dados;
-	private TipoIdentificacao idLivro;
+	private TipoIdentificacaoLivro idLivro;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComNenhumLivro();

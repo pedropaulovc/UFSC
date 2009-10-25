@@ -10,14 +10,14 @@ import producao.livro.DadosLivro;
 import producao.livro.Editora;
 import producao.livro.TipoDadosLivro;
 import producao.livro.TipoEditora;
-import producao.livro.TipoIdentificacao;
+import producao.livro.TipoIdentificacaoExemplar;
 import producao.livro.TipoLivroComExemplaresNaoArquivaveis;
 
 public class ExemplaresDiferentesPossuemIdsDiferentes extends Cenario {
 
 	private TipoLivroComExemplaresNaoArquivaveis l;
-	private TipoIdentificacao idExemplar1;
-	private TipoIdentificacao idExemplar2;
+	private TipoIdentificacaoExemplar idExemplar1;
+	private TipoIdentificacaoExemplar idExemplar2;
 
 	public void dadoQue() {
 		existeUmLivroComExemplares();

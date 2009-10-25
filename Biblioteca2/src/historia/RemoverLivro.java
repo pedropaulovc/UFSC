@@ -9,11 +9,11 @@ import producao.Biblioteca;
 import producao.ConfiguracaoBiblioteca;
 import producao.TipoBiblioteca;
 import producao.livro.DadosLivro;
-import producao.livro.TipoIdentificacao;
+import producao.livro.TipoIdentificacaoLivro;
 
 public class RemoverLivro extends Cenario {
 	private TipoBiblioteca b;
-	private TipoIdentificacao id;
+	private TipoIdentificacaoLivro id;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComUmLivro();
