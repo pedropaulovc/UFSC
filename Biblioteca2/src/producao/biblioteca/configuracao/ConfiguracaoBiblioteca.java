@@ -8,6 +8,10 @@ public class ConfiguracaoBiblioteca implements TipoConfiguracaoBiblioteca {
 	private TipoNomeBiblioteca nome;
 	private int prazoDevolucao;
 
+	/**
+	 * @param configuracao  Uma string contendo as configurações da biblioteca, separados
+	 *  por ponto vírgula e na ordem "Nome da Biblioteca;Prazo de entrega dos livros"
+	 */
 	public ConfiguracaoBiblioteca(String configuracao){
 		assert(configuracao != null);
 		

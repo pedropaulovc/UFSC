@@ -14,7 +14,7 @@ import producao.livro.exemplar.dados.DadosExemplarArquivavel;
 import producao.livro.exemplar.id.TipoIdExemplar;
 import producao.livro.id.TipoIdLivro;
 
-public class DevolverExemplar extends Cenario {
+public class DevolverExemplarEmprestadoNoPrazo extends Cenario {
 	private TipoBiblioteca b;
 	private TipoIdLivro idLivro;
 	private TipoIdExemplar idExemplar;
@@ -53,9 +53,7 @@ public class DevolverExemplar extends Cenario {
 	}
 
 	private void devolverOExemplarNoPrazo() {
-		System.out.println("antes" + b.obterEstadoExemplar(idExemplar));
 		b.devolver(idExemplar);
-		System.out.println("depois" + b.obterEstadoExemplar(idExemplar));
 	}
 
 	@Test

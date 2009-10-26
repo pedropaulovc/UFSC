@@ -5,8 +5,6 @@ import producao.livro.exemplar.id.TipoIdExemplar;
 import producao.livro.exemplar.numeroChamada.TipoNumeroChamada;
 import producao.livro.exemplar.prazoDevolucao.TipoPrazoDevolucao;
 
-
-
 public interface TipoExemplarArquivavel extends TipoExemplar {
 	public TipoNumeroChamada obterNumeroChamada();
 	
