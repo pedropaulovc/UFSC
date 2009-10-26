@@ -5,19 +5,19 @@ import infra.Cenario;
 
 import org.junit.Test;
 
-import producao.livro.DadosExemplarArquivavel;
-import producao.livro.DadosLivro;
-import producao.livro.EditoraBiblioteca;
-import producao.livro.TipoDadosExemplarArquivavel;
-import producao.livro.TipoDadosLivro;
-import producao.livro.TipoEditoraBiblioteca;
-import producao.livro.TipoIdentificacaoExemplar;
-import producao.livro.TipoLivroComExemplaresArquivaveis;
+import producao.livro.dados.DadosLivro;
+import producao.livro.dados.TipoDadosLivro;
+import producao.livro.editora.EditoraBiblioteca;
+import producao.livro.editora.TipoEditoraBiblioteca;
+import producao.livro.exemplar.TipoLivroComExemplaresArquivaveis;
+import producao.livro.exemplar.dados.DadosExemplarArquivavel;
+import producao.livro.exemplar.dados.TipoDadosExemplarArquivavel;
+import producao.livro.exemplar.id.TipoIdExemplar;
 
 public class RemoverExemplarEmLivro extends Cenario {
 	private TipoLivroComExemplaresArquivaveis livro;
 	private TipoDadosExemplarArquivavel dadosExemplar;
-	private TipoIdentificacaoExemplar id;
+	private TipoIdExemplar id;
 
 	public void dadoQue() {
 		existeUmLivroComUmExemplar();

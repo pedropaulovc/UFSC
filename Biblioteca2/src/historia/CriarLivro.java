@@ -5,11 +5,11 @@ import infra.Cenario;
 
 import org.junit.Test;
 
-import producao.livro.DadosLivro;
-import producao.livro.Editora;
-import producao.livro.TipoDadosLivro;
-import producao.livro.TipoEditora;
 import producao.livro.TipoLivro;
+import producao.livro.dados.DadosLivro;
+import producao.livro.dados.TipoDadosLivro;
+import producao.livro.editora.Editora;
+import producao.livro.editora.TipoEditora;
 
 public class CriarLivro extends Cenario {
 	private TipoLivro livro;

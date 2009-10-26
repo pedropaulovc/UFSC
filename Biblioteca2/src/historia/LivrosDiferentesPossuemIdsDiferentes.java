@@ -5,12 +5,12 @@ import infra.Cenario;
 
 import org.junit.Test;
 
-import producao.livro.DadosLivro;
-import producao.livro.Editora;
-import producao.livro.TipoDadosLivro;
-import producao.livro.TipoEditora;
-import producao.livro.TipoIdentificacaoLivro;
 import producao.livro.TipoLivro;
+import producao.livro.dados.DadosLivro;
+import producao.livro.dados.TipoDadosLivro;
+import producao.livro.editora.Editora;
+import producao.livro.editora.TipoEditora;
+import producao.livro.id.TipoIdLivro;
 
 public class LivrosDiferentesPossuemIdsDiferentes extends
 		Cenario {
@@ -46,8 +46,8 @@ public class LivrosDiferentesPossuemIdsDiferentes extends
 
 	@Test
 	public void osIdsDosLivrosSerãoDiferentes() {
-		TipoIdentificacaoLivro idLivro1 = livro1.obterIdentificacao();
-		TipoIdentificacaoLivro idLivro2 = livro2.obterIdentificacao();
+		TipoIdLivro idLivro1 = livro1.obterIdentificacao();
+		TipoIdLivro idLivro2 = livro2.obterIdentificacao();
 
 		assertFalse(idLivro1.equals(idLivro2));
 	}

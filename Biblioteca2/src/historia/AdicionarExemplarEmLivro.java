@@ -5,19 +5,19 @@ import infra.Cenario;
 
 import org.junit.Test;
 
-import producao.livro.DadosExemplar;
-import producao.livro.DadosLivro;
-import producao.livro.Editora;
-import producao.livro.TipoDadosExemplar;
-import producao.livro.TipoDadosLivro;
-import producao.livro.TipoEditora;
-import producao.livro.TipoIdentificacaoExemplar;
-import producao.livro.TipoLivroComExemplaresNaoArquivaveis;
+import producao.livro.dados.DadosLivro;
+import producao.livro.dados.TipoDadosLivro;
+import producao.livro.editora.Editora;
+import producao.livro.editora.TipoEditora;
+import producao.livro.exemplar.TipoLivroComExemplaresNaoArquivaveis;
+import producao.livro.exemplar.dados.DadosExemplar;
+import producao.livro.exemplar.dados.TipoDadosExemplar;
+import producao.livro.exemplar.id.TipoIdExemplar;
 
 public class AdicionarExemplarEmLivro extends Cenario {
 	private TipoLivroComExemplaresNaoArquivaveis livro;
 	private TipoDadosExemplar dadosExemplar;
-	private TipoIdentificacaoExemplar idExemplar;
+	private TipoIdExemplar idExemplar;
 
 	public void dadoQue() {
 		existeUmLivroSemExemplares();

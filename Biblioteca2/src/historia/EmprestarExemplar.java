@@ -2,24 +2,24 @@ package historia;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static producao.livro.EstadoEmprestimo.EMPRESTADO;
+import static producao.livro.exemplar.EstadoEmprestimo.EMPRESTADO;
 import infra.Cenario;
 
 import org.junit.Test;
 
-import producao.Biblioteca;
-import producao.ConfiguracaoBiblioteca;
-import producao.TipoBiblioteca;
-import producao.livro.DadosExemplarArquivavel;
-import producao.livro.DadosLivro;
-import producao.livro.PrazoDevolucao;
-import producao.livro.TipoIdentificacaoExemplar;
-import producao.livro.TipoIdentificacaoLivro;
+import producao.biblioteca.Biblioteca;
+import producao.biblioteca.TipoBiblioteca;
+import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
+import producao.livro.dados.DadosLivro;
+import producao.livro.exemplar.dados.DadosExemplarArquivavel;
+import producao.livro.exemplar.id.TipoIdExemplar;
+import producao.livro.exemplar.prazoDevolucao.PrazoDevolucao;
+import producao.livro.id.TipoIdLivro;
 
 public class EmprestarExemplar extends Cenario {
 	private TipoBiblioteca b;
-	private TipoIdentificacaoLivro idLivro;
-	private TipoIdentificacaoExemplar idExemplar;
+	private TipoIdLivro idLivro;
+	private TipoIdExemplar idExemplar;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();

@@ -1,5 +1,10 @@
 package producao.livro;
 
+import producao.livro.autor.TipoAutor;
+import producao.livro.dados.TipoDadosLivro;
+import producao.livro.id.TipoIdLivro;
+import producao.livro.titulo.TipoTitulo;
+
 public class Livro implements TipoLivro {
 
 	private TipoDadosLivro dados;
@@ -16,7 +21,7 @@ public class Livro implements TipoLivro {
 		return dados.obterTitulo();
 	}
 	
-	public TipoIdentificacaoLivro obterIdentificacao(){
+	public TipoIdLivro obterIdentificacao(){
 		return dados.obterIdentificacao();
 	}
 	

@@ -5,19 +5,19 @@ import infra.Cenario;
 
 import org.junit.Test;
 
-import producao.livro.DadosExemplarArquivavel;
-import producao.livro.DadosLivro;
-import producao.livro.Editora;
-import producao.livro.TipoDadosLivro;
-import producao.livro.TipoEditora;
-import producao.livro.TipoIdentificacaoExemplar;
-import producao.livro.TipoLivroComExemplaresNaoArquivaveis;
+import producao.livro.dados.DadosLivro;
+import producao.livro.dados.TipoDadosLivro;
+import producao.livro.editora.Editora;
+import producao.livro.editora.TipoEditora;
+import producao.livro.exemplar.TipoLivroComExemplaresNaoArquivaveis;
+import producao.livro.exemplar.dados.DadosExemplarArquivavel;
+import producao.livro.exemplar.id.TipoIdExemplar;
 
 public class ExemplaresDiferentesPossuemIdsDiferentes extends Cenario {
 
 	private TipoLivroComExemplaresNaoArquivaveis l;
-	private TipoIdentificacaoExemplar idExemplar1;
-	private TipoIdentificacaoExemplar idExemplar2;
+	private TipoIdExemplar idExemplar1;
+	private TipoIdExemplar idExemplar2;
 
 	public void dadoQue() {
 		existeUmLivroComExemplares();

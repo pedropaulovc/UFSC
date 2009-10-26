@@ -5,17 +5,17 @@ import infra.Cenario;
 
 import org.junit.Test;
 
-import producao.Biblioteca;
-import producao.ConfiguracaoBiblioteca;
-import producao.TipoBiblioteca;
-import producao.livro.DadosLivro;
-import producao.livro.TipoDadosLivro;
-import producao.livro.TipoIdentificacaoLivro;
+import producao.biblioteca.Biblioteca;
+import producao.biblioteca.TipoBiblioteca;
+import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
+import producao.livro.dados.DadosLivro;
+import producao.livro.dados.TipoDadosLivro;
+import producao.livro.id.TipoIdLivro;
 
 public class AdicionarLivroBiblioteca extends Cenario {
 	private TipoBiblioteca b;
 	private TipoDadosLivro dados;
-	private TipoIdentificacaoLivro idLivro;
+	private TipoIdLivro idLivro;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComNenhumLivro();

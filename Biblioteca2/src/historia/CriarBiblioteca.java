@@ -4,10 +4,10 @@ import static junit.framework.Assert.*;
 
 import org.junit.Test;
 
-import producao.Biblioteca;
-import producao.ConfiguracaoBiblioteca;
-import producao.TipoBiblioteca;
-import producao.TipoConfiguracaoBiblioteca;
+import producao.biblioteca.Biblioteca;
+import producao.biblioteca.TipoBiblioteca;
+import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
+import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
 
 import infra.Cenario;
 

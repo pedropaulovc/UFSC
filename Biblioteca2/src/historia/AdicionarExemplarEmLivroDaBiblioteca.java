@@ -5,20 +5,20 @@ import infra.Cenario;
 
 import org.junit.Test;
 
-import producao.Biblioteca;
-import producao.ConfiguracaoBiblioteca;
-import producao.TipoBiblioteca;
-import producao.livro.DadosExemplarArquivavel;
-import producao.livro.DadosLivro;
-import producao.livro.TipoDadosExemplarArquivavel;
-import producao.livro.TipoIdentificacaoExemplar;
-import producao.livro.TipoIdentificacaoLivro;
+import producao.biblioteca.Biblioteca;
+import producao.biblioteca.TipoBiblioteca;
+import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
+import producao.livro.dados.DadosLivro;
+import producao.livro.exemplar.dados.DadosExemplarArquivavel;
+import producao.livro.exemplar.dados.TipoDadosExemplarArquivavel;
+import producao.livro.exemplar.id.TipoIdExemplar;
+import producao.livro.id.TipoIdLivro;
 
 public class AdicionarExemplarEmLivroDaBiblioteca extends Cenario {
 	private TipoDadosExemplarArquivavel dadosExemplar;
 	private TipoBiblioteca b;
-	private TipoIdentificacaoLivro idLivro;
-	private TipoIdentificacaoExemplar idExemplar;
+	private TipoIdLivro idLivro;
+	private TipoIdExemplar idExemplar;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();

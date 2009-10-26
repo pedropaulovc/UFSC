@@ -1,9 +1,0 @@
-package producao.livro;
-
-public interface TipoDadosExemplar {
-	public TipoAnoPublicacao obterAnoPublicacao();
-
-	public TipoNomeEditora obterEditora();
-	
-	public TipoIdentificacaoExemplar obterIdentificacao();
-}
