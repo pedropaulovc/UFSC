@@ -1,7 +1,6 @@
 package producao.livro.exemplar;
 
-import static producao.livro.exemplar.EstadoEmprestimo.DISPONÍVEL;
-import static producao.livro.exemplar.EstadoEmprestimo.EMPRESTADO;
+import static producao.livro.exemplar.EstadoEmprestimo.*;
 import producao.livro.exemplar.dados.TipoDadosExemplarArquivavel;
 import producao.livro.exemplar.id.TipoIdExemplar;
 import producao.livro.exemplar.numeroChamada.TipoNumeroChamada;
@@ -62,5 +61,12 @@ public class ExemplarArquivavel extends Exemplar implements
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean alterarEstado(EstadoEmprestimo estado){
+		if(estado.equals(EMPRESTADO))
+			return false;
+		this.estado = estado;
+		return true;
 	}
 }

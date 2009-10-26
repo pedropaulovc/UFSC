@@ -45,7 +45,7 @@ public class TornarExemplarConsultaLocal extends Cenario {
 	}
 
 	private void tornarOExemplarConsultaLocal() {
-		//b.alterarEstado(idExemplar, CONSULTA_LOCAL);
+		b.alterarEstado(idExemplar, CONSULTA_LOCAL);
 	}
 
 	@Test

@@ -35,4 +35,7 @@ public interface TipoBiblioteca {
 	public TipoPrazoDevolucao obterPrazoDevolucao(TipoIdExemplar idExemplar);
 
 	public boolean devolver(TipoIdExemplar idExemplar);
+
+	public boolean alterarEstado(TipoIdExemplar idExemplar,
+			EstadoEmprestimo estado);
 }

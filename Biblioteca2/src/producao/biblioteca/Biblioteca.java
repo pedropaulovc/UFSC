@@ -99,4 +99,9 @@ public class Biblioteca implements TipoBiblioteca {
 	public boolean devolver(TipoIdExemplar idExemplar) {
 		return buscarLivro(idExemplar).devolver(idExemplar);
 	}
+
+	public boolean alterarEstado(TipoIdExemplar idExemplar,
+			EstadoEmprestimo estado) {
+		return buscarLivro(idExemplar).alterarEstado(idExemplar, estado);
+	}
 }

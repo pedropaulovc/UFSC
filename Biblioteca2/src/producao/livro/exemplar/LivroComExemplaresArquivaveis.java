@@ -69,8 +69,12 @@ public class LivroComExemplaresArquivaveis extends Livro implements
 		return mapaExemplares.get(idExemplar).obterPrazoDevolucao();
 	}
 
-	@Override
 	public boolean devolver(TipoIdExemplar idExemplar) {
 		return mapaExemplares.get(idExemplar).devolver();
+	}
+
+	public boolean alterarEstado(TipoIdExemplar idExemplar,
+			EstadoEmprestimo estado) {
+		return mapaExemplares.get(idExemplar).alterarEstado(estado);
 	}
 }

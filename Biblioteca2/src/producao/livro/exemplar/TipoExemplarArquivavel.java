@@ -21,4 +21,6 @@ public interface TipoExemplarArquivavel extends TipoExemplar {
 	public TipoPrazoDevolucao obterPrazoDevolucao();
 
 	public boolean devolver();
+
+	public boolean alterarEstado(EstadoEmprestimo estado);
 }
