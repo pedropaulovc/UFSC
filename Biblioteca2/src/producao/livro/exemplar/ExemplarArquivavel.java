@@ -21,8 +21,8 @@ public class ExemplarArquivavel extends Exemplar implements
 		this.prazoDevolucao = new PrazoDevolucaoNulo();
 	}
 
-	public TipoIdExemplar obterIdentificacao() {
-		return dados.obterIdentificacao();
+	public TipoIdExemplar obterId() {
+		return dados.obterId();
 	}
 
 	public TipoNumeroChamada obterNumeroChamada() {

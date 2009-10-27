@@ -24,10 +24,10 @@ public class LivroComExemplares extends Livro implements
 	}
 
 	public TipoIdExemplar adicionarExemplar(TipoDadosExemplar dadosExemplar) {
-		mapaExemplares.put(dadosExemplar.obterIdentificacao(),
+		mapaExemplares.put(dadosExemplar.obterId(),
 				new Exemplar(dadosExemplar));
 		
-		return dadosExemplar.obterIdentificacao();
+		return dadosExemplar.obterId();
 	}
 
 	public TipoAnoPublicacao obterAnoPublicacaoExemplar(

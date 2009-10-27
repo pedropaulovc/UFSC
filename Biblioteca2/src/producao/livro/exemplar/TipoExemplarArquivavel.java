@@ -8,7 +8,7 @@ import producao.livro.exemplar.prazoDevolucao.TipoPrazoDevolucao;
 public interface TipoExemplarArquivavel extends TipoExemplar {
 	public TipoNumeroChamada obterNumeroChamada();
 	
-	public TipoIdExemplar obterIdentificacao();
+	public TipoIdExemplar obterId();
 	
 	public TipoDadosExemplarArquivavel obterDados();
 

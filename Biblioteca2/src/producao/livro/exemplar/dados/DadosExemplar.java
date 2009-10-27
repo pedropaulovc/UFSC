@@ -38,7 +38,7 @@ public class DadosExemplar implements TipoDadosExemplar {
 	}
 	
 
-	public TipoIdExemplar obterIdentificacao() {
+	public TipoIdExemplar obterId() {
 		return id;
 	}
 

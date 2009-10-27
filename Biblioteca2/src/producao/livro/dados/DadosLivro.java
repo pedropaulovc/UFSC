@@ -36,7 +36,7 @@ public class DadosLivro implements TipoDadosLivro {
 		return autor;
 	}
 	
-	public TipoIdLivro obterIdentificacao(){
+	public TipoIdLivro obterId(){
 		return id;
 	}
 }

@@ -27,9 +27,9 @@ public class LivroComExemplaresArquivaveis extends Livro implements
 	}
 
 	public TipoIdExemplar adicionarExemplar(TipoDadosExemplarArquivavel dadosExemplar) {
-		mapaExemplares.put(dadosExemplar.obterIdentificacao(), new ExemplarArquivavel(dadosExemplar));
+		mapaExemplares.put(dadosExemplar.obterId(), new ExemplarArquivavel(dadosExemplar));
 		
-		return dadosExemplar.obterIdentificacao();
+		return dadosExemplar.obterId();
 	}
 
 	public TipoAnoPublicacao obterAnoPublicacaoExemplar(

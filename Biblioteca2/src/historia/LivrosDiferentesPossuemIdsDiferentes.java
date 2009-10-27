@@ -46,8 +46,8 @@ public class LivrosDiferentesPossuemIdsDiferentes extends
 
 	@Test
 	public void osIdsDosLivrosSerãoDiferentes() {
-		TipoIdLivro idLivro1 = livro1.obterIdentificacao();
-		TipoIdLivro idLivro2 = livro2.obterIdentificacao();
+		TipoIdLivro idLivro1 = livro1.obterId();
+		TipoIdLivro idLivro2 = livro2.obterId();
 
 		assertFalse(idLivro1.equals(idLivro2));
 	}
