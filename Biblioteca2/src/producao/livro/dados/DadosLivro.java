@@ -1,42 +1,39 @@
 package producao.livro.dados;
 
-import producao.livro.autor.Autor;
 import producao.livro.autor.TipoAutor;
-import producao.livro.id.IdLivro;
-import producao.livro.id.TipoIdLivro;
+import producao.livro.exemplar.anoPublicacao.TipoAnoPublicacao;
+import producao.livro.exemplar.nomeEditora.TipoNomeEditora;
 import producao.livro.titulo.TipoTitulo;
-import producao.livro.titulo.Titulo;
-
 
 public class DadosLivro implements TipoDadosLivro {
 	private TipoTitulo titulo;
 	private TipoAutor autor;
-	private TipoIdLivro id;
+	private TipoNomeEditora editora;
+	private TipoAnoPublicacao anoPublicacao;
 
-	/**
-	 * @param dados: Uma string contendo os dados do livro, separados por ponto vírgula e
-	 * na ordem "Título;Autor"
-	 */
-	public DadosLivro(String dados){
-		assert(dados != null);		
-		
-		String[] dadosSeparados = dados.split(";");
-		assert(dadosSeparados.length == 2);
+	public DadosLivro(TipoTitulo titulo, TipoAutor autor,
+			TipoNomeEditora editora, TipoAnoPublicacao anoPublicacao) {
 
-		this.titulo = new Titulo(dadosSeparados[0]);
-		this.autor = new Autor(dadosSeparados[1]);
-		this.id = new IdLivro();
+		this.titulo = titulo;
+		this.autor = autor;
+		this.editora = editora;
+		this.anoPublicacao = anoPublicacao;
 	}
-	
-	public TipoTitulo obterTitulo(){
+
+	public TipoTitulo obterTitulo() {
 		return titulo;
 	}
-	
-	public TipoAutor obterAutor(){
+
+	public TipoAutor obterAutor() {
 		return autor;
 	}
-	
-	public TipoIdLivro obterId(){
-		return id;
+
+	public TipoNomeEditora obterEditora() {
+		return editora;
 	}
+
+	public TipoAnoPublicacao obterAnoPublicacao() {
+		return anoPublicacao;
+	}
+
 }

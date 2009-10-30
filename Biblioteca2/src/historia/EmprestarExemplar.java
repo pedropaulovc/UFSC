@@ -55,7 +55,7 @@ public class EmprestarExemplar extends Cenario {
 
 	@Test
 	public void oExemplarFicaráEmprestado() {
-		assertTrue(EMPRESTADO.equals(b.obterEstadoExemplar(idExemplar)));
+		assertTrue(EMPRESTADO.equals(b.obterEstadoLivro(idExemplar)));
 	}
 
 	@Test

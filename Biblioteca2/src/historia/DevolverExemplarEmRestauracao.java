@@ -53,14 +53,14 @@ public class DevolverExemplarEmRestauracao extends Cenario {
 	}
 
 	private void devolverOExemplarNoPrazo() {
-		System.out.println("antes" + b.obterEstadoExemplar(idExemplar));
+		System.out.println("antes" + b.obterEstadoLivro(idExemplar));
 		b.devolver(idExemplar);
-		System.out.println("depois" + b.obterEstadoExemplar(idExemplar));
+		System.out.println("depois" + b.obterEstadoLivro(idExemplar));
 	}
 
 	@Test
 	public void oExemplarContinuaEmRestauração() {
-		assertEquals(EM_RESTAURAÇÃO, b.obterEstadoExemplar(idExemplar));
+		assertEquals(EM_RESTAURAÇÃO, b.obterEstadoLivro(idExemplar));
 	}
 
 	@Test

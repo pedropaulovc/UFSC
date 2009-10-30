@@ -8,14 +8,20 @@ import org.junit.Test;
 import producao.biblioteca.Biblioteca;
 import producao.biblioteca.TipoBiblioteca;
 import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
+import producao.livro.Livro;
+import producao.livro.autor.Autor;
 import producao.livro.dados.DadosLivro;
 import producao.livro.dados.TipoDadosLivro;
+import producao.livro.exemplar.anoPublicacao.AnoPublicacao;
+import producao.livro.exemplar.nomeEditora.NomeEditora;
 import producao.livro.id.TipoIdLivro;
+import producao.livro.titulo.Titulo;
 
 public class AdicionarLivroBiblioteca extends Cenario {
 	private TipoBiblioteca b;
 	private TipoDadosLivro dados;
 	private TipoIdLivro idLivro;
+	private Livro livro;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComNenhumLivro();
@@ -28,7 +34,7 @@ public class AdicionarLivroBiblioteca extends Cenario {
 
 	public void então() {
 		aBibliotecaPossuiUmLivro();
-		éPossívelObterOsDadosDoLivroArmazenado();
+		éPossívelObterOLivroArmazenado();
 	}
 
 	@Test
@@ -39,11 +45,13 @@ public class AdicionarLivroBiblioteca extends Cenario {
 	}
 
 	private void existemDadosDeUmLivroArquivavel() {
-		dados = new DadosLivro("Nome do Título;Nome do Autor");
+		dados = new DadosLivro(new Titulo("Titulo"), new Autor("Autor"),
+				new NomeEditora("Editora"), new AnoPublicacao(1999));
+		livro = new Livro(dados);
 	}
 
 	private void adicionaLivroNaBiblioteca() {
-		idLivro = b.adicionar(dados);
+		idLivro = b.adicionar(livro);
 	}
 
 	@Test
@@ -52,7 +60,7 @@ public class AdicionarLivroBiblioteca extends Cenario {
 	}
 
 	@Test
-	public void éPossívelObterOsDadosDoLivroArmazenado() {
-		assertEquals(dados, b.obterDadosLivro(idLivro));
+	public void éPossívelObterOLivroArmazenado() {
+		assertEquals(livro, b.obterLivro(idLivro));
 	}
 }

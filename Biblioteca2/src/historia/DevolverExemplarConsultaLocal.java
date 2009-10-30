@@ -58,7 +58,7 @@ public class DevolverExemplarConsultaLocal extends Cenario {
 
 	@Test
 	public void oExemplarContinuaEmConsultaLocal() {
-		assertEquals(CONSULTA_LOCAL, b.obterEstadoExemplar(idExemplar));
+		assertEquals(CONSULTA_LOCAL, b.obterEstadoLivro(idExemplar));
 	}
 
 	@Test

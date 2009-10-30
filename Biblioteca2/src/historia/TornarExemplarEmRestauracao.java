@@ -50,6 +50,6 @@ public class TornarExemplarEmRestauracao extends Cenario {
 
 	@Test
 	public void oExemplarTornaSeEmRestauracao() {
-		assertEquals(EM_RESTAURAÇÃO, b.obterEstadoExemplar(idExemplar));
+		assertEquals(EM_RESTAURAÇÃO, b.obterEstadoLivro(idExemplar));
 	}
 }

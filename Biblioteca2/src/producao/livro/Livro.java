@@ -2,7 +2,8 @@ package producao.livro;
 
 import producao.livro.autor.TipoAutor;
 import producao.livro.dados.TipoDadosLivro;
-import producao.livro.id.TipoIdLivro;
+import producao.livro.exemplar.anoPublicacao.TipoAnoPublicacao;
+import producao.livro.exemplar.nomeEditora.TipoNomeEditora;
 import producao.livro.titulo.TipoTitulo;
 
 public class Livro implements TipoLivro {
@@ -21,11 +22,16 @@ public class Livro implements TipoLivro {
 		return dados.obterTitulo();
 	}
 	
-	public TipoIdLivro obterId(){
-		return dados.obterId();
-	}
-	
 	public TipoDadosLivro obterDados(){
 		return dados;
+	}
+
+	public TipoAnoPublicacao obterAnoPublicacao() {
+		return dados.obterAnoPublicacao();
+	}
+
+	@Override
+	public TipoNomeEditora obterNomeEditora() {
+		return dados.obterEditora();
 	}
 }

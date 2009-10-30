@@ -53,7 +53,7 @@ public class DevolverExemplarDisponivel extends Cenario {
 
 	@Test
 	public void oExemplarContinuaDisponível() {
-		assertEquals(DISPONÍVEL, b.obterEstadoExemplar(idExemplar));
+		assertEquals(DISPONÍVEL, b.obterEstadoLivro(idExemplar));
 	}
 
 	@Test

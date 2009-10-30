@@ -1,32 +1,24 @@
 package producao.biblioteca;
 
-import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.Map;
 
 import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
 import producao.biblioteca.nome.TipoNomeBiblioteca;
-import producao.livro.dados.TipoDadosLivro;
-import producao.livro.editora.EditoraBiblioteca;
-import producao.livro.editora.TipoEditoraBiblioteca;
+import producao.livro.TipoLivro;
+import producao.livro.TipoLivroArquivavel;
 import producao.livro.exemplar.EstadoEmprestimo;
-import producao.livro.exemplar.TipoLivroComExemplaresArquivaveis;
-import producao.livro.exemplar.dados.TipoDadosExemplarArquivavel;
-import producao.livro.exemplar.id.TipoIdExemplar;
 import producao.livro.exemplar.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.id.TipoIdLivro;
 
 public class Biblioteca implements TipoBiblioteca {
 
 	private TipoConfiguracaoBiblioteca config;
-	private Map<TipoIdLivro, TipoLivroComExemplaresArquivaveis> mapaLivros;
-	private TipoEditoraBiblioteca editora;
-	private String erroId = "Identificação fornecida não existe no acervo";
+	private Map<TipoIdLivro, TipoLivroArquivavel> mapaLivros;
 
 	public Biblioteca(TipoConfiguracaoBiblioteca configuração) {
 		this.config = configuração;
-		this.mapaLivros = new HashMap<TipoIdLivro, TipoLivroComExemplaresArquivaveis>();
-		this.editora = new EditoraBiblioteca();
+		this.mapaLivros = new HashMap<TipoIdLivro, TipoLivroArquivavel>();
 	}
 
 	public TipoNomeBiblioteca obterNome() {
@@ -37,73 +29,39 @@ public class Biblioteca implements TipoBiblioteca {
 		return mapaLivros.size();
 	}
 
-	public TipoIdLivro adicionar(TipoDadosLivro dadosLivro) {
-		mapaLivros.put(dadosLivro.obterId(), editora
-				.criarLivroComExemplaresArquivaveis(dadosLivro));
-
-		return dadosLivro.obterId();
-	}
-
-	public TipoIdExemplar adicionarExemplar(TipoIdLivro livro,
-			TipoDadosExemplarArquivavel dadosExemplar) {
-
-		if (mapaLivros.containsKey(livro)) {
-			mapaLivros.get(livro).adicionarExemplar(dadosExemplar);
-			return dadosExemplar.obterId();
-		}
-		throw new InvalidParameterException(erroId);
-	}
-
-	public TipoDadosExemplarArquivavel obterDadosExemplar(
-			TipoIdExemplar exemplar) {
-		return buscarLivro(exemplar).obterDadosExemplar(exemplar);
-	}
-
-	public TipoDadosLivro obterDadosLivro(TipoIdLivro idLivro) {
-		if (mapaLivros.containsKey(idLivro))
-			return mapaLivros.get(idLivro).obterDados();
-		throw new InvalidParameterException(erroId);
-	}
-
-	public int qtdExemplares(TipoIdLivro livro) {
-		return mapaLivros.get(livro).qtdExemplares();
-	}
-
-	public void removerExemplar(TipoIdExemplar exemplar) {
-		buscarLivro(exemplar).removerExemplar(exemplar);
-	}
-
 	public void removerLivro(TipoIdLivro livro) {
 		mapaLivros.remove(livro);
 	}
 
-	private TipoLivroComExemplaresArquivaveis buscarLivro(
-			TipoIdExemplar exemplar) {
-		for (TipoLivroComExemplaresArquivaveis l : mapaLivros.values())
-			if (l.contemExemplar(exemplar))
-				return l;
-		throw new InvalidParameterException(erroId);
+	public TipoIdLivro adicionar(TipoLivro livro) {
+		TipoLivroArquivavel arquivavel = new LivroArquivavel(livro, new DadosLivroArquivavelNulo());
+		mapaLivros.put(arquivavel.obterId(), arquivavel);
+
+		return arquivavel.obterId();
 	}
 
-	public boolean emprestar(TipoIdExemplar idExemplar) {
-		return buscarLivro(idExemplar).emprestar(idExemplar,
-				config.obterPrazoDevolucao());
+	public boolean alterarEstado(TipoIdLivro idLivro, EstadoEmprestimo estado) {
+		return mapaLivros.get(idLivro).alterarEstado(estado);
 	}
 
-	public EstadoEmprestimo obterEstadoExemplar(TipoIdExemplar idExemplar) {
-		return buscarLivro(idExemplar).obterEstado(idExemplar);
+	public boolean devolver(TipoIdLivro idLivro) {
+		return mapaLivros.get(idLivro).devolver();
 	}
 
-	public TipoPrazoDevolucao obterPrazoDevolucao(TipoIdExemplar idExemplar) {
-		return buscarLivro(idExemplar).obterPrazoDevolucao(idExemplar);
+	public boolean emprestar(TipoIdLivro idLivro) {
+		return mapaLivros.get(idLivro).emprestar(config.obterPrazoDevolucao());
 	}
 
-	public boolean devolver(TipoIdExemplar idExemplar) {
-		return buscarLivro(idExemplar).devolver(idExemplar);
+	public EstadoEmprestimo obterEstadoLivro(TipoIdLivro idLivro) {
+		return mapaLivros.get(idLivro).obterEstado();
 	}
 
-	public boolean alterarEstado(TipoIdExemplar idExemplar,
-			EstadoEmprestimo estado) {
-		return buscarLivro(idExemplar).alterarEstado(idExemplar, estado);
+	public TipoLivro obterLivro(TipoIdLivro idLivro) {
+		return mapaLivros.get(idLivro);
 	}
+
+	public TipoPrazoDevolucao obterPrazoDevolucao(TipoIdLivro idLivro) {
+		return mapaLivros.get(idLivro).obterPrazoDevolucao();
+	}
+
 }

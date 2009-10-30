@@ -50,6 +50,6 @@ public class TornarExemplarConsultaLocal extends Cenario {
 
 	@Test
 	public void oExemplarTornaSeConsultaLocal() {
-		assertEquals(CONSULTA_LOCAL, b.obterEstadoExemplar(idExemplar));
+		assertEquals(CONSULTA_LOCAL, b.obterEstadoLivro(idExemplar));
 	}
 }

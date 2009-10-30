@@ -58,7 +58,7 @@ public class DevolverExemplarEmprestadoNoPrazo extends Cenario {
 
 	@Test
 	public void oExemplarFicaráDisponível() {
-		assertEquals(DISPONÍVEL, b.obterEstadoExemplar(idExemplar));
+		assertEquals(DISPONÍVEL, b.obterEstadoLivro(idExemplar));
 	}
 
 	@Test
