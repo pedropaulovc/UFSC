@@ -5,14 +5,14 @@ import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
+import producao.dados.anoPublicacao.AnoPublicacao;
+import producao.dados.autor.Autor;
+import producao.dados.nomeEditora.NomeEditora;
+import producao.dados.titulo.Titulo;
 import producao.livro.TipoLivro;
-import producao.livro.autor.Autor;
 import producao.livro.dados.DadosLivro;
 import producao.livro.dados.TipoDadosLivro;
 import producao.livro.editora.TipoEditora;
-import producao.livro.exemplar.anoPublicacao.AnoPublicacao;
-import producao.livro.exemplar.nomeEditora.NomeEditora;
-import producao.livro.titulo.Titulo;
 
 public class CriarLivro extends CenarioComBiblioteca {
 	private TipoLivro livro;

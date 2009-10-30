@@ -1,13 +1,13 @@
 package producao.biblioteca;
 
-import producao.biblioteca.nome.TipoNomeBiblioteca;
+import producao.dados.nome.TipoNome;
+import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.EstadoEmprestimo;
 import producao.livro.TipoLivro;
-import producao.livro.exemplar.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.id.TipoIdLivro;
 
 public interface TipoBiblioteca {
-	public TipoNomeBiblioteca obterNome();
+	public TipoNome obterNome();
 
 	public int tamanho();
 

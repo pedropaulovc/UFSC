@@ -4,13 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
-import producao.biblioteca.nome.TipoNomeBiblioteca;
+import producao.dados.nome.TipoNome;
+import producao.dados.prazoDevolucao.PrazoDevolucao;
+import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.EstadoEmprestimo;
+import producao.livroArquivavel.LivroArquivavel;
 import producao.livro.TipoLivro;
-import producao.livro.TipoLivroArquivavel;
-import producao.livro.exemplar.prazoDevolucao.PrazoDevolucao;
-import producao.livro.exemplar.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.id.TipoIdLivro;
+import producao.livroArquivavel.LivroArquivavelNulo;
+import producao.livroArquivavel.TipoLivroArquivavel;
+import producao.livroArquivavel.dados.DadosLivroArquivavelNulo;
 
 public class Biblioteca implements TipoBiblioteca {
 
@@ -22,7 +25,7 @@ public class Biblioteca implements TipoBiblioteca {
 		this.mapaLivros = new HashMap<TipoIdLivro, TipoLivroArquivavel>();
 	}
 
-	public TipoNomeBiblioteca obterNome() {
+	public TipoNome obterNome() {
 		return config.obterNomeBiblioteca();
 	}
 

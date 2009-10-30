@@ -1,6 +1,6 @@
 package producao.livro.id;
 
-import producao.livro.Id;
+import producao.dados.id.Id;
 
 public class IdLivro extends Id implements TipoIdLivro {
 

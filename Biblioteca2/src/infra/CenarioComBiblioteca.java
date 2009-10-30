@@ -4,17 +4,17 @@ import producao.biblioteca.Biblioteca;
 import producao.biblioteca.TipoBiblioteca;
 import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
 import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
-import producao.biblioteca.nome.NomeBiblioteca;
+import producao.dados.anoPublicacao.AnoPublicacao;
+import producao.dados.autor.Autor;
+import producao.dados.nome.Nome;
+import producao.dados.nomeEditora.NomeEditora;
+import producao.dados.prazoDevolucao.PrazoDevolucao;
+import producao.dados.titulo.Titulo;
 import producao.livro.TipoLivro;
-import producao.livro.autor.Autor;
 import producao.livro.dados.DadosLivro;
 import producao.livro.dados.TipoDadosLivro;
 import producao.livro.editora.Editora;
 import producao.livro.editora.TipoEditora;
-import producao.livro.exemplar.anoPublicacao.AnoPublicacao;
-import producao.livro.exemplar.nomeEditora.NomeEditora;
-import producao.livro.exemplar.prazoDevolucao.PrazoDevolucao;
-import producao.livro.titulo.Titulo;
 
 public abstract class CenarioComBiblioteca extends Cenario {
 	private TipoEditora editora;
@@ -25,7 +25,7 @@ public abstract class CenarioComBiblioteca extends Cenario {
 		this.editora = new Editora();
 		this.dados = new DadosLivro(new Titulo("Titulo"), new Autor("Autor"),
 				new NomeEditora("Editora"), new AnoPublicacao(1999));
-		this.configBiblioteca = new ConfiguracaoBiblioteca(new NomeBiblioteca(
+		this.configBiblioteca = new ConfiguracaoBiblioteca(new Nome(
 				"Biblioteca Central"), new PrazoDevolucao(15));
 
 	}

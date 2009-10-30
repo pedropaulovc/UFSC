@@ -1,9 +1,9 @@
 package producao.biblioteca.configuracao;
 
-import producao.biblioteca.nome.TipoNomeBiblioteca;
+import producao.dados.nome.TipoNome;
 
 public interface TipoConfiguracaoBiblioteca {
-	public TipoNomeBiblioteca obterNomeBiblioteca();
+	public TipoNome obterNomeBiblioteca();
 	
 	public int obterPrazoDevolucaoInteiro();
 }

@@ -1,6 +1,6 @@
 package producao.livro.id;
 
-import producao.livro.TipoId;
+import producao.dados.id.TipoId;
 
 public interface TipoIdLivro extends TipoId {
 

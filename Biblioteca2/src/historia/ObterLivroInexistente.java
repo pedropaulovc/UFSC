@@ -5,8 +5,8 @@ import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
-import producao.biblioteca.LivroNulo;
 import producao.biblioteca.TipoBiblioteca;
+import producao.livro.LivroNulo;
 import producao.livro.id.IdLivro;
 
 public class ObterLivroInexistente extends CenarioComBiblioteca {

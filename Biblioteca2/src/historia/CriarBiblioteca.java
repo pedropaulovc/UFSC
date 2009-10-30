@@ -8,8 +8,8 @@ import producao.biblioteca.Biblioteca;
 import producao.biblioteca.TipoBiblioteca;
 import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
 import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
-import producao.biblioteca.nome.NomeBiblioteca;
-import producao.livro.exemplar.prazoDevolucao.PrazoDevolucao;
+import producao.dados.nome.Nome;
+import producao.dados.prazoDevolucao.PrazoDevolucao;
 
 import infra.Cenario;
 
@@ -33,7 +33,7 @@ public class CriarBiblioteca extends Cenario {
 	}
 
 	private void existemConfiguraçõesValidasBiblioteca() {
-		configuração = new ConfiguracaoBiblioteca(new NomeBiblioteca(
+		configuração = new ConfiguracaoBiblioteca(new Nome(
 				"Biblioteca Central"), new PrazoDevolucao(15));
 	}
 
