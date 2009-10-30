@@ -10,4 +10,8 @@ public class PrazoDevolucaoNulo implements TipoPrazoDevolucao {
 		return 0;
 	}
 
+	public int obterPrazoInteiro() {
+		return 0;
+	}
+
 }

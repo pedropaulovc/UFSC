@@ -1,6 +1,5 @@
 package producao.livro;
 
-import producao.livro.exemplar.EstadoEmprestimo;
 import producao.livro.exemplar.numeroChamada.TipoNumeroChamada;
 import producao.livro.exemplar.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.id.TipoIdLivro;
@@ -19,4 +18,6 @@ public interface TipoLivroArquivavel extends TipoLivro {
 	public boolean devolver();
 
 	public boolean alterarEstado(EstadoEmprestimo estado);
+
+	public TipoLivro obterLivro();
 }

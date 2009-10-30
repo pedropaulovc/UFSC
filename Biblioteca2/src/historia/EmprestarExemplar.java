@@ -2,29 +2,22 @@ package historia;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static producao.livro.exemplar.EstadoEmprestimo.EMPRESTADO;
-import infra.Cenario;
+import static producao.livro.EstadoEmprestimo.EMPRESTADO;
+import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
-import producao.biblioteca.Biblioteca;
 import producao.biblioteca.TipoBiblioteca;
-import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
-import producao.livro.dados.DadosLivro;
-import producao.livro.exemplar.dados.DadosExemplarArquivavel;
-import producao.livro.exemplar.id.TipoIdExemplar;
 import producao.livro.exemplar.prazoDevolucao.PrazoDevolucao;
 import producao.livro.id.TipoIdLivro;
 
-public class EmprestarExemplar extends Cenario {
+public class EmprestarExemplar extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
 	private TipoIdLivro idLivro;
-	private TipoIdExemplar idExemplar;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();
-		aBibliotecaPossuiUmLivro();
-		oLivroPossuiUmExemplarDisponivel();
+		aBibliotecaPossuiUmLivroDisponivel();
 	}
 
 	public void quando() {
@@ -37,29 +30,24 @@ public class EmprestarExemplar extends Cenario {
 	}
 
 	private void existeUmaBiblioteca() {
-		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central;15"));
+		b = obterBiblioteca();
 	}
 
-	private void aBibliotecaPossuiUmLivro() {
-		idLivro = b.adicionar(new DadosLivro("Título Livro;Nome Autor"));
-	}
-
-	private void oLivroPossuiUmExemplarDisponivel() {
-		idExemplar = b.adicionarExemplar(idLivro, new DadosExemplarArquivavel(
-				"3a Edição;1999;Numero Chamada"));
+	private void aBibliotecaPossuiUmLivroDisponivel() {
+		idLivro = b.adicionar(obterLivro());
 	}
 
 	private void emprestarOExemplar() {
-		b.emprestar(idExemplar);
+		b.emprestar(idLivro);
 	}
 
 	@Test
 	public void oExemplarFicaráEmprestado() {
-		assertTrue(EMPRESTADO.equals(b.obterEstadoLivro(idExemplar)));
+		assertTrue(EMPRESTADO.equals(b.obterEstadoLivro(idLivro)));
 	}
 
 	@Test
 	public void oPrazoDeDevolucaoÉDe15Dias() {		
-		assertEquals(new PrazoDevolucao(15), b.obterPrazoDevolucao(idExemplar));
+		assertEquals(new PrazoDevolucao(15), b.obterPrazoDevolucao(idLivro));
 	}
 }

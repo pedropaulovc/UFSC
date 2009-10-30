@@ -1,17 +1,15 @@
 package historia;
 
-import infra.Cenario;
-
-import java.security.InvalidParameterException;
+import static org.junit.Assert.assertTrue;
+import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
-import producao.biblioteca.Biblioteca;
+import producao.biblioteca.LivroNulo;
 import producao.biblioteca.TipoBiblioteca;
-import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
 import producao.livro.id.IdLivro;
 
-public class ObterDadosExemplarInexistente extends Cenario {
+public class ObterLivroInexistente extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
 
 	public void dadoQue() {
@@ -27,13 +25,13 @@ public class ObterDadosExemplarInexistente extends Cenario {
 	}
 
 	private void existeUmaBiblioteca() {
-		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central;15"));
+		b = obterBiblioteca();
 	}
 
 	public void obtemDadosDeUmLivroInexistente() {}
 
-	@Test (expected = InvalidParameterException.class)
+	@Test
 	public void nãoRecebeLivro() {
-		b.obterDadosLivro(new IdLivro());
+		assertTrue(b.obterLivro(new IdLivro()) instanceof LivroNulo);
 	}
 }

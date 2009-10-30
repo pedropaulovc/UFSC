@@ -1,54 +1,48 @@
 package historia;
 
 import static org.junit.Assert.assertFalse;
-import infra.Cenario;
+import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
+import producao.biblioteca.TipoBiblioteca;
 import producao.livro.TipoLivro;
-import producao.livro.dados.DadosLivro;
-import producao.livro.dados.TipoDadosLivro;
-import producao.livro.editora.Editora;
-import producao.livro.editora.TipoEditora;
 import producao.livro.id.TipoIdLivro;
 
-public class LivrosDiferentesPossuemIdsDiferentes extends
-		Cenario {
-
-	private TipoDadosLivro dadosLivro2;
-	private TipoDadosLivro dadosLivro1;
-	private TipoLivro livro1;
-	private TipoLivro livro2;
+public class LivrosDiferentesPossuemIdsDiferentes extends CenarioComBiblioteca {
+	private TipoLivro livro1, livro2;
+	private TipoBiblioteca b;
+	private TipoIdLivro idLivro1, idLivro2;
 
 	public void dadoQue() {
+		existeUmaBiblioteca();
 		existemDadosDeDoisLivros();
 	}
 
 	public void quando() {
-		criarDoisLivros();
+		adicionarOsLivrosNaBiblioteca();
 	}
 
 	public void então() {
 		osIdsDosLivrosSerãoDiferentes();
 	}
 
-	private void existemDadosDeDoisLivros() {
-		dadosLivro1 = new DadosLivro("Titulo;Autor");
-		dadosLivro2 = new DadosLivro("Titulo;Autor");
+	private void existeUmaBiblioteca() {
+		b = obterBiblioteca();
 	}
 
-	private void criarDoisLivros() {
-		TipoEditora editora = new Editora();
-		
-		livro1 = editora.criarLivro(dadosLivro1);
-		livro2 = editora.criarLivro(dadosLivro2);
+	private void existemDadosDeDoisLivros() {
+		livro1 = obterLivro();
+		livro2 = obterLivro();
+	}
+
+	private void adicionarOsLivrosNaBiblioteca() {
+		idLivro1 = b.adicionar(livro1);
+		idLivro2 = b.adicionar(livro2);
 	}
 
 	@Test
 	public void osIdsDosLivrosSerãoDiferentes() {
-		TipoIdLivro idLivro1 = livro1.obterId();
-		TipoIdLivro idLivro2 = livro2.obterId();
-
 		assertFalse(idLivro1.equals(idLivro2));
 	}
 }

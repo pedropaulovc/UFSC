@@ -1,17 +1,20 @@
 package historia;
 
 import static org.junit.Assert.assertEquals;
-import infra.Cenario;
+import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
 import producao.livro.TipoLivro;
+import producao.livro.autor.Autor;
 import producao.livro.dados.DadosLivro;
 import producao.livro.dados.TipoDadosLivro;
-import producao.livro.editora.Editora;
 import producao.livro.editora.TipoEditora;
+import producao.livro.exemplar.anoPublicacao.AnoPublicacao;
+import producao.livro.exemplar.nomeEditora.NomeEditora;
+import producao.livro.titulo.Titulo;
 
-public class CriarLivro extends Cenario {
+public class CriarLivro extends CenarioComBiblioteca {
 	private TipoLivro livro;
 	private TipoEditora editora;
 	private TipoDadosLivro dados;
@@ -30,11 +33,12 @@ public class CriarLivro extends Cenario {
 	}
 
 	private void existeUmaEditora() {
-		editora = new Editora();
+		editora = obterEditora();
 	}
 
 	private void haDadosValidosDeUmLivro() {
-		dados = new DadosLivro("Nome do Título;Nome do Autor");
+		dados = new DadosLivro(new Titulo("Titulo"), new Autor("Autor"),
+				new NomeEditora("Editora"), new AnoPublicacao(1999));
 	}
 
 	private void criarUmNovoLivroComOsDados() {
@@ -43,7 +47,6 @@ public class CriarLivro extends Cenario {
 
 	@Test
 	public void receboUmNovoLivroComOsMesmosDados() {
-		assertEquals(dados.obterTitulo(), livro.obterTitulo());
-		assertEquals(dados.obterAutor(), livro.obterAutor());
+		assertEquals(dados, livro.obterDados());
 	}
 }

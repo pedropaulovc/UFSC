@@ -1,28 +1,21 @@
 package historia;
 
 import static org.junit.Assert.assertEquals;
-import static producao.livro.exemplar.EstadoEmprestimo.*;
-import infra.Cenario;
+import static producao.livro.EstadoEmprestimo.EM_RESTAURAÇÃO;
+import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
-import producao.biblioteca.Biblioteca;
 import producao.biblioteca.TipoBiblioteca;
-import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
-import producao.livro.dados.DadosLivro;
-import producao.livro.exemplar.dados.DadosExemplarArquivavel;
-import producao.livro.exemplar.id.TipoIdExemplar;
 import producao.livro.id.TipoIdLivro;
 
-public class DevolverExemplarEmRestauracao extends Cenario {
+public class DevolverExemplarEmRestauracao extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
 	private TipoIdLivro idLivro;
-	private TipoIdExemplar idExemplar;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();
 		aBibliotecaPossuiUmLivro();
-		oLivroPossuiUmExemplar();
 		oExemplarEstáEmRestauração();
 	}
 
@@ -36,36 +29,29 @@ public class DevolverExemplarEmRestauracao extends Cenario {
 	}
 
 	private void existeUmaBiblioteca() {
-		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central;15"));
+		b = obterBiblioteca();
 	}
 
 	private void aBibliotecaPossuiUmLivro() {
-		idLivro = b.adicionar(new DadosLivro("Nome Livro;Autor"));
-	}
-
-	private void oLivroPossuiUmExemplar() {
-		idExemplar = b.adicionarExemplar(idLivro, new DadosExemplarArquivavel(
-				"Editora;1999;Numero Chamada"));
+		idLivro = b.adicionar(obterLivro());
 	}
 
 	private void oExemplarEstáEmRestauração() {
-		b.alterarEstado(idExemplar, EM_RESTAURAÇÃO);
+		b.alterarEstado(idLivro, EM_RESTAURAÇÃO);
 	}
 
 	private void devolverOExemplarNoPrazo() {
-		System.out.println("antes" + b.obterEstadoLivro(idExemplar));
-		b.devolver(idExemplar);
-		System.out.println("depois" + b.obterEstadoLivro(idExemplar));
+		b.devolver(idLivro);
 	}
 
 	@Test
 	public void oExemplarContinuaEmRestauração() {
-		assertEquals(EM_RESTAURAÇÃO, b.obterEstadoLivro(idExemplar));
+		assertEquals(EM_RESTAURAÇÃO, b.obterEstadoLivro(idLivro));
 	}
 
 	@Test
 	public void oPrazoDeDevolucaoÉZero() {
-		assertEquals(0, b.obterPrazoDevolucao(idExemplar)
+		assertEquals(0, b.obterPrazoDevolucao(idLivro)
 				.obterPrazoDevolucaoRelativoAHoje());
 	}
 }

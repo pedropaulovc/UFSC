@@ -1,8 +1,8 @@
 package producao.biblioteca;
 
 import producao.biblioteca.nome.TipoNomeBiblioteca;
+import producao.livro.EstadoEmprestimo;
 import producao.livro.TipoLivro;
-import producao.livro.exemplar.EstadoEmprestimo;
 import producao.livro.exemplar.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.id.TipoIdLivro;
 

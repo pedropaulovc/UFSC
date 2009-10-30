@@ -5,10 +5,14 @@ import java.util.Calendar;
 public class PrazoDevolucao implements TipoPrazoDevolucao {
 
 	private int dataDevolucao;
+	private int prazo;
 
 	public PrazoDevolucao(int prazo) {
-		if (prazo < 0)
+		if (prazo < 0){
 			this.dataDevolucao = diaAtual();
+			this.prazo = 0;
+		}
+		this.prazo = prazo;	
 		this.dataDevolucao = diaAtual() + prazo;
 	}
 
@@ -47,6 +51,10 @@ public class PrazoDevolucao implements TipoPrazoDevolucao {
 		if (dataDevolucao != other.dataDevolucao)
 			return false;
 		return true;
+	}
+
+	public int obterPrazoInteiro() {
+		return prazo;
 	}
 
 }

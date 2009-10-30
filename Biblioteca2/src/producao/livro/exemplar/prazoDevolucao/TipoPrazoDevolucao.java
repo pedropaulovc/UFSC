@@ -5,4 +5,6 @@ public interface TipoPrazoDevolucao {
 	
 	public int obterPrazoDevolucaoRelativoAHoje();
 
+	public int obterPrazoInteiro();
+
 }

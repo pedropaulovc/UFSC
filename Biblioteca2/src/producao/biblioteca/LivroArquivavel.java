@@ -1,12 +1,11 @@
 package producao.biblioteca;
 
-import static producao.livro.exemplar.EstadoEmprestimo.DISPONÍVEL;
-import static producao.livro.exemplar.EstadoEmprestimo.EMPRESTADO;
+import static producao.livro.EstadoEmprestimo.*;
+import producao.livro.EstadoEmprestimo;
 import producao.livro.Livro;
 import producao.livro.TipoDadosLivroArquivavel;
 import producao.livro.TipoLivro;
 import producao.livro.TipoLivroArquivavel;
-import producao.livro.exemplar.EstadoEmprestimo;
 import producao.livro.exemplar.numeroChamada.TipoNumeroChamada;
 import producao.livro.exemplar.prazoDevolucao.PrazoDevolucaoNulo;
 import producao.livro.exemplar.prazoDevolucao.TipoPrazoDevolucao;
@@ -19,9 +18,11 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
 	private EstadoEmprestimo estado;
 	private TipoPrazoDevolucao prazoDevolucao;
 	private TipoDadosLivroArquivavel dados;
+	private TipoLivro livro;
 
 	public LivroArquivavel(TipoLivro livro, TipoDadosLivroArquivavel dados) {
 		super(livro.obterDados());
+		this.livro = livro;
 		this.id = new IdLivro();
 		this.estado = DISPONÍVEL;
 		this.prazoDevolucao = new PrazoDevolucaoNulo();
@@ -72,6 +73,10 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
 
 	public TipoPrazoDevolucao obterPrazoDevolucao() {
 		return prazoDevolucao;
+	}
+
+	public TipoLivro obterLivro() {
+		return livro;
 	}
 
 }

@@ -1,17 +1,14 @@
 package historia;
 
 import static org.junit.Assert.assertEquals;
-import infra.Cenario;
+import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
-import producao.biblioteca.Biblioteca;
 import producao.biblioteca.TipoBiblioteca;
-import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
-import producao.livro.dados.DadosLivro;
 import producao.livro.id.TipoIdLivro;
 
-public class RemoverLivro extends Cenario {
+public class RemoverLivro extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
 	private TipoIdLivro id;
 
@@ -28,9 +25,9 @@ public class RemoverLivro extends Cenario {
 	}
 
 	private void existeUmaBibliotecaComUmLivro() {
-		b = new Biblioteca(new ConfiguracaoBiblioteca("Biblioteca Central;15"));
+		b = obterBiblioteca();
 
-		id = b.adicionar(new DadosLivro("Nome do Título;Nome do Autor"));
+		id = b.adicionar(obterLivro());
 
 		assertEquals(1, b.tamanho());
 	}

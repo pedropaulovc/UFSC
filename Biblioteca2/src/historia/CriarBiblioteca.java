@@ -8,6 +8,8 @@ import producao.biblioteca.Biblioteca;
 import producao.biblioteca.TipoBiblioteca;
 import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
 import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
+import producao.biblioteca.nome.NomeBiblioteca;
+import producao.livro.exemplar.prazoDevolucao.PrazoDevolucao;
 
 import infra.Cenario;
 
@@ -31,23 +33,24 @@ public class CriarBiblioteca extends Cenario {
 	}
 
 	private void existemConfiguraçõesValidasBiblioteca() {
-		configuração = new ConfiguracaoBiblioteca("Biblioteca Central;15");
+		configuração = new ConfiguracaoBiblioteca(new NomeBiblioteca(
+				"Biblioteca Central"), new PrazoDevolucao(15));
 	}
-	
+
 	private void crioUmaBiblioteca() {
 		b = new Biblioteca(configuração);
 	}
-	
+
 	@Test
 	public void bibliotecaPassaAExistir() {
 		assertNotNull(b);
 	}
-	
+
 	@Test
 	public void bibliotecaPossuiUmNome() {
 		assertEquals("Biblioteca Central", b.obterNome().toString());
 	}
-	
+
 	@Test
 	public void bibliotecaPossuiNenhumLivroNoAcervo() {
 		assertEquals(0, b.tamanho());
