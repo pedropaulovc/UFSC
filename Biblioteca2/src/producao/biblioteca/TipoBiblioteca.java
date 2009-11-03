@@ -3,8 +3,9 @@ package producao.biblioteca;
 import producao.dados.id.TipoId;
 import producao.dados.nome.TipoNome;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
-import producao.livro.EstadoEmprestimo;
 import producao.livro.TipoLivro;
+import producao.livroArquivavel.devolucao.TipoDevolucao;
+import producao.livroArquivavel.emprestimo.EstadoEmprestimo;
 
 public interface TipoBiblioteca {
 	public TipoNome obterNome();
@@ -21,7 +22,7 @@ public interface TipoBiblioteca {
 
 	public TipoPrazoDevolucao obterPrazoDevolucao(TipoId idExemplar);
 
-	public boolean devolver(TipoId idExemplar);
+	public TipoDevolucao devolver(TipoId idExemplar);
 
 	public boolean alterarEstado(TipoId idLivro, EstadoEmprestimo estado);
 

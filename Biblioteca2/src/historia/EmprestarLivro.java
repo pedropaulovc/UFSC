@@ -2,7 +2,7 @@ package historia;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static producao.livro.EstadoEmprestimo.EMPRESTADO;
+import static producao.livroArquivavel.emprestimo.EstadoEmprestimo.EMPRESTADO;
 import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
@@ -14,6 +14,7 @@ import producao.dados.prazoDevolucao.PrazoDevolucao;
 public class EmprestarLivro extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
 	private TipoId idLivro;
+	private boolean emprestado;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();
@@ -38,11 +39,12 @@ public class EmprestarLivro extends CenarioComBiblioteca {
 	}
 
 	private void emprestarOExemplar() {
-		b.emprestar(idLivro);
+		emprestado = b.emprestar(idLivro);
 	}
 
 	@Test
 	public void oExemplarFicaráEmprestado() {
+		assertTrue(emprestado);
 		assertTrue(EMPRESTADO.equals(b.obterEstadoLivro(idLivro)));
 	}
 

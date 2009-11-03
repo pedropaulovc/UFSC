@@ -1,7 +1,7 @@
 package historia;
 
 import static org.junit.Assert.assertEquals;
-import static producao.livro.EstadoEmprestimo.CONSULTA_LOCAL;
+import static producao.livroArquivavel.emprestimo.EstadoEmprestimo.CONSULTA_LOCAL;
 import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
