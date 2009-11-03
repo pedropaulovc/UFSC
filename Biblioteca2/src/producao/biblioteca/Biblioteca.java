@@ -13,7 +13,6 @@ import producao.livro.TipoLivro;
 import producao.livroArquivavel.LivroArquivavel;
 import producao.livroArquivavel.LivroArquivavelNulo;
 import producao.livroArquivavel.TipoLivroArquivavel;
-import producao.livroArquivavel.dados.DadosLivroArquivavelNulo;
 
 public class Biblioteca implements TipoBiblioteca {
 
@@ -21,6 +20,8 @@ public class Biblioteca implements TipoBiblioteca {
 	private Map<TipoId, TipoLivroArquivavel> mapaLivros;
 
 	public Biblioteca(TipoConfiguracaoBiblioteca configuração) {
+		assert configuração != null;
+
 		this.config = configuração;
 		this.mapaLivros = new HashMap<TipoId, TipoLivroArquivavel>();
 	}
@@ -38,28 +39,27 @@ public class Biblioteca implements TipoBiblioteca {
 	}
 
 	public TipoId adicionar(TipoLivro livro) {
-		TipoLivroArquivavel arquivavel = new LivroArquivavel(livro,
-				new DadosLivroArquivavelNulo());
+		TipoLivroArquivavel arquivavel = new LivroArquivavel(livro);
 		mapaLivros.put(arquivavel.obterId(), arquivavel);
 
 		return arquivavel.obterId();
 	}
 
 	public boolean alterarEstado(TipoId idLivro, EstadoEmprestimo estado) {
-		return mapaLivros.get(idLivro).alterarEstado(estado);
+		return obterLivroArquivavel(idLivro).alterarEstado(estado);
 	}
 
 	public boolean devolver(TipoId idLivro) {
-		return mapaLivros.get(idLivro).devolver();
+		return obterLivroArquivavel(idLivro).devolver();
 	}
 
 	public boolean emprestar(TipoId idLivro) {
-		return mapaLivros.get(idLivro).emprestar(
+		return obterLivroArquivavel(idLivro).emprestar(
 				new PrazoDevolucao(config.obterPrazoDevolucaoInteiro()));
 	}
 
 	public EstadoEmprestimo obterEstadoLivro(TipoId idLivro) {
-		return mapaLivros.get(idLivro).obterEstado();
+		return obterLivroArquivavel(idLivro).obterEstado();
 	}
 
 	public TipoLivro obterLivro(TipoId idLivro) {
@@ -67,14 +67,14 @@ public class Biblioteca implements TipoBiblioteca {
 	}
 
 	public TipoPrazoDevolucao obterPrazoDevolucao(TipoId idLivro) {
-		return mapaLivros.get(idLivro).obterPrazoDevolucao();
+		return obterLivroArquivavel(idLivro).obterPrazoDevolucao();
 	}
 	
 	private TipoLivroArquivavel obterLivroArquivavel(TipoId idLivro){
 		TipoLivroArquivavel livro = mapaLivros.get(idLivro);
 		if(livro != null)
 			return livro;
-		return new LivroArquivavelNulo();	
+		return new LivroArquivavelNulo();
 	}
 
 }

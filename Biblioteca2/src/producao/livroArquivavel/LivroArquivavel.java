@@ -1,6 +1,7 @@
 package producao.livroArquivavel;
 
-import static producao.livro.EstadoEmprestimo.*;
+import static producao.livro.EstadoEmprestimo.DISPONÍVEL;
+import static producao.livro.EstadoEmprestimo.EMPRESTADO;
 import producao.dados.id.Id;
 import producao.dados.id.TipoId;
 import producao.dados.numeroChamada.TipoNumeroChamada;
@@ -9,6 +10,7 @@ import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.EstadoEmprestimo;
 import producao.livro.Livro;
 import producao.livro.TipoLivro;
+import producao.livroArquivavel.dados.DadosLivroArquivavelNulo;
 import producao.livroArquivavel.dados.TipoDadosLivroArquivavel;
 
 public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
@@ -27,13 +29,17 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
 		this.prazoDevolucao = new PrazoDevolucaoNulo();
 		this.dados = dados;
 	}
-	
-	public TipoId obterId(){
+
+	public LivroArquivavel(TipoLivro livro) {
+		this(livro, new DadosLivroArquivavelNulo());
+	}
+
+	public TipoId obterId() {
 		return id;
 	}
 
 	public boolean alterarEstado(EstadoEmprestimo estado) {
-		if(estado.equals(EMPRESTADO))
+		if (estado.equals(EMPRESTADO))
 			return false;
 		this.estado = estado;
 		return true;
