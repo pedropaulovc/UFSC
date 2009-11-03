@@ -6,12 +6,12 @@ import infra.CenarioComBiblioteca;
 import org.junit.Test;
 
 import producao.biblioteca.TipoBiblioteca;
+import producao.dados.id.TipoId;
 import producao.livro.TipoLivro;
-import producao.livro.id.TipoIdLivro;
 
 public class AdicionarLivroBiblioteca extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
-	private TipoIdLivro idLivro;
+	private TipoId idLivro;
 	private TipoLivro livro;
 
 	public void dadoQue() {

@@ -6,7 +6,7 @@ import infra.CenarioComBiblioteca;
 import org.junit.Test;
 
 import producao.biblioteca.TipoBiblioteca;
-import producao.livro.id.IdLivro;
+import producao.dados.id.Id;
 
 public class RemoverLivroInexistente extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
@@ -32,7 +32,7 @@ public class RemoverLivroInexistente extends CenarioComBiblioteca {
 	}
 	
 	private void removeLivroInexistente() {
-		b.removerLivro(new IdLivro());
+		b.removerLivro(new Id());
 	}
 
 	@Test

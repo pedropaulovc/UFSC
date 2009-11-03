@@ -6,8 +6,8 @@ import infra.CenarioComBiblioteca;
 import org.junit.Test;
 
 import producao.biblioteca.TipoBiblioteca;
+import producao.dados.id.Id;
 import producao.livro.LivroNulo;
-import producao.livro.id.IdLivro;
 
 public class ObterLivroInexistente extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
@@ -32,6 +32,6 @@ public class ObterLivroInexistente extends CenarioComBiblioteca {
 
 	@Test
 	public void nãoRecebeLivro() {
-		assertTrue(b.obterLivro(new IdLivro()) instanceof LivroNulo);
+		assertTrue(b.obterLivro(new Id()) instanceof LivroNulo);
 	}
 }

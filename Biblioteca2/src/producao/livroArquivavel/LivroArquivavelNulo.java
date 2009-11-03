@@ -1,10 +1,12 @@
 package producao.livroArquivavel;
 
-import static producao.livro.EstadoEmprestimo.*;
+import static producao.livro.EstadoEmprestimo.DISPONÍVEL;
 import producao.dados.anoPublicacao.AnoPublicacaoNulo;
 import producao.dados.anoPublicacao.TipoAnoPublicacao;
 import producao.dados.autor.AutorNulo;
 import producao.dados.autor.TipoAutor;
+import producao.dados.id.IdNulo;
+import producao.dados.id.TipoId;
 import producao.dados.nomeEditora.NomeEditoraNulo;
 import producao.dados.nomeEditora.TipoNomeEditora;
 import producao.dados.numeroChamada.NumeroChamadaNulo;
@@ -18,8 +20,6 @@ import producao.livro.LivroNulo;
 import producao.livro.TipoLivro;
 import producao.livro.dados.DadosLivroNulo;
 import producao.livro.dados.TipoDadosLivro;
-import producao.livro.id.IdLivroNulo;
-import producao.livro.id.TipoIdLivro;
 
 public class LivroArquivavelNulo implements TipoLivroArquivavel {
 
@@ -39,8 +39,8 @@ public class LivroArquivavelNulo implements TipoLivroArquivavel {
 		return DISPONÍVEL;
 	}
 
-	public TipoIdLivro obterId() {
-		return new IdLivroNulo();
+	public TipoId obterId() {
+		return new IdNulo();
 	}
 
 	public TipoLivro obterLivro() {

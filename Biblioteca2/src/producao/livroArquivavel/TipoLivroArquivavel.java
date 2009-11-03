@@ -1,13 +1,13 @@
 package producao.livroArquivavel;
 
+import producao.dados.id.TipoId;
 import producao.dados.numeroChamada.TipoNumeroChamada;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.EstadoEmprestimo;
 import producao.livro.TipoLivro;
-import producao.livro.id.TipoIdLivro;
 
 public interface TipoLivroArquivavel extends TipoLivro {
-	public TipoIdLivro obterId();
+	public TipoId obterId();
 	
 	public TipoNumeroChamada obterNumeroChamada();
 

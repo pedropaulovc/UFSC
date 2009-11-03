@@ -5,6 +5,7 @@ public class Titulo implements TipoTitulo {
 	private String titulo;
 
 	public Titulo(String titulo) {
+		assert titulo.length() != 0;
 		this.titulo = titulo;
 	}
 	

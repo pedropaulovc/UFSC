@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
+import producao.dados.id.TipoId;
 import producao.dados.nome.TipoNome;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.EstadoEmprestimo;
-import producao.livroArquivavel.LivroArquivavel;
 import producao.livro.TipoLivro;
-import producao.livro.id.TipoIdLivro;
+import producao.livroArquivavel.LivroArquivavel;
 import producao.livroArquivavel.LivroArquivavelNulo;
 import producao.livroArquivavel.TipoLivroArquivavel;
 import producao.livroArquivavel.dados.DadosLivroArquivavelNulo;
@@ -18,11 +18,11 @@ import producao.livroArquivavel.dados.DadosLivroArquivavelNulo;
 public class Biblioteca implements TipoBiblioteca {
 
 	private TipoConfiguracaoBiblioteca config;
-	private Map<TipoIdLivro, TipoLivroArquivavel> mapaLivros;
+	private Map<TipoId, TipoLivroArquivavel> mapaLivros;
 
 	public Biblioteca(TipoConfiguracaoBiblioteca configuração) {
 		this.config = configuração;
-		this.mapaLivros = new HashMap<TipoIdLivro, TipoLivroArquivavel>();
+		this.mapaLivros = new HashMap<TipoId, TipoLivroArquivavel>();
 	}
 
 	public TipoNome obterNome() {
@@ -33,11 +33,11 @@ public class Biblioteca implements TipoBiblioteca {
 		return mapaLivros.size();
 	}
 
-	public void removerLivro(TipoIdLivro livro) {
+	public void removerLivro(TipoId livro) {
 		mapaLivros.remove(livro);
 	}
 
-	public TipoIdLivro adicionar(TipoLivro livro) {
+	public TipoId adicionar(TipoLivro livro) {
 		TipoLivroArquivavel arquivavel = new LivroArquivavel(livro,
 				new DadosLivroArquivavelNulo());
 		mapaLivros.put(arquivavel.obterId(), arquivavel);
@@ -45,32 +45,32 @@ public class Biblioteca implements TipoBiblioteca {
 		return arquivavel.obterId();
 	}
 
-	public boolean alterarEstado(TipoIdLivro idLivro, EstadoEmprestimo estado) {
+	public boolean alterarEstado(TipoId idLivro, EstadoEmprestimo estado) {
 		return mapaLivros.get(idLivro).alterarEstado(estado);
 	}
 
-	public boolean devolver(TipoIdLivro idLivro) {
+	public boolean devolver(TipoId idLivro) {
 		return mapaLivros.get(idLivro).devolver();
 	}
 
-	public boolean emprestar(TipoIdLivro idLivro) {
+	public boolean emprestar(TipoId idLivro) {
 		return mapaLivros.get(idLivro).emprestar(
 				new PrazoDevolucao(config.obterPrazoDevolucaoInteiro()));
 	}
 
-	public EstadoEmprestimo obterEstadoLivro(TipoIdLivro idLivro) {
+	public EstadoEmprestimo obterEstadoLivro(TipoId idLivro) {
 		return mapaLivros.get(idLivro).obterEstado();
 	}
 
-	public TipoLivro obterLivro(TipoIdLivro idLivro) {
+	public TipoLivro obterLivro(TipoId idLivro) {
 		return obterLivroArquivavel(idLivro).obterLivro();
 	}
 
-	public TipoPrazoDevolucao obterPrazoDevolucao(TipoIdLivro idLivro) {
+	public TipoPrazoDevolucao obterPrazoDevolucao(TipoId idLivro) {
 		return mapaLivros.get(idLivro).obterPrazoDevolucao();
 	}
 	
-	private TipoLivroArquivavel obterLivroArquivavel(TipoIdLivro idLivro){
+	private TipoLivroArquivavel obterLivroArquivavel(TipoId idLivro){
 		TipoLivroArquivavel livro = mapaLivros.get(idLivro);
 		if(livro != null)
 			return livro;

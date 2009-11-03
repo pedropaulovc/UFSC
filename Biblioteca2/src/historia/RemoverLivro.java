@@ -6,11 +6,11 @@ import infra.CenarioComBiblioteca;
 import org.junit.Test;
 
 import producao.biblioteca.TipoBiblioteca;
-import producao.livro.id.TipoIdLivro;
+import producao.dados.id.TipoId;
 
 public class RemoverLivro extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
-	private TipoIdLivro id;
+	private TipoId id;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComUmLivro();

@@ -1,19 +1,19 @@
 package producao.livroArquivavel;
 
 import static producao.livro.EstadoEmprestimo.*;
+import producao.dados.id.Id;
+import producao.dados.id.TipoId;
 import producao.dados.numeroChamada.TipoNumeroChamada;
 import producao.dados.prazoDevolucao.PrazoDevolucaoNulo;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.EstadoEmprestimo;
 import producao.livro.Livro;
 import producao.livro.TipoLivro;
-import producao.livro.id.IdLivro;
-import producao.livro.id.TipoIdLivro;
 import producao.livroArquivavel.dados.TipoDadosLivroArquivavel;
 
 public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
 
-	private TipoIdLivro id;
+	private TipoId id;
 	private EstadoEmprestimo estado;
 	private TipoPrazoDevolucao prazoDevolucao;
 	private TipoDadosLivroArquivavel dados;
@@ -22,13 +22,13 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
 	public LivroArquivavel(TipoLivro livro, TipoDadosLivroArquivavel dados) {
 		super(livro.obterDados());
 		this.livro = livro;
-		this.id = new IdLivro();
+		this.id = new Id();
 		this.estado = DISPONÍVEL;
 		this.prazoDevolucao = new PrazoDevolucaoNulo();
 		this.dados = dados;
 	}
 	
-	public TipoIdLivro obterId(){
+	public TipoId obterId(){
 		return id;
 	}
 

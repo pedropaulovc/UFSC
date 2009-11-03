@@ -8,12 +8,12 @@ import infra.CenarioComBiblioteca;
 import org.junit.Test;
 
 import producao.biblioteca.TipoBiblioteca;
+import producao.dados.id.TipoId;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
-import producao.livro.id.TipoIdLivro;
 
 public class EmprestarLivro extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
-	private TipoIdLivro idLivro;
+	private TipoId idLivro;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();
