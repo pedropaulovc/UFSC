@@ -6,7 +6,6 @@ import java.util.Map;
 import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
 import producao.dados.id.TipoId;
 import producao.dados.nome.TipoNome;
-import producao.dados.prazoDevolucao.PrazoDevolucao;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.livro.EstadoEmprestimo;
 import producao.livro.TipoLivro;
@@ -46,33 +45,33 @@ public class Biblioteca implements TipoBiblioteca {
 	}
 
 	public boolean alterarEstado(TipoId idLivro, EstadoEmprestimo estado) {
-		return obterLivroArquivavel(idLivro).alterarEstado(estado);
+		return buscarLivro(idLivro).alterarEstado(estado);
 	}
 
 	public boolean devolver(TipoId idLivro) {
-		return obterLivroArquivavel(idLivro).devolver();
+		return buscarLivro(idLivro).devolver();
 	}
 
 	public boolean emprestar(TipoId idLivro) {
-		return obterLivroArquivavel(idLivro).emprestar(
-				new PrazoDevolucao(config.obterPrazoDevolucaoInteiro()));
+		return buscarLivro(idLivro).emprestar(
+				config.obterNovoPrazoDevolucao());
 	}
 
 	public EstadoEmprestimo obterEstadoLivro(TipoId idLivro) {
-		return obterLivroArquivavel(idLivro).obterEstado();
+		return buscarLivro(idLivro).obterEstado();
 	}
 
 	public TipoLivro obterLivro(TipoId idLivro) {
-		return obterLivroArquivavel(idLivro).obterLivro();
+		return buscarLivro(idLivro).obterLivro();
 	}
 
 	public TipoPrazoDevolucao obterPrazoDevolucao(TipoId idLivro) {
-		return obterLivroArquivavel(idLivro).obterPrazoDevolucao();
+		return buscarLivro(idLivro).obterPrazoDevolucao();
 	}
-	
-	private TipoLivroArquivavel obterLivroArquivavel(TipoId idLivro){
+
+	private TipoLivroArquivavel buscarLivro(TipoId idLivro) {
 		TipoLivroArquivavel livro = mapaLivros.get(idLivro);
-		if(livro != null)
+		if (livro != null)
 			return livro;
 		return new LivroArquivavelNulo();
 	}

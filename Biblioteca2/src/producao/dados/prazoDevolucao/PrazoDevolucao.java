@@ -8,10 +8,8 @@ public class PrazoDevolucao implements TipoPrazoDevolucao {
 	private int prazo;
 
 	public PrazoDevolucao(int prazo) {
-		if (prazo < 0){
-			this.dataDevolucao = diaAtual();
-			this.prazo = 0;
-		}
+		assert prazo > 0;
+		
 		this.prazo = prazo;	
 		this.dataDevolucao = diaAtual() + prazo;
 	}
