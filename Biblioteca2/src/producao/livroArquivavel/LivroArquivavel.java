@@ -1,20 +1,17 @@
 package producao.livroArquivavel;
 
-import static producao.livroArquivavel.emprestimo.EstadoEmprestimo.DISPONÍVEL;
-import static producao.livroArquivavel.emprestimo.EstadoEmprestimo.EMPRESTADO;
+import static producao.livro.EstadoEmprestimo.DISPONÍVEL;
+import static producao.livro.EstadoEmprestimo.EMPRESTADO;
 import producao.dados.id.Id;
 import producao.dados.id.TipoId;
 import producao.dados.numeroChamada.TipoNumeroChamada;
 import producao.dados.prazoDevolucao.PrazoDevolucaoNulo;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
+import producao.livro.EstadoEmprestimo;
 import producao.livro.Livro;
 import producao.livro.TipoLivro;
 import producao.livroArquivavel.dados.DadosLivroArquivavelNulo;
 import producao.livroArquivavel.dados.TipoDadosLivroArquivavel;
-import producao.livroArquivavel.devolucao.Devolucao;
-import producao.livroArquivavel.devolucao.DevolucaoNula;
-import producao.livroArquivavel.devolucao.TipoDevolucao;
-import producao.livroArquivavel.emprestimo.EstadoEmprestimo;
 
 public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
 
@@ -48,16 +45,18 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
 		return true;
 	}
 
-	public TipoDevolucao devolver() {
-		if (!estado.equals(EMPRESTADO))
-			return new DevolucaoNula();
+	@Override
+	public boolean devolver() {
+		if (!estado.equals(EMPRESTADO)) {
+			return false;
+		}
 
 		if (prazoDevolucao.estaNoPrazo()) {
 			estado = DISPONÍVEL;
 			prazoDevolucao = new PrazoDevolucaoNulo();
-			return new Devolucao();
+			return true;
 		}
-		return new Devolucao();
+		return false;
 	}
 
 	public boolean emprestar(TipoPrazoDevolucao prazoDevolucao) {

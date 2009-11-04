@@ -1,6 +1,6 @@
 package producao.livroArquivavel;
 
-import static producao.livroArquivavel.emprestimo.EstadoEmprestimo.DISPONÍVEL;
+import static producao.livro.EstadoEmprestimo.DISPONÍVEL;
 import producao.dados.anoPublicacao.AnoPublicacaoNulo;
 import producao.dados.anoPublicacao.TipoAnoPublicacao;
 import producao.dados.autor.AutorNulo;
@@ -15,13 +15,11 @@ import producao.dados.prazoDevolucao.PrazoDevolucaoNulo;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.dados.titulo.TipoTitulo;
 import producao.dados.titulo.TituloNulo;
+import producao.livro.EstadoEmprestimo;
 import producao.livro.LivroNulo;
 import producao.livro.TipoLivro;
 import producao.livro.dados.DadosLivroNulo;
 import producao.livro.dados.TipoDadosLivro;
-import producao.livroArquivavel.devolucao.DevolucaoNula;
-import producao.livroArquivavel.devolucao.TipoDevolucao;
-import producao.livroArquivavel.emprestimo.EstadoEmprestimo;
 
 public class LivroArquivavelNulo implements TipoLivroArquivavel {
 
@@ -29,8 +27,8 @@ public class LivroArquivavelNulo implements TipoLivroArquivavel {
 		return false;
 	}
 
-	public TipoDevolucao devolver() {
-		return new DevolucaoNula();
+	public boolean devolver() {
+		return false;
 	}
 
 	public boolean emprestar(TipoPrazoDevolucao tipoPrazoDevolucao) {

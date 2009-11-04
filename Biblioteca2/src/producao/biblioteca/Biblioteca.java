@@ -7,12 +7,11 @@ import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
 import producao.dados.id.TipoId;
 import producao.dados.nome.TipoNome;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
+import producao.livro.EstadoEmprestimo;
 import producao.livro.TipoLivro;
 import producao.livroArquivavel.LivroArquivavel;
 import producao.livroArquivavel.LivroArquivavelNulo;
 import producao.livroArquivavel.TipoLivroArquivavel;
-import producao.livroArquivavel.devolucao.TipoDevolucao;
-import producao.livroArquivavel.emprestimo.EstadoEmprestimo;
 
 public class Biblioteca implements TipoBiblioteca {
 
@@ -49,7 +48,7 @@ public class Biblioteca implements TipoBiblioteca {
 		return buscarLivro(idLivro).alterarEstado(estado);
 	}
 
-	public TipoDevolucao devolver(TipoId idLivro) {
+	public boolean devolver(TipoId idLivro) {
 		return buscarLivro(idLivro).devolver();
 	}
 
