@@ -8,7 +8,7 @@ import producao.livro.TipoLivro;
 
 public interface TipoLivroArquivavel extends TipoLivro {
 	public TipoId obterId();
-	
+
 	public TipoNumeroChamada obterNumeroChamada();
 
 	public boolean emprestar(TipoPrazoDevolucao tipoPrazoDevolucao);

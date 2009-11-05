@@ -12,5 +12,4 @@ public class NumeroChamada implements TipoNumeroChamada {
 		return numeroChamada;
 	}
 
-
 }

@@ -30,7 +30,7 @@ public class RemoverLivroInexistente extends CenarioComBiblioteca {
 
 		assertEquals(1, b.tamanho());
 	}
-	
+
 	private void removeLivroInexistente() {
 		b.removerLivro(new Id());
 	}

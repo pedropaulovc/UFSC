@@ -8,8 +8,8 @@ public class Titulo implements TipoTitulo {
 		assert titulo.length() != 0;
 		this.titulo = titulo;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return titulo;
 	}
 

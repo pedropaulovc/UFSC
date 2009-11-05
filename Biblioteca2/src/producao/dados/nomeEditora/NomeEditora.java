@@ -8,8 +8,8 @@ public class NomeEditora implements TipoNomeEditora {
 		assert editora.length() != 0;
 		this.editora = editora;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return editora;
 	}
 

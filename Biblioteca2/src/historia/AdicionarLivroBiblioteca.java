@@ -50,6 +50,6 @@ public class AdicionarLivroBiblioteca extends CenarioComBiblioteca {
 
 	@Test
 	public void éPossívelObterOLivroArmazenado() {
-		assertEquals(livro, b.obterLivro(idLivro));
+		assertEquals(livro, b.obterDocumento(idLivro));
 	}
 }

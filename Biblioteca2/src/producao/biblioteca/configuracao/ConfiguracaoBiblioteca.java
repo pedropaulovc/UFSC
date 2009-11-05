@@ -8,16 +8,16 @@ public class ConfiguracaoBiblioteca implements TipoConfiguracaoBiblioteca {
 	private TipoNome nome;
 	private int prazoDevolucao;
 
-	public ConfiguracaoBiblioteca(TipoNome nome, TipoPrazoDevolucao prazo){		
+	public ConfiguracaoBiblioteca(TipoNome nome, TipoPrazoDevolucao prazo) {
 		this.nome = nome;
 		this.prazoDevolucao = prazo.obterPrazoInteiro();
 	}
 
-	public TipoNome obterNomeBiblioteca(){
+	public TipoNome obterNomeBiblioteca() {
 		return nome;
 	}
-	
-	public TipoPrazoDevolucao obterNovoPrazoDevolucao(){
+
+	public TipoPrazoDevolucao obterNovoPrazoDevolucao() {
 		return new PrazoDevolucao(prazoDevolucao);
 	}
 }

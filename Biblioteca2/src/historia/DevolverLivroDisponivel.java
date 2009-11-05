@@ -41,7 +41,7 @@ public class DevolverLivroDisponivel extends CenarioComBiblioteca {
 
 	@Test
 	public void oExemplarContinuaDisponível() {
-		assertEquals(DISPONÍVEL, b.obterEstadoLivro(idLivro));
+		assertEquals(DISPONÍVEL, b.obterEstadoDocumento(idLivro));
 	}
 
 	@Test

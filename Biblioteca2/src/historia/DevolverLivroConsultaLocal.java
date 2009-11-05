@@ -46,7 +46,7 @@ public class DevolverLivroConsultaLocal extends CenarioComBiblioteca {
 
 	@Test
 	public void oExemplarContinuaEmConsultaLocal() {
-		assertEquals(CONSULTA_LOCAL, b.obterEstadoLivro(idLivro));
+		assertEquals(CONSULTA_LOCAL, b.obterEstadoDocumento(idLivro));
 	}
 
 	@Test

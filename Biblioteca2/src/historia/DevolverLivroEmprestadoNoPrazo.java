@@ -46,7 +46,7 @@ public class DevolverLivroEmprestadoNoPrazo extends CenarioComBiblioteca {
 
 	@Test
 	public void oExemplarFicaráDisponível() {
-		assertEquals(DISPONÍVEL, b.obterEstadoLivro(idLivro));
+		assertEquals(DISPONÍVEL, b.obterEstadoDocumento(idLivro));
 	}
 
 	@Test

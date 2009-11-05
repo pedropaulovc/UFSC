@@ -40,6 +40,6 @@ public class TornarLivroEmRestauracao extends CenarioComBiblioteca {
 
 	@Test
 	public void oLivroSeTornaConsultaLocal() {
-		assertEquals(EM_RESTAURAÇÃO, b.obterEstadoLivro(idLivro));
+		assertEquals(EM_RESTAURAÇÃO, b.obterEstadoDocumento(idLivro));
 	}
 }

@@ -3,20 +3,20 @@ package producao.dados.id;
 import java.util.UUID;
 
 public class Id implements TipoId {
-	private UUID id ;
+	private UUID id;
 
-	public Id(){
+	public Id() {
 		this.id = UUID.randomUUID();
 	}
-	
-	public Id(String id){
+
+	public Id(String id) {
 		this.id = UUID.fromString(id);
 	}
 
-	public String toString(){
+	public String toString() {
 		return id.toString();
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

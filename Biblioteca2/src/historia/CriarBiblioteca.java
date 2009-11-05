@@ -33,8 +33,8 @@ public class CriarBiblioteca extends Cenario {
 	}
 
 	private void existemConfiguraçõesValidasBiblioteca() {
-		configuração = new ConfiguracaoBiblioteca(new Nome(
-				"Biblioteca Central"), new PrazoDevolucao(15));
+		configuração = new ConfiguracaoBiblioteca(
+				new Nome("Biblioteca Central"), new PrazoDevolucao(15));
 	}
 
 	private void crioUmaBiblioteca() {

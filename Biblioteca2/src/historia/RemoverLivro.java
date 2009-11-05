@@ -31,7 +31,7 @@ public class RemoverLivro extends CenarioComBiblioteca {
 
 		assertEquals(1, b.tamanho());
 	}
-	
+
 	private void removeOLivro() {
 		b.removerLivro(id);
 	}

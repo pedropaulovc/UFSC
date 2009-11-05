@@ -43,11 +43,11 @@ public class EmprestarLivro extends CenarioComBiblioteca {
 
 	@Test
 	public void oExemplarFicaráEmprestado() {
-		assertTrue(EMPRESTADO.equals(b.obterEstadoLivro(idLivro)));
+		assertTrue(EMPRESTADO.equals(b.obterEstadoDocumento(idLivro)));
 	}
 
 	@Test
-	public void oPrazoDeDevolucaoÉDe15Dias() {		
+	public void oPrazoDeDevolucaoÉDe15Dias() {
 		assertEquals(new PrazoDevolucao(15), b.obterPrazoDevolucao(idLivro));
 	}
 }

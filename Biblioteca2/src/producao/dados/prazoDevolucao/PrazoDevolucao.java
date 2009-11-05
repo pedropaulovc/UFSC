@@ -9,8 +9,8 @@ public class PrazoDevolucao implements TipoPrazoDevolucao {
 
 	public PrazoDevolucao(int prazo) {
 		assert prazo > 0;
-		
-		this.prazo = prazo;	
+
+		this.prazo = prazo;
 		this.dataDevolucao = diaAtual() + prazo;
 	}
 

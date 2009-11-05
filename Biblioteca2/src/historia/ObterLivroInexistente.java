@@ -28,10 +28,11 @@ public class ObterLivroInexistente extends CenarioComBiblioteca {
 		b = obterBiblioteca();
 	}
 
-	public void obtemDadosDeUmLivroInexistente() {}
+	public void obtemDadosDeUmLivroInexistente() {
+	}
 
 	@Test
 	public void nãoRecebeLivro() {
-		assertTrue(b.obterLivro(new Id()) instanceof LivroNulo);
+		assertTrue(b.obterDocumento(new Id()) instanceof LivroNulo);
 	}
 }

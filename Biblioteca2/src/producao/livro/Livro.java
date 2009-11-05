@@ -10,10 +10,10 @@ public class Livro implements TipoLivro {
 
 	private TipoDadosLivro dados;
 
-	public Livro(TipoDadosLivro dados){
+	public Livro(TipoDadosLivro dados) {
 		this.dados = dados;
 	}
-	
+
 	public TipoAutor obterAutor() {
 		return dados.obterAutor();
 	}
@@ -21,8 +21,8 @@ public class Livro implements TipoLivro {
 	public TipoTitulo obterTitulo() {
 		return dados.obterTitulo();
 	}
-	
-	public TipoDadosLivro obterDados(){
+
+	public TipoDadosLivro obterDados() {
 		return dados;
 	}
 

@@ -37,8 +37,8 @@ public abstract class CenarioComBiblioteca extends Cenario {
 	public TipoBiblioteca obterBiblioteca() {
 		return new Biblioteca(configBiblioteca);
 	}
-	
-	public TipoEditora obterEditora(){
+
+	public TipoEditora obterEditora() {
 		return editora;
 	}
 }

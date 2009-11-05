@@ -12,8 +12,9 @@ import producao.livro.TipoLivro;
 import producao.livroArquivavel.LivroArquivavel;
 import producao.livroArquivavel.LivroArquivavelNulo;
 import producao.livroArquivavel.TipoLivroArquivavel;
+import producao.xteca.Xteca;
 
-public class Biblioteca implements TipoBiblioteca {
+public class Biblioteca extends Xteca implements TipoBiblioteca {
 
 	private TipoConfiguracaoBiblioteca config;
 	private Map<TipoId, TipoLivroArquivavel> mapaLivros;
@@ -53,15 +54,14 @@ public class Biblioteca implements TipoBiblioteca {
 	}
 
 	public boolean emprestar(TipoId idLivro) {
-		return buscarLivro(idLivro).emprestar(
-				config.obterNovoPrazoDevolucao());
+		return buscarLivro(idLivro).emprestar(config.obterNovoPrazoDevolucao());
 	}
 
-	public EstadoEmprestimo obterEstadoLivro(TipoId idLivro) {
+	public EstadoEmprestimo obterEstadoDocumento(TipoId idLivro) {
 		return buscarLivro(idLivro).obterEstado();
 	}
 
-	public TipoLivro obterLivro(TipoId idLivro) {
+	public TipoLivro obterDocumento(TipoId idLivro) {
 		return buscarLivro(idLivro).obterLivro();
 	}
 
@@ -75,5 +75,4 @@ public class Biblioteca implements TipoBiblioteca {
 			return livro;
 		return new LivroArquivavelNulo();
 	}
-
 }

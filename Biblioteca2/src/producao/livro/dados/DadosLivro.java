@@ -17,7 +17,7 @@ public class DadosLivro implements TipoDadosLivro {
 		assert autor != null;
 		assert editora != null;
 		assert anoPublicacao != null;
-		
+
 		this.titulo = titulo;
 		this.autor = autor;
 		this.editora = editora;

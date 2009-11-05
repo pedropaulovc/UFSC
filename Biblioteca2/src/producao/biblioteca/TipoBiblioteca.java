@@ -1,29 +1,11 @@
 package producao.biblioteca;
 
 import producao.dados.id.TipoId;
-import producao.dados.nome.TipoNome;
-import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
-import producao.livro.EstadoEmprestimo;
 import producao.livro.TipoLivro;
+import producao.xteca.TipoXteca;
 
-public interface TipoBiblioteca {
-	public TipoNome obterNome();
+public interface TipoBiblioteca extends TipoXteca {
+	public TipoId adicionar(TipoLivro documento);
 
-	public int tamanho();
-
-	public TipoId adicionar(TipoLivro livro);
-
-	public void removerLivro(TipoId livro);
-
-	public boolean emprestar(TipoId idLivro);
-
-	public EstadoEmprestimo obterEstadoLivro(TipoId idExemplar);
-
-	public TipoPrazoDevolucao obterPrazoDevolucao(TipoId idExemplar);
-
-	public boolean devolver(TipoId idExemplar);
-
-	public boolean alterarEstado(TipoId idLivro, EstadoEmprestimo estado);
-
-	public TipoLivro obterLivro(TipoId idLivro);
+	public TipoLivro obterDocumento(TipoId idDocumento);
 }

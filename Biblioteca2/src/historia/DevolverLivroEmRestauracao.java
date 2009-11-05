@@ -46,7 +46,7 @@ public class DevolverLivroEmRestauracao extends CenarioComBiblioteca {
 
 	@Test
 	public void oExemplarContinuaEmRestauração() {
-		assertEquals(EM_RESTAURAÇÃO, b.obterEstadoLivro(idLivro));
+		assertEquals(EM_RESTAURAÇÃO, b.obterEstadoDocumento(idLivro));
 	}
 
 	@Test
