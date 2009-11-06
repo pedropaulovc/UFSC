@@ -1,7 +1,7 @@
 package historia.biblioteca;
 
 import static org.junit.Assert.assertEquals;
-import static producao.livro.EstadoEmprestimo.DISPONÍVEL;
+import static producao.documento.arquivavel.EstadoEmprestimo.DISPONÍVEL;
 import infra.CenarioComBiblioteca;
 
 import org.junit.Test;

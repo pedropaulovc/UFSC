@@ -1,9 +1,11 @@
 package producao.xteca;
 
+import java.util.Observer;
+
 import producao.dados.id.TipoId;
-import producao.dados.nome.TipoNome;
+import producao.dados.nome.modelo.TipoNome;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
-import producao.livro.EstadoEmprestimo;
+import producao.documento.arquivavel.EstadoEmprestimo;
 
 public interface TipoXteca {
 	public TipoNome obterNome();
@@ -21,4 +23,6 @@ public interface TipoXteca {
 	public boolean devolver(TipoId idDocumento);
 
 	public boolean alterarEstado(TipoId idDocumento, EstadoEmprestimo estado);
+	
+	public void adicionarObservador(Observer o);
 }

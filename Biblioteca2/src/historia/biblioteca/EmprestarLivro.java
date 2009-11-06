@@ -2,7 +2,7 @@ package historia.biblioteca;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static producao.livro.EstadoEmprestimo.EMPRESTADO;
+import static producao.documento.arquivavel.EstadoEmprestimo.EMPRESTADO;
 import infra.CenarioComBiblioteca;
 
 import org.junit.Test;

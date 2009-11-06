@@ -10,8 +10,14 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>br.ufsc.edugraf.edix.compiladorDix</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>br.ufsc.edugraf.edix.natureDoDix</nature>
 	</natures>
 </projectDescription>

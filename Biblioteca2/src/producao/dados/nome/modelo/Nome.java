@@ -1,4 +1,4 @@
-package producao.dados.nome;
+package producao.dados.nome.modelo;
 
 public class Nome implements TipoNome {
 	private String nome;

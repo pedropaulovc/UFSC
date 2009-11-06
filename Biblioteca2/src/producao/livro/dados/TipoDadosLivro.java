@@ -1,6 +1,6 @@
 package producao.livro.dados;
 
-import producao.dados.anoPublicacao.TipoAnoPublicacao;
+import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.TipoAutor;
 import producao.dados.nomeEditora.TipoNomeEditora;
 import producao.dados.titulo.TipoTitulo;

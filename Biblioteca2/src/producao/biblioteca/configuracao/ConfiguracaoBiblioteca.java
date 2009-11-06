@@ -1,6 +1,6 @@
 package producao.biblioteca.configuracao;
 
-import producao.dados.nome.TipoNome;
+import producao.dados.nome.modelo.TipoNome;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.xteca.configuracao.ConfiguracaoXteca;
 

@@ -2,17 +2,19 @@ package producao.xteca;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import producao.dados.id.TipoId;
-import producao.dados.nome.TipoNome;
+import producao.dados.nome.modelo.TipoNome;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.documento.TipoDocumento;
 import producao.documento.arquivavel.DocumentoArquivavelNulo;
+import producao.documento.arquivavel.EstadoEmprestimo;
 import producao.documento.arquivavel.TipoDocumentoArquivavel;
-import producao.livro.EstadoEmprestimo;
 import producao.xteca.configuracao.TipoConfiguracaoXteca;
 
-public abstract class Xteca implements TipoXteca {
+public abstract class Xteca extends Observable implements TipoXteca {
 	private Map<TipoId, TipoDocumentoArquivavel> mapaDocumentos;
 	private TipoConfiguracaoXteca config;
 
@@ -33,32 +35,45 @@ public abstract class Xteca implements TipoXteca {
 
 	public void removerDocumento(TipoId doc) {
 		mapaDocumentos.remove(doc);
+
+		setChanged();
+		notifyObservers(doc);
 	}
 
 	public TipoPrazoDevolucao obterPrazoDevolucao(TipoId idLivro) {
 		return buscarDocumento(idLivro).obterPrazoDevolucao();
 	}
 
-	public boolean devolver(TipoId idLivro) {
-		return buscarDocumento(idLivro).devolver();
+	public boolean devolver(TipoId doc) {
+		boolean devolvido = buscarDocumento(doc).devolver();
+		setChanged();
+		notifyObservers(doc);
+		return devolvido;
 	}
 
-	public boolean alterarEstado(TipoId idLivro, EstadoEmprestimo estado) {
-		return buscarDocumento(idLivro).alterarEstado(estado);
+	public boolean alterarEstado(TipoId doc, EstadoEmprestimo estado) {
+		boolean alterado = buscarDocumento(doc).alterarEstado(estado);
+		setChanged();
+		notifyObservers(doc);
+		return alterado;
 	}
 
-	public EstadoEmprestimo obterEstadoDocumento(TipoId idLivro) {
-		return buscarDocumento(idLivro).obterEstado();
+	public EstadoEmprestimo obterEstadoDocumento(TipoId doc) {
+		return buscarDocumento(doc).obterEstado();
 	}
 
-	public boolean emprestar(TipoId idLivro) {
-		return buscarDocumento(idLivro).emprestar(
+	public boolean emprestar(TipoId doc) {
+		boolean emprestado = buscarDocumento(doc).emprestar(
 				config.obterNovoPrazoDevolucao());
+		setChanged();
+		notifyObservers(doc);
+		return emprestado;
 	}
 
 	public TipoId adicionarDocumento(TipoDocumentoArquivavel doc) {
 		mapaDocumentos.put(doc.obterId(), doc);
-
+		setChanged();
+		notifyObservers(doc);
 		return doc.obterId();
 	}
 
@@ -71,5 +86,9 @@ public abstract class Xteca implements TipoXteca {
 		if (doc != null)
 			return doc;
 		return new DocumentoArquivavelNulo();
+	}
+	
+	public void adicionarObservador(Observer o){
+		addObserver(o);
 	}
 }

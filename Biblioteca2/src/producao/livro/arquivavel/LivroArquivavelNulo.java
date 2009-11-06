@@ -1,7 +1,7 @@
 package producao.livro.arquivavel;
 
-import producao.dados.anoPublicacao.AnoPublicacaoNulo;
-import producao.dados.anoPublicacao.TipoAnoPublicacao;
+import producao.dados.anoPublicacao.modelo.AnoPublicacaoNulo;
+import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.AutorNulo;
 import producao.dados.autor.TipoAutor;
 import producao.dados.nomeEditora.NomeEditoraNulo;

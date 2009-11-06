@@ -5,7 +5,7 @@ import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
-import producao.dados.anoPublicacao.AnoPublicacao;
+import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.autor.Autor;
 import producao.dados.nomeEditora.NomeEditora;
 import producao.dados.titulo.Titulo;

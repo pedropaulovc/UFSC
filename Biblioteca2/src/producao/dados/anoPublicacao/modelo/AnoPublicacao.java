@@ -1,4 +1,4 @@
-package producao.dados.anoPublicacao;
+package producao.dados.anoPublicacao.modelo;
 
 import java.util.Calendar;
 

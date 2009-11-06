@@ -1,14 +1,13 @@
 package producao.documento.arquivavel;
 
-import static producao.livro.EstadoEmprestimo.DISPONÍVEL;
-import static producao.livro.EstadoEmprestimo.EMPRESTADO;
+import static producao.documento.arquivavel.EstadoEmprestimo.DISPONÍVEL;
+import static producao.documento.arquivavel.EstadoEmprestimo.EMPRESTADO;
 import producao.dados.id.Id;
 import producao.dados.id.TipoId;
 import producao.dados.prazoDevolucao.PrazoDevolucaoNulo;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.documento.DocumentoNulo;
 import producao.documento.TipoDocumento;
-import producao.livro.EstadoEmprestimo;
 
 public class DocumentoArquivavel implements TipoDocumentoArquivavel {
 
