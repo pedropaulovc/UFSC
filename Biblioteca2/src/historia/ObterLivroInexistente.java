@@ -33,6 +33,6 @@ public class ObterLivroInexistente extends CenarioComBiblioteca {
 
 	@Test
 	public void nãoRecebeLivro() {
-		assertTrue(b.obterDocumento(new Id()) instanceof LivroNulo);
+		assertTrue(b.obterLivro(new Id()) instanceof LivroNulo);
 	}
 }

@@ -1,10 +1,7 @@
 package producao.biblioteca.configuracao;
 
-import producao.dados.nome.TipoNome;
-import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
+import producao.xteca.configuracao.TipoConfiguracaoXteca;
 
-public interface TipoConfiguracaoBiblioteca {
-	public TipoNome obterNomeBiblioteca();
-
-	public TipoPrazoDevolucao obterNovoPrazoDevolucao();
+public interface TipoConfiguracaoBiblioteca extends TipoConfiguracaoXteca {
+	
 }

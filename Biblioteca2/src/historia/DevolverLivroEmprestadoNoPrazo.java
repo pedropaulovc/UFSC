@@ -33,7 +33,7 @@ public class DevolverLivroEmprestadoNoPrazo extends CenarioComBiblioteca {
 	}
 
 	private void aBibliotecaPossuiUmLivro() {
-		idLivro = b.adicionar(obterLivro());
+		idLivro = b.adicionarLivro(obterLivro());
 	}
 
 	private void oExemplarEstáEmprestado() {

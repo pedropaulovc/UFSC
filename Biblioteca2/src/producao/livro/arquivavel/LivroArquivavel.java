@@ -1,4 +1,4 @@
-package producao.livroArquivavel;
+package producao.livro.arquivavel;
 
 import static producao.livro.EstadoEmprestimo.DISPONÍVEL;
 import static producao.livro.EstadoEmprestimo.EMPRESTADO;
@@ -7,13 +7,15 @@ import producao.dados.id.TipoId;
 import producao.dados.numeroChamada.TipoNumeroChamada;
 import producao.dados.prazoDevolucao.PrazoDevolucaoNulo;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
+import producao.documento.TipoDocumento;
+import producao.documento.arquivavel.TipoDocumentoArquivavel;
 import producao.livro.EstadoEmprestimo;
 import producao.livro.Livro;
 import producao.livro.TipoLivro;
-import producao.livroArquivavel.dados.DadosLivroArquivavelNulo;
-import producao.livroArquivavel.dados.TipoDadosLivroArquivavel;
+import producao.livro.arquivavel.dados.DadosLivroArquivavelNulo;
+import producao.livro.arquivavel.dados.TipoDadosLivroArquivavel;
 
-public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
+public class LivroArquivavel extends Livro implements TipoLivroArquivavel, TipoDocumentoArquivavel {
 
 	private TipoId id;
 	private EstadoEmprestimo estado;
@@ -45,7 +47,6 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
 		return true;
 	}
 
-	@Override
 	public boolean devolver() {
 		if (!estado.equals(EMPRESTADO)) {
 			return false;
@@ -81,6 +82,10 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
 	}
 
 	public TipoLivro obterLivro() {
+		return livro;
+	}
+
+	public TipoDocumento obterDocumento() {
 		return livro;
 	}
 

@@ -1,78 +1,28 @@
 package producao.biblioteca;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
 import producao.dados.id.TipoId;
-import producao.dados.nome.TipoNome;
-import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
-import producao.livro.EstadoEmprestimo;
+import producao.livro.LivroNulo;
 import producao.livro.TipoLivro;
-import producao.livroArquivavel.LivroArquivavel;
-import producao.livroArquivavel.LivroArquivavelNulo;
-import producao.livroArquivavel.TipoLivroArquivavel;
+import producao.livro.arquivavel.LivroArquivavel;
 import producao.xteca.Xteca;
 
 public class Biblioteca extends Xteca implements TipoBiblioteca {
 
-	private TipoConfiguracaoBiblioteca config;
-	private Map<TipoId, TipoLivroArquivavel> mapaLivros;
-
 	public Biblioteca(TipoConfiguracaoBiblioteca configuração) {
-		assert configuração != null;
-
-		this.config = configuração;
-		this.mapaLivros = new HashMap<TipoId, TipoLivroArquivavel>();
+		super(configuração);
 	}
 
-	public TipoNome obterNome() {
-		return config.obterNomeBiblioteca();
+	public TipoId adicionarLivro(TipoLivro livro) {
+		return adicionarDocumento(new LivroArquivavel(livro));
 	}
 
-	public int tamanho() {
-		return mapaLivros.size();
+	public TipoLivro obterLivro(TipoId idLivro) {
+		try {
+			return (TipoLivro) obterDocumento(idLivro);
+		} catch (ClassCastException e) {
+			return new LivroNulo();
+		}
 	}
 
-	public void removerLivro(TipoId livro) {
-		mapaLivros.remove(livro);
-	}
-
-	public TipoId adicionar(TipoLivro livro) {
-		TipoLivroArquivavel arquivavel = new LivroArquivavel(livro);
-		mapaLivros.put(arquivavel.obterId(), arquivavel);
-
-		return arquivavel.obterId();
-	}
-
-	public boolean alterarEstado(TipoId idLivro, EstadoEmprestimo estado) {
-		return buscarLivro(idLivro).alterarEstado(estado);
-	}
-
-	public boolean devolver(TipoId idLivro) {
-		return buscarLivro(idLivro).devolver();
-	}
-
-	public boolean emprestar(TipoId idLivro) {
-		return buscarLivro(idLivro).emprestar(config.obterNovoPrazoDevolucao());
-	}
-
-	public EstadoEmprestimo obterEstadoDocumento(TipoId idLivro) {
-		return buscarLivro(idLivro).obterEstado();
-	}
-
-	public TipoLivro obterDocumento(TipoId idLivro) {
-		return buscarLivro(idLivro).obterLivro();
-	}
-
-	public TipoPrazoDevolucao obterPrazoDevolucao(TipoId idLivro) {
-		return buscarLivro(idLivro).obterPrazoDevolucao();
-	}
-
-	private TipoLivroArquivavel buscarLivro(TipoId idLivro) {
-		TipoLivroArquivavel livro = mapaLivros.get(idLivro);
-		if (livro != null)
-			return livro;
-		return new LivroArquivavelNulo();
-	}
 }

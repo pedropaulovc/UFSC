@@ -5,7 +5,7 @@ import producao.livro.TipoLivro;
 import producao.xteca.TipoXteca;
 
 public interface TipoBiblioteca extends TipoXteca {
-	public TipoId adicionar(TipoLivro documento);
+	public TipoId adicionarLivro(TipoLivro documento);
 
-	public TipoLivro obterDocumento(TipoId idDocumento);
+	public TipoLivro obterLivro(TipoId idDocumento);
 }

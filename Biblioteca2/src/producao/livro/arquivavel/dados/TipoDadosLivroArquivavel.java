@@ -1,4 +1,4 @@
-package producao.livroArquivavel.dados;
+package producao.livro.arquivavel.dados;
 
 import producao.dados.numeroChamada.TipoNumeroChamada;
 

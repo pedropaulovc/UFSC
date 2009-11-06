@@ -37,8 +37,8 @@ public class LivrosDiferentesPossuemIdsDiferentes extends CenarioComBiblioteca {
 	}
 
 	private void adicionarOsLivrosNaBiblioteca() {
-		idLivro1 = b.adicionar(livro1);
-		idLivro2 = b.adicionar(livro2);
+		idLivro1 = b.adicionarLivro(livro1);
+		idLivro2 = b.adicionarLivro(livro2);
 	}
 
 	@Test

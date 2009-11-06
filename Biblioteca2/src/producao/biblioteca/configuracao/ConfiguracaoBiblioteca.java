@@ -13,7 +13,7 @@ public class ConfiguracaoBiblioteca implements TipoConfiguracaoBiblioteca {
 		this.prazoDevolucao = prazo.obterPrazoInteiro();
 	}
 
-	public TipoNome obterNomeBiblioteca() {
+	public TipoNome obterNome() {
 		return nome;
 	}
 

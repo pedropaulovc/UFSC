@@ -32,7 +32,7 @@ public class DevolverLivroDisponivel extends CenarioComBiblioteca {
 	}
 
 	private void aBibliotecaPossuiUmLivro() {
-		idLivro = b.adicionar(obterLivro());
+		idLivro = b.adicionarLivro(obterLivro());
 	}
 
 	private void devolverOExemplarNoPrazo() {

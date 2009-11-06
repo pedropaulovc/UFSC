@@ -40,7 +40,7 @@ public class AdicionarLivroBiblioteca extends CenarioComBiblioteca {
 	}
 
 	private void adicionaLivroNaBiblioteca() {
-		idLivro = b.adicionar(livro);
+		idLivro = b.adicionarLivro(livro);
 	}
 
 	@Test
@@ -50,6 +50,6 @@ public class AdicionarLivroBiblioteca extends CenarioComBiblioteca {
 
 	@Test
 	public void éPossívelObterOLivroArmazenado() {
-		assertEquals(livro, b.obterDocumento(idLivro));
+		assertEquals(livro, b.obterLivro(idLivro));
 	}
 }

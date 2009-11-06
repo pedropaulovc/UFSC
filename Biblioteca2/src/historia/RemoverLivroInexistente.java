@@ -26,13 +26,13 @@ public class RemoverLivroInexistente extends CenarioComBiblioteca {
 	private void existeUmaBibliotecaComUmLivro() {
 		b = obterBiblioteca();
 
-		b.adicionar(obterLivro());
+		b.adicionarLivro(obterLivro());
 
 		assertEquals(1, b.tamanho());
 	}
 
 	private void removeLivroInexistente() {
-		b.removerLivro(new Id());
+		b.removerDocumento(new Id());
 	}
 
 	@Test
