@@ -1,7 +1,7 @@
-package historia;
+package historia.biblioteca;
 
 import static org.junit.Assert.assertEquals;
-import static producao.livro.EstadoEmprestimo.EM_RESTAURAÇÃO;
+import static producao.livro.EstadoEmprestimo.CONSULTA_LOCAL;
 import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
@@ -9,7 +9,7 @@ import org.junit.Test;
 import producao.biblioteca.TipoBiblioteca;
 import producao.dados.id.TipoId;
 
-public class TornarLivroEmRestauracao extends CenarioComBiblioteca {
+public class TornarLivroConsultaLocal extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
 	private TipoId idLivro;
 
@@ -19,11 +19,11 @@ public class TornarLivroEmRestauracao extends CenarioComBiblioteca {
 	}
 
 	public void quando() {
-		tornarOLivroConsultaLocal();
+		tornarOExemplarConsultaLocal();
 	}
 
 	public void então() {
-		oLivroSeTornaConsultaLocal();
+		oExemplarTornaSeConsultaLocal();
 	}
 
 	private void existeUmaBiblioteca() {
@@ -34,12 +34,12 @@ public class TornarLivroEmRestauracao extends CenarioComBiblioteca {
 		idLivro = b.adicionarLivro(obterLivro());
 	}
 
-	private void tornarOLivroConsultaLocal() {
-		b.alterarEstado(idLivro, EM_RESTAURAÇÃO);
+	private void tornarOExemplarConsultaLocal() {
+		b.alterarEstado(idLivro, CONSULTA_LOCAL);
 	}
 
 	@Test
-	public void oLivroSeTornaConsultaLocal() {
-		assertEquals(EM_RESTAURAÇÃO, b.obterEstadoDocumento(idLivro));
+	public void oExemplarTornaSeConsultaLocal() {
+		assertEquals(CONSULTA_LOCAL, b.obterEstadoDocumento(idLivro));
 	}
 }

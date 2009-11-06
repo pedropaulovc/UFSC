@@ -1,4 +1,4 @@
-package historia;
+package historia.biblioteca;
 
 import static junit.framework.Assert.*;
 

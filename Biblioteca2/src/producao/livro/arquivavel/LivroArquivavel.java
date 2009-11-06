@@ -1,13 +1,10 @@
 package producao.livro.arquivavel;
 
-import static producao.livro.EstadoEmprestimo.DISPONÍVEL;
-import static producao.livro.EstadoEmprestimo.EMPRESTADO;
-import producao.dados.id.Id;
 import producao.dados.id.TipoId;
 import producao.dados.numeroChamada.TipoNumeroChamada;
-import producao.dados.prazoDevolucao.PrazoDevolucaoNulo;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.documento.TipoDocumento;
+import producao.documento.arquivavel.DocumentoArquivavel;
 import producao.documento.arquivavel.TipoDocumentoArquivavel;
 import producao.livro.EstadoEmprestimo;
 import producao.livro.Livro;
@@ -15,20 +12,17 @@ import producao.livro.TipoLivro;
 import producao.livro.arquivavel.dados.DadosLivroArquivavelNulo;
 import producao.livro.arquivavel.dados.TipoDadosLivroArquivavel;
 
-public class LivroArquivavel extends Livro implements TipoLivroArquivavel, TipoDocumentoArquivavel {
-
-	private TipoId id;
-	private EstadoEmprestimo estado;
-	private TipoPrazoDevolucao prazoDevolucao;
+public class LivroArquivavel extends Livro implements TipoLivroArquivavel,
+		TipoDocumentoArquivavel {
+	
 	private TipoDadosLivroArquivavel dados;
 	private TipoLivro livro;
+	private TipoDocumentoArquivavel arquivavel;
 
 	public LivroArquivavel(TipoLivro livro, TipoDadosLivroArquivavel dados) {
 		super(livro.obterDados());
+		this.arquivavel = new DocumentoArquivavel();
 		this.livro = livro;
-		this.id = new Id();
-		this.estado = DISPONÍVEL;
-		this.prazoDevolucao = new PrazoDevolucaoNulo();
 		this.dados = dados;
 	}
 
@@ -37,40 +31,23 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel, TipoD
 	}
 
 	public TipoId obterId() {
-		return id;
+		return arquivavel.obterId();
 	}
 
 	public boolean alterarEstado(EstadoEmprestimo estado) {
-		if (estado.equals(EMPRESTADO))
-			return false;
-		this.estado = estado;
-		return true;
+		return arquivavel.alterarEstado(estado);
 	}
 
 	public boolean devolver() {
-		if (!estado.equals(EMPRESTADO)) {
-			return false;
-		}
-
-		if (prazoDevolucao.estaNoPrazo()) {
-			estado = DISPONÍVEL;
-			prazoDevolucao = new PrazoDevolucaoNulo();
-			return true;
-		}
-		return false;
+		return arquivavel.devolver();
 	}
 
 	public boolean emprestar(TipoPrazoDevolucao prazoDevolucao) {
-		if (estado.equals(DISPONÍVEL)) {
-			estado = EMPRESTADO;
-			this.prazoDevolucao = prazoDevolucao;
-			return true;
-		}
-		return false;
+		return arquivavel.emprestar(prazoDevolucao);
 	}
 
 	public EstadoEmprestimo obterEstado() {
-		return estado;
+		return arquivavel.obterEstado();
 	}
 
 	public TipoNumeroChamada obterNumeroChamada() {
@@ -78,7 +55,7 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel, TipoD
 	}
 
 	public TipoPrazoDevolucao obterPrazoDevolucao() {
-		return prazoDevolucao;
+		return arquivavel.obterPrazoDevolucao();
 	}
 
 	public TipoLivro obterLivro() {
@@ -88,5 +65,4 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel, TipoD
 	public TipoDocumento obterDocumento() {
 		return livro;
 	}
-
 }

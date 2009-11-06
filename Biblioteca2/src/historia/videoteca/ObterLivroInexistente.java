@@ -1,4 +1,4 @@
-package historia;
+package historia.videoteca;
 
 import static org.junit.Assert.assertTrue;
 import infra.CenarioComBiblioteca;

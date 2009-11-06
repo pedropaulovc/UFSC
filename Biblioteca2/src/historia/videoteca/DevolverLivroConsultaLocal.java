@@ -1,4 +1,4 @@
-package historia;
+package historia.videoteca;
 
 import static org.junit.Assert.assertEquals;
 import static producao.livro.EstadoEmprestimo.CONSULTA_LOCAL;

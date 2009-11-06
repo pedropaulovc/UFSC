@@ -1,4 +1,4 @@
-package historia;
+package historia.videoteca;
 
 import static org.junit.Assert.assertEquals;
 import static producao.livro.EstadoEmprestimo.DISPONÍVEL;
@@ -9,13 +9,14 @@ import org.junit.Test;
 import producao.biblioteca.TipoBiblioteca;
 import producao.dados.id.TipoId;
 
-public class DevolverLivroDisponivel extends CenarioComBiblioteca {
+public class DevolverLivroEmprestadoNoPrazo extends CenarioComBiblioteca {
 	private TipoBiblioteca b;
 	private TipoId idLivro;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();
 		aBibliotecaPossuiUmLivro();
+		oExemplarEstáEmprestado();
 	}
 
 	public void quando() {
@@ -23,7 +24,7 @@ public class DevolverLivroDisponivel extends CenarioComBiblioteca {
 	}
 
 	public void então() {
-		oExemplarContinuaDisponível();
+		oExemplarFicaráDisponível();
 		oPrazoDeDevolucaoÉZero();
 	}
 
@@ -35,12 +36,16 @@ public class DevolverLivroDisponivel extends CenarioComBiblioteca {
 		idLivro = b.adicionarLivro(obterLivro());
 	}
 
+	private void oExemplarEstáEmprestado() {
+		b.emprestar(idLivro);
+	}
+
 	private void devolverOExemplarNoPrazo() {
 		b.devolver(idLivro);
 	}
 
 	@Test
-	public void oExemplarContinuaDisponível() {
+	public void oExemplarFicaráDisponível() {
 		assertEquals(DISPONÍVEL, b.obterEstadoDocumento(idLivro));
 	}
 

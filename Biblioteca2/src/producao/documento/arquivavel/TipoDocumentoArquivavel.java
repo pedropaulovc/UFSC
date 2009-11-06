@@ -5,7 +5,7 @@ import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.documento.TipoDocumento;
 import producao.livro.EstadoEmprestimo;
 
-public interface TipoDocumentoArquivavel extends TipoDocumento {
+public interface TipoDocumentoArquivavel {
 	public TipoId obterId();
 
 	public boolean emprestar(TipoPrazoDevolucao tipoPrazoDevolucao);
