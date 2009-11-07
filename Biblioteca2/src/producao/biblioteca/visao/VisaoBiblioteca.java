@@ -1,11 +1,11 @@
-package producao.visao.biblioteca;
+package producao.biblioteca.visao;
 
 import java.util.Observable;
 import java.util.Observer;
 
-import producao.biblioteca.TipoBiblioteca;
 import producao.biblioteca.estatistica.VisaoEstatisticas;
 import producao.biblioteca.estatistica.TipoVisaoEstatisticas;
+import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.dados.nome.visao.VisaoNome;
 import producao.formulario.visao.FormularioBiblioteca;
 import producao.formulario.visao.TipoFormularioBiblioteca;

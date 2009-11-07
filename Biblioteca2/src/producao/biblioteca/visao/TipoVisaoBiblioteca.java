@@ -1,4 +1,4 @@
-package producao.visao.biblioteca;
+package producao.biblioteca.visao;
 
 import java.util.Observer;
 

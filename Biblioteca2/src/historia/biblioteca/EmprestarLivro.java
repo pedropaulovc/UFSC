@@ -7,7 +7,7 @@ import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
-import producao.biblioteca.TipoBiblioteca;
+import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.dados.id.TipoId;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
 

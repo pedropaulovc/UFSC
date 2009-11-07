@@ -4,10 +4,10 @@ import static junit.framework.Assert.*;
 
 import org.junit.Test;
 
-import producao.biblioteca.Biblioteca;
-import producao.biblioteca.TipoBiblioteca;
 import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
 import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
+import producao.biblioteca.modelo.Biblioteca;
+import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
 

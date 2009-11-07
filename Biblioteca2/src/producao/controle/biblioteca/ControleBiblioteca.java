@@ -1,7 +1,7 @@
 package producao.controle.biblioteca;
 
-import producao.biblioteca.TipoBiblioteca;
-import producao.visao.biblioteca.TipoVisaoBiblioteca;
+import producao.biblioteca.modelo.TipoBiblioteca;
+import producao.biblioteca.visao.TipoVisaoBiblioteca;
 
 public class ControleBiblioteca implements TipoControleBiblioteca {
 

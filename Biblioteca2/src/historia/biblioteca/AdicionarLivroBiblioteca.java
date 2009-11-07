@@ -5,8 +5,9 @@ import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
-import producao.biblioteca.TipoBiblioteca;
+import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.dados.id.TipoId;
+import static producao.documento.arquivavel.EstadoEmprestimo.*;
 import producao.livro.TipoLivro;
 
 public class AdicionarLivroBiblioteca extends CenarioComBiblioteca {
@@ -26,6 +27,7 @@ public class AdicionarLivroBiblioteca extends CenarioComBiblioteca {
 	public void então() {
 		aBibliotecaPossuiUmLivro();
 		éPossívelObterOLivroArmazenado();
+		oLivroFicaDisponível();
 	}
 
 	@Test
@@ -51,5 +53,10 @@ public class AdicionarLivroBiblioteca extends CenarioComBiblioteca {
 	@Test
 	public void éPossívelObterOLivroArmazenado() {
 		assertEquals(livro, b.obterLivro(idLivro));
+	}
+	
+	@Test
+	public void oLivroFicaDisponível() {
+		assertEquals(DISPONÍVEL, b.obterEstadoDocumento(idLivro));
 	}
 }

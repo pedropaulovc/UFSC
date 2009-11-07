@@ -1,4 +1,4 @@
-package producao.biblioteca;
+package producao.biblioteca.modelo;
 
 import producao.dados.id.TipoId;
 import producao.livro.TipoLivro;
