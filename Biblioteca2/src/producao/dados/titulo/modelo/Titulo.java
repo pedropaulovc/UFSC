@@ -1,4 +1,4 @@
-package producao.dados.titulo;
+package producao.dados.titulo.modelo;
 
 public class Titulo implements TipoTitulo {
 

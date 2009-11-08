@@ -1,7 +1,7 @@
 package producao.dados.anoPublicacao.modelo;
 
-import producao.dados.TipoInformacao;
+import producao.dados.TipoDados;
 
-public interface TipoAnoPublicacao extends TipoInformacao {
+public interface TipoAnoPublicacao extends TipoDados {
 
 }

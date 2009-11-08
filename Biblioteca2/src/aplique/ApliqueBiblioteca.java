@@ -2,11 +2,11 @@ package aplique;
 
 import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
 import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
+import producao.biblioteca.controle.ControleBiblioteca;
 import producao.biblioteca.modelo.Biblioteca;
 import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.biblioteca.visao.TipoVisaoBiblioteca;
 import producao.biblioteca.visao.VisaoBiblioteca;
-import producao.controle.biblioteca.ControleBiblioteca;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
 import edugraf.jadix.Aplique;

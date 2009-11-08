@@ -2,14 +2,14 @@ package producao.livro.arquivavel;
 
 import producao.dados.anoPublicacao.modelo.AnoPublicacaoNulo;
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
-import producao.dados.autor.AutorNulo;
-import producao.dados.autor.TipoAutor;
+import producao.dados.autor.modelo.AutorNulo;
+import producao.dados.autor.modelo.TipoAutor;
 import producao.dados.nomeEditora.NomeEditoraNulo;
 import producao.dados.nomeEditora.TipoNomeEditora;
 import producao.dados.numeroChamada.NumeroChamadaNulo;
 import producao.dados.numeroChamada.TipoNumeroChamada;
-import producao.dados.titulo.TipoTitulo;
-import producao.dados.titulo.TituloNulo;
+import producao.dados.titulo.modelo.TipoTitulo;
+import producao.dados.titulo.modelo.TituloNulo;
 import producao.livro.LivroNulo;
 import producao.livro.TipoLivro;
 import producao.livro.dados.DadosLivroNulo;

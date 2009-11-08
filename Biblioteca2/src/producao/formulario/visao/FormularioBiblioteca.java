@@ -1,5 +1,7 @@
 package producao.formulario.visao;
 
+import producao.formulario.campos.CamposFormulario;
+import producao.formulario.campos.TipoCamposFormulario;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
 

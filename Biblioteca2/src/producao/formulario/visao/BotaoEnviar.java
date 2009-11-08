@@ -1,5 +1,6 @@
 package producao.formulario.visao;
 
+import producao.formulario.campos.CampoAbstratoFormulario;
 import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;

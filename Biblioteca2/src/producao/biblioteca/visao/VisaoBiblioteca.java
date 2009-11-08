@@ -20,6 +20,7 @@ public class VisaoBiblioteca implements TipoVisaoBiblioteca, Observer {
 		this.b = biblioteca;
 		new VisaoNome(b.obterNome(), pagina);
 		estatisticas = new VisaoEstatisticas(pagina);
+		estatisticas.exibir("Não há livro no acervo ainda");
 		formulario = new FormularioBiblioteca(pagina);
 	}
 

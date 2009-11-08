@@ -1,4 +1,4 @@
-package producao.dados.autor;
+package producao.dados.autor.modelo;
 
 public class Autor implements TipoAutor {
 

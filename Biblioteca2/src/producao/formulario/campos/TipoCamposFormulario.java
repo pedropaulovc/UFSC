@@ -1,4 +1,4 @@
-package producao.formulario.visao;
+package producao.formulario.campos;
 
 public interface TipoCamposFormulario {
 

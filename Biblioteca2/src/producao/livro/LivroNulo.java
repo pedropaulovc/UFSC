@@ -2,12 +2,12 @@ package producao.livro;
 
 import producao.dados.anoPublicacao.modelo.AnoPublicacaoNulo;
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
-import producao.dados.autor.AutorNulo;
-import producao.dados.autor.TipoAutor;
+import producao.dados.autor.modelo.AutorNulo;
+import producao.dados.autor.modelo.TipoAutor;
 import producao.dados.nomeEditora.NomeEditoraNulo;
 import producao.dados.nomeEditora.TipoNomeEditora;
-import producao.dados.titulo.TipoTitulo;
-import producao.dados.titulo.TituloNulo;
+import producao.dados.titulo.modelo.TipoTitulo;
+import producao.dados.titulo.modelo.TituloNulo;
 import producao.livro.dados.DadosLivroNulo;
 import producao.livro.dados.TipoDadosLivro;
 

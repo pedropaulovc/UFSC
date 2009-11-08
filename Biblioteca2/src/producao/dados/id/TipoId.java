@@ -1,7 +1,7 @@
 package producao.dados.id;
 
-import producao.dados.TipoInformacao;
+import producao.dados.TipoDados;
 
-public interface TipoId extends TipoInformacao {
+public interface TipoId extends TipoDados {
 
 }

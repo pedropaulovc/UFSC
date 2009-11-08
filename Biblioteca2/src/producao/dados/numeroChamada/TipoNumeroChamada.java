@@ -1,7 +1,7 @@
 package producao.dados.numeroChamada;
 
-import producao.dados.TipoInformacao;
+import producao.dados.TipoDados;
 
-public interface TipoNumeroChamada extends TipoInformacao {
+public interface TipoNumeroChamada extends TipoDados {
 
 }

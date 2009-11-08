@@ -1,5 +1,5 @@
 package producao.dados;
 
-public interface TipoInformacao {
+public interface TipoDados {
 	String toString();
 }

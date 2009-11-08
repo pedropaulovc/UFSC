@@ -6,9 +6,9 @@ import infra.CenarioComBiblioteca;
 import org.junit.Test;
 
 import producao.dados.anoPublicacao.modelo.AnoPublicacao;
-import producao.dados.autor.Autor;
+import producao.dados.autor.modelo.Autor;
 import producao.dados.nomeEditora.NomeEditora;
-import producao.dados.titulo.Titulo;
+import producao.dados.titulo.modelo.Titulo;
 import producao.livro.TipoLivro;
 import producao.livro.dados.DadosLivro;
 import producao.livro.dados.TipoDadosLivro;
