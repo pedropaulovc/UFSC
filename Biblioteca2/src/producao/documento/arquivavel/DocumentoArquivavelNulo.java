@@ -7,6 +7,8 @@ import producao.dados.prazoDevolucao.PrazoDevolucaoNulo;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.documento.DocumentoNulo;
 import producao.documento.TipoDocumento;
+import producao.documento.arquivavel.dados.DadosDocumentoArquivavelNulo;
+import producao.documento.arquivavel.dados.TipoDadosDocumentoArquivavel;
 
 public class DocumentoArquivavelNulo implements TipoDocumentoArquivavel {
 
@@ -36,6 +38,10 @@ public class DocumentoArquivavelNulo implements TipoDocumentoArquivavel {
 
 	public TipoDocumento obterDocumento() {
 		return new DocumentoNulo();
+	}
+
+	public TipoDadosDocumentoArquivavel obterDadosDeArquivo() {
+		return new DadosDocumentoArquivavelNulo();
 	}
 
 }

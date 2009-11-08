@@ -3,10 +3,12 @@ package producao.biblioteca.visao;
 import java.util.Observable;
 import java.util.Observer;
 
+import producao.biblioteca.controle.TratadorEnvioDados;
 import producao.biblioteca.estatistica.VisaoEstatisticas;
 import producao.biblioteca.estatistica.TipoVisaoEstatisticas;
 import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.dados.nome.visao.VisaoNome;
+import producao.formulario.campos.TipoCamposFormulario;
 import producao.formulario.visao.FormularioBiblioteca;
 import producao.formulario.visao.TipoFormularioBiblioteca;
 import edugraf.jadix.fachada.PaginaDix;
@@ -27,9 +29,12 @@ public class VisaoBiblioteca implements TipoVisaoBiblioteca, Observer {
 	public void update(Observable arg0, Object arg1) {
 		estatisticas.exibir("Tamanho do acervo: " + b.tamanho());
 	}
-	
-	public TipoFormularioBiblioteca obterFormulario(){
-		return formulario;
+
+	public TipoCamposFormulario obterCamposFormulario() {
+		return formulario.obterCampos();
 	}
 
+	public void adicionarTratadorEnvioDados(TratadorEnvioDados tratador) {
+		formulario.adicionarTratadorEnvioDados(tratador);
+	}
 }

@@ -5,9 +5,19 @@ import producao.biblioteca.visao.TipoVisaoBiblioteca;
 
 public class ControleBiblioteca implements TipoControleBiblioteca {
 
-	public ControleBiblioteca(TipoBiblioteca biblioteca,
-			TipoVisaoBiblioteca visaoBiblioteca) {
+	private TipoBiblioteca b;
+	private TipoVisaoBiblioteca v;
 
+	public ControleBiblioteca(TipoBiblioteca biblioteca,
+			TipoVisaoBiblioteca visao) {
+		this.b = biblioteca;
+		this.v = visao;
+		
+		adicionarTratadoresEventos();
+	}
+
+	private void adicionarTratadoresEventos() {
+		v.adicionarTratadorEnvioDados(new TratadorEnvioDados(b, v));		
 	}
 
 }

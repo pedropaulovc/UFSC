@@ -12,6 +12,7 @@ import producao.documento.TipoDocumento;
 import producao.documento.arquivavel.DocumentoArquivavelNulo;
 import producao.documento.arquivavel.EstadoEmprestimo;
 import producao.documento.arquivavel.TipoDocumentoArquivavel;
+import producao.documento.arquivavel.dados.TipoDadosDocumentoArquivavel;
 import producao.xteca.configuracao.TipoConfiguracaoXteca;
 
 public abstract class Xteca extends Observable implements TipoXteca {
@@ -77,12 +78,16 @@ public abstract class Xteca extends Observable implements TipoXteca {
 		return doc.obterId();
 	}
 
+	public TipoDadosDocumentoArquivavel obterDadosDeArquivo(TipoId idDoc){
+		return buscarDocumento(idDoc).obterDadosDeArquivo();
+	}
+	
 	public TipoDocumento obterDocumento(TipoId idDocumento) {
 		return buscarDocumento(idDocumento).obterDocumento();
 	}
 
-	private TipoDocumentoArquivavel buscarDocumento(TipoId idLivro) {
-		TipoDocumentoArquivavel doc = mapaDocumentos.get(idLivro);
+	private TipoDocumentoArquivavel buscarDocumento(TipoId idDoc) {
+		TipoDocumentoArquivavel doc = mapaDocumentos.get(idDoc);
 		if (doc != null)
 			return doc;
 		return new DocumentoArquivavelNulo();

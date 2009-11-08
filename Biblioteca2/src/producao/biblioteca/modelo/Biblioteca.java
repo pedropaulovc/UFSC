@@ -5,6 +5,7 @@ import producao.dados.id.TipoId;
 import producao.livro.LivroNulo;
 import producao.livro.TipoLivro;
 import producao.livro.arquivavel.LivroArquivavel;
+import producao.livro.arquivavel.dados.TipoDadosLivroArquivavel;
 import producao.xteca.Xteca;
 
 public class Biblioteca extends Xteca implements TipoBiblioteca {
@@ -17,6 +18,10 @@ public class Biblioteca extends Xteca implements TipoBiblioteca {
 		return adicionarDocumento(new LivroArquivavel(livro));
 	}
 
+	public TipoId adicionarLivro(TipoLivro livro, TipoDadosLivroArquivavel dados) {
+		return adicionarDocumento(new LivroArquivavel(livro, dados));
+	}
+
 	public TipoLivro obterLivro(TipoId idLivro) {
 		try {
 			return (TipoLivro) obterDocumento(idLivro);
@@ -25,4 +30,7 @@ public class Biblioteca extends Xteca implements TipoBiblioteca {
 		}
 	}
 
+	public TipoDadosLivroArquivavel obterDadosDeArquivo(TipoId idLivro) {
+		return (TipoDadosLivroArquivavel) super.obterDadosDeArquivo(idLivro);
+	}
 }

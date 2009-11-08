@@ -6,5 +6,5 @@ import edugraf.jadix.fachada.TratadorDixAbstrato;
 public interface TipoFormularioBiblioteca {
 	public void adicionarTratadorEnvioDados(TratadorDixAbstrato tratador);
 
-	public TipoCamposFormulario obterCamposFormulario();
+	public TipoCamposFormulario obterCampos();
 }

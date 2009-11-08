@@ -12,6 +12,10 @@ public class AnoPublicacao implements TipoAnoPublicacao {
 		this.anoPublicacao = anoPublicacao;
 	}
 
+	public AnoPublicacao(String anoPublicacao) {
+		this(Integer.parseInt(anoPublicacao));
+	}
+
 	public String toString() {
 		return Integer.toString(anoPublicacao);
 	}

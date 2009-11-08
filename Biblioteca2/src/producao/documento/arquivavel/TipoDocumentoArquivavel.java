@@ -3,6 +3,7 @@ package producao.documento.arquivavel;
 import producao.dados.id.TipoId;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.documento.TipoDocumento;
+import producao.documento.arquivavel.dados.TipoDadosDocumentoArquivavel;
 
 public interface TipoDocumentoArquivavel {
 	public TipoId obterId();
@@ -18,4 +19,6 @@ public interface TipoDocumentoArquivavel {
 	public boolean alterarEstado(EstadoEmprestimo estado);
 
 	public TipoDocumento obterDocumento();
+
+	public TipoDadosDocumentoArquivavel obterDadosDeArquivo();
 }

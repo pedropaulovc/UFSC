@@ -21,7 +21,7 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel,
 
 	public LivroArquivavel(TipoLivro livro, TipoDadosLivroArquivavel dados) {
 		super(livro.obterDados());
-		this.arquivavel = new DocumentoArquivavel();
+		this.arquivavel = new DocumentoArquivavel(dados);
 		this.livro = livro;
 		this.dados = dados;
 	}
@@ -65,4 +65,9 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel,
 	public TipoDocumento obterDocumento() {
 		return livro;
 	}
+
+	public TipoDadosLivroArquivavel obterDadosDeArquivo() {
+		return dados;
+	}
+
 }

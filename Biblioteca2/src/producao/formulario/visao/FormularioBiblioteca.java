@@ -24,7 +24,7 @@ public class FormularioBiblioteca implements TipoFormularioBiblioteca {
 		botaoEnviar.adicionarTratadorEventos(tratador);
 	}
 
-	public TipoCamposFormulario obterCamposFormulario() {
+	public TipoCamposFormulario obterCampos() {
 		return camposFormulario;
 	}
 
