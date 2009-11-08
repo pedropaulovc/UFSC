@@ -13,7 +13,6 @@ import edugraf.jadix.Aplique;
 import edugraf.jadix.fachada.PaginaDix;
 
 public class ApliqueBiblioteca extends Aplique {
-	@Override
 	public void iniciar() {
 		PaginaDix pagina = this.obterPaginaDix();
 
@@ -23,7 +22,6 @@ public class ApliqueBiblioteca extends Aplique {
 
 		TipoVisaoBiblioteca visaoBiblioteca = new VisaoBiblioteca(pagina,
 				biblioteca);
-		biblioteca.adicionarObservador(visaoBiblioteca);
 
 		new ControleBiblioteca(biblioteca, visaoBiblioteca);
 	}

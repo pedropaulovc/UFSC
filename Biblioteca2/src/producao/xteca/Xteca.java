@@ -13,6 +13,7 @@ import producao.documento.arquivavel.DocumentoArquivavelNulo;
 import producao.documento.arquivavel.EstadoEmprestimo;
 import producao.documento.arquivavel.TipoDocumentoArquivavel;
 import producao.documento.arquivavel.dados.TipoDadosDocumentoArquivavel;
+import producao.log.modelo.Mensagem;
 import producao.xteca.configuracao.TipoConfiguracaoXteca;
 
 public abstract class Xteca extends Observable implements TipoXteca {
@@ -37,8 +38,7 @@ public abstract class Xteca extends Observable implements TipoXteca {
 	public void removerDocumento(TipoId doc) {
 		mapaDocumentos.remove(doc);
 
-		setChanged();
-		notifyObservers(doc);
+		notificarAlteracao("Documento " + doc.toString() + "foi removido.", doc);
 	}
 
 	public TipoPrazoDevolucao obterPrazoDevolucao(TipoId idLivro) {
@@ -47,15 +47,17 @@ public abstract class Xteca extends Observable implements TipoXteca {
 
 	public boolean devolver(TipoId doc) {
 		boolean devolvido = buscarDocumento(doc).devolver();
-		setChanged();
-		notifyObservers(doc);
+		if (devolvido)
+			notificarAlteracao(
+					"Documento " + doc.toString() + " foi devolvido", doc);
 		return devolvido;
 	}
 
 	public boolean alterarEstado(TipoId doc, EstadoEmprestimo estado) {
 		boolean alterado = buscarDocumento(doc).alterarEstado(estado);
-		setChanged();
-		notifyObservers(doc);
+		if (alterado)
+			notificarAlteracao("Documento " + doc.toString()
+					+ " passou para o estado " + estado.toString(), doc);
 		return alterado;
 	}
 
@@ -66,22 +68,25 @@ public abstract class Xteca extends Observable implements TipoXteca {
 	public boolean emprestar(TipoId doc) {
 		boolean emprestado = buscarDocumento(doc).emprestar(
 				config.obterNovoPrazoDevolucao());
-		setChanged();
-		notifyObservers(doc);
+		if (emprestado)
+			notificarAlteracao("Documento " + doc.toString()
+					+ " foi emprestado", doc);
 		return emprestado;
 	}
 
 	public TipoId adicionarDocumento(TipoDocumentoArquivavel doc) {
+		assert doc != null;
+
 		mapaDocumentos.put(doc.obterId(), doc);
-		setChanged();
-		notifyObservers(doc);
+		notificarAlteracao("Foi adicionado novo documento sob a id "
+				+ doc.obterId().toString(), doc);
 		return doc.obterId();
 	}
 
-	public TipoDadosDocumentoArquivavel obterDadosDeArquivo(TipoId idDoc){
+	public TipoDadosDocumentoArquivavel obterDadosDeArquivo(TipoId idDoc) {
 		return buscarDocumento(idDoc).obterDadosDeArquivo();
 	}
-	
+
 	public TipoDocumento obterDocumento(TipoId idDocumento) {
 		return buscarDocumento(idDocumento).obterDocumento();
 	}
@@ -92,8 +97,13 @@ public abstract class Xteca extends Observable implements TipoXteca {
 			return doc;
 		return new DocumentoArquivavelNulo();
 	}
-	
-	public void adicionarObservador(Observer o){
+
+	public void adicionarObservador(Observer o) {
 		addObserver(o);
+	}
+
+	private void notificarAlteracao(String mensagem, Object o) {
+		setChanged();
+		notifyObservers(new Mensagem(mensagem, o));
 	}
 }
