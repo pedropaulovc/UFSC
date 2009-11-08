@@ -1,6 +1,6 @@
 package producao.livro.arquivavel.dados;
 
-import producao.dados.numeroChamada.TipoNumeroChamada;
+import producao.dados.numeroChamada.modelo.TipoNumeroChamada;
 
 public class DadosLivroArquivavel implements TipoDadosLivroArquivavel {
 

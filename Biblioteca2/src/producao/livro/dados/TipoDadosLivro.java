@@ -2,7 +2,7 @@ package producao.livro.dados;
 
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.modelo.TipoAutor;
-import producao.dados.nomeEditora.TipoNomeEditora;
+import producao.dados.nomeEditora.modelo.TipoNomeEditora;
 import producao.dados.titulo.modelo.TipoTitulo;
 
 public interface TipoDadosLivro {

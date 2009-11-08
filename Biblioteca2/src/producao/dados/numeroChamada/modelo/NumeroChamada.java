@@ -1,4 +1,4 @@
-package producao.dados.numeroChamada;
+package producao.dados.numeroChamada.modelo;
 
 public class NumeroChamada implements TipoNumeroChamada {
 

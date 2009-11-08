@@ -7,7 +7,7 @@ import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.autor.modelo.Autor;
 import producao.dados.nome.modelo.Nome;
-import producao.dados.nomeEditora.NomeEditora;
+import producao.dados.nomeEditora.modelo.NomeEditora;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
 import producao.dados.titulo.modelo.Titulo;
 import producao.livro.TipoLivro;

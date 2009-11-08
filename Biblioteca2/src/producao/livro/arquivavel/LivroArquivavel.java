@@ -1,7 +1,7 @@
 package producao.livro.arquivavel;
 
 import producao.dados.id.TipoId;
-import producao.dados.numeroChamada.TipoNumeroChamada;
+import producao.dados.numeroChamada.modelo.TipoNumeroChamada;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
 import producao.documento.TipoDocumento;
 import producao.documento.arquivavel.DocumentoArquivavel;

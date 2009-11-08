@@ -1,6 +1,6 @@
 package producao.livro.arquivavel;
 
-import producao.dados.numeroChamada.TipoNumeroChamada;
+import producao.dados.numeroChamada.modelo.TipoNumeroChamada;
 import producao.livro.TipoLivro;
 
 public interface TipoLivroArquivavel extends TipoLivro {

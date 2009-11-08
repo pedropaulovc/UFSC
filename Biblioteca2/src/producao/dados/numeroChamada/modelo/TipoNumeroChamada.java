@@ -1,4 +1,4 @@
-package producao.dados.numeroChamada;
+package producao.dados.numeroChamada.modelo;
 
 import producao.dados.TipoDados;
 

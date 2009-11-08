@@ -4,8 +4,8 @@ import producao.dados.anoPublicacao.modelo.AnoPublicacaoNulo;
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.modelo.AutorNulo;
 import producao.dados.autor.modelo.TipoAutor;
-import producao.dados.nomeEditora.NomeEditoraNulo;
-import producao.dados.nomeEditora.TipoNomeEditora;
+import producao.dados.nomeEditora.modelo.NomeEditoraNulo;
+import producao.dados.nomeEditora.modelo.TipoNomeEditora;
 import producao.dados.titulo.modelo.TipoTitulo;
 import producao.dados.titulo.modelo.TituloNulo;
 

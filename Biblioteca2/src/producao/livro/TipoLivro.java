@@ -1,7 +1,7 @@
 package producao.livro;
 
 import producao.dados.autor.modelo.TipoAutor;
-import producao.dados.nomeEditora.TipoNomeEditora;
+import producao.dados.nomeEditora.modelo.TipoNomeEditora;
 import producao.documento.TipoDocumento;
 import producao.livro.dados.TipoDadosLivro;
 
