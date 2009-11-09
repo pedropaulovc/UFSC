@@ -10,18 +10,21 @@ import producao.dados.nome.modelo.TipoNome;
 import producao.dados.numeroChamada.modelo.NumeroChamada;
 import producao.dados.numeroChamada.modelo.TipoNumeroChamada;
 import producao.formulario.campos.TipoCamposFormulario;
-import producao.livro.Livro;
 import producao.livro.TipoLivro;
 import producao.livro.arquivavel.dados.DadosLivroArquivavel;
 import producao.livro.arquivavel.dados.TipoDadosLivroArquivavel;
 import producao.livro.dados.DadosLivro;
 import producao.livro.dados.TipoDadosLivro;
+import producao.livro.editora.Editora;
+import producao.livro.editora.TipoEditora;
 
 public class AdaptadorFormulario implements TipoAdaptadorFormulario {
 	private TipoCamposFormulario campos;
+	private TipoEditora editora;
 
 	public AdaptadorFormulario(TipoVisaoBiblioteca visao) {
 		this.campos = visao.obterCamposFormulario();
+		editora = new Editora();
 	}
 
 	public TipoLivro adaptarLivro() {
@@ -36,7 +39,7 @@ public class AdaptadorFormulario implements TipoAdaptadorFormulario {
 		TipoDadosLivro dados = new DadosLivro(criarTitulo(), criarAutor(),
 				criarNomeEditora(), criarAnoPublicacao());
 
-		return new Livro(dados);
+		return editora.criarLivro(dados);
 	}
 
 	private TipoNome criarTitulo() {
