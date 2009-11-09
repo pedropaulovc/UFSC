@@ -2,15 +2,14 @@ package producao.livro.dados;
 
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.modelo.TipoAutor;
-import producao.dados.nomeEditora.modelo.TipoNomeEditora;
-import producao.dados.titulo.modelo.TipoTitulo;
+import producao.dados.nome.modelo.TipoNome;
 
 public interface TipoDadosLivro {
-	public TipoTitulo obterTitulo();
+	public TipoNome obterTitulo();
 
 	public TipoAutor obterAutor();
 
-	public TipoNomeEditora obterEditora();
+	public TipoNome obterEditora();
 
 	public TipoAnoPublicacao obterAnoPublicacao();
 }

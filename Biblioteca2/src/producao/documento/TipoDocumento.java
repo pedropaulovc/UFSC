@@ -1,10 +1,10 @@
 package producao.documento;
 
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
-import producao.dados.titulo.modelo.TipoTitulo;
+import producao.dados.nome.modelo.TipoNome;
 
 public interface TipoDocumento {
-	public TipoTitulo obterTitulo();
+	public TipoNome obterTitulo();
 
 	public TipoAnoPublicacao obterAnoPublicacao();
 }

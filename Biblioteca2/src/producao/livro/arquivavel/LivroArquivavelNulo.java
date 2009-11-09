@@ -5,13 +5,11 @@ import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.modelo.AutorNulo;
 import producao.dados.autor.modelo.TipoAutor;
 import producao.dados.id.TipoId;
-import producao.dados.nomeEditora.modelo.NomeEditoraNulo;
-import producao.dados.nomeEditora.modelo.TipoNomeEditora;
+import producao.dados.nome.modelo.NomeNulo;
+import producao.dados.nome.modelo.TipoNome;
 import producao.dados.numeroChamada.modelo.NumeroChamadaNulo;
 import producao.dados.numeroChamada.modelo.TipoNumeroChamada;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
-import producao.dados.titulo.modelo.TipoTitulo;
-import producao.dados.titulo.modelo.TituloNulo;
 import producao.documento.TipoDocumento;
 import producao.documento.arquivavel.DocumentoArquivavelNulo;
 import producao.documento.arquivavel.EstadoEmprestimo;
@@ -49,12 +47,12 @@ public class LivroArquivavelNulo implements TipoLivroArquivavel {
 		return new DadosLivroNulo();
 	}
 
-	public TipoNomeEditora obterNomeEditora() {
-		return new NomeEditoraNulo();
+	public TipoNome obterNomeEditora() {
+		return new NomeNulo();
 	}
 
-	public TipoTitulo obterTitulo() {
-		return new TituloNulo();
+	public TipoNome obterTitulo() {
+		return new NomeNulo();
 	}
 
 	public boolean alterarEstado(EstadoEmprestimo estado) {

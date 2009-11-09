@@ -15,7 +15,7 @@ public class VisaoNome implements TipoVisaoNome {
 	}
 
 	private void criarTitulo() {
-		pagina.criarComponente(TiposDeComponentesDix.ETIQUETA, "tituloPagina")
+		pagina.criarComponente(TiposDeComponentesDix.ETIQUETA, "nome_" + Math.random())
 		.fixarTopo(20).fixarEsquerda(500).fixarTexto(nome.toString());
 	}
 }

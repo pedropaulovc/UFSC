@@ -4,6 +4,7 @@ public class Nome implements TipoNome {
 	private String nome;
 
 	public Nome(String nome) {
+		assert nome.length() != 0;
 		this.nome = nome;
 	}
 

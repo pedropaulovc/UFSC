@@ -2,8 +2,8 @@ package producao.documento;
 
 import producao.dados.anoPublicacao.modelo.AnoPublicacaoNulo;
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
-import producao.dados.titulo.modelo.TipoTitulo;
-import producao.dados.titulo.modelo.TituloNulo;
+import producao.dados.nome.modelo.NomeNulo;
+import producao.dados.nome.modelo.TipoNome;
 
 public class DocumentoNulo implements TipoDocumento {
 
@@ -11,8 +11,8 @@ public class DocumentoNulo implements TipoDocumento {
 		return new AnoPublicacaoNulo();
 	}
 
-	public TipoTitulo obterTitulo() {
-		return new TituloNulo();
+	public TipoNome obterTitulo() {
+		return new NomeNulo();
 	}
 
 }

@@ -4,10 +4,8 @@ import producao.dados.anoPublicacao.modelo.AnoPublicacaoNulo;
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.modelo.AutorNulo;
 import producao.dados.autor.modelo.TipoAutor;
-import producao.dados.nomeEditora.modelo.NomeEditoraNulo;
-import producao.dados.nomeEditora.modelo.TipoNomeEditora;
-import producao.dados.titulo.modelo.TipoTitulo;
-import producao.dados.titulo.modelo.TituloNulo;
+import producao.dados.nome.modelo.NomeNulo;
+import producao.dados.nome.modelo.TipoNome;
 
 public class DadosLivroNulo implements TipoDadosLivro {
 
@@ -19,12 +17,12 @@ public class DadosLivroNulo implements TipoDadosLivro {
 		return new AutorNulo();
 	}
 
-	public TipoNomeEditora obterEditora() {
-		return new NomeEditoraNulo();
+	public TipoNome obterEditora() {
+		return new NomeNulo();
 	}
 
-	public TipoTitulo obterTitulo() {
-		return new TituloNulo();
+	public TipoNome obterTitulo() {
+		return new NomeNulo();
 	}
 
 }

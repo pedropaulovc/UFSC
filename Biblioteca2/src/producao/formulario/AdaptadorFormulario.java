@@ -5,12 +5,10 @@ import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.modelo.Autor;
 import producao.dados.autor.modelo.TipoAutor;
-import producao.dados.nomeEditora.modelo.NomeEditora;
-import producao.dados.nomeEditora.modelo.TipoNomeEditora;
+import producao.dados.nome.modelo.Nome;
+import producao.dados.nome.modelo.TipoNome;
 import producao.dados.numeroChamada.modelo.NumeroChamada;
 import producao.dados.numeroChamada.modelo.TipoNumeroChamada;
-import producao.dados.titulo.modelo.TipoTitulo;
-import producao.dados.titulo.modelo.Titulo;
 import producao.formulario.campos.TipoCamposFormulario;
 import producao.livro.Livro;
 import producao.livro.TipoLivro;
@@ -41,16 +39,16 @@ public class AdaptadorFormulario implements TipoAdaptadorFormulario {
 		return new Livro(dados);
 	}
 
-	private TipoTitulo criarTitulo() {
-		return new Titulo(campos.obterTitulo());
+	private TipoNome criarTitulo() {
+		return new Nome(campos.obterTitulo());
 	}
 
 	private TipoAutor criarAutor() {
 		return new Autor(campos.obterAutor());
 	}
 
-	private TipoNomeEditora criarNomeEditora() {
-		return new NomeEditora(campos.obterNomeEditora());
+	private TipoNome criarNomeEditora() {
+		return new Nome(campos.obterNomeEditora());
 	}
 
 	private TipoAnoPublicacao criarAnoPublicacao() {
