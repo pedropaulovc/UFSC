@@ -1,5 +1,7 @@
 package producao.documento.arquivavel.dados;
 
-public interface TipoDadosDocumentoArquivavel {
+import producao.dados.numeroChamada.modelo.TipoNumeroChamada;
 
+public interface TipoDadosDocumentoArquivavel {
+	public TipoNumeroChamada obterNumeroChamada();
 }

@@ -3,28 +3,20 @@ package producao.livro.dados;
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.modelo.TipoAutor;
 import producao.dados.nome.modelo.TipoNome;
+import producao.documento.dados.DadosDocumento;
 
-public class DadosLivro implements TipoDadosLivro {
-	private TipoNome titulo;
+public class DadosLivro extends DadosDocumento implements TipoDadosLivro {
 	private TipoAutor autor;
 	private TipoNome editora;
-	private TipoAnoPublicacao anoPublicacao;
 
-	public DadosLivro(TipoNome titulo, TipoAutor autor,
-			TipoNome editora, TipoAnoPublicacao anoPublicacao) {
-		assert titulo != null;
+	public DadosLivro(TipoNome titulo, TipoAutor autor, TipoNome editora,
+			TipoAnoPublicacao anoPublicacao) {
+		super(titulo, anoPublicacao);
 		assert autor != null;
 		assert editora != null;
-		assert anoPublicacao != null;
 
-		this.titulo = titulo;
 		this.autor = autor;
 		this.editora = editora;
-		this.anoPublicacao = anoPublicacao;
-	}
-
-	public TipoNome obterTitulo() {
-		return titulo;
 	}
 
 	public TipoAutor obterAutor() {
@@ -33,10 +25,6 @@ public class DadosLivro implements TipoDadosLivro {
 
 	public TipoNome obterEditora() {
 		return editora;
-	}
-
-	public TipoAnoPublicacao obterAnoPublicacao() {
-		return anoPublicacao;
 	}
 
 }

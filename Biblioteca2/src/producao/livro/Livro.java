@@ -1,15 +1,16 @@
 package producao.livro;
 
-import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.modelo.TipoAutor;
 import producao.dados.nome.modelo.TipoNome;
+import producao.documento.Documento;
 import producao.livro.dados.TipoDadosLivro;
 
-public class Livro implements TipoLivro {
+public class Livro extends Documento implements TipoLivro {
 
 	private TipoDadosLivro dados;
 
 	public Livro(TipoDadosLivro dados) {
+		super(dados);
 		this.dados = dados;
 	}
 
@@ -17,16 +18,8 @@ public class Livro implements TipoLivro {
 		return dados.obterAutor();
 	}
 
-	public TipoNome obterTitulo() {
-		return dados.obterTitulo();
-	}
-
 	public TipoDadosLivro obterDados() {
 		return dados;
-	}
-
-	public TipoAnoPublicacao obterAnoPublicacao() {
-		return dados.obterAnoPublicacao();
 	}
 
 	public TipoNome obterNomeEditora() {

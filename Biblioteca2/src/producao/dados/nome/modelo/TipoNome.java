@@ -1,5 +1,7 @@
 package producao.dados.nome.modelo;
 
-public interface TipoNome {
+import producao.dados.TipoDados;
+
+public interface TipoNome extends TipoDados {
 	public String toString();
 }

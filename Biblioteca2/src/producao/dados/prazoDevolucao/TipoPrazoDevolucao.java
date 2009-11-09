@@ -1,6 +1,8 @@
 package producao.dados.prazoDevolucao;
 
-public interface TipoPrazoDevolucao {
+import producao.dados.TipoDados;
+
+public interface TipoPrazoDevolucao extends TipoDados {
 	public boolean estaNoPrazo();
 
 	public int obterPrazoDevolucaoRelativoAHoje();
