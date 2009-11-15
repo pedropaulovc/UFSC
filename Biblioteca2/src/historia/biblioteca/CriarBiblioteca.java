@@ -1,6 +1,8 @@
 package historia.biblioteca;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import infra.Cenario;
 
 import org.junit.Test;
 
@@ -10,8 +12,6 @@ import producao.biblioteca.modelo.Biblioteca;
 import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
-
-import infra.Cenario;
 
 public class CriarBiblioteca extends Cenario {
 

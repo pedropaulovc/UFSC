@@ -1,13 +1,13 @@
 package historia.biblioteca;
 
 import static org.junit.Assert.assertEquals;
+import static producao.documento.arquivavel.EstadoEmprestimo.DISPONÍVEL;
 import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
 import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.dados.id.TipoId;
-import static producao.documento.arquivavel.EstadoEmprestimo.*;
 import producao.livro.TipoLivro;
 
 public class AdicionarLivroBiblioteca extends CenarioComBiblioteca {
@@ -54,7 +54,7 @@ public class AdicionarLivroBiblioteca extends CenarioComBiblioteca {
 	public void éPossívelObterOLivroArmazenado() {
 		assertEquals(livro, b.obter(idLivro));
 	}
-	
+
 	@Test
 	public void oLivroFicaDisponível() {
 		assertEquals(DISPONÍVEL, b.obterEstadoDocumento(idLivro));

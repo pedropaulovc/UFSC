@@ -17,7 +17,7 @@ public class Videoteca extends Xteca implements TipoVideoteca {
 	public TipoId adicionar(TipoVideo video) {
 		return adicionarDocumento(new VideoArquivavel(video));
 	}
-	
+
 	public TipoId adicionar(TipoVideo video, TipoDadosVideoArquivavel dados) {
 		return adicionarDocumento(new VideoArquivavel(video, dados));
 	}

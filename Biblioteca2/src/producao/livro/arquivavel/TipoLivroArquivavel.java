@@ -6,6 +6,6 @@ import producao.livro.TipoLivro;
 
 public interface TipoLivroArquivavel extends TipoLivro, TipoDocumentoArquivavel {
 	public TipoNumeroChamada obterNumeroChamada();
-	
+
 	public TipoLivro obterDocumento();
 }

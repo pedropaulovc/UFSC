@@ -7,7 +7,7 @@ import edugraf.jadix.fachada.TiposDeComponentesDix;
 public class VisaoNome implements TipoVisaoNome {
 	private PaginaDix pagina;
 	private TipoNome nome;
-	
+
 	public VisaoNome(TipoNome nome, PaginaDix pagina) {
 		this.pagina = pagina;
 		this.nome = nome;
@@ -15,7 +15,8 @@ public class VisaoNome implements TipoVisaoNome {
 	}
 
 	private void criarTitulo() {
-		pagina.criarComponente(TiposDeComponentesDix.ETIQUETA, "nome_" + Math.random())
-		.fixarTopo(20).fixarEsquerda(500).fixarTexto(nome.toString());
+		pagina.criarComponente(TiposDeComponentesDix.ETIQUETA,
+				"nome_" + Math.random()).fixarTopo(20).fixarEsquerda(500)
+				.fixarTexto(nome.toString());
 	}
 }

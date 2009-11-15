@@ -12,12 +12,12 @@ public class ControleBiblioteca implements TipoControleBiblioteca {
 			TipoVisaoBiblioteca visao) {
 		this.b = biblioteca;
 		this.v = visao;
-		
+
 		adicionarTratadoresEventos();
 	}
 
 	private void adicionarTratadoresEventos() {
-		v.adicionarTratadorEnvioDados(new TratadorEnvioDados(b, v));		
+		v.adicionarTratadorEnvioDados(new TratadorEnvioDados(b, v));
 	}
 
 }

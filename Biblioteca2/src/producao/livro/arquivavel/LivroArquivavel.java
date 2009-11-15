@@ -30,10 +30,10 @@ public class LivroArquivavel extends DocumentoArquivavel implements
 		return dados.obterNumeroChamada();
 	}
 
-	public TipoLivro obterDocumento(){
+	public TipoLivro obterDocumento() {
 		return livro;
 	}
-	
+
 	public TipoAutor obterAutor() {
 		return livro.obterAutor();
 	}

@@ -23,8 +23,8 @@ public class VideoNulo extends DocumentoNulo implements TipoVideo {
 	public TipoNome obterNomeProdutora() {
 		return new NomeNulo();
 	}
-	
-	public TipoDadosVideo obterDados(){
+
+	public TipoDadosVideo obterDados() {
 		return new DadosVideoNulo();
 	}
 

@@ -8,6 +8,6 @@ public interface TipoCamposFormulario {
 	public String obterAnoPublicacao();
 
 	public String obterNumeroChamada();
-	
+
 	public String obterNomeEditora();
 }

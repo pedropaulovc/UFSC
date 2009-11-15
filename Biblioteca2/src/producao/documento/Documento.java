@@ -8,10 +8,10 @@ public class Documento implements TipoDocumento {
 
 	private TipoDadosDocumento dados;
 
-	public Documento(TipoDadosDocumento dados){
+	public Documento(TipoDadosDocumento dados) {
 		this.dados = dados;
 	}
-	
+
 	public TipoAnoPublicacao obterAnoPublicacao() {
 		return dados.obterAnoPublicacao();
 	}

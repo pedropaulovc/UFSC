@@ -1,5 +1,7 @@
 package infra;
 
+import static producao.dados.categoria.Categoria.ANIMAÇÃO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public abstract class CenarioComVideoteca extends Cenario {
 		this.produtora = new Produtora();
 		this.dados = new DadosVideo(new Nome("Titulo"), new Autor("Autor"),
 				new ListaAtores(gerarAtores()), new Nome("Editora"),
-				new AnoPublicacao(1999));
+				new AnoPublicacao(1999), ANIMAÇÃO);
 		this.configVideoteca = new ConfiguracaoVideoteca(new Nome(
 				"Nome Videoteca"), new PrazoDevolucao(15));
 	}

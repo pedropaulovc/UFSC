@@ -14,7 +14,7 @@ public class Mensagem implements TipoMensagem {
 		return object;
 	}
 
-	public String toString(){
+	public String toString() {
 		return mensagem;
 	}
 }

@@ -4,8 +4,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import producao.biblioteca.controle.TratadorEnvioDados;
-import producao.biblioteca.estatistica.VisaoEstatisticas;
 import producao.biblioteca.estatistica.TipoVisaoEstatisticas;
+import producao.biblioteca.estatistica.VisaoEstatisticas;
 import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.dados.nome.visao.VisaoNome;
 import producao.formulario.campos.TipoCamposFormulario;

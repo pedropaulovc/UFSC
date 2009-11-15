@@ -1,6 +1,7 @@
 package historia.videoteca;
 
 import static org.junit.Assert.assertEquals;
+import static producao.dados.categoria.Categoria.COMÉDIA;
 import infra.CenarioComVideoteca;
 
 import org.junit.Test;
@@ -38,7 +39,8 @@ public class CriarVideo extends CenarioComVideoteca {
 
 	private void haDadosValidosDeUmVideo() {
 		dados = new DadosVideo(new Nome("Titulo"), new Autor("Autor"),
-				new ListaAtores(gerarAtores()), new Nome("Editora"), new AnoPublicacao(1999));
+				new ListaAtores(gerarAtores()), new Nome("Editora"),
+				new AnoPublicacao(1999), COMÉDIA);
 	}
 
 	private void criarUmNovoVideoComOsDados() {

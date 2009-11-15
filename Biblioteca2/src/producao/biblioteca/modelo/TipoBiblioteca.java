@@ -7,11 +7,10 @@ import producao.xteca.TipoXteca;
 
 public interface TipoBiblioteca extends TipoXteca {
 	public TipoId adicionar(TipoLivro livro);
-	
-	public TipoId adicionar(TipoLivro livro,
-			TipoDadosLivroArquivavel dados);
+
+	public TipoId adicionar(TipoLivro livro, TipoDadosLivroArquivavel dados);
 
 	public TipoLivro obter(TipoId idLivro);
-	
+
 	public TipoDadosLivroArquivavel obterDadosDeArquivo(TipoId idDoc);
 }

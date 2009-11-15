@@ -2,7 +2,6 @@ package producao.dados.listaAtores;
 
 import java.util.List;
 
-import producao.dados.listaAtores.TipoListaAtores;
 import producao.dados.nome.modelo.TipoNome;
 
 public class ListaAtores implements TipoListaAtores {

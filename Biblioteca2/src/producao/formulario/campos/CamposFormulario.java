@@ -47,8 +47,8 @@ public class CamposFormulario implements TipoCamposFormulario {
 	public String obterNumeroChamada() {
 		return numeroChamada.obterTexto();
 	}
-	
-	public String obterNomeEditora(){
+
+	public String obterNomeEditora() {
 		return nomeEditora.obterTexto();
 	}
 }

@@ -13,8 +13,8 @@ public class BotaoEnviar extends CampoAbstratoFormulario {
 
 	@Override
 	public ComponenteDix criarCampo(PaginaDix pagina) {
-		ComponenteDix componente = pagina.criarComponente(TiposDeComponentesDix.BOTÃO,
-				"botaoEnviar");
+		ComponenteDix componente = pagina.criarComponente(
+				TiposDeComponentesDix.BOTÃO, "botaoEnviar");
 		componente.fixarTopo(425).fixarEsquerda(200).fixarLargura(150)
 				.fixarTexto("Enviar");
 		return componente;

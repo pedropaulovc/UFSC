@@ -8,6 +8,6 @@ public interface TipoDocumento {
 	public TipoNome obterTitulo();
 
 	public TipoAnoPublicacao obterAnoPublicacao();
-	
+
 	public TipoDadosDocumento obterDados();
 }
