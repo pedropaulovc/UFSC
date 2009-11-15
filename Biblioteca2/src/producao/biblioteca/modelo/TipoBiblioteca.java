@@ -6,12 +6,12 @@ import producao.livro.arquivavel.dados.TipoDadosLivroArquivavel;
 import producao.xteca.TipoXteca;
 
 public interface TipoBiblioteca extends TipoXteca {
-	public TipoId adicionarLivro(TipoLivro livro);
+	public TipoId adicionar(TipoLivro livro);
 	
-	public TipoId adicionarLivro(TipoLivro livro,
+	public TipoId adicionar(TipoLivro livro,
 			TipoDadosLivroArquivavel dados);
 
-	public TipoLivro obterLivro(TipoId idLivro);
+	public TipoLivro obter(TipoId idLivro);
 	
 	public TipoDadosLivroArquivavel obterDadosDeArquivo(TipoId idDoc);
 }

@@ -20,7 +20,7 @@ public class TratadorEnvioDados extends TratadorDixAbstrato {
 
 	public void seDito(EventoSimples evento) {
 		if (evento.obterNomeDoEvento().equals(NomeDeEventosSimples.CLICADO)) {
-			biblioteca.adicionarLivro(adaptador.adaptarLivro(), adaptador
+			biblioteca.adicionar(adaptador.adaptarLivro(), adaptador
 					.adaptarDadosDeArquivo());
 		}
 	}

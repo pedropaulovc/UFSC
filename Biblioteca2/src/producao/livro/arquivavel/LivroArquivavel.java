@@ -1,26 +1,23 @@
 package producao.livro.arquivavel;
 
-import producao.dados.id.TipoId;
+import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
+import producao.dados.autor.modelo.TipoAutor;
+import producao.dados.nome.modelo.TipoNome;
 import producao.dados.numeroChamada.modelo.TipoNumeroChamada;
-import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
-import producao.documento.TipoDocumento;
 import producao.documento.arquivavel.DocumentoArquivavel;
-import producao.documento.arquivavel.EstadoEmprestimo;
-import producao.documento.arquivavel.TipoDocumentoArquivavel;
-import producao.livro.Livro;
 import producao.livro.TipoLivro;
 import producao.livro.arquivavel.dados.DadosLivroArquivavelNulo;
 import producao.livro.arquivavel.dados.TipoDadosLivroArquivavel;
+import producao.livro.dados.TipoDadosLivro;
 
-public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
-	
+public class LivroArquivavel extends DocumentoArquivavel implements
+		TipoLivroArquivavel {
+
 	private TipoDadosLivroArquivavel dados;
 	private TipoLivro livro;
-	private TipoDocumentoArquivavel arquivavel;
 
 	public LivroArquivavel(TipoLivro livro, TipoDadosLivroArquivavel dados) {
-		super(livro.obterDados());
-		this.arquivavel = new DocumentoArquivavel(dados);
+		super(dados);
 		this.livro = livro;
 		this.dados = dados;
 	}
@@ -29,44 +26,32 @@ public class LivroArquivavel extends Livro implements TipoLivroArquivavel {
 		this(livro, new DadosLivroArquivavelNulo());
 	}
 
-	public TipoId obterId() {
-		return arquivavel.obterId();
-	}
-
-	public boolean alterarEstado(EstadoEmprestimo estado) {
-		return arquivavel.alterarEstado(estado);
-	}
-
-	public boolean devolver() {
-		return arquivavel.devolver();
-	}
-
-	public boolean emprestar(TipoPrazoDevolucao prazoDevolucao) {
-		return arquivavel.emprestar(prazoDevolucao);
-	}
-
-	public EstadoEmprestimo obterEstado() {
-		return arquivavel.obterEstado();
-	}
-
 	public TipoNumeroChamada obterNumeroChamada() {
 		return dados.obterNumeroChamada();
 	}
 
-	public TipoPrazoDevolucao obterPrazoDevolucao() {
-		return arquivavel.obterPrazoDevolucao();
-	}
-
-	public TipoLivro obterLivro() {
+	public TipoLivro obterDocumento(){
 		return livro;
 	}
-
-	public TipoDocumento obterDocumento() {
-		return livro;
+	
+	public TipoAutor obterAutor() {
+		return livro.obterAutor();
 	}
 
-	public TipoDadosLivroArquivavel obterDadosDeArquivo() {
-		return dados;
+	public TipoDadosLivro obterDados() {
+		return livro.obterDados();
+	}
+
+	public TipoNome obterNomeEditora() {
+		return livro.obterNomeEditora();
+	}
+
+	public TipoAnoPublicacao obterAnoPublicacao() {
+		return livro.obterAnoPublicacao();
+	}
+
+	public TipoNome obterTitulo() {
+		return livro.obterTitulo();
 	}
 
 }

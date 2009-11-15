@@ -14,15 +14,15 @@ public class Biblioteca extends Xteca implements TipoBiblioteca {
 		super(configuração);
 	}
 
-	public TipoId adicionarLivro(TipoLivro livro) {
+	public TipoId adicionar(TipoLivro livro) {
 		return adicionarDocumento(new LivroArquivavel(livro));
 	}
 
-	public TipoId adicionarLivro(TipoLivro livro, TipoDadosLivroArquivavel dados) {
+	public TipoId adicionar(TipoLivro livro, TipoDadosLivroArquivavel dados) {
 		return adicionarDocumento(new LivroArquivavel(livro, dados));
 	}
 
-	public TipoLivro obterLivro(TipoId idLivro) {
+	public TipoLivro obter(TipoId idLivro) {
 		try {
 			return (TipoLivro) obterDocumento(idLivro);
 		} catch (ClassCastException e) {

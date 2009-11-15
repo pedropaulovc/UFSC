@@ -26,7 +26,7 @@ public class RemoverLivroInexistente extends CenarioComBiblioteca {
 	private void existeUmaBibliotecaComUmLivro() {
 		b = obterBiblioteca();
 
-		b.adicionarLivro(obterLivro());
+		b.adicionar(obterLivro());
 
 		assertEquals(1, b.tamanho());
 	}

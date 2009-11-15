@@ -6,8 +6,14 @@ import producao.documento.arquivavel.dados.DadosDocumentoArquivavel;
 public class DadosLivroArquivavel extends DadosDocumentoArquivavel implements
 		TipoDadosLivroArquivavel {
 
+	private TipoNumeroChamada numeroChamada;
+
 	public DadosLivroArquivavel(TipoNumeroChamada numeroChamada) {
-		super(numeroChamada);
+		this.numeroChamada = numeroChamada;
+	}
+
+	public TipoNumeroChamada obterNumeroChamada() {
+		return numeroChamada;
 	}
 
 }

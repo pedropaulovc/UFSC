@@ -10,7 +10,6 @@ import producao.dados.nome.modelo.TipoNome;
 import producao.dados.numeroChamada.modelo.NumeroChamadaNulo;
 import producao.dados.numeroChamada.modelo.TipoNumeroChamada;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
-import producao.documento.TipoDocumento;
 import producao.documento.arquivavel.DocumentoArquivavelNulo;
 import producao.documento.arquivavel.EstadoEmprestimo;
 import producao.documento.arquivavel.dados.TipoDadosDocumentoArquivavel;
@@ -25,10 +24,6 @@ public class LivroArquivavelNulo implements TipoLivroArquivavel {
 
 	public LivroArquivavelNulo() {
 		this.arquivavelNulo = new DocumentoArquivavelNulo();
-	}
-
-	public TipoLivro obterLivro() {
-		return new LivroNulo();
 	}
 
 	public TipoNumeroChamada obterNumeroChamada() {
@@ -71,8 +66,8 @@ public class LivroArquivavelNulo implements TipoLivroArquivavel {
 		return arquivavelNulo.obterDadosDeArquivo();
 	}
 
-	public TipoDocumento obterDocumento() {
-		return arquivavelNulo.obterDocumento();
+	public TipoLivro obterDocumento() {
+		return new LivroNulo();
 	}
 
 	public EstadoEmprestimo obterEstado() {

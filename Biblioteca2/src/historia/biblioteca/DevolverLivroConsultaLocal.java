@@ -33,7 +33,7 @@ public class DevolverLivroConsultaLocal extends CenarioComBiblioteca {
 	}
 
 	private void aBibliotecaPossuiUmLivro() {
-		idLivro = b.adicionarLivro(obterLivro());
+		idLivro = b.adicionar(obterLivro());
 	}
 
 	private void oExemplarEstáEmConsultaLocal() {

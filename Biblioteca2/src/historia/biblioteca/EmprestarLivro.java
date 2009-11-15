@@ -34,7 +34,7 @@ public class EmprestarLivro extends CenarioComBiblioteca {
 	}
 
 	private void aBibliotecaPossuiUmLivroDisponivel() {
-		idLivro = b.adicionarLivro(obterLivro());
+		idLivro = b.adicionar(obterLivro());
 	}
 
 	private void emprestarOExemplar() {

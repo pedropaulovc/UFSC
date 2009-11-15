@@ -5,7 +5,6 @@ import producao.dados.numeroChamada.modelo.TipoNumeroChamada;
 
 public class DadosLivroArquivavelNulo implements TipoDadosLivroArquivavel {
 
-	@Override
 	public TipoNumeroChamada obterNumeroChamada() {
 		return new NumeroChamadaNulo();
 	}

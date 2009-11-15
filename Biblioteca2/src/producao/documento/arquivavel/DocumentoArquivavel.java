@@ -6,26 +6,24 @@ import producao.dados.id.Id;
 import producao.dados.id.TipoId;
 import producao.dados.prazoDevolucao.PrazoDevolucaoNulo;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;
-import producao.documento.DocumentoNulo;
-import producao.documento.TipoDocumento;
 import producao.documento.arquivavel.dados.TipoDadosDocumentoArquivavel;
 
-public class DocumentoArquivavel implements TipoDocumentoArquivavel {
+public abstract class DocumentoArquivavel implements TipoDocumentoArquivavel {
 
 	private TipoId id;
 	private EstadoEmprestimo estado;
 	private TipoPrazoDevolucao prazoDevolucao;
 	private TipoDadosDocumentoArquivavel dados;
-	
-	public DocumentoArquivavel(TipoDadosDocumentoArquivavel dados){
+
+	public DocumentoArquivavel(TipoDadosDocumentoArquivavel dados) {
 		assert dados != null;
-		
+
 		this.id = new Id();
 		this.estado = DISPONÍVEL;
 		this.prazoDevolucao = new PrazoDevolucaoNulo();
 		this.dados = dados;
 	}
-	
+
 	public boolean alterarEstado(EstadoEmprestimo estado) {
 		if (estado.equals(EMPRESTADO))
 			return false;
@@ -53,10 +51,6 @@ public class DocumentoArquivavel implements TipoDocumentoArquivavel {
 			return true;
 		}
 		return false;
-	}
-
-	public TipoDocumento obterDocumento() {
-		return new DocumentoNulo();
 	}
 
 	public EstadoEmprestimo obterEstado() {

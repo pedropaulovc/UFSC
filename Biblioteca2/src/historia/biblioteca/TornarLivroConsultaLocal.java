@@ -31,7 +31,7 @@ public class TornarLivroConsultaLocal extends CenarioComBiblioteca {
 	}
 
 	private void aBibliotecaPossuiUmLivro() {
-		idLivro = b.adicionarLivro(obterLivro());
+		idLivro = b.adicionar(obterLivro());
 	}
 
 	private void tornarOExemplarConsultaLocal() {

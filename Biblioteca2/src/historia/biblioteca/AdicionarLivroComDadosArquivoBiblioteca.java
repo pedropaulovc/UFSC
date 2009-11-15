@@ -49,7 +49,7 @@ public class AdicionarLivroComDadosArquivoBiblioteca extends
 	}
 
 	private void adicionaLivroNaBiblioteca() {
-		idLivro = b.adicionarLivro(livro, dadosArquivo);
+		idLivro = b.adicionar(livro, dadosArquivo);
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class AdicionarLivroComDadosArquivoBiblioteca extends
 
 	@Test
 	public void éPossívelObterOLivroArmazenado() {
-		assertEquals(livro, b.obterLivro(idLivro));
+		assertEquals(livro, b.obter(idLivro));
 	}
 
 	@Test
