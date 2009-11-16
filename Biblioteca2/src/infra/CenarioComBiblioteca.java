@@ -1,9 +1,9 @@
 package infra;
 
-import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
-import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
 import producao.biblioteca.modelo.Biblioteca;
 import producao.biblioteca.modelo.TipoBiblioteca;
+import producao.biblioteca.modelo.configuracao.ConfiguracaoBiblioteca;
+import producao.biblioteca.modelo.configuracao.TipoConfiguracaoBiblioteca;
 import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.autor.modelo.Autor;
 import producao.dados.nome.modelo.Nome;

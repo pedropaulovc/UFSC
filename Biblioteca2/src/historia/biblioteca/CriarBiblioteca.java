@@ -6,10 +6,10 @@ import infra.Cenario;
 
 import org.junit.Test;
 
-import producao.biblioteca.configuracao.ConfiguracaoBiblioteca;
-import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
 import producao.biblioteca.modelo.Biblioteca;
 import producao.biblioteca.modelo.TipoBiblioteca;
+import producao.biblioteca.modelo.configuracao.ConfiguracaoBiblioteca;
+import producao.biblioteca.modelo.configuracao.TipoConfiguracaoBiblioteca;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
 

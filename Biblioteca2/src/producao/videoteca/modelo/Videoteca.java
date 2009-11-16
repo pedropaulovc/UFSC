@@ -1,11 +1,11 @@
-package producao.videoteca;
+package producao.videoteca.modelo;
 
 import producao.dados.id.TipoId;
 import producao.video.TipoVideo;
 import producao.video.VideoNulo;
 import producao.video.arquivavel.VideoArquivavel;
 import producao.video.arquivavel.dados.TipoDadosVideoArquivavel;
-import producao.videoteca.configuracao.TipoConfiguracaoVideoteca;
+import producao.videoteca.modelo.configuracao.TipoConfiguracaoVideoteca;
 import producao.xteca.Xteca;
 
 public class Videoteca extends Xteca implements TipoVideoteca {

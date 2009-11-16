@@ -8,10 +8,10 @@ import org.junit.Test;
 
 import producao.dados.nome.modelo.Nome;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
-import producao.videoteca.TipoVideoteca;
-import producao.videoteca.Videoteca;
-import producao.videoteca.configuracao.ConfiguracaoVideoteca;
-import producao.videoteca.configuracao.TipoConfiguracaoVideoteca;
+import producao.videoteca.modelo.TipoVideoteca;
+import producao.videoteca.modelo.Videoteca;
+import producao.videoteca.modelo.configuracao.ConfiguracaoVideoteca;
+import producao.videoteca.modelo.configuracao.TipoConfiguracaoVideoteca;
 
 public class CriarVideoteca extends Cenario {
 

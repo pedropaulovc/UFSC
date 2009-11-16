@@ -1,4 +1,4 @@
-package producao.videoteca.configuracao;
+package producao.videoteca.modelo.configuracao;
 
 import producao.dados.nome.modelo.TipoNome;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;

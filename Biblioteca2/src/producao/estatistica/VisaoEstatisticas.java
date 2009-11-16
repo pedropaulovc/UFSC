@@ -1,4 +1,4 @@
-package producao.biblioteca.estatistica;
+package producao.estatistica;
 
 import edugraf.jadix.componentesDix.TipoComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;

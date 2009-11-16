@@ -1,4 +1,4 @@
-package producao.videoteca.configuracao;
+package producao.videoteca.modelo.configuracao;
 
 import producao.xteca.configuracao.TipoConfiguracaoXteca;
 

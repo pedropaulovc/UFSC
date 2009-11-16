@@ -1,4 +1,4 @@
-package producao.biblioteca.configuracao;
+package producao.biblioteca.modelo.configuracao;
 
 import producao.dados.nome.modelo.TipoNome;
 import producao.dados.prazoDevolucao.TipoPrazoDevolucao;

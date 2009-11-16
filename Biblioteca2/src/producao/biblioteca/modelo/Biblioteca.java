@@ -1,6 +1,6 @@
 package producao.biblioteca.modelo;
 
-import producao.biblioteca.configuracao.TipoConfiguracaoBiblioteca;
+import producao.biblioteca.modelo.configuracao.TipoConfiguracaoBiblioteca;
 import producao.dados.id.TipoId;
 import producao.livro.LivroNulo;
 import producao.livro.TipoLivro;

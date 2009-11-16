@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import producao.dados.id.Id;
 import producao.video.VideoNulo;
-import producao.videoteca.TipoVideoteca;
+import producao.videoteca.modelo.TipoVideoteca;
 
 public class ObterVideoInexistente extends CenarioComVideoteca {
 	private TipoVideoteca b;

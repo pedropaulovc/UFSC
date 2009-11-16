@@ -7,7 +7,7 @@ import infra.CenarioComVideoteca;
 import org.junit.Test;
 
 import producao.dados.id.TipoId;
-import producao.videoteca.TipoVideoteca;
+import producao.videoteca.modelo.TipoVideoteca;
 
 public class DevolverVideoEmprestadoNoPrazo extends CenarioComVideoteca {
 	private TipoVideoteca b;

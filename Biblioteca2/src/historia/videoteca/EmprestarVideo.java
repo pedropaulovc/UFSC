@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import producao.dados.id.TipoId;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
-import producao.videoteca.TipoVideoteca;
+import producao.videoteca.modelo.TipoVideoteca;
 
 public class EmprestarVideo extends CenarioComVideoteca {
 	private TipoVideoteca b;

@@ -1,4 +1,4 @@
-package producao.videoteca;
+package producao.videoteca.modelo;
 
 import producao.dados.id.TipoId;
 import producao.video.TipoVideo;

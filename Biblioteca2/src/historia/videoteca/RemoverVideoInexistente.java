@@ -6,7 +6,7 @@ import infra.CenarioComVideoteca;
 import org.junit.Test;
 
 import producao.dados.id.Id;
-import producao.videoteca.TipoVideoteca;
+import producao.videoteca.modelo.TipoVideoteca;
 
 public class RemoverVideoInexistente extends CenarioComVideoteca {
 	private TipoVideoteca b;

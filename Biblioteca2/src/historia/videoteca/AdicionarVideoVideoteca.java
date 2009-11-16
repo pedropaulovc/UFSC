@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import producao.dados.id.TipoId;
 import producao.video.TipoVideo;
-import producao.videoteca.TipoVideoteca;
+import producao.videoteca.modelo.TipoVideoteca;
 
 public class AdicionarVideoVideoteca extends CenarioComVideoteca {
 	private TipoVideoteca v;
