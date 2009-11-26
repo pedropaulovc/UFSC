@@ -1,5 +1,6 @@
 package producao.documento.dados;
 
+import producao.dados.ExcecaoParametroInvalido;
 import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.nome.modelo.Nome;
@@ -14,6 +15,8 @@ public class DadosDocumento implements TipoDadosDocumento {
 		assert titulo != null;
 		assert anoPublicacao != null;
 
+		if(titulo == null || anoPublicacao == null)
+			throw new ExcecaoParametroInvalido("Parâmetros inválidos");
 		this.titulo = titulo;
 		this.anoPublicacao = anoPublicacao;
 	}

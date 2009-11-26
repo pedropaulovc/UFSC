@@ -1,19 +1,16 @@
 package producao.formulario.campos;
 
-import producao.dados.anoPublicacao.visao.VisaoAnoPublicacao;
-import producao.dados.autor.visao.VisaoAutor;
-import producao.dados.nome.visao.VisaoFormularioNome;
-import producao.dados.numeroChamada.visao.VisaoNumeroChamada;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+
 import edugraf.jadix.fachada.PaginaDix;
 
 public class CamposFormularioBiblioteca {
 
 	private PaginaDix pagina;
-	private VisaoFormularioNome titulo;
-	private VisaoAutor autor;
-	private VisaoAnoPublicacao anoPublicacao;
-	private VisaoNumeroChamada numeroChamada;
-	private VisaoFormularioNome nomeEditora;
+	private CampoFormulario titulo, autor, anoPublicacao, numeroChamada,
+			nomeEditora;
 
 	public CamposFormularioBiblioteca(PaginaDix pagina) {
 		this.pagina = pagina;
@@ -21,11 +18,20 @@ public class CamposFormularioBiblioteca {
 	}
 
 	private void criarCampos() {
-		titulo = new VisaoFormularioNome(pagina);
-		autor = new VisaoAutor(pagina);
-		anoPublicacao = new VisaoAnoPublicacao(pagina);
-		numeroChamada = new VisaoNumeroChamada(pagina);
-		nomeEditora = new VisaoFormularioNome(pagina);
+		titulo = new CampoFormulario(pagina, new Rectangle(new Point(120, 20),
+				new Dimension(500, 0)), "Título");
+
+		autor = new CampoFormulario(pagina, new Rectangle(new Point(170, 20),
+				new Dimension(500, 0)), "Autor");
+
+		nomeEditora = new CampoFormulario(pagina, new Rectangle(new Point(220,
+				20), new Dimension(500, 0)), "Nome da Editora");
+
+		anoPublicacao = new CampoFormulario(pagina, new Rectangle(new Point(
+				270, 280), new Dimension(100, 0)), "Ano de Publicação");
+
+		numeroChamada = new CampoFormulario(pagina, new Rectangle(new Point(
+				270, 20), new Dimension(100, 0)), "Número de Chamada");
 	}
 
 	public String obterTitulo() {

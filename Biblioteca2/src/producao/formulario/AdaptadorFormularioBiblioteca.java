@@ -13,7 +13,6 @@ import producao.livro.TipoLivro;
 import producao.livro.arquivavel.dados.DadosLivroArquivavel;
 import producao.livro.arquivavel.dados.TipoDadosLivroArquivavel;
 import producao.livro.dados.DadosLivro;
-import producao.livro.dados.TipoDadosLivro;
 import producao.livro.editora.Editora;
 import producao.log.modelo.Mensagem;
 
@@ -35,7 +34,7 @@ public class AdaptadorFormularioBiblioteca extends Observable {
 	}
 
 	private TipoLivro criarLivro() {
-		TipoDadosLivro dados = new DadosLivro(criarTitulo(), criarAutor(),
+		DadosLivro dados = new DadosLivro(criarTitulo(), criarAutor(),
 				criarNomeEditora(), criarAnoPublicacao());
 
 		return editora.criarLivro(dados);
@@ -45,7 +44,7 @@ public class AdaptadorFormularioBiblioteca extends Observable {
 		try {
 			return new Nome(campos.obterTitulo());
 		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao(e.getLocalizedMessage(), this);
+			notificarAlteracao("Campo título vazio", this);
 		}
 
 		return null;
@@ -65,7 +64,7 @@ public class AdaptadorFormularioBiblioteca extends Observable {
 		try {
 			return new Nome(campos.obterNomeEditora());
 		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao(e.getLocalizedMessage(), this);
+			notificarAlteracao("Campo Nome da Editora vazio", this);
 		}
 
 		return null;

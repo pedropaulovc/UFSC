@@ -8,12 +8,11 @@ import producao.dados.nome.modelo.Nome;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
 import producao.livro.TipoLivro;
 import producao.livro.dados.DadosLivro;
-import producao.livro.dados.TipoDadosLivro;
 import producao.livro.editora.Editora;
 
 public abstract class CenarioComBiblioteca extends Cenario {
 	private Editora editora;
-	private TipoDadosLivro dados;
+	private DadosLivro dados;
 	private ConfiguracaoBiblioteca configBiblioteca;
 
 	public CenarioComBiblioteca() {

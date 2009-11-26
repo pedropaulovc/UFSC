@@ -1,22 +1,36 @@
 package producao.formulario.visao;
 
-import producao.formulario.campos.CampoAbstratoFormulario;
-import edugraf.jadix.fachada.ComponenteDix;
+import java.awt.Rectangle;
+
+import edugraf.jadix.componentesDix.TipoComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
+import edugraf.jadix.fachada.TratadorDixAbstrato;
 
-public class BotaoEnviar extends CampoAbstratoFormulario {
+public class BotaoEnviar {
 
-	public BotaoEnviar(PaginaDix pagina) {
-		super(pagina);
+	private TipoComponenteDix componente;
+
+	public BotaoEnviar(PaginaDix pagina, Rectangle r, String legenda) {
+		criarCampo(pagina, r, legenda);
 	}
 
-	@Override
-	public ComponenteDix criarCampo(PaginaDix pagina) {
-		ComponenteDix componente = pagina.criarComponente(
-				TiposDeComponentesDix.BOTÃO, "botaoEnviar");
-		componente.fixarTopo(425).fixarEsquerda(200).fixarLargura(150)
-				.fixarTexto("Enviar");
-		return componente;
+	public void criarCampo(PaginaDix pagina, Rectangle r, String legenda) {
+		componente = pagina.criarComponente(TiposDeComponentesDix.BOTÃO,
+				"botaoEnviar");
+		componente.fixarTopo((int) r.getX()).fixarEsquerda((int) r.getY())
+				.fixarLargura((int) r.getWidth()).fixarTexto(legenda);
+	}
+
+	public void tornarVisivel() {
+		componente.tornarVisivel();
+	}
+
+	public void tornarInvisivel() {
+		componente.tornarInvisivel();
+	}
+
+	public void adicionarTratadorEventos(TratadorDixAbstrato tratador) {
+		componente.adicionarTratadorDeEventos(tratador);
 	}
 }

@@ -1,5 +1,6 @@
 package producao.livro.dados;
 
+import producao.dados.ExcecaoParametroInvalido;
 import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.autor.modelo.Autor;
 import producao.dados.autor.modelo.TipoAutor;
@@ -17,6 +18,8 @@ public class DadosLivro extends DadosDocumento implements TipoDadosLivro {
 		assert autor != null;
 		assert editora != null;
 
+		if(autor == null || editora == null)
+			throw new ExcecaoParametroInvalido("Parâmetros inválidos");
 		this.autor = autor;
 		this.editora = editora;
 	}
