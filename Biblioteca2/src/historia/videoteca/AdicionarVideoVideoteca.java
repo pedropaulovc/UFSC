@@ -8,10 +8,10 @@ import org.junit.Test;
 
 import producao.dados.id.TipoId;
 import producao.video.TipoVideo;
-import producao.videoteca.modelo.TipoVideoteca;
+import producao.videoteca.modelo.Videoteca;
 
 public class AdicionarVideoVideoteca extends CenarioComVideoteca {
-	private TipoVideoteca v;
+	private Videoteca v;
 	private TipoId idVideo;
 	private TipoVideo video;
 

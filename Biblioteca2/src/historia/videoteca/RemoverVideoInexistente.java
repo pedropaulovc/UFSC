@@ -6,10 +6,10 @@ import infra.CenarioComVideoteca;
 import org.junit.Test;
 
 import producao.dados.id.Id;
-import producao.videoteca.modelo.TipoVideoteca;
+import producao.videoteca.modelo.Videoteca;
 
 public class RemoverVideoInexistente extends CenarioComVideoteca {
-	private TipoVideoteca b;
+	private Videoteca b;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComUmVideo();

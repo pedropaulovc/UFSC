@@ -7,10 +7,10 @@ import org.junit.Test;
 
 import producao.dados.id.Id;
 import producao.video.VideoNulo;
-import producao.videoteca.modelo.TipoVideoteca;
+import producao.videoteca.modelo.Videoteca;
 
 public class ObterVideoInexistente extends CenarioComVideoteca {
-	private TipoVideoteca b;
+	private Videoteca b;
 
 	public void dadoQue() {
 		existeUmaBiblioteca();

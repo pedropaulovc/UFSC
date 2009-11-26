@@ -5,8 +5,7 @@ import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
 
-public class VisaoNumeroChamada extends CampoAbstratoFormulario implements
-		TipoVisaoNumeroChamada {
+public class VisaoNumeroChamada extends CampoAbstratoFormulario {
 
 	public VisaoNumeroChamada(PaginaDix pagina) {
 		super(pagina);

@@ -11,11 +11,11 @@ import producao.dados.nome.modelo.Nome;
 import producao.livro.TipoLivro;
 import producao.livro.dados.DadosLivro;
 import producao.livro.dados.TipoDadosLivro;
-import producao.livro.editora.TipoEditora;
+import producao.livro.editora.Editora;
 
 public class CriarLivro extends CenarioComBiblioteca {
 	private TipoLivro livro;
-	private TipoEditora editora;
+	private Editora editora;
 	private TipoDadosLivro dados;
 
 	public void dadoQue() {

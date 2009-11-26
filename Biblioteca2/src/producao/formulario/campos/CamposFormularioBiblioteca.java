@@ -1,35 +1,31 @@
 package producao.formulario.campos;
 
-import producao.dados.anoPublicacao.visao.TipoVisaoAnoPublicacao;
 import producao.dados.anoPublicacao.visao.VisaoAnoPublicacao;
-import producao.dados.autor.visao.TipoVisaoAutor;
 import producao.dados.autor.visao.VisaoAutor;
-import producao.dados.nome.visao.TipoVisaoCampoNome;
-import producao.dados.nome.visao.VisaoCampoNome;
-import producao.dados.numeroChamada.visao.TipoVisaoNumeroChamada;
+import producao.dados.nome.visao.VisaoFormularioNome;
 import producao.dados.numeroChamada.visao.VisaoNumeroChamada;
 import edugraf.jadix.fachada.PaginaDix;
 
-public class CamposFormulario implements TipoCamposFormulario {
+public class CamposFormularioBiblioteca {
 
 	private PaginaDix pagina;
-	private TipoVisaoCampoNome titulo;
-	private TipoVisaoAutor autor;
-	private TipoVisaoAnoPublicacao anoPublicacao;
-	private TipoVisaoNumeroChamada numeroChamada;
-	private TipoVisaoCampoNome nomeEditora;
+	private VisaoFormularioNome titulo;
+	private VisaoAutor autor;
+	private VisaoAnoPublicacao anoPublicacao;
+	private VisaoNumeroChamada numeroChamada;
+	private VisaoFormularioNome nomeEditora;
 
-	public CamposFormulario(PaginaDix pagina) {
+	public CamposFormularioBiblioteca(PaginaDix pagina) {
 		this.pagina = pagina;
 		criarCampos();
 	}
 
 	private void criarCampos() {
-		titulo = new VisaoCampoNome(pagina);
+		titulo = new VisaoFormularioNome(pagina);
 		autor = new VisaoAutor(pagina);
 		anoPublicacao = new VisaoAnoPublicacao(pagina);
 		numeroChamada = new VisaoNumeroChamada(pagina);
-		nomeEditora = new VisaoCampoNome(pagina);
+		nomeEditora = new VisaoFormularioNome(pagina);
 	}
 
 	public String obterTitulo() {

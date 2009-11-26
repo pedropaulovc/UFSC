@@ -4,7 +4,7 @@ import producao.dados.nome.modelo.TipoNome;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
 
-public class VisaoNome implements TipoVisaoNome {
+public class VisaoNome {
 	private PaginaDix pagina;
 	private TipoNome nome;
 

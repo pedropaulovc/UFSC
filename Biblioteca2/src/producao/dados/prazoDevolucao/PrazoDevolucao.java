@@ -2,14 +2,19 @@ package producao.dados.prazoDevolucao;
 
 import java.util.Calendar;
 
+import producao.dados.ExcecaoParametroInvalido;
+import static producao.dados.ValidadorInt.validarNumero;
+
 public class PrazoDevolucao implements TipoPrazoDevolucao {
 
 	private int dataDevolucao;
 	private int prazo;
 
-	public PrazoDevolucao(int prazo) {
+	public PrazoDevolucao(int prazo) throws ExcecaoParametroInvalido {
 		assert prazo > 0;
 
+		if (!validarNumero(prazo))
+			throw new ExcecaoParametroInvalido("Prazo de devolução inválido");
 		this.prazo = prazo;
 		this.dataDevolucao = diaAtual() + prazo;
 	}
@@ -24,7 +29,7 @@ public class PrazoDevolucao implements TipoPrazoDevolucao {
 		Calendar cal = Calendar.getInstance();
 		int diaDoAno = cal.get(Calendar.DAY_OF_YEAR);
 		int ano = cal.get(Calendar.YEAR);
-		return diaDoAno * ano;
+		return diaDoAno + 365 * ano;
 	}
 
 	public int obterPrazoDevolucaoRelativoAHoje() {

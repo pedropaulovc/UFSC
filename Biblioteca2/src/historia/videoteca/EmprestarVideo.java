@@ -9,10 +9,10 @@ import org.junit.Test;
 
 import producao.dados.id.TipoId;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
-import producao.videoteca.modelo.TipoVideoteca;
+import producao.videoteca.modelo.Videoteca;
 
 public class EmprestarVideo extends CenarioComVideoteca {
-	private TipoVideoteca b;
+	private Videoteca b;
 	private TipoId idVideo;
 
 	public void dadoQue() {

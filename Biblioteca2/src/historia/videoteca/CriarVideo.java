@@ -13,11 +13,11 @@ import producao.dados.nome.modelo.Nome;
 import producao.video.TipoVideo;
 import producao.video.dados.DadosVideo;
 import producao.video.dados.TipoDadosVideo;
-import producao.video.produtora.TipoProdutora;
+import producao.video.produtora.Produtora;
 
 public class CriarVideo extends CenarioComVideoteca {
 	private TipoVideo video;
-	private TipoProdutora produtora;
+	private Produtora produtora;
 	private TipoDadosVideo dados;
 
 	public void dadoQue() {

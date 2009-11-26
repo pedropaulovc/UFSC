@@ -1,21 +1,22 @@
 package producao.biblioteca.controle;
 
-import producao.biblioteca.modelo.TipoBiblioteca;
-import producao.biblioteca.visao.TipoVisaoBiblioteca;
-import producao.formulario.AdaptadorFormulario;
+import producao.biblioteca.modelo.Biblioteca;
+import producao.biblioteca.visao.VisaoBiblioteca;
+import producao.formulario.AdaptadorFormularioBiblioteca;
 import edugraf.jadix.eventos.EventoSimples;
 import edugraf.jadix.eventos.nomes.NomeDeEventosSimples;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
 
 public class TratadorEnvioDados extends TratadorDixAbstrato {
 
-	private AdaptadorFormulario adaptador;
-	private TipoBiblioteca biblioteca;
+	private AdaptadorFormularioBiblioteca adaptador;
+	private Biblioteca biblioteca;
 
-	public TratadorEnvioDados(TipoBiblioteca biblioteca,
-			TipoVisaoBiblioteca visao) {
-		this.adaptador = new AdaptadorFormulario(visao);
+	public TratadorEnvioDados(Biblioteca biblioteca, VisaoBiblioteca visao) {
+		this.adaptador = new AdaptadorFormularioBiblioteca(visao);
 		this.biblioteca = biblioteca;
+
+		adaptador.addObserver(visao);
 	}
 
 	public void seDito(EventoSimples evento) {

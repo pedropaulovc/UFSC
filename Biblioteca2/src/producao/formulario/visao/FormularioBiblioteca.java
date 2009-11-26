@@ -1,14 +1,13 @@
 package producao.formulario.visao;
 
-import producao.formulario.campos.CamposFormulario;
-import producao.formulario.campos.TipoCamposFormulario;
+import producao.formulario.campos.CamposFormularioBiblioteca;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
 
-public class FormularioBiblioteca implements TipoFormularioBiblioteca {
+public class FormularioBiblioteca {
 	private PaginaDix pagina;
 	private BotaoEnviar botaoEnviar;
-	private TipoCamposFormulario camposFormulario;
+	private CamposFormularioBiblioteca camposFormulario;
 
 	public FormularioBiblioteca(PaginaDix pagina) {
 		this.pagina = pagina;
@@ -16,7 +15,7 @@ public class FormularioBiblioteca implements TipoFormularioBiblioteca {
 	}
 
 	private void montarFormulario() {
-		camposFormulario = new CamposFormulario(pagina);
+		camposFormulario = new CamposFormularioBiblioteca(pagina);
 		botaoEnviar = new BotaoEnviar(pagina);
 	}
 
@@ -24,7 +23,7 @@ public class FormularioBiblioteca implements TipoFormularioBiblioteca {
 		botaoEnviar.adicionarTratadorEventos(tratador);
 	}
 
-	public TipoCamposFormulario obterCampos() {
+	public CamposFormularioBiblioteca obterCampos() {
 		return camposFormulario;
 	}
 

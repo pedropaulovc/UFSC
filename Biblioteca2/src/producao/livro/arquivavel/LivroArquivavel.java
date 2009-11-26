@@ -10,8 +10,7 @@ import producao.livro.arquivavel.dados.DadosLivroArquivavelNulo;
 import producao.livro.arquivavel.dados.TipoDadosLivroArquivavel;
 import producao.livro.dados.TipoDadosLivro;
 
-public class LivroArquivavel extends DocumentoArquivavel implements
-		TipoLivroArquivavel {
+public class LivroArquivavel extends DocumentoArquivavel {
 
 	private TipoDadosLivroArquivavel dados;
 	private TipoLivro livro;

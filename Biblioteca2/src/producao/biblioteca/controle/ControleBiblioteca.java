@@ -1,15 +1,14 @@
 package producao.biblioteca.controle;
 
-import producao.biblioteca.modelo.TipoBiblioteca;
-import producao.biblioteca.visao.TipoVisaoBiblioteca;
+import producao.biblioteca.modelo.Biblioteca;
+import producao.biblioteca.visao.VisaoBiblioteca;
 
-public class ControleBiblioteca implements TipoControleBiblioteca {
+public class ControleBiblioteca {
 
-	private TipoBiblioteca b;
-	private TipoVisaoBiblioteca v;
+	private Biblioteca b;
+	private VisaoBiblioteca v;
 
-	public ControleBiblioteca(TipoBiblioteca biblioteca,
-			TipoVisaoBiblioteca visao) {
+	public ControleBiblioteca(Biblioteca biblioteca, VisaoBiblioteca visao) {
 		this.b = biblioteca;
 		this.v = visao;
 

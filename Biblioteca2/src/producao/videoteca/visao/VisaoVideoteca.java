@@ -1,45 +1,45 @@
-package producao.biblioteca.visao;
+package producao.videoteca.visao;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import producao.biblioteca.controle.TratadorEnvioDados;
-import producao.biblioteca.modelo.Biblioteca;
 import producao.dados.nome.visao.VisaoNome;
 import producao.estatistica.VisaoEstatisticas;
-import producao.formulario.campos.CamposFormularioBiblioteca;
-import producao.formulario.visao.FormularioBiblioteca;
+import producao.formulario.campos.CamposFormularioVideoteca;
+import producao.formulario.visao.FormularioVideoteca;
 import producao.log.modelo.Mensagem;
 import producao.log.visao.VisaoLog;
+import producao.videoteca.modelo.Videoteca;
 import edugraf.jadix.fachada.PaginaDix;
 
-public class VisaoBiblioteca implements Observer {
+public class VisaoVideoteca implements Observer {
 	private VisaoEstatisticas estatisticas;
-	private FormularioBiblioteca formulario;
-	private Biblioteca b;
+	private FormularioVideoteca formulario;
+	private Videoteca v;
 	private VisaoLog log;
 
-	public VisaoBiblioteca(PaginaDix pagina, Biblioteca biblioteca) {
-		this.b = biblioteca;
-		b.addObserver(this);
+	public VisaoVideoteca(PaginaDix pagina, Videoteca videoteca) {
+		this.v = videoteca;
+		v.addObserver(this);
 
 		montarVisao(pagina);
 	}
 
 	private void montarVisao(PaginaDix pagina) {
-		new VisaoNome(b.obterNome(), pagina);
+		new VisaoNome(v.obterNome(), pagina);
 		estatisticas = new VisaoEstatisticas(pagina);
-		estatisticas.exibir("Não há livro no acervo ainda");
-		formulario = new FormularioBiblioteca(pagina);
+		estatisticas.exibir("Não há vídeos no acervo ainda");
+		formulario = new FormularioVideoteca(pagina);
 		log = new VisaoLog(pagina);
 	}
 
 	public void update(Observable arg0, Object arg1) {
-		estatisticas.exibir("Tamanho do acervo: " + b.tamanho());
+		estatisticas.exibir("Tamanho do acervo: " + v.tamanho());
 		log.atualizar(((Mensagem) arg1).toString());
 	}
 
-	public CamposFormularioBiblioteca obterCamposFormulario() {
+	public CamposFormularioVideoteca obterCamposFormulario() {
 		return formulario.obterCampos();
 	}
 

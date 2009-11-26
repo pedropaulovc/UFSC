@@ -6,10 +6,10 @@ import infra.CenarioComVideoteca;
 import org.junit.Test;
 
 import producao.dados.id.TipoId;
-import producao.videoteca.modelo.TipoVideoteca;
+import producao.videoteca.modelo.Videoteca;
 
 public class RemoverVideo extends CenarioComVideoteca {
-	private TipoVideoteca b;
+	private Videoteca b;
 	private TipoId id;
 
 	public void dadoQue() {

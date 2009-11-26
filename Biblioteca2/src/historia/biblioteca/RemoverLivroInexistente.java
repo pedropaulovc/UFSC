@@ -5,11 +5,11 @@ import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
-import producao.biblioteca.modelo.TipoBiblioteca;
+import producao.biblioteca.modelo.Biblioteca;
 import producao.dados.id.Id;
 
 public class RemoverLivroInexistente extends CenarioComBiblioteca {
-	private TipoBiblioteca b;
+	private Biblioteca b;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComUmLivro();

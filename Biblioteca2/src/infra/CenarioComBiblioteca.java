@@ -1,9 +1,7 @@
 package infra;
 
 import producao.biblioteca.modelo.Biblioteca;
-import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.biblioteca.modelo.configuracao.ConfiguracaoBiblioteca;
-import producao.biblioteca.modelo.configuracao.TipoConfiguracaoBiblioteca;
 import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.autor.modelo.Autor;
 import producao.dados.nome.modelo.Nome;
@@ -12,12 +10,11 @@ import producao.livro.TipoLivro;
 import producao.livro.dados.DadosLivro;
 import producao.livro.dados.TipoDadosLivro;
 import producao.livro.editora.Editora;
-import producao.livro.editora.TipoEditora;
 
 public abstract class CenarioComBiblioteca extends Cenario {
-	private TipoEditora editora;
+	private Editora editora;
 	private TipoDadosLivro dados;
-	private TipoConfiguracaoBiblioteca configBiblioteca;
+	private ConfiguracaoBiblioteca configBiblioteca;
 
 	public CenarioComBiblioteca() {
 		this.editora = new Editora();
@@ -32,11 +29,11 @@ public abstract class CenarioComBiblioteca extends Cenario {
 		return editora.criarLivro(dados);
 	}
 
-	public TipoBiblioteca obterBiblioteca() {
+	public Biblioteca obterBiblioteca() {
 		return new Biblioteca(configBiblioteca);
 	}
 
-	public TipoEditora obterEditora() {
+	public Editora obterEditora() {
 		return editora;
 	}
 }

@@ -17,7 +17,6 @@ public class Id implements TipoId {
 		return id.toString();
 	}
 
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -25,7 +24,6 @@ public class Id implements TipoId {
 		return result;
 	}
 
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

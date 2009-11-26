@@ -4,7 +4,7 @@ import edugraf.jadix.componentesDix.TipoComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
 
-public class VisaoEstatisticas implements TipoVisaoEstatisticas {
+public class VisaoEstatisticas {
 
 	private PaginaDix pagina;
 	private TipoComponenteDix estatisticasBiblioteca;

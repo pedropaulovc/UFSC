@@ -5,10 +5,9 @@ import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
 
-public class VisaoCampoNome extends CampoAbstratoFormulario implements
-		TipoVisaoCampoNome {
+public class VisaoFormularioNome extends CampoAbstratoFormulario {
 
-	public VisaoCampoNome(PaginaDix pagina) {
+	public VisaoFormularioNome(PaginaDix pagina) {
 		super(pagina);
 	}
 

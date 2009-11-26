@@ -7,11 +7,11 @@ import org.junit.Test;
 
 import producao.dados.id.TipoId;
 import producao.video.TipoVideo;
-import producao.videoteca.modelo.TipoVideoteca;
+import producao.videoteca.modelo.Videoteca;
 
 public class VideosDiferentesPossuemIdsDiferentes extends CenarioComVideoteca {
 	private TipoVideo video1, video2;
-	private TipoVideoteca b;
+	private Videoteca b;
 	private TipoId idVideo1, idVideo2;
 
 	public void dadoQue() {

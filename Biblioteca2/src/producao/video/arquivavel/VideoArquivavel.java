@@ -10,8 +10,7 @@ import producao.video.arquivavel.dados.DadosVideoArquivavelNulo;
 import producao.video.arquivavel.dados.TipoDadosVideoArquivavel;
 import producao.video.dados.TipoDadosVideo;
 
-public class VideoArquivavel extends DocumentoArquivavel implements
-		TipoVideoArquivavel {
+public class VideoArquivavel extends DocumentoArquivavel {
 
 	private TipoVideo video;
 

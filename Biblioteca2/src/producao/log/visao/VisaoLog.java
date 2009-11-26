@@ -4,7 +4,7 @@ import edugraf.jadix.componentesDix.TipoComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
 
-public class VisaoLog implements TipoVisaoLog {
+public class VisaoLog {
 
 	private PaginaDix pagina;
 	private TipoComponenteDix componente;

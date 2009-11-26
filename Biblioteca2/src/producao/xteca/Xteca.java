@@ -3,7 +3,6 @@ package producao.xteca;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
-import java.util.Observer;
 
 import producao.dados.id.TipoId;
 import producao.dados.nome.modelo.TipoNome;
@@ -14,13 +13,13 @@ import producao.documento.arquivavel.EstadoEmprestimo;
 import producao.documento.arquivavel.TipoDocumentoArquivavel;
 import producao.documento.arquivavel.dados.TipoDadosDocumentoArquivavel;
 import producao.log.modelo.Mensagem;
-import producao.xteca.configuracao.TipoConfiguracaoXteca;
+import producao.xteca.configuracao.ConfiguracaoXteca;
 
-public abstract class Xteca extends Observable implements TipoXteca {
+public abstract class Xteca extends Observable {
 	private Map<TipoId, TipoDocumentoArquivavel> mapaDocumentos;
-	private TipoConfiguracaoXteca config;
+	private ConfiguracaoXteca config;
 
-	public Xteca(TipoConfiguracaoXteca config) {
+	public Xteca(ConfiguracaoXteca config) {
 		assert config != null;
 
 		this.config = config;
@@ -98,9 +97,9 @@ public abstract class Xteca extends Observable implements TipoXteca {
 		return new DocumentoArquivavelNulo();
 	}
 
-	public void adicionarObservador(Observer o) {
+	/*public void adicionarObservador(Observer o) {
 		addObserver(o);
-	}
+	}*/
 
 	private void notificarAlteracao(String mensagem, Object o) {
 		setChanged();

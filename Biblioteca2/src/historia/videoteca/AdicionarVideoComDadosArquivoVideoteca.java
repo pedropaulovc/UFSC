@@ -11,10 +11,10 @@ import producao.dados.id.TipoId;
 import producao.video.TipoVideo;
 import producao.video.arquivavel.dados.DadosVideoArquivavel;
 import producao.video.arquivavel.dados.TipoDadosVideoArquivavel;
-import producao.videoteca.modelo.TipoVideoteca;
+import producao.videoteca.modelo.Videoteca;
 
 public class AdicionarVideoComDadosArquivoVideoteca extends CenarioComVideoteca {
-	private TipoVideoteca b;
+	private Videoteca b;
 	private TipoId idVideo;
 	private TipoVideo video;
 	private TipoDadosVideoArquivavel dadosArquivo;

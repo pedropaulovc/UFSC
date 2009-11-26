@@ -2,10 +2,7 @@ package aplique;
 
 import producao.biblioteca.controle.ControleBiblioteca;
 import producao.biblioteca.modelo.Biblioteca;
-import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.biblioteca.modelo.configuracao.ConfiguracaoBiblioteca;
-import producao.biblioteca.modelo.configuracao.TipoConfiguracaoBiblioteca;
-import producao.biblioteca.visao.TipoVisaoBiblioteca;
 import producao.biblioteca.visao.VisaoBiblioteca;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
@@ -13,16 +10,29 @@ import edugraf.jadix.Aplique;
 import edugraf.jadix.fachada.PaginaDix;
 
 public class ApliqueBiblioteca extends Aplique {
+	private Biblioteca biblioteca;
+	private PaginaDix pagina;
+	private VisaoBiblioteca visaoBiblioteca;
+
 	public void iniciar() {
-		PaginaDix pagina = this.obterPaginaDix();
+		pagina = this.obterPaginaDix();
 
-		TipoConfiguracaoBiblioteca config = new ConfiguracaoBiblioteca(
-				new Nome("Biblioteca Central"), new PrazoDevolucao(15));
-		TipoBiblioteca biblioteca = new Biblioteca(config);
+		criarModelo();
+		criarVisao();
+		criarControle();
+	}
 
-		TipoVisaoBiblioteca visaoBiblioteca = new VisaoBiblioteca(pagina,
-				biblioteca);
+	private void criarModelo() {
+		ConfiguracaoBiblioteca config = new ConfiguracaoBiblioteca(new Nome(
+				"Biblioteca Central"), new PrazoDevolucao(15));
+		biblioteca = new Biblioteca(config);
+	}
 
+	private void criarVisao() {
+		visaoBiblioteca = new VisaoBiblioteca(pagina, biblioteca);
+	}
+
+	private void criarControle() {
 		new ControleBiblioteca(biblioteca, visaoBiblioteca);
 	}
 }

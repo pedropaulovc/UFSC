@@ -5,12 +5,12 @@ import producao.video.TipoVideo;
 import producao.video.VideoNulo;
 import producao.video.arquivavel.VideoArquivavel;
 import producao.video.arquivavel.dados.TipoDadosVideoArquivavel;
-import producao.videoteca.modelo.configuracao.TipoConfiguracaoVideoteca;
+import producao.videoteca.modelo.configuracao.ConfiguracaoVideoteca;
 import producao.xteca.Xteca;
 
-public class Videoteca extends Xteca implements TipoVideoteca {
+public class Videoteca extends Xteca {
 
-	public Videoteca(TipoConfiguracaoVideoteca config) {
+	public Videoteca(ConfiguracaoVideoteca config) {
 		super(config);
 	}
 

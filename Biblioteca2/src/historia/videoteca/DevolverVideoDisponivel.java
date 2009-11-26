@@ -7,10 +7,10 @@ import infra.CenarioComVideoteca;
 import org.junit.Test;
 
 import producao.dados.id.TipoId;
-import producao.videoteca.modelo.TipoVideoteca;
+import producao.videoteca.modelo.Videoteca;
 
 public class DevolverVideoDisponivel extends CenarioComVideoteca {
-	private TipoVideoteca b;
+	private Videoteca b;
 	private TipoId idVideo;
 
 	public void dadoQue() {

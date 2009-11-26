@@ -6,7 +6,7 @@ import infra.CenarioComBiblioteca;
 
 import org.junit.Test;
 
-import producao.biblioteca.modelo.TipoBiblioteca;
+import producao.biblioteca.modelo.Biblioteca;
 import producao.dados.id.TipoId;
 import producao.dados.numeroChamada.modelo.NumeroChamada;
 import producao.livro.TipoLivro;
@@ -15,7 +15,7 @@ import producao.livro.arquivavel.dados.TipoDadosLivroArquivavel;
 
 public class AdicionarLivroComDadosArquivoBiblioteca extends
 		CenarioComBiblioteca {
-	private TipoBiblioteca b;
+	private Biblioteca b;
 	private TipoId idLivro;
 	private TipoLivro livro;
 	private TipoDadosLivroArquivavel dadosArquivo;

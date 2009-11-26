@@ -1,9 +1,12 @@
 package producao.video.dados;
 
 import producao.dados.anoPublicacao.modelo.AnoPublicacao;
+import producao.dados.autor.modelo.Autor;
 import producao.dados.autor.modelo.TipoAutor;
 import producao.dados.categoria.Categoria;
+import producao.dados.listaAtores.ListaAtores;
 import producao.dados.listaAtores.TipoListaAtores;
+import producao.dados.nome.modelo.Nome;
 import producao.dados.nome.modelo.TipoNome;
 import producao.documento.dados.DadosDocumento;
 
@@ -14,8 +17,8 @@ public class DadosVideo extends DadosDocumento implements TipoDadosVideo {
 	private TipoNome nomeProdutora;
 	private Categoria categoria;
 
-	public DadosVideo(TipoNome titulo, TipoAutor diretor,
-			TipoListaAtores listaAtores, TipoNome nomeProdutora,
+	public DadosVideo(Nome titulo, Autor diretor,
+			ListaAtores listaAtores, Nome nomeProdutora,
 			AnoPublicacao anoPublicacao, Categoria categoria) {
 		super(titulo, anoPublicacao);
 		this.diretor = diretor;

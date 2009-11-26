@@ -7,16 +7,14 @@ import infra.Cenario;
 import org.junit.Test;
 
 import producao.biblioteca.modelo.Biblioteca;
-import producao.biblioteca.modelo.TipoBiblioteca;
 import producao.biblioteca.modelo.configuracao.ConfiguracaoBiblioteca;
-import producao.biblioteca.modelo.configuracao.TipoConfiguracaoBiblioteca;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
 
 public class CriarBiblioteca extends Cenario {
 
-	private TipoBiblioteca b;
-	private TipoConfiguracaoBiblioteca configuração;
+	private Biblioteca b;
+	private ConfiguracaoBiblioteca configuração;
 
 	public void dadoQue() {
 		existemConfiguraçõesValidasBiblioteca();

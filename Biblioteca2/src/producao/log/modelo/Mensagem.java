@@ -1,6 +1,6 @@
 package producao.log.modelo;
 
-public class Mensagem implements TipoMensagem {
+public class Mensagem {
 
 	private String mensagem;
 	private Object object;

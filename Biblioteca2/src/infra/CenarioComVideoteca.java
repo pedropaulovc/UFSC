@@ -15,16 +15,13 @@ import producao.video.TipoVideo;
 import producao.video.dados.DadosVideo;
 import producao.video.dados.TipoDadosVideo;
 import producao.video.produtora.Produtora;
-import producao.video.produtora.TipoProdutora;
-import producao.videoteca.modelo.TipoVideoteca;
 import producao.videoteca.modelo.Videoteca;
 import producao.videoteca.modelo.configuracao.ConfiguracaoVideoteca;
-import producao.videoteca.modelo.configuracao.TipoConfiguracaoVideoteca;
 
 public abstract class CenarioComVideoteca extends Cenario {
-	private TipoProdutora produtora;
+	private Produtora produtora;
 	private TipoDadosVideo dados;
-	private TipoConfiguracaoVideoteca configVideoteca;
+	private ConfiguracaoVideoteca configVideoteca;
 
 	public CenarioComVideoteca() {
 		this.produtora = new Produtora();
@@ -47,11 +44,11 @@ public abstract class CenarioComVideoteca extends Cenario {
 		return produtora.criarVideo(dados);
 	}
 
-	public TipoVideoteca obterVideoteca() {
+	public Videoteca obterVideoteca() {
 		return new Videoteca(configVideoteca);
 	}
 
-	public TipoProdutora obterProdutora() {
+	public Produtora obterProdutora() {
 		return produtora;
 	}
 }
