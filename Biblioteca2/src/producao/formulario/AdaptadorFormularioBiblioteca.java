@@ -9,9 +9,8 @@ import producao.dados.autor.modelo.Autor;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.numeroChamada.modelo.NumeroChamada;
 import producao.formulario.campos.CamposFormularioBiblioteca;
-import producao.livro.TipoLivro;
+import producao.livro.Livro;
 import producao.livro.arquivavel.dados.DadosLivroArquivavel;
-import producao.livro.arquivavel.dados.TipoDadosLivroArquivavel;
 import producao.livro.dados.DadosLivro;
 import producao.livro.editora.Editora;
 import producao.log.modelo.Mensagem;
@@ -25,15 +24,15 @@ public class AdaptadorFormularioBiblioteca extends Observable {
 		editora = new Editora();
 	}
 
-	public TipoLivro adaptarLivro() {
+	public Livro adaptarLivro() {
 		return criarLivro();
 	}
 
-	public TipoDadosLivroArquivavel adaptarDadosDeArquivo() {
+	public DadosLivroArquivavel adaptarDadosDeArquivo() {
 		return new DadosLivroArquivavel(criarNumeroChamada());
 	}
 
-	private TipoLivro criarLivro() {
+	private Livro criarLivro() {
 		DadosLivro dados = new DadosLivro(criarTitulo(), criarAutor(),
 				criarNomeEditora(), criarAnoPublicacao());
 
@@ -94,5 +93,9 @@ public class AdaptadorFormularioBiblioteca extends Observable {
 	private void notificarAlteracao(String mensagem, Object o) {
 		setChanged();
 		notifyObservers(new Mensagem(mensagem, o));
+	}
+
+	public boolean dadosArquivosPreenchidos() {
+		return !campos.obterNumeroChamada().isEmpty();
 	}
 }

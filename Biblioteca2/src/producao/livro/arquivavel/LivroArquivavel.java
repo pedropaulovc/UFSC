@@ -1,5 +1,6 @@
 package producao.livro.arquivavel;
 
+import producao.dados.ExcecaoParametroInvalido;
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.modelo.TipoAutor;
 import producao.dados.nome.modelo.TipoNome;
@@ -17,6 +18,10 @@ public class LivroArquivavel extends DocumentoArquivavel {
 
 	public LivroArquivavel(TipoLivro livro, TipoDadosLivroArquivavel dados) {
 		super(dados);
+		
+		if(livro == null || dados == null)
+			throw new ExcecaoParametroInvalido("Parâmetro inválido");
+		
 		this.livro = livro;
 		this.dados = dados;
 	}
@@ -51,6 +56,12 @@ public class LivroArquivavel extends DocumentoArquivavel {
 
 	public TipoNome obterTitulo() {
 		return livro.obterTitulo();
+	}
+	
+	public String toString(){
+		if(dados.toString().isEmpty())
+			return livro.toString();
+		return livro.toString() + ", " + dados.toString();
 	}
 
 }

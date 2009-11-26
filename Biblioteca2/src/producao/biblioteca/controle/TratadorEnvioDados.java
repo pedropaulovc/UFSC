@@ -21,8 +21,12 @@ public class TratadorEnvioDados extends TratadorDixAbstrato {
 
 	public void seDito(EventoSimples evento) {
 		if (evento.obterNomeDoEvento().equals(NomeDeEventosSimples.CLICADO)) {
-			biblioteca.adicionar(adaptador.adaptarLivro(), adaptador
-					.adaptarDadosDeArquivo());
+			if(adaptador.dadosArquivosPreenchidos()){
+				biblioteca.adicionar(adaptador.adaptarLivro(), adaptador
+						.adaptarDadosDeArquivo());
+				return;
+			}
+			biblioteca.adicionar(adaptador.adaptarLivro());
 		}
 	}
 }

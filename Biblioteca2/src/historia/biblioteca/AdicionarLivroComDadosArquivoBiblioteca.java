@@ -9,16 +9,15 @@ import org.junit.Test;
 import producao.biblioteca.modelo.Biblioteca;
 import producao.dados.id.TipoId;
 import producao.dados.numeroChamada.modelo.NumeroChamada;
-import producao.livro.TipoLivro;
+import producao.livro.Livro;
 import producao.livro.arquivavel.dados.DadosLivroArquivavel;
-import producao.livro.arquivavel.dados.TipoDadosLivroArquivavel;
 
 public class AdicionarLivroComDadosArquivoBiblioteca extends
 		CenarioComBiblioteca {
 	private Biblioteca b;
 	private TipoId idLivro;
-	private TipoLivro livro;
-	private TipoDadosLivroArquivavel dadosArquivo;
+	private Livro livro;
+	private DadosLivroArquivavel dadosArquivo;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComNenhumLivro();

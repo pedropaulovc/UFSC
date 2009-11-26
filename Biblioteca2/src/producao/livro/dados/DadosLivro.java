@@ -18,7 +18,7 @@ public class DadosLivro extends DadosDocumento implements TipoDadosLivro {
 		assert autor != null;
 		assert editora != null;
 
-		if(autor == null || editora == null)
+		if (autor == null || editora == null)
 			throw new ExcecaoParametroInvalido("Parâmetros inválidos");
 		this.autor = autor;
 		this.editora = editora;
@@ -30,6 +30,11 @@ public class DadosLivro extends DadosDocumento implements TipoDadosLivro {
 
 	public TipoNome obterEditora() {
 		return editora;
+	}
+
+	public String toString() {
+		return super.toString() + ", Autor: " + autor.toString() + ", Editora: "
+				+ editora.toString();
 	}
 
 }

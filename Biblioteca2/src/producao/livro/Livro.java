@@ -3,13 +3,14 @@ package producao.livro;
 import producao.dados.autor.modelo.TipoAutor;
 import producao.dados.nome.modelo.TipoNome;
 import producao.documento.Documento;
+import producao.livro.dados.DadosLivro;
 import producao.livro.dados.TipoDadosLivro;
 
 public class Livro extends Documento implements TipoLivro {
 
-	private TipoDadosLivro dados;
+	private DadosLivro dados;
 
-	public Livro(TipoDadosLivro dados) {
+	public Livro(DadosLivro dados) {
 		super(dados);
 		this.dados = dados;
 	}
@@ -24,5 +25,9 @@ public class Livro extends Documento implements TipoLivro {
 
 	public TipoNome obterNomeEditora() {
 		return dados.obterEditora();
+	}
+	
+	public String toString(){
+		return "LIVRO: " + dados.toString();
 	}
 }

@@ -6,7 +6,7 @@ import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.autor.modelo.Autor;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
-import producao.livro.TipoLivro;
+import producao.livro.Livro;
 import producao.livro.dados.DadosLivro;
 import producao.livro.editora.Editora;
 
@@ -24,7 +24,7 @@ public abstract class CenarioComBiblioteca extends Cenario {
 
 	}
 
-	public TipoLivro obterLivro() {
+	public Livro obterLivro() {
 		return editora.criarLivro(dados);
 	}
 

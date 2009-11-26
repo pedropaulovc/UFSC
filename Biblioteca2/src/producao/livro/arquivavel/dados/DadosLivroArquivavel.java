@@ -15,5 +15,9 @@ public class DadosLivroArquivavel extends DadosDocumentoArquivavel implements
 	public TipoNumeroChamada obterNumeroChamada() {
 		return numeroChamada;
 	}
+	
+	public String toString(){
+		return "Número de Chamada: " + numeroChamada.toString();
+	}
 
 }

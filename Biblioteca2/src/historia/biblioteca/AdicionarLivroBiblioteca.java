@@ -8,12 +8,12 @@ import org.junit.Test;
 
 import producao.biblioteca.modelo.Biblioteca;
 import producao.dados.id.TipoId;
-import producao.livro.TipoLivro;
+import producao.livro.Livro;
 
 public class AdicionarLivroBiblioteca extends CenarioComBiblioteca {
 	private Biblioteca b;
 	private TipoId idLivro;
-	private TipoLivro livro;
+	private Livro livro;
 
 	public void dadoQue() {
 		existeUmaBibliotecaComNenhumLivro();

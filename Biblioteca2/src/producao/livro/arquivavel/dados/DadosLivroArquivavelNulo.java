@@ -9,4 +9,7 @@ public class DadosLivroArquivavelNulo implements TipoDadosLivroArquivavel {
 		return new NumeroChamadaNulo();
 	}
 
+	public String toString(){
+		return new String();
+	}
 }

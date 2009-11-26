@@ -68,5 +68,9 @@ public abstract class DocumentoArquivavel implements TipoDocumentoArquivavel {
 	public TipoDadosDocumentoArquivavel obterDadosDeArquivo() {
 		return dados;
 	}
+	
+	public String toString(){
+		return dados.toString();
+	}
 
 }

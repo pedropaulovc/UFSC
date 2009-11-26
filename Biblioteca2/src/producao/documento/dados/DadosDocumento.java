@@ -28,5 +28,9 @@ public class DadosDocumento implements TipoDadosDocumento {
 	public TipoAnoPublicacao obterAnoPublicacao() {
 		return anoPublicacao;
 	}
+	
+	public String toString(){
+		return "Título: " + titulo.toString() + ", Ano de Publicação: " + anoPublicacao.toString();
+	}
 
 }

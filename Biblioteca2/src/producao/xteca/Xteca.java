@@ -78,7 +78,7 @@ public abstract class Xteca extends Observable {
 
 		mapaDocumentos.put(doc.obterId(), doc);
 		notificarAlteracao("Foi adicionado novo documento sob a id "
-				+ doc.obterId().toString(), doc);
+				+ doc.obterId().toString() + ";\n" + doc.toString(), doc);
 		return doc.obterId();
 	}
 
@@ -97,9 +97,9 @@ public abstract class Xteca extends Observable {
 		return new DocumentoArquivavelNulo();
 	}
 
-	/*public void adicionarObservador(Observer o) {
-		addObserver(o);
-	}*/
+	/*
+	 * public void adicionarObservador(Observer o) { addObserver(o); }
+	 */
 
 	private void notificarAlteracao(String mensagem, Object o) {
 		setChanged();
