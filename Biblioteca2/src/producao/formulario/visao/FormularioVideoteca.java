@@ -4,8 +4,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import producao.biblioteca.controle.TratadorEnvioDados;
 import producao.formulario.campos.CamposFormularioVideoteca;
+import producao.videoteca.controle.TratadorEnvioDadosVideoteca;
 import edugraf.jadix.fachada.PaginaDix;
 
 public class FormularioVideoteca {
@@ -22,10 +22,10 @@ public class FormularioVideoteca {
 	private void montarFormulario() {
 		camposFormulario = new CamposFormularioVideoteca(pagina);
 		botaoEnviar = new BotaoEnviar(pagina, new Rectangle(
-				new Point(300, 200), new Dimension(150, 0)), "Enviar");
+				new Point(400, 200), new Dimension(150, 0)), "Enviar");
 	}
 
-	public void adicionarTratadorEnvioDados(TratadorEnvioDados tratador) {
+	public void adicionarTratadorEnvioDados(TratadorEnvioDadosVideoteca tratador) {
 		botaoEnviar.adicionarTratadorEventos(tratador);
 	}
 

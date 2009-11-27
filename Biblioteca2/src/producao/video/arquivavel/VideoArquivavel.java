@@ -2,7 +2,6 @@ package producao.video.arquivavel;
 
 import producao.dados.anoPublicacao.modelo.TipoAnoPublicacao;
 import producao.dados.autor.modelo.TipoAutor;
-import producao.dados.listaAtores.TipoListaAtores;
 import producao.dados.nome.modelo.TipoNome;
 import producao.documento.arquivavel.DocumentoArquivavel;
 import producao.video.TipoVideo;
@@ -13,9 +12,11 @@ import producao.video.dados.TipoDadosVideo;
 public class VideoArquivavel extends DocumentoArquivavel {
 
 	private TipoVideo video;
+	private TipoDadosVideoArquivavel dados;
 
 	public VideoArquivavel(TipoVideo video, TipoDadosVideoArquivavel dados) {
 		super(dados);
+		this.dados = dados;
 		this.video = video;
 	}
 
@@ -31,10 +32,6 @@ public class VideoArquivavel extends DocumentoArquivavel {
 		return video.obterDiretor();
 	}
 
-	public TipoListaAtores obterListaAtores() {
-		return video.obterListaAtores();
-	}
-
 	public TipoNome obterNomeProdutora() {
 		return video.obterNomeProdutora();
 	}
@@ -47,7 +44,15 @@ public class VideoArquivavel extends DocumentoArquivavel {
 		return video.obterTitulo();
 	}
 
+	public TipoLancamento obterTipoLancamento(){
+		return dados.obterTipoDeLancamento();
+	}
+	
 	public TipoVideo obterDocumento() {
 		return video;
+	}
+	
+	public String toString(){
+		return video.toString() + "; " + dados.toString();
 	}
 }

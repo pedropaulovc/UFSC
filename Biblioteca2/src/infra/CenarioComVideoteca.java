@@ -7,7 +7,6 @@ import java.util.List;
 
 import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.autor.modelo.Autor;
-import producao.dados.listaAtores.ListaAtores;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.nome.modelo.TipoNome;
 import producao.dados.prazoDevolucao.PrazoDevolucao;
@@ -26,8 +25,8 @@ public abstract class CenarioComVideoteca extends Cenario {
 	public CenarioComVideoteca() {
 		this.produtora = new Produtora();
 		this.dados = new DadosVideo(new Nome("Titulo"), new Autor("Autor"),
-				new ListaAtores(gerarAtores()), new Nome("Editora"),
-				new AnoPublicacao(1999), ANIMAÇÃO);
+				new Nome("Editora"),
+				new AnoPublicacao(1999), ANIMAÇÃO, new Nome("Um enredo"));
 		this.configVideoteca = new ConfiguracaoVideoteca(new Nome(
 				"Nome Videoteca"), new PrazoDevolucao(15));
 	}

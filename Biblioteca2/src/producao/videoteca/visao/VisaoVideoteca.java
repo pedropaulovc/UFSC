@@ -3,13 +3,13 @@ package producao.videoteca.visao;
 import java.util.Observable;
 import java.util.Observer;
 
-import producao.biblioteca.controle.TratadorEnvioDados;
 import producao.dados.nome.visao.VisaoNome;
 import producao.estatistica.VisaoEstatisticas;
 import producao.formulario.campos.CamposFormularioVideoteca;
 import producao.formulario.visao.FormularioVideoteca;
 import producao.log.modelo.Mensagem;
 import producao.log.visao.VisaoLog;
+import producao.videoteca.controle.TratadorEnvioDadosVideoteca;
 import producao.videoteca.modelo.Videoteca;
 import edugraf.jadix.fachada.PaginaDix;
 
@@ -43,7 +43,7 @@ public class VisaoVideoteca implements Observer {
 		return formulario.obterCampos();
 	}
 
-	public void adicionarTratadorEnvioDados(TratadorEnvioDados tratador) {
+	public void adicionarTratadorEnvioDados(TratadorEnvioDadosVideoteca tratador) {
 		formulario.adicionarTratadorEnvioDados(tratador);
 	}
 }

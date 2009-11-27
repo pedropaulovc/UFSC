@@ -17,7 +17,7 @@ public class BotaoEnviar {
 
 	public void criarCampo(PaginaDix pagina, Rectangle r, String legenda) {
 		componente = pagina.criarComponente(TiposDeComponentesDix.BOTÃO,
-				"botaoEnviar");
+				"botaoEnviar" + Math.random());
 		componente.fixarTopo((int) r.getX()).fixarEsquerda((int) r.getY())
 				.fixarLargura((int) r.getWidth()).fixarTexto(legenda);
 	}

@@ -1,9 +1,9 @@
 package producao.video;
 
+import static producao.dados.categoria.Categoria.OUTRA;
 import producao.dados.autor.modelo.AutorNulo;
 import producao.dados.autor.modelo.TipoAutor;
-import producao.dados.listaAtores.ListaAtoresNula;
-import producao.dados.listaAtores.TipoListaAtores;
+import producao.dados.categoria.Categoria;
 import producao.dados.nome.modelo.NomeNulo;
 import producao.dados.nome.modelo.TipoNome;
 import producao.documento.DocumentoNulo;
@@ -16,16 +16,16 @@ public class VideoNulo extends DocumentoNulo implements TipoVideo {
 		return new AutorNulo();
 	}
 
-	public TipoListaAtores obterListaAtores() {
-		return new ListaAtoresNula();
-	}
-
 	public TipoNome obterNomeProdutora() {
 		return new NomeNulo();
 	}
 
 	public TipoDadosVideo obterDados() {
 		return new DadosVideoNulo();
+	}
+
+	public Categoria obterCategoria() {
+		return OUTRA;
 	}
 
 }

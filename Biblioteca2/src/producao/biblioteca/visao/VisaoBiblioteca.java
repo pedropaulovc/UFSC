@@ -3,7 +3,7 @@ package producao.biblioteca.visao;
 import java.util.Observable;
 import java.util.Observer;
 
-import producao.biblioteca.controle.TratadorEnvioDados;
+import producao.biblioteca.controle.TratadorEnvioDadosBiblioteca;
 import producao.biblioteca.modelo.Biblioteca;
 import producao.dados.nome.visao.VisaoNome;
 import producao.estatistica.VisaoEstatisticas;
@@ -43,7 +43,7 @@ public class VisaoBiblioteca implements Observer {
 		return formulario.obterCampos();
 	}
 
-	public void adicionarTratadorEnvioDados(TratadorEnvioDados tratador) {
+	public void adicionarTratadorEnvioDados(TratadorEnvioDadosBiblioteca tratador) {
 		formulario.adicionarTratadorEnvioDados(tratador);
 	}
 }

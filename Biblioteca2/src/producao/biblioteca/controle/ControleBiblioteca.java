@@ -16,7 +16,7 @@ public class ControleBiblioteca {
 	}
 
 	private void adicionarTratadoresEventos() {
-		v.adicionarTratadorEnvioDados(new TratadorEnvioDados(b, v));
+		v.adicionarTratadorEnvioDados(new TratadorEnvioDadosBiblioteca(b, v));
 	}
 
 }

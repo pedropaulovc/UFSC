@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.autor.modelo.Autor;
-import producao.dados.listaAtores.ListaAtores;
 import producao.dados.nome.modelo.Nome;
 import producao.video.TipoVideo;
 import producao.video.dados.DadosVideo;
@@ -39,8 +38,8 @@ public class CriarVideo extends CenarioComVideoteca {
 
 	private void haDadosValidosDeUmVideo() {
 		dados = new DadosVideo(new Nome("Titulo"), new Autor("Autor"),
-				new ListaAtores(gerarAtores()), new Nome("Editora"),
-				new AnoPublicacao(1999), COMÉDIA);
+				new Nome("Editora"), new AnoPublicacao(1999), COMÉDIA,
+				new Nome("Um enredo"));
 	}
 
 	private void criarUmNovoVideoComOsDados() {

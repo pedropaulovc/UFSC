@@ -13,5 +13,9 @@ public class DadosVideoArquivavel implements TipoDadosVideoArquivavel {
 	public TipoLancamento obterTipoDeLancamento() {
 		return tipoLancamento;
 	}
+	
+	public String toString(){
+		return "Tipo de Lançamento: " + tipoLancamento.toString();
+	}
 
 }

@@ -4,15 +4,15 @@ import producao.biblioteca.modelo.Biblioteca;
 import producao.biblioteca.visao.VisaoBiblioteca;
 import producao.formulario.AdaptadorFormularioBiblioteca;
 import edugraf.jadix.eventos.EventoSimples;
-import edugraf.jadix.eventos.nomes.NomeDeEventosSimples;
+import static edugraf.jadix.eventos.nomes.NomeDeEventosSimples.CLICADO;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
 
-public class TratadorEnvioDados extends TratadorDixAbstrato {
+public class TratadorEnvioDadosBiblioteca extends TratadorDixAbstrato {
 
 	private AdaptadorFormularioBiblioteca adaptador;
 	private Biblioteca biblioteca;
 
-	public TratadorEnvioDados(Biblioteca biblioteca, VisaoBiblioteca visao) {
+	public TratadorEnvioDadosBiblioteca(Biblioteca biblioteca, VisaoBiblioteca visao) {
 		this.adaptador = new AdaptadorFormularioBiblioteca(visao);
 		this.biblioteca = biblioteca;
 
@@ -20,8 +20,8 @@ public class TratadorEnvioDados extends TratadorDixAbstrato {
 	}
 
 	public void seDito(EventoSimples evento) {
-		if (evento.obterNomeDoEvento().equals(NomeDeEventosSimples.CLICADO)) {
-			if(adaptador.dadosArquivosPreenchidos()){
+		if (evento.obterNomeDoEvento().equals(CLICADO)) {
+			if(adaptador.dadosDeArquivoPreenchidos()){
 				biblioteca.adicionar(adaptador.adaptarLivro(), adaptador
 						.adaptarDadosDeArquivo());
 				return;

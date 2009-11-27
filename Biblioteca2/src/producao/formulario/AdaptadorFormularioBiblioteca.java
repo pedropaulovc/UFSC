@@ -1,10 +1,7 @@
 package producao.formulario;
 
-import java.util.Observable;
-
 import producao.biblioteca.visao.VisaoBiblioteca;
 import producao.dados.ExcecaoParametroInvalido;
-import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.autor.modelo.Autor;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.numeroChamada.modelo.NumeroChamada;
@@ -13,13 +10,13 @@ import producao.livro.Livro;
 import producao.livro.arquivavel.dados.DadosLivroArquivavel;
 import producao.livro.dados.DadosLivro;
 import producao.livro.editora.Editora;
-import producao.log.modelo.Mensagem;
 
-public class AdaptadorFormularioBiblioteca extends Observable {
+public class AdaptadorFormularioBiblioteca extends AdaptadorFormularioAbstrato {
 	private CamposFormularioBiblioteca campos;
 	private Editora editora;
 
 	public AdaptadorFormularioBiblioteca(VisaoBiblioteca visao) {
+		super(visao.obterCamposFormulario());
 		this.campos = visao.obterCamposFormulario();
 		editora = new Editora();
 	}
@@ -37,16 +34,6 @@ public class AdaptadorFormularioBiblioteca extends Observable {
 				criarNomeEditora(), criarAnoPublicacao());
 
 		return editora.criarLivro(dados);
-	}
-
-	private Nome criarTitulo() {
-		try {
-			return new Nome(campos.obterTitulo());
-		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao("Campo título vazio", this);
-		}
-
-		return null;
 	}
 
 	private Autor criarAutor() {
@@ -69,17 +56,6 @@ public class AdaptadorFormularioBiblioteca extends Observable {
 		return null;
 	}
 
-	private AnoPublicacao criarAnoPublicacao() {
-
-		try {
-			return new AnoPublicacao(campos.obterAnoPublicacao());
-		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao(e.getLocalizedMessage(), this);
-		}
-
-		return null;
-	}
-
 	private NumeroChamada criarNumeroChamada() {
 		try {
 			return new NumeroChamada(campos.obterNumeroChamada());
@@ -90,12 +66,7 @@ public class AdaptadorFormularioBiblioteca extends Observable {
 		return null;
 	}
 
-	private void notificarAlteracao(String mensagem, Object o) {
-		setChanged();
-		notifyObservers(new Mensagem(mensagem, o));
-	}
-
-	public boolean dadosArquivosPreenchidos() {
+	public boolean dadosDeArquivoPreenchidos() {
 		return !campos.obterNumeroChamada().isEmpty();
 	}
 }
