@@ -1,11 +1,12 @@
-package producao.formulario;
+package producao.biblioteca.controle;
 
+import producao.biblioteca.visao.CamposFormularioBiblioteca;
 import producao.biblioteca.visao.VisaoBiblioteca;
 import producao.dados.ExcecaoParametroInvalido;
 import producao.dados.autor.modelo.Autor;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.numeroChamada.modelo.NumeroChamada;
-import producao.formulario.campos.CamposFormularioBiblioteca;
+import producao.formulario.AdaptadorFormularioAbstrato;
 import producao.livro.Livro;
 import producao.livro.arquivavel.dados.DadosLivroArquivavel;
 import producao.livro.dados.DadosLivro;

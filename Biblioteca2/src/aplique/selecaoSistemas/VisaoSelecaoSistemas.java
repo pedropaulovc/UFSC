@@ -22,12 +22,12 @@ import producao.videoteca.visao.VisaoVideoteca;
 import edugraf.jadix.componentesDix.ComponenteComLista;
 import edugraf.jadix.fachada.PaginaDix;
 
-public class SelecaoSistemas {
+public class VisaoSelecaoSistemas {
 	private PaginaDix pagina;
 	private ComponenteComLista componente;
 	private BotaoEnviar botao;
 
-	public SelecaoSistemas(PaginaDix pagina) {
+	public VisaoSelecaoSistemas(PaginaDix pagina) {
 		this.pagina = pagina;
 		criarCaixaDeSelecao();
 		criarBotão();
@@ -44,9 +44,7 @@ public class SelecaoSistemas {
 		botao = new BotaoEnviar(pagina, new Rectangle(new Point(
 				300, 300), new Dimension(100, 0)), "Escolher");
 
-		TratadorSelecaoSistemas tratador = new TratadorSelecaoSistemas(this);
-
-		botao.adicionarTratadorEventos(tratador);
+		botao.adicionarTratadorEventos(new TratadorSelecaoSistemas(this));
 	}
 
 	private List<String> criarListaSistemas() {
@@ -66,7 +64,7 @@ public class SelecaoSistemas {
 	}
 
 	public void criarVideoteca() {
-		removerSelecao();
+		removerSelecaoSistemas();
 		ConfiguracaoVideoteca config = new ConfiguracaoVideoteca(new Nome(
 				"Videoteca"), new PrazoDevolucao(10));
 		Videoteca videoteca = new Videoteca(config);
@@ -78,7 +76,7 @@ public class SelecaoSistemas {
 	}
 
 	public void criarBiblioteca() {
-		removerSelecao();
+		removerSelecaoSistemas();
 		ConfiguracaoBiblioteca config = new ConfiguracaoBiblioteca(new Nome(
 				"Biblioteca Central"), new PrazoDevolucao(15));
 		Biblioteca biblioteca = new Biblioteca(config);
@@ -89,7 +87,7 @@ public class SelecaoSistemas {
 		new ControleBiblioteca(biblioteca, visaoBiblioteca);
 	}
 
-	private void removerSelecao() {
+	private void removerSelecaoSistemas() {
 		componente.tornarInvisivel();
 		botao.tornarInvisivel();
 	}

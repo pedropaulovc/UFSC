@@ -2,7 +2,6 @@ package producao.biblioteca.controle;
 
 import producao.biblioteca.modelo.Biblioteca;
 import producao.biblioteca.visao.VisaoBiblioteca;
-import producao.formulario.AdaptadorFormularioBiblioteca;
 import edugraf.jadix.eventos.EventoSimples;
 import static edugraf.jadix.eventos.nomes.NomeDeEventosSimples.CLICADO;
 import edugraf.jadix.fachada.TratadorDixAbstrato;

@@ -5,8 +5,6 @@ import java.util.Observer;
 
 import producao.dados.nome.visao.VisaoNome;
 import producao.estatistica.VisaoEstatisticas;
-import producao.formulario.campos.CamposFormularioVideoteca;
-import producao.formulario.visao.FormularioVideoteca;
 import producao.log.modelo.Mensagem;
 import producao.log.visao.VisaoLog;
 import producao.videoteca.controle.TratadorEnvioDadosVideoteca;

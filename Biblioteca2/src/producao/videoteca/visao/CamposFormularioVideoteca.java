@@ -1,4 +1,4 @@
-package producao.formulario.campos;
+package producao.videoteca.visao;
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import producao.dados.categoria.Categoria;
+import producao.formulario.campos.CampoFormulario;
+import producao.formulario.campos.CamposFormularioAbstrato;
 import producao.video.arquivavel.TipoLancamento;
 import edugraf.jadix.componentesDix.ComponenteComLista;
 import edugraf.jadix.fachada.PaginaDix;

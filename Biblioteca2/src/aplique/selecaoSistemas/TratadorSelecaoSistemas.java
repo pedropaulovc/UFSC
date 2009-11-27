@@ -5,9 +5,9 @@ import edugraf.jadix.eventos.EventoSimples;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
 
 public class TratadorSelecaoSistemas extends TratadorDixAbstrato {
-	private SelecaoSistemas sel;
+	private VisaoSelecaoSistemas sel;
 
-	public TratadorSelecaoSistemas(SelecaoSistemas sel) {
+	public TratadorSelecaoSistemas(VisaoSelecaoSistemas sel) {
 		this.sel = sel;
 	}
 

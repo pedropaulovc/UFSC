@@ -1,7 +1,6 @@
 package producao.videoteca.controle;
 
 import static edugraf.jadix.eventos.nomes.NomeDeEventosSimples.CLICADO;
-import producao.formulario.AdaptadorFormularioVideoteca;
 import producao.videoteca.modelo.Videoteca;
 import producao.videoteca.visao.VisaoVideoteca;
 import edugraf.jadix.eventos.EventoSimples;

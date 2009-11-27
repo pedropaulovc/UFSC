@@ -7,8 +7,6 @@ import producao.biblioteca.controle.TratadorEnvioDadosBiblioteca;
 import producao.biblioteca.modelo.Biblioteca;
 import producao.dados.nome.visao.VisaoNome;
 import producao.estatistica.VisaoEstatisticas;
-import producao.formulario.campos.CamposFormularioBiblioteca;
-import producao.formulario.visao.FormularioBiblioteca;
 import producao.log.modelo.Mensagem;
 import producao.log.visao.VisaoLog;
 import edugraf.jadix.fachada.PaginaDix;

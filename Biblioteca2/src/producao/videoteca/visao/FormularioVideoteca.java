@@ -1,10 +1,10 @@
-package producao.formulario.visao;
+package producao.videoteca.visao;
 
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import producao.formulario.campos.CamposFormularioVideoteca;
+import producao.formulario.visao.BotaoEnviar;
 import producao.videoteca.controle.TratadorEnvioDadosVideoteca;
 import edugraf.jadix.fachada.PaginaDix;
 

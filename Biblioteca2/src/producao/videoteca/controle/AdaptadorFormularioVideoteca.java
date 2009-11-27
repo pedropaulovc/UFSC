@@ -1,16 +1,17 @@
-package producao.formulario;
+package producao.videoteca.controle;
 
 import producao.dados.ExcecaoParametroInvalido;
 import producao.dados.autor.modelo.Autor;
 import producao.dados.categoria.Categoria;
 import producao.dados.nome.modelo.Nome;
-import producao.formulario.campos.CamposFormularioVideoteca;
+import producao.formulario.AdaptadorFormularioAbstrato;
 import producao.video.Video;
 import producao.video.arquivavel.TipoLancamento;
 import producao.video.arquivavel.dados.DadosVideoArquivavel;
 import producao.video.arquivavel.dados.TipoDadosVideoArquivavel;
 import producao.video.dados.DadosVideo;
 import producao.video.produtora.Produtora;
+import producao.videoteca.visao.CamposFormularioVideoteca;
 import producao.videoteca.visao.VisaoVideoteca;
 
 public class AdaptadorFormularioVideoteca extends AdaptadorFormularioAbstrato {

@@ -1,10 +1,10 @@
-package producao.formulario.visao;
+package producao.biblioteca.visao;
 
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import producao.formulario.campos.CamposFormularioBiblioteca;
+import producao.formulario.visao.BotaoEnviar;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TratadorDixAbstrato;
 
