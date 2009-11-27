@@ -6,10 +6,11 @@ import producao.dados.autor.modelo.AutorNulo;
 import producao.dados.autor.modelo.TipoAutor;
 import producao.dados.nome.modelo.NomeNulo;
 import producao.dados.nome.modelo.TipoNome;
+import producao.documento.DocumentoNulo;
 import producao.livro.dados.DadosLivroNulo;
 import producao.livro.dados.TipoDadosLivro;
 
-public class LivroNulo implements TipoLivro {
+public class LivroNulo extends DocumentoNulo implements TipoLivro {
 
 	public TipoAnoPublicacao obterAnoPublicacao() {
 		return new AnoPublicacaoNulo();
@@ -24,10 +25,6 @@ public class LivroNulo implements TipoLivro {
 	}
 
 	public TipoNome obterNomeEditora() {
-		return new NomeNulo();
-	}
-
-	public TipoNome obterTitulo() {
 		return new NomeNulo();
 	}
 

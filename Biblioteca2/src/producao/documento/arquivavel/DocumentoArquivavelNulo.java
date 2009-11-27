@@ -1,6 +1,6 @@
 package producao.documento.arquivavel;
 
-import static producao.documento.arquivavel.EstadoEmprestimo.NULO;
+import static producao.documento.arquivavel.EstadoEmprestimo.OUTRO;
 import producao.dados.id.IdNulo;
 import producao.dados.id.TipoId;
 import producao.dados.prazoDevolucao.PrazoDevolucaoNulo;
@@ -25,7 +25,7 @@ public class DocumentoArquivavelNulo implements TipoDocumentoArquivavel {
 	}
 
 	public EstadoEmprestimo obterEstado() {
-		return NULO;
+		return OUTRO;
 	}
 
 	public TipoId obterId() {
