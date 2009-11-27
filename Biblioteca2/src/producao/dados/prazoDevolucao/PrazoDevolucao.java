@@ -59,5 +59,9 @@ public class PrazoDevolucao implements TipoPrazoDevolucao {
 	public int obterPrazoInteiro() {
 		return prazo;
 	}
+	
+	public String toString(){
+		return Integer.toString(prazo);
+	}
 
 }

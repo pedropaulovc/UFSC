@@ -18,7 +18,7 @@ public class CriarAnoPublicacaoInvalido extends Cenario {
 	}
 
 	public void quando() {
-		//tentaCriarUmNovoAnoDePublicação();
+		try {tentaCriarUmNovoAnoDePublicação();	} catch (Exception e) {	}
 	}
 
 	public void então() {
