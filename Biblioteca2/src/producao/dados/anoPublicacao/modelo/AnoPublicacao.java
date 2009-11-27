@@ -39,5 +39,19 @@ public class AnoPublicacao implements TipoAnoPublicacao {
 	public String toString() {
 		return Integer.toString(anoPublicacao);
 	}
+	
+	public static boolean validar(int anoPublicacao){
+		return validarAno(anoPublicacao);
+	}
+	
+	public static boolean validar(String anoPublicacao){
+		int ano;
+		try {
+			ano = Integer.parseInt(anoPublicacao);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return validar(ano);
+	}
 
 }

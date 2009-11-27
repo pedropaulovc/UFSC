@@ -16,4 +16,8 @@ public class Nome implements TipoNome {
 	public String toString() {
 		return nome;
 	}
+
+	public static boolean validar(String nome) {
+		return validarStringNaoVazia(nome);
+	}
 }

@@ -1,6 +1,5 @@
 package producao.videoteca.controle;
 
-import producao.dados.ExcecaoParametroInvalido;
 import producao.dados.autor.modelo.Autor;
 import producao.dados.categoria.Categoria;
 import producao.dados.nome.modelo.Nome;
@@ -30,6 +29,8 @@ public class AdaptadorFormularioVideoteca extends AdaptadorFormularioAbstrato {
 	}
 
 	public Video criarVideo() {
+		verificarCampos();
+
 		DadosVideo dados = new DadosVideo(criarTitulo(), criarDiretor(),
 				criarNomeProdutora(), criarAnoPublicacao(), criarCategoria(),
 				criarEnredo());
@@ -44,43 +45,38 @@ public class AdaptadorFormularioVideoteca extends AdaptadorFormularioAbstrato {
 	private TipoLancamento criarTipoLancamento() {
 		return TipoLancamento.valueOf(campos.obterTipoLancamento());
 	}
-	
-	private Autor criarDiretor() {
-		try {
-			return new Autor(campos.obterDiretor());
-		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao("Campo Diretor vazio", this);
-		}
 
-		return null;
+	private Autor criarDiretor() {
+		return new Autor(campos.obterDiretor());
 	}
 
 	private Nome criarNomeProdutora() {
-		try {
-			return new Nome(campos.obterNomeProdutora());
-		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao("Campo Nome da Produtora vazio", this);
-		}
-
-		return null;
+		return new Nome(campos.obterNomeProdutora());
 	}
 
 	private Nome criarEnredo() {
-		try {
-			return new Nome(campos.obterEnredo());
-		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao("Campo Enredo vazio", this);
-		}
-
-		return null;
+		return new Nome(campos.obterEnredo());
 	}
-	
-	public boolean dadosDeArquivoPreenchidos(){
+
+	public boolean dadosDeArquivoPreenchidos() {
 		return !campos.obterTipoLancamento().isEmpty();
 	}
 
 	public TipoDadosVideoArquivavel adaptarDadosDeArquivo() {
 		return new DadosVideoArquivavel(criarTipoLancamento());
+	}
+
+	public void verificarCampos() {
+		super.verificarCampos();
+
+		if (!Autor.validar(campos.obterDiretor()))
+			notificarAlteracao("Nome do Diretor inválido", this);
+
+		if (!Nome.validar(campos.obterNomeProdutora()))
+			notificarAlteracao("Nome da produtora inválido", this);
+
+		if (!Nome.validar(campos.obterEnredo()))
+			notificarAlteracao("Enredo inválido", this);
 	}
 
 }

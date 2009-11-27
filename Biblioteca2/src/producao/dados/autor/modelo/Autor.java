@@ -18,4 +18,8 @@ public class Autor implements TipoAutor {
 		return autor;
 	}
 
+	public static boolean validar(String autor) {
+		return validarStringNaoVazia(autor);
+	}
+
 }

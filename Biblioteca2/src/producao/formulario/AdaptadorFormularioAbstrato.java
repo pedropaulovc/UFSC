@@ -2,7 +2,6 @@ package producao.formulario;
 
 import java.util.Observable;
 
-import producao.dados.ExcecaoParametroInvalido;
 import producao.dados.anoPublicacao.modelo.AnoPublicacao;
 import producao.dados.nome.modelo.Nome;
 import producao.formulario.campos.CamposFormularioAbstrato;
@@ -17,24 +16,19 @@ public abstract class AdaptadorFormularioAbstrato extends Observable {
 	}
 
 	public AnoPublicacao criarAnoPublicacao() {
-
-		try {
-			return new AnoPublicacao(campos.obterAnoPublicacao());
-		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao(e.getLocalizedMessage(), this);
-		}
-
-		return null;
+		return new AnoPublicacao(campos.obterAnoPublicacao());
 	}
 
 	public Nome criarTitulo() {
-		try {
-			return new Nome(campos.obterTitulo());
-		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao("Campo Título vazio", this);
-		}
+		return new Nome(campos.obterTitulo());
+	}
 
-		return null;
+	public void verificarCampos() {
+		if (!AnoPublicacao.validar(campos.obterAnoPublicacao()))
+			notificarAlteracao("Ano inválido", this);
+
+		if (!Nome.validar(campos.obterTitulo()))
+			notificarAlteracao("Título inválido", this);
 	}
 
 	public void notificarAlteracao(String mensagem, Object o) {

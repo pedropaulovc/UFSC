@@ -2,7 +2,6 @@ package producao.biblioteca.controle;
 
 import producao.biblioteca.visao.CamposFormularioBiblioteca;
 import producao.biblioteca.visao.VisaoBiblioteca;
-import producao.dados.ExcecaoParametroInvalido;
 import producao.dados.autor.modelo.Autor;
 import producao.dados.nome.modelo.Nome;
 import producao.dados.numeroChamada.modelo.NumeroChamada;
@@ -31,6 +30,8 @@ public class AdaptadorFormularioBiblioteca extends AdaptadorFormularioAbstrato {
 	}
 
 	private Livro criarLivro() {
+		verificarCampos();
+
 		DadosLivro dados = new DadosLivro(criarTitulo(), criarAutor(),
 				criarNomeEditora(), criarAnoPublicacao());
 
@@ -38,36 +39,32 @@ public class AdaptadorFormularioBiblioteca extends AdaptadorFormularioAbstrato {
 	}
 
 	private Autor criarAutor() {
-		try {
-			return new Autor(campos.obterAutor());
-		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao(e.getLocalizedMessage(), this);
-		}
+		return new Autor(campos.obterAutor());
 
-		return null;
 	}
 
 	private Nome criarNomeEditora() {
-		try {
-			return new Nome(campos.obterNomeEditora());
-		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao("Campo Nome da Editora vazio", this);
-		}
+		return new Nome(campos.obterNomeEditora());
 
-		return null;
 	}
 
 	private NumeroChamada criarNumeroChamada() {
-		try {
-			return new NumeroChamada(campos.obterNumeroChamada());
-		} catch (ExcecaoParametroInvalido e) {
-			notificarAlteracao(e.getLocalizedMessage(), this);
-		}
+		return new NumeroChamada(campos.obterNumeroChamada());
 
-		return null;
 	}
 
 	public boolean dadosDeArquivoPreenchidos() {
 		return !campos.obterNumeroChamada().isEmpty();
+	}
+
+	public void verificarCampos() {
+		super.verificarCampos();
+
+		if (!Autor.validar(campos.obterAutor()))
+			notificarAlteracao("Nome do Autor inválido", this);
+
+		if (!Nome.validar(campos.obterNomeEditora()))
+			notificarAlteracao("Nome da editora inválido", this);
+
 	}
 }
