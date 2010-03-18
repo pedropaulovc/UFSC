@@ -48,7 +48,6 @@ void exibeMenu();
 
 int main(){
 	int opcao;
-	char elementoAux[TAM_STRING];
 	elementoDaFila elemento;
 
 	exibeIntroducao();
@@ -56,7 +55,7 @@ int main(){
 
 	while(1){
 		exibeMenu();
-		scanf("%d", &opcao);
+		scanf("%d",&opcao);
 
 		switch(opcao){
 		case 0:
@@ -64,8 +63,8 @@ int main(){
 			break;
 		case 1:
 			puts("Forneça o elemento (No máximo 30 caracteres): ");
-			scanf("%s", elementoAux);
-			strncpy(elemento.texto, elementoAux, TAM_STRING);
+			getchar();
+			gets(elemento.texto);
 			if(enfileirar(elemento) == ERRO_FILA_CHEIA)
 				puts("A fila está cheia");
 			break;
