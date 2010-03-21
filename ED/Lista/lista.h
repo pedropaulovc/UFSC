@@ -10,6 +10,10 @@
 
 #define MAXELEMENTOS 100
 #define MAXNOME 31
+#define LISTAVAZIA -1;
+#define ERRO_LISTA_CHEIA -1
+#define ERRO_LISTA_VAZIA -2
+#define ERRO_POSICAO_INVALIDA -3
 
 typedef struct {
 	char nome[MAXNOME];
@@ -18,8 +22,10 @@ typedef struct {
 
 typedef struct {
 	tAgenda elementos[MAXELEMENTOS];
+	int ultimo;
 } tLista;
 
+tLista aLista;
 
 int adiciona(tAgenda dado);
 int adicionaNoInicio(tAgenda dado);
@@ -27,7 +33,7 @@ int adicionaNaPosicao(tAgenda dado, int posicao);
 int adicionaEmOrdem(tAgenda dado);
 tAgenda retira();
 tAgenda retiraDoInicio();
-tAgenda retiraDaPosicao(posicao);
+tAgenda retiraDaPosicao(int posicao);
 int listaCheia();
 int listaVazia();
 int posicao(tAgenda dado);
