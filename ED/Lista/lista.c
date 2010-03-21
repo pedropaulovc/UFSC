@@ -5,3 +5,7 @@
  *      Author: pedropaulo
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "lista.h"
+
