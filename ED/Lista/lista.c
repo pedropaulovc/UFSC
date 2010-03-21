@@ -17,7 +17,7 @@ int adiciona(tAgenda dado) {
 		return ERRO_LISTA_CHEIA;
 
 	aLista.ultimo++;
-	aLista.elementos[aLista.ultimo] = dado;
+	aLista.elem[aLista.ultimo] = dado;
 
 	return aLista.ultimo;
 }
@@ -32,7 +32,7 @@ int adicionaNaPosicao(tAgenda dado, int posicao) {
 	if(resultado != 0)
 		return resultado;
 
-	aLista.elementos[posicao] = dado;
+	aLista.elem[posicao] = dado;
 	return 0;
 }
 
@@ -41,11 +41,18 @@ int vagarPosicao(int posicao){
 
 	int i;
 	for(i = aLista.ultimo; i > posicao; i--)
-		aLista.elementos[i] = aLista.elementos[i + 1];
+		aLista.elem[i] = aLista.elem[i + 1];
 	return 0;
 }
 
-int adicionaEmOrdem(tAgenda dado);
+int adicionaEmOrdem(tAgenda dado){
+	int pos = 0;
+	while(pos < aLista.ultimo && maior(dado, aLista.elem[pos]))
+		pos++;
+
+	return adicionaNaPosicao(dado, pos + 1);
+}
+
 tAgenda retira();
 tAgenda retiraDoInicio();
 tAgenda retiraDaPosicao(int posicao);

@@ -21,7 +21,7 @@ typedef struct {
 } tAgenda;
 
 typedef struct {
-	tAgenda elementos[MAXELEMENTOS];
+	tAgenda elem[MAXELEMENTOS];
 	int ultimo;
 } tLista;
 
