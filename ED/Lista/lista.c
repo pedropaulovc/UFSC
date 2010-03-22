@@ -7,10 +7,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "lista.h"
 
 //TODO: Será que é melhor colocar em lista.h?
-int vagarPosicao(int posicao);
+//Mudei para lá
+
+//TODO:As funções de retirar devem retornar int
+
 
 int adiciona(tAgenda dado) {
 	if(aLista.ultimo == MAXELEMENTOS - 1)
@@ -38,30 +42,99 @@ int adicionaNaPosicao(tAgenda dado, int posicao) {
 
 int vagarPosicao(int posicao){
 	//TODO: Verificar se a lista está vazia ou se a posicão não é valida.
+	if(posicao > aLista.ultimo || posicao < 0)
+		return ERRO_POSICAO_INVALIDA;
 
+	//Caso a lista estiver cheia não tem como deslocar
+	if(listaCheia())
+		return ERRO_LISTA_CHEIA;
+
+	// Estava fazendo cópias do último elemento do vetor
+	// elemento[i] recebia elemento[i+1], elemento[i-1] recebia elemento[i](elemento[i+1])
 	int i;
 	for(i = aLista.ultimo; i > posicao; i--)
-		aLista.elem[i] = aLista.elem[i + 1];
+		aLista.elem[i+1] = aLista.elem[i];
 	return 0;
 }
 
+
 int adicionaEmOrdem(tAgenda dado){
 	int pos = 0;
-	while(pos < aLista.ultimo && maior(dado, aLista.elem[pos]))
+	while(pos <= aLista.ultimo && maior(dado, aLista.elem[pos]))
 		pos++;
 
-	return adicionaNaPosicao(dado, pos + 1);
+	// Estava sempre adicionando em uma posição a mais, e quando
+	// posição era igual a último não fazia a comparação.
+	return adicionaNaPosicao(dado, pos);
 }
 
-tAgenda retira();
-tAgenda retiraDoInicio();
-tAgenda retiraDaPosicao(int posicao);
-int listaCheia();
-int listaVazia();
-int posicao(tAgenda dado);
-int contem(tAgenda dado);
-int igual(tAgenda dado1, tAgenda dado2);
-int maior(tAgenda dado1, tAgenda dado2);
-int menor(tAgenda dado1, tAgenda dado2);
-void inicializaLista();
-void destroiLista();
+tAgenda retira(){
+	retiraDaPosicao(aLista.ultimo);
+}
+
+tAgenda retiraDoInicio(){
+	retiraDaPosicao(0);
+}
+
+tAgenda retiraDaPosicao(int posicao){
+	if(posicao > aLista.ultimo || posicao < 0)
+		return ERRO_POSICAO_INVALIDA;
+
+	for(; posicao <= aLista.ultimo; posicao++)
+		aLista[posicao] = aLista[posicao+1];
+
+	aLista.ultimo--;
+}
+
+int listaCheia(){
+	if(aLista.ultimo == MAXELEMENTOS -1)
+		return 1;
+	return 0;
+}
+
+int listaVazia(){
+	if(aLista.ultimo == LISTAVAZIA)
+		return 1;
+	return 0;
+}
+
+// Retorna -1 se o dado não está na agenda.
+int posicao(tAgenda dado){
+	int i;
+	for(i = 0; i <= aLista.ultimo; i++)
+		if(igual(dado, aLista.elem[i]))
+				return i;
+	return -1;
+}
+
+int contem(tAgenda dado){
+	int i;
+	for(i = 0; i <= aLista.ultimo; i++)
+		if(igual(dado, aLista.elem[i]))
+			return 1;
+	return 0;
+}
+
+int igual(tAgenda dado1, tAgenda dado2){
+	if (strcmp(dado1.nome, dado2.nome) == 0)
+		return 1;
+	return 0;
+}
+
+int maior(tAgenda dado1, tAgenda dado2){
+	if (strcmp(dado1.nome, dado2.nome) > 0)
+		return 1;
+	return 0;
+}
+
+int menor(tAgenda dado1, tAgenda dado2){
+	if (strcmp(dado1.nome, dado2.nome) < 0)
+		return 1;
+	return 0;
+}
+void inicializaLista(){
+	aLista.ultimo = -1;
+}
+void destroiLista(){
+	aLista.ultimo = -1;
+}
