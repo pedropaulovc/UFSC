@@ -37,22 +37,27 @@ int adicionaNaPosicao(tAgenda dado, int posicao) {
 		return resultado;
 
 	aLista.elem[posicao] = dado;
+	aLista.ultimo++;
 	return 0;
 }
 
 int vagarPosicao(int posicao) {
-	//TODO: Verificar se a lista está vazia ou se a posicão não é valida.
-	if (posicao > aLista.ultimo || posicao < 0)
-		return ERRO_POSICAO_INVALIDA;
+	//Numa lista vazia não é necessário fazer nada.
+	//Além disso, a função falharia em vagar a posição 0 de uma lista vazia pois 0 > -1 (ultimo)
+	if (listaVazia() == 1)
+		return 0;
 
 	//Caso a lista estiver cheia não tem como deslocar
-	if (listaCheia())
+	if (listaCheia() == 1)
 		return ERRO_LISTA_CHEIA;
+
+	if (posicao > aLista.ultimo || posicao < 0)
+		return ERRO_POSICAO_INVALIDA;
 
 	// Estava fazendo cópias do último elemento do vetor
 	// elemento[i] recebia elemento[i+1], elemento[i-1] recebia elemento[i](elemento[i+1])
 	int i;
-	for (i = aLista.ultimo; i > posicao; i--)
+	for (i = aLista.ultimo; i >= posicao; i--)
 		aLista.elem[i + 1] = aLista.elem[i];
 	return 0;
 }
@@ -65,6 +70,24 @@ int adicionaEmOrdem(tAgenda dado) {
 	// Estava sempre adicionando em uma posição a mais, e quando
 	// posição era igual a último não fazia a comparação.
 	return adicionaNaPosicao(dado, pos);
+}
+
+//TODO: Implementar
+tAgenda obter() {
+	tAgenda contato;
+	return contato;
+}
+
+//TODO: Implementar
+tAgenda obterDoInicio() {
+	tAgenda contato;
+	return contato;
+}
+
+//TODO: Implementar
+tAgenda obterDaPosicao(int posicao) {
+	tAgenda contato;
+	return contato;
 }
 
 int retira() {
@@ -99,7 +122,7 @@ int listaVazia() {
 }
 
 int posicaoValida(int posicao) {
-	if(posicao <= aLista.ultimo && posicao >= 0)
+	if (posicao <= aLista.ultimo && posicao >= 0)
 		return 1;
 	return 0;
 }

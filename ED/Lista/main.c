@@ -109,10 +109,10 @@ void exibeMenuPrincipal() {
 }
 
 void exibeMenuSecundario(char* opcao) {
-	puts("\nEscolha uma opção: ");
-	printf("0 - %s contato final", opcao);
-	printf("1 - %s contato inicial", opcao);
-	printf("2 - %s contato de uma posição específica", opcao);
+	puts("\nEscolha uma opção: \n");
+	printf("0 - %s contato final\n", opcao);
+	printf("1 - %s contato inicial\n", opcao);
+	printf("2 - %s contato de uma posição específica\n", opcao);
 }
 
 void exibirMensagemErro(int resultado) {
@@ -130,8 +130,8 @@ void exibirMensagemErro(int resultado) {
 }
 
 void exibirContato(tAgenda contato) {
-	printf("Nome: %s", contato.nome);
-	printf("Telefone: %d", contato.numero);
+	printf("Nome: %s\n", contato.nome);
+	printf("Telefone: %d\n", contato.numero);
 }
 
 void adicionarContato() {
@@ -140,7 +140,7 @@ void adicionarContato() {
 
 	puts("Forneça o nome do contato: ");
 	getchar();
-	gets(elemento.nome);
+	scanf("%[^\n]", &elemento.nome);
 	puts("Forneça o número de telefone: ");
 	scanf("%d", &elemento.numero);
 
@@ -238,7 +238,7 @@ void obterContato() {
 //Decisão de projeto, armazenar em ordem ou ordenar depois?
 void exibirContatosEmOrdem() {
 	int i;
-	for(i = 0; i < aLista.ultimo; i++)
+	for(i = 0; i <= aLista.ultimo; i++)
 		exibirContato(aLista.elem[i]);
 }
 
