@@ -1,10 +1,74 @@
-/*
- * main.c
- *
- *  Created on: Mar 21, 2010
- *      Author: pedropaulo
- */
+/**
+ARQUIVO:       main.c
+TÍTULO:        Implementação de Lista de Contatos com Vetores em "C"
+ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+MATÉRIA:       INE5408
+PRAZO:         30 de março de 2010
 
+PROPÓSITO:
+Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados lista.
+
+
+ FUNCIONAMENTO GERAL:
+ Como informado no enunciado do trabalho, este programa é um exemplo prático da implementação
+ de listas, servindo como lista de contatos simplificada. Ele possui um menu simples que aceita
+ do usuário comandos para os principais usos da estrutura: adicionar, remover e obter contatos de
+ qualquer posição da lista além de exibir em ordem os dados armazenados e sua quantidade.
+ No mesmo enunciado, foi definido que seria criada uma variável global, aLista, inicializada
+ em lista.h, contendo uma lista de 100 estruturas contendo uma string de tamanho 30 correspondente
+ ao nome do contato e um número de telefone.
+
+FUNÇÕES:
+
+main
+	fica responsável por receber o comando do usário e delegar o trabalho a uma das funções
+	de lista.c que executará o comando pedido.
+
+exibeIntroducao
+	apenas introduz o usuário ao programa.
+
+exibeMenuPrincipal
+	apresenta as opções disponíveis ao usuário.
+
+exibeMenuSecundario
+	apresenta ao usuário as subopções disponíveis nas operações de adição, remoção e obtenção de contatos,
+	por exemplo, adicionar um contato no início da lista ou remover o último contato ou ainda obter o 5o
+	contato armazenado.
+
+exibirMensagemErro
+	caso o usuário realize alguma operação inválida na lista esta função é a responsável por avisá-lo de
+	tal comportamento inexperado. Erros possíveis incluem remover elementos de uma lista vazia, adicionar
+	mais contatos que o máximo permitido ou ainda tentar acessar um elemento em uma posição fora dos limites
+	da lista.
+
+adicionarContato
+	responsável por obter o contato a ser armazenado e encaminhá-lo à lista de maneira apropriada e por fim
+	informar se tudo aconteceu de maneira correta.
+
+retirarContato
+	responsável por gerenciar as operações de remoção de contatos e delegá-las apropriadamente à lista e
+	informar se tudo aconteceu de maneira correta.
+
+obterContato
+	responsável por gerenciar as operações de obtenção de contatos e delegá-las apropriadamente à lista e
+	informar se tudo aconteceu de maneira correta.
+
+exibirContato
+	exibe um único contato ao usuário.
+
+exibirContatosEmOrdem
+	exibe ao usuário a lista armazenada em ordem alfabética de nomes dos contatos.
+
+
+ARQUIVOS INCLUSOS:
+   stdio.h
+   stdlib.h
+   lista.h
+
+ARQUIVOS DE DADOS:
+   nenhum
+
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "lista.h"
@@ -16,8 +80,8 @@ void exibirMensagemErro(int resultado);
 void adicionarContato();
 void retirarContato();
 void obterContato();
-void exibirContatosEmOrdem();
 void exibirContato();
+void exibirContatosEmOrdem();
 
 int main() {
 	int opcao;
@@ -82,7 +146,7 @@ void exibeIntroducao() {
 }
 
 /**
- NOME DA FUNÇÃO: exibeMenu
+ NOME DA FUNÇÃO: exibeMenuPrincipal
  ALUNOS: Pedro Paulo e Felipe dos Santos
  PROPÓSITO:
  Exibe na saída padrão as opções disponíveis ao usuário para manipular o programa.
@@ -108,13 +172,55 @@ void exibeMenuPrincipal() {
 	puts("6 - Limpar a lista de contatos");
 }
 
+
+/**
+NOME DA FUNÇÃO: exibeMenuSecundario
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	apresenta ao usuário as subopções disponíveis nas operações de adição,
+	remoção e obtenção de contatos, por exemplo, adicionar um contato no
+	início da lista ou remover o último contato ou ainda obter o 5o
+	contato armazenado.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+--------------------------------------------------------------------------
+opcao        char*            valor              nome da opção, "adicionar",
+												 "remover" ou "obter"
+
+VALOR DE RETORNO:
+nenhum
+
+CHAMA: nada
+
+CHAMADA DE: adicionarContato, retirarContato, obterContato
+*/
 void exibeMenuSecundario(char* opcao) {
 	puts("\nEscolha uma opção: \n");
-	printf("0 - %s contato final\n", opcao);
-	printf("1 - %s contato inicial\n", opcao);
-	printf("2 - %s contato de uma posição específica\n", opcao);
+	printf("0 - %s final\n", opcao);
+	printf("1 - %s início\n", opcao);
+	printf("2 - %s local específico\n", opcao);
 }
 
+/**
+ NOME DA FUNÇÃO: exibirMensagemErro
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+	Exibe caso o usuário realize alguma operação inválida na lista esta função é a responsável por avisá-lo de
+	tal comportamento inexperado. Erros possíveis incluem remover elementos de uma lista vazia, adicionar
+	mais contatos que o máximo permitido ou ainda tentar acessar um elemento em uma posição fora dos limites
+	da lista.
+
+ PARÂMETROS:
+ nenhum
+
+ VALOR DE RETORNO:
+ nenhum
+
+ CHAMA: nada
+
+ CHAMADA DE: adicionarContato, retirarContato, obterContato
+ */
 void exibirMensagemErro(int resultado) {
 	switch (resultado) {
 	case ERRO_LISTA_CHEIA:
@@ -129,11 +235,46 @@ void exibirMensagemErro(int resultado) {
 	}
 }
 
+/**
+ NOME DA FUNÇÃO: exibirContato
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+	É responsável por exibir um único contato ao usuário.
+
+ PARÂMETROS:
+ nome         tipo             valor/referência   descrição
+ --------------------------------------------------------------------------
+ contato      tAgenda          valor              o contato a ser exibido
+
+ VALOR DE RETORNO:
+ nenhum
+
+ CHAMA: nada
+
+ CHAMADA DE: exibirContatosEmOrdem, obterContato
+ */
 void exibirContato(tAgenda contato) {
 	printf("Nome: %s\n", contato.nome);
 	printf("Telefone: %d\n", contato.numero);
 }
 
+/**
+ NOME DA FUNÇÃO: adicionarContato
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+	É responsável por obter o contato a ser armazenado e encaminhá-lo à lista de maneira apropriada e por fim
+	informar se tudo aconteceu de maneira correta.
+
+ PARÂMETROS:
+ nenhum
+
+ VALOR DE RETORNO:
+ nenhum
+
+ CHAMA: exibeMenuSecundario, adiciona, adicionaNoInicio, adicionaNaPosicao, exibirMensagemErro
+
+ CHAMADA DE: main
+ */
 void adicionarContato() {
 	int opcao, posicao, resultado;
 	tAgenda elemento;
@@ -144,7 +285,7 @@ void adicionarContato() {
 	puts("Forneça o número de telefone: ");
 	scanf("%d", &elemento.numero);
 
-	exibeMenuSecundario("Adicionar");
+	exibeMenuSecundario("Adicionar no");
 	scanf("%d", &opcao);
 
 	switch (opcao) {
@@ -168,10 +309,27 @@ void adicionarContato() {
 		exibirMensagemErro(resultado);
 }
 
+/**
+ NOME DA FUNÇÃO: retirarContato
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+	É responsável por gerenciar as operações de remoção de contatos e delegá-las apropriadamente à lista e
+	informar se tudo aconteceu de maneira correta.
+
+ PARÂMETROS:
+ nenhum
+
+ VALOR DE RETORNO:
+ nenhum
+
+ CHAMA: exibeMenuSecundario, retira, retiraDoInicio, retiraDaPosicao, exibirMensagemErro
+
+ CHAMADA DE: main
+ */
 void retirarContato() {
 	int opcao, posicao, resultado;
 
-	exibeMenuSecundario("Remover");
+	exibeMenuSecundario("Remover do");
 	scanf("%d", &opcao);
 
 	switch (opcao) {
@@ -195,12 +353,30 @@ void retirarContato() {
 		exibirMensagemErro(resultado);
 }
 
+/**
+ NOME DA FUNÇÃO: obterContato
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+	É responsável por gerenciar as operações de obtenção de contatos e delegá-las apropriadamente à lista e
+	informar se tudo aconteceu de maneira correta.
+
+ PARÂMETROS:
+ nenhum
+
+ VALOR DE RETORNO:
+ nenhum
+
+ CHAMA: exibeMenuSecundario, listaVazia, obter, obterDoInicio, posicaoValida, obterDaPosicao
+		exibirMensagemErro, exibirContato
+
+ CHAMADA DE: main
+ */
 void obterContato() {
 	int opcao, posicao;
 	int resultado = 0;
 	tAgenda contato;
 
-	exibeMenuSecundario("Obter");
+	exibeMenuSecundario("Obter do");
 	scanf("%d", &opcao);
 
 	if (listaVazia())
@@ -236,6 +412,22 @@ void obterContato() {
 
 //TODO: Por agora essa função não exibe em ordem.
 //Decisão de projeto, armazenar em ordem ou ordenar depois?
+/**
+ NOME DA FUNÇÃO: exibirContatosEmOrdem
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+	Exibe ao usuário a lista armazenada em ordem alfabética de nomes dos contatos.
+
+ PARÂMETROS:
+ nenhum
+
+ VALOR DE RETORNO:
+ nenhum
+
+ CHAMA: exibirContato
+
+ CHAMADA DE: main
+ */
 void exibirContatosEmOrdem() {
 	int i;
 	for(i = 0; i <= aLista.ultimo; i++)
