@@ -17,7 +17,7 @@
 
 typedef struct {
 	char nome[MAXNOME];
-	long int numero;
+	int numero;
 } tAgenda;
 
 typedef struct {
@@ -37,17 +37,16 @@ int retiraDoInicio();
 int retiraDaPosicao(int posicao);
 int listaCheia();
 int listaVazia();
+int posicaoValida(int posicao);
 int posicao(tAgenda dado);
 int contem(tAgenda dado);
 int igual(tAgenda dado1, tAgenda dado2);
 int maior(tAgenda dado1, tAgenda dado2);
 int menor(tAgenda dado1, tAgenda dado2);
-tAgenda obter(int posicao);
-tAgenda obterElemento(int posicao);
-tAgenda obterPosicao(int posicao);
+tAgenda obter();
+tAgenda obterDoInicio();
+tAgenda obterDaPosicao(int posicao);
 void inicializaLista();
 void destroiLista();
-
-
 
 #endif /* LISTA_H_ */
