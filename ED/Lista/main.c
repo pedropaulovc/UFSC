@@ -167,7 +167,7 @@ void exibeMenuPrincipal() {
 	puts("1 - Adicionar contato");
 	puts("2 - Retirar contato");
 	puts("3 - Obter contato");
-	puts("4 - Mostrar todos os contatos em ordem");
+	puts("4 - Mostrar todos os contatos");
 	puts("5 - Exibir a quantidade de contatos armazenados");
 	puts("6 - Limpar a lista de contatos");
 }
@@ -286,6 +286,7 @@ void adicionarContato() {
 	scanf("%d", &elemento.numero);
 
 	exibeMenuSecundario("Adicionar no");
+	puts("3 - Adicionar em ordem");
 	scanf("%d", &opcao);
 
 	switch (opcao) {
@@ -299,6 +300,9 @@ void adicionarContato() {
 		puts("Forneça a posição a ser adicionada");
 		scanf("%d", &posicao);
 		resultado = adicionaNaPosicao(elemento, posicao);
+		break;
+	case 3:
+		resultado = adicionaEmOrdem(elemento);
 		break;
 	default:
 		puts("Opção Inválida");
@@ -410,8 +414,6 @@ void obterContato() {
 	exibirContato(contato);
 }
 
-//TODO: Por agora essa função não exibe em ordem.
-//Decisão de projeto, armazenar em ordem ou ordenar depois?
 /**
  NOME DA FUNÇÃO: exibirContatosEmOrdem
  ALUNOS: Pedro Paulo e Felipe dos Santos

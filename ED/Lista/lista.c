@@ -216,16 +216,16 @@ nome           tipo  descrição
 
 */
 int vagarPosicao(int posicao) {
+	//Caso a lista estiver cheia não tem como deslocar
+	if (listaCheia() == 1)
+		return ERRO_LISTA_CHEIA;
+
 	//Numa lista vazia não é necessário fazer nada.
 	//Além disso, a função falharia em vagar a posição 0 de uma lista vazia pois 0 > -1 (ultimo)
 	if (listaVazia() == 1)
 		return 0;
 
-	//Caso a lista estiver cheia não tem como deslocar
-	if (listaCheia() == 1)
-		return ERRO_LISTA_CHEIA;
-
-	if (posicao > aLista.ultimo || posicao < 0)
+	if (posicao > aLista.ultimo + 1 || posicao < 0)
 		return ERRO_POSICAO_INVALIDA;
 
 	// Estava fazendo cópias do último elemento do vetor
