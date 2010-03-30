@@ -376,15 +376,13 @@ void retirarContato() {
  CHAMADA DE: main
  */
 void obterContato() {
-	int opcao, posicao;
-	int resultado = 0;
+	int opcao, aPosicao;
 	tAgenda contato;
+	char* nome;
 
 	exibeMenuSecundario("Obter do");
+	puts("3 - Obter contato pelo nome");
 	scanf("%d", &opcao);
-
-	if (listaVazia())
-		resultado = ERRO_LISTA_VAZIA;
 
 	switch (opcao) {
 	case 0:
@@ -395,23 +393,25 @@ void obterContato() {
 		break;
 	case 2:
 		puts("Forneça a posição a ser obtida");
-		scanf("%d", &posicao);
-		if (!posicaoValida(posicao))
-			resultado = ERRO_POSICAO_INVALIDA;
+		scanf("%d", &aPosicao);
 
-		contato = obterDaPosicao(posicao);
+		contato = obterDaPosicao(aPosicao);
+		break;
+	case 3:
+		puts("Forneça o nome do contato a ser obtido");
+		getchar();
+		scanf("%[^\n]", nome);
+		contato = obterContatoPeloNome(nome);
 		break;
 	default:
 		puts("Opção Inválida");
 		break;
 	}
 
-	if (resultado != 0) {
-		exibirMensagemErro(resultado);
-		return;
-	}
-
-	exibirContato(contato);
+	if(contato.numero == ERRO_POSICAO_INVALIDA)
+		puts(contato.nome);
+	else
+		exibirContato(contato);
 }
 
 /**

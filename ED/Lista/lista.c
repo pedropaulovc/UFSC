@@ -59,11 +59,8 @@ listaCheia
 listaVazia
 	retorna 1 caso a lista esteja vazia e 0 em caso contrario.
 
-posicaoValida
+posicaoExistente
 	retorna 1 caso a posição informada esteja no intervalo [0, ultimo] e 0 em caso contrário.
-
-posicao
-	retorna a posição de um elemento fornecido e -1 em caso o elemento não exista na lista.
 
 contem
 	retorna 1 se a lista contém um elemento fornecido e 0 em caso contrário.
@@ -87,6 +84,10 @@ obterDoInicio
 obterDaPosicao
 	retorna o contato, se possível, localizado em uma posição arbitrária da lista.
 
+obterContatoPeloNome
+	retorna um contato armazenado que coincida com o nome fornecido, ou um contato
+	que informa que a posicão é inválida em caso de erro.
+
 inicializaLista
 	prepara a lista para ser utilizada ao definir que ela está vazia (ultimo = -1)
 
@@ -103,7 +104,6 @@ ARQUIVOS INCLUSOS:
 ARQUIVOS DE DADOS:
    nenhum
 */
-//TODO: Remover comentários e TODOs do código antes de enviar
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -216,20 +216,16 @@ nome           tipo  descrição
 
 */
 int vagarPosicao(int posicao) {
-	//Caso a lista estiver cheia não tem como deslocar
+
 	if (listaCheia() == 1)
 		return ERRO_LISTA_CHEIA;
 
-	//Numa lista vazia não é necessário fazer nada.
-	//Além disso, a função falharia em vagar a posição 0 de uma lista vazia pois 0 > -1 (ultimo)
 	if (listaVazia() == 1)
 		return 0;
 
 	if (posicao > aLista.ultimo + 1 || posicao < 0)
 		return ERRO_POSICAO_INVALIDA;
 
-	// Estava fazendo cópias do último elemento do vetor
-	// elemento[i] recebia elemento[i+1], elemento[i-1] recebia elemento[i](elemento[i+1])
 	int i;
 	for (i = aLista.ultimo; i >= posicao; i--)
 		aLista.elem[i + 1] = aLista.elem[i];
@@ -260,12 +256,9 @@ int adicionaEmOrdem(tAgenda dado) {
 	while (pos <= aLista.ultimo && maior(dado, aLista.elem[pos]))
 		pos++;
 
-	// Estava sempre adicionando em uma posição a mais, e quando
-	// posição era igual a último não fazia a comparação.
 	return adicionaNaPosicao(dado, pos);
 }
 
-//TODO: Implementar
 /**
 NOME DA FUNÇÃO: obter
 ALUNOS: Pedro Paulo e Felipe dos Santos
@@ -283,11 +276,9 @@ nome           tipo      descrição
 
 */
 tAgenda obter() {
-	tAgenda contato;
-	return contato;
+	return obterDaPosicao(aLista.ultimo);
 }
 
-//TODO: Implementar
 /**
 NOME DA FUNÇÃO: obterDoInicio
 ALUNOS: Pedro Paulo e Felipe dos Santos
@@ -305,11 +296,9 @@ nome           tipo  descrição
 
 */
 tAgenda obterDoInicio() {
-	tAgenda contato;
-	return contato;
+	return obterDaPosicao(0);
 }
 
-//TODO: Implementar
 /**
 NOME DA FUNÇÃO: obterDaPosicao
 ALUNOS: Pedro Paulo e Felipe dos Santos
@@ -325,11 +314,51 @@ VALOR DE RETORNO:
 nome           tipo      descrição
 ---------------------------------------------------------------------
 --             tAgenda   contato localizado em uma posição arbitrária da lista,
-						 ou um contato em branco em caso de erro.
+						 ou um contato informando que a posicão é inválida em caso
+						 de erro
 
 */
 tAgenda obterDaPosicao(int posicao) {
 	tAgenda contato;
+	if(posicaoExistente(posicao))
+		return aLista.elem[posicao];
+
+	strcpy(contato.nome, "Posicao inválida.");
+	contato.numero = ERRO_POSICAO_INVALIDA;
+
+	return contato;
+}
+
+/**
+NOME DA FUNÇÃO: obterContatoPeloNome
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna um contato armazenado que coincida com o nome fornecido, ou um contato
+	que informa que a posicão é inválida em caso de erro.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+nome         char*            referência         nome a ser procurado
+
+VALOR DE RETORNO:
+nome           tipo      descrição
+---------------------------------------------------------------------
+contat         tAgenda   o contato buscado
+
+*/
+tAgenda obterContatoPeloNome(char* nome) {
+	int i;
+	tAgenda contato;
+	strcpy(contato.nome, nome);
+
+	for (i = 0; i <= aLista.ultimo; i++)
+		if (igual(contato, aLista.elem[i]))
+			return aLista.elem[i];
+
+	strcpy(contato.nome, "Nome não consta na lista.");
+	contato.numero = ERRO_POSICAO_INVALIDA;
+
 	return contato;
 }
 
@@ -446,7 +475,7 @@ int listaVazia() {
 }
 
 /**
-NOME DA FUNÇÃO: posicaoValida
+NOME DA FUNÇÃO: posicaoExistente
 ALUNOS: Pedro Paulo e Felipe dos Santos
 PROPÓSITO:
 	retorna 1 caso a posição informada esteja no intervalo [0, ultimo] e 0 em caso contrário.
@@ -462,36 +491,10 @@ nome           tipo  descrição
 --             int   1 caso a posição seja válida e 0 em caso contrário
 
 */
-int posicaoValida(int posicao) {
+int posicaoExistente(int posicao) {
 	if (posicao <= aLista.ultimo && posicao >= 0)
 		return 1;
 	return 0;
-}
-
-/**
-NOME DA FUNÇÃO: posicao
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	retorna a posição de um elemento fornecido e -1 em caso o elemento não exista na lista.
-
-PARÂMETROS:
-nome         tipo             valor/referência   descrição
----------------------------------------------------------------------
-dado         tAgenda          valor              elemento a ser procurado
-
-VALOR DE RETORNO:
-nome           tipo  descrição
----------------------------------------------------------------------
-i              int   posição do elemento fornecido
-
-*/
-int posicao(tAgenda dado) {
-	int i;
-
-	for (i = 0; i <= aLista.ultimo; i++)
-		if (igual(dado, aLista.elem[i]))
-			return i;
-	return -1;
 }
 
 /**

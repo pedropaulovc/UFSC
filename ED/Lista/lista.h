@@ -73,8 +73,7 @@ int retiraDoInicio();
 int retiraDaPosicao(int posicao);
 int listaCheia();
 int listaVazia();
-int posicaoValida(int posicao);
-int posicao(tAgenda dado);
+int posicaoExistente(int posicao);
 int contem(tAgenda dado);
 int igual(tAgenda dado1, tAgenda dado2);
 int maior(tAgenda dado1, tAgenda dado2);
@@ -82,6 +81,7 @@ int menor(tAgenda dado1, tAgenda dado2);
 tAgenda obter();
 tAgenda obterDoInicio();
 tAgenda obterDaPosicao(int posicao);
+tAgenda obterContatoPeloNome(char* nome);
 void inicializaLista();
 void destroiLista();
 
