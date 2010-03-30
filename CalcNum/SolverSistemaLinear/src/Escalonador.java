@@ -4,38 +4,48 @@ public class Escalonador {
 
 	/**
 	 * @param args
-	 */
+	 */	
 	public static void main(String[] args) {
-		float[][] matriz = gerarMatrizHilbert(10);
+		float[][] matriz = gerarMatrizHilbert(3);
+		//float[][] matriz = obterMatriz();
 		System.out.println("INÍCIO: ");
 		exibirMatriz(matriz);
 		System.out.println("Escalonando: ");
 		escalonarMatriz(matriz);
+		//calcularCondicionamento(matriz);
 		System.out.println("FIM: ");
 		exibirMatriz(matriz);
 	}
 
 	private static void escalonarMatriz(float[][] matriz) {
-		for (int colPrinc = 0; colPrinc < matriz.length - 1; colPrinc++) {
-			pivotarLinhas(matriz, colPrinc);
-			System.out.println("Pivotado coluna " + colPrinc);
+		//Última coluna -> Matriz dos termos independentes
+		//Última Linha não precisa pivotar ou subtrair linhas.
+		for (int colunaAtual = 0; colunaAtual < matriz[0].length - 2; colunaAtual++) {
+			pivotarLinhas(matriz, colunaAtual);
+			System.out.println("Pivotado coluna " + colunaAtual);
 			exibirMatriz(matriz);
-			dividirLinha(matriz, colPrinc);
-			System.out.println("Dividida linha " + colPrinc);
+			dividirLinha(matriz, colunaAtual);
+			System.out.println("Dividida linha " + colunaAtual);
 			exibirMatriz(matriz);
-			subtrairLinhaDeOutra(matriz, colPrinc);
+			subtrairLinhasAbaixo(matriz, colunaAtual);
 			exibirMatriz(matriz);
-			System.out.println("Subtraídas linhas abaixo de " + colPrinc);
+			System.out.println("Subtraídas linhas abaixo de " + colunaAtual);
 		}
+			dividirLinha(matriz, matriz.length - 1);
+			System.out.println("Dividida última linha"); 
+			exibirMatriz(matriz);
 	}
 
-	private static void pivotarLinhas(float[][] matriz, int linhaAtual) {
+	//Pivoto as linhas da matriz[linhaInicial][linhaInicial] para baixo
+	private static void pivotarLinhas(float[][] matriz, int linhaInicial) {
 		float maior = 0;
-		int linhaMaior = linhaAtual;
-
-		for (int i = linhaAtual; i < matriz.length; i++) {
-			if (matriz[i][linhaAtual] > maior) {
-				maior = matriz[i][linhaAtual];
+		float modulo;
+		int linhaMaior = linhaInicial;
+		
+		for (int i = linhaInicial; i < matriz.length; i++) {
+			modulo = Math.abs(matriz[i][linhaInicial]);
+			if (modulo > maior) {
+				maior = modulo;
 				linhaMaior = i;
 			}
 		}
@@ -45,8 +55,8 @@ public class Escalonador {
 			System.exit(1);
 		}
 
-		float[] temp = matriz[linhaAtual];
-		matriz[linhaAtual] = matriz[linhaMaior];
+		float[] temp = matriz[linhaInicial];
+		matriz[linhaInicial] = matriz[linhaMaior];
 		matriz[linhaMaior] = temp;
 	}
 
@@ -58,7 +68,7 @@ public class Escalonador {
 
 	}
 
-	private static void subtrairLinhaDeOutra(float[][] matriz, int indice) {
+	private static void subtrairLinhasAbaixo(float[][] matriz, int indice) {
 		for (int i = indice + 1; i < matriz.length; i++) {
 			float fatorCondenado = matriz[i][indice];
 			for (int j = indice; j < matriz[0].length; j++) {
@@ -94,10 +104,10 @@ public class Escalonador {
 	}
 
 	private static float[][] gerarMatrizHilbert(int ordem) {
-		float[][] matriz = new float[ordem][ordem];
+		float[][] matriz = new float[ordem][ordem + 1];
 
 		for (int i = 1; i <= ordem; i++)
-			for (int j = 1; j <= ordem; j++)
+			for (int j = 1; j <= ordem  + 1; j++)
 				matriz[i - 1][j - 1] = 1.0f/(i + j - 1);
 				
 		return matriz;
