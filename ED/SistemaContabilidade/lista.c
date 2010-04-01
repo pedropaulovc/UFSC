@@ -1,0 +1,636 @@
+/**
+ARQUIVO:       main.c
+TÍTULO:        Implementação de Lista de Contatos com Vetores em "C"
+ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+MATÉRIA:       INE5408
+PRAZO:         30 de março de 2010
+
+PROPÓSITO:
+Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados lista.
+
+
+FUNCIONAMENTO GERAL:
+Como informado no enunciado do trabalho, este programa é um exemplo prático da implementação
+de listas, servindo como lista de contatos simplificada. Ele possui um menu simples que aceita
+do usuário comandos para os principais usos da estrutura: adicionar, remover e obter contatos de
+qualquer posição da lista além de exibir em ordem os dados armazenados e sua quantidade.
+No mesmo enunciado, foi definido que seria criada uma variável global, aLista, inicializada
+em lista.h, contendo uma lista de 100 estruturas contendo uma string de tamanho 30 correspondente
+ao nome do contato e um número de telefone.
+
+FUNÇÕES:
+
+vagarPosicao
+	responsável por realizar uma bateria de testes para saber se é possível mover outros contatos da
+	lista de forma a desocupar a posição desejada, posteriormente realiza a operação propriamente dita
+	retornando ao final o sucesso ou não da operação.
+
+adiciona
+	adiciona, se possível, um contato na última posição da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+adicionaNoInicio
+	adiciona, se possível, um contato na primeira posição da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+adicionaNaPosicao
+	adiciona, se possível, um contato em uma posição arbitrária da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+adicionaEmOrdem
+	partindo do pressuposto que a lista está previamente ordenada, adiciona, se possível, um novo contato na
+	sua posição correspondente para manter a lista ordenada.
+
+retira
+	retira, se possível, um contato da última posição da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+retiraDoInicio
+	retira, se possível, um contato na primeira posição da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+retiraDaPosicao
+	retira, se possível, um contato em uma posição arbitrária da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+listaCheia
+	retorna 1 caso a lista esteja cheia e 0 em caso contrário.
+
+listaVazia
+	retorna 1 caso a lista esteja vazia e 0 em caso contrario.
+
+posicaoExistente
+	retorna 1 caso a posição informada esteja no intervalo [0, ultimo] e 0 em caso contrário.
+
+contem
+	retorna 1 se a lista contém um elemento fornecido e 0 em caso contrário.
+igual
+	retorna 1 se dois contatos fornecidos são iguais nos seus nomes e 0 em caso contrário.
+
+maior
+	retorna 1 se o nome do primeiro contato fornecido procede o segundo em uma ordem alfabética de nomes
+	e 0 em caso contrário.
+
+menor
+	retorna 1 se o nome do primeiro contato fornecido precede o segundo em uma ordem alfabética de nomes
+	e 0 em caso contrário.
+
+obter
+	retorna o contato, se possível, localizado na última posição da lista.
+
+obterDoInicio
+	retorna o contato, se possível, localizado no início da lista.
+
+obterDaPosicao
+	retorna o contato, se possível, localizado em uma posição arbitrária da lista.
+
+obterContatoPeloNome
+	retorna um contato armazenado que coincida com o nome fornecido, ou um contato
+	que informa que a posicão é inválida em caso de erro.
+
+inicializaLista
+	prepara a lista para ser utilizada ao definir que ela está vazia (ultimo = -1)
+
+destroiLista
+	limpa a lista para ser novamente repopulada ao definir a posição do último elemento como -1, tal como
+	inicializaLista->
+
+ARQUIVOS INCLUSOS:
+   stdio.h
+   stdlib.h
+   string.h
+   lista.h
+
+ARQUIVOS DE DADOS:
+   nenhum
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "lista.h"
+
+/**
+NOME DA FUNÇÃO: adiciona
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	adiciona, se possível, um contato na última posição da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+dado         tAgenda          valor              elemento a ser adicionado
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   0 em caso de sucesso, código de erro em caso de problema
+
+
+
+*/
+int adiciona(tLista *aLista, tAgenda dado) {
+	if (aLista->ultimo == MAXELEMENTOS - 1)
+		return ERRO_LISTA_CHEIA;
+
+	aLista->ultimo++;
+	aLista->elem[aLista->ultimo] = dado;
+
+	return 0;
+}
+
+   /**
+   NOME DA FUNÇÃO: adicionaNoInicio
+   ALUNOS: Pedro Paulo e Felipe dos Santos
+   PROPÓSITO:
+   	adiciona, se possível, um contato na primeira posição da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+   PARÂMETROS:
+   nome         tipo             valor/referência   descrição
+   ---------------------------------------------------------------------
+   dado         tAgenda          valor              elemento a ser adicionado
+
+   VALOR DE RETORNO:
+   nome           tipo  descrição
+   ---------------------------------------------------------------------
+   --             int   0 em caso de sucesso, código de erro em caso de problema
+
+
+
+
+   */
+int adicionaNoInicio(tLista *aLista, tAgenda dado) {
+	return adicionaNaPosicao(aLista, dado, 0);
+}
+
+/**
+NOME DA FUNÇÃO: adicionaNaPosicao
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	adiciona, se possível, um contato em uma posição arbitrária da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+dado         tAgenda          valor              elemento a ser adicionado
+posicao      int              valor              posição do elemento a ser adicionado
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   0 em caso de sucesso, código de erro em caso de problema
+
+
+*/
+int adicionaNaPosicao(tLista *aLista, tAgenda dado, int posicao) {
+	int resultado = vagarPosicao(aLista, posicao);
+
+	if (resultado != 0)
+		return resultado;
+
+	aLista->elem[posicao] = dado;
+	aLista->ultimo++;
+	return 0;
+}
+
+/**
+NOME DA FUNÇÃO: vagarPosicao
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	responsável por realizar uma bateria de testes para saber se é possível mover outros contatos da
+	lista de forma a desocupar a posição desejada, posteriormente realiza a operação propriamente dita
+	retornando ao final o sucesso ou não da operação.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+posicao      int              valor              posição da lista a ser vaga
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   0 em caso de sucesso, código de erro em caso de problema
+
+
+*/
+int vagarPosicao(tLista *aLista, int posicao) {
+
+	if (listaCheia(aLista) == 1)
+		return ERRO_LISTA_CHEIA;
+
+	if (listaVazia(aLista) == 1)
+		return 0;
+
+	if (posicao > aLista->ultimo + 1 || posicao < 0)
+		return ERRO_POSICAO_INVALIDA;
+
+	int i;
+	for (i = aLista->ultimo; i >= posicao; i--)
+		aLista->elem[i + 1] = aLista->elem[i];
+	return 0;
+}
+
+/**
+NOME DA FUNÇÃO: adicionaEmOrdem
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	partindo do pressuposto que a lista está previamente ordenada, adiciona, se possível, um novo contato na
+	sua posição correspondente para manter a lista ordenada.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+dado         tAgenda          valor              elemento a ser adicionado
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   0 em caso de sucesso, código de erro em caso de problema
+
+
+*/
+int adicionaEmOrdem(tLista *aLista, tAgenda dado) {
+	int pos = 0;
+	while (pos <= aLista->ultimo && maior(dado, aLista->elem[pos]))
+		pos++;
+
+	return adicionaNaPosicao(aLista, dado, pos);
+}
+
+/**
+NOME DA FUNÇÃO: obter
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna o contato, se possível, localizado na última posição da lista.
+
+PARÂMETROS:
+nenhum
+
+VALOR DE RETORNO:
+nome           tipo      descrição
+---------------------------------------------------------------------
+--             tAgenda   contato localizado na última posição da lista,
+						 ou um contato em branco em caso de erro.
+
+*/
+tAgenda obter(tLista *aLista) {
+	return obterDaPosicao(aLista, aLista->ultimo);
+}
+
+/**
+NOME DA FUNÇÃO: obterDoInicio
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna o contato, se possível, localizado no início da lista.
+
+PARÂMETROS:
+nenhum
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             tAgenda   contato localizado na primeira posição da lista,
+						 ou um contato em branco em caso de erro.
+
+*/
+tAgenda obterDoInicio(tLista *aLista) {
+	return obterDaPosicao(aLista, 0);
+}
+
+/**
+NOME DA FUNÇÃO: obterDaPosicao
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna o contato, se possível, localizado em uma posição arbitrária da lista.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+posicao      int              valor              posição do elemento a ser obtido
+
+VALOR DE RETORNO:
+nome           tipo      descrição
+---------------------------------------------------------------------
+--             tAgenda   contato localizado em uma posição arbitrária da lista,
+						 ou um contato informando que a posicão é inválida em caso
+						 de erro
+
+*/
+tAgenda obterDaPosicao(tLista *aLista, int posicao) {
+	tAgenda contato;
+	if(posicaoExistente(aLista, posicao))
+		return aLista->elem[posicao];
+
+	strcpy(contato.nome, "Posicao inválida.");
+	contato.numero = ERRO_POSICAO_INVALIDA;
+
+	return contato;
+}
+
+/**
+NOME DA FUNÇÃO: obterContatoPeloNome
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna um contato armazenado que coincida com o nome fornecido, ou um contato
+	que informa que a posicão é inválida em caso de erro.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+nome         char*            referência         nome a ser procurado
+
+VALOR DE RETORNO:
+nome           tipo      descrição
+---------------------------------------------------------------------
+contat         tAgenda   o contato buscado
+
+*/
+tAgenda obterContatoPeloNome(tLista *aLista, char* nome) {
+	int i;
+	tAgenda contato;
+	strcpy(contato.nome, nome);
+
+	for (i = 0; i <= aLista->ultimo; i++)
+		if (igual(contato, aLista->elem[i]))
+			return aLista->elem[i];
+
+	strcpy(contato.nome, "Nome não consta na lista.");
+	contato.numero = ERRO_POSICAO_INVALIDA;
+
+	return contato;
+}
+
+/**
+NOME DA FUNÇÃO: retira
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retira, se possível, um contato da última posição da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+PARÂMETROS:
+nenhum
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   0 em caso de sucesso, código de erro em caso de problema
+
+*/
+int retira(tLista *aLista) {
+	return retiraDaPosicao(aLista, aLista->ultimo);
+}
+
+/**
+NOME DA FUNÇÃO: retiraDoInicio
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retira, se possível, um contato na primeira posição da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+PARÂMETROS:
+nenhum
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   0 em caso de sucesso, código de erro em caso de problema
+
+*/
+int retiraDoInicio(tLista *aLista) {
+	return retiraDaPosicao(aLista, 0);
+}
+
+/**
+NOME DA FUNÇÃO: retiraDaPosicao
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retira, se possível, um contato em uma posição arbitrária da lista. Ao final retorna o sucesso ou não da
+	operação.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+posicao      int              valor              posição do elemento a ser removido
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   0 em caso de sucesso, código de erro em caso de problema
+
+*/
+int retiraDaPosicao(tLista *aLista, int posicao) {
+	if (posicao > aLista->ultimo || posicao < 0)
+		return ERRO_POSICAO_INVALIDA;
+
+	for (; posicao <= aLista->ultimo; posicao++)
+		aLista->elem[posicao] = aLista->elem[posicao + 1];
+
+	aLista->ultimo--;
+	return 0;
+}
+
+/**
+NOME DA FUNÇÃO: listaCheia
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna 1 caso a lista esteja cheia e 0 em caso contrário.
+
+PARÂMETROS:
+nenhum
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   1 caso a lista esteja cheia e 0 em caso contrário
+
+
+*/
+int listaCheia(tLista *aLista) {
+	if (aLista->ultimo == MAXELEMENTOS - 1)
+		return 1;
+	return 0;
+}
+
+/**
+NOME DA FUNÇÃO: listaVazia
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna 1 caso a lista esteja vazia e 0 em caso contrario.
+
+PARÂMETROS:
+nenhum
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   1 caso a lista esteja vazia e 0 em caso contrário
+
+*/
+int listaVazia(tLista *aLista) {
+	if (aLista->ultimo == LISTAVAZIA)
+		return 1;
+	return 0;
+}
+
+/**
+NOME DA FUNÇÃO: posicaoExistente
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna 1 caso a posição informada esteja no intervalo [0, ultimo] e 0 em caso contrário.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+posicao      int              valor              posição a ser testada
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   1 caso a posição seja válida e 0 em caso contrário
+
+*/
+int posicaoExistente(tLista *aLista, int posicao) {
+	if (posicao <= aLista->ultimo && posicao >= 0)
+		return 1;
+	return 0;
+}
+
+/**
+NOME DA FUNÇÃO: contem
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+		retorna 1 se a lista contém um elemento fornecido e 0 em caso contrário.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+dado         tAgenda          valor              elemento a ser procurado
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   1 caso o contato pertença à lista e 0 em caso contrário
+
+
+*/
+int contem(tLista *aLista, tAgenda dado) {
+	int i;
+	for (i = 0; i <= aLista->ultimo; i++)
+		if (igual(dado, aLista->elem[i]))
+			return 1;
+	return 0;
+}
+
+/**
+NOME DA FUNÇÃO: igual
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna 1 se dois contatos fornecidos são iguais nos seus nomes e 0 em caso contrário.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+dado1         tAgenda          valor              elemento a ser comparado
+dado2         tAgenda          valor              elemento a ser comparado
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   1 caso os nomes dos contatos sejam iguais e 0 em caso contrário.
+
+
+*/
+int igual(tAgenda dado1, tAgenda dado2) {
+	if (strcmp(dado1.nome, dado2.nome) == 0)
+		return 1;
+	return 0;
+}
+
+/**
+NOME DA FUNÇÃO: maior
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna 1 se o nome do primeiro contato fornecido procede o segundo em uma ordem alfabética de nomes
+	e 0 em caso contrário.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+dado1         tAgenda          valor              elemento a ser comparado
+dado2         tAgenda          valor              elemento a ser comparado
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   1 caso seja obedecida a regra definida no propósito da função e 0 caso contrário
+
+
+*/
+int maior(tAgenda dado1, tAgenda dado2) {
+	if (strcmp(dado1.nome, dado2.nome) > 0)
+		return 1;
+	return 0;
+}
+
+/**
+NOME DA FUNÇÃO: menor
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna 1 se o nome do primeiro contato fornecido precede o segundo em uma ordem alfabética de nomes
+	e 0 em caso contrário.
+
+PARÂMETROS:
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+dado1         tAgenda          valor              elemento a ser comparado
+dado2         tAgenda          valor              elemento a ser comparado
+
+VALOR DE RETORNO:
+nome           tipo  descrição
+---------------------------------------------------------------------
+--             int   1 caso seja obedecida a regra definida no propósito da função e 0 caso contrário
+
+
+*/
+int menor(tAgenda dado1, tAgenda dado2) {
+	if (strcmp(dado1.nome, dado2.nome) < 0)
+		return 1;
+	return 0;
+}
+
+/**
+NOME DA FUNÇÃO: inicializaLista
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	prepara a lista para ser utilizada ao definir que ela está vazia (ultimo = -1)
+
+PARÂMETROS:
+nenhum
+
+VALOR DE RETORNO:
+nenhum
+
+*/
+void inicializaLista(tLista *aLista) {
+	aLista->ultimo = -1;
+}
+
+/**
+NOME DA FUNÇÃO: destroiLista
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	limpa a lista para ser novamente repopulada ao definir a posição do último elemento como -1, tal como
+	inicializaLista->
+
+PARÂMETROS:
+nenhum
+
+VALOR DE RETORNO:
+nenhum
+
+*/
+void destroiLista(tLista *aLista) {
+	aLista->ultimo = -1;
+}
