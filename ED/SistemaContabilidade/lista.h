@@ -52,38 +52,38 @@ tLista
 #define ERRO_POSICAO_INVALIDA -3
 
 typedef struct {
-	char nome[MAXNOME];
-	int numero;
-} tAgenda;
+	char *nome;
+	double valor;
+} tLancamento;
 
 typedef struct {
-	tAgenda elem[MAXELEMENTOS];
+	tLancamento elem[MAXELEMENTOS];
 	int ultimo;
-} tLista;
+} tListaContabil;
 
-tLista debitos;
-tLista creditos;
+tListaContabil debitos, creditos;
+char buffer[10000];
 
-int vagarPosicao(tLista *aLista, int posicao);
-int adiciona(tLista *aLista, tAgenda dado);
-int adicionaNoInicio(tLista *aLista, tAgenda dado);
-int adicionaNaPosicao(tLista *aLista, tAgenda dado, int posicao);
-int adicionaEmOrdem(tLista *aLista, tAgenda dado);
-int retira(tLista *aLista);
-int retiraDoInicio(tLista *aLista);
-int retiraDaPosicao(tLista *aLista, int posicao);
-int listaCheia(tLista *aLista);
-int listaVazia(tLista *aLista);
-int posicaoExistente(tLista *aLista, int posicao);
-int contem(tLista *aLista, tAgenda dado);
-int igual(tAgenda dado1, tAgenda dado2);
-int maior(tAgenda dado1, tAgenda dado2);
-int menor(tAgenda dado1, tAgenda dado2);
-tAgenda obter(tLista *aLista);
-tAgenda obterDoInicio(tLista *aLista);
-tAgenda obterDaPosicao(tLista *aLista, int posicao);
-tAgenda obterContatoPeloNome(tLista *aLista, char* nome);
-void inicializaLista(tLista *aLista);
-void destroiLista(tLista *aLista);
+int vagarPosicao(tListaContabil *aLista, int posicao);
+int adiciona(tListaContabil *aLista, tLancamento dado);
+int adicionaNoInicio(tListaContabil *aLista, tLancamento dado);
+int adicionaNaPosicao(tListaContabil *aLista, tLancamento dado, int posicao);
+int adicionaEmOrdem(tListaContabil *aLista, tLancamento dado);
+int retira(tListaContabil *aLista);
+int retiraDoInicio(tListaContabil *aLista);
+int retiraDaPosicao(tListaContabil *aLista, int posicao);
+int listaCheia(tListaContabil *aLista);
+int listaVazia(tListaContabil *aLista);
+int posicaoExistente(tListaContabil *aLista, int posicao);
+int contem(tListaContabil *aLista, tLancamento dado);
+int igual(tLancamento dado1, tLancamento dado2);
+int maior(tLancamento dado1, tLancamento dado2);
+int menor(tLancamento dado1, tLancamento dado2);
+tLancamento obter(tListaContabil *aLista);
+tLancamento obterDoInicio(tListaContabil *aLista);
+tLancamento obterDaPosicao(tListaContabil *aLista, int posicao);
+tLancamento obterContatoPeloNome(tListaContabil *aLista, char* nome);
+void inicializaLista(tListaContabil *aLista);
+void destroiLista(tListaContabil *aLista);
 
 #endif /* LISTA_H_ */

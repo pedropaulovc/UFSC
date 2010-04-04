@@ -71,17 +71,18 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "lista.h"
 
 void exibeIntroducao();
 void exibeMenuPrincipal();
 void exibeMenuSecundario(char* opcao);
 void exibirMensagemErro(int resultado);
-void adicionarContato();
-void retirarContato();
-void obterContato();
-void exibirContato();
-void exibirContatosEmOrdem();
+void adicionarLancamento();
+void retirarLancamento();
+void obterLancamento();
+void exibirLancamento();
+void exibirLancamentos();
 
 int main() {
 	int opcao;
@@ -98,24 +99,37 @@ int main() {
 		case 0:
 			return EXIT_SUCCESS;
 			break;
-		case 1:
-			adicionarContato();
+		case 1:p
+			adicionarLancamento();
 			break;
 		case 2:
-			retirarContato();
+			retirarLancamento();
 			break;
 		case 3:
-			obterContato();
+			obterLancamento();
 			break;
 		case 4:
-			exibirContatosEmOrdem();
+			if(listaVazia(&debitos) == 0){
+				puts("Débitos: ");
+				exibirLancamentos(&debitos);
+			} else
+				puts("Sem débitos.");
+
+			if (listaVazia(&creditos) == 0){
+				puts("Créditos: ");
+				exibirLancamentos(&creditos);
+			} else
+				puts("Sem créditos.");
 			break;
 		case 5:
-			printf("Contatos armazenados: %d", debitos.ultimo + 1);
+			puts("Lançamentos armazenados:");
+			printf("Débitos: %d\n", debitos.ultimo + 1);
+			printf("Céditos: %d\n", creditos.ultimo + 1);
 			break;
 		case 6:
 			destroiLista(&debitos);
-			puts("Lista limpa.");
+			destroiLista(&creditos);
+			puts("Lançamentos limpos.");
 			break;
 		default:
 			puts("Opção inválida");
@@ -142,7 +156,7 @@ int main() {
  */
 void exibeIntroducao() {
 	puts("INE5408 - ESTRUTURAS DE DADOS");
-	puts("EXERCÍCIO 3 - LISTAS USANDO VETORES");
+	puts("EXERCÍCIO 4 - PASSAGEM DE PARÂMETROS");
 	puts("ALUNOS: PEDRO PAULO VEZZÁ CAMPOS E FELIPE DOS SANTOS SILVEIRA\n");
 }
 
@@ -165,14 +179,15 @@ void exibeIntroducao() {
 void exibeMenuPrincipal() {
 	puts("\nEscolha uma opção:");
 	puts("0 - Sair do programa");
-	puts("1 - Adicionar contato");
-	puts("2 - Retirar contato");
-	puts("3 - Obter contato");
-	puts("4 - Mostrar todos os contatos");
-	puts("5 - Exibir a quantidade de contatos armazenados");
-	puts("6 - Limpar a lista de contatos");
+	puts("1 - Adicionar novo lançamento");
+	puts("2 - Remover lançamento");
+	puts("3 - Mostrar saldo atual");
+	puts("4 - Ver toda a movimentação financeira");
+	puts("5 - Exibir a quantidade de lançamentos armazenados");
+	puts("6 - Limpar os lançamentos");
 }
 
+//TODO: Verificar necessidade da função
 /**
  NOME DA FUNÇÃO: exibeMenuSecundario
  ALUNOS: Pedro Paulo e Felipe dos Santos
@@ -200,6 +215,12 @@ void exibeMenuSecundario(char* opcao) {
 	printf("0 - %s final\n", opcao);
 	printf("1 - %s início\n", opcao);
 	printf("2 - %s local específico\n", opcao);
+}
+
+void exibeMenuLancamentos(char* opcao){
+	puts("\nEscolha uma opção: \n");
+	printf("0 - %s débitos\n", opcao);
+	printf("1 - %s créditos\n", opcao);
 }
 
 /**
@@ -253,9 +274,9 @@ void exibirMensagemErro(int resultado) {
 
  CHAMADA DE: exibirContatosEmOrdem, obterContato
  */
-void exibirContato(tAgenda contato) {
+void exibirLancamento(tLancamento contato) {
 	printf("Nome: %s\n", contato.nome);
-	printf("Telefone: %d\n", contato.numero);
+	printf("Valor: %f\n", contato.valor);
 }
 
 /**
@@ -275,34 +296,27 @@ void exibirContato(tAgenda contato) {
 
  CHAMADA DE: main
  */
-void adicionarContato() {
-	int opcao, posicao, resultado;
-	tAgenda elemento;
+void adicionarLancamento() {
+	int opcao, resultado;
+	tLancamento elemento;
 
-	puts("Forneça o nome do contato: ");
+	puts("Forneça o nome do lançamento: ");
 	getchar();
-	scanf("%[^\n]", &elemento.nome);
-	puts("Forneça o número de telefone: ");
-	scanf("%d", &elemento.numero);
+	scanf("%[^\n]", &buffer);
+	elemento.nome = malloc(strlen(buffer) + 1);
+	strcpy(elemento.nome, buffer);
+	puts("Forneça o valor do lançamento: ");
+	scanf("%lf", &elemento.valor);
 
-	exibeMenuSecundario("Adicionar no");
-	puts("3 - Adicionar em ordem");
+	exibeMenuLancamentos("Adicionar como");
 	scanf("%d", &opcao);
 
 	switch (opcao) {
 	case 0:
-		resultado = adiciona(&debitos, elemento);
+		resultado = adicionaEmOrdem(&debitos, elemento);
 		break;
 	case 1:
-		resultado = adicionaNoInicio(&debitos, elemento);
-		break;
-	case 2:
-		puts("Forneça a posição a ser adicionada");
-		scanf("%d", &posicao);
-		resultado = adicionaNaPosicao(&debitos, elemento, posicao);
-		break;
-	case 3:
-		resultado = adicionaEmOrdem(&debitos, elemento);
+		resultado = adicionaEmOrdem(&creditos, elemento);
 		break;
 	default:
 		puts("Opção Inválida");
@@ -330,23 +344,20 @@ void adicionarContato() {
 
  CHAMADA DE: main
  */
-void retirarContato() {
+void retirarLancamento() {
 	int opcao, posicao, resultado;
 
-	exibeMenuSecundario("Remover do");
+	exibeMenuLancamentos("Remover dos");
 	scanf("%d", &opcao);
+	puts("Forneça a posição a ser removida");
+	scanf("%d", &posicao);
 
 	switch (opcao) {
 	case 0:
-		resultado = retira(&debitos);
+		resultado = retiraDaPosicao(&debitos, posicao);
 		break;
 	case 1:
-		resultado = retiraDoInicio(&debitos);
-		break;
-	case 2:
-		puts("Forneça a posição a ser removida");
-		scanf("%d", &posicao);
-		resultado = retiraDaPosicao(&debitos, posicao);
+		resultado = retiraDaPosicao(&creditos, posicao);
 		break;
 	default:
 		puts("Opção Inválida");
@@ -375,43 +386,31 @@ void retirarContato() {
 
  CHAMADA DE: main
  */
-void obterContato() {
+void obterLancamento() {
 	int opcao, aPosicao;
-	tAgenda contato;
-	char* nome;
+	tLancamento contato;
 
-	exibeMenuSecundario("Obter do");
-	puts("3 - Obter contato pelo nome");
+	exibeMenuLancamentos("Obter dos");
 	scanf("%d", &opcao);
+	puts("Forneça a posição a ser obtida");
+	scanf("%d", &aPosicao);
 
 	switch (opcao) {
 	case 0:
-		contato = obter(&debitos);
-		break;
-	case 1:
-		contato = obterDoInicio(&debitos);
-		break;
-	case 2:
-		puts("Forneça a posição a ser obtida");
-		scanf("%d", &aPosicao);
-
 		contato = obterDaPosicao(&debitos, aPosicao);
 		break;
-	case 3:
-		puts("Forneça o nome do contato a ser obtido");
-		getchar();
-		scanf("%[^\n]", nome);
-		contato = obterContatoPeloNome(&debitos, nome);
+	case 1:
+		contato = obterDaPosicao(&creditos, aPosicao);
 		break;
 	default:
 		puts("Opção Inválida");
 		break;
 	}
 
-	if (contato.numero == ERRO_POSICAO_INVALIDA)
+	if (contato.valor == ERRO_POSICAO_INVALIDA)
 		puts(contato.nome);
 	else
-		exibirContato(contato);
+		exibirLancamento(contato);
 }
 
 /**
@@ -430,9 +429,9 @@ void obterContato() {
 
  CHAMADA DE: main
  */
-void exibirContatosEmOrdem() {
+void exibirLancamentos(tListaContabil *aLista) {
 	int i;
-	for (i = 0; i <= debitos.ultimo; i++)
-		exibirContato(debitos.elem[i]);
+	for (i = 0; i <= aLista->ultimo; i++)
+		exibirLancamento(aLista->elem[i]);
 }
 

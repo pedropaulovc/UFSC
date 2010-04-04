@@ -129,7 +129,7 @@ nome           tipo  descrição
 
 
 */
-int adiciona(tLista *aLista, tAgenda dado) {
+int adiciona(tListaContabil *aLista, tLancamento dado) {
 	if (aLista->ultimo == MAXELEMENTOS - 1)
 		return ERRO_LISTA_CHEIA;
 
@@ -160,7 +160,7 @@ int adiciona(tLista *aLista, tAgenda dado) {
 
 
    */
-int adicionaNoInicio(tLista *aLista, tAgenda dado) {
+int adicionaNoInicio(tListaContabil *aLista, tLancamento dado) {
 	return adicionaNaPosicao(aLista, dado, 0);
 }
 
@@ -184,7 +184,7 @@ nome           tipo  descrição
 
 
 */
-int adicionaNaPosicao(tLista *aLista, tAgenda dado, int posicao) {
+int adicionaNaPosicao(tListaContabil *aLista, tLancamento dado, int posicao) {
 	int resultado = vagarPosicao(aLista, posicao);
 
 	if (resultado != 0)
@@ -215,7 +215,7 @@ nome           tipo  descrição
 
 
 */
-int vagarPosicao(tLista *aLista, int posicao) {
+int vagarPosicao(tListaContabil *aLista, int posicao) {
 
 	if (listaCheia(aLista) == 1)
 		return ERRO_LISTA_CHEIA;
@@ -251,7 +251,7 @@ nome           tipo  descrição
 
 
 */
-int adicionaEmOrdem(tLista *aLista, tAgenda dado) {
+int adicionaEmOrdem(tListaContabil *aLista, tLancamento dado) {
 	int pos = 0;
 	while (pos <= aLista->ultimo && maior(dado, aLista->elem[pos]))
 		pos++;
@@ -275,7 +275,7 @@ nome           tipo      descrição
 						 ou um contato em branco em caso de erro.
 
 */
-tAgenda obter(tLista *aLista) {
+tLancamento obter(tListaContabil *aLista) {
 	return obterDaPosicao(aLista, aLista->ultimo);
 }
 
@@ -295,7 +295,7 @@ nome           tipo  descrição
 						 ou um contato em branco em caso de erro.
 
 */
-tAgenda obterDoInicio(tLista *aLista) {
+tLancamento obterDoInicio(tListaContabil *aLista) {
 	return obterDaPosicao(aLista, 0);
 }
 
@@ -318,13 +318,13 @@ nome           tipo      descrição
 						 de erro
 
 */
-tAgenda obterDaPosicao(tLista *aLista, int posicao) {
-	tAgenda contato;
+tLancamento obterDaPosicao(tListaContabil *aLista, int posicao) {
+	tLancamento contato;
 	if(posicaoExistente(aLista, posicao))
 		return aLista->elem[posicao];
 
 	strcpy(contato.nome, "Posicao inválida.");
-	contato.numero = ERRO_POSICAO_INVALIDA;
+	contato.valor = ERRO_POSICAO_INVALIDA;
 
 	return contato;
 }
@@ -347,9 +347,9 @@ nome           tipo      descrição
 contat         tAgenda   o contato buscado
 
 */
-tAgenda obterContatoPeloNome(tLista *aLista, char* nome) {
+tLancamento obterContatoPeloNome(tListaContabil *aLista, char* nome) {
 	int i;
-	tAgenda contato;
+	tLancamento contato;
 	strcpy(contato.nome, nome);
 
 	for (i = 0; i <= aLista->ultimo; i++)
@@ -357,7 +357,7 @@ tAgenda obterContatoPeloNome(tLista *aLista, char* nome) {
 			return aLista->elem[i];
 
 	strcpy(contato.nome, "Nome não consta na lista.");
-	contato.numero = ERRO_POSICAO_INVALIDA;
+	contato.valor = ERRO_POSICAO_INVALIDA;
 
 	return contato;
 }
@@ -378,7 +378,7 @@ nome           tipo  descrição
 --             int   0 em caso de sucesso, código de erro em caso de problema
 
 */
-int retira(tLista *aLista) {
+int retira(tListaContabil *aLista) {
 	return retiraDaPosicao(aLista, aLista->ultimo);
 }
 
@@ -398,7 +398,7 @@ nome           tipo  descrição
 --             int   0 em caso de sucesso, código de erro em caso de problema
 
 */
-int retiraDoInicio(tLista *aLista) {
+int retiraDoInicio(tListaContabil *aLista) {
 	return retiraDaPosicao(aLista, 0);
 }
 
@@ -420,7 +420,7 @@ nome           tipo  descrição
 --             int   0 em caso de sucesso, código de erro em caso de problema
 
 */
-int retiraDaPosicao(tLista *aLista, int posicao) {
+int retiraDaPosicao(tListaContabil *aLista, int posicao) {
 	if (posicao > aLista->ultimo || posicao < 0)
 		return ERRO_POSICAO_INVALIDA;
 
@@ -447,7 +447,7 @@ nome           tipo  descrição
 
 
 */
-int listaCheia(tLista *aLista) {
+int listaCheia(tListaContabil *aLista) {
 	if (aLista->ultimo == MAXELEMENTOS - 1)
 		return 1;
 	return 0;
@@ -468,7 +468,7 @@ nome           tipo  descrição
 --             int   1 caso a lista esteja vazia e 0 em caso contrário
 
 */
-int listaVazia(tLista *aLista) {
+int listaVazia(tListaContabil *aLista) {
 	if (aLista->ultimo == LISTAVAZIA)
 		return 1;
 	return 0;
@@ -491,7 +491,7 @@ nome           tipo  descrição
 --             int   1 caso a posição seja válida e 0 em caso contrário
 
 */
-int posicaoExistente(tLista *aLista, int posicao) {
+int posicaoExistente(tListaContabil *aLista, int posicao) {
 	if (posicao <= aLista->ultimo && posicao >= 0)
 		return 1;
 	return 0;
@@ -515,7 +515,7 @@ nome           tipo  descrição
 
 
 */
-int contem(tLista *aLista, tAgenda dado) {
+int contem(tListaContabil *aLista, tLancamento dado) {
 	int i;
 	for (i = 0; i <= aLista->ultimo; i++)
 		if (igual(dado, aLista->elem[i]))
@@ -542,7 +542,7 @@ nome           tipo  descrição
 
 
 */
-int igual(tAgenda dado1, tAgenda dado2) {
+int igual(tLancamento dado1, tLancamento dado2) {
 	if (strcmp(dado1.nome, dado2.nome) == 0)
 		return 1;
 	return 0;
@@ -568,7 +568,7 @@ nome           tipo  descrição
 
 
 */
-int maior(tAgenda dado1, tAgenda dado2) {
+int maior(tLancamento dado1, tLancamento dado2) {
 	if (strcmp(dado1.nome, dado2.nome) > 0)
 		return 1;
 	return 0;
@@ -594,7 +594,7 @@ nome           tipo  descrição
 
 
 */
-int menor(tAgenda dado1, tAgenda dado2) {
+int menor(tLancamento dado1, tLancamento dado2) {
 	if (strcmp(dado1.nome, dado2.nome) < 0)
 		return 1;
 	return 0;
@@ -613,7 +613,7 @@ VALOR DE RETORNO:
 nenhum
 
 */
-void inicializaLista(tLista *aLista) {
+void inicializaLista(tListaContabil *aLista) {
 	aLista->ultimo = -1;
 }
 
@@ -631,6 +631,9 @@ VALOR DE RETORNO:
 nenhum
 
 */
-void destroiLista(tLista *aLista) {
+void destroiLista(tListaContabil *aLista) {
+	int i;
+	for(i = 0; i < aLista->ultimo; i++)
+		free(aLista->elem[i].nome);
 	aLista->ultimo = -1;
 }
