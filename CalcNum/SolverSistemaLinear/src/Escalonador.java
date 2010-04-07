@@ -8,7 +8,7 @@ public class Escalonador {
 	public static void main(String[] args) {
 		float[][] matriz = gerarMatrizHilbert(3);
 		//float[][] matriz = obterMatriz();
-		System.out.println("INÍCIO: ");
+		System.out.println("INÃCIO: ");
 		exibirMatriz(matriz);
 		System.out.println("Escalonando: ");
 		escalonarMatriz(matriz);
@@ -18,8 +18,8 @@ public class Escalonador {
 	}
 
 	private static void escalonarMatriz(float[][] matriz) {
-		//Última coluna -> Matriz dos termos independentes
-		//Última Linha não precisa pivotar ou subtrair linhas.
+		//Ãšltima coluna -> Matriz dos termos independentes
+		//Ãšltima Linha nÃ£o precisa pivotar ou subtrair linhas.
 		for (int colunaAtual = 0; colunaAtual < matriz[0].length - 2; colunaAtual++) {
 			pivotarLinhas(matriz, colunaAtual);
 			System.out.println("Pivotado coluna " + colunaAtual);
@@ -29,10 +29,10 @@ public class Escalonador {
 			exibirMatriz(matriz);
 			subtrairLinhasAbaixo(matriz, colunaAtual);
 			exibirMatriz(matriz);
-			System.out.println("Subtraídas linhas abaixo de " + colunaAtual);
+			System.out.println("SubtraÃ­das linhas abaixo de " + colunaAtual);
 		}
 			dividirLinha(matriz, matriz.length - 1);
-			System.out.println("Dividida última linha"); 
+			System.out.println("Dividida Ãºltima linha"); 
 			exibirMatriz(matriz);
 	}
 
@@ -88,14 +88,14 @@ public class Escalonador {
 	}
 
 	private static float[][] obterMatriz() {
-		System.out.print("Forneça tamanho da matriz: ");
+		System.out.print("ForneÃ§a tamanho da matriz: ");
 		int n = new Scanner(System.in).nextInt();
 
 		float[][] matriz = new float[n][n + 1];
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n + 1; j++) {
-				System.out.print("Forneça o elemento " + i + "," + j + ": ");
+				System.out.print("ForneÃ§a o elemento " + i + "," + j + ": ");
 				matriz[i][j] = new Scanner(System.in).nextFloat();
 			}
 		}
