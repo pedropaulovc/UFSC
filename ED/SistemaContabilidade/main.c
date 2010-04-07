@@ -420,9 +420,9 @@ void obterSaldo() {
 
  CHAMADA DE: main
  */
-void exibirLancamentos(tListaContabil *aLista) {
+void exibirLancamentos(tListaContabil *lista) {
 	int i;
-	for (i = 0; i <= aLista->ultimo; i++)
-		exibirLancamento(aLista->elem[i]);
+	for (i = 0; i <= lista->ultimo; i++)
+		exibirLancamento(lista->elem[i]);
 }
 

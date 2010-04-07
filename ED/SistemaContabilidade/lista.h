@@ -64,26 +64,26 @@ typedef struct {
 tListaContabil debitos, creditos;
 char buffer[10000];
 
-int vagarPosicao(tListaContabil *aLista, int posicao);
-int adiciona(tListaContabil *aLista, tLancamento dado);
-int adicionaNoInicio(tListaContabil *aLista, tLancamento dado);
-int adicionaNaPosicao(tListaContabil *aLista, tLancamento dado, int posicao);
-int adicionaEmOrdem(tListaContabil *aLista, tLancamento dado);
-int retira(tListaContabil *aLista);
-int retiraDoInicio(tListaContabil *aLista);
-int retiraDaPosicao(tListaContabil *aLista, int posicao);
-int listaCheia(tListaContabil *aLista);
-int listaVazia(tListaContabil *aLista);
-int posicaoExistente(tListaContabil *aLista, int posicao);
-int contem(tListaContabil *aLista, tLancamento dado);
+int vagarPosicao(tListaContabil *lista, int posicao);
+int adiciona(tListaContabil *lista, tLancamento dado);
+int adicionaNoInicio(tListaContabil *lista, tLancamento dado);
+int adicionaNaPosicao(tListaContabil *lista, tLancamento dado, int posicao);
+int adicionaEmOrdem(tListaContabil *lista, tLancamento dado);
+int retira(tListaContabil *lista);
+int retiraDoInicio(tListaContabil *lista);
+int retiraDaPosicao(tListaContabil *lista, int posicao);
+int listaCheia(tListaContabil *lista);
+int listaVazia(tListaContabil *lista);
+int posicaoExistente(tListaContabil *lista, int posicao);
+int contem(tListaContabil *lista, tLancamento dado);
 int igual(tLancamento dado1, tLancamento dado2);
 int maior(tLancamento dado1, tLancamento dado2);
 int menor(tLancamento dado1, tLancamento dado2);
-tLancamento obter(tListaContabil *aLista);
-tLancamento obterDoInicio(tListaContabil *aLista);
-tLancamento obterDaPosicao(tListaContabil *aLista, int posicao);
-tLancamento obterContatoPeloNome(tListaContabil *aLista, char* nome);
-void inicializaLista(tListaContabil *aLista);
-void destroiLista(tListaContabil *aLista);
+tLancamento obter(tListaContabil *lista);
+tLancamento obterDoInicio(tListaContabil *lista);
+tLancamento obterDaPosicao(tListaContabil *lista, int posicao);
+tLancamento obterLancamentoPeloNome(tListaContabil *lista, char* nome);
+void inicializlista(tListaContabil *lista);
+void destroiLista(tListaContabil *lista);
 
 #endif /* LISTA_H_ */
