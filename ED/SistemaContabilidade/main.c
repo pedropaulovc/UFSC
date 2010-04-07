@@ -80,7 +80,7 @@ void exibeMenuSecundario(char* opcao);
 void exibirMensagemErro(int resultado);
 void adicionarLancamento();
 void retirarLancamento();
-void obterLancamento();
+void obterSaldo();
 void exibirLancamento();
 void exibirLancamentos();
 
@@ -99,14 +99,14 @@ int main() {
 		case 0:
 			return EXIT_SUCCESS;
 			break;
-		case 1:p
+		case 1:
 			adicionarLancamento();
 			break;
 		case 2:
 			retirarLancamento();
 			break;
 		case 3:
-			obterLancamento();
+			obterSaldo();
 			break;
 		case 4:
 			if(listaVazia(&debitos) == 0){
@@ -125,6 +125,7 @@ int main() {
 			puts("Lançamentos armazenados:");
 			printf("Débitos: %d\n", debitos.ultimo + 1);
 			printf("Céditos: %d\n", creditos.ultimo + 1);
+			printf("Total: %d\n", debitos.ultimo + creditos.ultimo + 2);
 			break;
 		case 6:
 			destroiLista(&debitos);
@@ -276,7 +277,7 @@ void exibirMensagemErro(int resultado) {
  */
 void exibirLancamento(tLancamento contato) {
 	printf("Nome: %s\n", contato.nome);
-	printf("Valor: %f\n", contato.valor);
+	printf("Valor: %.2f\n", contato.valor);
 }
 
 /**
@@ -386,31 +387,21 @@ void retirarLancamento() {
 
  CHAMADA DE: main
  */
-void obterLancamento() {
-	int opcao, aPosicao;
-	tLancamento contato;
-
-	exibeMenuLancamentos("Obter dos");
-	scanf("%d", &opcao);
-	puts("Forneça a posição a ser obtida");
-	scanf("%d", &aPosicao);
-
-	switch (opcao) {
-	case 0:
-		contato = obterDaPosicao(&debitos, aPosicao);
-		break;
-	case 1:
-		contato = obterDaPosicao(&creditos, aPosicao);
-		break;
-	default:
-		puts("Opção Inválida");
-		break;
+void obterSaldo() {
+	float totalCreditos, totalDebitos;
+	totalCreditos = 0.0f;
+	totalDebitos = 0.0f;
+	int i;
+	for(i = 0; i <= creditos.ultimo; i++){
+		totalCreditos = totalCreditos + creditos.elem[i].valor;
+	}
+	for(i = 0; i <= debitos.ultimo; i++){
+			totalDebitos = totalDebitos + debitos.elem[i].valor;
 	}
 
-	if (contato.valor == ERRO_POSICAO_INVALIDA)
-		puts(contato.nome);
-	else
-		exibirLancamento(contato);
+	printf("Total de créditos: %.2f\n", totalCreditos);
+	printf("Total de débitos: %.2f\n", totalDebitos);
+	printf("Saldo total: %.2f\n", totalCreditos-totalDebitos);
 }
 
 /**
