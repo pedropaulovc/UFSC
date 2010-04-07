@@ -632,7 +632,7 @@ VALOR DE RETORNO:
 nenhum
 
 */
-void inicializlista(tListaContabil *lista) {
+void inicializaLista(tListaContabil *lista) {
 	lista->ultimo = -1;
 }
 
