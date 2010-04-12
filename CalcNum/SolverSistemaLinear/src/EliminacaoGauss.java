@@ -1,15 +1,19 @@
-
 public class EliminacaoGauss {
-	public static void escalonarMatriz(double[][] matriz) {
-		
+	public static double[] escalonarMatriz(double[][] matriz) {
+		for(int i = 0; i < matriz.length; i++){
+			pivotarLinhas(matriz, i);
+			dividirLinha(matriz, i);
+			subtrairLinhasAbaixo(matriz, i);
+		}
+		return retrosubstituir(matriz);
 	}
 
-	//Pivoto as linhas da matriz[linhaInicial][linhaInicial] para baixo
+	// Pivoto as linhas da matriz[linhaInicial][linhaInicial] para baixo
 	private static void pivotarLinhas(double[][] matriz, int linhaInicial) {
 		double maior = 0;
 		double modulo;
 		int linhaMaior = linhaInicial;
-		
+
 		for (int i = linhaInicial; i < matriz.length; i++) {
 			modulo = Math.abs(matriz[i][linhaInicial]);
 			if (modulo > maior) {
@@ -28,17 +32,19 @@ public class EliminacaoGauss {
 		matriz[linhaMaior] = temp;
 	}
 
-	private static double[] retrosubstituir(double[][] matriz){
+	private static double[] retrosubstituir(double[][] matriz) {
 		double[] resposta = new double[matriz.length];
-		
-		for(int i = matriz.length; i >= 0; i++){
-/*			for(int j =  0; i)
-			resposta[i] = matriz[i][i + 1]/matriz[i][i];
-			resposta[i - 1] = matriz[i][]*/
+		double acum = 0;
+		for(int i = matriz.length - 1; i >= 0; i--){
+			acum = 0;
+			for(int j = i + 1; j < matriz.length; j++)
+				acum += matriz[i][j] * resposta[j];
+			resposta[i] = (matriz[i][matriz[0].length - 1] - acum) / matriz[i][i];
 		}
-		return null;
+
+		return resposta;
 	}
-	
+
 	private static void dividirLinha(double[][] matriz, int indice) {
 		double fatorDivisao = matriz[indice][indice];
 		for (int i = indice; i < matriz[0].length; i++) {
@@ -55,4 +61,5 @@ public class EliminacaoGauss {
 			}
 		}
 	}
+
 }
