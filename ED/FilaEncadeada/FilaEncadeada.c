@@ -6,7 +6,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include "filaEncadeada.h"
+#include "FilaEncadeada.h"
 #include "tInfo.h"
 
 tFila* inicializar() {
