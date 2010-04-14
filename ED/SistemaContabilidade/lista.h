@@ -1,16 +1,19 @@
 /**
 ARQUIVO:       lista.h
-TÍTULO:        Implementação de Lista de Contatos com Vetores em "C"
+TÍTULO:        Implementação de num variável de Listas com Vetores alocadas dinamicamente usando TAD Lista com Vetor
 ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
 MATÉRIA:       INE5408
-PRAZO:         30 de março de 2010
+PRAZO:         15 de abril de 2010
 
 PROPÓSITO:
-Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados lista.
+Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados lista,
+aliada à compreenção de alocação dinâmica de memória.
 
-SOBRE O ARQUIVO:
-Neste arquivo estão definidos os protótipos a serem implementados em lista.c referentes à estrutura de
-dados lista, além de definições de constantes usadas ao longo do programa.
+FUNCIONAMENTO GERAL:
+Como informado no enunciado do trabalho, este programa é um exemplo prático da implementação
+de listas, servindo como sistema de contabilidade simplificado. Ele possui um menu simples que aceita
+do usuário comandos para os principais usos da estrutura: adicionar, remover e obter lançamentos de
+qualquer posição da lista além de exibir em ordem os dados armazenados e sua quantidade.
 
 DEFINIÇÕES:
 MAXELEMENTOS
@@ -19,7 +22,7 @@ MAXELEMENTOS
 MAXNOME
 	Tamanho máximo de cada string correspondente ao nome do contato, valor padrão: 31
 
-ERRO_FILA_CHEIA
+ERRO_LISTA_CHEIA
 	Código de erro retornado pela lista em caso de uma operação inválida de adicionar um contato em uma
 	lista cheia. Valor padrão -1
 
@@ -33,11 +36,10 @@ ERRO_POSICAO_INVALIDA
 	Valor padrão: -3
 
 TIPOS:
-tAgenda
-	Definição de um contato da lista, como pedido, um vetor de string para o nome com tamanho 30
-	(Mais 1 para o caractere nulo) mais um inteiro que contém o número de telefone do contato.
+tLancamento
+	Definição de um lançamento da lista tal como foi definido no enunciado do exercício.
 tLista
-	Definição de uma lista, contendo um vetor que armazena 100 dados do tipo tAgenda, além de um inteiro
+	Definição de uma lista, contendo um vetor que armazena 100 dados do tipo tLancamento, além de um inteiro
 	que indica a posição do último elemento na lista.
 
 */

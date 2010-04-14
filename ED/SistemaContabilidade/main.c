@@ -1,22 +1,20 @@
 /**
  ARQUIVO:       main.c
- TÍTULO:        Implementação de Lista de Contatos com Vetores em "C"
+ TÍTULO:        Implementação de num variável de Listas com Vetores alocadas dinamicamente usando TAD Lista com Vetor
  ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
  MATÉRIA:       INE5408
- PRAZO:         30 de março de 2010
+ PRAZO:         15 de abril de 2010
 
  PROPÓSITO:
- Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados lista.
+ Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados lista,
+ aliada à compreenção de alocação dinâmica de memória.
 
 
  FUNCIONAMENTO GERAL:
  Como informado no enunciado do trabalho, este programa é um exemplo prático da implementação
- de listas, servindo como lista de contatos simplificada. Ele possui um menu simples que aceita
- do usuário comandos para os principais usos da estrutura: adicionar, remover e obter contatos de
+ de listas, servindo como sistema de contabilidade simplificado. Ele possui um menu simples que aceita
+ do usuário comandos para os principais usos da estrutura: adicionar, remover e obter lançamentos de
  qualquer posição da lista além de exibir em ordem os dados armazenados e sua quantidade.
- No mesmo enunciado, foi definido que seria criada uma variável global, aLista, inicializada
- em lista.h, contendo uma lista de 100 estruturas contendo uma string de tamanho 30 correspondente
- ao nome do contato e um número de telefone.
 
  FUNÇÕES:
 
@@ -30,40 +28,39 @@
  exibeMenuPrincipal
  apresenta as opções disponíveis ao usuário.
 
- exibeMenuSecundario
- apresenta ao usuário as subopções disponíveis nas operações de adição, remoção e obtenção de contatos,
- por exemplo, adicionar um contato no início da lista ou remover o último contato ou ainda obter o 5o
- contato armazenado.
+ exibeMenuLancamentos
+ permite ao usuário definir se a operação escolhida deve ser feita para a lista de créditos ou débitos
 
  exibirMensagemErro
  caso o usuário realize alguma operação inválida na lista esta função é a responsável por avisá-lo de
  tal comportamento inexperado. Erros possíveis incluem remover elementos de uma lista vazia, adicionar
- mais contatos que o máximo permitido ou ainda tentar acessar um elemento em uma posição fora dos limites
+ mais lançamentos que o máximo permitido ou ainda tentar acessar um elemento em uma posição fora dos limites
  da lista.
 
- adicionarContato
- responsável por obter o contato a ser armazenado e encaminhá-lo à lista de maneira apropriada e por fim
+ adicionarLancamento
+ responsável por obter o lançamento a ser armazenado e encaminhá-lo à lista de maneira apropriada e por fim
  informar se tudo aconteceu de maneira correta.
 
- retirarContato
- responsável por gerenciar as operações de remoção de contatos e delegá-las apropriadamente à lista e
+ retirarLancamento
+ responsável por gerenciar as operações de remoção de lançamentos e delegá-las apropriadamente à lista e
  informar se tudo aconteceu de maneira correta.
 
- obterContato
- responsável por gerenciar as operações de obtenção de contatos e delegá-las apropriadamente à lista e
+ obterLancamento
+ responsável por gerenciar as operações de obtenção de lançamentos e delegá-las apropriadamente à lista e
  informar se tudo aconteceu de maneira correta.
 
- exibirContato
- exibe um único contato ao usuário.
+ exibirLancamento
+ exibe um único lançamento ao usuário.
 
- exibirContatosEmOrdem
- exibe ao usuário a lista armazenada em ordem alfabética de nomes dos contatos.
+ exibirLancamentos
+ exibe ao usuário uma lista com todos os lançamentos armazenados até o momento.
 
 
  ARQUIVOS INCLUSOS:
  stdio.h
  stdlib.h
  lista.h
+ string.h
 
  ARQUIVOS DE DADOS:
  nenhum
@@ -76,11 +73,10 @@
 
 void exibeIntroducao();
 void exibeMenuPrincipal();
-void exibeMenuSecundario(char* opcao);
 void exibirMensagemErro(int resultado);
 void adicionarLancamento();
 void retirarLancamento();
-void obterSaldo();
+void obterLancamento();
 void exibirLancamento();
 void exibirLancamentos();
 
@@ -106,7 +102,7 @@ int main() {
 			retirarLancamento();
 			break;
 		case 3:
-			obterSaldo();
+			obterLancamento();
 			break;
 		case 4:
 			if(listaVazia(&debitos) == 0){
@@ -125,7 +121,6 @@ int main() {
 			puts("Lançamentos armazenados:");
 			printf("Débitos: %d\n", debitos.ultimo + 1);
 			printf("Céditos: %d\n", creditos.ultimo + 1);
-			printf("Total: %d\n", debitos.ultimo + creditos.ultimo + 2);
 			break;
 		case 6:
 			destroiLista(&debitos);
@@ -188,36 +183,6 @@ void exibeMenuPrincipal() {
 	puts("6 - Limpar os lançamentos");
 }
 
-//TODO: Verificar necessidade da função
-/**
- NOME DA FUNÇÃO: exibeMenuSecundario
- ALUNOS: Pedro Paulo e Felipe dos Santos
- PROPÓSITO:
- apresenta ao usuário as subopções disponíveis nas operações de adição,
- remoção e obtenção de contatos, por exemplo, adicionar um contato no
- início da lista ou remover o último contato ou ainda obter o 5o
- contato armazenado.
-
- PARÂMETROS:
- nome         tipo             valor/referência   descrição
- --------------------------------------------------------------------------
- opcao        char*            valor              nome da opção, "adicionar",
- "remover" ou "obter"
-
- VALOR DE RETORNO:
- nenhum
-
- CHAMA: nada
-
- CHAMADA DE: adicionarContato, retirarContato, obterContato
- */
-void exibeMenuSecundario(char* opcao) {
-	puts("\nEscolha uma opção: \n");
-	printf("0 - %s final\n", opcao);
-	printf("1 - %s início\n", opcao);
-	printf("2 - %s local específico\n", opcao);
-}
-
 void exibeMenuLancamentos(char* opcao){
 	puts("\nEscolha uma opção: \n");
 	printf("0 - %s débitos\n", opcao);
@@ -230,7 +195,7 @@ void exibeMenuLancamentos(char* opcao){
  PROPÓSITO:
  Exibe caso o usuário realize alguma operação inválida na lista esta função é a responsável por avisá-lo de
  tal comportamento inexperado. Erros possíveis incluem remover elementos de uma lista vazia, adicionar
- mais contatos que o máximo permitido ou ainda tentar acessar um elemento em uma posição fora dos limites
+ mais lançamentos que o máximo permitido ou ainda tentar acessar um elemento em uma posição fora dos limites
  da lista.
 
  PARÂMETROS:
@@ -241,7 +206,7 @@ void exibeMenuLancamentos(char* opcao){
 
  CHAMA: nada
 
- CHAMADA DE: adicionarContato, retirarContato, obterContato
+ CHAMADA DE: adicionarLançamento, retirarLançamento, obterLançamento
  */
 void exibirMensagemErro(int resultado) {
 	switch (resultado) {
@@ -258,33 +223,33 @@ void exibirMensagemErro(int resultado) {
 }
 
 /**
- NOME DA FUNÇÃO: exibirContato
+ NOME DA FUNÇÃO: exibirLancamento
  ALUNOS: Pedro Paulo e Felipe dos Santos
  PROPÓSITO:
- É responsável por exibir um único contato ao usuário.
+ É responsável por exibir um único lançamento ao usuário.
 
  PARÂMETROS:
  nome         tipo             valor/referência   descrição
  --------------------------------------------------------------------------
- contato      tAgenda          valor              o contato a ser exibido
+ lançamento      tAgenda          valor              o lançamento a ser exibido
 
  VALOR DE RETORNO:
  nenhum
 
  CHAMA: nada
 
- CHAMADA DE: exibirContatosEmOrdem, obterContato
+ CHAMADA DE: exibirLançamentosEmOrdem, obterLançamento
  */
-void exibirLancamento(tLancamento contato) {
-	printf("Nome: %s\n", contato.nome);
-	printf("Valor: %.2f\n", contato.valor);
+void exibirLancamento(tLancamento lancamento) {
+	printf("Nome: %s\n", lancamento.nome);
+	printf("Valor: %f\n", lancamento.valor);
 }
 
 /**
- NOME DA FUNÇÃO: adicionarContato
+ NOME DA FUNÇÃO: adicionarLançamento
  ALUNOS: Pedro Paulo e Felipe dos Santos
  PROPÓSITO:
- É responsável por obter o contato a ser armazenado e encaminhá-lo à lista de maneira apropriada e por fim
+ É responsável por obter o lançamento a ser armazenado e encaminhá-lo à lista de maneira apropriada e por fim
  informar se tudo aconteceu de maneira correta.
 
  PARÂMETROS:
@@ -329,10 +294,10 @@ void adicionarLancamento() {
 }
 
 /**
- NOME DA FUNÇÃO: retirarContato
+ NOME DA FUNÇÃO: retirarLançamento
  ALUNOS: Pedro Paulo e Felipe dos Santos
  PROPÓSITO:
- É responsável por gerenciar as operações de remoção de contatos e delegá-las apropriadamente à lista e
+ É responsável por gerenciar as operações de remoção de lançamentos e delegá-las apropriadamente à lista e
  informar se tudo aconteceu de maneira correta.
 
  PARÂMETROS:
@@ -370,10 +335,10 @@ void retirarLancamento() {
 }
 
 /**
- NOME DA FUNÇÃO: obterContato
+ NOME DA FUNÇÃO: obterLançamento
  ALUNOS: Pedro Paulo e Felipe dos Santos
  PROPÓSITO:
- É responsável por gerenciar as operações de obtenção de contatos e delegá-las apropriadamente à lista e
+ É responsável por gerenciar as operações de obtenção de lançamentos e delegá-las apropriadamente à lista e
  informar se tudo aconteceu de maneira correta.
 
  PARÂMETROS:
@@ -383,32 +348,42 @@ void retirarLancamento() {
  nenhum
 
  CHAMA: exibeMenuSecundario, listaVazia, obter, obterDoInicio, posicaoValida, obterDaPosicao
- exibirMensagemErro, exibirContato
+ exibirMensagemErro, exibirLançamento
 
  CHAMADA DE: main
  */
-void obterSaldo() {
-	float totalCreditos, totalDebitos;
-	totalCreditos = 0.0f;
-	totalDebitos = 0.0f;
-	int i;
-	for(i = 0; i <= creditos.ultimo; i++){
-		totalCreditos = totalCreditos + creditos.elem[i].valor;
-	}
-	for(i = 0; i <= debitos.ultimo; i++){
-			totalDebitos = totalDebitos + debitos.elem[i].valor;
+void obterLancamento() {
+	int opcao, aPosicao;
+	tLancamento lancamento;
+
+	exibeMenuLancamentos("Obter dos");
+	scanf("%d", &opcao);
+	puts("Forneça a posição a ser obtida");
+	scanf("%d", &aPosicao);
+
+	switch (opcao) {
+	case 0:
+		lancamento = obterDaPosicao(&debitos, aPosicao);
+		break;
+	case 1:
+		lancamento = obterDaPosicao(&creditos, aPosicao);
+		break;
+	default:
+		puts("Opção Inválida");
+		break;
 	}
 
-	printf("Total de créditos: %.2f\n", totalCreditos);
-	printf("Total de débitos: %.2f\n", totalDebitos);
-	printf("Saldo total: %.2f\n", totalCreditos-totalDebitos);
+	if (lancamento.valor == ERRO_POSICAO_INVALIDA)
+		puts(lancamento.nome);
+	else
+		exibirLancamento(lancamento);
 }
 
 /**
- NOME DA FUNÇÃO: exibirContatosEmOrdem
+ NOME DA FUNÇÃO: exibirLançamentos
  ALUNOS: Pedro Paulo e Felipe dos Santos
  PROPÓSITO:
- Exibe ao usuário a lista armazenada em ordem alfabética de nomes dos contatos.
+ Exibe ao usuário a lista armazenada em ordem alfabética de nomes dos lançamentos.
 
  PARÂMETROS:
  nenhum
@@ -416,13 +391,13 @@ void obterSaldo() {
  VALOR DE RETORNO:
  nenhum
 
- CHAMA: exibirContato
+ CHAMA: exibirLançamento
 
  CHAMADA DE: main
  */
-void exibirLancamentos(tListaContabil *lista) {
+void exibirLancamentos(tListaContabil *aLista) {
 	int i;
-	for (i = 0; i <= lista->ultimo; i++)
-		exibirLancamento(lista->elem[i]);
+	for (i = 0; i <= aLista->ultimo; i++)
+		exibirLancamento(aLista->elem[i]);
 }
 
