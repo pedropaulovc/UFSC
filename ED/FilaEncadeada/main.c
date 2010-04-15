@@ -5,20 +5,21 @@
 #include "FilaEncadeada.h"
 #include "tInfo.h"
 
+#define SEMANA 604800
+
 void exibeIntroducao();
 void exibeMenuPrincipal();
 void exibeMenuSecundario(char* opcao);
 void exibirMensagemErro(int resultado);
 void adicionarOrdemServico();
 void concluirServico();
-void mostrarSaldo();
+void mostrarServicosPendentes();
 void exibirInfo();
 void exibirInfos();
 
 tFila* filaConserto;
 
 char buffer[10000];
-
 
 int main() {
 	int opcao;
@@ -41,22 +42,22 @@ int main() {
 			concluirServico();
 			break;
 		case 3:
-			mostrarSaldo();
+			mostrarServicosPendentes();
 			break;
 		case 4:
-			printf("Atualmente há %d serviços pendentes.\n", filaConserto->tamanho);
+			printf("Atualmente há %d serviços pendentes.\n",
+					filaConserto->tamanho);
 			break;
 		case 5:
 			limpar(filaConserto);
 			printf("Fila limpa.\n");
 			break;
 		default:
-			puts("Opção inválida");
+			puts("Opção inválida\n");
 			break;
 		}
 	}
 }
-
 
 void exibeIntroducao() {
 	puts("INE5408 - ESTRUTURAS DE DADOS");
@@ -67,25 +68,11 @@ void exibeIntroducao() {
 void exibeMenuPrincipal() {
 	puts("\nEscolha uma opção:");
 	puts("0 - Sair do programa");
-	puts("1 - Adicionar novo lançamento");
-	puts("2 - Remover lançamento");
-	puts("3 - Mostrar saldo atual");
-	puts("4 - Ver toda a movimentação financeira");
-	puts("5 - Exibir a quantidade de lançamentos armazenados");
-	puts("6 - Limpar os lançamentos");
-}
-
-void exibeMenuSecundario(char* opcao) {
-	puts("\nEscolha uma opção: \n");
-	printf("0 - %s final\n", opcao);
-	printf("1 - %s início\n", opcao);
-	printf("2 - %s local específico\n", opcao);
-}
-
-void exibeMenuLancamentos(char* opcao){
-	puts("\nEscolha uma opção: \n");
-	printf("0 - %s débitos\n", opcao);
-	printf("1 - %s créditos\n", opcao);
+	puts("1 - Adicionar nova ordem de serviço");
+	puts("2 - Concluir serviço");
+	puts("3 - Visualizar todos os serviços pendentes");
+	puts("4 - Ver quantidade de serviços pendentes");
+	puts("5 - Limpar a fila de servços");
 }
 
 void exibirMensagemErro(int resultado) {
@@ -93,131 +80,90 @@ void exibirMensagemErro(int resultado) {
 	case ERROFILACHEIA:
 		puts("Erro: A fila está cheia.");
 		break;
-	default :
+	default:
 		break;
 	}
 }
 
 void exibirInfo(tInfo* info) {
+	if (info == NULL) {
+		puts("Elemento inválido");
+		return;
+	}
+
 	printf("Solicitante: %s\n", info->nomeSolicitante);
-	strftime("Data de entrega: %.2f\n", info->dataEntrega);
+	printf("Telefone: %d\n", info->telefone);
+	printf("Modelo: %s\n", info->modeloComputador);
+	printf("Valor: %.2f\n", info->valorConserto);
+	strftime(buffer, 10000, "Data de entrega: %d-%m-%y\n", localtime(
+			&info->dataEntrega));
+	puts(buffer);
+}
+
+void mostrarServicosPendentes() {
+	tElemento* atual = filaConserto->inicio;
+	if(atual != NULL)
+		puts("Serviços pendentes: \n");
+	else
+		puts("Não há serviços pendentes.\n");
+	while (atual != NULL) {
+		exibirInfo(atual->info);
+		atual = atual->proximo;
+	}
 }
 
 void adicionarOrdemServico() {
-	int opcao, resultado;
+	int resultado;
 	tInfo *elemento;
 
-	elemento = (tInfo *)malloc(sizeof(tInfo));
+	elemento = (tInfo *) malloc(sizeof(tInfo));
+	tInfo* ultimo = obterFimDaFila(filaConserto);
 
-	puts("Forneça o nome do lançamento: ");
+	puts("Forneça o nome do solicitante: ");
 	getchar();
-	scanf("%[^\n]", &buffer);
-	elemento->nome = (char *)malloc(strlen(buffer) + 1);
-	strcpy(elemento->nome, buffer);
-	puts("Forneça o valor do lançamento: ");
-	scanf("%f", &elemento->valor);
+	scanf("%[^\n]", buffer);
+	elemento->nomeSolicitante = (char *) malloc(strlen(buffer) + 1);
+	strcpy(elemento->nomeSolicitante, buffer);
 
-	exibeMenuLancamentos("Adicionar como");
-	scanf("%d", &opcao);
+	puts("Forneça o valor do conserto: ");
+	scanf("%f", &elemento->valorConserto);
 
-	switch (opcao) {
-	case 0:
-		resultado = adicionaNoFim(debitos, elemento);
-		break;
-	case 1:
-		resultado = adicionaNoFim(creditos, elemento);
-		break;
-	default:
-		puts("Opção Inválida");
-		break;
-	}
+	puts("Forneça o telefone do solicitante: ");
+	scanf("%d", &elemento->telefone);
 
-	if (resultado != 1)
+	puts("Forneça o modelo do computador");
+	getchar();
+	scanf("%[^\n]", buffer);
+	elemento->modeloComputador = (char *) malloc(strlen(buffer) + 1);
+	strcpy(elemento->modeloComputador, buffer);
+
+	if (ultimo != NULL)
+		elemento->dataEntrega = ultimo->dataEntrega + 2 * SEMANA;
+	else
+		elemento->dataEntrega = time(NULL) + 2 * SEMANA;
+
+	resultado = enfileirar(filaConserto, elemento);
+
+	if (resultado < 0)
 		exibirMensagemErro(resultado);
 }
 
 void concluirServico() {
-	int opcao, posicao;
-	tInfo *resultado;
-
-	exibeMenuLancamentos("Remover dos");
-	scanf("%d", &opcao);
-	puts("Forneça a posição a ser removida");
-	scanf("%d", &posicao);
-
-	switch (opcao) {
-	case 0:
-		resultado = retiraDaPosicao(debitos, posicao);
-		break;
-	case 1:
-		resultado = retiraDaPosicao(creditos, posicao);
-		break;
-	default:
-		puts("Opção Inválida");
-		break;
+	tInfo* info = desenfileirar(filaConserto);
+	if (info != NULL) {
+		puts("Concluído serviço abaixo:");
+		exibirInfo(info);
+		destruirInfo(info);
+	} else {
+		puts("Não há serviços pendentes");
 	}
-
-	if (resultado == NULL){
-		exibirMensagemErro(ERRO_POSICAO_INVALIDA);
-		return;
-	}
-
-	puts("Lançamento retirado:");
-	exibirInfo(resultado);
-	destroi(resultado);
 }
 
-void mostrarSaldo() {
-	float credito = 0.0;
-	float debito = 0.0;
+
+void exibirInfos(tFila *fila) {
 	tElemento *elemento;
-	tInfo *info;
-
-	elemento = creditos->dados;
-	while (elemento != NULL){
-		info = elemento->info;
-		credito += info->valor;
-		elemento = elemento->proximo;
-	}
-	elemento = debitos->dados;
-	while (elemento != NULL){
-		info = elemento->info;
-		debito += info->valor;
-		elemento = elemento->proximo;
-	}
-
-	printf("Crédito: %.2f\n", credito);
-	printf("Débito: %.2f\n", debito);
-	printf("Total: %.2f\n", credito - debito);
-}
-void eliminarInfo(){
-	int opcao, posicao;
-	int resultado;
-
-	exibeMenuLancamentos("Eliminar dos");
-	scanf("%d", &opcao);
-	puts("Forneça a posição a ser eliminada");
-	scanf("%d", &posicao);
-
-	switch (opcao) {
-	case 0:
-		resultado = eliminaDaPosicao(debitos, posicao);
-		break;
-	case 1:
-		resultado = eliminaDaPosicao(creditos, posicao);
-		break;
-	default:
-		puts("Opção Inválida");
-		break;
-	}
-
-	exibirMensagemErro(resultado);
-}
-
-void exibirInfos(tFila *lista){
-	tElemento *elemento;
-	elemento = lista->dados;
-	while(elemento != NULL){
+	elemento = fila->inicio;
+	while (elemento != NULL) {
 		exibirInfo(elemento->info);
 		elemento = elemento->proximo;
 	}

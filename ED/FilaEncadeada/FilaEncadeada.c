@@ -28,11 +28,12 @@ int enfileirar(tFila* fila, tInfo* info) {
 
 	if (aFilaEstaVazia(fila))
 		fila->inicio = elemento;
+	else
+		fila->fim->proximo = elemento;
 
 	elemento->proximo = NULL;
 	elemento->info = info;
 
-	fila->fim->proximo = elemento;
 	fila->fim = elemento;
 	fila->tamanho++;
 
@@ -61,19 +62,19 @@ tInfo* desenfileirar(tFila* fila) {
 
 void limpar(tFila* fila) {
 	while(!aFilaEstaVazia(fila))
-		desenfileirar(fila);
+		destruirInfo(desenfileirar(fila));
 }
 
 int verPosicaoFinal(tFila* fila) {
 	return fila->tamanho - 1;
 }
 
-tInfo* obterPrimeiroElemento(tFila* fila) {
-	return fila->inicio->info;
+tInfo* obterFimDaFila(tFila* fila) {
+	if(!aFilaEstaVazia(fila))
+		return fila->fim->info;
+	return NULL;
 }
 
 int aFilaEstaVazia(tFila* fila) {
-	if (fila->tamanho == 0)
-		return 1;
-	return 0;
+	return fila->tamanho == 0;
 }

@@ -8,7 +8,9 @@ typedef struct{
 	int telefone;
 	time_t dataEntrega;
 	char* modeloComputador;
-	float* valorConserto;
+	float valorConserto;
 }tInfo;
+
+void destruirInfo(tInfo* info);
 
 #endif

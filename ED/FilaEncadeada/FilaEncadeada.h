@@ -27,7 +27,7 @@ int enfileirar(tFila* fila, tInfo* info);
 tInfo* desenfileirar(tFila* fila);
 void limpar(tFila* fila);
 int verPosicaoFinal(tFila* fila);
-tInfo* obterPrimeiroElemento(tFila* fila);
+tInfo* obterFimDaFila(tFila* fila);
 int aFilaEstaVazia(tFila* fila);
 
 #endif /* FILAENCADEADA_H_ */
