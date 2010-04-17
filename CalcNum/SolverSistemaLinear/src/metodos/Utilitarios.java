@@ -27,7 +27,8 @@ public class Utilitarios {
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n + 1; j++) {
-				System.out.print("Forneça o elemento " + (i + 1) + "," + (j + 1) + ": ");
+				System.out.print("Forneça o elemento " + (i + 1) + ","
+						+ (j + 1) + ": ");
 				matriz[i][j] = new Scanner(System.in).nextDouble();
 			}
 		}
@@ -45,15 +46,14 @@ public class Utilitarios {
 	}
 
 	public static double[][] matrizExemplo1() {
-		double[][] matriz = { { 2, 1, -1, 8 }, { -3, -1, 2, -11 },
-				{ -2, 1, 2, -3 } };
-
+		double[][] matriz = { { 11, 10, 14, 73 }, { 12, 11, -13, -5 },
+				{ 14, 13, -66, -158 } };
 		return matriz;
 	}
 
 	public static double[][] matrizExemplo2() {
-		double[][] matriz = { { 2, 1, -1, 8 }, { -3, -1, 2, -11 },
-				{ -2, 1, 2, -3 } };
+		double[][] matriz = { { 1, 0, 0, 5 }, { 0, 0, 3, 5 },
+				{ 0, 2, 0, 5 } };
 
 		return matriz;
 	}

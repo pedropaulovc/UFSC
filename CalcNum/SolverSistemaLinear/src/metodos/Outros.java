@@ -20,8 +20,6 @@ public class Outros {
 
 		return matriz;
 	}
-	
-
 
 	public static double[][] matriz3x3Coeficientes() {
 		double[][] matriz = { { 2, 1, -1 }, { -3, -1, 2 }, { -2, 1, 2 } };
@@ -34,4 +32,5 @@ public class Outros {
 
 		return matriz;
 	}
-}
+
+ }
