@@ -1,7 +1,7 @@
 package metodos;
 
 public class EliminacaoGauss {
-	public static double[] calcularResposta(double[][] matriz) {
+	public static double[] solverSistema(double[][] matriz) {
 		for (int i = 0; i < matriz.length; i++) {
 			pivotarLinhas(matriz, i);
 			dividirLinha(matriz, i);
@@ -22,7 +22,7 @@ public class EliminacaoGauss {
 		return Math.abs(calcularDeterminante(matriz)) / denominador;
 	}
 
-	public static double calcularDeterminante(double[][] matriz) {
+	private static double calcularDeterminante(double[][] matriz) {
 		double det = 1;
 		for (int i = 0; i < matriz.length; i++) {
 			if (pivotarLinhas(matriz, i))
