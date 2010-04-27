@@ -1,3 +1,64 @@
+/**
+ARQUIVO:       main.c
+TÍTULO:        Implementação da filas encadeadas
+ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+MATÉRIA:       INE5408
+PRAZO:         27 de abril de 2010
+
+PROPÓSITO:
+Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados fila encadeada.
+
+FUNCIONAMENTO GERAL:
+Como informado no enunciado do trabalho, este programa é um exemplo prático da implementação
+de filas. Ele possui um menu simples que aceita do usuário comandos para os principais
+usos da estrutura: "enfileirar, desenfileirar, limpar, mostrar fila, sair do programa" em um programa
+de exemplo que funciona como sistema de controle de ordem de serviços de uma empresa de manutenção
+de computadores.
+
+
+FUNÇÕES:
+
+main
+	fica responsável por receber o comando do usário e delegar o trabalho a uma das funções
+	de FilaEncadeada.c que executará o comando pedido.
+
+exibeIntroducao
+	apenas introduz o usuário ao programa.
+
+exibeMenuPrincipal
+	apresenta as opções principais disponíveis ao usuário.
+
+exibeMenuSecundario
+	apresenta sub-opções dentro de uma opção escolhida no menu principal.
+
+exibirMensagemErro
+	responsável por informar ao usuário de possíveis erros que ele venha a enfrentar durante a execução do programa.
+
+adicionarOrdemServico
+	recebe os dados referentes a uma ordem de serviço e os fornece à fila que se e encarrega de armazená-los
+
+concluirServico
+	desenfileira o primeiro elemento e informa ao usuário qual serviço foi concluído.
+
+mostrarServicosPendentes
+	apresenta a fila de ordens de serviço pendentes ao usuário.
+
+exibirInfo
+	exibe os dados de uma ordem de serviço dada.
+
+exibirInfos
+	itera a lista exibindo todas as ordens de serviços pendentes.
+
+ARQUIVOS INCLUSOS:
+   stdio.h
+   string.h
+   stdlib.h
+   fila.h
+
+ARQUIVOS DE DADOS:
+   nenhum
+
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

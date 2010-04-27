@@ -62,13 +62,15 @@ ARQUIVOS DE DADOS:
 NOME DA FUNÇÃO: inicializar
 ALUNOS: Pedro Paulo e Felipe dos Santos
 PROPÓSITO:
-	Esta função prepara a fila para ser utilizada, através da definição da posição do
-	último elemento como -1, ou seja, que a fila está vazia.
+	Essa função aloca uma nova cabeça de fila e inicializa seus valores para serem utilizados posteriormente.
+
 PARÂMETROS:
 	nenhum
 
 VALOR DE RETORNO:
-	nenhum
+nome           tipo  descrição
+---------------------------------------------------------------------
+fila           tFila  cabeça de lista devidamente inicializada
 
 CHAMA: nada
 
@@ -89,19 +91,18 @@ tFila* inicializar() {
 NOME DA FUNÇÃO: enfileirar
 ALUNOS: Pedro Paulo e Felipe dos Santos
 PROPÓSITO:
-	Esta função prepara a fila para ser utilizada, através da definição da posição do
-	último elemento como -1, ou seja, que a fila está vazia.
+	Esta função enflilera, se possível, um novo elemento na fila e retorna o novo tamanho dela
 
 PARÂMETROS:
 nome         tipo             valor/referência   descrição
 ---------------------------------------------------------------------
-elemento     elementoDaFila   valor              elemento a ser enfileirado
+fila         tFila            referência        a fila a ser operada
+info         tInfo            info              o elemento a ser enfileirado
 
 VALOR DE RETORNO:
 nome           tipo  descrição
 ---------------------------------------------------------------------
-aFila.ultimo   int   posição do último elemento da fila, ou um código
-					 de erro caso não seja posível enfileirar o elemento.
+aFila.tamanho   int   tamanho da fila após a operação ou um código de erro.
 
 CHAMA: nada
 
@@ -131,14 +132,18 @@ int enfileirar(tFila* fila, tInfo* info) {
 NOME DA FUNÇÃO: desenfileirar
 ALUNOS: Pedro Paulo e Felipe dos Santos
 PROPÓSITO:
-	Esta função remove o último elemento da fila, se possível,
-	além de reordenar os elementos restantes dentro da fila.
+	Esta função remove o último elemento da fila, se possível, e retorna
+	o elemento desenfileirado.
 
 PARÂMETROS:
-	nenhum
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+fila         tFila            referência        a fila a ser operada
 
 VALOR DE RETORNO:
-	nenhum
+nome           tipo  descrição
+---------------------------------------------------------------------
+infoSai       tInfo   elemento desenfileirado ou ponteiro nulo em caso de erro.
 
 CHAMA: nada
 
@@ -168,11 +173,13 @@ tInfo* desenfileirar(tFila* fila) {
 NOME DA FUNÇÃO: limpar
 ALUNOS: Pedro Paulo e Felipe dos Santos
 PROPÓSITO:
-	Esta função reinicializa a fila, tornando-a vazia
-	novamente ao definir o últmo elemento como -1.
+	Esta função reinicializa a fila, limpando elementos existentes nela e atualizando
+	seu tamanho para 0.
 
 PARÂMETROS:
-	nenhum
+nome         tipo             valor/referência   descrição
+---------------------------------------------------------------------
+fila         tFila            referência        a fila a ser operada
 
 VALOR DE RETORNO:
 	nenhum
@@ -198,7 +205,7 @@ nenhum
 VALOR DE RETORNO:
 nome                   tipo              descrição
 ---------------------------------------------------------------------
-aFila.ultimo           int               posição do último elemento da fila
+aFila.tamanho - 1      int               posição do último elemento da fila
 
 CHAMA: nada
 
@@ -218,13 +225,12 @@ PROPÓSITO:
 PARÂMETROS:
 nome         tipo             valor/referência   descrição
 ---------------------------------------------------------------------
-elemento     elementoDaFila   valor              elemento a ser enfileirado
+elemento     tInfo            referência         elemento do fim da fila
 
 VALOR DE RETORNO:
 nome           tipo  descrição
 ---------------------------------------------------------------------
-aFila.ultimo   int   posição do último elemento da fila, ou um código
-					 de erro caso não seja posível enfileirar o elemento.
+-------        tInfo  último elemento da fila ou um ponteiro nulo em caso de erro.
 
 CHAMA: nada
 
@@ -237,10 +243,10 @@ tInfo* obterFimDaFila(tFila* fila) {
 }
 
 /**
-NOME DA FUNÇÃO: verPosicaoFinal
+NOME DA FUNÇÃO: aFilaEstaVazia
 ALUNOS: Pedro Paulo e Felipe dos Santos
 PROPÓSITO:
-	Esta função retorna a posição do último elemento da fila.
+	Esta função retorna 1 se a fila estiver vazia ou 0 em caso contrário.
 
 PARÂMETROS:
 nenhum
@@ -248,7 +254,7 @@ nenhum
 VALOR DE RETORNO:
 nome                   tipo              descrição
 ---------------------------------------------------------------------
-aFila.ultimo           int               posição do último elemento da fila
+-----                 int               1 se fila estiver vazia ou 0 em caso contrário.
 
 CHAMA: nada
 
