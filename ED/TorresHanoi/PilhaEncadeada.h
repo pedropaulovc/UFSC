@@ -29,6 +29,7 @@ struct tInfo* desempilha(tPilha* pilha);
 struct tInfo* obterTopo(tPilha* pilha);
 void limparPilha(tPilha* pilha);
 void destruirPilha(tPilha* pilha);
+struct tInfo* obterElemento(tPilha* pilha, int elemento);
 
 
 #endif /* PILHAENCADEADA_H_ */

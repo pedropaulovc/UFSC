@@ -11,7 +11,8 @@
 
 typedef struct tInfo{
 	int tamanho;
-	struct tPilha* pilhaOrigem;
+	struct tPilha* pilhaAnterior;
+	struct tPilha* pilhaAtual;
 } tInfo;
 
 void destruirInfo(tInfo* info);

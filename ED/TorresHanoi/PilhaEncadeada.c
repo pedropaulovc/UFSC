@@ -53,9 +53,21 @@ tInfo* desempilha(tPilha* pilha) {
 }
 
 tInfo* obterTopo(tPilha* pilha) {
-	if (pilha == NULL)
+	if (pilha == NULL || pilha->topo == NULL)
 		return NULL;
 	return pilha->topo->info;
+}
+
+tInfo* obterElemento(tPilha* pilha, int posicao){
+	if(pilha == NULL || posicao > pilha->tamanho || pilha->tamanho == 0)
+		return NULL;
+	int i = 1;
+	tElemento* atual = pilha->topo;
+	while(i != posicao){
+		atual = atual->proximo;
+		i++;
+	}
+	return atual->info;
 }
 
 void limparPilha(tPilha* pilha) {
