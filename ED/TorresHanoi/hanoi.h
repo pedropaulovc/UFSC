@@ -11,5 +11,4 @@
 void solveTorreHanoiRecursivo(tPilha* fonte, tPilha* meio, tPilha* destino, int n);
 void solveTorreHanoiIterativo(tPilha* fonte, tPilha* meio, tPilha* destino, int n);
 void populaPino(tPilha* pino, int n);
-
 #endif /* HANOI_H_ */

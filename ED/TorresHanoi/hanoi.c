@@ -42,6 +42,7 @@ void solveTorreHanoiIterativo(tPilha* fonte, tPilha* meio, tPilha* destino, int 
 		/*Na primeira jogada apenas, o disco do topo do pino fonte vai:
 		 * para o pino destino SE o número de discos for ímpar
 		 * para o pino do meio SE o numero de discos for par.*/
+		menor = obterTopo(fonte);
 		if(i == 0){
 			if(n % 2 == 0)
 				moveDisco(fonte, meio);
@@ -51,17 +52,18 @@ void solveTorreHanoiIterativo(tPilha* fonte, tPilha* meio, tPilha* destino, int 
 		 *  para o pino de onde ele não veio em uma jogada anterior;*/
 		} else {
 			menor = encontraMenorDisco(pilhas, 3);
+
 			if(menor->pilhaAnterior == fonte && menor->pilhaAtual == meio)
 				moveDisco(meio, destino);
-			if(menor->pilhaAnterior == fonte && menor->pilhaAtual == destino)
+			else if(menor->pilhaAnterior == fonte && menor->pilhaAtual == destino)
 				moveDisco(destino, meio);
-			if(menor->pilhaAnterior == meio && menor->pilhaAtual == fonte)
+			else if(menor->pilhaAnterior == meio && menor->pilhaAtual == fonte)
 				moveDisco(fonte, destino);
-			if(menor->pilhaAnterior == meio && menor->pilhaAtual == destino)
+			else if(menor->pilhaAnterior == meio && menor->pilhaAtual == destino)
 				moveDisco(destino, fonte);
-			if(menor->pilhaAnterior == destino && menor->pilhaAtual == fonte)
+			else if(menor->pilhaAnterior == destino && menor->pilhaAtual == fonte)
 				moveDisco(fonte, meio);
-			if(menor->pilhaAnterior == destino && menor->pilhaAtual == meio)
+			else if(menor->pilhaAnterior == destino && menor->pilhaAtual == meio)
 				moveDisco(meio, fonte);
 		}
 
@@ -76,19 +78,15 @@ void solveTorreHanoiIterativo(tPilha* fonte, tPilha* meio, tPilha* destino, int 
 			if(menor->pilhaAtual == fonte){
 				pilhasSegundaJogada[0] = meio;
 				pilhasSegundaJogada[1] = destino;
-			}
-
-			if(menor->pilhaAtual == meio){
+			} else if(menor->pilhaAtual == meio){
 				pilhasSegundaJogada[0] = fonte;
 				pilhasSegundaJogada[1] = destino;
-			}
-
-			if(menor->pilhaAtual == destino){
+			} else if(menor->pilhaAtual == destino){
 				pilhasSegundaJogada[0] = fonte;
 				pilhasSegundaJogada[1] = meio;
 			}
 
-			outro= encontraMenorDisco(pilhasSegundaJogada, 2);
+			outro = encontraMenorDisco(pilhasSegundaJogada, 2);
 
 			if(outro->pilhaAtual == pilhasSegundaJogada[0])
 				moveDisco(outro->pilhaAtual, pilhasSegundaJogada[1]);
@@ -109,7 +107,7 @@ void populaPino(tPilha* pino, int n){
 		info = (tInfo*) malloc(sizeof(tInfo));
 		if(info == NULL)
 			return;
-		info->tamanho = i;
+		info->tamanho = n - i;
 		info->pilhaAtual = pino;
 		info->pilhaAnterior = NULL;
 		empilha(pino, info);
@@ -119,10 +117,18 @@ void populaPino(tPilha* pino, int n){
 tInfo* encontraMenorDisco(tPilha* pilhas[], int qtdPilhas){
 	if(pilhas == NULL || qtdPilhas <= 0)
 		return NULL;
-	int i;
-	tInfo* menor = obterTopo(pilhas[0]);
+	int i = 0;
+	tInfo* menor;
+	do{
+		menor = obterTopo(pilhas[i]);
+		i++;
+	} while (menor == NULL);
+
+	if(menor == NULL)
+		return NULL;
+
 	tInfo* atual;
-	for(i = 1; i < qtdPilhas; i++){
+	for(i; i < qtdPilhas; i++){
 		atual = obterTopo(pilhas[i]);
 		if(atual != NULL)
 			if(atual->tamanho < menor->tamanho)
@@ -139,3 +145,5 @@ int moveDisco(tPilha* fonte, tPilha* destino){
 	disco->pilhaAtual = destino;
 	return empilha(destino, disco);
 }
+
+
