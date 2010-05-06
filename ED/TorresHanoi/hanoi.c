@@ -14,6 +14,8 @@ int moveDisco(tPilha* fonte, tPilha* destino);
 void populaPino(tPilha* pino, int n);
 int moveDisco(tPilha* fonte, tPilha* destino);
 
+int numMovimentacoes = 0;
+
 void solveTorreHanoiRecursivo(tPilha* fonte, tPilha* meio, tPilha* destino, int n) {
 	if (fonte == NULL || meio == NULL || destino == NULL || n <= 0)
 		return;
@@ -128,7 +130,7 @@ tInfo* encontraMenorDisco(tPilha* pilhas[], int qtdPilhas){
 		return NULL;
 
 	tInfo* atual;
-	for(i; i < qtdPilhas; i++){
+	for(; i < qtdPilhas; i++){
 		atual = obterTopo(pilhas[i]);
 		if(atual != NULL)
 			if(atual->tamanho < menor->tamanho)
@@ -143,7 +145,14 @@ int moveDisco(tPilha* fonte, tPilha* destino){
 		return ERRO_DADOS_INVALIDOS;
 	disco->pilhaAnterior = fonte;
 	disco->pilhaAtual = destino;
+	numMovimentacoes++;
 	return empilha(destino, disco);
 }
 
+int obterNumMovimentacoes(){
+	return numMovimentacoes;
+}
 
+void limparNumMovimentacoes(){
+	numMovimentacoes = 0;
+}
