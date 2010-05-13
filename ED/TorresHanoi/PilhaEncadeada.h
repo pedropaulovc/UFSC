@@ -1,9 +1,25 @@
-/*
- * PilhaEncadeada.h
- *
- *  Created on: Apr 27, 2010
- *      Author: pedropaulo
- */
+/**
+TÍTULO:        Implementação do algoritmo para solver o problema das Torres de Hanoi
+ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+MATÉRIA:       INE5408
+PRAZO:         13 de maio de 2010
+
+PROPÓSITO:
+Este programa é uma implementação do algoritmo para solver o problema das Torres de Hanoi que permite
+evidenciar sua complexidade.
+
+SOBRE O ARQUIVO:
+Neste arquivo estão definidos os protótipos a serem implementados em PilhaEncadeada.c referentes ao à estrutura
+de dados pilha encadeada.
+
+TIPOS
+tElemento
+	elemento da pilha, com um ponteiro para suas informações e um ponteiro para o próximo elemento.
+
+tPilha
+	a pilha propriamente dita, com ponteiro para o elemento do topo e seu tamanho.
+
+*/
 
 #ifndef PILHAENCADEADA_H_
 #define PILHAENCADEADA_H_
@@ -29,7 +45,6 @@ struct tInfo* desempilha(tPilha* pilha);
 struct tInfo* obterTopo(tPilha* pilha);
 void limparPilha(tPilha* pilha);
 void destruirPilha(tPilha* pilha);
-struct tInfo* obterElemento(tPilha* pilha, int elemento);
 
 
 #endif /* PILHAENCADEADA_H_ */

@@ -1,9 +1,38 @@
-/*
- * hanoi.c
- *
- *  Created on: Apr 27, 2010
- *      Author: pedropaulo
- */
+/**
+TÍTULO:        Implementação do algoritmo para solver o problema das Torres de Hanoi
+ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+MATÉRIA:       INE5408
+PRAZO:         13 de maio de 2010
+
+PROPÓSITO:
+Este programa é uma implementação do algoritmo para solver o problema das Torres de Hanoi que permite
+evidenciar sua complexidade.
+
+FUNCIONAMENTO GERAL:
+Como informado no enunciado do trabalho, este programa é uma implementação do algoritmo para solver o problema
+das Torres de Hanoi de maneira iterativa além de conter extensões que permitem ao usuário verificar sua complexidade.
+
+FUNÇÕES
+solveTorreHanoiIterativo
+	é o algoritmo principal que solve o problema das Torres de Hanoi.
+
+populaPino
+	empilha um número de discos determinado pelo usuário em ordem decrescente de tamanho.
+
+encontraMenorDisco
+	dado um vetor contendo um número determinado de pinos, a função retorna um ponteiro para o menor dos discos.
+
+moveDisco
+	dados dois pinos, essa função desempilha um disco da fonte e reempilha-o no destino, atualizando as informações
+	inerentes ao disco.
+
+obterNumMovimentacoes
+	retorna o número de movimentações de discos acumuladas até o momento.
+
+limparNumMovimentacoes
+	limpa o número de movimentaçõs de discos.
+
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "PilhaEncadeada.h"
@@ -16,22 +45,18 @@ int moveDisco(tPilha* fonte, tPilha* destino);
 
 int numMovimentacoes = 0;
 
-void solveTorreHanoiRecursivo(tPilha* fonte, tPilha* meio, tPilha* destino, int n) {
-	if (fonte == NULL || meio == NULL || destino == NULL || n <= 0)
-		return;
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	é o algoritmo principal que solve o problema das Torres de Hanoi.
 
-	tInfo* umDisco;
-	if (n == 1) {
-		umDisco = desempilha(fonte);
-		empilha(destino, umDisco);
-	} else {
-		solveTorreHanoiRecursivo(fonte, meio, destino, n - 1);
-		umDisco = desempilha(fonte);
-		empilha(destino, umDisco);
-		solveTorreHanoiRecursivo(meio, destino, fonte, n - 1);
-	}
-}
+PARÂMETROS:
+	as pilhas de fonte, meio e destino e a quantidade e discos contidos na fonte.
 
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void solveTorreHanoiIterativo(tPilha* fonte, tPilha* meio, tPilha* destino, int n){
 	if (fonte == NULL || meio == NULL || destino == NULL || n <= 0)
 		return;
@@ -100,6 +125,18 @@ void solveTorreHanoiIterativo(tPilha* fonte, tPilha* meio, tPilha* destino, int 
 
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	empilha um número de discos determinado pelo usuário em ordem decrescente de tamanho.
+
+PARÂMETROS:
+	o pino a ser populado e a quantidade de discos a serem inseridos.
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void populaPino(tPilha* pino, int n){
 	if(pino == NULL)
 		return;
@@ -116,15 +153,28 @@ void populaPino(tPilha* pino, int n){
 	}
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	dado um vetor contendo um número determinado de pinos, a função retorna um ponteiro para o menor dos discos.
+
+PARÂMETROS:
+	o vetor de pilhas a serem analisados e a o seu tamanho.
+
+VALOR DE RETORNO:
+	ponteiro para o menor dos discos dentre os pinos analisados.
+
+*/
 tInfo* encontraMenorDisco(tPilha* pilhas[], int qtdPilhas){
 	if(pilhas == NULL || qtdPilhas <= 0)
 		return NULL;
 	int i = 0;
 	tInfo* menor;
+	/* Esse laço encontra o primeiro pino não vazio */
 	do{
 		menor = obterTopo(pilhas[i]);
 		i++;
-	} while (menor == NULL);
+	} while (menor == NULL && i < qtdPilhas);
 
 	if(menor == NULL)
 		return NULL;
@@ -139,6 +189,19 @@ tInfo* encontraMenorDisco(tPilha* pilhas[], int qtdPilhas){
 	return menor;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	dados dois pinos, essa função desempilha um disco da fonte e reempilha-o no destino, atualizando as informações
+	inerentes ao disco.
+
+PARÂMETROS:
+	as pilhas fonte e destino.
+
+VALOR DE RETORNO:
+	o tamanho da pilha de destino ou um código de erro.
+
+*/
 int moveDisco(tPilha* fonte, tPilha* destino){
 	tInfo* disco = desempilha(fonte);
 	if(disco == NULL)
@@ -149,10 +212,34 @@ int moveDisco(tPilha* fonte, tPilha* destino){
 	return empilha(destino, disco);
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna o número de movimentações de discos acumuladas até o momento.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	o número de movimentações acumulado.
+
+*/
 int obterNumMovimentacoes(){
 	return numMovimentacoes;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	limpa o número de movimentaçõs de discos.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void limparNumMovimentacoes(){
 	numMovimentacoes = 0;
 }
