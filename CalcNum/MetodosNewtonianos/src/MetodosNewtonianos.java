@@ -1,40 +1,40 @@
 import static java.lang.Math.*;
 
 public class MetodosNewtonianos {
-	public void newtonGeral(Funcao funcao, double precisao, double inicial) {
-		double den, erroN;
-		den = funcao.obterValorDerivada(inicial);
+	public void newtonGeral(Funcao funcao, double precisao, double xk) {
+		double den, erroN, xkPost;
+		den = funcao.obterValorDerivada(xk);
 		if (den == 0) {
 			System.out.println("Divisão por zero na iteração inicial");
 			return;
 		}
-		double proximo = inicial - funcao.obterValor(inicial) / den;
+		xkPost = xk - funcao.obterValor(xk) / den;
 		int numIteracoes = 0;
-		double erroV = abs(proximo - inicial) / max(abs(inicial), abs(proximo));
-		inicial = proximo;
+		double erroV = abs(xkPost - xk) / max(abs(xk), abs(xkPost));
+		xk = xkPost;
 
 		boolean erroDiminuindo = true;
 		while (erroDiminuindo) {
 			numIteracoes++;
-			den = funcao.obterValorDerivada(inicial);
+			den = funcao.obterValorDerivada(xk);
 			if (den == 0) {
 				System.out.println("Divisão por zero");
 				return;
 			}
 
-			proximo = inicial - funcao.obterValor(inicial) / den;
-			erroN = abs(proximo - inicial) / max(abs(inicial), abs(proximo));
+			xkPost = xk - funcao.obterValor(xk) / den;
+			erroN = abs(xkPost - xk) / max(abs(xk), abs(xkPost));
 
 			if (erroN <= precisao) {
 				System.out.println("Solução obtida com " + numIteracoes
-						+ " iterações: " + proximo);
+						+ " iterações: " + xkPost);
 				return;
 			}
 
 			if (erroN >= erroV)
 				erroDiminuindo = false;
 
-			inicial = proximo;
+			xk = xkPost;
 			erroV = erroN;
 		}
 		System.out
@@ -44,17 +44,17 @@ public class MetodosNewtonianos {
 
 	public void metodoSecante(Funcao funcao, double precisao, double xk,
 			double xkAnt) {
-		double den, erroN;
-		den = funcao.obterValor(xk) - funcao.obterValor(xkAnt);
+		double den, erroN, xkPost;
+		/*den = funcao.obterValor(xk) - funcao.obterValor(xkAnt);
 		if (den == 0) {
 			System.out.println("Divisão por zero na iteração inicial");
 			return;
-		}
-		double proximo = xk - funcao.obterValor(xk) * (xk - xkAnt) / den;
+		}*/
+		//double xkPost = xk - funcao.obterValor(xk) * (xk - xkAnt) / den;
 		int numIteracoes = 0;
-		double erroV = abs(proximo - xk) / max(abs(xk), abs(proximo));
-		xkAnt = xk;
-		xk = proximo;
+		double erroV = abs(xk - xkAnt) / max(abs(xk), abs(xkAnt));
+		/*xkAnt = xk;
+		xk = xkPost;*/
 
 		boolean erroDiminuindo = true;
 		while (erroDiminuindo) {
@@ -65,12 +65,12 @@ public class MetodosNewtonianos {
 				return;
 			}
 
-			proximo = xk - funcao.obterValor(xk) * (xk - xkAnt) / den;
-			erroN = abs(proximo - xk) / max(abs(xk), abs(proximo));
+			xkPost = xk - funcao.obterValor(xk) * (xk - xkAnt) / den;
+			erroN = abs(xkPost - xk) / max(abs(xk), abs(xkPost));
 
 			if (erroN <= precisao) {
 				System.out.println("Solução obtida com " + numIteracoes
-						+ " iterações: " + proximo);
+						+ " iterações: " + xkPost);
 				return;
 			}
 
@@ -78,7 +78,7 @@ public class MetodosNewtonianos {
 				erroDiminuindo = false;
 
 			xkAnt = xk;
-			xk = proximo;
+			xk = xkPost;
 			erroV = erroN;
 		}
 		System.out

@@ -6,8 +6,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		MetodosNewtonianos m = new MetodosNewtonianos();
-		m.metodoSecante(new Polinomial(), pow(10, -10), -3, -4);
-		
+		m.newtonGeral(new Polinomial(), pow(10, -10), -2);
 	}
 
 }
