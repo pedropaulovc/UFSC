@@ -33,7 +33,7 @@ void calculaNumMovimentacoes(tPilha* fonte, tPilha* meio, tPilha* destino, int q
 
 int main(){
 	tPilha *fonte, *meio, *destino;
-
+	int opcao, maxDiscos;
 
 	fonte = criaPilha();
 	meio = criaPilha();
@@ -41,9 +41,27 @@ int main(){
 	tPilha* pinos[3] = {fonte, meio, destino};
 	int i,j;
 
-	for(i = 0; i < 31; i++){
+	do{
+		puts("Escolha a opção desejada:");
+		puts("1 - Calcular tempo de execução");
+		puts("2 - Calcular quantidade de movimentações");
+		scanf("%d", &opcao);
+		if(opcao < 1 || opcao > 2)
+			puts("Opção inválida.");
+	} while(opcao < 1 || opcao > 2);
+
+	do{
+		puts("Escolha a quantidade máxima de discos a serem colocados: ");
+		scanf("%d", &maxDiscos);
+		if(maxDiscos < 0)
+			puts("Quantidade inválida.");
+	} while(maxDiscos < 0);
+	for(i = 0; i <= maxDiscos; i++){
 		populaPino(fonte, i);
-		calculaNumMovimentacoes(fonte, meio, destino, i);
+		if(opcao == 1)
+			calculaTempoHanoi(fonte, meio, destino, i);
+		else
+			calculaNumMovimentacoes(fonte, meio, destino, i);
 		for(j = 0; j < 3; j++)
 			limparPilha(pinos[j]);
 	}
