@@ -26,7 +26,7 @@ def newtonGeral(func, dfunc, precisao, xk):
 		if(den == 0):
 			print 'Divisão por zero'
 			return
-		
+
 
 		xkPost = xk - f(func, xk) / den
 		erroN = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
@@ -34,17 +34,73 @@ def newtonGeral(func, dfunc, precisao, xk):
 		if(erroN <= precisao):
 			print 'Solução obtida com {0} iterações: {1}'.format(numIteracoes, xkPost)
 			return
-	
+
 		if(erroN >= erroV):
 			erroDiminuindo = False
 
 		xk = xkPost
 		erroV = erroN
-	
+
 	print 'Método pode estar divergindo. Iterações: {0}'.format(numIteracoes)
 
-def secante(func, xk, precisao, xkPost):
-	print 'Lorem'
+def secante(func, precisao, xk, xkAnt):
+		numIteracoes = 0
+		erroV = abs(xk - xkAnt) / max(abs(xk), abs(xkAnt))
+
+		erroDiminuindo = True
+		while (erroDiminuindo):
+			numIteracoes += 1
+			den = f(func, xk) - f(func, xkAnt)
+			if (den == 0):
+				print 'Divisão por zero'
+				return
+
+			xkPost = xk - f(func, xk) * (xk - xkAnt) / den
+			erroN = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
+
+			if (erroN <= precisao):
+				print 'Solução obtida com {0} iterações: {1}'.format(numIteracoes, xkPost)
+				return
+
+			if (erroN >= erroV):
+				erroDiminuindo = False
+
+			xkAnt = xk
+			xk = xkPost
+			erroV = erroN
+
+		print 'Método pode estar divergindo. Número de iterações: {0}'.format(numIteracoes)
 
 def steffensen(func, precisao, xk):
-	print 'Ipsum'
+		numIteracoes = 0
+		aux = f(func, xk)
+		den = f(func, (xk + aux)) - aux
+		xkPost = (aux * aux) / den
+
+		erroV = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
+		xk = xkPost
+
+		erroDiminuindo = True
+		while(erroDiminuindo):
+			numIteracoes += 1
+			aux = f(func, xk)
+			den = f(func, (xk + aux)) - aux
+			
+			if(den == 0):
+				print 'Divisão por zero'
+				return
+			
+			xkPost = (aux * aux) / den
+
+			erroN = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
+
+			if(erroN <= precisao):
+				print 'Solução obtida com {0} iterações: {1}'.format(numIteracoes, xkPost)
+				return
+
+			if(erroN >= erroV):
+				erroDiminuindo = False
+
+			xk = xkPost
+			erroV = erroN
+		print 'Método pode estar divergindo. Número de iterações: {0}'.format(numIteracoes)

@@ -26,8 +26,8 @@ def main():
 		dfunc = raw_input('Forneça a derivada da função anterior: ')
 		newtonGeral(func, dfunc, precisao, xk)
 	elif(metodo == 2):
-		xkPost = int(raw_input('Forneça o segundo valor'))
-		secante(func, xk, precisao, xkPost)
+		xkAnt = int(raw_input('Forneça o segundo valor: '))
+		secante(func, precisao, xk, xkAnt)
 	else:
 		steffensen(func, precisao, xk)
 
