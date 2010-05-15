@@ -75,7 +75,7 @@ def steffensen(func, precisao, xk):
 		numIteracoes = 0
 		aux = f(func, xk)
 		den = f(func, (xk + aux)) - aux
-		xkPost = (aux * aux) / den
+		xkPost = xk - (aux * aux) / den
 
 		erroV = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
 		xk = xkPost
@@ -90,7 +90,7 @@ def steffensen(func, precisao, xk):
 				print 'Divisão por zero'
 				return
 			
-			xkPost = (aux * aux) / den
+			xkPost = xk - (aux * aux) / den
 
 			erroN = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
 
@@ -99,7 +99,9 @@ def steffensen(func, precisao, xk):
 				return
 
 			if(erroN >= erroV):
-				erroDiminuindo = False
+				print 'aumentando'
+			else:
+				print 'diminuindo'
 
 			xk = xkPost
 			erroV = erroN
