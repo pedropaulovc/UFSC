@@ -4,10 +4,13 @@ Createdon15/05/2010
 
 @author:PedroPaulo
 '''
+from math import *
+
 def f(func, x):
 	return float(eval(func))
 
-def newtonGeral(func, dfunc, precisao, xk):
+def newton_geral(func, dfunc, precisao, xk, forcar):
+	print 'Newton geral: '
 	den = f(dfunc, xk)
 
 	if(den == 0):
@@ -20,13 +23,12 @@ def newtonGeral(func, dfunc, precisao, xk):
 	xk = xkPost
 
 	erroDiminuindo = True
-	while(erroDiminuindo):
+	while(erroDiminuindo or forcar):
 		numIteracoes += 1
 		den = f(dfunc, xk);
 		if(den == 0):
 			print 'Divisão por zero'
 			return
-
 
 		xkPost = xk - f(func, xk) / den
 		erroN = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
@@ -43,66 +45,68 @@ def newtonGeral(func, dfunc, precisao, xk):
 
 	print 'Método pode estar divergindo. Iterações: {0}'.format(numIteracoes)
 
-def secante(func, precisao, xk, xkAnt):
-		numIteracoes = 0
-		erroV = abs(xk - xkAnt) / max(abs(xk), abs(xkAnt))
+def secante(func, precisao, xk, xkAnt, forcar):
+	print 'Secante: '
+	numIteracoes = 0
+	erroV = abs(xk - xkAnt) / max(abs(xk), abs(xkAnt))
+	erroDiminuindo = True
+	while (erroDiminuindo or forcar):
+		numIteracoes += 1
+		aux = f(func, xk)
 
-		erroDiminuindo = True
-		while (erroDiminuindo):
-			numIteracoes += 1
-			den = f(func, xk) - f(func, xkAnt)
-			if (den == 0):
-				print 'Divisão por zero'
-				return
+		den = aux - f(func, xkAnt)
+		if (den == 0):
+			print 'Divisão por zero'
+			return
+		xkPost = xk - aux * (xk - xkAnt) / den
+		erroN = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
+		if (erroN <= precisao):
+			print 'Solução obtida com {0} iterações: {1}'.format(numIteracoes, xkPost)
+			return
+		if (erroN >= erroV):
+			erroDiminuindo = False
+		xkAnt = xk
+		xk = xkPost
+		erroV = erroN
 
-			xkPost = xk - f(func, xk) * (xk - xkAnt) / den
-			erroN = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
+	print 'Método pode estar divergindo. Número de iterações: {0}'.format(numIteracoes)
 
-			if (erroN <= precisao):
-				print 'Solução obtida com {0} iterações: {1}'.format(numIteracoes, xkPost)
-				return
+def steffensen(func, precisao, xk, forcar):
+	print 'Steffensen: '
+	numIteracoes = 0
+	aux = f(func, xk)
+	den = f(func, (xk + aux)) - aux
+	xkPost = xk - (aux * aux) / den
 
-			if (erroN >= erroV):
-				erroDiminuindo = False
+	erroV = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
+	xk = xkPost
 
-			xkAnt = xk
-			xk = xkPost
-			erroV = erroN
-
-		print 'Método pode estar divergindo. Número de iterações: {0}'.format(numIteracoes)
-
-def steffensen(func, precisao, xk):
-		numIteracoes = 0
+	erroDiminuindo = True
+	while(erroDiminuindo or forcar):
+		numIteracoes += 1
 		aux = f(func, xk)
 		den = f(func, (xk + aux)) - aux
+
+		if(den == 0):
+			print 'Divisão por zero'
+			return
+
 		xkPost = xk - (aux * aux) / den
 
-		erroV = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
+		erroN = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
+
+		if(erroN <= precisao):
+			print 'Solução obtida com {0} iterações: {1}'.format(numIteracoes, xkPost)
+			return
+
+		if(erroN >= erroV):
+			erroDiminuindo = False
+
 		xk = xkPost
+		erroV = erroN
+	print 'Método pode estar divergindo. Número de iterações: {0}'.format(numIteracoes)
 
-		erroDiminuindo = True
-		while(erroDiminuindo):
-			numIteracoes += 1
-			aux = f(func, xk)
-			den = f(func, (xk + aux)) - aux
-			
-			if(den == 0):
-				print 'Divisão por zero'
-				return
-			
-			xkPost = xk - (aux * aux) / den
+def calcular_reta(x1, y1, x2, y2):
+	m = (y2 - y1) / (x2 - x1)
 
-			erroN = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
-
-			if(erroN <= precisao):
-				print 'Solução obtida com {0} iterações: {1}'.format(numIteracoes, xkPost)
-				return
-
-			if(erroN >= erroV):
-				print 'aumentando'
-			else:
-				print 'diminuindo'
-
-			xk = xkPost
-			erroV = erroN
-		print 'Método pode estar divergindo. Número de iterações: {0}'.format(numIteracoes)
+	print 'y - {0} = {1}(x - {2}), '.format(y1, m, x1),
