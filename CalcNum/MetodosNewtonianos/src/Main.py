@@ -8,6 +8,8 @@ from newtonianos import newton_geral, secante, steffensen
 from testes import funcoes
 
 def main():
+	booleanos = ['sim', 'Sim', 's', 'S', 'T','t', '1', 'v', 'V']
+	
 	while(True):
 		metodo = -1
 		metodos = ['Newton Geral', 'Secante', 'Steffensen', 'Todos']
@@ -34,7 +36,7 @@ def main():
 		else:
 			func = funcoes[escolhida - 1][0]
 	
-		forcar = bool(raw_input('Desconsiderar aumento do erro durante cálculo? (Forçar cálculo): '))
+		forcar = raw_input('Desconsiderar aumento do erro durante cálculo? (Forçar cálculo): ') in booleanos
 		xk = float(raw_input('Forneça o primeiro valor: '))
 	
 		precisao = float('1e-' + raw_input('Forneça a precisão em casas decimais: '));
