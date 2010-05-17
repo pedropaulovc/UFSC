@@ -6,7 +6,6 @@ Created on 15/05/2010
 '''
 from newtonianos import newton_geral, secante, steffensen
 from testes import funcoes
-from test.test_iterlen import len
 
 def main():
 	while(True):

@@ -7,7 +7,12 @@ Createdon15/05/2010
 from math import *
 
 def f(func, x):
-	return float(eval(func))
+	try:
+		return float(eval(func))
+	except OverflowError:
+		print 'Overflow. Ignorar resultados posteriores.'
+		return 0
+		
 
 def newton_geral(func, dfunc, precisao, xk, forcar):
 	print 'Newton geral: '
