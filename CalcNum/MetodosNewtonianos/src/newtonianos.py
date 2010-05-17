@@ -50,7 +50,7 @@ def newton_geral(func, dfunc, precisao, xk, forcar):
 
 	print 'Método pode estar divergindo. Iterações: {0}'.format(numIteracoes)
 
-def secante(func, precisao, xk, xkAnt, forcar):
+def secante(func, precisao, xkAnt, xk, forcar):
 	print 'Secante: '
 	numIteracoes = 0
 	erroV = abs(xk - xkAnt) / max(abs(xk), abs(xkAnt))
@@ -82,6 +82,10 @@ def steffensen(func, precisao, xk, forcar):
 	aux = f(func, xk)
 	den = f(func, (xk + aux)) - aux
 	xkPost = xk - (aux * aux) / den
+	
+	if(den == 0):
+		print 'Divisão por zero na iteração inicial'
+		return
 
 	erroV = abs(xkPost - xk) / max(abs(xk), abs(xkPost))
 	xk = xkPost
