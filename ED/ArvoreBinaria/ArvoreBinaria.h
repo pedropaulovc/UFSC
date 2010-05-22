@@ -8,8 +8,8 @@
 #ifndef ARVOREBINARIA_H_
 #define ARVOREBINARIA_H_
 
-#include "NodoBinario.h"
 #include <string>
+#include "NodoBinario.h"
 
 using namespace std;
 
@@ -30,7 +30,7 @@ public:
 	void percorreEmOrdemIterativo();
 	void percorrePosOrdemIterativo();
 
-	NodoBinario<T>* criaArvore(String expressao);
+	NodoBinario<T>* criaArvore(string expressao);
 };
 
 template <class T>
@@ -62,8 +62,8 @@ fim
  */
 
 template <class T>
-NodoBinario<T>* ArvoreBinaria<T> :: criaArvore(std::String expressao){
-	ǸodoBinario<T>* novoNodo;
+NodoBinario<T>* ArvoreBinaria<T> :: criaArvore(string expressao){
+	NodoBinario<T>* novoNodo;
 
 
 

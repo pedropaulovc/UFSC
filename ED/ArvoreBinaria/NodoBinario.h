@@ -39,12 +39,12 @@ void NodoBinario<T>::alterarFilhoDireita(NodoBinario<T>* filho) {
 }
 
 template<class T>
-void NodoBinario<T>::obterFilhoEsquerda() {
+NodoBinario<T>* NodoBinario<T>::obterFilhoEsquerda() {
 	return filhoEsquerda;
 }
 
 template<class T>
-void NodoBinario<T>::obterFilhoDireita() {
+NodoBinario<T>* NodoBinario<T>::obterFilhoDireita() {
 	return filhoDireita;
 }
 
