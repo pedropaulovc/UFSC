@@ -8,22 +8,44 @@
 #ifndef NODOBINARIO_H_
 #define NODOBINARIO_H_
 
+#include <string>
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
 template<class T>
 class NodoBinario {
 	NodoBinario<T>* filhoEsquerda;
 	NodoBinario<T>* filhoDireita;
+	T* info;
 
 public:
-	NodoBinario(NodoBinario<T>* filhoEsquerda, NodoBinario<T>* filhoDireita);
+	NodoBinario(T* info, NodoBinario<T>* filhoEsquerda, NodoBinario<T>* filhoDireita);
+	virtual ~NodoBinario();
+
 	void alterarFilhoEsquerda(NodoBinario<T>* filho);
 	void alterarFilhoDireita(NodoBinario<T>* filho);
+
 	NodoBinario<T>* obterFilhoEsquerda();
 	NodoBinario<T>* obterFilhoDireita();
-	virtual ~NodoBinario();
+	T* obterInfo();
+
+	void percorrePreOrdemRecursivo();
+	void percorreEmOrdemRecursivo();
+	void percorrePosOrdemRecursivo();
+
+	void percorrePreOrdemIterativo();
+	void percorreEmOrdemIterativo();
+	void percorrePosOrdemIterativo();
+
+	NodoBinario<string>* criaArvore(string expressao);
+
 };
 
 template<class T>
-NodoBinario<T>::NodoBinario(NodoBinario<T>* filhoEsquerda, NodoBinario<T>* filhoDireita) {
+NodoBinario<T>::NodoBinario(T* info, NodoBinario<T>* filhoEsquerda, NodoBinario<T>* filhoDireita) {
+	this->info = info;
 	this->filhoEsquerda = filhoEsquerda;
 	this->filhoDireita = filhoDireita;
 }
@@ -46,6 +68,29 @@ NodoBinario<T>* NodoBinario<T>::obterFilhoEsquerda() {
 template<class T>
 NodoBinario<T>* NodoBinario<T>::obterFilhoDireita() {
 	return filhoDireita;
+}
+
+template<class T>
+T* NodoBinario<T>::obterInfo(){
+	return info;
+}
+
+//TODO: criaArvore deveria ser estático
+template<class T>
+NodoBinario<string>* NodoBinario<T>::criaArvore(string expressao){
+	string t = expressao.substr(0, 1);
+	std::cout << t << "\n";
+	string restante1 = expressao.substr(1);
+	string restante2 = expressao.substr(2);
+
+	NodoBinario<string>* novoNodo;
+
+	if(t == "+" || t == "-" || t == "*" || t == "/")
+		novoNodo = new NodoBinario(&t, criaArvore(restante1), criaArvore(restante2));
+	else
+		novoNodo = new NodoBinario(&t, NULL, NULL);
+
+	return novoNodo;
 }
 
 template<class T>
