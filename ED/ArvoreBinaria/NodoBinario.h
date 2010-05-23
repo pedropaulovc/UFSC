@@ -39,7 +39,7 @@ public:
 	void percorreEmOrdemIterativo();
 	void percorrePosOrdemIterativo();
 
-	NodoBinario<string>* criaArvore(string expressao);
+	NodoBinario<string>* criaArvore(string expressao, int *i);
 
 };
 
@@ -77,16 +77,14 @@ T* NodoBinario<T>::obterInfo(){
 
 //TODO: criaArvore deveria ser estático
 template<class T>
-NodoBinario<string>* NodoBinario<T>::criaArvore(string expressao){
-	string t = expressao.substr(0, 1);
-	std::cout << t << "\n";
-	string restante1 = expressao.substr(1);
-	string restante2 = expressao.substr(2);
+NodoBinario<string>* NodoBinario<T>::criaArvore(string expressao, int *i){
+	string t = expressao.substr(*i, 1);
+	(*i)++;
 
 	NodoBinario<string>* novoNodo;
 
 	if(t == "+" || t == "-" || t == "*" || t == "/")
-		novoNodo = new NodoBinario(&t, criaArvore(restante1), criaArvore(restante2));
+		novoNodo = new NodoBinario(&t, criaArvore(expressao, i), criaArvore(expressao, i));
 	else
 		novoNodo = new NodoBinario(&t, NULL, NULL);
 
