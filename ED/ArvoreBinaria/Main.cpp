@@ -1,16 +1,14 @@
 #include "NodoBinario.h"
 #include <iostream>
 #include <string>
+#include <list>
 
 
 int main() {
-	NodoBinario<string>* arvore = new NodoBinario<string>(NULL, NULL, NULL);
-	NodoBinario<string>* arvore2;
 	//Tá bugando ainda. Não consigo obter o info. Aparentemente agora está percorrendo a árvore como deve.
-	int i = 0;
-	arvore2 = arvore->criaArvore("-+/846*2-98", &i);
+	NodoBinario<char>* arvore = new NodoBinario<char>("-+/846*2-98");
 
-	std::cout << "Lorem " << *(arvore2->obterInfo()) << " Ipsum";
-
+	std::list<char>* lista = new list<char>();
+	arvore->percorreEmOrdemRecursivo(lista);
 	return 0;
 }
