@@ -8,15 +8,16 @@
 #ifndef NODOBINARIO_H_
 #define NODOBINARIO_H_
 
-#include <string>
 #include <cstdlib>
-#include <iostream>
+//TODO: Eliminar dependência de EDs do C++
 #include <list>
+#include <stack>
 
 using namespace std;
 
-template <class T>
+template<class T>
 class NodoBinario {
+private:
 	NodoBinario<T>* filhoEsquerda;
 	NodoBinario<T>* filhoDireita;
 	T* info;
@@ -24,137 +25,139 @@ class NodoBinario {
 public:
 	NodoBinario(T* info, NodoBinario<T>* filhoEsquerda,
 			NodoBinario<T>* filhoDireita);
-	NodoBinario(string expressao, int *i);
 	virtual ~NodoBinario();
 
 	void alterarFilhoEsquerda(NodoBinario<T>* filho);
 	void alterarFilhoDireita(NodoBinario<T>* filho);
+	void alterarInfo(T* info);
 
 	NodoBinario<T>* obterFilhoEsquerda();
 	NodoBinario<T>* obterFilhoDireita();
 	T* obterInfo();
 
 	void percorrePreOrdemRecursivo(std::list<T*>* lista);
-	std::list<T*>* percorreEmOrdemRecursivo();
+	void percorreEmOrdemRecursivo(std::list<T*>* lista);
 	void percorrePosOrdemRecursivo(std::list<T*>* lista);
 
 	void percorrePreOrdemIterativo(std::list<T*>* lista);
 	void percorreEmOrdemIterativo(std::list<T*>* lista);
 	void percorrePosOrdemIterativo(std::list<T*>* lista);
-
-	NodoBinario<char>* criaArvore(string expressao, int *i);
-
-
-private:
-	void percorreEmOrdemRecursivo(std::list<T*>* lista);
 };
 
-template <class T>
+template<class T>
 NodoBinario<T>::NodoBinario(T* info, NodoBinario<T>* filhoEsquerda,
 		NodoBinario<T>* filhoDireita) {
 	this->info = info;
-/*	if (info != NULL)
-		std::cout << "info construtor: " << *this->info << "\n";*/
 	this->filhoEsquerda = filhoEsquerda;
 	this->filhoDireita = filhoDireita;
 }
 
-template <class T>
-NodoBinario<T>::NodoBinario(string expressao, int *i){
-	criaArvore(expressao, i);
+template<class T>
+NodoBinario<T>::~NodoBinario() {
 }
 
-template <class T>
+template<class T>
 void NodoBinario<T>::alterarFilhoEsquerda(NodoBinario<T>* filho) {
 	this->filhoEsquerda = filho;
 }
 
-template <class T>
+template<class T>
 void NodoBinario<T>::alterarFilhoDireita(NodoBinario<T>* filho) {
 	this->filhoDireita = filho;
 }
 
 template <class T>
+void NodoBinario<T>::alterarInfo(T* info){
+	this->info = info;
+}
+
+template<class T>
 NodoBinario<T>* NodoBinario<T>::obterFilhoEsquerda() {
 	return this->filhoEsquerda;
 }
 
-template <class T>
+template<class T>
 NodoBinario<T>* NodoBinario<T>::obterFilhoDireita() {
 	return this->filhoDireita;
 }
 
-template <class T>
+template<class T>
 T* NodoBinario<T>::obterInfo() {
-/*	if (this->info != NULL)
-		std::cout << "obter info: " << *this->info << "\n";*/
 	return this->info;
 }
 
-template <class T>
-void NodoBinario<T>::percorrePreOrdemRecursivo(std::list<T*>* lista) {
+template<class T>
+void NodoBinario<T>::percorrePreOrdemRecursivo(std::list<T*>* lista = NULL) {
+	if (lista == NULL)
+		lista = new list<T*> ();
+
 	lista->push_back(this->info);
-	if(filhoEsquerda != NULL)
-		percorrePreOrdemRecursivo(lista);
-	if(filhoDireita != NULL)
-		percorrePreOrdemRecursivo(lista);
+	if (filhoEsquerda != NULL)
+		filhoEsquerda->percorrePreOrdemRecursivo(lista);
+	if (filhoDireita != NULL)
+		filhoDireita->percorrePreOrdemRecursivo(lista);
 }
 
-template <class T>
-void NodoBinario<T>::percorreEmOrdemRecursivo(std::list<T*>* lista){
-	if(filhoEsquerda != NULL)
+template<class T>
+void NodoBinario<T>::percorreEmOrdemRecursivo(std::list<T*>* lista = NULL) {
+	if (lista == NULL)
+		lista = new list<T*> ();
+
+	if (filhoEsquerda != NULL)
 		filhoEsquerda->percorreEmOrdemRecursivo(lista);
 	lista->push_back(this->info);
-	if(filhoDireita != NULL)
+	if (filhoDireita != NULL)
 		filhoDireita->percorreEmOrdemRecursivo(lista);
 }
 
-template <class T>
-std::list<T*>* NodoBinario<T>::percorreEmOrdemRecursivo(){
-	std::list<T*>* lista = new list<T*>();
+template<class T>
+void NodoBinario<T>::percorrePosOrdemRecursivo(std::list<T*>* lista = NULL) {
+	if (lista == NULL)
+		lista = new list<T*> ();
 
-	percorreEmOrdemRecursivo(lista);
-
-	return lista;
+	if (filhoEsquerda != NULL)
+		filhoEsquerda->percorrePosOrdemRecursivo(lista);
+	if (filhoDireita != NULL)
+		filhoDireita->percorrePosOrdemRecursivo(lista);
+	lista->push_back(this->info);
 }
 
-template <class T>
-void NodoBinario<T>::percorrePosOrdemRecursivo(std::list<T*>* lista){
-	if(filhoEsquerda != NULL)
-		percorrePosOrdemRecursivo(lista);
-	if(filhoDireita != NULL)
-		percorrePosOrdemRecursivo(lista);
-	lista->push_back(info);
-}
+//TODO: Testar
+/*1. Crie uma pilha e monte uma árvore
+ 2. Empilhe nodo e ache o filho da esquerda até NULO
+ 3. Se o nodo for NULO, desempilhe
+ 4. Imprima o nodo e ache o filho da direita (empilhe), vá para passo 2
+ 5. Se o filho da direita for NULO, desempilhe e vá para o passo 4
+ 6. Se o filho da direita for NULO e a pilha estiver vazia, pare.*/
+template<class T>
+void NodoBinario<T>::percorreEmOrdemIterativo(std::list<T*>* lista = NULL) {
+	std::stack<T*>* pilha = new stack<T*> ();
 
-//TODO: criaArvore deveria ser estático
-template <class T>
-NodoBinario<char>* NodoBinario<T>::criaArvore(string expressao, int *i) {
-	char t = expressao[*i];
-	std::cout << "t: " << t << "\n";
-	(*i)++;
+	NodoBinario<T>* nodoAtual = this;
+	NodoBinario<T>* filhoDireita;
 
-	info = new char(t);
+	do {
+		//Passo 2
+		while (nodoAtual != NULL) {
+			pilha->push(nodoAtual);
+			nodoAtual = nodoAtual->obterFilhoEsquerda();
+		}
+		//Passo 4
+		nodoAtual = pilha->pop();
+		lista->push_back(nodoAtual);
+		filhoDireita = nodoAtual->obterFilhoDireita();
 
-	if (obterInfo() != NULL)
-			std::cout << "info1 : " << *obterInfo() << "\n";
+		if (filhoDireita != NULL)
+			pilha->push(filhoDireita);
+		else {
+			nodoAtual = pilha->pop();
+			lista->push_back(nodoAtual);
+			filhoDireita = nodoAtual->obterFilhoDireita();
+			pilha->push(filhoDireita);
+		}
 
-	if (t == '+' || t == '-' || t == '*' || t == '/') {
-		filhoEsquerda = new NodoBinario<char>(expressao, i);
-		filhoDireita = new NodoBinario<char>(expressao, i);
-	} else {
-		filhoEsquerda = NULL;
-		filhoDireita = NULL;
-	}
+	} while (filhoDireita != NULL || !(pilha->empty()));
 
-	if (obterInfo() != NULL)
-		std::cout << "info2 : " << *obterInfo() << "\n";
-
-	return this;
-}
-
-template <class T>
-NodoBinario<T>::~NodoBinario() {
 }
 
 #endif /* NODOBINARIO_H_ */
