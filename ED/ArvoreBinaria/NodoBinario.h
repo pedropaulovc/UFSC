@@ -24,7 +24,7 @@ class NodoBinario {
 public:
 	NodoBinario(T* info, NodoBinario<T>* filhoEsquerda,
 			NodoBinario<T>* filhoDireita);
-	NodoBinario(string expressao);
+	NodoBinario(string expressao, int *i);
 	virtual ~NodoBinario();
 
 	void alterarFilhoEsquerda(NodoBinario<T>* filho);
@@ -34,16 +34,19 @@ public:
 	NodoBinario<T>* obterFilhoDireita();
 	T* obterInfo();
 
-	void percorrePreOrdemRecursivo(std::list<T>& lista);
-	void percorreEmOrdemRecursivo(std::list<T>& lista);
-	void percorrePosOrdemRecursivo(std::list<T>& lista);
+	void percorrePreOrdemRecursivo(std::list<T*>* lista);
+	std::list<T*>* percorreEmOrdemRecursivo();
+	void percorrePosOrdemRecursivo(std::list<T*>* lista);
 
-	void percorrePreOrdemIterativo(std::list<T>* lista);
-	void percorreEmOrdemIterativo(std::list<T>* lista);
-	void percorrePosOrdemIterativo(std::list<T>* lista);
+	void percorrePreOrdemIterativo(std::list<T*>* lista);
+	void percorreEmOrdemIterativo(std::list<T*>* lista);
+	void percorrePosOrdemIterativo(std::list<T*>* lista);
 
 	NodoBinario<char>* criaArvore(string expressao, int *i);
 
+
+private:
+	void percorreEmOrdemRecursivo(std::list<T*>* lista);
 };
 
 template <class T>
@@ -57,9 +60,8 @@ NodoBinario<T>::NodoBinario(T* info, NodoBinario<T>* filhoEsquerda,
 }
 
 template <class T>
-NodoBinario<T>::NodoBinario(string expressao){
-	int i = 0;
-	criaArvore(expressao, &i);
+NodoBinario<T>::NodoBinario(string expressao, int *i){
+	criaArvore(expressao, i);
 }
 
 template <class T>
@@ -90,7 +92,7 @@ T* NodoBinario<T>::obterInfo() {
 }
 
 template <class T>
-void NodoBinario<T>::percorrePreOrdemRecursivo(std::list<T>& lista) {
+void NodoBinario<T>::percorrePreOrdemRecursivo(std::list<T*>* lista) {
 	lista->push_back(this->info);
 	if(filhoEsquerda != NULL)
 		percorrePreOrdemRecursivo(lista);
@@ -99,16 +101,25 @@ void NodoBinario<T>::percorrePreOrdemRecursivo(std::list<T>& lista) {
 }
 
 template <class T>
-void NodoBinario<T>::percorreEmOrdemRecursivo(std::list<T>& lista){
+void NodoBinario<T>::percorreEmOrdemRecursivo(std::list<T*>* lista){
 	if(filhoEsquerda != NULL)
-		percorreEmOrdemRecursivo(lista);
-	lista->push_back(info);
+		filhoEsquerda->percorreEmOrdemRecursivo(lista);
+	lista->push_back(this->info);
 	if(filhoDireita != NULL)
-		percorreEmOrdemRecursivo(lista);
+		filhoDireita->percorreEmOrdemRecursivo(lista);
 }
 
 template <class T>
-void NodoBinario<T>::percorrePosOrdemRecursivo(std::list<T>& lista){
+std::list<T*>* NodoBinario<T>::percorreEmOrdemRecursivo(){
+	std::list<T*>* lista = new list<T*>();
+
+	percorreEmOrdemRecursivo(lista);
+
+	return lista;
+}
+
+template <class T>
+void NodoBinario<T>::percorrePosOrdemRecursivo(std::list<T*>* lista){
 	if(filhoEsquerda != NULL)
 		percorrePosOrdemRecursivo(lista);
 	if(filhoDireita != NULL)
@@ -123,17 +134,21 @@ NodoBinario<char>* NodoBinario<T>::criaArvore(string expressao, int *i) {
 	std::cout << "t: " << t << "\n";
 	(*i)++;
 
-	info = &t;
+	info = new char(t);
+
+	if (obterInfo() != NULL)
+			std::cout << "info1 : " << *obterInfo() << "\n";
+
 	if (t == '+' || t == '-' || t == '*' || t == '/') {
-		filhoEsquerda = criaArvore(expressao, i);
-		filhoDireita = criaArvore(expressao, i);
+		filhoEsquerda = new NodoBinario<char>(expressao, i);
+		filhoDireita = new NodoBinario<char>(expressao, i);
 	} else {
 		filhoEsquerda = NULL;
 		filhoDireita = NULL;
 	}
 
-/*	if (obterInfo() != NULL)
-		std::cout << "info : " << *obterInfo() << "\n";*/
+	if (obterInfo() != NULL)
+		std::cout << "info2 : " << *obterInfo() << "\n";
 
 	return this;
 }
