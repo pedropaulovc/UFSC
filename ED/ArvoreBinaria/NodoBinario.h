@@ -12,6 +12,7 @@
 //TODO: Eliminar dependência de EDs do C++
 #include <list>
 #include <stack>
+#include <iostream>
 
 using namespace std;
 
@@ -40,7 +41,7 @@ public:
 	void percorrePosOrdemRecursivo(std::list<T*>* lista);
 
 	void percorrePreOrdemIterativo(std::list<T*>* lista);
-	void percorreEmOrdemIterativo(std::list<T*>* lista);
+	std::list<T*>* percorreEmOrdemIterativo();
 	void percorrePosOrdemIterativo(std::list<T*>* lista);
 };
 
@@ -66,8 +67,8 @@ void NodoBinario<T>::alterarFilhoDireita(NodoBinario<T>* filho) {
 	this->filhoDireita = filho;
 }
 
-template <class T>
-void NodoBinario<T>::alterarInfo(T* info){
+template<class T>
+void NodoBinario<T>::alterarInfo(T* info) {
 	this->info = info;
 }
 
@@ -130,33 +131,77 @@ void NodoBinario<T>::percorrePosOrdemRecursivo(std::list<T*>* lista = NULL) {
  5. Se o filho da direita for NULO, desempilhe e vá para o passo 4
  6. Se o filho da direita for NULO e a pilha estiver vazia, pare.*/
 template<class T>
-void NodoBinario<T>::percorreEmOrdemIterativo(std::list<T*>* lista = NULL) {
-	std::stack<T*>* pilha = new stack<T*> ();
+std::list<T*>* NodoBinario<T>::percorreEmOrdemIterativo() {
+	std::stack<NodoBinario<T>*>* pilha = new stack<NodoBinario<T>*> ();
+	std::list<T*>* lista = new list<T*>();
 
 	NodoBinario<T>* nodoAtual = this;
-	NodoBinario<T>* filhoDireita;
 
-	do {
-		//Passo 2
-		while (nodoAtual != NULL) {
-			pilha->push(nodoAtual);
-			nodoAtual = nodoAtual->obterFilhoEsquerda();
-		}
-		//Passo 4
-		nodoAtual = pilha->pop();
-		lista->push_back(nodoAtual);
-		filhoDireita = nodoAtual->obterFilhoDireita();
+	passo2: do {
+		pilha->push(nodoAtual);
+		if(pilha->top() != NULL)
+			std::cout<< "empilhei " << *(pilha->top()->obterInfo()) << "\n";
+		nodoAtual = nodoAtual->obterFilhoEsquerda();
+	} while (nodoAtual != NULL);
 
-		if (filhoDireita != NULL)
-			pilha->push(filhoDireita);
-		else {
-			nodoAtual = pilha->pop();
-			lista->push_back(nodoAtual);
-			filhoDireita = nodoAtual->obterFilhoDireita();
-			pilha->push(filhoDireita);
-		}
+	if (pilha->top() == NULL)
+		pilha->pop();
+	nodoAtual = pilha->top();
 
-	} while (filhoDireita != NULL || !(pilha->empty()));
+	std::cout<< "nodo atual " << nodoAtual->obterInfo() << "\n";
+
+	passo4: lista->push_back(nodoAtual->obterInfo());
+	std::cout<< "escrevi " << nodoAtual->obterInfo() << "\n";
+	if(pilha->top() != NULL)
+		std::cout<< "desempilhei " << *(pilha->top()->obterInfo()) << "\n";
+	pilha->pop();
+	nodoAtual = nodoAtual->obterFilhoDireita();
+	pilha->push(nodoAtual);
+	if(pilha->top() != NULL)
+		std::cout<< "empilhei " << *(pilha->top()->obterInfo()) << "\n";
+
+	if(nodoAtual != NULL)
+		std::cout<< "nodo atual " << nodoAtual->obterInfo() << "\n";
+	//pilha->push(nodoAtual);
+
+	if (nodoAtual == NULL) {
+		if(pilha->top() != NULL)
+			std::cout<< "desempilhei " << pilha->top() << "\n";
+		pilha->pop();
+		nodoAtual = pilha->top();
+		std::cout<< "nodo atual " << nodoAtual->obterInfo() << "\n";
+		goto passo4;
+	} else if (pilha->empty()) {
+		return lista;
+	} else {
+		pilha->pop();
+		if(pilha->top() != NULL)
+			std::cout<< "desempilhei " << *(pilha->top()->obterInfo()) << "\n";
+		goto passo2;
+	}
+
+	/*
+	 do {
+	 //Passo 2
+	 while (nodoAtual != NULL) {
+	 pilha->push(nodoAtual);
+	 nodoAtual = nodoAtual->obterFilhoEsquerda();
+	 }
+	 //Passo 4
+	 nodoAtual = pilha->pop();
+	 lista->push_back(nodoAtual);
+	 filhoDireita = nodoAtual->obterFilhoDireita();
+
+	 if (filhoDireita != NULL)
+	 pilha->push(filhoDireita);
+	 else {
+	 nodoAtual = pilha->pop();
+	 lista->push_back(nodoAtual);
+	 filhoDireita = nodoAtual->obterFilhoDireita();
+	 pilha->push(filhoDireita);
+	 }
+
+	 } while (filhoDireita != NULL || !(pilha->empty()));*/
 
 }
 
