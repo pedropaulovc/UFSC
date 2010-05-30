@@ -40,9 +40,9 @@ public:
 	void percorreEmOrdemRecursivo(std::list<T*>* lista);
 	void percorrePosOrdemRecursivo(std::list<T*>* lista);
 
-	void percorrePreOrdemIterativo(std::list<T*>* lista);
+	std::list<T*>* percorrePreOrdemIterativo();
 	std::list<T*>* percorreEmOrdemIterativo();
-	void percorrePosOrdemIterativo(std::list<T*>* lista);
+	std::list<T*>* percorrePosOrdemIterativo();
 };
 
 template<class T>
@@ -123,86 +123,51 @@ void NodoBinario<T>::percorrePosOrdemRecursivo(std::list<T*>* lista = NULL) {
 	lista->push_back(this->info);
 }
 
-//TODO: Testar
-/*1. Crie uma pilha e monte uma árvore
- 2. Empilhe nodo e ache o filho da esquerda até NULO
- 3. Se o nodo for NULO, desempilhe
- 4. Imprima o nodo e ache o filho da direita (empilhe), vá para passo 2
- 5. Se o filho da direita for NULO, desempilhe e vá para o passo 4
- 6. Se o filho da direita for NULO e a pilha estiver vazia, pare.*/
 template<class T>
 std::list<T*>* NodoBinario<T>::percorreEmOrdemIterativo() {
 	std::stack<NodoBinario<T>*>* pilha = new stack<NodoBinario<T>*> ();
-	std::list<T*>* lista = new list<T*>();
+	std::list<T*>* lista = new list<T*> ();
 
 	NodoBinario<T>* nodoAtual = this;
 
-	passo2: do {
-		pilha->push(nodoAtual);
-		if(pilha->top() != NULL)
-			std::cout<< "empilhei " << *(pilha->top()->obterInfo()) << "\n";
-		nodoAtual = nodoAtual->obterFilhoEsquerda();
-	} while (nodoAtual != NULL);
+	do {
+		while (nodoAtual != NULL) {
+			pilha->push(nodoAtual);
+			nodoAtual = nodoAtual->obterFilhoEsquerda();
+		}
 
-	if (pilha->top() == NULL)
-		pilha->pop();
-	nodoAtual = pilha->top();
+		if (pilha->empty())
+			return lista;
 
-	std::cout<< "nodo atual " << nodoAtual->obterInfo() << "\n";
-
-	passo4: lista->push_back(nodoAtual->obterInfo());
-	std::cout<< "escrevi " << nodoAtual->obterInfo() << "\n";
-	if(pilha->top() != NULL)
-		std::cout<< "desempilhei " << *(pilha->top()->obterInfo()) << "\n";
-	pilha->pop();
-	nodoAtual = nodoAtual->obterFilhoDireita();
-	pilha->push(nodoAtual);
-	if(pilha->top() != NULL)
-		std::cout<< "empilhei " << *(pilha->top()->obterInfo()) << "\n";
-
-	if(nodoAtual != NULL)
-		std::cout<< "nodo atual " << nodoAtual->obterInfo() << "\n";
-	//pilha->push(nodoAtual);
-
-	if (nodoAtual == NULL) {
-		if(pilha->top() != NULL)
-			std::cout<< "desempilhei " << pilha->top() << "\n";
-		pilha->pop();
 		nodoAtual = pilha->top();
-		std::cout<< "nodo atual " << nodoAtual->obterInfo() << "\n";
-		goto passo4;
-	} else if (pilha->empty()) {
-		return lista;
-	} else {
 		pilha->pop();
-		if(pilha->top() != NULL)
-			std::cout<< "desempilhei " << *(pilha->top()->obterInfo()) << "\n";
-		goto passo2;
-	}
+		lista->push_back(nodoAtual->obterInfo());
+		nodoAtual = nodoAtual->obterFilhoDireita();
+	} while (true);
+}
 
-	/*
-	 do {
-	 //Passo 2
-	 while (nodoAtual != NULL) {
-	 pilha->push(nodoAtual);
-	 nodoAtual = nodoAtual->obterFilhoEsquerda();
-	 }
-	 //Passo 4
-	 nodoAtual = pilha->pop();
-	 lista->push_back(nodoAtual);
-	 filhoDireita = nodoAtual->obterFilhoDireita();
+template<class T>
+std::list<T*>* NodoBinario<T>::percorrePreOrdemIterativo() {
+	std::stack<NodoBinario<T>*>* pilha = new stack<NodoBinario<T>*> ();
+	std::list<T*>* lista = new list<T*> ();
 
-	 if (filhoDireita != NULL)
-	 pilha->push(filhoDireita);
-	 else {
-	 nodoAtual = pilha->pop();
-	 lista->push_back(nodoAtual);
-	 filhoDireita = nodoAtual->obterFilhoDireita();
-	 pilha->push(filhoDireita);
-	 }
+	NodoBinario<T>* nodoAtual = this;
 
-	 } while (filhoDireita != NULL || !(pilha->empty()));*/
+	do {
+		while (nodoAtual != NULL) {
+			lista->push_back(nodoAtual->obterInfo());
+			pilha->push(nodoAtual);
+			nodoAtual = nodoAtual->obterFilhoEsquerda();
+		}
 
+		if (pilha->empty())
+			return lista;
+
+		nodoAtual = pilha->top();
+		pilha->pop();
+
+		nodoAtual = nodoAtual->obterFilhoDireita();
+	} while (true);
 }
 
 #endif /* NODOBINARIO_H_ */
