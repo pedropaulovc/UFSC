@@ -32,8 +32,8 @@ public:
 
 	NodoAVL<TipoInfo>* rotacaoDireita(NodoAVL<TipoInfo>* raiz);
 	NodoAVL<TipoInfo>* rotacaoEsquerda(NodoAVL<TipoInfo>* raiz);
-	NodoAVL<TipoInfo>* rotacaoDuplaDireita();
-	NodoAVL<TipoInfo>* rotacaoDuplaEsquerda();
+	NodoAVL<TipoInfo>* rotacaoDuplaDireita(NodoAVL<TipoInfo>* nodo);
+	NodoAVL<TipoInfo>* rotacaoDuplaEsquerda(NodoAVL<TipoInfo>* nodo);
 
 	NodoAVL<TipoInfo>* obterEsquerda();
 	NodoAVL<TipoInfo>* obterDireita();

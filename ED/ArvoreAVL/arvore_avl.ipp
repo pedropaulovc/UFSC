@@ -8,7 +8,8 @@ template<class TipoInfo> NodoAVL<TipoInfo>::NodoAVL() {
 template<class TipoInfo> NodoAVL<TipoInfo>::~NodoAVL() {
 }
 
-template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::insere(const TipoInfo& tipo) {
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::insere(
+		const TipoInfo& tipo) {
 	if (this->info == 0) {
 		info = tipo;
 		altura = 0;
@@ -48,15 +49,15 @@ template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::verificaCondicaoA
 		if (fatorDireita <= 0)
 			novaRaiz = rotacaoEsquerda(this);
 		if (fatorDireita == 1)
-			novaRaiz = rotacaoDuplaEsquerda();
+			novaRaiz = rotacaoDuplaEsquerda(this);
 	}
-
+//Provavelmente as rotações não precisam receber as raízes como paramentros
 	if (fator == 2) {
 		fatorEsquerda = nodoEsquerda->retornaFatorDesbalanceamento();
 		if (fatorEsquerda <= 0)
 			novaRaiz = rotacaoDireita(this);
 		if (fatorEsquerda == 1)
-			novaRaiz = rotacaoDuplaDireita();
+			novaRaiz = rotacaoDuplaDireita(this);
 	}
 
 	return novaRaiz;
@@ -73,9 +74,44 @@ template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoEsquerda(
 	raiz->alterarAltura(std::max(raiz->obterDireita()->retornaAltura(),
 			raiz->obterEsquerda()->retornaAltura()) + 1);
 	pivo->alterarAltura(std::max(pivo->obterDireita()->retornaAltura(),
-				pivo->obterEsquerda()->retornaAltura()) + 1);
+			pivo->obterEsquerda()->retornaAltura()) + 1);
 
 	return pivo;
+}
+
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDireita(
+		NodoAVL<TipoInfo>* raiz) {
+	NodoAVL<TipoInfo>* pivo = raiz->obterEsquerda();
+	NodoAVL<TipoInfo>* filhoDireitaPivo = pivo->obterDireita();
+
+	raiz->alterarEsquerda(filhoDireitaPivo);
+	pivo->alterarDireita(raiz);
+
+	raiz->alterarAltura(std::max(raiz->obterDireita()->retornaAltura(),
+			raiz->obterEsquerda()->retornaAltura()) + 1);
+	pivo->alterarAltura(std::max(pivo->obterDireita()->retornaAltura(),
+			pivo->obterEsquerda()->retornaAltura()) + 1);
+
+	return pivo;
+}
+
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDuplaDireita(
+		NodoAVL<TipoInfo>* nodo) {
+	NodoAVL<TipoInfo>* raiz = nodo->obterEsquerda();
+
+	nodo = rotacaoEsquerda(raiz);
+
+	return rotacaoDireita(nodo);
+
+}
+
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDuplaEsquerda(
+		NodoAVL<TipoInfo>* nodo) {
+	NodoAVL<TipoInfo>* raiz = nodo->obterDireita();
+
+	nodo = rotacaoDireita(raiz);
+
+	return rotacaoEsquerda(nodo);
 }
 
 template<class TipoInfo> int NodoAVL<TipoInfo>::retornaFatorDesbalanceamento() {
