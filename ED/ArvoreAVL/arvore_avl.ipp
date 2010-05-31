@@ -1,19 +1,19 @@
 #include <cstdlib>
 
 template<class TipoInfo> NodoAVL<TipoInfo>::NodoAVL() {
-	this->altura = -1;
-	this->numElementos = -1;
+	this->altura = 0;
+	this->numElementos = 0;
 }
 
 template<class TipoInfo> NodoAVL<TipoInfo>::~NodoAVL() {
 }
 
-template<class TipoInfo> void NodoAVL<TipoInfo>::insere(const TipoInfo& tipo) {
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::insere(const TipoInfo& tipo) {
 	if (this->info == 0) {
 		info = tipo;
 		altura = 0;
 		numElementos = 0;
-		return;
+		return this;
 	} else if (tipo < info) {
 		if (nodoEsquerda != NULL)
 			nodoEsquerda->insere(tipo);
@@ -32,34 +32,34 @@ template<class TipoInfo> void NodoAVL<TipoInfo>::insere(const TipoInfo& tipo) {
 	altura++;
 	numElementos++;
 
-	verificaCondicaoAVL();
-
-	//Insere deveria retornar a nova raiz gerada por alguma das rotações feitas.
+	return verificaCondicaoAVL();
 }
 
-template<class TipoInfo> void NodoAVL<TipoInfo>::verificaCondicaoAVL() {
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::verificaCondicaoAVL() {
 	int fator = retornaFatorDesbalanceamento();
 	int fatorDireita, fatorEsquerda;
+	NodoAVL<TipoInfo>* novaRaiz;
 
 	if (fator <= 1 && fator >= -1)
-		return;
+		return this;
 
 	if (fator == -2) {
 		fatorDireita = nodoDireita->retornaFatorDesbalanceamento();
 		if (fatorDireita <= 0)
-			rotacaoEsquerda(this);
+			novaRaiz = rotacaoEsquerda(this);
 		if (fatorDireita == 1)
-			rotacaoDuplaEsquerda();
+			novaRaiz = rotacaoDuplaEsquerda();
 	}
 
 	if (fator == 2) {
 		fatorEsquerda = nodoEsquerda->retornaFatorDesbalanceamento();
 		if (fatorEsquerda <= 0)
-			rotacaoDireita(this);
+			novaRaiz = rotacaoDireita(this);
 		if (fatorEsquerda == 1)
-			rotacaoDuplaDireita();
+			novaRaiz = rotacaoDuplaDireita();
 	}
 
+	return novaRaiz;
 }
 
 template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoEsquerda(

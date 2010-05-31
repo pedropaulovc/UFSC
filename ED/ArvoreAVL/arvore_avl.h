@@ -19,7 +19,7 @@ public:
 	NodoAVL();
 	~NodoAVL();
 
-	void insere(const TipoInfo& tipo);
+	NodoAVL<TipoInfo>* insere(const TipoInfo& tipo);
 	void remove(const TipoInfo& tipo);
 
 	std::string retornaPrefixada();
@@ -32,8 +32,8 @@ public:
 
 	NodoAVL<TipoInfo>* rotacaoDireita(NodoAVL<TipoInfo>* raiz);
 	NodoAVL<TipoInfo>* rotacaoEsquerda(NodoAVL<TipoInfo>* raiz);
-	void rotacaoDuplaDireita();
-	void rotacaoDuplaEsquerda();
+	NodoAVL<TipoInfo>* rotacaoDuplaDireita();
+	NodoAVL<TipoInfo>* rotacaoDuplaEsquerda();
 
 	NodoAVL<TipoInfo>* obterEsquerda();
 	NodoAVL<TipoInfo>* obterDireita();
@@ -43,7 +43,7 @@ public:
 	void alterarAltura(int altura);
 
 private:
-	void verificaCondicaoAVL();
+	NodoAVL<TipoInfo>* verificaCondicaoAVL();
 };
 
 #include "arvore_avl.ipp"
