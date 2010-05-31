@@ -27,13 +27,15 @@ public:
 	std::string retornaInfixada(std::string string);
 
 	int retornaAltura();
+	int retornaAlturaDireita();
+	int retornaAlturaEsquerda();
 	int retornaNumeroDeElementos();
 	int retornaFatorDesbalanceamento();
 
-	NodoAVL<TipoInfo>* rotacaoDireita(NodoAVL<TipoInfo>* raiz);
-	NodoAVL<TipoInfo>* rotacaoEsquerda(NodoAVL<TipoInfo>* raiz);
-	NodoAVL<TipoInfo>* rotacaoDuplaDireita(NodoAVL<TipoInfo>* nodo);
-	NodoAVL<TipoInfo>* rotacaoDuplaEsquerda(NodoAVL<TipoInfo>* nodo);
+	NodoAVL<TipoInfo>* rotacaoDireita();
+	NodoAVL<TipoInfo>* rotacaoEsquerda();
+	NodoAVL<TipoInfo>* rotacaoDuplaDireita();
+	NodoAVL<TipoInfo>* rotacaoDuplaEsquerda();
 
 	NodoAVL<TipoInfo>* obterEsquerda();
 	NodoAVL<TipoInfo>* obterDireita();

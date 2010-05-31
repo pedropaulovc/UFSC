@@ -6,6 +6,7 @@
 
 #include "arvore_avl.h"
 #include <gtest/gtest.h>
+#include <iostream>
 
 class ArvoreAVLTest : public ::testing::Test {
 
@@ -22,18 +23,31 @@ protected:
 		arvore_avl = new NodoAVL<int>();
 		arvore_avl = arvore_avl = arvore_avl->insere(9);
 		arvore_avl = arvore_avl->insere(19);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(40);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(18);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(63);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(12);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(85);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(96);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(1);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(68);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(54);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(58);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(17);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(87);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(70);
 		arvore_avl = arvore_avl->insere(44);
 		arvore_avl = arvore_avl->insere(99);

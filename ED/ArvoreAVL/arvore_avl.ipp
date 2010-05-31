@@ -2,7 +2,13 @@
 #include <string>
 #include <sstream>
 
+//TODO: Remover couts
+#include <iostream>
+
 template<class TipoInfo> NodoAVL<TipoInfo>::NodoAVL() {
+	this->nodoEsquerda = NULL;
+	this->nodoDireita = NULL;
+	this->info = NULL;
 	this->altura = 0;
 	this->numElementos = 0;
 }
@@ -12,11 +18,11 @@ template<class TipoInfo> NodoAVL<TipoInfo>::~NodoAVL() {
 
 template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::insere(
 		const TipoInfo& tipo) {
+	std::cout << "inserindo " << tipo << "\n";
 	if (this->info == 0) {
 		info = tipo;
 		altura = 0;
 		numElementos = 0;
-		return this;
 	} else if (tipo < info) {
 		if (nodoEsquerda != NULL)
 			nodoEsquerda->insere(tipo);
@@ -49,87 +55,73 @@ template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::verificaCondicaoA
 	if (fator == -2) {
 		fatorDireita = nodoDireita->retornaFatorDesbalanceamento();
 		if (fatorDireita <= 0)
-			novaRaiz = rotacaoEsquerda(this);
+			novaRaiz = rotacaoEsquerda();
 		if (fatorDireita == 1)
-			novaRaiz = rotacaoDuplaEsquerda(this);
+			novaRaiz = rotacaoDuplaEsquerda();
 	}
-//Provavelmente as rotações não precisam receber as raízes como paramentros
+
 	if (fator == 2) {
 		fatorEsquerda = nodoEsquerda->retornaFatorDesbalanceamento();
 		if (fatorEsquerda <= 0)
-			novaRaiz = rotacaoDireita(this);
+			novaRaiz = rotacaoDireita();
 		if (fatorEsquerda == 1)
-			novaRaiz = rotacaoDuplaDireita(this);
+			novaRaiz = rotacaoDuplaDireita();
 	}
 
 	return novaRaiz;
 }
 
-template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoEsquerda(
-		NodoAVL<TipoInfo>* raiz) {
-	NodoAVL<TipoInfo>* pivo = raiz->obterDireita();
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoEsquerda() {
+	std::cout << "fazendo rotação à esquerda " << this->info << "\n";
+	NodoAVL<TipoInfo>* pivo = obterDireita();
 	NodoAVL<TipoInfo>* filhoEsquerdaPivo = pivo->obterEsquerda();
 
-	raiz->alterarDireita(filhoEsquerdaPivo);
-	pivo->alterarEsquerda(raiz);
+	alterarDireita(filhoEsquerdaPivo);
+	pivo->alterarEsquerda(this);
 
-	raiz->alterarAltura(std::max(raiz->obterDireita()->retornaAltura(),
-			raiz->obterEsquerda()->retornaAltura()) + 1);
-	pivo->alterarAltura(std::max(pivo->obterDireita()->retornaAltura(),
-			pivo->obterEsquerda()->retornaAltura()) + 1);
+	alterarAltura(std::max(retornaAlturaDireita(), retornaAlturaEsquerda()) + 1);
+	pivo->alterarAltura(std::max(pivo->retornaAlturaDireita(),
+			pivo->retornaAlturaEsquerda()) + 1);
 
 	return pivo;
 }
 
-template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDireita(
-		NodoAVL<TipoInfo>* raiz) {
-	NodoAVL<TipoInfo>* pivo = raiz->obterEsquerda();
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDireita() {
+	std::cout << "fazendo rotação à direita " << this->info << "\n";
+	NodoAVL<TipoInfo>* pivo = obterEsquerda();
 	NodoAVL<TipoInfo>* filhoDireitaPivo = pivo->obterDireita();
 
-	raiz->alterarEsquerda(filhoDireitaPivo);
-	pivo->alterarDireita(raiz);
+	alterarEsquerda(filhoDireitaPivo);
+	pivo->alterarDireita(this);
 
-	raiz->alterarAltura(std::max(raiz->obterDireita()->retornaAltura(),
-			raiz->obterEsquerda()->retornaAltura()) + 1);
-	pivo->alterarAltura(std::max(pivo->obterDireita()->retornaAltura(),
-			pivo->obterEsquerda()->retornaAltura()) + 1);
+	alterarAltura(std::max(retornaAlturaDireita(), retornaAlturaEsquerda()) + 1);
+	pivo->alterarAltura(std::max(pivo->retornaAlturaEsquerda(),
+			pivo->retornaAlturaDireita()) + 1);
 
 	return pivo;
 }
 
-template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDuplaDireita(
-		NodoAVL<TipoInfo>* nodo) {
-	NodoAVL<TipoInfo>* raiz = nodo->obterEsquerda();
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDuplaDireita() {
+	std::cout << "fazendo rotação dupla à direita " << this->info << "\n";
+	NodoAVL<TipoInfo>* raiz = obterEsquerda();
 
-	nodo = rotacaoEsquerda(raiz);
+	alterarEsquerda(raiz->rotacaoEsquerda());
 
-	return rotacaoDireita(nodo);
+	return rotacaoDireita();
 
 }
 
-template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDuplaEsquerda(
-		NodoAVL<TipoInfo>* nodo) {
-	NodoAVL<TipoInfo>* raiz = nodo->obterDireita();
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDuplaEsquerda() {
+	std::cout << "fazendo rotação dupla à esquerda " << this->info << "\n";
+	NodoAVL<TipoInfo>* raiz = obterDireita();
 
-	nodo = rotacaoDireita(raiz);
+	alterarDireita(raiz->rotacaoDireita());
 
-	return rotacaoEsquerda(nodo);
+	return rotacaoEsquerda();
 }
 
 template<class TipoInfo> int NodoAVL<TipoInfo>::retornaFatorDesbalanceamento() {
-	int alturaDireita, alturaEsquerda;
-
-	if (nodoEsquerda != NULL)
-		alturaEsquerda = nodoEsquerda->retornaAltura();
-	else
-		alturaEsquerda = 0;
-
-	if (nodoDireita != NULL)
-		alturaDireita = nodoDireita->retornaAltura();
-	else
-		alturaDireita = 0;
-
-	return alturaEsquerda - alturaDireita;
+	return retornaAlturaEsquerda() - retornaAlturaDireita();
 }
 
 template<class TipoInfo> void NodoAVL<TipoInfo>::remove(const TipoInfo& tipo) {
@@ -158,57 +150,71 @@ template<class TipoInfo> void NodoAVL<TipoInfo>::alterarEsquerda(NodoAVL<
 	nodoEsquerda = nodo;
 }
 
-template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPrefixada(std::string string = "") {
+template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPrefixada(
+		std::string string = "") {
+	//TODO: implementar
+	return std::string();
+}
+
+template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPosfixada(
+		std::string string = "") {
+	//TODO: implementar
+	return std::string();
+}
+
+template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaInfixada(
+		std::string string = "") {
 	std::stringstream saida;
 
+	if (nodoEsquerda != NULL)
+		string = nodoEsquerda->retornaInfixada(string);
 	saida << info << " ";
 	string.append(saida.str());
-	if (nodoEsquerda != NULL)
-		nodoEsquerda->retornaPrefixada(string);
-
 	if (nodoDireita != NULL)
-		nodoDireita->retornaPrefixada(string);
+		string = nodoDireita->retornaInfixada(string);
 	return string;
-}
-
-template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPosfixada(std::string string = "") {
-	//TODO: implementar
-	return std::string();
-}
-
-template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaInfixada(std::string string = "") {
-	//TODO: implementar
-	return std::string();
 }
 
 template<class TipoInfo> int NodoAVL<TipoInfo>::retornaAltura() {
 	return altura;
 }
 
+template<class TipoInfo> int NodoAVL<TipoInfo>::retornaAlturaDireita() {
+	if (nodoDireita == 0)
+		return 0;
+	return nodoDireita->retornaAltura();
+}
+
+template<class TipoInfo> int NodoAVL<TipoInfo>::retornaAlturaEsquerda() {
+	if (nodoEsquerda == 0)
+		return 0;
+	return nodoEsquerda->retornaAltura();
+}
+
 template<class TipoInfo> int NodoAVL<TipoInfo>::retornaNumeroDeElementos() {
 	return 0;
 }
 
-template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::menor(){
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::menor() {
 	NodoAVL<TipoInfo>* atual;
 
-	if(this == 0)
+	if (this == 0)
 		return 0;
 
 	atual = this;
-	while(atual->nodoEsquerda != 0)
+	while (atual->nodoEsquerda != 0)
 		atual = atual->nodoEsquerda;
 	return atual;
 }
 
-template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::maior(){
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::maior() {
 	NodoAVL<TipoInfo>* atual;
 
-	if(this == 0)
+	if (this == 0)
 		return 0;
 
 	atual = this;
-	while(atual->nodoDireita!= 0)
+	while (atual->nodoDireita != 0)
 		atual = atual->nodoDireita;
 	return atual;
 }
