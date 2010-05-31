@@ -1,4 +1,6 @@
 #include <cstdlib>
+#include <string>
+#include <sstream>
 
 template<class TipoInfo> NodoAVL<TipoInfo>::NodoAVL() {
 	this->altura = 0;
@@ -156,17 +158,25 @@ template<class TipoInfo> void NodoAVL<TipoInfo>::alterarEsquerda(NodoAVL<
 	nodoEsquerda = nodo;
 }
 
-template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPrefixada() {
+template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPrefixada(std::string string = "") {
+	std::stringstream saida;
+
+	saida << info << " ";
+	string.append(saida.str());
+	if (nodoEsquerda != NULL)
+		nodoEsquerda->retornaPrefixada(string);
+
+	if (nodoDireita != NULL)
+		nodoDireita->retornaPrefixada(string);
+	return string;
+}
+
+template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPosfixada(std::string string = "") {
 	//TODO: implementar
 	return std::string();
 }
 
-template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPosfixada() {
-	//TODO: implementar
-	return std::string();
-}
-
-template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaInfixada() {
+template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaInfixada(std::string string = "") {
 	//TODO: implementar
 	return std::string();
 }

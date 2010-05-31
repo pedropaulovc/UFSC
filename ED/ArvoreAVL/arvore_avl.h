@@ -22,9 +22,9 @@ public:
 	NodoAVL<TipoInfo>* insere(const TipoInfo& tipo);
 	void remove(const TipoInfo& tipo);
 
-	std::string retornaPrefixada();
-	std::string retornaPosfixada();
-	std::string retornaInfixada();
+	std::string retornaPrefixada(std::string string);
+	std::string retornaPosfixada(std::string string);
+	std::string retornaInfixada(std::string string);
 
 	int retornaAltura();
 	int retornaNumeroDeElementos();

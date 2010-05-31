@@ -2,7 +2,7 @@
 //Data: 20/05/2010
 //Testes baseado usando applet interativo do http://www.site.uottawa.ca/~stan/csi2514/applets/avl/BT.html
 //Dependencias: googletest -> http://code.google.com/p/googletest/
-//Compilação: g++ arvore_avl_teste.cpp -lgtest -lpthread
+//Compilaï¿½ï¿½o: g++ arvore_avl_teste.cpp -lgtest -lpthread
 
 #include "arvore_avl.h"
 #include <gtest/gtest.h>
@@ -20,31 +20,31 @@ protected:
 
 	void SetUp() {
 		arvore_avl = new NodoAVL<int>();
-		arvore_avl->insere(9);
-		arvore_avl->insere(19);
-		arvore_avl->insere(40);
-		arvore_avl->insere(18);
-		arvore_avl->insere(63);
-		arvore_avl->insere(12);
-		arvore_avl->insere(85);
-		arvore_avl->insere(96);
-		arvore_avl->insere(1);
-		arvore_avl->insere(68);
-		arvore_avl->insere(54);
-		arvore_avl->insere(58);
-		arvore_avl->insere(17);
-		arvore_avl->insere(87);
-		arvore_avl->insere(70);
-		arvore_avl->insere(44);
-		arvore_avl->insere(99);
-		arvore_avl->insere(34);
-		arvore_avl->insere(88);
-		arvore_avl->insere(76);
-		arvore_avl->insere(7);
-		arvore_avl->insere(37);
-		arvore_avl->insere(45);
-		arvore_avl->insere(3);
-		arvore_avl->insere(61);
+		arvore_avl = arvore_avl = arvore_avl->insere(9);
+		arvore_avl = arvore_avl->insere(19);
+		arvore_avl = arvore_avl->insere(40);
+		arvore_avl = arvore_avl->insere(18);
+		arvore_avl = arvore_avl->insere(63);
+		arvore_avl = arvore_avl->insere(12);
+		arvore_avl = arvore_avl->insere(85);
+		arvore_avl = arvore_avl->insere(96);
+		arvore_avl = arvore_avl->insere(1);
+		arvore_avl = arvore_avl->insere(68);
+		arvore_avl = arvore_avl->insere(54);
+		arvore_avl = arvore_avl->insere(58);
+		arvore_avl = arvore_avl->insere(17);
+		arvore_avl = arvore_avl->insere(87);
+		arvore_avl = arvore_avl->insere(70);
+		arvore_avl = arvore_avl->insere(44);
+		arvore_avl = arvore_avl->insere(99);
+		arvore_avl = arvore_avl->insere(34);
+		arvore_avl = arvore_avl->insere(88);
+		arvore_avl = arvore_avl->insere(76);
+		arvore_avl = arvore_avl->insere(7);
+		arvore_avl = arvore_avl->insere(37);
+		arvore_avl = arvore_avl->insere(45);
+		arvore_avl = arvore_avl->insere(3);
+		arvore_avl = arvore_avl->insere(61);
 	}
 
 	void TearDown() {
@@ -83,11 +83,11 @@ TEST_F(ArvoreAVLTest, testaSaidaPrefixadaAposInserirNovosElementos) {
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 25);
 
-	arvore_avl->insere(62);
-	arvore_avl->insere(53);
-	arvore_avl->insere(57);
-	arvore_avl->insere(50);
-	arvore_avl->insere(59);
+	arvore_avl = arvore_avl->insere(62);
+	arvore_avl = arvore_avl->insere(53);
+	arvore_avl = arvore_avl->insere(57);
+	arvore_avl = arvore_avl->insere(50);
+	arvore_avl = arvore_avl->insere(59);
 
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 30);
@@ -125,11 +125,11 @@ TEST_F(ArvoreAVLTest, testaSaidaPosfixadaAposInserirNovosElementos) {
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 25);
 
-	arvore_avl->insere(62);
-	arvore_avl->insere(53);
-	arvore_avl->insere(57);
-	arvore_avl->insere(50);
-	arvore_avl->insere(59);
+	arvore_avl = arvore_avl->insere(62);
+	arvore_avl = arvore_avl->insere(53);
+	arvore_avl = arvore_avl->insere(57);
+	arvore_avl = arvore_avl->insere(50);
+	arvore_avl = arvore_avl->insere(59);
 
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 30);
@@ -168,11 +168,11 @@ TEST_F(ArvoreAVLTest, testaSaidaInfixadaAposInserirNovosElementos) {
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 25);
 
-	arvore_avl->insere(62);
-	arvore_avl->insere(53);
-	arvore_avl->insere(57);
-	arvore_avl->insere(50);
-	arvore_avl->insere(59);
+	arvore_avl = arvore_avl->insere(62);
+	arvore_avl = arvore_avl->insere(53);
+	arvore_avl = arvore_avl->insere(57);
+	arvore_avl = arvore_avl->insere(50);
+	arvore_avl = arvore_avl->insere(59);
 
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 30);
