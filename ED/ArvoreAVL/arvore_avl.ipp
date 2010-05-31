@@ -188,3 +188,27 @@ template<class TipoInfo> int NodoAVL<TipoInfo>::retornaAltura() {
 template<class TipoInfo> int NodoAVL<TipoInfo>::retornaNumeroDeElementos() {
 	return 0;
 }
+
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::menor(){
+	NodoAVL<TipoInfo>* atual;
+
+	if(this == 0)
+		return 0;
+
+	atual = this;
+	while(atual->nodoEsquerda != 0)
+		atual = atual->nodoEsquerda;
+	return atual;
+}
+
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::maior(){
+	NodoAVL<TipoInfo>* atual;
+
+	if(this == 0)
+		return 0;
+
+	atual = this;
+	while(atual->nodoDireita!= 0)
+		atual = atual->nodoDireita;
+	return atual;
+}

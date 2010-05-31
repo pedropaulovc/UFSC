@@ -42,6 +42,9 @@ public:
 	void alterarDireita(NodoAVL<TipoInfo>* nodo);
 	void alterarAltura(int altura);
 
+	NodoAVL<TipoInfo>* menor();
+	NodoAVL<TipoInfo>* maior();
+
 private:
 	NodoAVL<TipoInfo>* verificaCondicaoAVL();
 };
