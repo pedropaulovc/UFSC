@@ -10,7 +10,7 @@
 #include "NodoOperacao.h"
 
 
-NodoOperacao::NodoOperacao(string expressao, int *i):NodoBinario<char>(NULL, NULL, NULL){
+NodoOperacao::NodoOperacao(string expressao, int *i):NodoBinario<char>(){
 	criaArvore(expressao, i);
 }
 

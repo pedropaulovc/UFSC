@@ -46,8 +46,8 @@ public:
 };
 
 template<class T>
-NodoBinario<T>::NodoBinario(T* info, NodoBinario<T>* filhoEsquerda,
-		NodoBinario<T>* filhoDireita) {
+NodoBinario<T>::NodoBinario(T* info = NULL, NodoBinario<T>* filhoEsquerda = NULL,
+		NodoBinario<T>* filhoDireita = NULL) {
 	this->info = info;
 	this->filhoEsquerda = filhoEsquerda;
 	this->filhoDireita = filhoDireita;
