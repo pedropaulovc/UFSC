@@ -2,11 +2,10 @@
 //Data: 20/05/2010
 //Testes baseado usando applet interativo do http://www.site.uottawa.ca/~stan/csi2514/applets/avl/BT.html
 //Dependencias: googletest -> http://code.google.com/p/googletest/
-//Compila��o: g++ arvore_avl_teste.cpp -lgtest -lpthread
+//Compilação: g++ arvore_avl_teste.cpp -lgtest -lpthread
 
 #include "arvore_avl.h"
 #include <gtest/gtest.h>
-#include <iostream>
 
 class ArvoreAVLTest : public ::testing::Test {
 
@@ -73,6 +72,7 @@ protected:
 		std::cout << arvore_avl->retornaInfixada() << "\n";
 	}
 
+
 	void TearDown() {
 		delete arvore_avl;
 	}
@@ -125,7 +125,7 @@ TEST_F(ArvoreAVLTest, testaSaidaPosfixada) {
 	std::string posfixado("3 1 9 7 17 18 12 37 34 45 44 61 58 54 40 19 68 76 70 88 87 99 96 85 63");
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 25);
-	ASSERT_EQ(arvore_avl->retornaPrefixada(), posfixado);
+	ASSERT_EQ(arvore_avl->retornaPosfixada(), posfixado);
 }
 
 // Saida Posfixada Apos Remocao de Alguns Elementos
@@ -142,10 +142,10 @@ TEST_F(ArvoreAVLTest, testaSaidaPosfixadaAposRemoverElementos) {
 
 	ASSERT_EQ(arvore_avl->retornaAltura(), 5);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 20);
-	ASSERT_EQ(arvore_avl->retornaPrefixada(), posfixado);
+	ASSERT_EQ(arvore_avl->retornaPosfixada(), posfixado);
 }
 
-// Saida Prefixada Apos Inserir Alguns Elementos
+// Saida Posfixada Apos Inserir Alguns Elementos
 TEST_F(ArvoreAVLTest, testaSaidaPosfixadaAposInserirNovosElementos) {
 	std::string posfixado("3 1 9 7 17 18 12 37 34 44 50 53 45 40 19 57 59 58 62 61 68 76 70 88 87 99 86 85 63 54");
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
@@ -159,7 +159,7 @@ TEST_F(ArvoreAVLTest, testaSaidaPosfixadaAposInserirNovosElementos) {
 
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 30);
-	ASSERT_EQ(arvore_avl->retornaPrefixada(), posfixado);
+	ASSERT_EQ(arvore_avl->retornaPosfixada(), posfixado);
 }
 
 // Saida Infixada
@@ -167,7 +167,7 @@ TEST_F(ArvoreAVLTest, testaSaidaInfixada) {
 	std::string infixado("1 3 7 9 12 17 18 19 34 37 40 44 45 54 58 61 63 68 70 76 85 87 88 96 99");
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 25);
-	ASSERT_EQ(arvore_avl->retornaPrefixada(), infixado);
+	ASSERT_EQ(arvore_avl->retornaInfixada(), infixado);
 }
 
 // Saida Infixada Apos Remocao de Cinco Elementos
@@ -185,10 +185,10 @@ TEST_F(ArvoreAVLTest, testaSaidaInfixadaAposRemoverElementos) {
 
 	ASSERT_EQ(arvore_avl->retornaAltura(), 5);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 20);
-	ASSERT_EQ(arvore_avl->retornaPrefixada(), infixado);
+	ASSERT_EQ(arvore_avl->retornaInfixada(), infixado);
 }
 
-// Saida Prefixada Apos Inserir Alguns Elementos
+// Saida Infixada Apos Inserir Alguns Elementos
 TEST_F(ArvoreAVLTest, testaSaidaInfixadaAposInserirNovosElementos) {
 	std::string infixado("1 3 7 9 12 17 18 19 34 37 40 44 45 50 53 54 57 58 59 61 62 63 68 70 76 85 87 88 96 99");
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
@@ -202,7 +202,7 @@ TEST_F(ArvoreAVLTest, testaSaidaInfixadaAposInserirNovosElementos) {
 
 	ASSERT_EQ(arvore_avl->retornaAltura(), 6);
 	ASSERT_EQ(arvore_avl->retornaNumeroDeElementos(), 30);
-	ASSERT_EQ(arvore_avl->retornaPrefixada(), infixado);
+	ASSERT_EQ(arvore_avl->retornaInfixada(), infixado);
 }
 
 int main(int argc, char **argv) {

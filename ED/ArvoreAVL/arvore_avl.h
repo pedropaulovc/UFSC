@@ -29,7 +29,11 @@ public:
 	int retornaAltura();
 	int retornaAlturaDireita();
 	int retornaAlturaEsquerda();
+
 	int retornaNumeroDeElementos();
+	int retornaNumeroDeElementosDireita();
+	int retornaNumeroDeElementosEsquerda();
+
 	int retornaFatorDesbalanceamento();
 
 	NodoAVL<TipoInfo>* rotacaoDireita();
