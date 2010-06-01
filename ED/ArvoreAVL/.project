@@ -3,7 +3,6 @@
 	<name>ArvoreAVL</name>
 	<comment></comment>
 	<projects>
-		<project>ArvoreBinaria</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
