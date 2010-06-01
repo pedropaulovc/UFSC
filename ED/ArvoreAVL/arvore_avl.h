@@ -35,6 +35,7 @@ public:
 	int retornaNumeroDeElementosEsquerda();
 
 	int retornaFatorDesbalanceamento();
+	void atualizaAltura();
 
 	NodoAVL<TipoInfo>* rotacaoDireita();
 	NodoAVL<TipoInfo>* rotacaoEsquerda();

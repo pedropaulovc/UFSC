@@ -63,16 +63,23 @@ TEST_F(ArvoreAVLTest, testaSaidaPrefixada) {
 // Saida Prefixada Apos Remocao Cinco Elementos
 TEST_F(ArvoreAVLTest, testaSaidaPrefixadaAposRemoverElementos) {
 	std::string prefixado("61 19 9 3 1 7 17 44 37 34 54 45 58 85 70 68 76 96 88 99 ");
-	ASSERT_EQ(6,arvore_avl->retornaAltura());
+	ASSERT_EQ(5,arvore_avl->retornaAltura());
 	ASSERT_EQ(25,arvore_avl->retornaNumeroDeElementos());
 
-	arvore_avl->remove(40);
-	arvore_avl->remove(12);
-	arvore_avl->remove(63);
-	arvore_avl->remove(87);
-	arvore_avl->remove(18);
-
-	//ASSERT_EQ(5,arvore_avl->retornaAltura());
+	arvore_avl = arvore_avl->remove(40);
+	ASSERT_EQ(5,arvore_avl->retornaAltura());
+	ASSERT_EQ(24,arvore_avl->retornaNumeroDeElementos());
+	arvore_avl = arvore_avl->remove(12);
+	ASSERT_EQ(5,arvore_avl->retornaAltura());
+	ASSERT_EQ(23,arvore_avl->retornaNumeroDeElementos());
+	arvore_avl = arvore_avl->remove(63);
+	ASSERT_EQ(4,arvore_avl->retornaAltura());
+	ASSERT_EQ(22,arvore_avl->retornaNumeroDeElementos());
+	arvore_avl = arvore_avl->remove(87);
+	ASSERT_EQ(4,arvore_avl->retornaAltura());
+	ASSERT_EQ(21,arvore_avl->retornaNumeroDeElementos());
+	arvore_avl = arvore_avl->remove(18);
+	ASSERT_EQ(4,arvore_avl->retornaAltura());
 	ASSERT_EQ(20,arvore_avl->retornaNumeroDeElementos());
 	ASSERT_EQ(prefixado,arvore_avl->retornaPrefixada());
 }
@@ -105,7 +112,7 @@ TEST_F(ArvoreAVLTest, testaSaidaPosfixada) {
 // Saida Posfixada Apos Remocao de Alguns Elementos
 TEST_F(ArvoreAVLTest, testaSaidaPosfixadaAposRemoverElementos) {
 	std::string posfixado("1 7 3 17 9 34 37 45 58 54 44 19 68 76 70 88 99 96 85 61 ");
-	ASSERT_EQ(6,arvore_avl->retornaAltura());
+	ASSERT_EQ(5,arvore_avl->retornaAltura());
 	ASSERT_EQ(25,arvore_avl->retornaNumeroDeElementos());
 
 	arvore_avl->remove(40);
@@ -114,7 +121,7 @@ TEST_F(ArvoreAVLTest, testaSaidaPosfixadaAposRemoverElementos) {
 	arvore_avl->remove(87);
 	arvore_avl->remove(18);
 
-	ASSERT_EQ(5,arvore_avl->retornaAltura());
+	ASSERT_EQ(4,arvore_avl->retornaAltura());
 	ASSERT_EQ(20,arvore_avl->retornaNumeroDeElementos());
 	ASSERT_EQ(posfixado,arvore_avl->retornaPosfixada());
 }
@@ -151,7 +158,7 @@ TEST_F(ArvoreAVLTest, testaSaidaInfixada) {
 TEST_F(ArvoreAVLTest, testaSaidaInfixadaAposRemoverElementos) {
 	std::string infixado("1 3 7 9 17 19 34 37 44 45 54 58 61 68 70 76 85 88 96 99 ");
 
-	ASSERT_EQ(6,arvore_avl->retornaAltura());
+	ASSERT_EQ(5,arvore_avl->retornaAltura());
 	ASSERT_EQ(25,arvore_avl->retornaNumeroDeElementos());
 
 	arvore_avl->remove(40);
@@ -160,7 +167,7 @@ TEST_F(ArvoreAVLTest, testaSaidaInfixadaAposRemoverElementos) {
 	arvore_avl->remove(87);
 	arvore_avl->remove(18);
 
-	ASSERT_EQ(5,arvore_avl->retornaAltura());
+	ASSERT_EQ(4,arvore_avl->retornaAltura());
 	ASSERT_EQ(20,arvore_avl->retornaNumeroDeElementos());
 	ASSERT_EQ(infixado,arvore_avl->retornaInfixada());
 }

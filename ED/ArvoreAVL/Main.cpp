@@ -15,7 +15,7 @@ string* lerCidade(std::string linha){
 		cep = cep.substr(posicaoInicioCep);
 		cout << "cidade:" << cidade << endl << "cep:" << cep << endl;
 	}
-}
+ }
 
 
 void lerArquivo() {
@@ -35,9 +35,9 @@ void lerArquivo() {
 }
 
 int main(int argc, char **argv) {
-	//::testing::InitGoogleTest(&argc, argv);
-	//return RUN_ALL_TESTS();
+	::testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
 
-	lerArquivo();
+//	lerArquivo();
 	return 0;
 }

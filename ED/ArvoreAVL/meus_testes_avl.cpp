@@ -102,3 +102,30 @@ TEST_F(TestesRotacaoAVL, testeRotacaoEsquerdaArvoreCheia){
 	ASSERT_EQ(6,arvore_avl->retornaNumeroDeElementos());
 	ASSERT_EQ(std::string("20 30 34 35 50 60 "), arvore_avl->retornaInfixada());
 }
+
+TEST_F(TestesRotacaoAVL, testeRemocaoFolha){
+	arvore_avl = arvore_avl->insere(2);
+	arvore_avl = arvore_avl->insere(4);
+	arvore_avl = arvore_avl->insere(7);
+	ASSERT_EQ(1,arvore_avl->retornaAltura());
+	ASSERT_EQ(3,arvore_avl->retornaNumeroDeElementos());
+	ASSERT_EQ("2 4 7 ", arvore_avl->retornaInfixada());
+	arvore_avl = arvore_avl->remove(2);
+	ASSERT_EQ(1,arvore_avl->retornaAltura());
+	ASSERT_EQ(2,arvore_avl->retornaNumeroDeElementos());
+	ASSERT_EQ("4 7 ",arvore_avl->retornaInfixada());
+}
+
+TEST_F(TestesRotacaoAVL, testeRemocaoNodoUmFilho){
+	arvore_avl = arvore_avl->insere(4);
+	arvore_avl = arvore_avl->insere(2);
+	arvore_avl = arvore_avl->insere(7);
+	arvore_avl = arvore_avl->insere(3);
+	ASSERT_EQ(2,arvore_avl->retornaAltura());
+	ASSERT_EQ(4,arvore_avl->retornaNumeroDeElementos());
+	ASSERT_EQ("2 3 4 7 ", arvore_avl->retornaInfixada());
+	arvore_avl = arvore_avl->remove(2);
+	ASSERT_EQ("3 4 7 ",arvore_avl->retornaInfixada());
+	ASSERT_EQ(1,arvore_avl->retornaAltura());
+	ASSERT_EQ(3,arvore_avl->retornaNumeroDeElementos());
+}
