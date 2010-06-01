@@ -20,7 +20,7 @@ public:
 	~NodoAVL();
 
 	NodoAVL<TipoInfo>* insere(const TipoInfo& tipo);
-	void remove(const TipoInfo& tipo);
+	NodoAVL<TipoInfo>* remove(const TipoInfo& tipo);
 
 	std::string retornaPrefixada(std::string string);
 	std::string retornaPosfixada(std::string string);

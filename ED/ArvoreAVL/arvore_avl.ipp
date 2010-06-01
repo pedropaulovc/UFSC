@@ -131,12 +131,13 @@ template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDuplaEsque
 
 template<class TipoInfo> int NodoAVL<TipoInfo>::retornaFatorDesbalanceamento() {
 	int alturaEsquerda, alturaDireita;
+	//Cara, o que é isso? O que você tá fazendo?
 	alturaEsquerda = alturaEsquerda < 0 ? 0 : alturaEsquerda;
 	alturaDireita = alturaDireita < 0 ? 0 : alturaDireita;
 	return retornaAlturaEsquerda() - retornaAlturaDireita();
 }
 
-template<class TipoInfo> void NodoAVL<TipoInfo>::remove(const TipoInfo& tipo) {
+template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::remove(const TipoInfo& tipo) {
 	/*	nodo *delete(info: tipo info, arv: *nodo)
 	 início
 	 tmp, filho: *nodo;
@@ -177,19 +178,41 @@ template<class TipoInfo> void NodoAVL<TipoInfo>::remove(const TipoInfo& tipo) {
 	 fim*/
 
 	NodoAVL<TipoInfo>* temp;
-	NodoAVL<TipoInfo>* nodoRemovido;
 
 	if(tipo < info && nodoEsquerda != NULL){
-		nodoRemovido = nodoEsquerda->remove(tipo);
-		return nodoRemovido->verificaCondicaoAVL();
+		nodoEsquerda = nodoEsquerda->remove(tipo);
+		return verificaCondicaoAVL();
 	}
 
 	if(tipo > info && nodoDireita != NULL){
-		nodoRemovido = nodoDireita->remove(tipo);
-		return nodoRemovido->verificaCondicaoAVL();
+		nodoDireita = nodoDireita->remove(tipo);
+		return verificaCondicaoAVL();
 	}
 
-	if(nodoDireita != NULL && nodoEsquerda != NULL){
+	if(tipo != info)
+		return this;
+
+	if(nodoEsquerda == NULL && nodoDireita == NULL){
+		delete this;
+		return NULL;
+	}
+
+	if(nodoEsquerda != NULL){
+		temp = nodoEsquerda->maior();
+		info = temp->info;
+		nodoEsquerda = nodoEsquerda->remove(temp->info);
+		return verificaCondicaoAVL();
+	} else {
+		temp = nodoDireita->menor();
+		info = temp->info;
+		nodoDireita = nodoDireita->remove(temp->info);
+		return verificaCondicaoAVL();
+	}
+
+
+
+
+	/*if(nodoDireita != NULL && nodoEsquerda != NULL){
 		temp = nodoDireita->menor();
 		info = temp->info;
 		nodoDireita->remove(info);
@@ -200,7 +223,7 @@ template<class TipoInfo> void NodoAVL<TipoInfo>::remove(const TipoInfo& tipo) {
 		if(nodoDireita != NULL){
 			//FIXME não entendi, tô com sono
 		}
-	}
+	}*/
 }
 
 template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::obterDireita() {
@@ -293,6 +316,7 @@ template<class TipoInfo> int NodoAVL<TipoInfo>::retornaNumeroDeElementos() {
 template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::menor() {
 	NodoAVL<TipoInfo>* atual;
 
+	//Não seria this->info?
 	if (this == 0)
 		return 0;
 
