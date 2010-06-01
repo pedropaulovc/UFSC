@@ -21,7 +21,8 @@ protected:
 
 	void SetUp() {
 		arvore_avl = new NodoAVL<int>();
-		arvore_avl = arvore_avl = arvore_avl->insere(9);
+		arvore_avl = arvore_avl->insere(9);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(19);
 		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(40);
@@ -49,16 +50,27 @@ protected:
 		arvore_avl = arvore_avl->insere(87);
 		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(70);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(44);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(99);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(34);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(88);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(76);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(7);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(37);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(45);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(3);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 		arvore_avl = arvore_avl->insere(61);
+		std::cout << arvore_avl->retornaInfixada() << "\n";
 	}
 
 	void TearDown() {
