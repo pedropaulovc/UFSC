@@ -8,11 +8,18 @@ class NodoAVL {
 
 private:
 
-	TipoInfo info;
+	const TipoInfo *info;
 	NodoAVL *nodoEsquerda;
 	NodoAVL *nodoDireita;
 	int altura;
 	int numElementos;
+
+	NodoAVL<TipoInfo>* verificaCondicaoAVL();
+
+	NodoAVL<TipoInfo>* rotacaoDireita();
+	NodoAVL<TipoInfo>* rotacaoEsquerda();
+	NodoAVL<TipoInfo>* rotacaoDuplaDireita();
+	NodoAVL<TipoInfo>* rotacaoDuplaEsquerda();
 
 public:
 
@@ -37,13 +44,8 @@ public:
 	int retornaFatorDesbalanceamento();
 	void atualizaAltura();
 
-	NodoAVL<TipoInfo>* rotacaoDireita();
-	NodoAVL<TipoInfo>* rotacaoEsquerda();
-	NodoAVL<TipoInfo>* rotacaoDuplaDireita();
-	NodoAVL<TipoInfo>* rotacaoDuplaEsquerda();
-
-	NodoAVL<TipoInfo>* obterEsquerda();
-	NodoAVL<TipoInfo>* obterDireita();
+	NodoAVL<TipoInfo>* retornaEsquerda();
+	NodoAVL<TipoInfo>* retornaDireita();
 
 	void alterarEsquerda(NodoAVL<TipoInfo>* nodo);
 	void alterarDireita(NodoAVL<TipoInfo>* nodo);
@@ -51,9 +53,6 @@ public:
 
 	NodoAVL<TipoInfo>* menor();
 	NodoAVL<TipoInfo>* maior();
-
-private:
-	NodoAVL<TipoInfo>* verificaCondicaoAVL();
 };
 
 #include "arvore_avl.ipp"
