@@ -41,6 +41,7 @@ TEST_F(TestesCep, testeComparadores){
 
 
 TEST_F(TestesCep, testeArquivoCeps){
+	//FIXME Verficar se a lista encadeada está funcionando corretamente.
 	ListaEncadeada<Cep>* ceps = Cep::lerArquivoCeps("dados.txt");
 
 	ASSERT_TRUE(new Cep("09238123", "asddom") == ceps->obterDaPosicao(1));
