@@ -41,10 +41,10 @@ TEST_F(TestesCep, testeComparadores){
 
 
 TEST_F(TestesCep, testeArquivoCeps){
-	//FIXME Verficar se a lista encadeada está funcionando corretamente.
 	ListaEncadeada<Cep>* ceps = Cep::lerArquivoCeps("dados.txt");
 
-	ASSERT_TRUE(new Cep("09238123", "asddom") == ceps->obterDaPosicao(1));
-	ASSERT_TRUE(new Cep("1413412", "sdad") == ceps->obterDaPosicao(2));
-	ASSERT_TRUE(new Cep("123", "cidade") == ceps->obterDaPosicao(3));
+	ASSERT_EQ(3, ceps->obterTamanho());
+	ASSERT_TRUE(*(new Cep("09238123", "asddom")) == *(ceps->obterDaPosicao(1)));
+	ASSERT_TRUE(*(new Cep("1413412", "sdad")) == *(ceps->obterDaPosicao(2)));
+	ASSERT_TRUE(*(new Cep("123", "cidade")) == *(ceps->obterDaPosicao(3)));
 }
