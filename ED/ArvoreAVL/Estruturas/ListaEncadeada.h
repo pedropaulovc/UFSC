@@ -139,7 +139,7 @@ T* ListaEncadeada<T>::obterDaPosicao(int posicao) {
 	T* info;
 	int posicaoAtual = 1;
 	ultimoElemento = primeiro;
-	while (posicaoAtual != posicao) {
+	while (posicaoAtual != posicao && ultimoElemento->getProximo() != NULL) {
 		penultimoElemento = ultimoElemento;
 		ultimoElemento = ultimoElemento->getProximo();
 		posicaoAtual++;
