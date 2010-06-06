@@ -28,10 +28,7 @@ public:
 	bool operator!=(Cep& outro) const;
 	bool operator==(Cep& outro) const;
 	static ListaEncadeada<Cep>* lerArquivoCeps(string caminhoArquivo);
-
-private:
 	static Cep* lerCep(string linha);
-
 
 };
 

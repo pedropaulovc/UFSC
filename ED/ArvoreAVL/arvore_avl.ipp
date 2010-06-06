@@ -2,13 +2,10 @@
 #include <string>
 #include <sstream>
 
-//TODO: Remover couts
-#include <iostream>
-
 template<class TipoInfo> NodoAVL<TipoInfo>::NodoAVL() {
 	this->nodoEsquerda = NULL;
 	this->nodoDireita = NULL;
-	this->info = NULL;
+	this->utilizado = false;
 	this->altura = 0;
 	this->numElementos = 0;
 }
@@ -21,12 +18,13 @@ template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::insere(
 	//	std::cout << "inserindo " << tipo << "\n";
 
 	//FIXME: Há alguma maneira mais bonita de fazer isso?
-	if (this->info == NULL) {
-		info = new TipoInfo(tipo);
+	if (this->utilizado == false) {
+		info = tipo;
+		utilizado = true;
 		return this;
 	}
 
-	if (tipo < *info) {
+	if (tipo < info) {
 		if (nodoEsquerda == NULL)
 			nodoEsquerda = new NodoAVL<TipoInfo> ();
 		nodoEsquerda = nodoEsquerda->insere(tipo);
@@ -81,8 +79,6 @@ template<class TipoInfo> void NodoAVL<TipoInfo>::atualizaAltura() {
 }
 
 template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoEsquerda() {
-	//	std::cout << "fazendo rotação à esquerda " << this->info << "\n";
-
 	NodoAVL<TipoInfo>* pivo = retornaEsquerda();
 	NodoAVL<TipoInfo>* filhoDireitaPivo = pivo->retornaDireita();
 
@@ -98,7 +94,6 @@ template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoEsquerda()
 }
 
 template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDireita() {
-	//	std::cout << "fazendo rotação à direita " << this->info << "\n";
 	NodoAVL<TipoInfo>* pivo = retornaDireita();
 	NodoAVL<TipoInfo>* filhoEsquerdaPivo = pivo->retornaEsquerda();
 
@@ -114,7 +109,6 @@ template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDireita() 
 }
 
 template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDuplaDireita() {
-	//	std::cout << "fazendo rotação dupla à direita " << this->info << "\n";
 	NodoAVL<TipoInfo>* k1;
 	k1 = retornaDireita();
 	alterarDireita(k1->rotacaoEsquerda());
@@ -123,7 +117,6 @@ template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDuplaDirei
 }
 
 template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::rotacaoDuplaEsquerda() {
-	//	std::cout << "fazendo rotação dupla à esquerda " << this->info << "\n";
 	NodoAVL<TipoInfo>* k1;
 	k1 = retornaEsquerda();
 	alterarEsquerda(k1->rotacaoDireita());
@@ -143,34 +136,34 @@ template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::remove(
 		const TipoInfo& tipo) {
 	NodoAVL<TipoInfo> *temp, *novaRaiz;
 
-	if (tipo == *info && nodoEsquerda == NULL && nodoDireita == NULL) {
+	if (tipo == info && nodoEsquerda == NULL && nodoDireita == NULL) {
 		delete this;
 		return NULL;
 	}
 
-	if (tipo < *info && nodoEsquerda != NULL) {
+	if (tipo < info && nodoEsquerda != NULL) {
 		nodoEsquerda = nodoEsquerda->remove(tipo);
 		atualizaAltura();
 		return verificaCondicaoAVL();
 	}
 
-	if (tipo > *info && nodoDireita != NULL) {
+	if (tipo > info && nodoDireita != NULL) {
 		nodoDireita = nodoDireita->remove(tipo);
 		atualizaAltura();
 		return verificaCondicaoAVL();
 	}
 
-	if (tipo != *info)
+	if (tipo != info)
 		return this;
 
 	if (nodoEsquerda != NULL) {
 		temp = nodoEsquerda->maior();
 		info = temp->info;
-		nodoEsquerda = nodoEsquerda->remove(*(temp->info));
+		nodoEsquerda = nodoEsquerda->remove(temp->info);
 	} else {
 		temp = nodoDireita->menor();
 		info = temp->info;
-		nodoDireita = nodoDireita->remove(*(temp->info));
+		nodoDireita = nodoDireita->remove(temp->info);
 	}
 
 	novaRaiz = verificaCondicaoAVL();
@@ -204,7 +197,7 @@ template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPrefixada(
 		std::string string = "") {
 
 	std::stringstream saida;
-	saida << *info << " ";
+	saida << info << " ";
 	string.append(saida.str());
 	if (nodoEsquerda != NULL)
 		string = nodoEsquerda->retornaPrefixada(string);
@@ -221,7 +214,7 @@ template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPosfixada(
 		string = nodoEsquerda->retornaPosfixada(string);
 	if (nodoDireita != NULL)
 		string = nodoDireita->retornaPosfixada(string);
-	saida << *info << " ";
+	saida << info << " ";
 	string.append(saida.str());
 	return string;
 
@@ -233,7 +226,7 @@ template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaInfixada(
 
 	if (nodoEsquerda != NULL)
 		string = nodoEsquerda->retornaInfixada(string);
-	saida << *info << " ";
+	saida << info << " ";
 	string.append(saida.str());
 	if (nodoDireita != NULL)
 		string = nodoDireita->retornaInfixada(string);

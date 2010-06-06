@@ -8,11 +8,12 @@ class NodoAVL {
 
 private:
 
-	const TipoInfo *info;
+	TipoInfo info;
 	NodoAVL *nodoEsquerda;
 	NodoAVL *nodoDireita;
 	int altura;
 	int numElementos;
+	bool utilizado;
 
 	NodoAVL<TipoInfo>* verificaCondicaoAVL();
 
