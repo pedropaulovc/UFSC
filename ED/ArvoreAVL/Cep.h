@@ -24,6 +24,7 @@ public:
 	int obterCep();
 	string obterNome();
 	bool operator>(Cep& outro) const;
+	bool operator<=(Cep& outro) const;
 	bool operator<(Cep& outro) const;
 	bool operator!=(Cep& outro) const;
 	bool operator==(Cep& outro) const;

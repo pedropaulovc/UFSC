@@ -135,19 +135,14 @@ T* ListaEncadeada<T>::obterDaPosicao(int posicao) {
 	if (posicao == 1)
 		return obterDoInicio();
 
-	Elemento<T> *penultimoElemento, *ultimoElemento;
-	T* info;
+	Elemento<T>* atual = primeiro;
 	int posicaoAtual = 1;
-	ultimoElemento = primeiro;
-	while (posicaoAtual != posicao && ultimoElemento->getProximo() != NULL) {
-		penultimoElemento = ultimoElemento;
-		ultimoElemento = ultimoElemento->getProximo();
+	while(posicaoAtual != posicao){
+		atual = atual->getProximo();
 		posicaoAtual++;
 	}
 
-	penultimoElemento->setProximo(ultimoElemento->getProximo());
-	info = ultimoElemento->getInfo();
-	return info;
+	return atual->getInfo();
 }
 
 template<class T>

@@ -2,6 +2,7 @@
 #define ARVORE_AVL_H
 
 #include <string>
+#include "Estruturas/ListaEncadeada.h"
 
 template<class TipoInfo>
 class NodoAVL {
@@ -33,6 +34,10 @@ public:
 	std::string retornaPrefixada(std::string string);
 	std::string retornaPosfixada(std::string string);
 	std::string retornaInfixada(std::string string);
+
+	ListaEncadeada<TipoInfo>* retornaListaPrefixada(ListaEncadeada<TipoInfo>* lista);
+	ListaEncadeada<TipoInfo>* retornaListaPosfixada(ListaEncadeada<TipoInfo>* lista);
+	ListaEncadeada<TipoInfo>* retornaListaInfixada(ListaEncadeada<TipoInfo>* lista);
 
 	int retornaAltura();
 	int retornaAlturaDireita();

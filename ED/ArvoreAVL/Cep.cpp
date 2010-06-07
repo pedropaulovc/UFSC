@@ -34,19 +34,23 @@ string Cep::obterNome() {
 }
 
 bool Cep::operator>(Cep& outro) const {
-	return cep > outro.cep;
+	return (nome.compare(outro.nome) > 0);
 }
 
 bool Cep::operator<(Cep& outro) const {
-	return cep < outro.cep;
+	return (nome.compare(outro.nome) < 0);
+}
+
+bool Cep::operator<=(Cep& outro) const {
+	return (nome.compare(outro.nome) <= 0);
 }
 
 bool Cep::operator==(Cep& outro) const {
-	return cep == outro.cep;
+	return (nome.compare(outro.nome) == 0);
 }
 
 bool Cep::operator!=(Cep& outro) const {
-	return cep != outro.cep;
+	return (nome.compare(outro.nome) != 0);
 }
 
 Cep* Cep::lerCep(string linha) {

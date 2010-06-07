@@ -1,24 +1,25 @@
 #include "arvore_avl.h"
 #include <gtest/gtest.h>
 #include <iostream>
+#include "Estruturas/ListaEncadeada.h"
 
-class TestesRotacaoAVL : public ::testing::Test {
+class TestesRotacaoAVL: public ::testing::Test {
 
 protected:
 
 	NodoAVL<int>* arvore_avl;
 
-	void SetUp(){
-		arvore_avl = new NodoAVL<int>();
+	void SetUp() {
+		arvore_avl = new NodoAVL<int> ();
 	}
 
-	void TearDown(){
+	void TearDown() {
 		delete arvore_avl;
 	}
 };
 
-
-TEST_F(TestesRotacaoAVL, testeInsercoesDireita){
+TEST_F(TestesRotacaoAVL, testeInsercoesDireita)
+{
 	arvore_avl = arvore_avl->insere(10);
 	arvore_avl = arvore_avl->insere(20);
 	ASSERT_EQ(std::string("10 20 "), arvore_avl->retornaInfixada());
@@ -26,7 +27,8 @@ TEST_F(TestesRotacaoAVL, testeInsercoesDireita){
 	ASSERT_EQ(2,arvore_avl->retornaNumeroDeElementos());
 }
 
-TEST_F(TestesRotacaoAVL, testeInsercoesEsquerda){
+TEST_F(TestesRotacaoAVL, testeInsercoesEsquerda)
+{
 	arvore_avl = arvore_avl->insere(20);
 	arvore_avl = arvore_avl->insere(10);
 	ASSERT_EQ(std::string("10 20 "), arvore_avl->retornaInfixada());
@@ -34,7 +36,8 @@ TEST_F(TestesRotacaoAVL, testeInsercoesEsquerda){
 	ASSERT_EQ(2,arvore_avl->retornaNumeroDeElementos());
 }
 
-TEST_F(TestesRotacaoAVL, testeInsercoesAmbosLados){
+TEST_F(TestesRotacaoAVL, testeInsercoesAmbosLados)
+{
 	arvore_avl = arvore_avl->insere(20);
 	arvore_avl = arvore_avl->insere(30);
 	arvore_avl = arvore_avl->insere(10);
@@ -43,7 +46,8 @@ TEST_F(TestesRotacaoAVL, testeInsercoesAmbosLados){
 	ASSERT_EQ(3,arvore_avl->retornaNumeroDeElementos());
 }
 
-TEST_F(TestesRotacaoAVL, testeRotacaoEsquerda){
+TEST_F(TestesRotacaoAVL, testeRotacaoEsquerda)
+{
 	arvore_avl = arvore_avl->insere(50);
 	arvore_avl = arvore_avl->insere(40);
 	arvore_avl = arvore_avl->insere(30);
@@ -52,7 +56,8 @@ TEST_F(TestesRotacaoAVL, testeRotacaoEsquerda){
 	ASSERT_EQ(3,arvore_avl->retornaNumeroDeElementos());
 }
 
-TEST_F(TestesRotacaoAVL, testeRotacaoDireita){
+TEST_F(TestesRotacaoAVL, testeRotacaoDireita)
+{
 	arvore_avl = arvore_avl->insere(30);
 	arvore_avl = arvore_avl->insere(40);
 	arvore_avl = arvore_avl->insere(50);
@@ -61,7 +66,8 @@ TEST_F(TestesRotacaoAVL, testeRotacaoDireita){
 	ASSERT_EQ(3,arvore_avl->retornaNumeroDeElementos());
 }
 
-TEST_F(TestesRotacaoAVL, testeRotacaoDuplaEsquerda){
+TEST_F(TestesRotacaoAVL, testeRotacaoDuplaEsquerda)
+{
 	arvore_avl = arvore_avl->insere(40);
 	arvore_avl = arvore_avl->insere(30);
 	arvore_avl = arvore_avl->insere(35);
@@ -70,7 +76,8 @@ TEST_F(TestesRotacaoAVL, testeRotacaoDuplaEsquerda){
 	ASSERT_EQ(3,arvore_avl->retornaNumeroDeElementos());
 }
 
-TEST_F(TestesRotacaoAVL, testeRotacaoDuplaDireita){
+TEST_F(TestesRotacaoAVL, testeRotacaoDuplaDireita)
+{
 	arvore_avl = arvore_avl->insere(50);
 	arvore_avl = arvore_avl->insere(60);
 	arvore_avl = arvore_avl->insere(55);
@@ -79,7 +86,8 @@ TEST_F(TestesRotacaoAVL, testeRotacaoDuplaDireita){
 	ASSERT_EQ(3,arvore_avl->retornaNumeroDeElementos());
 }
 
-TEST_F(TestesRotacaoAVL, testeAlturaGrande){
+TEST_F(TestesRotacaoAVL, testeAlturaGrande)
+{
 	arvore_avl = arvore_avl->insere(50);
 	ASSERT_EQ(0,arvore_avl->retornaAltura());
 	arvore_avl = arvore_avl->insere(60);
@@ -91,7 +99,8 @@ TEST_F(TestesRotacaoAVL, testeAlturaGrande){
 	ASSERT_EQ(4,arvore_avl->retornaNumeroDeElementos());
 }
 
-TEST_F(TestesRotacaoAVL, testeRotacaoEsquerdaArvoreCheia){
+TEST_F(TestesRotacaoAVL, testeRotacaoEsquerdaArvoreCheia)
+{
 	arvore_avl = arvore_avl->insere(50);
 	arvore_avl = arvore_avl->insere(30);
 	arvore_avl = arvore_avl->insere(60);
@@ -103,7 +112,8 @@ TEST_F(TestesRotacaoAVL, testeRotacaoEsquerdaArvoreCheia){
 	ASSERT_EQ(std::string("20 30 34 35 50 60 "), arvore_avl->retornaInfixada());
 }
 
-TEST_F(TestesRotacaoAVL, testeRemocaoFolha){
+TEST_F(TestesRotacaoAVL, testeRemocaoFolha)
+{
 	arvore_avl = arvore_avl->insere(2);
 	arvore_avl = arvore_avl->insere(4);
 	arvore_avl = arvore_avl->insere(7);
@@ -116,7 +126,8 @@ TEST_F(TestesRotacaoAVL, testeRemocaoFolha){
 	ASSERT_EQ("4 7 ",arvore_avl->retornaInfixada());
 }
 
-TEST_F(TestesRotacaoAVL, testeRemocaoNodoUmFilho){
+TEST_F(TestesRotacaoAVL, testeRemocaoNodoUmFilho)
+{
 	arvore_avl = arvore_avl->insere(4);
 	arvore_avl = arvore_avl->insere(2);
 	arvore_avl = arvore_avl->insere(7);
@@ -128,4 +139,25 @@ TEST_F(TestesRotacaoAVL, testeRemocaoNodoUmFilho){
 	ASSERT_EQ("3 4 7 ",arvore_avl->retornaInfixada());
 	ASSERT_EQ(1,arvore_avl->retornaAltura());
 	ASSERT_EQ(3,arvore_avl->retornaNumeroDeElementos());
+}
+
+
+TEST_F(TestesRotacaoAVL, testePercursoEmordem)
+{
+	int emOrdem [] = {2, 3, 4, 7, 20, 30, 35, 50, 60};
+	arvore_avl = arvore_avl->insere(4);
+	arvore_avl = arvore_avl->insere(2);
+	arvore_avl = arvore_avl->insere(7);
+	arvore_avl = arvore_avl->insere(3);
+	arvore_avl = arvore_avl->insere(50);
+	arvore_avl = arvore_avl->insere(30);
+	arvore_avl = arvore_avl->insere(60);
+	arvore_avl = arvore_avl->insere(20);
+	arvore_avl = arvore_avl->insere(35);
+
+	ListaEncadeada<int>* listaEmOrdem = arvore_avl->retornaListaInfixada();
+
+	for(int i = 1; i < listaEmOrdem->obterTamanho(); i++){
+		ASSERT_EQ(emOrdem[i - 1], *(listaEmOrdem->obterDaPosicao(i)));
+	}
 }

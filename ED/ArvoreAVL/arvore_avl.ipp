@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <string>
 #include <sstream>
+#include "Estruturas/ListaEncadeada.h"
 
 template<class TipoInfo> NodoAVL<TipoInfo>::NodoAVL() {
 	this->nodoEsquerda = NULL;
@@ -15,16 +16,13 @@ template<class TipoInfo> NodoAVL<TipoInfo>::~NodoAVL() {
 
 template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::insere(
 		const TipoInfo& tipo) {
-	//	std::cout << "inserindo " << tipo << "\n";
-
-	//FIXME: Há alguma maneira mais bonita de fazer isso?
 	if (this->utilizado == false) {
 		info = tipo;
 		utilizado = true;
 		return this;
 	}
 
-	if (tipo < info) {
+	if (tipo <= info) {
 		if (nodoEsquerda == NULL)
 			nodoEsquerda = new NodoAVL<TipoInfo> ();
 		nodoEsquerda = nodoEsquerda->insere(tipo);
@@ -206,6 +204,7 @@ template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPrefixada(
 	return string;
 }
 
+
 template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaPosfixada(
 		std::string string = "") {
 
@@ -231,6 +230,45 @@ template<class TipoInfo> std::string NodoAVL<TipoInfo>::retornaInfixada(
 	if (nodoDireita != NULL)
 		string = nodoDireita->retornaInfixada(string);
 	return string;
+}
+
+template<class TipoInfo> ListaEncadeada<TipoInfo>* NodoAVL<TipoInfo>::retornaListaPrefixada(
+		ListaEncadeada<TipoInfo>* lista = NULL) {
+	if(lista == NULL)
+		lista = new ListaEncadeada<TipoInfo>();
+
+	lista->adicionarNoFim(&info);
+	if (nodoEsquerda != NULL)
+		nodoEsquerda->retornaListaPrefixada(lista);
+	if (nodoDireita != NULL)
+		nodoDireita->retornaListaPrefixada(lista);
+	return lista;
+}
+
+template<class TipoInfo> ListaEncadeada<TipoInfo>* NodoAVL<TipoInfo>::retornaListaInfixada(
+		ListaEncadeada<TipoInfo>* lista = NULL) {
+	if(lista == NULL)
+		lista = new ListaEncadeada<TipoInfo>();
+
+	if (nodoEsquerda != NULL)
+		nodoEsquerda->retornaListaInfixada(lista);
+	lista->adicionarNoFim(&info);
+	if (nodoDireita != NULL)
+		nodoDireita->retornaListaInfixada(lista);
+	return lista;
+}
+
+template<class TipoInfo> ListaEncadeada<TipoInfo>* NodoAVL<TipoInfo>::retornaListaPosfixada(
+		ListaEncadeada<TipoInfo>* lista = NULL) {
+	if(lista == NULL)
+		lista = new ListaEncadeada<TipoInfo>();
+
+	if (nodoEsquerda != NULL)
+		nodoEsquerda->retornaListaPosfixada(lista);
+	if (nodoDireita != NULL)
+		nodoDireita->retornaListaPosfixada(lista);
+	lista->adicionarNoFim(&info);
+	return lista;
 }
 
 template<class TipoInfo> int NodoAVL<TipoInfo>::retornaAltura() {

@@ -16,9 +16,9 @@ protected:
 	Cep cep1, cep2, cep3;
 
 	void SetUp(){
-		cep1 = *(new Cep("00000000", "Rua dos Bobos"));
-		cep2 = *(new Cep("98239858", "Avenida 3"));
-		cep3 = *(new Cep("98239858", "Avenida 3"));
+		cep1 = *(new Cep("00000000", "Rua A"));
+		cep2 = *(new Cep("98239858", "Rua B"));
+		cep3 = *(new Cep("98239858", "Rua B"));
 	}
 
 	void TearDown(){

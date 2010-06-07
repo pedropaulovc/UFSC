@@ -62,7 +62,6 @@ void Main::executaLeituraCep() {
 	string arquivoCeps;
 	Cep* cepAtual;
 	timeval antes, depois;
-
 	NodoAVL<Cep>* raiz = new NodoAVL<Cep> ();
 
 	cout << "Forneça o caminho do arquivo de CEPs: ";
@@ -70,13 +69,15 @@ void Main::executaLeituraCep() {
 
 	ofstream out;
 	out.open("analise/out.txt", ios::trunc | ios::out);
+	out.setf(ios::fixed, ios::floatfield);
+	out.precision(6);
+
+	ListaEncadeada<Cep>* ceps = Cep::lerArquivoCeps(arquivoCeps);
 
 	if (out.bad()) {
 		cout << "Problema no arquivo de saída\n";
 		return;
 	}
-
-	ListaEncadeada<Cep>* ceps = Cep::lerArquivoCeps(arquivoCeps);
 
 	if (ceps == NULL) {
 		cout << "Problema na leitura do arquivo.\n";
@@ -85,20 +86,26 @@ void Main::executaLeituraCep() {
 
 	for (int i = 1; i < ceps->obterTamanho(); i++) {
 		cepAtual = ceps->obterDaPosicao(i);
-		cout << "Logradouro: " << cepAtual->obterNome() << " CEP: "
-				<< cepAtual->obterCep() << "\n";
 		gettimeofday(&antes, NULL);
 		raiz = raiz->insere(*cepAtual);
 		gettimeofday(&depois, NULL);
-		out << i << "\t" << depois.tv_usec - antes.tv_usec << "\n";
+		out << i << "\t" << calculaDiferencaTempo(antes, depois) << "\n";
 	}
 	out.close();
+
+	ListaEncadeada<Cep>* cepsEmOrdem = raiz->retornaListaInfixada();
+	for(int i = 1; i < cepsEmOrdem->obterTamanho(); i++){
+		cepAtual = cepsEmOrdem->obterDaPosicao(i);
+		cout << "Logradouro: " << cepAtual->obterNome() << " CEP: "
+				<< cepAtual->obterCep() << "\n";
+	}
 
 	system("gnuplot analise/gnuplot.gnu");
 }
 
-inline double Main::calculaDiferencaTempo(timeval antes, timeval depois){
-	return depois.tv_sec - antes.tv_sec + pow10(-6) * (depois.tv_usec - antes.tv_usec);
+inline double Main::calculaDiferencaTempo(timeval antes, timeval depois) {
+	return depois.tv_sec - antes.tv_sec + pow10(-6) * (depois.tv_usec
+			- antes.tv_usec);
 }
 
 int Main::executaTestes(int argc, char **argv) {
