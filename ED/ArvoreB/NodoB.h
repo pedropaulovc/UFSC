@@ -14,14 +14,17 @@
 template<class T>
 class NodoB {
 private:
-	T** infos;
+	const T** infos;
 	NodoB** filhos;
-	int numChaves;
+	int numChavesNodo;
+	int totalChaves;
+	int altura;
+	int ordem;
 	bool folha;
 
-	void insereFolha(const T& tipo);
+	//void insereFolha(T const &tipo);
 	NodoB<T>* divideNodo();
-	NodoB<T>* selecionaRamoDescida(const T& tipo);
+	NodoB<T>* selecionaRamoDescida(T const &tipo);
 
 	void atualizaAltura();
 	void atualizaQtdElementos();
@@ -31,13 +34,13 @@ public:
 	NodoB(int ordem);
 	virtual ~NodoB();
 
-	NodoB<T>* insere(const T& tipo);
-	NodoB<T>* remove(const T& tipo);
+	NodoB<T>* insere(T const &tipo);
+	NodoB<T>* remove(T const &tipo);
 
 	int retornaAltura();
 	int retornaNumeroDeElementos();
 
-	void retornaPrefixada(ListaEncadeada<T>* lista);
+	void retornaPrefixada(ListaEncadeada<const T>* lista);
 	void retornaPosfixada(ListaEncadeada<T>* lista);
 	void retornaInfixada(ListaEncadeada<T>* lista);
 
@@ -46,6 +49,9 @@ public:
 	std::string retornaInfixada();
 
 	bool nodoCheio();
+	bool nodoVazio();
+
+	void insereFolha(T const &tipo);
 };
 
 #include "NodoB.ipp"
