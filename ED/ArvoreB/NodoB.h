@@ -39,10 +39,11 @@ public:
 
 	int retornaAltura();
 	int retornaNumeroDeElementos();
+	int retornaNumeroDeChaves();
 
 	void retornaPrefixada(ListaEncadeada<const T>* lista);
-	void retornaPosfixada(ListaEncadeada<T>* lista);
-	void retornaInfixada(ListaEncadeada<T>* lista);
+	void retornaPosfixada(ListaEncadeada<const T>* lista);
+	void retornaInfixada(ListaEncadeada<const T>* lista);
 
 	std::string retornaPrefixada();
 	std::string retornaPosfixada();

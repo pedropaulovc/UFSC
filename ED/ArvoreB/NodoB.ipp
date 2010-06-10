@@ -44,8 +44,6 @@ template<class T> NodoB<T>* NodoB<T>::insere(T const &tipo) {
 
 template<class T> void NodoB<T>::insereFolha(T const &tipo) {
 	const T* infoAtual = infos[0];
-	if (nodoCheio() || !folha)
-		return;
 
 	int i = 0;
 	while (infoAtual != NULL && tipo > *infoAtual) {
@@ -68,14 +66,55 @@ template<class T> void NodoB<T>::insereFolha(T const &tipo) {
 }
 
 template<class T> NodoB<T>* NodoB<T>::selecionaRamoDescida(T const &tipo) {
+	if (folha)
+		return this;
 
+	for (int i = 0; i < (numChavesNodo); i++)
+		if (tipo < *infos[i])
+			return filhos[i]->selecionaRamoDescida(tipo);
+
+	return filhos[numChavesNodo - 1];
 }
 
 template<class T> NodoB<T>* NodoB<T>::divideNodo() {
+	NodoB<T>* nodoEsquerda = new NodoB<T> (ordem);
+	NodoB<T>* nodoDireita = new NodoB<T> (ordem);
 
+	// Cria um nodo com os filhos à esquerda da chave do meio do pai
+	for (int i = 0; i < ordem - 1; i++)
+		nodoEsquerda->insere(*infos[i]);
+
+	// Cria um nodo com os filhos à direita da chave do meio do pai
+	for (int i = ordem; i < (2 * ordem - 1); i++)
+		nodoDireita->insere(*infos[i]);
+
+	// Coloca a chave do meio na primeira posição e anula o resto
+	infos[0] = infos[ordem - 1];
+	for (int i = 1; i < (2 * ordem - 1); i++)
+		infos[i] = NULL;
+
+	filhos[0] = nodoEsquerda;
+	filhos[1] = nodoDireita;
+
+	// Anula os outros filhos
+	for (int i = 2; i < (2 * ordem - 1); i++)
+		filhos[i] = NULL;
+
+	numChavesNodo = 1;
+	folha = false;
+
+	atualizaAltura();
+	atualizaQtdElementos();
+
+	return this;
 }
 
 template<class T> void NodoB<T>::atualizaAltura() {
+	if (folha) {
+		altura = 0;
+		return;
+	}
+
 	int i = 0;
 	int maxAltura = 0;
 	int alturaFilho;
@@ -86,10 +125,7 @@ template<class T> void NodoB<T>::atualizaAltura() {
 		i++;
 	}
 
-	if (maxAltura == 0)
-		altura = 0;
-	else
-		altura = maxAltura + 1;
+	altura = maxAltura + 1;
 }
 
 template<class T> void NodoB<T>::atualizaQtdElementos() {
@@ -111,6 +147,10 @@ template<class T> bool NodoB<T>::nodoVazio() {
 	return numChavesNodo == 0;
 }
 
+template<class T> int NodoB<T>::retornaNumeroDeChaves(){
+	return numChavesNodo;
+}
+
 template<class T> int NodoB<T>::retornaNumeroDeElementos() {
 	return totalChaves;
 }
@@ -121,14 +161,13 @@ template<class T> int NodoB<T>::retornaAltura() {
 
 template<class T> void NodoB<T>::retornaPrefixada(
 		ListaEncadeada<const T>* lista) {
-	if (lista == NULL)
-		lista = new ListaEncadeada<const T> ();
 
 	lista->adicionarNoFim(infos[0]);
+
 	if (filhos[0] != NULL)
-		retornaPrefixada(lista);
+		filhos[0]->retornaPrefixada(lista);
 	if (filhos[1] != NULL)
-		retornaPrefixada(lista);
+		filhos[1]->retornaPrefixada(lista);
 
 	int i = 1;
 	while (infos[i] != NULL && i < 2 * ordem - 1) {
@@ -137,14 +176,27 @@ template<class T> void NodoB<T>::retornaPrefixada(
 			retornaPrefixada(lista);
 		i++;
 	}
-
 }
 
-template<class T> void NodoB<T>::retornaInfixada(ListaEncadeada<T>* lista) {
+template<class T> void NodoB<T>::retornaInfixada(ListaEncadeada<const T>* lista) {
+	if (filhos[0] != NULL)
+		filhos[0]->retornaInfixada(lista);
 
+	lista->adicionarNoFim(infos[0]);
+
+	if (filhos[1] != NULL)
+		filhos[1]->retornaInfixada(lista);
+
+	int i = 1;
+	while (infos[i] != NULL && i < 2 * ordem - 1) {
+		if (filhos[i + 1] != NULL)
+			retornaInfixada(lista);
+		lista->adicionarNoFim(infos[i]);
+		i++;
+	}
 }
 
-template<class T> void NodoB<T>::retornaPosfixada(ListaEncadeada<T>* lista) {
+template<class T> void NodoB<T>::retornaPosfixada(ListaEncadeada<const T>* lista) {
 
 }
 
@@ -162,7 +214,16 @@ template<class T> std::string NodoB<T>::retornaPrefixada() {
 }
 
 template<class T> std::string NodoB<T>::retornaInfixada() {
+	ListaEncadeada<const T>* lista = new ListaEncadeada<const T> ();
+	retornaInfixada(lista);
 
+	std::stringstream saida;
+
+	for (int i = 1; i <= lista->obterTamanho(); i++) {
+		saida << *(lista->obterDaPosicao(i)) << " ";
+	}
+
+	return saida.str();
 }
 
 template<class T> std::string NodoB<T>::retornaPosfixada() {
