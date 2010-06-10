@@ -119,19 +119,22 @@ int ListaEncadeada<T>::adicionarEmOrdem(T* info) {
 
 template<class T>
 T* ListaEncadeada<T>::obterDoInicio() {
-	if(tamanho > 0)
-		return primeiro->getInfo();
-	return NULL;
+	if(listaVazia())
+		return NULL;
+
+	return primeiro->getInfo();
 }
 
 template<class T>
 T* ListaEncadeada<T>::obterDoFim() {
+	if(listaVazia())
+		return NULL;
+
 	return obterDaPosicao(tamanho);
 }
 
 template<class T>
 T* ListaEncadeada<T>::obterDaPosicao(int posicao) {
-
 	if (posicao > tamanho || posicao < 1)
 		return NULL;
 	if (posicao == 1)
@@ -172,12 +175,15 @@ T* ListaEncadeada<T>::removerDaPosicao(int posicao){
 	Elemento<T> *penultimoElemento, *ultimoElemento;
 	int posicaoAtual = 1;
 
-	while(posicao != posicaoAtual){
+	ultimoElemento = primeiro;
+
+	while(posicao != posicaoAtual && ultimoElemento->getProximo() != NULL){
 		penultimoElemento = ultimoElemento;
 		ultimoElemento = ultimoElemento->getProximo();
 		posicaoAtual++;
 	}
 
+	tamanho--;
 	penultimoElemento->setProximo(ultimoElemento->getProximo());
 	return ultimoElemento->getInfo();
 }

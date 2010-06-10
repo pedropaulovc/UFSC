@@ -164,9 +164,9 @@ template<class T> void NodoB<T>::retornaPrefixada(
 
 	lista->adicionarNoFim(infos->obterDoInicio());
 	if (filhos->obterDoInicio() != NULL)
-		retornaPrefixada(lista);
+		filhos->obterDoInicio()->retornaPrefixada(lista);
 	if (filhos->obterDaPosicao(2) != NULL)
-		retornaPrefixada(lista);
+		filhos->obterDaPosicao(2)->retornaPrefixada(lista);
 
 	int i = 2;
 	while (i <= numChavesNodo) {
