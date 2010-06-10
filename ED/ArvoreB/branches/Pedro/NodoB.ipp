@@ -67,7 +67,7 @@ template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 	if (!filho->nodoCheio())
 		return;
 
-	int nodoMeio = (2 * ordem + 1) / 2;
+	int nodoMeio = ordem + 1;
 	const T* infoSobe = filho->infos->removerDaPosicao(nodoMeio);
 	NodoB<T>* outroFilho = new NodoB<T> (ordem);
 
@@ -75,21 +75,23 @@ template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 	ListaEncadeada<const T>* chavesFilho = filho->infos;
 	ListaEncadeada<const T>* chavesOutroFilho = outroFilho->infos;
 	const T* infoAtual = chavesFilho->obterDoInicio();
-	int i = 0;
+	int i = 1;
 	while(i < nodoMeio && infoAtual != NULL){
-		i++;
-		infoAtual = chavesFilho->removerDaPosicao(i);
+		chavesFilho->removerDoInicio();
 		chavesOutroFilho->adicionarEmOrdem(infoAtual);
+		i++;
+		infoAtual = chavesFilho->obterDoInicio();
 	}
 
 	ListaEncadeada<NodoB<T> >* filhosDoFilho = filho->filhos;
 	ListaEncadeada<NodoB<T> >* filhosDoOutroFilho = outroFilho->filhos;
 	NodoB<T>* filhoAtual = filhosDoFilho->obterDoInicio();
-	i = 0;
+	i = 1;
 	while(i <= nodoMeio && filhoAtual != NULL){
-		i++;
 		filhosDoOutroFilho->adicionarNaPosicao(filhoAtual, i);
-		filhoAtual = filhosDoFilho->removerDaPosicao(i);
+		filhosDoFilho->removerDoInicio();
+		i++;
+		filhoAtual = filhosDoFilho->obterDoInicio();
 	}
 
 	filho->atualizaQtdElementos();
@@ -99,6 +101,7 @@ template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 
 	int posicaoNovoFilho = raiz->encontrarPosicaoNovoNodo(*infoSobe);
 	raiz->infos->adicionarEmOrdem(infoSobe);
+	raiz->numChavesNodo++;
 	raiz->filhos->adicionarNaPosicao(outroFilho, posicaoNovoFilho);
 
 	if (raiz->filhos->obterDaPosicao(posicaoNovoFilho + 1) != filho)

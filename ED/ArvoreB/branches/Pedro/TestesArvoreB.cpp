@@ -42,5 +42,5 @@ TEST_F(TestesArvoreB, testeDivisaoRaiz)
 
 	ASSERT_EQ(7, arvore_b->retornaNumeroDeElementos());
 	ASSERT_EQ(1, arvore_b->retornaAltura());
-	ASSERT_EQ("1 2 3 4 5 9 11 ", arvore_b->retornaPrefixada());
+	ASSERT_EQ("4 1 2 3 5 9 11 ", arvore_b->retornaPrefixada());
 }
