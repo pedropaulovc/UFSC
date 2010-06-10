@@ -10,7 +10,7 @@ template<class U> NodoB<U>::NodoB(int ordem) {
 	folha = true;
 	raiz = true;
 	infos = new ListaEncadeada<const U> ();
-	filhos = new ListaEncadeada<NodoDef > ();
+	filhos = new ListaEncadeada<NodoB<U> > ();
 }
 
 template<class U> NodoB<U>::~NodoB() {

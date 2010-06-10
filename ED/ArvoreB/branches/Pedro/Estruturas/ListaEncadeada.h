@@ -169,7 +169,7 @@ T* ListaEncadeada<T>::removerDaPosicao(int posicao){
 	if(posicao == 1)
 		return removerDoInicio();
 
-	Elemento<int> *penultimoElemento, *ultimoElemento;
+	Elemento<T> *penultimoElemento, *ultimoElemento;
 	int posicaoAtual = 1;
 
 	while(posicao != posicaoAtual){
