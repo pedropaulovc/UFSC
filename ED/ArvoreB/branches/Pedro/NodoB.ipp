@@ -147,7 +147,7 @@ template<class T> void NodoB<T>::atualizaQtdElementos() {
 				+= filhos->obterDaPosicao(i)->retornaNumeroDeElementos();
 		i++;
 	}
-
+	numChavesNodo = infos->obterTamanho();
 	totalChaves = numElementosSubarvores + infos->obterTamanho();
 }
 
