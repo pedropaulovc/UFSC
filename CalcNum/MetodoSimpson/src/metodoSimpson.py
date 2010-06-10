@@ -1,3 +1,4 @@
+#encoding=utf-8
 '''
 Created on Jun 9, 2010
 
@@ -12,36 +13,49 @@ def f(func, x):
 def integrarSimpson(func, inicio, fim, partes):
 	inicio = float(inicio)
 	fim = float(fim)
-	
-	
+
+
 	h = (fim - inicio) / partes
-	print 'h = ', h
 	extremos = f(func, inicio) + f(func, fim)
 
 
 	partes2 = int(partes / 2)
 	h2 = h + h
 	c = inicio + h
-	print 'Range par ', 1, partes2 - 1
-	print 'Ponto soma par ', inicio + h
-	print 'Valor ', f(func, c)
-	sp = f(func, c)
+	somaPares = f(func, c)
 	for _ in range(1, partes2):
 		c += h2
-		sp += f(func, c)
-		print 'Ponto soma par ', c
-		print 'Valor ', f(func, c)
+		somaPares += f(func, c)
 
-	si = 0.0
+	somaImpares = 0.0
 	c = inicio
-	print 'Range impar ', 1, partes2 - 1
 	for _ in range(1, partes2):
 		c += h2
-		si += f(func, c)
-		print 'Ponto soma impar ', c
-		print 'Valor ', f(func, c)
+		somaImpares += f(func, c)
 
-	return (h / 3) * (extremos + 4 * sp + 2 * si)
+	return (h / 3) * (extremos + 4 * somaPares + 2 * somaImpares)
 
+def simpsonComposto(func, inicio, fim, precisao, partes):
+	int = integrarSimpson(func, inicio, fim, partes)
+	intAnterior = int
+	erro = 10 * precisao
+	passo = (fim - inicio) / 2
+	k = 2
 
+	numIteracoes = 1
+	while(erro > precisao):
+		c = inicio
+		int = 0
 
+		for _ in range(k):
+			d = c + passo
+			intParcial = integrarSimpson(func, c, d, partes)
+			int += intParcial
+			c = d
+		erro = abs(int - intAnterior) / max(abs(int), abs(intAnterior))
+		intAnterior = int
+		passo /= 2
+		k = k + k
+		numIteracoes += 1
+
+	return int
