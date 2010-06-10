@@ -68,27 +68,34 @@ template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 		return;
 
 	int nodoMeio = (2 * ordem + 1) / 2;
-	const T* infoSobe = filho->infos->obterDaPosicao(nodoMeio);
+	const T* infoSobe = filho->infos->removerDaPosicao(nodoMeio);
 	NodoB<T>* outroFilho = new NodoB<T> (ordem);
 
-	const T* infoAtual;
+
 	ListaEncadeada<const T>* chavesFilho = filho->infos;
 	ListaEncadeada<const T>* chavesOutroFilho = outroFilho->infos;
-	for (int i = 1; i < nodoMeio; i++) {
+	const T* infoAtual = chavesFilho->obterDoInicio();
+	int i = 0;
+	while(i < nodoMeio && infoAtual != NULL){
+		i++;
 		infoAtual = chavesFilho->removerDaPosicao(i);
 		chavesOutroFilho->adicionarEmOrdem(infoAtual);
 	}
 
-	NodoB<T>* filhoAtual;
 	ListaEncadeada<NodoB<T> >* filhosDoFilho = filho->filhos;
 	ListaEncadeada<NodoB<T> >* filhosDoOutroFilho = outroFilho->filhos;
-	for (int i = 1; i <= nodoMeio + 1; i++) {
-		filhoAtual = filhosDoFilho->removerDaPosicao(i);
+	NodoB<T>* filhoAtual = filhosDoFilho->obterDoInicio();
+	i = 0;
+	while(i <= nodoMeio && filhoAtual != NULL){
+		i++;
 		filhosDoOutroFilho->adicionarNaPosicao(filhoAtual, i);
+		filhoAtual = filhosDoFilho->removerDaPosicao(i);
 	}
 
 	filho->atualizaQtdElementos();
+	filho->atualizaAltura();
 	outroFilho->atualizaQtdElementos();
+	outroFilho->atualizaAltura();
 
 	int posicaoNovoFilho = raiz->encontrarPosicaoNovoNodo(*infoSobe);
 	raiz->infos->adicionarEmOrdem(infoSobe);
@@ -114,7 +121,7 @@ template<class T> int NodoB<T>::encontrarPosicaoNovoNodo(T const &tipo) {
 
 template<class T> void NodoB<T>::atualizaAltura() {
 	int i = 1;
-	int maxAltura = 0;
+	int maxAltura = -1;
 	int alturaFilho;
 	while (i <= filhos->obterTamanho()) {
 		alturaFilho = filhos->obterDaPosicao(i)->retornaAltura();
@@ -123,7 +130,7 @@ template<class T> void NodoB<T>::atualizaAltura() {
 		i++;
 	}
 
-	if (maxAltura == 0)
+	if (maxAltura == -1)
 		altura = 0;
 	else
 		altura = maxAltura + 1;
@@ -162,15 +169,20 @@ template<class T> void NodoB<T>::retornaPrefixada(
 	if (lista == NULL)
 		lista = new ListaEncadeada<const T> ();
 
-	lista->adicionarNoFim(infos->obterDoInicio());
+	const T* infoAtual = infos->obterDoInicio();
+
+	if(infoAtual != NULL)
+		lista->adicionarNoFim(infoAtual);
 	if (filhos->obterDoInicio() != NULL)
 		filhos->obterDoInicio()->retornaPrefixada(lista);
 	if (filhos->obterDaPosicao(2) != NULL)
 		filhos->obterDaPosicao(2)->retornaPrefixada(lista);
 
 	int i = 2;
-	while (i <= numChavesNodo) {
-		lista->adicionarNoFim(infos->obterDaPosicao(i));
+	while (i <= infos->obterTamanho()) {
+		infoAtual = infos->obterDaPosicao(i);
+		if(infoAtual != NULL)
+			lista->adicionarNoFim(infoAtual);
 		if (filhos->obterDaPosicao(i + 1) != NULL)
 			retornaPrefixada(lista);
 		i++;

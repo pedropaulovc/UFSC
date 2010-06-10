@@ -44,7 +44,7 @@ public:
 
 	bool nodoCheio();
 	bool nodoVazio();
-	/* Uornar privados após testes */
+	/* Tornar privados após testes */
 	void divideNodo(NodoB<U>* raiz, NodoB<U>* filho);
 	NodoB<U>* selecionaRamoDescida(U const &tipo);
 
