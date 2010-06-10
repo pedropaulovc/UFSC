@@ -58,6 +58,9 @@ int ListaEncadeada<T>::obterTamanho() {
 
 template<class T>
 int ListaEncadeada<T>::adicionarNoInicio(T* info) {
+	if(info == NULL)
+		return -2; //Erro info inválido
+
 	Elemento<T>* novoElemento = new Elemento<T> (info, primeiro);
 	primeiro = novoElemento;
 	tamanho++;
@@ -68,6 +71,9 @@ template<class T>
 int ListaEncadeada<T>::adicionarNaPosicao(T* info, int posicao) {
 	if (posicao > this->tamanho + 1 || posicao < 1)
 		return -1; // ERRO POSICAO INVALIDA
+
+	if(info == NULL)
+		return -2; //Erro info inválido
 
 	if (posicao == 1)
 		return adicionarNoInicio(info);
@@ -92,12 +98,18 @@ int ListaEncadeada<T>::adicionarNaPosicao(T* info, int posicao) {
 
 template<class T>
 int ListaEncadeada<T>::adicionarNoFim(T* info) {
+	if(info == NULL)
+		return -2; //Erro info inválido
+
 	return adicionarNaPosicao(info, tamanho + 1);
 }
 
 //TODO verificar logica
 template<class T>
 int ListaEncadeada<T>::adicionarEmOrdem(T* info) {
+	if(info == NULL)
+		return -2; //Erro info inválido
+
 	if (listaVazia())
 		return adicionarNoInicio(info);
 
