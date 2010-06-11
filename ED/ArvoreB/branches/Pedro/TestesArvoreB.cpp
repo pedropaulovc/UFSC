@@ -49,7 +49,7 @@ TEST_F(TestesArvoreB, testeDivisaoRaiz)
 	ASSERT_EQ("1 2 3 5 9 11 4 ", arvore_b->retornaPosfixada());
 }
 
-TEST_F(TestesArvoreB, testeDivisaoNodoFilho)
+TEST_F(TestesArvoreB, testeDivisaoNodoFilhoADireita)
 {
 	arvore_b = arvore_b->insere(3);
 	arvore_b = arvore_b->insere(5);
@@ -68,6 +68,27 @@ TEST_F(TestesArvoreB, testeDivisaoNodoFilho)
 	ASSERT_EQ("4 1 2 3 5 9 11 12 13 14 15 ", arvore_b->retornaPrefixada());
 	ASSERT_EQ("1 2 3 4 5 9 11 12 13 14 15 ", arvore_b->retornaInfixada());
 	ASSERT_EQ("1 2 3 5 9 11 4 13 14 15 12 ", arvore_b->retornaPosfixada());
+}
+
+TEST_F(TestesArvoreB, testeDivisaoNodoFilhoAEsquerda)
+{
+	arvore_b = arvore_b->insere(15);
+	arvore_b = arvore_b->insere(14);
+	arvore_b = arvore_b->insere(13);
+	arvore_b = arvore_b->insere(12);
+	arvore_b = arvore_b->insere(11);
+	arvore_b = arvore_b->insere(10);
+	arvore_b = arvore_b->insere(9);
+	arvore_b = arvore_b->insere(8);
+	arvore_b = arvore_b->insere(7);
+	arvore_b = arvore_b->insere(6);
+	arvore_b = arvore_b->insere(5);
+
+	ASSERT_EQ(11, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1, arvore_b->retornaAltura());
+	ASSERT_EQ("8 5 6 7 9 10 11 12 13 14 15 ", arvore_b->retornaPrefixada());
+	ASSERT_EQ("5 6 7 8 9 10 11 12 13 14 15 ", arvore_b->retornaInfixada());
+	ASSERT_EQ("5 6 7 9 10 11 8 13 14 15 12 ", arvore_b->retornaPosfixada());
 }
 
 TEST_F(TestesArvoreB, testeDivisaoNodoInternoERaiz)
