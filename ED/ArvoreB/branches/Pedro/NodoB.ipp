@@ -28,12 +28,13 @@ template<class T> NodoB<T>* NodoB<T>::insere(T const &tipo) {
 	}
 
 	if (filho != NULL && filho->nodoCheio())
-		divideNodo(this, filho);
+			divideNodo(this, filho);
 
 	if (raiz && nodoCheio()) {
 		novaRaiz = new NodoB<T> (ordem);
 		divideNodo(novaRaiz, this);
 	}
+
 
 	novaRaiz->atualizaAltura();
 	novaRaiz->atualizaQtdElementos();
@@ -96,8 +97,10 @@ template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 
 	filho->atualizaQtdElementos();
 	filho->atualizaAltura();
+	filho->raiz = false;
 	outroFilho->atualizaQtdElementos();
 	outroFilho->atualizaAltura();
+	outroFilho->raiz = false;
 
 	int posicaoNovoFilho = raiz->encontrarPosicaoNovoNodo(*infoSobe);
 	raiz->infos->adicionarEmOrdem(infoSobe);
@@ -187,7 +190,7 @@ template<class T> void NodoB<T>::retornaPrefixada(
 		if(infoAtual != NULL)
 			lista->adicionarNoFim(infoAtual);
 		if (filhos->obterDaPosicao(i + 1) != NULL)
-			retornaPrefixada(lista);
+			filhos->obterDaPosicao(i + 1)->retornaPrefixada(lista);
 		i++;
 	}
 

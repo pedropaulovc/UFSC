@@ -62,3 +62,67 @@ TEST_F(TestesArvoreB, testeDivisaoNodoFilho)
 	ASSERT_EQ(1, arvore_b->retornaAltura());
 	ASSERT_EQ("4 1 2 3 5 9 11 12 13 14 15 ", arvore_b->retornaPrefixada());
 }
+
+TEST_F(TestesArvoreB, testeDivisaoNodoInternoERaiz)
+{
+	arvore_b = arvore_b->insere(3);
+	arvore_b = arvore_b->insere(5);
+	arvore_b = arvore_b->insere(2);
+	arvore_b = arvore_b->insere(9);
+	arvore_b = arvore_b->insere(4);
+	arvore_b = arvore_b->insere(11);
+	arvore_b = arvore_b->insere(1);//Divisão na raiz, aumento altura
+	arvore_b = arvore_b->insere(12);
+	arvore_b = arvore_b->insere(13);
+	arvore_b = arvore_b->insere(14);
+	arvore_b = arvore_b->insere(15);//Divisão no filho da direita
+
+	ASSERT_EQ(11, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1, arvore_b->retornaAltura());
+	ASSERT_EQ("4 1 2 3 5 9 11 12 13 14 15 ", arvore_b->retornaPrefixada());
+
+	arvore_b = arvore_b->insere(16);
+	arvore_b = arvore_b->insere(17);
+	arvore_b = arvore_b->insere(18);
+	arvore_b = arvore_b->insere(19);//Divisão no filho da direita
+
+	ASSERT_EQ(15, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1, arvore_b->retornaAltura());
+	ASSERT_EQ("4 1 2 3 5 9 11 12 13 14 15 16 17 18 19 ", arvore_b->retornaPrefixada());
+
+	arvore_b = arvore_b->insere(20);
+	arvore_b = arvore_b->insere(21);
+	arvore_b = arvore_b->insere(22);
+	arvore_b = arvore_b->insere(23);//Divisão no filho da direita
+
+	ASSERT_EQ(19, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1, arvore_b->retornaAltura());
+	ASSERT_EQ("4 1 2 3 5 9 11 12 13 14 15 16 17 18 19 20 21 22 23 ", arvore_b->retornaPrefixada());
+
+	arvore_b = arvore_b->insere(24);
+	arvore_b = arvore_b->insere(25);
+	arvore_b = arvore_b->insere(26);
+	arvore_b = arvore_b->insere(27);//Divisão no filho da direita
+
+	ASSERT_EQ(23, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1, arvore_b->retornaAltura());
+	ASSERT_EQ("4 1 2 3 5 9 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 ", arvore_b->retornaPrefixada());
+
+	arvore_b = arvore_b->insere(28);
+	arvore_b = arvore_b->insere(29);
+	arvore_b = arvore_b->insere(30);
+	arvore_b = arvore_b->insere(31);//Divisão no filho da direita
+
+	ASSERT_EQ(27, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1, arvore_b->retornaAltura());
+	ASSERT_EQ("4 1 2 3 5 9 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 ", arvore_b->retornaPrefixada());
+
+	arvore_b = arvore_b->insere(32);
+	arvore_b = arvore_b->insere(33);
+	arvore_b = arvore_b->insere(34);
+	arvore_b = arvore_b->insere(35);//Divisão no filho da direita e raiz, aumento altura
+
+	ASSERT_EQ(31, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(2, arvore_b->retornaAltura());
+	ASSERT_EQ("20 4 1 2 3 5 9 11 12 13 14 15 16 17 18 19 24 21 22 23 25 26 27 28 29 30 31 32 33 34 35 ", arvore_b->retornaPrefixada());
+}
