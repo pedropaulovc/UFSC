@@ -25,10 +25,10 @@ template<class T> NodoB<T>* NodoB<T>::insere(T const &tipo) {
 	} else {
 		filho = selecionaRamoDescida(tipo);
 		filho->insere(tipo);
-	}
 
-	if (filho != NULL && filho->nodoCheio())
-		divideNodo(this, filho);
+		if (filho->nodoCheio())
+			divideNodo(this, filho);
+	}
 
 	if (raiz && nodoCheio()) {
 		novaRaiz = new NodoB<T> (ordem);
@@ -63,6 +63,34 @@ template<class T> NodoB<T>* NodoB<T>::selecionaRamoDescida(T const &tipo) {
 	return filhos->obterDaPosicao(i);
 }
 
+template<class T> void NodoB<T>::moverChavesMenores(NodoB<T> *& origem,
+		NodoB<T> *& destino, int & limite) {
+	ListaEncadeada<const T> *chavesOrigem = origem->infos;
+	ListaEncadeada<const T> *chavesDestino = destino->infos;
+	const T *chaveAtual = chavesOrigem->obterDoInicio();
+	int i = 1;
+	while (i < limite) {
+		chavesOrigem->removerDoInicio();
+		chavesDestino->adicionarEmOrdem(chaveAtual);
+		i++;
+		chaveAtual = chavesOrigem->obterDoInicio();
+	}
+}
+
+template<class T> void NodoB<T>::moverRamosMenores(NodoB<T> *& origem,
+		NodoB<T> *& destino, int limite) {
+	ListaEncadeada<NodoB<T> > *ramosOrigem = origem->filhos;
+	ListaEncadeada<NodoB<T> > *ramosDestino = destino->filhos;
+	NodoB<T> *ramoAtual = ramosOrigem->obterDoInicio();
+	int i = 1;
+	while (i <= limite && ramoAtual != NULL) {
+		ramosOrigem->removerDoInicio();
+		ramosDestino->adicionarNaPosicao(ramoAtual, i);
+		i++;
+		ramoAtual = ramosOrigem->obterDoInicio();
+	}
+}
+
 template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 	if (!filho->nodoCheio())
 		return;
@@ -71,27 +99,9 @@ template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 	const T* infoSobe = filho->infos->removerDaPosicao(nodoMeio);
 	NodoB<T>* outroFilho = new NodoB<T> (ordem);
 
-	ListaEncadeada<const T>* chavesFilho = filho->infos;
-	ListaEncadeada<const T>* chavesOutroFilho = outroFilho->infos;
-	const T* infoAtual = chavesFilho->obterDoInicio();
-	int i = 1;
-	while (i < nodoMeio && infoAtual != NULL) {
-		chavesFilho->removerDoInicio();
-		chavesOutroFilho->adicionarEmOrdem(infoAtual);
-		i++;
-		infoAtual = chavesFilho->obterDoInicio();
-	}
+	moverChavesMenores(filho, outroFilho, nodoMeio);
 
-	ListaEncadeada<NodoB<T> >* filhosDoFilho = filho->filhos;
-	ListaEncadeada<NodoB<T> >* filhosDoOutroFilho = outroFilho->filhos;
-	NodoB<T>* filhoAtual = filhosDoFilho->obterDoInicio();
-	i = 1;
-	while (i <= nodoMeio && filhoAtual != NULL) {
-		filhosDoOutroFilho->adicionarNaPosicao(filhoAtual, i);
-		filhosDoFilho->removerDoInicio();
-		i++;
-		filhoAtual = filhosDoFilho->obterDoInicio();
-	}
+	moverRamosMenores(filho, outroFilho, nodoMeio);
 
 	filho->atualizaQtdElementos();
 	filho->atualizaAltura();
@@ -142,14 +152,14 @@ template<class T> void NodoB<T>::atualizaAltura() {
 
 template<class T> void NodoB<T>::atualizaQtdElementos() {
 	int i = 1;
-	int numElementosSubarvores = 0;
+	int totalSubarvores = 0;
 	while (i <= filhos->obterTamanho()) {
-		numElementosSubarvores
+		totalSubarvores
 				+= filhos->obterDaPosicao(i)->retornaNumeroDeElementos();
 		i++;
 	}
 	numChavesNodo = infos->obterTamanho();
-	totalChaves = numElementosSubarvores + infos->obterTamanho();
+	totalChaves = totalSubarvores + infos->obterTamanho();
 }
 
 template<class T> bool NodoB<T>::nodoCheio() {

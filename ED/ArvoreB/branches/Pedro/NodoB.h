@@ -11,12 +11,12 @@
 #include <string>
 #include "Estruturas/ListaEncadeada.h"
 
-template<class U>
+template<class T>
 class NodoB {
 
 private:
-	ListaEncadeada<const U>* infos;
-	ListaEncadeada<NodoB<U> >* filhos;
+	ListaEncadeada<const T>* infos;
+	ListaEncadeada<NodoB<T> >* filhos;
 	int numChavesNodo;
 	int totalChaves;
 	int altura;
@@ -24,29 +24,31 @@ private:
 	bool folha;
 	bool raiz;
 
-	void divideNodo(NodoB<U>* raiz, NodoB<U>* filho);
-	NodoB<U>* selecionaRamoDescida(U const &tipo);
+	void divideNodo(NodoB<T>* raiz, NodoB<T>* filho);
+	NodoB<T>* selecionaRamoDescida(T const &tipo);
 
 	void atualizaAltura();
 	void atualizaQtdElementos();
 
-	void insereFolha(U const &tipo);
+	void insereFolha(T const &tipo);
 
-	int encontrarPosicaoNovoNodo(U const &tipo);
+	int encontrarPosicaoNovoNodo(T const &tipo);
+	void moverChavesMenores(NodoB<T> *& origem, NodoB<T> *& destino, int & limite);
+	void moverRamosMenores(NodoB<T> *& origem, NodoB<T> *& destino, int limite);
 
 public:
 	NodoB(int ordem);
 	virtual ~NodoB();
 
-	NodoB<U>* insere(U const &tipo);
-	NodoB<U>* remove(U const &tipo);
+	NodoB<T>* insere(T const &tipo);
+	NodoB<T>* remove(T const &tipo);
 
 	int retornaAltura();
 	int retornaNumeroDeElementos();
 
-	void retornaPrefixada(ListaEncadeada<const U>* lista);
-	void retornaPosfixada(ListaEncadeada<const U>* lista);
-	void retornaInfixada(ListaEncadeada<const U>* lista);
+	void retornaPrefixada(ListaEncadeada<const T>* lista);
+	void retornaPosfixada(ListaEncadeada<const T>* lista);
+	void retornaInfixada(ListaEncadeada<const T>* lista);
 
 	std::string retornaPrefixada();
 	std::string retornaPosfixada();
