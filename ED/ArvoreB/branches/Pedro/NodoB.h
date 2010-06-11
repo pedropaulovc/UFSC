@@ -24,6 +24,16 @@ private:
 	bool folha;
 	bool raiz;
 
+	void divideNodo(NodoB<U>* raiz, NodoB<U>* filho);
+	NodoB<U>* selecionaRamoDescida(U const &tipo);
+
+	void atualizaAltura();
+	void atualizaQtdElementos();
+
+	void insereFolha(U const &tipo);
+
+	int encontrarPosicaoNovoNodo(U const &tipo);
+
 public:
 	NodoB(int ordem);
 	virtual ~NodoB();
@@ -35,8 +45,8 @@ public:
 	int retornaNumeroDeElementos();
 
 	void retornaPrefixada(ListaEncadeada<const U>* lista);
-	void retornaPosfixada(ListaEncadeada<U>* lista);
-	void retornaInfixada(ListaEncadeada<U>* lista);
+	void retornaPosfixada(ListaEncadeada<const U>* lista);
+	void retornaInfixada(ListaEncadeada<const U>* lista);
 
 	std::string retornaPrefixada();
 	std::string retornaPosfixada();
@@ -44,16 +54,7 @@ public:
 
 	bool nodoCheio();
 	bool nodoVazio();
-	/* Tornar privados após testes */
-	void divideNodo(NodoB<U>* raiz, NodoB<U>* filho);
-	NodoB<U>* selecionaRamoDescida(U const &tipo);
 
-	void atualizaAltura();
-	void atualizaQtdElementos();
-
-	void insereFolha(U const &tipo);
-
-	int encontrarPosicaoNovoNodo(U const &tipo);
 };
 
 #include "NodoB.ipp"

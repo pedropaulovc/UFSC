@@ -28,13 +28,12 @@ template<class T> NodoB<T>* NodoB<T>::insere(T const &tipo) {
 	}
 
 	if (filho != NULL && filho->nodoCheio())
-			divideNodo(this, filho);
+		divideNodo(this, filho);
 
 	if (raiz && nodoCheio()) {
 		novaRaiz = new NodoB<T> (ordem);
 		divideNodo(novaRaiz, this);
 	}
-
 
 	novaRaiz->atualizaAltura();
 	novaRaiz->atualizaQtdElementos();
@@ -72,12 +71,11 @@ template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 	const T* infoSobe = filho->infos->removerDaPosicao(nodoMeio);
 	NodoB<T>* outroFilho = new NodoB<T> (ordem);
 
-
 	ListaEncadeada<const T>* chavesFilho = filho->infos;
 	ListaEncadeada<const T>* chavesOutroFilho = outroFilho->infos;
 	const T* infoAtual = chavesFilho->obterDoInicio();
 	int i = 1;
-	while(i < nodoMeio && infoAtual != NULL){
+	while (i < nodoMeio && infoAtual != NULL) {
 		chavesFilho->removerDoInicio();
 		chavesOutroFilho->adicionarEmOrdem(infoAtual);
 		i++;
@@ -88,7 +86,7 @@ template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 	ListaEncadeada<NodoB<T> >* filhosDoOutroFilho = outroFilho->filhos;
 	NodoB<T>* filhoAtual = filhosDoFilho->obterDoInicio();
 	i = 1;
-	while(i <= nodoMeio && filhoAtual != NULL){
+	while (i <= nodoMeio && filhoAtual != NULL) {
 		filhosDoOutroFilho->adicionarNaPosicao(filhoAtual, i);
 		filhosDoFilho->removerDoInicio();
 		i++;
@@ -177,7 +175,7 @@ template<class T> void NodoB<T>::retornaPrefixada(
 
 	const T* infoAtual = infos->obterDoInicio();
 
-	if(infoAtual != NULL)
+	if (infoAtual != NULL)
 		lista->adicionarNoFim(infoAtual);
 	if (filhos->obterDoInicio() != NULL)
 		filhos->obterDoInicio()->retornaPrefixada(lista);
@@ -187,7 +185,7 @@ template<class T> void NodoB<T>::retornaPrefixada(
 	int i = 2;
 	while (i <= infos->obterTamanho()) {
 		infoAtual = infos->obterDaPosicao(i);
-		if(infoAtual != NULL)
+		if (infoAtual != NULL)
 			lista->adicionarNoFim(infoAtual);
 		if (filhos->obterDaPosicao(i + 1) != NULL)
 			filhos->obterDaPosicao(i + 1)->retornaPrefixada(lista);
@@ -196,12 +194,53 @@ template<class T> void NodoB<T>::retornaPrefixada(
 
 }
 
-template<class T> void NodoB<T>::retornaInfixada(ListaEncadeada<T>* lista) {
+template<class T> void NodoB<T>::retornaInfixada(ListaEncadeada<const T>* lista) {
+	if (lista == NULL)
+		lista = new ListaEncadeada<const T> ();
 
+	const T* infoAtual = infos->obterDoInicio();
+
+	if (filhos->obterDoInicio() != NULL)
+		filhos->obterDoInicio()->retornaInfixada(lista);
+	if (infoAtual != NULL)
+		lista->adicionarNoFim(infoAtual);
+	if (filhos->obterDaPosicao(2) != NULL)
+		filhos->obterDaPosicao(2)->retornaInfixada(lista);
+
+	int i = 2;
+	while (i <= infos->obterTamanho()) {
+		infoAtual = infos->obterDaPosicao(i);
+		if (infoAtual != NULL)
+			lista->adicionarNoFim(infoAtual);
+		if (filhos->obterDaPosicao(i + 1) != NULL)
+			filhos->obterDaPosicao(i + 1)->retornaInfixada(lista);
+		i++;
+	}
 }
 
-template<class T> void NodoB<T>::retornaPosfixada(ListaEncadeada<T>* lista) {
+template<class T> void NodoB<T>::retornaPosfixada(
+		ListaEncadeada<const T>* lista) {
+	if (lista == NULL)
+		lista = new ListaEncadeada<const T> ();
 
+	const T* infoAtual = infos->obterDoInicio();
+
+	if (filhos->obterDoInicio() != NULL)
+		filhos->obterDoInicio()->retornaPosfixada(lista);
+	if (filhos->obterDaPosicao(2) != NULL)
+		filhos->obterDaPosicao(2)->retornaPosfixada(lista);
+	if (infoAtual != NULL)
+		lista->adicionarNoFim(infoAtual);
+
+	int i = 2;
+	while (i <= infos->obterTamanho()) {
+		if (filhos->obterDaPosicao(i + 1) != NULL)
+			filhos->obterDaPosicao(i + 1)->retornaPosfixada(lista);
+		infoAtual = infos->obterDaPosicao(i);
+		if (infoAtual != NULL)
+			lista->adicionarNoFim(infoAtual);
+		i++;
+	}
 }
 
 template<class T> std::string NodoB<T>::retornaPrefixada() {
@@ -218,9 +257,27 @@ template<class T> std::string NodoB<T>::retornaPrefixada() {
 }
 
 template<class T> std::string NodoB<T>::retornaInfixada() {
-	return "";
+	ListaEncadeada<const T>* lista = new ListaEncadeada<const T> ();
+	retornaInfixada(lista);
+
+	std::stringstream saida;
+
+	for (int i = 1; i <= lista->obterTamanho(); i++) {
+		saida << *(lista->obterDaPosicao(i)) << " ";
+	}
+
+	return saida.str();
 }
 
 template<class T> std::string NodoB<T>::retornaPosfixada() {
-	return "";
+	ListaEncadeada<const T>* lista = new ListaEncadeada<const T> ();
+	retornaPosfixada(lista);
+
+	std::stringstream saida;
+
+	for (int i = 1; i <= lista->obterTamanho(); i++) {
+		saida << *(lista->obterDaPosicao(i)) << " ";
+	}
+
+	return saida.str();
 }
