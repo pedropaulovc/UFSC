@@ -131,3 +131,38 @@ TEST_F(TestesArvoreB, testeDivisaoNodoInternoERaiz)
 	ASSERT_EQ("1 2 3 4 5 9 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 ", arvore_b->retornaInfixada());
 	ASSERT_EQ("1 2 3 5 9 11 4 13 14 15 12 17 18 19 16 21 22 23 25 26 27 24 29 30 31 28 33 34 35 32 20 ", arvore_b->retornaPosfixada());
 }
+
+
+TEST_F(TestesArvoreB, testeRemocaoEmNodoRaiz){
+	arvore_b = arvore_b->insere(10);
+	arvore_b = arvore_b->insere(20);
+	arvore_b = arvore_b->insere(30);
+
+	ASSERT_EQ(3,arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(0,arvore_b->retornaAltura());
+	ASSERT_EQ("10 20 30 ", arvore_b->retornaInfixada());
+
+	arvore_b = arvore_b->remove(20);
+	ASSERT_EQ(2,arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(0,arvore_b->retornaAltura());
+	ASSERT_EQ("10 30 ", arvore_b->retornaInfixada());
+}
+
+TEST_F(TestesArvoreB, testeRemocaoEmNodoFolhaNaoRaiz){
+	arvore_b = arvore_b->insere(10);
+	arvore_b = arvore_b->insere(20);
+	arvore_b = arvore_b->insere(30);
+	arvore_b = arvore_b->insere(40);
+	arvore_b = arvore_b->insere(50);
+	arvore_b = arvore_b->insere(60);
+	arvore_b = arvore_b->insere(70);
+
+	ASSERT_EQ(7,arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1,arvore_b->retornaAltura());
+	ASSERT_EQ("10 20 30 40 50 60 70 ", arvore_b->retornaInfixada());
+
+	arvore_b = arvore_b->remove(70);
+	ASSERT_EQ(6,arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1,arvore_b->retornaAltura());
+	ASSERT_EQ("10 20 30 40 50 60 ", arvore_b->retornaInfixada());
+}

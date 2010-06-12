@@ -31,6 +31,9 @@ public:
 	T* obterDoInicio();
 	T* obterDaPosicao(int posicao);
 	T* obterDoFim();
+
+	bool contem(T* info);
+	int posicao(T* info);
 };
 
 template<class T>
@@ -160,6 +163,24 @@ T* ListaEncadeada<T>::obterDaPosicao(int posicao) {
 	}
 
 	return atual->getInfo();
+}
+
+template<class T>
+bool ListaEncadeada<T>::contem(T* info){
+	return posicao(info) != -1;
+}
+
+template<class T>
+int ListaEncadeada<T>::posicao(T* info){
+	Elemento<T>* elemento = primeiro;
+
+	for(int i = 1; i <= tamanho; i++){
+		if(*elemento->getInfo() == *info)
+			return i;
+		elemento = elemento->getProximo();
+	}
+
+	return -1;
 }
 
 template<class T>

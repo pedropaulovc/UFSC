@@ -45,6 +45,7 @@ public:
 
 	int retornaAltura();
 	int retornaNumeroDeElementos();
+	int retornaNumeroDeChaves();
 
 	void retornaPrefixada(ListaEncadeada<const T>* lista);
 	void retornaPosfixada(ListaEncadeada<const T>* lista);

@@ -41,6 +41,31 @@ template<class T> NodoB<T>* NodoB<T>::insere(T const &tipo) {
 	return novaRaiz;
 }
 
+template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo){
+	NodoB<T> *novaRaiz, *nodo, *nodoRemovido;
+	ListaEncadeada<NodoB<T> >* nodos = new ListaEncadeada<NodoB<T> >();
+
+	nodo = this;
+	nodos->adicionarNoFim(nodo);
+
+	while(!nodo->infos->contem(&tipo)){
+		nodo = nodo->selecionaRamoDescida(tipo);
+		nodos->adicionarNoFim(nodo);
+	}
+
+	if(nodo->folha){
+		nodo->infos->removerDaPosicao(nodo->infos->posicao(&tipo));
+		int tamanho = nodos->obterTamanho();
+		for(int i = 0; i < tamanho; i++){
+			nodoRemovido = nodos->removerDoFim();
+			nodoRemovido->atualizaQtdElementos();
+			nodoRemovido->atualizaAltura();
+		}
+		return this;
+	}
+
+}
+
 template<class T> void NodoB<T>::insereFolha(T const &tipo) {
 	if (nodoCheio() || !folha)
 		return;
@@ -151,15 +176,16 @@ template<class T> void NodoB<T>::atualizaAltura() {
 }
 
 template<class T> void NodoB<T>::atualizaQtdElementos() {
-	int i = 1;
 	int totalSubarvores = 0;
-	while (i <= filhos->obterTamanho()) {
-		totalSubarvores
-				+= filhos->obterDaPosicao(i)->retornaNumeroDeElementos();
-		i++;
+	NodoB<T>* filho;
+
+	for(int i = 1; i <= filhos->obterTamanho(); i++){
+		filho = filhos->obterDaPosicao(i);
+		totalSubarvores += filho->retornaNumeroDeElementos();
 	}
+
 	numChavesNodo = infos->obterTamanho();
-	totalChaves = totalSubarvores + infos->obterTamanho();
+	totalChaves = totalSubarvores + numChavesNodo;
 }
 
 template<class T> bool NodoB<T>::nodoCheio() {
@@ -172,6 +198,10 @@ template<class T> bool NodoB<T>::nodoVazio() {
 
 template<class T> int NodoB<T>::retornaNumeroDeElementos() {
 	return totalChaves;
+}
+
+template<class T> int NodoB<T>::retornaNumeroDeChaves(){
+	return numChavesNodo;
 }
 
 template<class T> int NodoB<T>::retornaAltura() {
