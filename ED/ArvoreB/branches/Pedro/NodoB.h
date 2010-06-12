@@ -29,6 +29,7 @@ private:
 
 	void atualizaAltura();
 	void atualizaQtdElementos();
+	void atualizaElemento();
 
 	void insereFolha(T const &tipo);
 
