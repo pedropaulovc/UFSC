@@ -187,3 +187,24 @@ TEST_F(TestesArvoreB, testeRemocaoNodoRamoPredecessorEmCondicoes){
 	ASSERT_EQ(1,arvore_b->retornaAltura());
 	ASSERT_EQ("5 10 20 30 50 60 70 ", arvore_b->retornaInfixada());
 }
+
+TEST_F(TestesArvoreB, testeRemocaoNodoRamoSucessorEmCondicoes){
+	arvore_b = arvore_b->insere(10);
+	arvore_b = arvore_b->insere(20);
+	arvore_b = arvore_b->insere(30);
+	arvore_b = arvore_b->insere(40);
+	arvore_b = arvore_b->insere(50);
+	arvore_b = arvore_b->insere(60);
+	arvore_b = arvore_b->insere(70);
+	arvore_b = arvore_b->insere(80);
+
+	ASSERT_EQ(8, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1,arvore_b->retornaAltura());
+	ASSERT_EQ("10 20 30 40 50 60 70 80 ", arvore_b->retornaInfixada());
+
+	arvore_b = arvore_b->remove(40);
+
+	ASSERT_EQ(7, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1,arvore_b->retornaAltura());
+	ASSERT_EQ("10 20 30 50 60 70 80 ", arvore_b->retornaInfixada());
+}
