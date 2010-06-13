@@ -27,6 +27,8 @@ TEST_F(TestesArvoreB, testeInsercaoFolhaVazia)
 
 	ASSERT_EQ(6, arvore_b->retornaNumeroDeElementos());
 	ASSERT_EQ(0, arvore_b->retornaAltura());
+	ASSERT_EQ(6, arvore_b->retornaNumeroDeChaves());
+	ASSERT_EQ(0, arvore_b->retornaNumeroDeFilhos());
 	ASSERT_EQ("2 3 4 5 9 11 ", arvore_b->retornaPrefixada());
 	ASSERT_EQ("2 3 4 5 9 11 ", arvore_b->retornaInfixada());
 	ASSERT_EQ("2 3 4 5 9 11 ", arvore_b->retornaPosfixada());
@@ -44,6 +46,8 @@ TEST_F(TestesArvoreB, testeDivisaoRaiz)
 
 	ASSERT_EQ(7, arvore_b->retornaNumeroDeElementos());
 	ASSERT_EQ(1, arvore_b->retornaAltura());
+	ASSERT_EQ(1, arvore_b->retornaNumeroDeChaves());
+	ASSERT_EQ(2, arvore_b->retornaNumeroDeFilhos());
 	ASSERT_EQ("4 1 2 3 5 9 11 ", arvore_b->retornaPrefixada());
 	ASSERT_EQ("1 2 3 4 5 9 11 ", arvore_b->retornaInfixada());
 	ASSERT_EQ("1 2 3 5 9 11 4 ", arvore_b->retornaPosfixada());
@@ -65,6 +69,7 @@ TEST_F(TestesArvoreB, testeDivisaoNodoFilhoADireita)
 
 	ASSERT_EQ(11, arvore_b->retornaNumeroDeElementos());
 	ASSERT_EQ(1, arvore_b->retornaAltura());
+	ASSERT_EQ(3, arvore_b->retornaNumeroDeFilhos());
 	ASSERT_EQ("4 1 2 3 5 9 11 12 13 14 15 ", arvore_b->retornaPrefixada());
 	ASSERT_EQ("1 2 3 4 5 9 11 12 13 14 15 ", arvore_b->retornaInfixada());
 	ASSERT_EQ("1 2 3 5 9 11 4 13 14 15 12 ", arvore_b->retornaPosfixada());
@@ -86,6 +91,7 @@ TEST_F(TestesArvoreB, testeDivisaoNodoFilhoAEsquerda)
 
 	ASSERT_EQ(11, arvore_b->retornaNumeroDeElementos());
 	ASSERT_EQ(1, arvore_b->retornaAltura());
+	ASSERT_EQ(3, arvore_b->retornaNumeroDeFilhos());
 	ASSERT_EQ("8 5 6 7 9 10 11 12 13 14 15 ", arvore_b->retornaPrefixada());
 	ASSERT_EQ("5 6 7 8 9 10 11 12 13 14 15 ", arvore_b->retornaInfixada());
 	ASSERT_EQ("5 6 7 9 10 11 8 13 14 15 12 ", arvore_b->retornaPosfixada());
@@ -148,7 +154,7 @@ TEST_F(TestesArvoreB, testeRemocaoEmNodoRaiz){
 	ASSERT_EQ("10 30 ", arvore_b->retornaInfixada());
 }
 
-TEST_F(TestesArvoreB, testeRemocaoEmNodoFolhaNaoRaiz){
+TEST_F(TestesArvoreB, testeMudancaDeRaiz){
 	arvore_b = arvore_b->insere(10);
 	arvore_b = arvore_b->insere(20);
 	arvore_b = arvore_b->insere(30);
@@ -157,14 +163,31 @@ TEST_F(TestesArvoreB, testeRemocaoEmNodoFolhaNaoRaiz){
 	arvore_b = arvore_b->insere(60);
 	arvore_b = arvore_b->insere(70);
 
+	arvore_b = arvore_b->remove(30);
+
+	ASSERT_EQ(6, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(0, arvore_b->retornaAltura());
+	ASSERT_EQ("10 20 40 50 60 70 ", arvore_b->retornaInfixada());
+}
+
+TEST_F(TestesArvoreB, testeRemocaoEmNodoFolhaNaoRaiz){
+	arvore_b = arvore_b->insere(10);
+	arvore_b = arvore_b->insere(20);
+	arvore_b = arvore_b->insere(30);
+	arvore_b = arvore_b->insere(40);
+	arvore_b = arvore_b->insere(50);
+	arvore_b = arvore_b->insere(60);
+	arvore_b = arvore_b->insere(70);
+	arvore_b = arvore_b->insere(80);
+
+	ASSERT_EQ(8,arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1,arvore_b->retornaAltura());
+	ASSERT_EQ("10 20 30 40 50 60 70 80 ", arvore_b->retornaInfixada());
+
+	arvore_b = arvore_b->remove(80);
 	ASSERT_EQ(7,arvore_b->retornaNumeroDeElementos());
 	ASSERT_EQ(1,arvore_b->retornaAltura());
 	ASSERT_EQ("10 20 30 40 50 60 70 ", arvore_b->retornaInfixada());
-
-	arvore_b = arvore_b->remove(70);
-	ASSERT_EQ(6,arvore_b->retornaNumeroDeElementos());
-	ASSERT_EQ(1,arvore_b->retornaAltura());
-	ASSERT_EQ("10 20 30 40 50 60 ", arvore_b->retornaInfixada());
 }
 
 TEST_F(TestesArvoreB, testeRemocaoNodoRamoPredecessorEmCondicoes){
@@ -207,4 +230,52 @@ TEST_F(TestesArvoreB, testeRemocaoNodoRamoSucessorEmCondicoes){
 	ASSERT_EQ(7, arvore_b->retornaNumeroDeElementos());
 	ASSERT_EQ(1,arvore_b->retornaAltura());
 	ASSERT_EQ("10 20 30 50 60 70 80 ", arvore_b->retornaInfixada());
+}
+
+TEST_F(TestesArvoreB, testeRemocaoComUnderflowAEsquerda){
+	arvore_b = arvore_b->insere(10);
+	arvore_b = arvore_b->insere(20);
+	arvore_b = arvore_b->insere(30);
+	arvore_b = arvore_b->insere(40);
+	arvore_b = arvore_b->insere(50);
+	arvore_b = arvore_b->insere(60);
+	arvore_b = arvore_b->insere(70);
+
+	ASSERT_EQ(7, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1,arvore_b->retornaAltura());
+	ASSERT_EQ(1, arvore_b->retornaNumeroDeChaves());
+	ASSERT_EQ("10 20 30 40 50 60 70 ", arvore_b->retornaInfixada());
+
+	arvore_b = arvore_b->remove(30);
+
+	ASSERT_EQ(6, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(0,arvore_b->retornaAltura());
+	ASSERT_EQ(6, arvore_b->retornaNumeroDeChaves());
+	ASSERT_EQ("10 20 40 50 60 70 ", arvore_b->retornaInfixada());
+}
+
+TEST_F(TestesArvoreB, testeRemocaoComUnderflowADireita){
+	arvore_b = arvore_b->insere(10);
+	arvore_b = arvore_b->insere(20);
+	arvore_b = arvore_b->insere(30);
+	arvore_b = arvore_b->insere(40);
+	arvore_b = arvore_b->insere(50);
+	arvore_b = arvore_b->insere(60);
+	arvore_b = arvore_b->insere(70);
+
+	ASSERT_EQ(7, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(1,arvore_b->retornaAltura());
+	ASSERT_EQ(1, arvore_b->retornaNumeroDeChaves());
+	ASSERT_EQ("10 20 30 40 50 60 70 ", arvore_b->retornaInfixada());
+
+	arvore_b = arvore_b->remove(70);
+
+	ASSERT_EQ(6, arvore_b->retornaNumeroDeElementos());
+	ASSERT_EQ(0,arvore_b->retornaAltura());
+	ASSERT_EQ(6, arvore_b->retornaNumeroDeChaves());
+	ASSERT_EQ("10 20 30 40 50 60 ", arvore_b->retornaInfixada());
+}
+
+TEST_F(TestesArvoreB, testeRemocaoComUnderflowSeguido){
+
 }

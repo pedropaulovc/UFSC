@@ -26,6 +26,7 @@ private:
 
 	void divideNodo(NodoB<T>* raiz, NodoB<T>* filho);
 	NodoB<T>* selecionaRamoDescida(T const &tipo);
+	int posicaoRamoDescida(T const &tipo);
 
 	void atualizaAltura();
 	void atualizaQtdElementos();
@@ -47,6 +48,7 @@ public:
 	int retornaAltura();
 	int retornaNumeroDeElementos();
 	int retornaNumeroDeChaves();
+	int retornaNumeroDeFilhos();
 
 	void retornaPrefixada(ListaEncadeada<const T>* lista);
 	void retornaPosfixada(ListaEncadeada<const T>* lista);
