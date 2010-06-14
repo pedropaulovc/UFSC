@@ -1,6 +1,7 @@
 #include "Estruturas/ListaEncadeada.h"
 #include <cstdlib>
 #include <sstream>
+#include <iostream>
 
 template<class T> NodoB<T>::NodoB(int ordem) {
 	this->ordem = ordem;
@@ -145,6 +146,7 @@ template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
 	if (infos->contem(&tipo)) {
 		if (folha) {
 			infos->removerDaPosicao(infos->posicao(&tipo));
+			std::cout << tipo << " e nodo folha, caso simples\n";
 		} else {
 			int posicaoNodoPredecessor = infos->posicao(&tipo);
 			NodoB<T>* nodoPredecessor = filhos->obterDaPosicao(
@@ -163,6 +165,8 @@ template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
 						posicaoElementoRemovido);
 
 				nodoPredecessor->remove(tipo);
+
+				std::cout << tipo << " não é folha, mas o nodo da esquerda tem elementos sobrando\n";
 			} else {
 				int posicaoNodoSucessor = posicaoNodoPredecessor + 1;
 				NodoB<T>* nodoSucessor = filhos->obterDaPosicao(
@@ -180,7 +184,11 @@ template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
 							posicaoElementoRemovido);
 
 					nodoSucessor->remove(tipo);
+					std::cout << tipo << " não é folha, mas o nodo da direita tem elementos sobrando\n";
 				} else {
+
+					//TODO ajustar para os elementos do canto
+
 					ListaEncadeada<const T>* infosDoPredecessor =
 							nodoPredecessor->infos;
 					ListaEncadeada<const T>* infosDoSucessor =
@@ -201,21 +209,11 @@ template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
 		}
 	}
 
-	//			NodoB<T>* nodoSucessor = nodo->filhos->obterDaPosicao(
-	//					posicaoNodoSucessor);
-	//			ListaEncadeada<const T>* infosDoSucessor = nodoSucessor->infos;
-	//
-	//			ListaEncadeada<const T>* infosDoNodo = nodo->infos;
-	//			int posicaoInfoNodo = infosDoNodo->posicao(&tipo);
-	//			int posicaoNodoPredecessor = nodo->infos->posicao(&tipo);
-	//			posicaoNodoPredecessor != 1 ? posicaoNodoPredecessor++
-	//					: posicaoNodoPredecessor;
-	//			int posicaoNodoSucessor = posicaoNodoPredecessor + 1;
-
 	else {
 		NodoB<T>* nodoSelecionado = selecionaRamoDescida(tipo);
 		ListaEncadeada<const T>* infosNodoSelecionado = nodoSelecionado->infos;
 		nodoSelecionado->remove(tipo);
+
 		if (nodoSelecionado->retornaNumeroDeChaves() == ordem - 1) {
 			int posicaoNodoSelecionado = posicaoRamoDescida(tipo);
 			NodoB<T>* nodoEsquerdaDoSelecionado = filhos->obterDaPosicao(
@@ -232,7 +230,7 @@ template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
 
 				infos->adicionarEmOrdem(maiorElemento);
 
-				infosNodoSelecionado->adicionarEmOrdem(infos->removerDoFim());
+				infosNodoSelecionado->adicionarEmOrdem(infos->removerDaPosicao(posicaoNodoSelecionado));
 
 				nodoSelecionado->atualizaQtdElementos();
 				nodoEsquerdaDoSelecionado->atualizaQtdElementos();
@@ -248,23 +246,24 @@ template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
 					infos->adicionarEmOrdem(menorElemento);
 
 					infosNodoSelecionado->adicionarEmOrdem(
-							infos->removerDoInicio());
+							infos->removerDaPosicao(posicaoNodoSelecionado));
 
 					nodoSelecionado->atualizaQtdElementos();
-					nodoEsquerdaDoSelecionado->atualizaQtdElementos();
+					nodoDireitaDoSelecionado->atualizaQtdElementos();
 				} else {
 					NodoB<T>* possivelNovaRaiz;
+
 					if(nodoEsquerdaDoSelecionado != NULL){
 						ListaEncadeada<const T>* infosIrmaoEsquerda =
 								nodoEsquerdaDoSelecionado->infos;
 
-						int posicaoParaAdicionar = posicaoNodoSelecionado > infos->obterTamanho() ? infos->obterTamanho() : posicaoNodoSelecionado;
+						int posicaoParaAdicionar = posicaoNodoSelecionado - 1;
 						infosIrmaoEsquerda->adicionarEmOrdem(infos->removerDaPosicao(posicaoParaAdicionar));
 						for(int i = 0; i < ordem - 1; i++){
 							infosIrmaoEsquerda->adicionarEmOrdem(infosNodoSelecionado->removerDoFim());
 						}
 
-						filhos->removerDaPosicao(posicaoParaAdicionar);
+						filhos->removerDaPosicao(posicaoNodoSelecionado);
 
 						nodoEsquerdaDoSelecionado->atualizaQtdElementos();
 						possivelNovaRaiz = nodoEsquerdaDoSelecionado;
@@ -275,6 +274,7 @@ template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
 							ListaEncadeada<const T>* infosIrmaoDireita =
 									nodoDireitaDoSelecionado->infos;
 
+							int posicaoParaAdicionar = posicaoNodoSelecionado + 1;
 							infosIrmaoDireita->adicionarEmOrdem(infos->removerDaPosicao(posicaoNodoSelecionado));
 							for(int i = 0; i < ordem - 1; i++){
 								infosIrmaoDireita->adicionarEmOrdem(infosNodoSelecionado->removerDoInicio());
