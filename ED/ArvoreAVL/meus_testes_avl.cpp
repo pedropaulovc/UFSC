@@ -1,3 +1,18 @@
+/**
+ TÍTULO:        Implementação de árvores binárias semibalanceadas
+ ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+ MATÉRIA:       INE5408
+ PRAZO:         15 de junho de 2010
+
+ PROPÓSITO:
+ Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados
+ árvore semibalanceada (AVL).
+
+ SOBRE O ARQUIVO:
+ Testes unitários para a árvore AVL.
+
+*/
+
 #include "arvore_avl.h"
 #include <gtest/gtest.h>
 #include <iostream>

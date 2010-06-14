@@ -1,9 +1,17 @@
-/*
- * meus_testes_cep.cpp
- *
- *  Created on: Jun 4, 2010
- *      Author: pedropaulo
- */
+/**
+ TÍTULO:        Implementação de árvores binárias semibalanceadas
+ ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+ MATÉRIA:       INE5408
+ PRAZO:         15 de junho de 2010
+
+ PROPÓSITO:
+ Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados
+ árvore semibalanceada (AVL).
+
+ SOBRE O ARQUIVO:
+ Testes unitários para o tipo Cep.
+
+*/
 
 #include <gtest/gtest.h>
 #include <iostream>
