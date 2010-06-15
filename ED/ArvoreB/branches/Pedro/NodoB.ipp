@@ -1,7 +1,6 @@
 #include "Estruturas/ListaEncadeada.h"
 #include <cstdlib>
 #include <sstream>
-#include <iostream>
 
 template<class T> NodoB<T>::NodoB(int ordem) {
 	this->ordem = ordem;
@@ -42,6 +41,118 @@ template<class T> NodoB<T>* NodoB<T>::insere(T const &tipo) {
 	return novaRaiz;
 }
 
+
+
+template<class T> void NodoB<T>::insereFolha(T const &tipo) {
+	if (nodoCheio() || !folha)
+		return;
+
+	infos->adicionarEmOrdem(&tipo);
+
+	numChavesNodo++;
+	totalChaves++;
+}
+
+template<class T> NodoB<T>* NodoB<T>::selecionaRamoDescida(T const &tipo) {
+	const T* infoAtual = infos->obterDaPosicao(1);
+	int i = 1;
+
+	while (i <= numChavesNodo && tipo > *infoAtual) {
+		i++;
+
+		infoAtual = infos->obterDaPosicao(i);
+	}
+
+	return filhos->obterDaPosicao(i);
+}
+
+template<class T> int NodoB<T>::posicaoRamoDescida(T const &tipo) {
+	const T* infoAtual = infos->obterDaPosicao(1);
+	int posicao = 1;
+
+	while (posicao <= numChavesNodo && tipo > *infoAtual) {
+		posicao++;
+
+		infoAtual = infos->obterDaPosicao(posicao);
+	}
+
+	return posicao;
+}
+
+template<class T> void NodoB<T>::moverChavesMenores(NodoB<T> *& origem,
+		NodoB<T> *& destino, int & limite) {
+	ListaEncadeada<const T> *chavesOrigem = origem->infos;
+	ListaEncadeada<const T> *chavesDestino = destino->infos;
+	const T *chaveAtual = chavesOrigem->obterDoInicio();
+	int i = 1;
+	while (i < limite) {
+		chavesOrigem->removerDoInicio();
+		chavesDestino->adicionarEmOrdem(chaveAtual);
+		i++;
+		chaveAtual = chavesOrigem->obterDoInicio();
+	}
+}
+
+template<class T> void NodoB<T>::moverRamosMenores(NodoB<T> *& origem,
+		NodoB<T> *& destino, int limite) {
+	ListaEncadeada<NodoB<T> > *ramosOrigem = origem->filhos;
+	ListaEncadeada<NodoB<T> > *ramosDestino = destino->filhos;
+	NodoB<T> *ramoAtual = ramosOrigem->obterDoInicio();
+	int i = 1;
+	while (i <= limite && ramoAtual != NULL) {
+		ramosOrigem->removerDoInicio();
+		ramosDestino->adicionarNaPosicao(ramoAtual, i);
+		i++;
+		ramoAtual = ramosOrigem->obterDoInicio();
+	}
+}
+
+template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
+	if (!filho->nodoCheio())
+		return;
+
+	int nodoMeio = ordem + 1;
+	const T* infoSobe = filho->infos->removerDaPosicao(nodoMeio);
+	NodoB<T>* outroFilho = new NodoB<T> (ordem);
+
+	moverChavesMenores(filho, outroFilho, nodoMeio);
+
+	moverRamosMenores(filho, outroFilho, nodoMeio);
+
+	filho->atualizaQtdElementos();
+	filho->atualizaAltura();
+	filho->raiz = false;
+	outroFilho->atualizaQtdElementos();
+	outroFilho->atualizaAltura();
+	outroFilho->raiz = false;
+
+	int posicaoNovoFilho = raiz->encontrarPosicaoNovoNodo(*infoSobe);
+	raiz->infos->adicionarEmOrdem(infoSobe);
+	raiz->numChavesNodo++;
+	raiz->filhos->adicionarNaPosicao(outroFilho, posicaoNovoFilho);
+
+	if (raiz->filhos->obterDaPosicao(posicaoNovoFilho + 1) != filho) {
+		raiz->filhos->adicionarNaPosicao(filho, posicaoNovoFilho + 1);
+		raiz->numChavesNodo++;
+	}
+
+	raiz->folha = false;
+	raiz->atualizaAltura();
+	raiz->atualizaQtdElementos();
+}
+
+template<class T> int NodoB<T>::encontrarPosicaoNovoNodo(T const &tipo) {
+	const T* infoAtual = infos->obterDaPosicao(1);
+	int i = 1;
+
+	while (i <= numChavesNodo && tipo > *infoAtual) {
+		i++;
+		infoAtual = infos->obterDaPosicao(i);
+	}
+
+	return i;
+}
+
 template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
 	NodoB<T>* possivelNovaRaiz = this;
 	if (infos->contem(&tipo)) {
@@ -61,7 +172,6 @@ template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
 template<class T> void NodoB<T>::removeDoNodo(const T & tipo) {
 	if (folha) {
 		infos->removerDaPosicao(infos->posicao(&tipo));
-		std::cout << tipo << " e nodo folha, caso simples\n";
 	} else {
 		removeDoNodoInterno(tipo);
 	}
@@ -79,8 +189,6 @@ template<class T> void NodoB<T>::removeDoNodoInterno(const T & tipo) {
 				posicaoElementoRemovido));
 		infos->adicionarNaPosicao(predecessorInordem, posicaoElementoRemovido);
 		nodoPredecessor->remove(tipo);
-		std::cout << tipo
-				<< " não é folha, mas o nodo da esquerda tem elementos sobrando\n";
 		return;
 	}
 
@@ -94,8 +202,6 @@ template<class T> void NodoB<T>::removeDoNodoInterno(const T & tipo) {
 				posicaoElementoRemovido));
 		infos->adicionarNaPosicao(sucessorInordem, posicaoElementoRemovido);
 		nodoSucessor->remove(tipo);
-		std::cout << tipo
-				<< " não é folha, mas o nodo da direita tem elementos sobrando\n";
 		return;
 	}
 
@@ -227,116 +333,6 @@ template<class T> NodoB<T>* NodoB<T>::ajustaFilhoAposRemocao(const T & tipo,
 	}
 
 	return this;
-}
-
-template<class T> void NodoB<T>::insereFolha(T const &tipo) {
-	if (nodoCheio() || !folha)
-		return;
-
-	infos->adicionarEmOrdem(&tipo);
-
-	numChavesNodo++;
-	totalChaves++;
-}
-
-template<class T> NodoB<T>* NodoB<T>::selecionaRamoDescida(T const &tipo) {
-	const T* infoAtual = infos->obterDaPosicao(1);
-	int i = 1;
-
-	while (i <= numChavesNodo && tipo > *infoAtual) {
-		i++;
-
-		infoAtual = infos->obterDaPosicao(i);
-	}
-
-	return filhos->obterDaPosicao(i);
-}
-
-template<class T> int NodoB<T>::posicaoRamoDescida(T const &tipo) {
-	const T* infoAtual = infos->obterDaPosicao(1);
-	int posicao = 1;
-
-	while (posicao <= numChavesNodo && tipo > *infoAtual) {
-		posicao++;
-
-		infoAtual = infos->obterDaPosicao(posicao);
-	}
-
-	return posicao;
-}
-
-template<class T> void NodoB<T>::moverChavesMenores(NodoB<T> *& origem,
-		NodoB<T> *& destino, int & limite) {
-	ListaEncadeada<const T> *chavesOrigem = origem->infos;
-	ListaEncadeada<const T> *chavesDestino = destino->infos;
-	const T *chaveAtual = chavesOrigem->obterDoInicio();
-	int i = 1;
-	while (i < limite) {
-		chavesOrigem->removerDoInicio();
-		chavesDestino->adicionarEmOrdem(chaveAtual);
-		i++;
-		chaveAtual = chavesOrigem->obterDoInicio();
-	}
-}
-
-template<class T> void NodoB<T>::moverRamosMenores(NodoB<T> *& origem,
-		NodoB<T> *& destino, int limite) {
-	ListaEncadeada<NodoB<T> > *ramosOrigem = origem->filhos;
-	ListaEncadeada<NodoB<T> > *ramosDestino = destino->filhos;
-	NodoB<T> *ramoAtual = ramosOrigem->obterDoInicio();
-	int i = 1;
-	while (i <= limite && ramoAtual != NULL) {
-		ramosOrigem->removerDoInicio();
-		ramosDestino->adicionarNaPosicao(ramoAtual, i);
-		i++;
-		ramoAtual = ramosOrigem->obterDoInicio();
-	}
-}
-
-template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
-	if (!filho->nodoCheio())
-		return;
-
-	int nodoMeio = ordem + 1;
-	const T* infoSobe = filho->infos->removerDaPosicao(nodoMeio);
-	NodoB<T>* outroFilho = new NodoB<T> (ordem);
-
-	moverChavesMenores(filho, outroFilho, nodoMeio);
-
-	moverRamosMenores(filho, outroFilho, nodoMeio);
-
-	filho->atualizaQtdElementos();
-	filho->atualizaAltura();
-	filho->raiz = false;
-	outroFilho->atualizaQtdElementos();
-	outroFilho->atualizaAltura();
-	outroFilho->raiz = false;
-
-	int posicaoNovoFilho = raiz->encontrarPosicaoNovoNodo(*infoSobe);
-	raiz->infos->adicionarEmOrdem(infoSobe);
-	raiz->numChavesNodo++;
-	raiz->filhos->adicionarNaPosicao(outroFilho, posicaoNovoFilho);
-
-	if (raiz->filhos->obterDaPosicao(posicaoNovoFilho + 1) != filho) {
-		raiz->filhos->adicionarNaPosicao(filho, posicaoNovoFilho + 1);
-		raiz->numChavesNodo++;
-	}
-
-	raiz->folha = false;
-	raiz->atualizaAltura();
-	raiz->atualizaQtdElementos();
-}
-
-template<class T> int NodoB<T>::encontrarPosicaoNovoNodo(T const &tipo) {
-	const T* infoAtual = infos->obterDaPosicao(1);
-	int i = 1;
-
-	while (i <= numChavesNodo && tipo > *infoAtual) {
-		i++;
-		infoAtual = infos->obterDaPosicao(i);
-	}
-
-	return i;
 }
 
 template<class T> void NodoB<T>::atualizaAltura() {

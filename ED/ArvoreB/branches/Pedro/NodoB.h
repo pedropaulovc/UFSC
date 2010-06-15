@@ -39,10 +39,9 @@ private:
 			int & limite);
 	void moverRamosMenores(NodoB<T> *& origem, NodoB<T> *& destino, int limite);
 
-	/*----------*/
 	void removeDoNodo(const T & tipo);
-	NodoB<T>* ajustaFilhoAposRemocao(const T & tipo, NodoB<T> *filho);
 	void removeDoNodoInterno(const T & tipo);
+	NodoB<T>* ajustaFilhoAposRemocao(const T & tipo, NodoB<T> *filho);
 	NodoB<T>* fundirNodosParaEsquerda(NodoB<T> *destino, NodoB<T>* origem, int & posicao);
 	NodoB<T>* fundirNodosParaDireita(NodoB<T> *destino, NodoB<T>* origem, int posicao);
 
