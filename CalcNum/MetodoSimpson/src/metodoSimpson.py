@@ -29,7 +29,10 @@ def integrarSimpson(func, inicio, fim, partes):
 	'''
 	inicio = float(inicio)
 	fim = float(fim)
-
+	if(partes % 2 != 0):
+		print 'Número de partes não é par'
+		return
+	
 	h = (fim - inicio) / partes
 	extremos = f(func, inicio) + f(func, fim)
 
@@ -54,6 +57,10 @@ def integrarSimpsonModificado(func, inicio, fim, partes, pontosF):
 	Integra 'func' de 'inicio' até 'fim', dividindo o intervalo em 'partes' partes.
 	Reaproveita pontos já calculados. Instável.
 	'''
+	if(partes % 2 != 0):
+		print 'Número de partes não é par'
+		return
+		
 	inicio = float(inicio)
 	fim = float(fim)
 
@@ -81,21 +88,18 @@ def simpsonComposto(func, inicio, fim, precisao, partes):
 	Integra usando o método de Simpson composto até 'precisao' desejada. 
 	Estável.
 	'''
-	int = integrarSimpson(func, inicio, fim, partes)
-	intAnterior = int
+	intAnterior = integrarSimpson(func, inicio, fim, partes)
 	erro = 10 * precisao
 	passo = (fim - inicio) / 2
 	k = 2
 
-	numIteracoes = 1
 	while(erro > precisao):
 		c = inicio
 		int = 0
 
 		for _ in range(k):
 			d = c + passo
-			intParcial = integrarSimpson(func, c, d, partes)
-			int += intParcial
+			int += integrarSimpson(func, c, d, partes)
 			c = d
 			num = abs(int - intAnterior)
 			if(num == 0):
@@ -105,7 +109,6 @@ def simpsonComposto(func, inicio, fim, precisao, partes):
 		intAnterior = int
 		passo /= 2
 		k = k + k
-		numIteracoes += 1
 
 	return int
 
