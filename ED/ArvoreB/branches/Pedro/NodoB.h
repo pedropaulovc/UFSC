@@ -35,15 +35,16 @@ private:
 	void insereFolha(const T & tipo);
 
 	int encontrarPosicaoNovoNodo(const T & tipo);
-	void moverChavesMenores(NodoB<T> *& origem, NodoB<T> *& destino, int & limite);
+	void moverChavesMenores(NodoB<T> *& origem, NodoB<T> *& destino,
+			int & limite);
 	void moverRamosMenores(NodoB<T> *& origem, NodoB<T> *& destino, int limite);
 
 	/*----------*/
 	void removeDoNodo(const T & tipo);
 	NodoB<T>* ajustaFilhoAposRemocao(const T & tipo, NodoB<T> *filho);
 	void removeDoNodoInterno(const T & tipo);
-	NodoB<T>*fundirNodos(NodoB<T> *destino, NodoB<T> *origem, int & posicao);
-
+	NodoB<T>* fundirNodosParaEsquerda(NodoB<T> *destino, NodoB<T>* origem, int & posicao);
+	NodoB<T>* fundirNodosParaDireita(NodoB<T> *destino, NodoB<T>* origem, int posicao);
 
 public:
 	NodoB(int ordem);

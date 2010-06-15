@@ -112,17 +112,49 @@ template<class T> void NodoB<T>::removeDoNodoInterno(const T & tipo) {
 
 }
 
-template<class T> NodoB<T>* NodoB<T>::fundirNodos(NodoB<T> *destino,
-		NodoB<T> *origem, int & posicao) {
+template<class T> NodoB<T>* NodoB<T>::fundirNodosParaEsquerda(
+		NodoB<T> *destino, NodoB<T>* origem, int & posicao) {
 
 	ListaEncadeada<const T> *infosOrigem = origem->infos;
+	ListaEncadeada<NodoB<T> > *filhosOrigem = origem->filhos;
 	ListaEncadeada<const T> *infosDestino = destino->infos;
+	ListaEncadeada<NodoB<T> > *filhosDestino = destino->filhos;
+
 	int posicaoParaAdicionar = posicao - 1;
 	infosDestino->adicionarEmOrdem(
 			infos->removerDaPosicao(posicaoParaAdicionar));
 	for (int i = 0; i < ordem - 1; i++) {
 		infosDestino->adicionarEmOrdem(infosOrigem->removerDoFim());
 	}
+
+	int qtdFilhosOrigem = filhosOrigem->obterTamanho();
+	for (int i = 1; i <= qtdFilhosOrigem; i++) {
+		filhosDestino->adicionarNoFim(filhosOrigem->removerDoInicio());
+	}
+
+	filhos->removerDaPosicao(posicao);
+	destino->atualizaQtdElementos();
+	return destino;
+}
+
+template<class T> NodoB<T>* NodoB<T>::fundirNodosParaDireita(NodoB<T> *destino,
+		NodoB<T>* origem, int posicao) {
+
+	ListaEncadeada<const T> *infosOrigem = origem->infos;
+	ListaEncadeada<NodoB<T> > *filhosOrigem = origem->filhos;
+	ListaEncadeada<const T> *infosDestino = destino->infos;
+	ListaEncadeada<NodoB<T> > *filhosDestino = destino->filhos;
+
+	infosDestino->adicionarEmOrdem(infos->removerDaPosicao(posicao));
+	for (int i = 0; i < ordem - 1; i++) {
+		infosDestino->adicionarEmOrdem(infosOrigem->removerDoInicio());
+	}
+
+	int qtdFilhosOrigem = filhosOrigem->obterTamanho();
+	for (int i = 1; i <= qtdFilhosOrigem; i++) {
+		filhosDestino->adicionarNoFim(filhosOrigem->removerDoInicio());
+	}
+
 	filhos->removerDaPosicao(posicao);
 	destino->atualizaQtdElementos();
 	return destino;
@@ -178,39 +210,13 @@ template<class T> NodoB<T>* NodoB<T>::ajustaFilhoAposRemocao(const T & tipo,
 	NodoB<T>* possivelNovaRaiz;
 
 	if (nodoEsquerdaDoSelecionado != NULL) {
-		ListaEncadeada<const T>* infosIrmaoEsquerda =
-				nodoEsquerdaDoSelecionado->infos;
+		possivelNovaRaiz = fundirNodosParaEsquerda(nodoEsquerdaDoSelecionado,
+				filho, posicaoNodoSelecionado);
+	}
 
-		int posicaoParaAdicionar = posicaoNodoSelecionado - 1;
-		infosIrmaoEsquerda->adicionarEmOrdem(infos->removerDaPosicao(
-				posicaoParaAdicionar));
-		for (int i = 0; i < ordem - 1; i++) {
-			infosIrmaoEsquerda->adicionarEmOrdem(
-					infosNodoSelecionado->removerDoFim());
-		}
-
-		filhos->removerDaPosicao(posicaoNodoSelecionado);
-
-		nodoEsquerdaDoSelecionado->atualizaQtdElementos();
-		possivelNovaRaiz = nodoEsquerdaDoSelecionado;
-
-	} else {
-		if (nodoDireitaDoSelecionado != NULL) {
-			ListaEncadeada<const T>* infosIrmaoDireita =
-					nodoDireitaDoSelecionado->infos;
-
-			infosIrmaoDireita->adicionarEmOrdem(infos->removerDaPosicao(
-					posicaoNodoSelecionado));
-			for (int i = 0; i < ordem - 1; i++) {
-				infosIrmaoDireita->adicionarEmOrdem(
-						infosNodoSelecionado->removerDoInicio());
-			}
-
-			filhos->removerDaPosicao(posicaoNodoSelecionado);
-
-			nodoDireitaDoSelecionado->atualizaQtdElementos();
-			possivelNovaRaiz = nodoDireitaDoSelecionado;
-		}
+	if (nodoDireitaDoSelecionado != NULL) {
+		possivelNovaRaiz = fundirNodosParaDireita(nodoDireitaDoSelecionado,
+				filho, posicaoNodoSelecionado);
 	}
 
 	if (raiz) {
