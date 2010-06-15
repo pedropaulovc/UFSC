@@ -43,164 +43,183 @@ template<class T> NodoB<T>* NodoB<T>::insere(T const &tipo) {
 }
 
 template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
-
+	NodoB<T>* possivelNovaRaiz = this;
 	if (infos->contem(&tipo)) {
-		if (folha) {
-			infos->removerDaPosicao(infos->posicao(&tipo));
-			std::cout << tipo << " e nodo folha, caso simples\n";
-		} else {
-			int posicaoNodoPredecessor = infos->posicao(&tipo);
-			NodoB<T>* nodoPredecessor = filhos->obterDaPosicao(
-					posicaoNodoPredecessor);
-			int posicaoElementoRemovido = infos->posicao(&tipo);
-
-			if (nodoPredecessor->retornaNumeroDeChaves() >= ordem + 1) {
-				ListaEncadeada<const T>* infosDoPredecessor =
-						nodoPredecessor->infos;
-
-				const T* predecessorInordem =
-						infosDoPredecessor->removerDoFim();
-				infosDoPredecessor->adicionarNoFim(infos->removerDaPosicao(
-						posicaoElementoRemovido));
-				infos->adicionarNaPosicao(predecessorInordem,
-						posicaoElementoRemovido);
-
-				nodoPredecessor->remove(tipo);
-
-				std::cout << tipo << " não é folha, mas o nodo da esquerda tem elementos sobrando\n";
-			} else {
-				int posicaoNodoSucessor = posicaoNodoPredecessor + 1;
-				NodoB<T>* nodoSucessor = filhos->obterDaPosicao(
-						posicaoNodoSucessor);
-
-				if (nodoSucessor->retornaNumeroDeChaves() >= ordem + 1) {
-					ListaEncadeada<const T>* infosDoSucessor =
-							nodoSucessor->infos;
-
-					const T* sucessorInordem =
-							infosDoSucessor->removerDoInicio();
-					infosDoSucessor->adicionarNoInicio(infos->removerDaPosicao(
-							posicaoElementoRemovido));
-					infos->adicionarNaPosicao(sucessorInordem,
-							posicaoElementoRemovido);
-
-					nodoSucessor->remove(tipo);
-					std::cout << tipo << " não é folha, mas o nodo da direita tem elementos sobrando\n";
-				} else {
-
-					//TODO ajustar para os elementos do canto
-
-					ListaEncadeada<const T>* infosDoPredecessor =
-							nodoPredecessor->infos;
-					ListaEncadeada<const T>* infosDoSucessor =
-							nodoSucessor->infos;
-
-					infosDoPredecessor->adicionarNoFim(infos->removerDaPosicao(
-							posicaoElementoRemovido));
-					for (int i = 0; i < ordem; i++) {
-						infosDoPredecessor->adicionarEmOrdem(
-								infosDoSucessor->removerDoFim());
-					}
-
-					filhos->removerDaPosicao(posicaoNodoSucessor);
-
-					nodoPredecessor->remove(tipo);
-				}
-			}
-		}
-	}
-
-	else {
-		NodoB<T>* nodoSelecionado = selecionaRamoDescida(tipo);
-		ListaEncadeada<const T>* infosNodoSelecionado = nodoSelecionado->infos;
+		removeDoNodo(tipo);
+	} else {
+		NodoB<T> *nodoSelecionado = selecionaRamoDescida(tipo);
 		nodoSelecionado->remove(tipo);
 
-		if (nodoSelecionado->retornaNumeroDeChaves() == ordem - 1) {
-			int posicaoNodoSelecionado = posicaoRamoDescida(tipo);
-			NodoB<T>* nodoEsquerdaDoSelecionado = filhos->obterDaPosicao(
-					posicaoNodoSelecionado - 1);
-			NodoB<T>* nodoDireitaDoSelecionado = filhos->obterDaPosicao(posicaoNodoSelecionado
-					+ 1);
-
-			if (nodoEsquerdaDoSelecionado != NULL
-					&& nodoEsquerdaDoSelecionado->retornaNumeroDeChaves()
-							>= ordem + 1) {
-				ListaEncadeada<const T>* infosIrmaoEsquerda =
-						nodoEsquerdaDoSelecionado->infos;
-				const T* maiorElemento = infosIrmaoEsquerda->removerDoFim();
-
-				infos->adicionarEmOrdem(maiorElemento);
-
-				infosNodoSelecionado->adicionarEmOrdem(infos->removerDaPosicao(posicaoNodoSelecionado));
-
-				nodoSelecionado->atualizaQtdElementos();
-				nodoEsquerdaDoSelecionado->atualizaQtdElementos();
-			} else {
-				if (nodoDireitaDoSelecionado != NULL
-						&& nodoDireitaDoSelecionado->retornaNumeroDeChaves()
-								>= ordem + 1) {
-					ListaEncadeada<const T>* infosIrmaoDireita =
-							nodoDireitaDoSelecionado->infos;
-					const T* menorElemento =
-							infosIrmaoDireita->removerDoInicio();
-
-					infos->adicionarEmOrdem(menorElemento);
-
-					infosNodoSelecionado->adicionarEmOrdem(
-							infos->removerDaPosicao(posicaoNodoSelecionado));
-
-					nodoSelecionado->atualizaQtdElementos();
-					nodoDireitaDoSelecionado->atualizaQtdElementos();
-				} else {
-					NodoB<T>* possivelNovaRaiz;
-
-					if(nodoEsquerdaDoSelecionado != NULL){
-						ListaEncadeada<const T>* infosIrmaoEsquerda =
-								nodoEsquerdaDoSelecionado->infos;
-
-						int posicaoParaAdicionar = posicaoNodoSelecionado - 1;
-						infosIrmaoEsquerda->adicionarEmOrdem(infos->removerDaPosicao(posicaoParaAdicionar));
-						for(int i = 0; i < ordem - 1; i++){
-							infosIrmaoEsquerda->adicionarEmOrdem(infosNodoSelecionado->removerDoFim());
-						}
-
-						filhos->removerDaPosicao(posicaoNodoSelecionado);
-
-						nodoEsquerdaDoSelecionado->atualizaQtdElementos();
-						possivelNovaRaiz = nodoEsquerdaDoSelecionado;
-
-					}
-					else{
-						if(nodoDireitaDoSelecionado != NULL){
-							ListaEncadeada<const T>* infosIrmaoDireita =
-									nodoDireitaDoSelecionado->infos;
-
-							int posicaoParaAdicionar = posicaoNodoSelecionado + 1;
-							infosIrmaoDireita->adicionarEmOrdem(infos->removerDaPosicao(posicaoNodoSelecionado));
-							for(int i = 0; i < ordem - 1; i++){
-								infosIrmaoDireita->adicionarEmOrdem(infosNodoSelecionado->removerDoInicio());
-							}
-
-							filhos->removerDaPosicao(posicaoNodoSelecionado);
-
-							nodoDireitaDoSelecionado->atualizaQtdElementos();
-							possivelNovaRaiz = nodoDireitaDoSelecionado;
-						}
-					}
-
-					if(raiz){
-						atualizaAltura();
-						atualizaQtdElementos();
-						if(numChavesNodo == 0)
-							return possivelNovaRaiz;
-					}
-				}
-			}
-		}
+		possivelNovaRaiz = ajustaFilhoAposRemocao(tipo, nodoSelecionado);
 	}
 
 	atualizaAltura();
 	atualizaQtdElementos();
+	return possivelNovaRaiz;
+}
+
+template<class T> void NodoB<T>::removeDoNodo(const T & tipo) {
+	if (folha) {
+		infos->removerDaPosicao(infos->posicao(&tipo));
+		std::cout << tipo << " e nodo folha, caso simples\n";
+	} else {
+		removeDoNodoInterno(tipo);
+	}
+}
+
+template<class T> void NodoB<T>::removeDoNodoInterno(const T & tipo) {
+	int posicaoNodoPredecessor = infos->posicao(&tipo);
+	NodoB<T> *nodoPredecessor = filhos->obterDaPosicao(posicaoNodoPredecessor);
+	int posicaoElementoRemovido = infos->posicao(&tipo);
+
+	if (nodoPredecessor->retornaNumeroDeChaves() >= ordem + 1) {
+		ListaEncadeada<const T> *infosDoPredecessor = nodoPredecessor->infos;
+		const T *predecessorInordem = infosDoPredecessor->removerDoFim();
+		infosDoPredecessor->adicionarNoFim(infos->removerDaPosicao(
+				posicaoElementoRemovido));
+		infos->adicionarNaPosicao(predecessorInordem, posicaoElementoRemovido);
+		nodoPredecessor->remove(tipo);
+		std::cout << tipo
+				<< " não é folha, mas o nodo da esquerda tem elementos sobrando\n";
+		return;
+	}
+
+	int posicaoNodoSucessor = posicaoNodoPredecessor + 1;
+	NodoB<T> *nodoSucessor = filhos->obterDaPosicao(posicaoNodoSucessor);
+
+	if (nodoSucessor->retornaNumeroDeChaves() >= ordem + 1) {
+		ListaEncadeada<const T> *infosDoSucessor = nodoSucessor->infos;
+		const T *sucessorInordem = infosDoSucessor->removerDoInicio();
+		infosDoSucessor->adicionarNoInicio(infos->removerDaPosicao(
+				posicaoElementoRemovido));
+		infos->adicionarNaPosicao(sucessorInordem, posicaoElementoRemovido);
+		nodoSucessor->remove(tipo);
+		std::cout << tipo
+				<< " não é folha, mas o nodo da direita tem elementos sobrando\n";
+		return;
+	}
+
+	//TODO ajustar para os elementos do canto
+	ListaEncadeada<const T> *infosDoPredecessor = nodoPredecessor->infos;
+	ListaEncadeada<const T> *infosDoSucessor = nodoSucessor->infos;
+	infosDoPredecessor->adicionarNoFim(infos->removerDaPosicao(
+			posicaoElementoRemovido));
+	for (int i = 0; i < ordem; i++) {
+		infosDoPredecessor->adicionarEmOrdem(infosDoSucessor->removerDoFim());
+	}
+	filhos->removerDaPosicao(posicaoNodoSucessor);
+	nodoPredecessor->remove(tipo);
+
+}
+
+template<class T> NodoB<T>* NodoB<T>::fundirNodos(NodoB<T> *destino,
+		NodoB<T> *origem, int & posicao) {
+
+	ListaEncadeada<const T> *infosOrigem = origem->infos;
+	ListaEncadeada<const T> *infosDestino = destino->infos;
+	int posicaoParaAdicionar = posicao - 1;
+	infosDestino->adicionarEmOrdem(
+			infos->removerDaPosicao(posicaoParaAdicionar));
+	for (int i = 0; i < ordem - 1; i++) {
+		infosDestino->adicionarEmOrdem(infosOrigem->removerDoFim());
+	}
+	filhos->removerDaPosicao(posicao);
+	destino->atualizaQtdElementos();
+	return destino;
+}
+
+template<class T> NodoB<T>* NodoB<T>::ajustaFilhoAposRemocao(const T & tipo,
+		NodoB<T> *filho) {
+
+	ListaEncadeada<const T> *infosNodoSelecionado = filho->infos;
+
+	if (filho->retornaNumeroDeChaves() != ordem - 1) {
+		return this;
+	}
+
+	int posicaoNodoSelecionado = posicaoRamoDescida(tipo);
+	NodoB<T>* nodoEsquerdaDoSelecionado = filhos->obterDaPosicao(
+			posicaoNodoSelecionado - 1);
+	NodoB<T>* nodoDireitaDoSelecionado = filhos->obterDaPosicao(
+			posicaoNodoSelecionado + 1);
+
+	if (nodoEsquerdaDoSelecionado != NULL
+			&& nodoEsquerdaDoSelecionado->retornaNumeroDeChaves() >= ordem + 1) {
+		ListaEncadeada<const T>* infosIrmaoEsquerda =
+				nodoEsquerdaDoSelecionado->infos;
+		const T* maiorElemento = infosIrmaoEsquerda->removerDoFim();
+
+		infos->adicionarEmOrdem(maiorElemento);
+
+		infosNodoSelecionado->adicionarEmOrdem(infos->removerDaPosicao(
+				posicaoNodoSelecionado));
+
+		filho->atualizaQtdElementos();
+		nodoEsquerdaDoSelecionado->atualizaQtdElementos();
+		return this;
+	}
+
+	if (nodoDireitaDoSelecionado != NULL
+			&& nodoDireitaDoSelecionado->retornaNumeroDeChaves() >= ordem + 1) {
+		ListaEncadeada<const T>* infosIrmaoDireita =
+				nodoDireitaDoSelecionado->infos;
+		const T* menorElemento = infosIrmaoDireita->removerDoInicio();
+
+		infos->adicionarEmOrdem(menorElemento);
+
+		infosNodoSelecionado->adicionarEmOrdem(infos->removerDaPosicao(
+				posicaoNodoSelecionado));
+
+		filho->atualizaQtdElementos();
+		nodoDireitaDoSelecionado->atualizaQtdElementos();
+		return this;
+	}
+
+	NodoB<T>* possivelNovaRaiz;
+
+	if (nodoEsquerdaDoSelecionado != NULL) {
+		ListaEncadeada<const T>* infosIrmaoEsquerda =
+				nodoEsquerdaDoSelecionado->infos;
+
+		int posicaoParaAdicionar = posicaoNodoSelecionado - 1;
+		infosIrmaoEsquerda->adicionarEmOrdem(infos->removerDaPosicao(
+				posicaoParaAdicionar));
+		for (int i = 0; i < ordem - 1; i++) {
+			infosIrmaoEsquerda->adicionarEmOrdem(
+					infosNodoSelecionado->removerDoFim());
+		}
+
+		filhos->removerDaPosicao(posicaoNodoSelecionado);
+
+		nodoEsquerdaDoSelecionado->atualizaQtdElementos();
+		possivelNovaRaiz = nodoEsquerdaDoSelecionado;
+
+	} else {
+		if (nodoDireitaDoSelecionado != NULL) {
+			ListaEncadeada<const T>* infosIrmaoDireita =
+					nodoDireitaDoSelecionado->infos;
+
+			infosIrmaoDireita->adicionarEmOrdem(infos->removerDaPosicao(
+					posicaoNodoSelecionado));
+			for (int i = 0; i < ordem - 1; i++) {
+				infosIrmaoDireita->adicionarEmOrdem(
+						infosNodoSelecionado->removerDoInicio());
+			}
+
+			filhos->removerDaPosicao(posicaoNodoSelecionado);
+
+			nodoDireitaDoSelecionado->atualizaQtdElementos();
+			possivelNovaRaiz = nodoDireitaDoSelecionado;
+		}
+	}
+
+	if (raiz) {
+		atualizaAltura();
+		atualizaQtdElementos();
+		if (numChavesNodo == 0)
+			return possivelNovaRaiz;
+	}
+
 	return this;
 }
 

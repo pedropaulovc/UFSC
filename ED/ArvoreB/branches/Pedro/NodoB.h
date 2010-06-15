@@ -32,11 +32,18 @@ private:
 	void atualizaQtdElementos();
 	void atualizaElemento();
 
-	void insereFolha(T const &tipo);
+	void insereFolha(const T & tipo);
 
-	int encontrarPosicaoNovoNodo(T const &tipo);
+	int encontrarPosicaoNovoNodo(const T & tipo);
 	void moverChavesMenores(NodoB<T> *& origem, NodoB<T> *& destino, int & limite);
 	void moverRamosMenores(NodoB<T> *& origem, NodoB<T> *& destino, int limite);
+
+	/*----------*/
+	void removeDoNodo(const T & tipo);
+	NodoB<T>* ajustaFilhoAposRemocao(const T & tipo, NodoB<T> *filho);
+	void removeDoNodoInterno(const T & tipo);
+	NodoB<T>*fundirNodos(NodoB<T> *destino, NodoB<T> *origem, int & posicao);
+
 
 public:
 	NodoB(int ordem);
