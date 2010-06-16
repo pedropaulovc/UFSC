@@ -115,7 +115,11 @@ void Main::executaLeituraCep() {
 	string arquivoCeps;
 	const Cep* cepAtual;
 	timeval antes, depois;
-	NodoB<Cep>* raiz = new NodoB<Cep> (11);
+	int ordem;
+	cout << "Forneça a ordem da árvore (maior ou igual a 1): ";
+	cin >> ordem;
+
+	NodoB<Cep>* raiz = new NodoB<Cep> (ordem);
 
 	cout << "Forneça o caminho do arquivo de CEPs: ";
 	cin >> arquivoCeps;
