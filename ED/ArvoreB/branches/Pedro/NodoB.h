@@ -1,9 +1,25 @@
-/*
- * NodoB.h
- *
- *  Created on: Jun 4, 2010
- *      Author: pedropaulo
- */
+/**
+ TÍTULO:        Implementação de árvores multivias semibalanceadas
+ ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+ MATÉRIA:       INE5408
+ PRAZO:         15 de junho de 2010
+
+ PROPÓSITO:
+ Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados
+ árvore B.
+
+ FUNCIONAMENTO GERAL:
+ Como informado no enunciado do trabalho, este programa é um exemplo prático da implementação
+ de uma árvore multivias semibalanceada. A estrutura de dados aceita comandos de inserção, exclusão e
+ percurso de maneira prefixada, infixada e posfixada. Como demonstração de funcionamento foi implementado
+ um sistema que recebe um arquivo de CEPs fora de ordem e plota o gráfico com o tempo para operar
+ nos nodos da árvore. Além disso, foram gerados testes unitários que garantem o funcionamento esperado
+ da estrutura de dados.
+
+ SOBRE ESSE ARQUIVO:
+ Declaração dos métodos públicos e privados além dos atributos de um NodoB a serem implementados
+ em NodoB.ipp.
+*/
 
 #ifndef NODOB_H_
 #define NODOB_H_
@@ -25,7 +41,6 @@ private:
 	bool raiz;
 
 	void divideNodo(NodoB<T>* raiz, NodoB<T>* filho);
-	NodoB<T>* selecionaRamoDescida(T const &tipo);
 	int posicaoRamoDescida(T const &tipo);
 
 	void atualizaAltura();
@@ -34,10 +49,8 @@ private:
 
 	void insereFolha(const T & tipo);
 
-	int encontrarPosicaoNovoNodo(const T & tipo);
-	void moverChavesMenores(NodoB<T> *& origem, NodoB<T> *& destino,
-			int & limite);
-	void moverRamosMenores(NodoB<T> *& origem, NodoB<T> *& destino, int limite);
+	void moverChavesMenores(NodoB<T> *& origem, NodoB<T> *& destino, int & numChaves);
+	void moverRamosMenores(NodoB<T> *& origem, NodoB<T> *& destino, int numRamos);
 
 	void removeDoNodo(const T & tipo);
 	void removeDoNodoInterno(const T & tipo);

@@ -1,9 +1,24 @@
-/*
- * Cep.cpp
- *
- *  Created on: Jun 4, 2010
- *      Author: pedropaulo
- */
+/**
+ TÍTULO:        Implementação de árvores multivias semibalanceadas
+ ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+ MATÉRIA:       INE5408
+ PRAZO:         15 de junho de 2010
+
+ PROPÓSITO:
+ Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados
+ árvore B.
+
+ FUNCIONAMENTO GERAL:
+ Como informado no enunciado do trabalho, este programa é um exemplo prático da implementação
+ de uma árvore multivias semibalanceada. A estrutura de dados aceita comandos de inserção, exclusão e
+ percurso de maneira prefixada, infixada e posfixada. Como demonstração de funcionamento foi implementado
+ um sistema que recebe um arquivo de CEPs fora de ordem e plota o gráfico com o tempo para operar
+ nos nodos da árvore. Além disso, foram gerados testes unitários que garantem o funcionamento esperado
+ da estrutura de dados.
+
+ SOBRE O ARQUIVO:
+ Implementação do tipo de dados Cep, composto de um número de cep e nome do logradouro.
+*/
 
 #include "Cep.h"
 #include "Estruturas/ListaEncadeada.h"
@@ -13,46 +28,178 @@
 
 using namespace std;
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Construtor principal do tipo Cep.
+
+PARÂMETROS:
+	O número do CEP e o nome do logradouro.
+
+VALOR DE RETORNO:
+	ponteiro para o objeto criado.
+
+*/
 Cep::Cep(string cep, string nome) {
 	istringstream buffer(cep);
 	buffer >> this->cep;
 	this->nome = nome;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Construtor sem parâmetros para satisfazer necessidade de compilação.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	ponteiro para o objeto criado.
+
+*/
 Cep::Cep() {
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Destrutor do objeto
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 Cep::~Cep() {
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna o número de cep armazenado no objeto.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	o número de cep
+
+*/
 int Cep::obterCep() const{
 	return cep;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	retorna o nome do logradouro armazenado no objeto.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	 o nome do logradouro
+
+*/
 string Cep::obterNome() const{
 	return nome;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	operador para comparação entre dois CEPs diferentes
+
+PARÂMETROS:
+	o outro cep a ser comparado.
+
+VALOR DE RETORNO:
+	valor booleano da operação
+
+*/
 bool Cep::operator>(const Cep& outro) const {
 	return (nome.compare(outro.nome) > 0);
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	operador para comparação entre dois CEPs diferentes
+
+PARÂMETROS:
+	o outro cep a ser comparado.
+
+VALOR DE RETORNO:
+	valor booleano da operação
+
+*/
 bool Cep::operator<(const Cep& outro) const {
 	return (nome.compare(outro.nome) < 0);
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	operador para comparação entre dois CEPs diferentes
+
+PARÂMETROS:
+	o outro cep a ser comparado.
+
+VALOR DE RETORNO:
+	valor booleano da operação
+
+*/
 bool Cep::operator<=(const Cep& outro) const {
 	return (nome.compare(outro.nome) <= 0);
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	operador para comparação entre dois CEPs diferentes
+
+PARÂMETROS:
+	o outro cep a ser comparado.
+
+VALOR DE RETORNO:
+	valor booleano da operação
+
+*/
 bool Cep::operator==(const Cep& outro) const {
 	return (nome.compare(outro.nome) == 0);
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	operador para comparação entre dois CEPs diferentes
+
+PARÂMETROS:
+	o outro cep a ser comparado.
+
+VALOR DE RETORNO:
+	valor booleano da operação
+
+*/
 bool Cep::operator!=(const Cep& outro) const {
 	return (nome.compare(outro.nome) != 0);
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	dada uma linha formatada contendo logradouro e cep, retorna um novo objeto cep com os dados fornecidos.
+
+PARÂMETROS:
+	a linha a ser lida
+
+VALOR DE RETORNO:
+	o objeto gerado ou NULL em caso de erro.
+
+*/
 Cep* Cep::lerCep(string linha) {
 	size_t posicaoBarra, posicaoInicioCep;
 	string cidade, cep;
@@ -67,6 +214,18 @@ Cep* Cep::lerCep(string linha) {
 	return NULL;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Itera um arquivo de CEPs e retorna uma lista encadeada contendo todos os CEPs do arquivo.
+
+PARÂMETROS:
+	o caminho para o arquivo a ser lido.
+
+VALOR DE RETORNO:
+	a lista de CEPs
+
+*/
 ListaEncadeada<Cep>* Cep::lerArquivoCeps(string caminhoArquivo) {
 	string line;
 	Cep* cep;

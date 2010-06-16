@@ -1,3 +1,26 @@
+/**
+ TÍTULO:        Implementação de árvores multivias semibalanceadas
+ ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+ MATÉRIA:       INE5408
+ PRAZO:         15 de junho de 2010
+
+ PROPÓSITO:
+ Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados
+ árvore B.
+
+ FUNCIONAMENTO GERAL:
+ Como informado no enunciado do trabalho, este programa é um exemplo prático da implementação
+ de uma árvore multivias semibalanceada. A estrutura de dados aceita comandos de inserção, exclusão e
+ percurso de maneira prefixada, infixada e posfixada. Como demonstração de funcionamento foi implementado
+ um sistema que recebe um arquivo de CEPs fora de ordem e plota o gráfico com o tempo para operar
+ nos nodos da árvore. Além disso, foram gerados testes unitários que garantem o funcionamento esperado
+ da estrutura de dados.
+
+ SOBRE ESSE ARQUIVO:
+ Testes unitários para a árvore B, testa diversos casos na inserção e deleção para garantir seu
+ funcionamento correto.
+*/
+
 #include <gtest/gtest.h>
 #include "NodoB.h"
 

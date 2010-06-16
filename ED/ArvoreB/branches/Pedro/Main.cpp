@@ -1,3 +1,26 @@
+/**
+ TÍTULO:        Implementação de árvores multivias semibalanceadas
+ ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+ MATÉRIA:       INE5408
+ PRAZO:         15 de junho de 2010
+
+ PROPÓSITO:
+ Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados
+ árvore B.
+
+ FUNCIONAMENTO GERAL:
+ Como informado no enunciado do trabalho, este programa é um exemplo prático da implementação
+ de uma árvore multivias semibalanceada. A estrutura de dados aceita comandos de inserção, exclusão e
+ percurso de maneira prefixada, infixada e posfixada. Como demonstração de funcionamento foi implementado
+ um sistema que recebe um arquivo de CEPs fora de ordem e plota o gráfico com o tempo para operar
+ nos nodos da árvore. Além disso, foram gerados testes unitários que garantem o funcionamento esperado
+ da estrutura de dados.
+
+ SOBRE O ARQUIVO:
+ Interface principal com o usuário.
+
+*/
+
 #include <gtest/gtest.h>
 #include <iostream>
 #include <fstream>
@@ -12,32 +35,26 @@ using namespace std;
 
 class Main {
 public:
-	int iniciar(int argc, char **argv);
-	void exibeIntroducao();
-	void exibeMenu();
-	void executaLeituraCep();
-	int executaTestes(int argc, char **argv);
-	inline double calculaDiferencaTempo(timeval antes, timeval depois);
+	static void exibeIntroducao();
+	static void exibeMenu();
+	static void executaLeituraCep();
+	static int executaTestes(int argc, char **argv);
+	static inline double calculaDiferencaTempo(timeval antes, timeval depois);
 };
 
 int main(int argc, char **argv) {
-	Main* main = new Main();
-	return main->iniciar(argc, argv);
-}
-
-int Main::iniciar(int argc, char **argv) {
 	int opcao;
 
-	exibeIntroducao();
+	Main::exibeIntroducao();
 
 	do {
-		exibeMenu();
+		Main::exibeMenu();
 		cin >> opcao;
 
 		if (opcao == 1) {
-			executaLeituraCep();
+			Main::executaLeituraCep();
 		} else if (opcao == 2) {
-			return executaTestes(argc, argv);
+			return Main::executaTestes(argc, argv);
 		} else if (opcao != 0) {
 			cout << "Opção inválida";
 		}
@@ -47,17 +64,53 @@ int Main::iniciar(int argc, char **argv) {
 	return 0;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	exibe introdução ao programa
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void Main::exibeIntroducao() {
 	cout << "TRABALHO 9 - ÁRVORE BINÁRIA DE BUSCA SEMIBALANCEADA\n"
 			<< "ALUNOS: PEDRO PAULO VEZZÁ CAMPOS E FELIPE DOS SANTOS SILVEIRA\n";
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	exibe um menu simples com as opções de execução
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void Main::exibeMenu() {
 	cout << "Escola a opção desejada: \n" << "0 - Sair\n"
 			<< "1 - Executar leitura de arquivo de CEPs\n"
 			<< "2 - Executar testes de validação\n";
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	interface para a criação de uma árvore de CEPs. Delega as tarefas às classes competentes.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void Main::executaLeituraCep() {
 	string arquivoCeps;
 	const Cep* cepAtual;
@@ -105,11 +158,35 @@ void Main::executaLeituraCep() {
 	system("gnuplot analise/gnuplot.gnu");
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	calcula com precisão de microsegundos o tempo para executar uma operação.
+
+PARÂMETROS:
+	os instantes antes e depois da execução/
+
+VALOR DE RETORNO:
+	um valor com precisão dupla com a diferença de tempo.
+
+*/
 inline double Main::calculaDiferencaTempo(timeval antes, timeval depois) {
 	return depois.tv_sec - antes.tv_sec + pow10(-6) * (depois.tv_usec
 			- antes.tv_usec);
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	aciona o sistema de testes unitários
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	o resultado numérico da execução.
+
+*/
 int Main::executaTestes(int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();

@@ -1,7 +1,42 @@
+/**
+ TÍTULO:        Implementação de árvores multivias semibalanceadas
+ ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+ MATÉRIA:       INE5408
+ PRAZO:         15 de junho de 2010
+
+ PROPÓSITO:
+ Este programa é uma implementação dos conceitos vistos em sala de aula sobre a estrutura de dados
+ árvore B.
+
+ FUNCIONAMENTO GERAL:
+ Como informado no enunciado do trabalho, este programa é um exemplo prático da implementação
+ de uma árvore multivias semibalanceada. A estrutura de dados aceita comandos de inserção, exclusão e
+ percurso de maneira prefixada, infixada e posfixada. Como demonstração de funcionamento foi implementado
+ um sistema que recebe um arquivo de CEPs fora de ordem e plota o gráfico com o tempo para operar
+ nos nodos da árvore. Além disso, foram gerados testes unitários que garantem o funcionamento esperado
+ da estrutura de dados.
+
+ SOBRE ESSE ARQUIVO:
+ Declaração dos métodos públicos e privados além dos atributos de um NodoB a serem implementados
+ em NodoB.ipp.
+ */
+
 #include "Estruturas/ListaEncadeada.h"
 #include <cstdlib>
 #include <sstream>
 
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Construtor principal da árvore B.
+
+ PARÂMETROS:
+ A ordem (>= 1) da árvore
+
+ VALOR DE RETORNO:
+ ponteiro para o objeto criado.
+
+ */
 template<class T> NodoB<T>::NodoB(int ordem) {
 	this->ordem = ordem;
 	numChavesNodo = 0;
@@ -13,9 +48,33 @@ template<class T> NodoB<T>::NodoB(int ordem) {
 	filhos = new ListaEncadeada<NodoB<T> > ();
 }
 
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Destrutor principal da árvore B.
+
+ PARÂMETROS:
+ nenhum
+
+ VALOR DE RETORNO:
+ nenhum
+
+ */
 template<class T> NodoB<T>::~NodoB() {
 }
 
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Método principal de inserção na árvore B.
+
+ PARÂMETROS:
+ O dado a ser inserido
+
+ VALOR DE RETORNO:
+ A nova raíz da árvore.
+
+ */
 template<class T> NodoB<T>* NodoB<T>::insere(T const &tipo) {
 	NodoB<T>* filho = NULL;
 	NodoB<T>* novaRaiz = this;
@@ -23,7 +82,8 @@ template<class T> NodoB<T>* NodoB<T>::insere(T const &tipo) {
 	if (folha) {
 		insereFolha(tipo);
 	} else {
-		filho = selecionaRamoDescida(tipo);
+		filho = filhos->obterDaPosicao(posicaoRamoDescida(tipo));
+
 		filho->insere(tipo);
 
 		if (filho->nodoCheio())
@@ -41,8 +101,18 @@ template<class T> NodoB<T>* NodoB<T>::insere(T const &tipo) {
 	return novaRaiz;
 }
 
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Método auxiliar de inserção na árvore B, inserção em nodo folha.
 
+ PARÂMETROS:
+ O dado a ser inserido
 
+ VALOR DE RETORNO:
+ nenhum
+
+ */
 template<class T> void NodoB<T>::insereFolha(T const &tipo) {
 	if (nodoCheio() || !folha)
 		return;
@@ -53,19 +123,18 @@ template<class T> void NodoB<T>::insereFolha(T const &tipo) {
 	totalChaves++;
 }
 
-template<class T> NodoB<T>* NodoB<T>::selecionaRamoDescida(T const &tipo) {
-	const T* infoAtual = infos->obterDaPosicao(1);
-	int i = 1;
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Método para decisão do ramo a ser seguido para adicionar ou remover um dado.
 
-	while (i <= numChavesNodo && tipo > *infoAtual) {
-		i++;
+ PARÂMETROS:
+ O dado a ser inserido ou removido
 
-		infoAtual = infos->obterDaPosicao(i);
-	}
+ VALOR DE RETORNO:
+ A posição do ramo de descida na árvore dentro da lista de ramos existentes.
 
-	return filhos->obterDaPosicao(i);
-}
-
+ */
 template<class T> int NodoB<T>::posicaoRamoDescida(T const &tipo) {
 	const T* infoAtual = infos->obterDaPosicao(1);
 	int posicao = 1;
@@ -79,13 +148,25 @@ template<class T> int NodoB<T>::posicaoRamoDescida(T const &tipo) {
 	return posicao;
 }
 
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Método para a moção de 'numChaves' chaves de 'origem' para 'destino'
+
+ PARÂMETROS:
+ A origem das chaves, o destino e o o número de chaves
+
+ VALOR DE RETORNO:
+ nenhum
+
+ */
 template<class T> void NodoB<T>::moverChavesMenores(NodoB<T> *& origem,
-		NodoB<T> *& destino, int & limite) {
+		NodoB<T> *& destino, int & numChaves) {
 	ListaEncadeada<const T> *chavesOrigem = origem->infos;
 	ListaEncadeada<const T> *chavesDestino = destino->infos;
 	const T *chaveAtual = chavesOrigem->obterDoInicio();
 	int i = 1;
-	while (i < limite) {
+	while (i < numChaves) {
 		chavesOrigem->removerDoInicio();
 		chavesDestino->adicionarEmOrdem(chaveAtual);
 		i++;
@@ -93,20 +174,18 @@ template<class T> void NodoB<T>::moverChavesMenores(NodoB<T> *& origem,
 	}
 }
 
-template<class T> void NodoB<T>::moverRamosMenores(NodoB<T> *& origem,
-		NodoB<T> *& destino, int limite) {
-	ListaEncadeada<NodoB<T> > *ramosOrigem = origem->filhos;
-	ListaEncadeada<NodoB<T> > *ramosDestino = destino->filhos;
-	NodoB<T> *ramoAtual = ramosOrigem->obterDoInicio();
-	int i = 1;
-	while (i <= limite && ramoAtual != NULL) {
-		ramosOrigem->removerDoInicio();
-		ramosDestino->adicionarNaPosicao(ramoAtual, i);
-		i++;
-		ramoAtual = ramosOrigem->obterDoInicio();
-	}
-}
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Método para a divisão de um nodo cheio em dois nodos.
 
+ PARÂMETROS:
+ A raiz do nodo cheio e 'filho', o nodo cheio
+
+ VALOR DE RETORNO:
+ nenhum
+
+ */
 template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 	if (!filho->nodoCheio())
 		return;
@@ -126,7 +205,7 @@ template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 	outroFilho->atualizaAltura();
 	outroFilho->raiz = false;
 
-	int posicaoNovoFilho = raiz->encontrarPosicaoNovoNodo(*infoSobe);
+	int posicaoNovoFilho = raiz->posicaoRamoDescida(*infoSobe);
 	raiz->infos->adicionarEmOrdem(infoSobe);
 	raiz->numChavesNodo++;
 	raiz->filhos->adicionarNaPosicao(outroFilho, posicaoNovoFilho);
@@ -141,24 +220,51 @@ template<class T> void NodoB<T>::divideNodo(NodoB<T>* raiz, NodoB<T>* filho) {
 	raiz->atualizaQtdElementos();
 }
 
-template<class T> int NodoB<T>::encontrarPosicaoNovoNodo(T const &tipo) {
-	const T* infoAtual = infos->obterDaPosicao(1);
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Método para a moção de 'numRamos' ramos de 'origem' para 'destino'
+
+ PARÂMETROS:
+ A origem das chaves, o destino e o o número de ramos
+
+ VALOR DE RETORNO:
+ nenhum
+
+ */
+template<class T> void NodoB<T>::moverRamosMenores(NodoB<T> *& origem,
+		NodoB<T> *& destino, int numRamos) {
+	ListaEncadeada<NodoB<T> > *ramosOrigem = origem->filhos;
+	ListaEncadeada<NodoB<T> > *ramosDestino = destino->filhos;
+	NodoB<T> *ramoAtual = ramosOrigem->obterDoInicio();
 	int i = 1;
-
-	while (i <= numChavesNodo && tipo > *infoAtual) {
+	while (i <= numRamos && ramoAtual != NULL) {
+		ramosOrigem->removerDoInicio();
+		ramosDestino->adicionarNaPosicao(ramoAtual, i);
 		i++;
-		infoAtual = infos->obterDaPosicao(i);
+		ramoAtual = ramosOrigem->obterDoInicio();
 	}
-
-	return i;
 }
 
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Método principal para a remoção de uma chave da árvore.
+
+ PARÂMETROS:
+ O valor a ser removido.
+
+ VALOR DE RETORNO:
+ A nova raíz da árvore.
+
+ */
 template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
 	NodoB<T>* possivelNovaRaiz = this;
 	if (infos->contem(&tipo)) {
 		removeDoNodo(tipo);
 	} else {
-		NodoB<T> *nodoSelecionado = selecionaRamoDescida(tipo);
+		NodoB<T> *nodoSelecionado = filhos->obterDaPosicao(posicaoRamoDescida(
+				tipo));
 		nodoSelecionado->remove(tipo);
 
 		possivelNovaRaiz = ajustaFilhoAposRemocao(tipo, nodoSelecionado);
@@ -169,6 +275,18 @@ template<class T> NodoB<T>* NodoB<T>::remove(T const &tipo) {
 	return possivelNovaRaiz;
 }
 
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Método auxiliar para a remoção de uma chave da árvore. Caso especial, remoção de chave no próprio nodo.
+
+ PARÂMETROS:
+ O valor a ser removido.
+
+ VALOR DE RETORNO:
+ nenhum
+
+ */
 template<class T> void NodoB<T>::removeDoNodo(const T & tipo) {
 	if (folha) {
 		infos->removerDaPosicao(infos->posicao(&tipo));
@@ -177,6 +295,19 @@ template<class T> void NodoB<T>::removeDoNodo(const T & tipo) {
 	}
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Método auxiliar para a remoção de uma chave da árvore. Caso especial, remoção
+	de chave no próprio nodo, sendo esse um nodo interno.
+
+PARÂMETROS:
+	O valor a ser removido.
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 template<class T> void NodoB<T>::removeDoNodoInterno(const T & tipo) {
 	int posicaoNodoPredecessor = infos->posicao(&tipo);
 	NodoB<T> *nodoPredecessor = filhos->obterDaPosicao(posicaoNodoPredecessor);
@@ -205,7 +336,6 @@ template<class T> void NodoB<T>::removeDoNodoInterno(const T & tipo) {
 		return;
 	}
 
-	//TODO ajustar para os elementos do canto
 	ListaEncadeada<const T> *infosDoPredecessor = nodoPredecessor->infos;
 	ListaEncadeada<const T> *infosDoSucessor = nodoSucessor->infos;
 	infosDoPredecessor->adicionarNoFim(infos->removerDaPosicao(
@@ -218,6 +348,19 @@ template<class T> void NodoB<T>::removeDoNodoInterno(const T & tipo) {
 
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Método para a fusão de dois nodos movendo os conteúdos do nodo da direita ('origem') para
+	a esquerda ('destino'). Remove o nodo antigo, localizado em 'posicao'
+
+PARÂMETROS:
+	A origem dos dados, o destino e a posição do nodo a ser removido.
+
+VALOR DE RETORNO:
+	'destino'
+
+*/
 template<class T> NodoB<T>* NodoB<T>::fundirNodosParaEsquerda(
 		NodoB<T> *destino, NodoB<T>* origem, int & posicao) {
 
@@ -243,6 +386,19 @@ template<class T> NodoB<T>* NodoB<T>::fundirNodosParaEsquerda(
 	return destino;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Método para a fusão de dois nodos movendo os conteúdos do nodo da esquerda ('origem') para
+	a esquerda ('destino'). Remove o nodo antigo, localizado em 'posicao'
+
+PARÂMETROS:
+	A origem dos dados, o destino e a posição do nodo a ser removido.
+
+VALOR DE RETORNO:
+	'destino'
+
+*/
 template<class T> NodoB<T>* NodoB<T>::fundirNodosParaDireita(NodoB<T> *destino,
 		NodoB<T>* origem, int posicao) {
 
@@ -266,6 +422,18 @@ template<class T> NodoB<T>* NodoB<T>::fundirNodosParaDireita(NodoB<T> *destino,
 	return destino;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Método para o ajuste de nodo filho que venha a entrar em underflow após remoção de chave.
+
+PARÂMETROS:
+	O dado removido e o filho em potencial underflow
+
+VALOR DE RETORNO:
+	A nova raíz da subárvore.
+
+*/
 template<class T> NodoB<T>* NodoB<T>::ajustaFilhoAposRemocao(const T & tipo,
 		NodoB<T> *filho) {
 
@@ -335,6 +503,18 @@ template<class T> NodoB<T>* NodoB<T>::ajustaFilhoAposRemocao(const T & tipo,
 	return this;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Método para o ajuste da altura de um nodo após operação de inserção ou remoção.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 template<class T> void NodoB<T>::atualizaAltura() {
 	int i = 1;
 	int maxAltura = -1;
@@ -352,6 +532,19 @@ template<class T> void NodoB<T>::atualizaAltura() {
 		altura = maxAltura + 1;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Método para o ajuste da quantidade de elementos de um nodo após operação de
+	inserção ou remoção.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 template<class T> void NodoB<T>::atualizaQtdElementos() {
 	int totalSubarvores = 0;
 	NodoB<T>* filho;
@@ -365,30 +558,115 @@ template<class T> void NodoB<T>::atualizaQtdElementos() {
 	totalChaves = totalSubarvores + numChavesNodo;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Retorna valor booleano verdadeiro se o nodo está com mais que 2*ordem + 1 chaves armazenadas nele.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	verdadeiro se o nodo está cheio ou falso em caso contrário.
+
+*/
 template<class T> bool NodoB<T>::nodoCheio() {
 	return numChavesNodo == 2 * ordem + 1;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Retorna valor booleano verdadeiro se o nodo está com 0 chaves armazenadas nele.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	verdadeiro se o nodo está vazio ou falso em caso contrário.
+
+*/
 template<class T> bool NodoB<T>::nodoVazio() {
 	return numChavesNodo == 0;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Retorna a quantidade de chaves armazenadas no nodo e em todos seus ramos.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	O total de elementos armazenados na subárvore.
+
+*/
 template<class T> int NodoB<T>::retornaNumeroDeElementos() {
 	return totalChaves;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Retorna quantidade de chaves armazenadas somente no nodo.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	a quantidade de chaves armazenadas no nodo.
+
+*/
 template<class T> int NodoB<T>::retornaNumeroDeChaves() {
 	return numChavesNodo;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Retorna a altura de um nodo
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	a altura de um nodo.
+
+*/
 template<class T> int NodoB<T>::retornaAltura() {
 	return altura;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Retorna o número de ramos que o nodo possui referência.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	o número de filhos que o nodo possui.
+
+*/
 template<class T> int NodoB<T>::retornaNumeroDeFilhos() {
 	return filhos->obterTamanho();
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Realiza o percurso prefixado na árvore gravando as referências em uma lista encadeada passada por
+	parâmetro.
+
+PARÂMETROS:
+	a lista a ser gravada com os elementos em preordem.
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 template<class T> void NodoB<T>::retornaPrefixada(
 		ListaEncadeada<const T>* lista) {
 	if (lista == NULL)
@@ -415,6 +693,19 @@ template<class T> void NodoB<T>::retornaPrefixada(
 
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Realiza o percurso infixado na árvore gravando as referências em uma lista encadeada passada por
+	parâmetro.
+
+PARÂMETROS:
+	a lista a ser gravada com os elementos em inordem.
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 template<class T> void NodoB<T>::retornaInfixada(ListaEncadeada<const T>* lista) {
 	if (lista == NULL)
 		lista = new ListaEncadeada<const T> ();
@@ -439,6 +730,19 @@ template<class T> void NodoB<T>::retornaInfixada(ListaEncadeada<const T>* lista)
 	}
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Realiza o percurso posfixado na árvore gravando as referências em uma lista encadeada passada por
+	parâmetro.
+
+PARÂMETROS:
+	a lista a ser gravada com os elementos em posordem.
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 template<class T> void NodoB<T>::retornaPosfixada(
 		ListaEncadeada<const T>* lista) {
 	if (lista == NULL)
@@ -464,6 +768,19 @@ template<class T> void NodoB<T>::retornaPosfixada(
 	}
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Realiza o percurso prefixado na árvore gerando uma string contendo todos os elementos armazenados na
+	árvore.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	a string contendo todos os elementos da subárvore separados por espaço.
+
+*/
 template<class T> std::string NodoB<T>::retornaPrefixada() {
 	ListaEncadeada<const T>* lista = new ListaEncadeada<const T> ();
 	retornaPrefixada(lista);
@@ -477,6 +794,19 @@ template<class T> std::string NodoB<T>::retornaPrefixada() {
 	return saida.str();
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Realiza o percurso infixado na árvore gerando uma string contendo todos os elementos armazenados na
+	árvore.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	a string contendo todos os elementos da subárvore separados por espaço.
+
+*/
 template<class T> std::string NodoB<T>::retornaInfixada() {
 	ListaEncadeada<const T>* lista = new ListaEncadeada<const T> ();
 	retornaInfixada(lista);
@@ -490,6 +820,19 @@ template<class T> std::string NodoB<T>::retornaInfixada() {
 	return saida.str();
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Realiza o percurso posfixado na árvore gerando uma string contendo todos os elementos armazenados na
+	árvore.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	a string contendo todos os elementos da subárvore separados por espaço.
+
+*/
 template<class T> std::string NodoB<T>::retornaPosfixada() {
 	ListaEncadeada<const T>* lista = new ListaEncadeada<const T> ();
 	retornaPosfixada(lista);
