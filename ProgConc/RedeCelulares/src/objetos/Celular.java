@@ -54,7 +54,7 @@ public class Celular extends Thread {
 		if (status != LIVRE)
 			return LIGACAO_INVALIDA;
 
-		Log.adicionarLog(num.toString() + ": Fazendo liga��o para "
+		Log.adicionarLog(num.toString() + ": Fazendo ligação para "
 				+ aLigar.toString());
 
 		EstadoLigacao ligacao = estacao.fazerLigacao(aLigar);
@@ -62,14 +62,14 @@ public class Celular extends Thread {
 		if(status == EM_LIGACAO)
 			emLigacao = aLigar;
 		
-		Log.adicionarLog(num.toString() + ": Status liga��o: "
+		Log.adicionarLog(num.toString() + ": Status ligação: "
 				+ ligacao.toString());
 
 		return ligacao;
 	}
 
 	public synchronized EstadoLigacao receberLigacao() {
-		Log.adicionarLog(num.toString() + ": Recebendo liga��o. Status antes: "
+		Log.adicionarLog(num.toString() + ": Recebendo ligação. Status antes: "
 				+ status.toString());
 		if (status != LIVRE)
 			return CELULAR_OCUPADO;
@@ -80,7 +80,7 @@ public class Celular extends Thread {
 	public synchronized EstadoLigacao terminarLigacao() {
 		if (status == EM_LIGACAO) {
 			status = LIVRE;
-			Log.adicionarLog(num.toString() + ": Terminou liga��o.");
+			Log.adicionarLog(num.toString() + ": Terminou ligação.");
 			estacao.terminarLigacao(emLigacao);
 		}
 		return TERMINADA;
