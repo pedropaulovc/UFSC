@@ -1,38 +1,75 @@
 package objetos;
 
+import static estados.EstadoCelular.*;
+import static estados.EstadoLigacao.*;
+import static mensagem.CodigosMensagem.*;
 import java.util.HashMap;
 import java.util.Map;
 
 import log.Log;
-
+import mensagem.CaixaPostal;
+import mensagem.CodigosMensagem;
+import mensagem.Mensagem;
 import estados.EstadoLigacao;
-import static estados.EstadoLigacao.*;
-import static estados.EstadoCelular.*;
 
 public class EstacaoBase extends Thread {
 	private Map<NumCelular, Celular> celulares = new HashMap<NumCelular, Celular>();
+	private CaixaPostal caixaPostal;
 	private int numLigacoes = 10;
 	private int id;
 
-	public EstacaoBase(int id){
+	public EstacaoBase(int id) {
 		this.id = id;
+		this.caixaPostal = new CaixaPostal();
 	}
-	
-	public synchronized void associarCelular(Celular celular) {
+
+	public void run() {
+		while (true) {
+			Mensagem msg = caixaPostal.receive();
+			switch (msg.obterCodigo()) {
+			case ASSOCIAR_CELULAR:
+				associarCelular(msg.obterCelular());
+				break;
+			case DESASSOCIAR_CELULAR:
+				desassociarCelular(msg.obterCelular());
+				break;
+			case FAZER_LIGACAO:
+				fazerLigacao(msg.obterNumero());
+				break;
+			case RECEBER_LIGACAO:
+				receberLigacao(msg.obterNumero());
+				break;
+			case TERMINAR_LIGACAO:
+				terminarLigacao(msg.obterNumero());
+				break;
+			}
+		}
+	}
+
+	private void associarCelular(Celular celular) {
+		Mensagem msg = new Mensagem();
 		NumCelular numCelular = celular.obterNumero();
+
+		msg.definirCodigo(ADICIONAR_CELULAR);
+		msg.definirNumero(numCelular);
+		msg.definirEstacao(this);
 
 		celulares.put(numCelular, celular);
-		ServidorCentral.adicionarCelular(numCelular, this);
+		ServidorCentral.send(msg);
 	}
 
-	public synchronized void desassociarCelular(Celular celular) {
+	private void desassociarCelular(Celular celular) {
+		Mensagem msg = new Mensagem();
 		NumCelular numCelular = celular.obterNumero();
 
+		msg.definirCodigo(REMOVER_CELULAR);
+		msg.definirNumero(numCelular);
+
 		celulares.remove(numCelular);
-		ServidorCentral.removerCelular(numCelular);
+		ServidorCentral.send(msg);
 	}
 
-	public synchronized EstadoLigacao fazerLigacao(NumCelular numDestino) {
+	private EstadoLigacao fazerLigacao(NumCelular numDestino) {
 		try {
 			while (numLigacoes == 0)
 				wait();
@@ -42,23 +79,42 @@ public class EstacaoBase extends Thread {
 		numLigacoes--;
 
 		EstacaoBase estacaoDestino = buscarEstacao(numDestino);
-		if(estacaoDestino == null)
+		if (estacaoDestino == null)
 			return NUMERO_INVALIDO;
-
+		
+		Mensagem msg = new Mensagem();
+		msg.definirCodigo(RECEBER_LIGACAO);
+		msg.definirEstacao(this);
+		msg.definirNumero(numDestino);
+		estacaoDestino.send(msg);
+		msg = caixaPostal.receive();
+		while(msg.obterNumero() != numDestino || (msg.obterCodigo() != RECEBER_LIGACAO)){
+			caixaPostal.send(msg);
+		}
 		return estacaoDestino.receberLigacao(numDestino);
+	}
+
+	public void send(Mensagem msg) {
+		caixaPostal.send(msg);
+		
 	}
 
 	private EstacaoBase buscarEstacao(NumCelular numDestino) {
 		EstacaoBase estacaoDestino = this;
+		
 		if (!celulares.containsKey(numDestino)) {
-			if (!ServidorCentral.celularCadastrado(numDestino))
-				return null;
-			estacaoDestino = ServidorCentral.buscarEstacao(numDestino);
+			Mensagem msg = new Mensagem();
+			msg.definirCodigo(BUSCAR_ESTACAO);
+			msg.definirNumero(numDestino);
+			ServidorCentral.send(msg);
+			msg = caixaPostal.receive();
+			estacaoDestino = msg.obterEstacao();
 		}
 		return estacaoDestino;
+
 	}
 
-	public synchronized EstadoLigacao receberLigacao(NumCelular numDestino) {
+	private EstadoLigacao receberLigacao(NumCelular numDestino) {
 		assert (celulares.containsKey(numDestino));
 		try {
 			while (numLigacoes == 0)
@@ -72,8 +128,8 @@ public class EstacaoBase extends Thread {
 		return celular.receberLigacao();
 	}
 
-	public synchronized EstadoLigacao terminarLigacao(NumCelular numDestino) {
-		if(celulares.containsKey(numDestino)){
+	private EstadoLigacao terminarLigacao(NumCelular numDestino) {
+		if (celulares.containsKey(numDestino)) {
 			Celular celular = celulares.get(numDestino);
 			if (celular.obterEstado() == EM_LIGACAO) {
 				numLigacoes++;
@@ -83,13 +139,13 @@ public class EstacaoBase extends Thread {
 			return TERMINADA;
 		}
 		EstacaoBase estacaoDestino = buscarEstacao(numDestino);
-		if(estacaoDestino == null)
+		if (estacaoDestino == null)
 			return NUMERO_INVALIDO;
-		
+
 		return estacaoDestino.terminarLigacao(numDestino);
 	}
-	
-	public int obterId(){
+
+	public int obterId() {
 		return id;
 	}
 }
