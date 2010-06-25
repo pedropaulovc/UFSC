@@ -34,7 +34,7 @@ public class EstacaoBase extends Thread {
 				desassociarCelular(msg.obterCelular());
 				break;
 			case FAZER_LIGACAO:
-				fazerLigacao(msg.obterNumero());
+				fazerLigacao(msg.obterCelular(), msg.obterNumero());
 				break;
 			case RECEBER_LIGACAO:
 				receberLigacao(msg.obterNumero());
@@ -69,7 +69,9 @@ public class EstacaoBase extends Thread {
 		ServidorCentral.send(msg);
 	}
 
-	private EstadoLigacao fazerLigacao(NumCelular numDestino) {
+	private void fazerLigacao(Celular origem, NumCelular numDestino) {
+		Mensagem msg = new Mensagem();
+
 		try {
 			while (numLigacoes == 0)
 				wait();
@@ -79,29 +81,22 @@ public class EstacaoBase extends Thread {
 		numLigacoes--;
 
 		EstacaoBase estacaoDestino = buscarEstacao(numDestino);
-		if (estacaoDestino == null)
-			return NUMERO_INVALIDO;
-		
-		Mensagem msg = new Mensagem();
+		if (estacaoDestino == null) {
+			msg.definirCodigo(RESULTADO_LIGACAO);
+			msg.definirEstadoLigacao(NUMERO_INVALIDO);
+			origem.send(msg);
+			return;
+		}
+
 		msg.definirCodigo(RECEBER_LIGACAO);
 		msg.definirEstacao(this);
 		msg.definirNumero(numDestino);
 		estacaoDestino.send(msg);
-		msg = caixaPostal.receive();
-		while(msg.obterNumero() != numDestino || (msg.obterCodigo() != RECEBER_LIGACAO)){
-			caixaPostal.send(msg);
-		}
-		return estacaoDestino.receberLigacao(numDestino);
-	}
-
-	public void send(Mensagem msg) {
-		caixaPostal.send(msg);
-		
 	}
 
 	private EstacaoBase buscarEstacao(NumCelular numDestino) {
 		EstacaoBase estacaoDestino = this;
-		
+
 		if (!celulares.containsKey(numDestino)) {
 			Mensagem msg = new Mensagem();
 			msg.definirCodigo(BUSCAR_ESTACAO);
@@ -114,7 +109,7 @@ public class EstacaoBase extends Thread {
 
 	}
 
-	private EstadoLigacao receberLigacao(NumCelular numDestino) {
+	private void receberLigacao(NumCelular numDestino) {
 		assert (celulares.containsKey(numDestino));
 		try {
 			while (numLigacoes == 0)
@@ -125,10 +120,14 @@ public class EstacaoBase extends Thread {
 		numLigacoes--;
 
 		Celular celular = celulares.get(numDestino);
-		return celular.receberLigacao();
+
+		Mensagem msg = new Mensagem();
+		msg.definirCodigo(RECEBER_LIGACAO);
+		//TODO: Pode ser interessante informar o celular destino de quem o chama.
+		celular.send(msg);
 	}
 
-	private EstadoLigacao terminarLigacao(NumCelular numDestino) {
+	private void terminarLigacao(NumCelular numDestino) {
 		if (celulares.containsKey(numDestino)) {
 			Celular celular = celulares.get(numDestino);
 			if (celular.obterEstado() == EM_LIGACAO) {
@@ -147,5 +146,9 @@ public class EstacaoBase extends Thread {
 
 	public int obterId() {
 		return id;
+	}
+
+	public void send(Mensagem msg) {
+		caixaPostal.send(msg);
 	}
 }

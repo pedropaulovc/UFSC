@@ -3,6 +3,8 @@ package objetos;
 import java.util.Random;
 
 import log.Log;
+import mensagem.CaixaPostal;
+import mensagem.Mensagem;
 
 import estados.EstadoCelular;
 import estados.EstadoLigacao;
@@ -14,11 +16,13 @@ public class Celular extends Thread {
 	private EstadoCelular status;
 	private EstacaoBase estacao;
 	private NumCelular emLigacao;
+	private CaixaPostal caixaPostal;
 	
 	public Celular(NumCelular num, EstacaoBase estacao) {
 		this.num = num;
 		this.status = LIVRE;
 		this.estacao = estacao;
+		this.caixaPostal = new CaixaPostal();
 		estacao.associarCelular(this);
 	}
 
@@ -88,6 +92,10 @@ public class Celular extends Thread {
 
 	public EstadoCelular obterEstado() {
 		return status;
+	}
+
+	public void send(Mensagem msg) {
+		caixaPostal.send(msg);
 	}
 
 }
