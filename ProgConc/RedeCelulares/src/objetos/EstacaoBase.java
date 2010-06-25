@@ -8,12 +8,10 @@ import java.util.Map;
 
 import log.Log;
 import mensagem.CaixaPostal;
-import mensagem.CodigosMensagem;
 import mensagem.Mensagem;
-import estados.EstadoLigacao;
 
 public class EstacaoBase extends Thread {
-	private Map<NumCelular, Celular> celulares = new HashMap<NumCelular, Celular>();
+	private Map<NumCelular, Celular> listaCelulares = new HashMap<NumCelular, Celular>();
 	private CaixaPostal caixaPostal;
 	private int numLigacoes = 10;
 	private int id;
@@ -54,7 +52,7 @@ public class EstacaoBase extends Thread {
 		msg.definirNumero(numCelular);
 		msg.definirEstacao(this);
 
-		celulares.put(numCelular, celular);
+		listaCelulares.put(numCelular, celular);
 		ServidorCentral.send(msg);
 	}
 
@@ -65,7 +63,7 @@ public class EstacaoBase extends Thread {
 		msg.definirCodigo(REMOVER_CELULAR);
 		msg.definirNumero(numCelular);
 
-		celulares.remove(numCelular);
+		listaCelulares.remove(numCelular);
 		ServidorCentral.send(msg);
 	}
 
@@ -97,7 +95,7 @@ public class EstacaoBase extends Thread {
 	private EstacaoBase buscarEstacao(NumCelular numDestino) {
 		EstacaoBase estacaoDestino = this;
 
-		if (!celulares.containsKey(numDestino)) {
+		if (!listaCelulares.containsKey(numDestino)) {
 			Mensagem msg = new Mensagem();
 			msg.definirCodigo(BUSCAR_ESTACAO);
 			msg.definirNumero(numDestino);
@@ -110,7 +108,7 @@ public class EstacaoBase extends Thread {
 	}
 
 	private void receberLigacao(NumCelular numDestino) {
-		assert (celulares.containsKey(numDestino));
+		assert (listaCelulares.containsKey(numDestino));
 		try {
 			while (numLigacoes == 0)
 				wait();
@@ -119,29 +117,33 @@ public class EstacaoBase extends Thread {
 		}
 		numLigacoes--;
 
-		Celular celular = celulares.get(numDestino);
+		Celular celular = listaCelulares.get(numDestino);
 
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RECEBER_LIGACAO);
-		//TODO: Pode ser interessante informar o celular destino de quem o chama.
+		// TODO: Pode ser interessante informar o celular destino de quem o
+		// chama.
 		celular.send(msg);
 	}
 
 	private void terminarLigacao(NumCelular numDestino) {
-		if (celulares.containsKey(numDestino)) {
-			Celular celular = celulares.get(numDestino);
-			if (celular.obterEstado() == EM_LIGACAO) {
-				numLigacoes++;
-				notify();
-				return celular.terminarLigacao();
-			}
-			return TERMINADA;
+		Mensagem msg = new Mensagem();
+		if (listaCelulares.containsKey(numDestino)) {
+			Celular celular = listaCelulares.get(numDestino);
+
+			msg.definirCodigo(TERMINAR_LIGACAO);
+			celular.send(msg);
+
+			numLigacoes++;
+			notify();
+			return;
 		}
 		EstacaoBase estacaoDestino = buscarEstacao(numDestino);
-		if (estacaoDestino == null)
-			return NUMERO_INVALIDO;
 
-		return estacaoDestino.terminarLigacao(numDestino);
+		msg.definirCodigo(TERMINAR_LIGACAO);
+		msg.definirNumero(numDestino);
+
+		estacaoDestino.send(msg);
 	}
 
 	public int obterId() {

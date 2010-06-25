@@ -10,6 +10,7 @@ import estados.EstadoCelular;
 import estados.EstadoLigacao;
 import static estados.EstadoCelular.*;
 import static estados.EstadoLigacao.*;
+import static mensagem.CodigosMensagem.*;
 
 public class Celular extends Thread {
 	private final NumCelular num;
@@ -17,27 +18,25 @@ public class Celular extends Thread {
 	private EstacaoBase estacao;
 	private NumCelular emLigacao;
 	private CaixaPostal caixaPostal;
-	
+
 	public Celular(NumCelular num, EstacaoBase estacao) {
 		this.num = num;
 		this.status = LIVRE;
 		this.estacao = estacao;
 		this.caixaPostal = new CaixaPostal();
-		estacao.associarCelular(this);
+
+		Mensagem msg = new Mensagem();
+		msg.definirCodigo(ASSOCIAR_CELULAR);
+		msg.definirCelular(this);
+		estacao.send(msg);
 	}
 
 	public void run() {
-		int opcao;
+		float estado;
 		while (true) {
-			opcao = new Random().nextInt(2);
+			estado = new Random().nextFloat();
 
-			if (opcao == 0)
-				try {
-					sleep(10 * 1000);
-				} catch (InterruptedException e) {
-					Log.adicionarLog(e.getMessage());
-				}
-			if (opcao == 1) {
+			if (estado < 0.2) {
 				fazerLigacao(NumCelular.gerarNumeroAleatorio());
 				try {
 					sleep(5 * 1000);
@@ -47,47 +46,83 @@ public class Celular extends Thread {
 				if (status == EM_LIGACAO)
 					terminarLigacao();
 			}
+			if (estado >= 0.2) {
+				Mensagem msg = caixaPostal.receive();
+				switch (msg.obterCodigo()) {
+				case RECEBER_LIGACAO:
+					receberLigacao();
+					break;
+				case TERMINAR_LIGACAO:
+					terminarLigacao();
+					break;
+				case RESULTADO_LIGACAO:
+					verificarResultadoLigacao(msg.obterEstadoLigacao(), msg
+							.obterNumero());
+					break;
+				}
+			}
+
 		}
+
 	}
 
 	public NumCelular obterNumero() {
 		return num;
 	}
 
-	private synchronized EstadoLigacao fazerLigacao(NumCelular aLigar) {
-		if (status != LIVRE)
-			return LIGACAO_INVALIDA;
+	private void fazerLigacao(NumCelular aLigar) {
+		assert (status == LIVRE);
+		Mensagem msg = new Mensagem();
 
 		Log.adicionarLog(num.toString() + ": Fazendo ligação para "
 				+ aLigar.toString());
 
-		EstadoLigacao ligacao = estacao.fazerLigacao(aLigar);
-		
-		if(status == EM_LIGACAO)
-			emLigacao = aLigar;
-		
-		Log.adicionarLog(num.toString() + ": Status ligação: "
-				+ ligacao.toString());
-
-		return ligacao;
+		msg.definirCodigo(FAZER_LIGACAO);
+		msg.definirNumero(aLigar);
+		estacao.send(msg);
 	}
 
-	public synchronized EstadoLigacao receberLigacao() {
+	private void receberLigacao() {
+		Mensagem msg = new Mensagem();
+		msg.definirCodigo(RESULTADO_LIGACAO);
+
 		Log.adicionarLog(num.toString() + ": Recebendo ligação. Status antes: "
 				+ status.toString());
-		if (status != LIVRE)
-			return CELULAR_OCUPADO;
-		status = EM_LIGACAO;
-		return INICIADA;
+		if (status == EM_LIGACAO)
+			msg.definirEstadoLigacao(CELULAR_OCUPADO);
+		if (status == DESLIGADO)
+			msg.definirEstadoLigacao(CELULAR_DESLIGADO);
+		if (status == LIVRE) {
+			status = EM_LIGACAO;
+			emLigacao = msg.obterNumero();
+			msg.definirEstadoLigacao(INICIADA);
+		}
+
+		estacao.send(msg);
 	}
 
-	public synchronized EstadoLigacao terminarLigacao() {
-		if (status == EM_LIGACAO) {
-			status = LIVRE;
-			Log.adicionarLog(num.toString() + ": Terminou ligação.");
-			estacao.terminarLigacao(emLigacao);
+	private void terminarLigacao() {
+		assert (status == EM_LIGACAO);
+		Mensagem msg = new Mensagem();
+
+		status = LIVRE;
+		Log.adicionarLog(num.toString() + ": Terminou ligação.");
+
+		msg.definirCodigo(TERMINAR_LIGACAO);
+		msg.definirNumero(emLigacao);
+
+		emLigacao = null;
+		estacao.send(msg);
+	}
+
+	private void verificarResultadoLigacao(EstadoLigacao estadoLigacao,
+			NumCelular aLigar) {
+		if (estadoLigacao == INICIADA) {
+			emLigacao = aLigar;
+			status = EM_LIGACAO;
 		}
-		return TERMINADA;
+		Log.adicionarLog(num.toString() + ": Status ligação: "
+				+ estadoLigacao.toString());
 	}
 
 	public EstadoCelular obterEstado() {
