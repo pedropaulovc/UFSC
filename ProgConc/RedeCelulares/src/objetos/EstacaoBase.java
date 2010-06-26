@@ -12,6 +12,7 @@ import mensagem.Mensagem;
 
 public class EstacaoBase extends Thread {
 	private Map<NumCelular, Celular> listaCelulares = new HashMap<NumCelular, Celular>();
+	private Map<NumCelular, Celular> bufferChamadas = new HashMap<NumCelular, Celular>();
 	private CaixaPostal caixaPostal;
 	private int numLigacoes = 10;
 	private int id;
@@ -31,14 +32,20 @@ public class EstacaoBase extends Thread {
 			case DESASSOCIAR_CELULAR:
 				desassociarCelular(msg.obterCelular());
 				break;
-			case FAZER_LIGACAO:
-				fazerLigacao(msg.obterCelular(), msg.obterNumero());
+			case REQUISITAR_LIGACAO:
+				requisitarLigacao(msg.obterCelular(), msg.obterNumero());
+				break;
+			case CELULAR_LOCALIZADO:
+				completarLigacao(msg.obterNumero(), msg.obterEstacao());
 				break;
 			case RECEBER_LIGACAO:
 				receberLigacao(msg.obterNumero());
 				break;
 			case TERMINAR_LIGACAO:
 				terminarLigacao(msg.obterNumero());
+				break;
+			case RESULTADO_LIGACAO:
+				//TODO informarResultado(msg.obterEstadoLigacao());
 				break;
 			}
 		}
@@ -67,9 +74,7 @@ public class EstacaoBase extends Thread {
 		ServidorCentral.send(msg);
 	}
 
-	private void fazerLigacao(Celular origem, NumCelular numDestino) {
-		Mensagem msg = new Mensagem();
-
+	private void requisitarLigacao(Celular origem, NumCelular numDestino) {
 		try {
 			while (numLigacoes == 0)
 				wait();
@@ -77,34 +82,37 @@ public class EstacaoBase extends Thread {
 			Log.adicionarLog(e.toString());
 		}
 		numLigacoes--;
+		
+		bufferChamadas.put(numDestino, origem);
+		
+		if(!listaCelulares.containsKey(numDestino))
+			buscarEstacao(numDestino);
+		else
+			completarLigacao(numDestino, this);
+	}
 
-		EstacaoBase estacaoDestino = buscarEstacao(numDestino);
+	private void completarLigacao(NumCelular numDestino, EstacaoBase estacaoDestino) {
+		Mensagem msg = new Mensagem();
+		Celular origem = bufferChamadas.remove(numDestino);
+
 		if (estacaoDestino == null) {
 			msg.definirCodigo(RESULTADO_LIGACAO);
 			msg.definirEstadoLigacao(NUMERO_INVALIDO);
 			origem.send(msg);
 			return;
 		}
-
+		
 		msg.definirCodigo(RECEBER_LIGACAO);
 		msg.definirEstacao(this);
 		msg.definirNumero(numDestino);
 		estacaoDestino.send(msg);
 	}
 
-	private EstacaoBase buscarEstacao(NumCelular numDestino) {
-		EstacaoBase estacaoDestino = this;
-
-		if (!listaCelulares.containsKey(numDestino)) {
-			Mensagem msg = new Mensagem();
-			msg.definirCodigo(BUSCAR_ESTACAO);
-			msg.definirNumero(numDestino);
-			ServidorCentral.send(msg);
-			msg = caixaPostal.receive();
-			estacaoDestino = msg.obterEstacao();
-		}
-		return estacaoDestino;
-
+	private void buscarEstacao(NumCelular numDestino) {
+		Mensagem msg = new Mensagem();
+		msg.definirCodigo(BUSCAR_ESTACAO);
+		msg.definirNumero(numDestino);
+		ServidorCentral.send(msg);
 	}
 
 	private void receberLigacao(NumCelular numDestino) {
@@ -121,8 +129,6 @@ public class EstacaoBase extends Thread {
 
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RECEBER_LIGACAO);
-		// TODO: Pode ser interessante informar o celular destino de quem o
-		// chama.
 		celular.send(msg);
 	}
 
@@ -138,12 +144,13 @@ public class EstacaoBase extends Thread {
 			notify();
 			return;
 		}
-		EstacaoBase estacaoDestino = buscarEstacao(numDestino);
-
+		
+		//TODO BuscarEstação
+		
 		msg.definirCodigo(TERMINAR_LIGACAO);
 		msg.definirNumero(numDestino);
 
-		estacaoDestino.send(msg);
+		// TODO estacaoDestino.send(msg);
 	}
 
 	public int obterId() {
