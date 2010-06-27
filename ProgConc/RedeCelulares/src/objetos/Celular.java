@@ -17,6 +17,7 @@ public class Celular extends Thread {
 	private EstadoCelular status;
 	private EstacaoBase estacao;
 	private CaixaPostal caixaPostal;
+	private NumCelular emLigacao;
 
 	public Celular(NumCelular num, EstacaoBase estacao) {
 		this.num = num;
@@ -24,10 +25,10 @@ public class Celular extends Thread {
 		this.estacao = estacao;
 		this.caixaPostal = new CaixaPostal();
 
-		Mensagem msg = new Mensagem();
-		msg.definirCodigo(ASSOCIAR_CELULAR);
-		msg.definirCelular(this);
-		estacao.send(msg);
+		Mensagem msgAssociar = new Mensagem();
+		msgAssociar.definirCodigo(ASSOCIAR_CELULAR);
+		msgAssociar.definirCelular(this);
+		estacao.send(msgAssociar);
 	}
 
 	public void run() {
@@ -36,26 +37,33 @@ public class Celular extends Thread {
 
 		while (true) {
 			estado = new Random().nextFloat();
-			if (estado < 0.8 && status != TENTANDO_LIGACAO) {
+			if (estado < 0.8) { // Celular está em modo ativo
 				msg = new Mensagem();
-				msg.definirCodigo(REQUISITAR_LIGACAO);
-			} else {
+				if (status == LIVRE) {
+					msg.definirCodigo(REQUISITAR_LIGACAO);
+				} else if (status == EM_LIGACAO) {
+					msg.definirCodigo(ENVIAR_TERMINO_LIGACAO);
+				}
+			} else { // Celular está em modo passivo
 				msg = caixaPostal.receive();
 			}
 			switch (msg.obterCodigo()) {
 			case REQUISITAR_LIGACAO:
 				fazerLigacao(NumCelular.gerarNumeroAleatorio());
+				break;
 			case RECEBER_LIGACAO:
 				receberLigacao(msg.obterNumeroOrigem());
 				break;
-			case TERMINAR_LIGACAO:
-				terminarLigacao();
+			case RECEBER_TERMINO_LIGACAO:
+				receberTerminoLigacao();
+				break;
+			case ENVIAR_TERMINO_LIGACAO:
+				enviarTerminoLigacao();
 				break;
 			case RESPOSTA_CELULAR:
 				verificarResultadoLigacao(msg.obterEstadoLigacao());
 				break;
 			}
-
 		}
 	}
 
@@ -91,35 +99,45 @@ public class Celular extends Thread {
 
 		if (status == LIVRE) {
 			status = EM_LIGACAO;
+			emLigacao = origem;
 			msg.definirEstadoLigacao(INICIADA);
-		}
-		if (status == EM_LIGACAO)
-			msg.definirEstadoLigacao(CELULAR_OCUPADO);
-		if (status == DESLIGADO)
+		} else if(status == DESLIGADO){
 			msg.definirEstadoLigacao(CELULAR_DESLIGADO);
+		} else {
+			msg.definirEstadoLigacao(CELULAR_OCUPADO);
+		}
 
 		estacao.send(msg);
 	}
 
-	private void terminarLigacao() {
-		Log.adicionarLog("Celular " + num + ": Terminando ligação.");
+	private void receberTerminoLigacao() {
 		assert (status == EM_LIGACAO);
-		Mensagem msg = new Mensagem();
+		Log.adicionarLog("Celular " + num + ": Recebeu término de ligação.");
 
+		emLigacao = null;
 		status = LIVRE;
-		Log.adicionarLog(num.toString() + ": Terminou ligação.");
+	}
 
-		msg.definirCodigo(TERMINAR_LIGACAO);
+	private void enviarTerminoLigacao() {
+		assert (emLigacao != null);
+		Log.adicionarLog("Celular " + num + ": Enviando término de ligação.");
+		Mensagem msg = new Mensagem();
+		msg.definirCodigo(ENVIAR_TERMINO_LIGACAO);
+		msg.definirNumeroDestino(emLigacao);
+
+		emLigacao = null;
+		status = LIVRE;
 
 		estacao.send(msg);
 	}
 
 	private void verificarResultadoLigacao(EstadoLigacao estadoLigacao) {
-		Log.adicionarLog("Celular " + num + ": Estado da ligação: " + estadoLigacao);
+		Log.adicionarLog("Celular " + num + ": Estado da ligação: "
+				+ estadoLigacao);
 		if (estadoLigacao == INICIADA) {
 			status = EM_LIGACAO;
 		} else {
-			status = LIVRE; //FIXME Caso else pode ser desnecessário
+			status = LIVRE; // FIXME Caso else pode ser desnecessário
 		}
 	}
 

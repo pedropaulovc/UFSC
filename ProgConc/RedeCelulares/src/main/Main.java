@@ -9,12 +9,12 @@ import objetos.NumCelular;
 
 public class Main {
 	public static void main(String[] args) {
-		int numCelulares = 20;
-		int numEstacoes = 2;
+		int numCelulares = 2;
+		int numEstacoes = 1;
 
 		List<EstacaoBase> estacoes = new ArrayList<EstacaoBase>(numEstacoes);
 		List<Celular> celulares = new ArrayList<Celular>(numCelulares);
-		
+
 		for (int i = 1; i <= numEstacoes; i++) {
 			EstacaoBase estacao = new EstacaoBase(i);
 			estacao.start();

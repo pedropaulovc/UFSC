@@ -47,7 +47,7 @@ public class EstacaoBase extends Thread {
 				receberLigacao(msg.obterNumeroOrigem(), msg.obterEstacao(),
 						msg.obterNumeroDestino());
 				break;
-			case TERMINAR_LIGACAO:
+			case RECEBER_TERMINO_LIGACAO:
 				terminarLigacao(msg.obterNumeroDestino(),
 						msg.obterEstadoLigacao());
 				break;
@@ -58,6 +58,7 @@ public class EstacaoBase extends Thread {
 			case RESPOSTA_ESTACAO:
 				informarCelular(msg.obterNumeroDestino(),
 						msg.obterEstadoLigacao());
+				break;
 			}
 		}
 	}
@@ -101,6 +102,12 @@ public class EstacaoBase extends Thread {
 		// numLigacoes--;
 		Log.adicionarLog("Estação " + id + ": " + origem.obterNumero()
 				+ " requisitando ligação com " + numDestino);
+
+		if (origem.obterNumero().equals(numDestino)) {
+			terminarLigacao(origem.obterNumero(), NUMERO_INVALIDO);
+			return;
+		}
+
 		chamadasPendentes.put(numDestino, origem);
 
 		if (celularesLocais.containsKey(numDestino))
@@ -113,12 +120,10 @@ public class EstacaoBase extends Thread {
 			EstacaoBase estacaoDestino) {
 		Mensagem msg = new Mensagem();
 		Celular origem = chamadasPendentes.remove(numDestino);
-		Log.adicionarLog("Estação " + id + ": completando ligação entre"
+		Log.adicionarLog("Estação " + id + ": completando ligação entre "
 				+ origem.obterNumero() + " e " + numDestino);
 
 		if (estacaoDestino == null) {
-			Log.adicionarLog("Estação " + id + ": Terminando ligação de "
-					+ origem.obterNumero() + ". Número inválido.");
 			terminarLigacao(origem.obterNumero(), NUMERO_INVALIDO);
 			return;
 		}
@@ -172,7 +177,7 @@ public class EstacaoBase extends Thread {
 		if (estadoLigacao == INICIADA) {
 			msg.definirCodigo(RESPOSTA_ESTACAO);
 		} else {
-			msg.definirCodigo(TERMINAR_LIGACAO);
+			msg.definirCodigo(RECEBER_TERMINO_LIGACAO);
 			chamadasEmAndamento.remove(numeroDestino);
 		}
 		estacaoDestino.send(msg);
@@ -191,10 +196,12 @@ public class EstacaoBase extends Thread {
 
 	private void terminarLigacao(NumCelular numDestino,
 			EstadoLigacao estadoLigacao) {
+		// terminarLigacao serve tanto para terminar uma ligação em andamento
+		// quanto para abortar uma inválida.
 		Log.adicionarLog("Estação " + id + ": Terminando ligação de "
 				+ numDestino + ". Estado: " + estadoLigacao);
 		Mensagem msg = new Mensagem();
-		msg.definirCodigo(TERMINAR_LIGACAO);
+		msg.definirCodigo(RECEBER_TERMINO_LIGACAO);
 		msg.definirEstadoLigacao(estadoLigacao);
 
 		if (celularesLocais.containsKey(numDestino)) {

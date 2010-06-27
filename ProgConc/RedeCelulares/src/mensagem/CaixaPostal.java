@@ -1,7 +1,9 @@
 package mensagem;
 
+import log.Log;
+
 public class CaixaPostal {
-	Mensagem mensagem;
+	Mensagem cxpostal;
 	boolean cxcheia;
 
 	public synchronized void send(Mensagem msg) {
@@ -9,12 +11,11 @@ public class CaixaPostal {
 			while (cxcheia)
 				wait();
 			cxcheia = true;
-			mensagem = msg;
+			cxpostal = msg;
 			notify();
 		} catch (Exception e) {
-			System.out.println("   SEND " + e);
+			Log.adicionarLog("Erro no envio de mensagem: " + e);
 		}
-
 	}
 
 	public synchronized Mensagem receive() {
@@ -24,12 +25,8 @@ public class CaixaPostal {
 			cxcheia = false;
 			notify();
 		} catch (Exception e) {
-			{
-				System.out.println("   RECEIVE " + e);
-			}
+			Log.adicionarLog("Erro no recebimento de mensagem: " + e);
 		}
-		return mensagem;
-
+		return cxpostal;
 	}
-
 }

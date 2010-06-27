@@ -13,14 +13,14 @@ public class ServidorCentral extends Thread {
 	private static final CaixaPostal caixaPostal = new CaixaPostal();
 	private static final ServidorCentral instancia = new ServidorCentral();
 
-	private ServidorCentral(){
+	private ServidorCentral() {
 		start();
 	}
-	
-	public static ServidorCentral obterInstancia(){
+
+	public static ServidorCentral obterInstancia() {
 		return instancia;
 	}
-	
+
 	public void run() {
 		while (true) {
 			Mensagem msg = caixaPostal.receive();
@@ -43,7 +43,7 @@ public class ServidorCentral extends Thread {
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(CELULAR_LOCALIZADO);
 		msg.definirEstacao(mapaCelulares.get(numero));
-		msg.definirNumeroDestino(numero); //TODO: Necessário?
+		msg.definirNumeroDestino(numero); // TODO: Necessário?
 		estacaoRequerente.send(msg);
 	}
 
