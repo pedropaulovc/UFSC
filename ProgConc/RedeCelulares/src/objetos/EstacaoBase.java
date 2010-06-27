@@ -13,15 +13,15 @@ import mensagem.CaixaPostal;
 import mensagem.Mensagem;
 
 public class EstacaoBase extends Thread {
-	private Map<NumCelular, Celular> listaCelulares = new HashMap<NumCelular, Celular>();
+	private Map<NumCelular, Celular> celularesLocais = new HashMap<NumCelular, Celular>();
 	private Map<NumCelular, Celular> chamadasPendentes = new HashMap<NumCelular, Celular>();
 	private Map<NumCelular, EstacaoBase> chamadasEmAndamento = new HashMap<NumCelular, EstacaoBase>();
+	private ServidorCentral servidorCentral = ServidorCentral.obterInstancia();
 	private CaixaPostal caixaPostal;
-	private int numLigacoes = 10;
+	// private int numLigacoes = 10; //FIXME Agora que não se usa mais
+	// synchronized deve-se remodelar essa parte.
 	private int id;
 
-	//TODO Sempre que uma chamada não é completada ela deve ser terminada em ambas as partes
-	
 	public EstacaoBase(int id) {
 		this.id = id;
 		this.caixaPostal = new CaixaPostal();
@@ -44,21 +44,28 @@ public class EstacaoBase extends Thread {
 				completarLigacao(msg.obterNumeroDestino(), msg.obterEstacao());
 				break;
 			case RECEBER_LIGACAO:
-				receberLigacao(msg.obterNumeroOrigem(), msg.obterEstacao(), msg.obterNumeroDestino());
+				receberLigacao(msg.obterNumeroOrigem(), msg.obterEstacao(),
+						msg.obterNumeroDestino());
 				break;
 			case TERMINAR_LIGACAO:
-				terminarLigacao(msg.obterNumeroDestino());
+				terminarLigacao(msg.obterNumeroDestino(),
+						msg.obterEstadoLigacao());
 				break;
 			case RESPOSTA_CELULAR:
-				verificarRespostaCelular(msg.obterEstadoLigacao(), msg.obterNumeroDestino());
+				verificarRespostaCelular(msg.obterEstadoLigacao(),
+						msg.obterNumeroDestino());
 				break;
 			case RESPOSTA_ESTACAO:
-				informarCelular(msg.obterNumeroDestino(), msg.obterEstadoLigacao());
+				informarCelular(msg.obterNumeroDestino(),
+						msg.obterEstadoLigacao());
 			}
 		}
 	}
 
 	private void associarCelular(Celular celular) {
+		Log.adicionarLog("Estação " + id + " associando celular "
+				+ celular.obterNumero());
+
 		Mensagem msg = new Mensagem();
 		NumCelular numCelular = celular.obterNumero();
 
@@ -66,79 +73,86 @@ public class EstacaoBase extends Thread {
 		msg.definirNumeroDestino(numCelular);
 		msg.definirEstacao(this);
 
-		listaCelulares.put(numCelular, celular);
-		ServidorCentral.send(msg);
+		celularesLocais.put(numCelular, celular);
+		servidorCentral.send(msg);
 	}
 
 	private void desassociarCelular(Celular celular) {
+		Log.adicionarLog("Estação " + id + " desassociando celular "
+				+ celular.obterNumero());
+
 		Mensagem msg = new Mensagem();
 		NumCelular numCelular = celular.obterNumero();
 
 		msg.definirCodigo(REMOVER_CELULAR);
 		msg.definirNumeroDestino(numCelular);
 
-		listaCelulares.remove(numCelular);
-		ServidorCentral.send(msg);
+		celularesLocais.remove(numCelular);
+		servidorCentral.send(msg);
 	}
 
 	private void requisitarLigacao(Celular origem, NumCelular numDestino) {
-		try {
-			while (numLigacoes == 0)
-				wait();
-		} catch (InterruptedException e) {
-			Log.adicionarLog(e.toString());
-		}
-		numLigacoes--;
-		
+		// try {
+		// while (numLigacoes == 0)
+		// wait();
+		// } catch (InterruptedException e) {
+		// Log.adicionarLog(e.toString());
+		// }
+		// numLigacoes--;
+		Log.adicionarLog("Estação " + id + ": " + origem.obterNumero()
+				+ " requisitando ligação com " + numDestino);
 		chamadasPendentes.put(numDestino, origem);
-		
-		if(listaCelulares.containsKey(numDestino))
+
+		if (celularesLocais.containsKey(numDestino))
 			completarLigacao(numDestino, this);
 		else
 			buscarEstacao(numDestino);
 	}
 
-	private void completarLigacao(NumCelular numDestino, EstacaoBase estacaoDestino) {
+	private void completarLigacao(NumCelular numDestino,
+			EstacaoBase estacaoDestino) {
 		Mensagem msg = new Mensagem();
 		Celular origem = chamadasPendentes.remove(numDestino);
+		Log.adicionarLog("Estação " + id + ": completando ligação entre"
+				+ origem.obterNumero() + " e " + numDestino);
 
 		if (estacaoDestino == null) {
-			//FIXME Substituir esse trecho por TERMINAR_LIGACAO
-			msg.definirCodigo(RESPOSTA_CELULAR);
-			msg.definirEstadoLigacao(NUMERO_INVALIDO);
-			origem.send(msg);
-
-			notify();
-			numLigacoes++;
+			Log.adicionarLog("Estação " + id + ": Terminando ligação de "
+					+ origem.obterNumero() + ". Número inválido.");
+			terminarLigacao(origem.obterNumero(), NUMERO_INVALIDO);
 			return;
 		}
 
 		msg.definirCodigo(RECEBER_LIGACAO);
 		msg.definirEstacao(this);
 		msg.definirNumeroOrigem(origem.obterNumero());
-		msg.definirNumeroDestino(numDestino);		
+		msg.definirNumeroDestino(numDestino);
 		estacaoDestino.send(msg);
 	}
 
 	private void buscarEstacao(NumCelular numDestino) {
+		Log.adicionarLog("Estação " + id + ": Buscando " + numDestino);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(BUSCAR_ESTACAO);
 		msg.definirNumeroDestino(numDestino);
 		msg.definirEstacao(this);
-		ServidorCentral.send(msg);
+		servidorCentral.send(msg);
 	}
 
-	private void receberLigacao(NumCelular numOrigem, EstacaoBase estacaoOrigem, NumCelular numDestino) {
-		assert (listaCelulares.containsKey(numDestino));
-		try {
-			while (numLigacoes == 0)
-				wait();
-		} catch (InterruptedException e) {
-			Log.adicionarLog(e.toString());
-		}
-		numLigacoes--;
+	private void receberLigacao(NumCelular numOrigem,
+			EstacaoBase estacaoOrigem, NumCelular numDestino) {
+		assert (celularesLocais.containsKey(numDestino));
+		Log.adicionarLog("Estação " + id + ": Recebendo ligação de "
+				+ numOrigem + " para " + numDestino);
+		// try {
+		// while (numLigacoes == 0)
+		// wait();
+		// } catch (InterruptedException e) {
+		// Log.adicionarLog(e.toString());
+		// }
+		// numLigacoes--;
 		chamadasEmAndamento.put(numOrigem, estacaoOrigem);
-		Celular celular = listaCelulares.get(numDestino);
+		Celular celular = celularesLocais.get(numDestino);
 
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RECEBER_LIGACAO);
@@ -148,42 +162,51 @@ public class EstacaoBase extends Thread {
 
 	private void verificarRespostaCelular(EstadoLigacao estadoLigacao,
 			NumCelular numeroDestino) {
+		Log.adicionarLog("Estação " + id + ": Estado da ligação de "
+				+ numeroDestino + ": " + estadoLigacao);
 		Mensagem msg = new Mensagem();
-		EstacaoBase estacaoDestino = chamadasEmAndamento.get(numeroDestino);
-		msg.definirCodigo(RESPOSTA_ESTACAO);
-		msg.definirNumeroDestino(numeroDestino);
 		msg.definirEstadoLigacao(estadoLigacao);
-		
-		estacaoDestino.send(msg);		
+		msg.definirNumeroDestino(numeroDestino);
+		EstacaoBase estacaoDestino = chamadasEmAndamento.get(numeroDestino);
+
+		if (estadoLigacao == INICIADA) {
+			msg.definirCodigo(RESPOSTA_ESTACAO);
+		} else {
+			msg.definirCodigo(TERMINAR_LIGACAO);
+			chamadasEmAndamento.remove(numeroDestino);
+		}
+		estacaoDestino.send(msg);
 	}
-	
-	private void informarCelular(NumCelular numCelular, EstadoLigacao estadoLigacao) {
+
+	private void informarCelular(NumCelular numCelular,
+			EstadoLigacao estadoLigacao) {
+		Log.adicionarLog("Estação " + id + ": Informando celular " + numCelular
+				+ ". Estado: " + estadoLigacao);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RESPOSTA_CELULAR);
 		msg.definirEstadoLigacao(estadoLigacao);
-		Celular celular = listaCelulares.get(numCelular);
+		Celular celular = celularesLocais.get(numCelular);
 		celular.send(msg);
 	}
-	
-	private void terminarLigacao(NumCelular numDestino) {
+
+	private void terminarLigacao(NumCelular numDestino,
+			EstadoLigacao estadoLigacao) {
+		Log.adicionarLog("Estação " + id + ": Terminando ligação de "
+				+ numDestino + ". Estado: " + estadoLigacao);
 		Mensagem msg = new Mensagem();
-		if (listaCelulares.containsKey(numDestino)) {
-			Celular celular = listaCelulares.get(numDestino);
-
-			msg.definirCodigo(TERMINAR_LIGACAO);
-			celular.send(msg);
-
-			numLigacoes++;
-			notify();
-			return;
-		}
-		
-		//TODO BuscarEstação
-		
 		msg.definirCodigo(TERMINAR_LIGACAO);
-		msg.definirNumeroDestino(numDestino);
+		msg.definirEstadoLigacao(estadoLigacao);
 
-		// TODO estacaoDestino.send(msg);
+		if (celularesLocais.containsKey(numDestino)) {
+			Celular celular = celularesLocais.get(numDestino);
+			celular.send(msg);
+		} else {
+			EstacaoBase destino = chamadasEmAndamento.remove(numDestino);
+			destino.send(msg);
+		}
+
+		// numLigacoes++;
+		// notify();
 	}
 
 	public int obterId() {

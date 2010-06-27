@@ -64,32 +64,31 @@ public class Celular extends Thread {
 	}
 
 	private void fazerLigacao(NumCelular aLigar) {
+		Log.adicionarLog("Celular " + num + ": Ligando para " + aLigar);
 		assert (status == LIVRE);
 		Mensagem msg = new Mensagem();
 		status = TENTANDO_LIGACAO;
-
-		Log.adicionarLog(num.toString() + ": Fazendo ligação para "
-				+ aLigar.toString());
 
 		msg.definirCodigo(REQUISITAR_LIGACAO);
 		msg.definirNumeroDestino(aLigar);
 		msg.definirCelular(this);
 		estacao.send(msg);
 
-		try {
-			sleep(5 * 1000);
-		} catch (InterruptedException e) {
-			Log.adicionarLog(e.getMessage());
-		}
+		// FIXME Necessário?
+		// try {
+		// sleep(5 * 1000);
+		// } catch (InterruptedException e) {
+		// Log.adicionarLog(e.getMessage());
+		// }
 	}
 
 	private void receberLigacao(NumCelular origem) {
+		Log.adicionarLog("Celular " + num + ": Recebendo ligação de " + origem
+				+ ". Status antes: " + status);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RESPOSTA_CELULAR);
 		msg.definirNumeroDestino(origem);
 
-		Log.adicionarLog(num.toString() + ": Recebendo ligação de " + origem + ". Status antes: "
-				+ status.toString());
 		if (status == LIVRE) {
 			status = EM_LIGACAO;
 			msg.definirEstadoLigacao(INICIADA);
@@ -98,11 +97,12 @@ public class Celular extends Thread {
 			msg.definirEstadoLigacao(CELULAR_OCUPADO);
 		if (status == DESLIGADO)
 			msg.definirEstadoLigacao(CELULAR_DESLIGADO);
-		
+
 		estacao.send(msg);
 	}
 
 	private void terminarLigacao() {
+		Log.adicionarLog("Celular " + num + ": Terminando ligação.");
 		assert (status == EM_LIGACAO);
 		Mensagem msg = new Mensagem();
 
@@ -115,14 +115,12 @@ public class Celular extends Thread {
 	}
 
 	private void verificarResultadoLigacao(EstadoLigacao estadoLigacao) {
+		Log.adicionarLog("Celular " + num + ": Estado da ligação: " + estadoLigacao);
 		if (estadoLigacao == INICIADA) {
 			status = EM_LIGACAO;
 		} else {
-			status = LIVRE;
+			status = LIVRE; //FIXME Caso else pode ser desnecessário
 		}
-
-		Log.adicionarLog(num.toString() + ": Status ligação: "
-				+ estadoLigacao.toString());
 	}
 
 	public EstadoCelular obterEstado() {

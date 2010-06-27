@@ -14,7 +14,7 @@ public class Main {
 
 		List<EstacaoBase> estacoes = new ArrayList<EstacaoBase>(numEstacoes);
 		List<Celular> celulares = new ArrayList<Celular>(numCelulares);
-
+		
 		for (int i = 1; i <= numEstacoes; i++) {
 			EstacaoBase estacao = new EstacaoBase(i);
 			estacao.start();

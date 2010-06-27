@@ -3,6 +3,7 @@ package objetos;
 import java.util.HashMap;
 import java.util.Map;
 
+import log.Log;
 import mensagem.CaixaPostal;
 import mensagem.Mensagem;
 import static mensagem.CodigosMensagem.*;
@@ -10,7 +11,16 @@ import static mensagem.CodigosMensagem.*;
 public class ServidorCentral extends Thread {
 	private static Map<NumCelular, EstacaoBase> mapaCelulares = new HashMap<NumCelular, EstacaoBase>();
 	private static final CaixaPostal caixaPostal = new CaixaPostal();
+	private static final ServidorCentral instancia = new ServidorCentral();
 
+	private ServidorCentral(){
+		start();
+	}
+	
+	public static ServidorCentral obterInstancia(){
+		return instancia;
+	}
+	
 	public void run() {
 		while (true) {
 			Mensagem msg = caixaPostal.receive();
@@ -28,7 +38,8 @@ public class ServidorCentral extends Thread {
 		}
 	}
 
-	private static void buscarEstacao(NumCelular numero, EstacaoBase estacaoRequerente) {
+	private void buscarEstacao(NumCelular numero, EstacaoBase estacaoRequerente) {
+		Log.adicionarLog("Servidor Central: Buscando número " + numero);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(CELULAR_LOCALIZADO);
 		msg.definirEstacao(mapaCelulares.get(numero));
@@ -36,15 +47,17 @@ public class ServidorCentral extends Thread {
 		estacaoRequerente.send(msg);
 	}
 
-	private static void adicionarCelular(NumCelular numero, EstacaoBase estacao) {
+	private void adicionarCelular(NumCelular numero, EstacaoBase estacao) {
+		Log.adicionarLog("Servidor Central: Adicionando celular " + numero);
 		mapaCelulares.put(numero, estacao);
 	}
 
-	private static void removerCelular(NumCelular numero) {
+	private void removerCelular(NumCelular numero) {
+		Log.adicionarLog("Servidor Central: Removendo celular " + numero);
 		mapaCelulares.remove(numero);
 	}
 
-	public static void send(Mensagem msg) {
+	public void send(Mensagem msg) {
 		caixaPostal.send(msg);
 	}
 
