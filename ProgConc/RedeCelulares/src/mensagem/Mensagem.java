@@ -7,7 +7,8 @@ import objetos.NumCelular;
 
 public class Mensagem {
 
-	private NumCelular numero;
+	private NumCelular numeroDestino;
+	private NumCelular numeroOrigem;
 	private EstacaoBase estacao;
 	private CodigosMensagem codigo;
 	private Celular celular;
@@ -29,6 +30,14 @@ public class Mensagem {
 		this.celular = celular;
 	}
 
+	public void definirNumeroOrigem(NumCelular num) {
+		this.numeroOrigem = num;
+	}
+
+	public NumCelular obterNumeroOrigem() {
+		return numeroOrigem;
+	}
+
 	public CodigosMensagem obterCodigo() {
 		return codigo;
 	}
@@ -37,12 +46,12 @@ public class Mensagem {
 		this.codigo = codigo;
 	}
 
-	public NumCelular obterNumero() {
-		return numero;
+	public NumCelular obterNumeroDestino() {
+		return numeroDestino;
 	}
 
-	public void definirNumero(NumCelular num) {
-		this.numero = num;
+	public void definirNumeroDestino(NumCelular num) {
+		this.numeroDestino = num;
 	}
 
 	public void definirEstadoLigacao(EstadoLigacao estadoLigacao) {

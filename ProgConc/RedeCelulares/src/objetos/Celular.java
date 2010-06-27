@@ -46,14 +46,13 @@ public class Celular extends Thread {
 			case REQUISITAR_LIGACAO:
 				fazerLigacao(NumCelular.gerarNumeroAleatorio());
 			case RECEBER_LIGACAO:
-				receberLigacao();
+				receberLigacao(msg.obterNumeroOrigem());
 				break;
 			case TERMINAR_LIGACAO:
 				terminarLigacao();
 				break;
-			case RESULTADO_LIGACAO:
-				verificarResultadoLigacao(msg.obterEstadoLigacao(), msg
-						.obterNumero());
+			case RESPOSTA_CELULAR:
+				verificarResultadoLigacao(msg.obterEstadoLigacao());
 				break;
 			}
 
@@ -73,7 +72,8 @@ public class Celular extends Thread {
 				+ aLigar.toString());
 
 		msg.definirCodigo(REQUISITAR_LIGACAO);
-		msg.definirNumero(aLigar);
+		msg.definirNumeroDestino(aLigar);
+		msg.definirCelular(this);
 		estacao.send(msg);
 
 		try {
@@ -83,11 +83,12 @@ public class Celular extends Thread {
 		}
 	}
 
-	private void receberLigacao() {
+	private void receberLigacao(NumCelular origem) {
 		Mensagem msg = new Mensagem();
-		msg.definirCodigo(RESULTADO_LIGACAO);
+		msg.definirCodigo(RESPOSTA_CELULAR);
+		msg.definirNumeroDestino(origem);
 
-		Log.adicionarLog(num.toString() + ": Recebendo ligação. Status antes: "
+		Log.adicionarLog(num.toString() + ": Recebendo ligação de " + origem + ". Status antes: "
 				+ status.toString());
 		if (status == LIVRE) {
 			status = EM_LIGACAO;
@@ -113,8 +114,7 @@ public class Celular extends Thread {
 		estacao.send(msg);
 	}
 
-	private void verificarResultadoLigacao(EstadoLigacao estadoLigacao,
-			NumCelular aLigar) {
+	private void verificarResultadoLigacao(EstadoLigacao estadoLigacao) {
 		if (estadoLigacao == INICIADA) {
 			status = EM_LIGACAO;
 		} else {

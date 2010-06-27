@@ -16,13 +16,13 @@ public class ServidorCentral extends Thread {
 			Mensagem msg = caixaPostal.receive();
 			switch (msg.obterCodigo()) {
 			case ADICIONAR_CELULAR:
-				adicionarCelular(msg.obterNumero(), msg.obterEstacao());
+				adicionarCelular(msg.obterNumeroDestino(), msg.obterEstacao());
 				break;
 			case BUSCAR_ESTACAO:
-				buscarEstacao(msg.obterNumero(), msg.obterEstacao());
+				buscarEstacao(msg.obterNumeroDestino(), msg.obterEstacao());
 				break;
 			case REMOVER_CELULAR:
-				removerCelular(msg.obterNumero());
+				removerCelular(msg.obterNumeroDestino());
 				break;
 			}
 		}
@@ -32,7 +32,7 @@ public class ServidorCentral extends Thread {
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(CELULAR_LOCALIZADO);
 		msg.definirEstacao(mapaCelulares.get(numero));
-		msg.definirNumero(numero); //TODO: Necessário?
+		msg.definirNumeroDestino(numero); //TODO: Necessário?
 		estacaoRequerente.send(msg);
 	}
 
