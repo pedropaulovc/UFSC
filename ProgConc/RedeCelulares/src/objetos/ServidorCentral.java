@@ -39,7 +39,7 @@ public class ServidorCentral extends Thread {
 	}
 
 	private void buscarEstacao(NumCelular numero, EstacaoBase estacaoRequerente) {
-		Log.adicionarLog("Servidor Central: Buscando número " + numero);
+		Log.adicionarLog("Servidor Central: Buscando número " + numero, 0);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(CELULAR_LOCALIZADO);
 		msg.definirEstacao(mapaCelulares.get(numero));
@@ -48,12 +48,12 @@ public class ServidorCentral extends Thread {
 	}
 
 	private void adicionarCelular(NumCelular numero, EstacaoBase estacao) {
-		Log.adicionarLog("Servidor Central: Adicionando celular " + numero);
+		Log.adicionarLog("Servidor Central: Adicionando celular " + numero, 1);
 		mapaCelulares.put(numero, estacao);
 	}
 
 	private void removerCelular(NumCelular numero) {
-		Log.adicionarLog("Servidor Central: Removendo celular " + numero);
+		Log.adicionarLog("Servidor Central: Removendo celular " + numero, 1);
 		mapaCelulares.remove(numero);
 	}
 

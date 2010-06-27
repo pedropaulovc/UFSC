@@ -14,7 +14,7 @@ public class CaixaPostal {
 			cxpostal = msg;
 			notify();
 		} catch (Exception e) {
-			Log.adicionarLog("Erro no envio de mensagem: " + e);
+			Log.adicionarLog("Erro no envio de mensagem: " + e, 0);
 		}
 	}
 
@@ -25,7 +25,7 @@ public class CaixaPostal {
 			cxcheia = false;
 			notify();
 		} catch (Exception e) {
-			Log.adicionarLog("Erro no recebimento de mensagem: " + e);
+			Log.adicionarLog("Erro no recebimento de mensagem: " + e, 0);
 		}
 		return cxpostal;
 	}

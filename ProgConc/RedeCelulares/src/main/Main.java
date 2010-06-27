@@ -3,12 +3,15 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import log.Log;
+
 import objetos.Celular;
 import objetos.EstacaoBase;
 import objetos.NumCelular;
 
 public class Main {
 	public static void main(String[] args) {
+		Log.definirNivelDetalhes(0);
 		int numCelulares = 2;
 		int numEstacoes = 1;
 

@@ -4,7 +4,7 @@ import java.util.Random;
 
 public final class NumCelular {
 	private final int numero;
-	private static final int maxNum = 30;
+	private static final int maxNum = 10;
 
 	public NumCelular(int numero) {
 		assert (numero <= maxNum && numero > 0);

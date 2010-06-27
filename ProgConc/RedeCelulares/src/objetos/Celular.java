@@ -25,10 +25,10 @@ public class Celular extends Thread {
 		this.estacao = estacao;
 		this.caixaPostal = new CaixaPostal();
 
-		Mensagem msgAssociar = new Mensagem();
-		msgAssociar.definirCodigo(ASSOCIAR_CELULAR);
-		msgAssociar.definirCelular(this);
-		estacao.send(msgAssociar);
+		Mensagem msg = new Mensagem();
+		msg.definirCodigo(ASSOCIAR_CELULAR);
+		msg.definirCelular(this);
+		estacao.send(msg);
 	}
 
 	public void run() {
@@ -36,17 +36,17 @@ public class Celular extends Thread {
 		Mensagem msg;
 
 		while (true) {
+			msg = new Mensagem();
 			estado = new Random().nextFloat();
 			if (estado < 0.8) { // Celular está em modo ativo
-				msg = new Mensagem();
-				if (status == LIVRE) {
+				if (status == LIVRE)
 					msg.definirCodigo(REQUISITAR_LIGACAO);
-				} else if (status == EM_LIGACAO) {
+				if (status == EM_LIGACAO)
 					msg.definirCodigo(ENVIAR_TERMINO_LIGACAO);
-				}
-			} else { // Celular está em modo passivo
-				msg = caixaPostal.receive();
 			}
+			if (msg.obterCodigo() == null) // Celular está em modo passivo
+				msg = caixaPostal.receive();
+
 			switch (msg.obterCodigo()) {
 			case REQUISITAR_LIGACAO:
 				fazerLigacao(NumCelular.gerarNumeroAleatorio());
@@ -72,7 +72,7 @@ public class Celular extends Thread {
 	}
 
 	private void fazerLigacao(NumCelular aLigar) {
-		Log.adicionarLog("Celular " + num + ": Ligando para " + aLigar);
+		Log.adicionarLog("Celular " + num + ": Ligando para " + aLigar, 0);
 		assert (status == LIVRE);
 		Mensagem msg = new Mensagem();
 		status = TENTANDO_LIGACAO;
@@ -92,7 +92,7 @@ public class Celular extends Thread {
 
 	private void receberLigacao(NumCelular origem) {
 		Log.adicionarLog("Celular " + num + ": Recebendo ligação de " + origem
-				+ ". Status antes: " + status);
+				+ ". Status antes: " + status, 0);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RESPOSTA_CELULAR);
 		msg.definirNumeroDestino(origem);
@@ -101,7 +101,7 @@ public class Celular extends Thread {
 			status = EM_LIGACAO;
 			emLigacao = origem;
 			msg.definirEstadoLigacao(INICIADA);
-		} else if(status == DESLIGADO){
+		} else if (status == DESLIGADO) {
 			msg.definirEstadoLigacao(CELULAR_DESLIGADO);
 		} else {
 			msg.definirEstadoLigacao(CELULAR_OCUPADO);
@@ -111,8 +111,8 @@ public class Celular extends Thread {
 	}
 
 	private void receberTerminoLigacao() {
-		assert (status == EM_LIGACAO);
-		Log.adicionarLog("Celular " + num + ": Recebeu término de ligação.");
+		assert (status == EM_LIGACAO || status == TENTANDO_LIGACAO);
+		Log.adicionarLog("Celular " + num + ": Recebeu término de ligação.", 0);
 
 		emLigacao = null;
 		status = LIVRE;
@@ -120,7 +120,7 @@ public class Celular extends Thread {
 
 	private void enviarTerminoLigacao() {
 		assert (emLigacao != null);
-		Log.adicionarLog("Celular " + num + ": Enviando término de ligação.");
+		Log.adicionarLog("Celular " + num + ": Enviando término de ligação.", 0);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(ENVIAR_TERMINO_LIGACAO);
 		msg.definirNumeroDestino(emLigacao);
@@ -133,7 +133,7 @@ public class Celular extends Thread {
 
 	private void verificarResultadoLigacao(EstadoLigacao estadoLigacao) {
 		Log.adicionarLog("Celular " + num + ": Estado da ligação: "
-				+ estadoLigacao);
+				+ estadoLigacao, 0);
 		if (estadoLigacao == INICIADA) {
 			status = EM_LIGACAO;
 		} else {
