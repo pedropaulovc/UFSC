@@ -25,6 +25,8 @@ public class EstacaoBase extends Thread {
 
 	//FIXME Provavelmente o programa está dando dead lock porque nessa versão a torre manda mensagens
 	//para ela mesma. Se a caixa estiver cheia ela não sairá do send, logo nunca voltará ao receive.
+	//TODO Reimplementar os métodos que usam send() para verificar se a mensagem foi enviada corretamente.
+	//Caso não seja, uma ação de correção para retornar ao estado inicial. 
 	
 	public EstacaoBase(int id) {
 		this.id = id;
@@ -134,6 +136,11 @@ public class EstacaoBase extends Thread {
 			terminarLigacao(origem.obterNumero(), NUMERO_INVALIDO);
 			return;
 		}
+		
+		if (estacaoDestino == this){
+			receberLigacao(origem.obterNumero(), this, numDestino);
+			return;
+		}
 
 		msg.definirCodigo(RECEBER_LIGACAO);
 		msg.definirEstacao(this);
@@ -187,6 +194,15 @@ public class EstacaoBase extends Thread {
 			msg.definirCodigo(RECEBER_TERMINO_LIGACAO);
 			chamadasEmAndamento.remove(numeroDestino);
 		}
+		
+		if (estacaoDestino == this){
+			if (estadoLigacao == INICIADA) {
+				informarCelular(numeroDestino, estadoLigacao);
+			}else{
+				terminarLigacao(numeroDestino, estadoLigacao);
+			}
+			return;
+		}
 		estacaoDestino.send(msg);
 	}
 
@@ -205,8 +221,7 @@ public class EstacaoBase extends Thread {
 			EstadoLigacao estadoLigacao) {
 		// terminarLigacao serve tanto para terminar uma ligação em andamento
 		// quanto para abortar uma inválida.
-		Log.adicionarLog("Estação " + id + ": Terminando ligação de "
-				+ numDestino + ". Estado: " + estadoLigacao, 0);
+		Log.adicionarLog("Estação " + id + ": Terminando ligação de " + numDestino + ". Estado: " + estadoLigacao, 0);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RECEBER_TERMINO_LIGACAO);
 		msg.definirEstadoLigacao(estadoLigacao);
@@ -214,7 +229,7 @@ public class EstacaoBase extends Thread {
 		if (celularesLocais.containsKey(numDestino)) {
 			Celular celular = celularesLocais.get(numDestino);
 			celular.send(msg);
-		} else {
+		} else { //Garantido que os celulares são de estações diferentes 
 			EstacaoBase destino = chamadasEmAndamento.remove(numDestino);
 			destino.send(msg);
 		}

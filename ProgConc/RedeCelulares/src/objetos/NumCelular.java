@@ -4,7 +4,7 @@ import java.util.Random;
 
 public final class NumCelular {
 	private final int numero;
-	private static final int maxNum = 2;
+	private static int maxNum = 100;
 
 	public NumCelular(int numero) {
 		assert (numero <= maxNum && numero > 0);
@@ -41,6 +41,10 @@ public final class NumCelular {
 
 	public String toString() {
 		return Integer.toString(numero);
+	}
+	
+	public static void definirMaxNum(int maxNum) {
+		NumCelular.maxNum = maxNum;
 	}
 
 }

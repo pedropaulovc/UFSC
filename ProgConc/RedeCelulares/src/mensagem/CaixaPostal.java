@@ -7,16 +7,20 @@ public class CaixaPostal {
 	Mensagem cxpostal;
 	boolean cxcheia;
 
-	public synchronized void send(Mensagem msg) {
+	public synchronized boolean send(Mensagem msg) {
 		try {
-			while (cxcheia)
-				wait();
+			if (cxcheia)
+				wait(4*500);
+			if (cxcheia){ //não conseguiu enviar a mensagem (timeout no envio). Gera uma mensagem de ocupado para o requerente
+				return false;			
+			}
 			cxcheia = true;
 			cxpostal = msg;
 			notify();
 		} catch (Exception e) {
 			Log.adicionarLog("Erro no envio de mensagem: " + e, 0);
 		}
+		return true;
 	}
 
 	public synchronized Mensagem receive() {

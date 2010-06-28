@@ -11,9 +11,11 @@ import objetos.NumCelular;
 
 public class Main {
 	public static void main(String[] args) {
-		Log.definirNivelDetalhes(2);
-		int numCelulares = 2;
+
+		int numCelulares = 3;
 		int numEstacoes = 1;
+		Log.definirNivelDetalhes(2);
+		NumCelular.definirMaxNum(numCelulares);
 
 		List<EstacaoBase> estacoes = new ArrayList<EstacaoBase>(numEstacoes);
 		List<Celular> celulares = new ArrayList<Celular>(numCelulares);
