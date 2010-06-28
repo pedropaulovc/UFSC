@@ -23,6 +23,9 @@ public class EstacaoBase extends Thread {
 	// synchronized deve-se remodelar essa parte.
 	private int id;
 
+	//FIXME Provavelmente o programa está dando dead lock porque nessa versão a torre manda mensagens
+	//para ela mesma. Se a caixa estiver cheia ela não sairá do send, logo nunca voltará ao receive.
+	
 	public EstacaoBase(int id) {
 		this.id = id;
 		this.caixaPostal = new CaixaPostal();

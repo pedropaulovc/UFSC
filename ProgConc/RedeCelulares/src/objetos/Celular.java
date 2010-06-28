@@ -77,6 +77,8 @@ public class Celular extends Thread {
 		Mensagem msg = new Mensagem();
 		status = TENTANDO_LIGACAO;
 
+		emLigacao = aLigar;
+
 		msg.definirCodigo(REQUISITAR_LIGACAO);
 		msg.definirNumeroDestino(aLigar);
 		msg.definirCelular(this);
