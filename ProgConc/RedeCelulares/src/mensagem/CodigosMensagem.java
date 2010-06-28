@@ -10,6 +10,9 @@ public enum CodigosMensagem {
 	RESPOSTA_CELULAR, ESTACAO_RESPONDE_CELULAR, ENVIAR_TERMINO_LIGACAO,
 	
 	//Códigos para comunicação entre estações base
-	RESPOSTA_ESTACAO
+	RESPOSTA_ESTACAO,
+	
+	//Códigos de manutenção
+	TIME_OUT
 
 }

@@ -1,6 +1,7 @@
 package mensagem;
 
 import log.Log;
+import static mensagem.CodigosMensagem.TIME_OUT;
 
 public class CaixaPostal {
 	Mensagem cxpostal;
@@ -20,8 +21,13 @@ public class CaixaPostal {
 
 	public synchronized Mensagem receive() {
 		try {
-			while (!cxcheia)
-				wait();
+			if (!cxcheia)
+				wait(4*500);
+			if(!cxcheia){ // deu timeout e a caixa ainda está vazia. Cria-se uma mensagem de TIMEOUT
+				Mensagem msg = new Mensagem();
+				msg.definirCodigo(TIME_OUT);
+				return msg;
+			}
 			cxcheia = false;
 			notify();
 		} catch (Exception e) {

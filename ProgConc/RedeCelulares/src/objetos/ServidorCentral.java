@@ -34,6 +34,9 @@ public class ServidorCentral extends Thread {
 			case REMOVER_CELULAR:
 				removerCelular(msg.obterNumeroDestino());
 				break;
+			case TIME_OUT:
+				Log.adicionarLog("Servidor Central: TIME_OUT", 2);
+				break;
 			}
 		}
 	}

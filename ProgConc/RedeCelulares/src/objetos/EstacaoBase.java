@@ -63,6 +63,9 @@ public class EstacaoBase extends Thread {
 				informarCelular(msg.obterNumeroDestino(),
 						msg.obterEstadoLigacao());
 				break;
+			case TIME_OUT:
+				Log.adicionarLog("Estação "+ id + ": TIME_OUT", 2);
+				break;
 			}
 		}
 	}

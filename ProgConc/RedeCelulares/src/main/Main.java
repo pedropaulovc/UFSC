@@ -11,7 +11,7 @@ import objetos.NumCelular;
 
 public class Main {
 	public static void main(String[] args) {
-		Log.definirNivelDetalhes(0);
+		Log.definirNivelDetalhes(2);
 		int numCelulares = 2;
 		int numEstacoes = 1;
 

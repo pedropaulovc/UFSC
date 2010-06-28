@@ -38,6 +38,7 @@ public class Celular extends Thread {
 		while (true) {
 			msg = new Mensagem();
 			estado = new Random().nextFloat();
+			Log.adicionarLog("Celular "+ num+ ": Status "+ status, 2);
 			if (estado < 0.8) { // Celular está em modo ativo
 				if (status == LIVRE)
 					msg.definirCodigo(REQUISITAR_LIGACAO);
@@ -46,7 +47,7 @@ public class Celular extends Thread {
 			}
 			if (msg.obterCodigo() == null) // Celular está em modo passivo
 				msg = caixaPostal.receive();
-
+			
 			switch (msg.obterCodigo()) {
 			case REQUISITAR_LIGACAO:
 				fazerLigacao(NumCelular.gerarNumeroAleatorio());
@@ -62,6 +63,9 @@ public class Celular extends Thread {
 				break;
 			case RESPOSTA_CELULAR:
 				verificarResultadoLigacao(msg.obterEstadoLigacao());
+				break;
+			case TIME_OUT:
+				Log.adicionarLog("Celular "+ num+ ": TIME_OUT", 2);
 				break;
 			}
 		}
@@ -84,12 +88,12 @@ public class Celular extends Thread {
 		msg.definirCelular(this);
 		estacao.send(msg);
 
-		// FIXME Necessário?
-		// try {
-		// sleep(5 * 1000);
-		// } catch (InterruptedException e) {
-		// Log.adicionarLog(e.getMessage());
-		// }
+//		 FIXME Necessário?
+		 try {
+		 sleep(1 * 1000);
+		 } catch (InterruptedException e) {
+		 Log.adicionarLog(e.getMessage(),0);
+		 }
 	}
 
 	private void receberLigacao(NumCelular origem) {
