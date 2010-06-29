@@ -1,0 +1,12 @@
+1 - Arquivo de dados:
+	1 - Formatado como CSV-like.
+	2 - Separador, quebra linhas?
+2 - Arquivo de chaves primárias
+	1 - Árvore AVL
+	2 - Reler arquivos da árvore e adicionar em uma árvore binária.
+	    Ir adicionando os nodos de forma recursiva. Armazenar a AVL em pré-ordem.
+3 - Arquivos de chaves secundárias
+	1 - Lista invertida
+	2 - Vários arquivos, cada um para cada chave secundária
+4 - Geral
+	1 - Criar métodos buscar e contém para lista encadeada, se necessário

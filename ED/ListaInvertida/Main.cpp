@@ -6,11 +6,11 @@
  */
 #include "Indexador.h"
 #include <iostream>
+#include "Interface.h"
+
+using namespace std;
 
 int main(int argc, char **argv){
-	//Indexador::gerarArquivoDados("/home/pedropaulo/Downloads/Portarias_txt", "./Indices/portarias.dat");
-	std::string antes = "Lorem Ipsum\nDolor Sit Amet";
-	std::cout << antes << std::endl;
-	std::string depois = Indexador::codificarString(antes);
-	std::cout << depois << std::endl;
+	return Interface::executar(argc - 1, &argv[1]);
 }
+
