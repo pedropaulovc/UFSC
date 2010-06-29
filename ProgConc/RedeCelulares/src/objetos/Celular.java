@@ -39,10 +39,10 @@ public class Celular extends Thread {
 			msg = new Mensagem();
 			estado = new Random().nextFloat();
 			Log.adicionarLog("Celular "+ num+ ": Status "+ status, 2);
-			if (estado < 0.8) { // Celular está em modo ativo
+			if (estado < 0.5) { // Celular está em modo ativo
 				if (status == LIVRE)
 					msg.definirCodigo(REQUISITAR_LIGACAO);
-				if (status == EM_LIGACAO)
+				if (status == EM_LIGACAO && estado < 0.25)
 					msg.definirCodigo(ENVIAR_TERMINO_LIGACAO);
 			}
 			if (msg.obterCodigo() == null) // Celular está em modo passivo
@@ -146,13 +146,14 @@ public class Celular extends Thread {
 			status = LIVRE; // FIXME Caso else pode ser desnecessário
 		}
 	}
+	
 
 	public EstadoCelular obterEstado() {
 		return status;
 	}
 
-	public void send(Mensagem msg) {
-		caixaPostal.send(msg);
+	public boolean send(Mensagem msg) {
+		return caixaPostal.send(msg);
 	}
 
 }

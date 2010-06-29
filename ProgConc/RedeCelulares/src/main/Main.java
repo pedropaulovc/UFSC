@@ -12,8 +12,8 @@ import objetos.NumCelular;
 public class Main {
 	public static void main(String[] args) {
 
-		int numCelulares = 3;
-		int numEstacoes = 1;
+		int numCelulares = 10;
+		int numEstacoes = 5;
 		Log.definirNivelDetalhes(2);
 		NumCelular.definirMaxNum(numCelulares);
 

@@ -13,6 +13,6 @@ public enum CodigosMensagem {
 	RESPOSTA_ESTACAO,
 	
 	//Códigos de manutenção
-	TIME_OUT
+	TIME_OUT, ERRO
 
 }

@@ -13,6 +13,7 @@ public class Mensagem {
 	private CodigosMensagem codigo;
 	private Celular celular;
 	private EstadoLigacao estadoLigacao;
+	private CodigosErro codigosErro;
 
 	public EstacaoBase obterEstacao() {
 		return estacao;
@@ -60,6 +61,14 @@ public class Mensagem {
 
 	public EstadoLigacao obterEstadoLigacao() {
 		return estadoLigacao;
+	}
+
+	public void definirCodigoErro(CodigosErro codigosErro) {
+		this.codigosErro = codigosErro;
+	}
+
+	public CodigosErro obterCodigoErro() {
+		return codigosErro;
 	}
 
 }

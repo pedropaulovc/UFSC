@@ -60,8 +60,8 @@ public class ServidorCentral extends Thread {
 		mapaCelulares.remove(numero);
 	}
 
-	public void send(Mensagem msg) {
-		caixaPostal.send(msg);
+	public boolean send(Mensagem msg) {
+		return caixaPostal.send(msg);
 	}
 
 }

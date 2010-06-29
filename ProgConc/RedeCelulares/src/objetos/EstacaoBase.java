@@ -3,6 +3,7 @@ package objetos;
 import static estados.EstadoCelular.*;
 import static estados.EstadoLigacao.*;
 import static mensagem.CodigosMensagem.*;
+import static mensagem.CodigosErro.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +13,8 @@ import log.Log;
 import mensagem.CaixaPostal;
 import mensagem.Mensagem;
 
-@SuppressWarnings("unused") //TODO remover após testes
+@SuppressWarnings("unused")
+// TODO remover após testes
 public class EstacaoBase extends Thread {
 	private Map<NumCelular, Celular> celularesLocais = new HashMap<NumCelular, Celular>();
 	private Map<NumCelular, Celular> chamadasPendentes = new HashMap<NumCelular, Celular>();
@@ -23,11 +25,16 @@ public class EstacaoBase extends Thread {
 	// synchronized deve-se remodelar essa parte.
 	private int id;
 
-	//FIXME Provavelmente o programa está dando dead lock porque nessa versão a torre manda mensagens
-	//para ela mesma. Se a caixa estiver cheia ela não sairá do send, logo nunca voltará ao receive.
-	//TODO Reimplementar os métodos que usam send() para verificar se a mensagem foi enviada corretamente.
-	//Caso não seja, uma ação de correção para retornar ao estado inicial. 
-	
+	// FIXME Provavelmente o programa está dando dead lock porque nessa versão a
+	// torre manda mensagens
+	// para ela mesma. Se a caixa estiver cheia ela não sairá do send, logo
+	// nunca voltará ao receive.
+	// TODO Reimplementar os métodos que usam send() para verificar se a
+	// mensagem foi enviada corretamente.
+	// Caso não seja, uma ação de correção para retornar ao estado inicial.
+	// FIXME Verificar mensagens com falta de informação (NullPointer nas
+	// estações)
+
 	public EstacaoBase(int id) {
 		this.id = id;
 		this.caixaPostal = new CaixaPostal();
@@ -50,23 +57,26 @@ public class EstacaoBase extends Thread {
 				completarLigacao(msg.obterNumeroDestino(), msg.obterEstacao());
 				break;
 			case RECEBER_LIGACAO:
-				receberLigacao(msg.obterNumeroOrigem(), msg.obterEstacao(),
-						msg.obterNumeroDestino());
+				receberLigacao(msg.obterNumeroOrigem(), msg.obterEstacao(), msg
+						.obterNumeroDestino());
 				break;
 			case RECEBER_TERMINO_LIGACAO:
-				terminarLigacao(msg.obterNumeroDestino(),
-						msg.obterEstadoLigacao());
+				terminarLigacao(msg.obterNumeroDestino(), msg
+						.obterEstadoLigacao());
 				break;
 			case RESPOSTA_CELULAR:
-				verificarRespostaCelular(msg.obterEstadoLigacao(),
-						msg.obterNumeroDestino());
+				verificarRespostaCelular(msg.obterEstadoLigacao(), msg
+						.obterNumeroDestino());
 				break;
 			case RESPOSTA_ESTACAO:
-				informarCelular(msg.obterNumeroDestino(),
-						msg.obterEstadoLigacao());
+				informarCelular(msg.obterNumeroDestino(), msg
+						.obterEstadoLigacao());
 				break;
 			case TIME_OUT:
-				Log.adicionarLog("Estação "+ id + ": TIME_OUT", 2);
+				Log.adicionarLog("Estação " + id + ": TIME_OUT", 2);
+				break;
+			case ERRO:
+				tratarErro(msg);
 				break;
 			}
 		}
@@ -83,8 +93,17 @@ public class EstacaoBase extends Thread {
 		msg.definirNumeroDestino(numCelular);
 		msg.definirEstacao(this);
 
+		boolean enviado = servidorCentral.send(msg);
+
+		if (!enviado) {
+			msg = new Mensagem();
+			msg.definirCodigo(ERRO);
+			msg.definirCodigoErro(NAO_ASSOCIADO);
+
+			celular.send(msg);
+			return;
+		}
 		celularesLocais.put(numCelular, celular);
-		servidorCentral.send(msg);
 	}
 
 	private void desassociarCelular(Celular celular) {
@@ -97,8 +116,18 @@ public class EstacaoBase extends Thread {
 		msg.definirCodigo(REMOVER_CELULAR);
 		msg.definirNumeroDestino(numCelular);
 
+		boolean enviado = servidorCentral.send(msg);
+
+		// TODO Verificar coerência do tratamento de erro
+		if (!enviado) {
+			msg = new Mensagem();
+			msg.definirCodigo(ERRO);
+			msg.definirCodigoErro(NAO_DESASSOCIADO);
+
+			celular.send(msg);
+			return;
+		}
 		celularesLocais.remove(numCelular);
-		servidorCentral.send(msg);
 	}
 
 	private void requisitarLigacao(Celular origem, NumCelular numDestino) {
@@ -127,8 +156,10 @@ public class EstacaoBase extends Thread {
 
 	private void completarLigacao(NumCelular numDestino,
 			EstacaoBase estacaoDestino) {
+		assert (chamadasPendentes.get(numDestino) != null);
+
 		Mensagem msg = new Mensagem();
-		Celular origem = chamadasPendentes.remove(numDestino);
+		Celular origem = chamadasPendentes.get(numDestino);
 		Log.adicionarLog("Estação " + id + ": completando ligação entre "
 				+ origem.obterNumero() + " e " + numDestino, 0);
 
@@ -136,8 +167,8 @@ public class EstacaoBase extends Thread {
 			terminarLigacao(origem.obterNumero(), NUMERO_INVALIDO);
 			return;
 		}
-		
-		if (estacaoDestino == this){
+
+		if (estacaoDestino == this) {
 			receberLigacao(origem.obterNumero(), this, numDestino);
 			return;
 		}
@@ -146,7 +177,13 @@ public class EstacaoBase extends Thread {
 		msg.definirEstacao(this);
 		msg.definirNumeroOrigem(origem.obterNumero());
 		msg.definirNumeroDestino(numDestino);
-		estacaoDestino.send(msg);
+		boolean enviado = estacaoDestino.send(msg);
+
+		if (!enviado) {
+			terminarLigacao(origem.obterNumero(), DESTINO_NAO_DISPONIVEL);
+			return;
+		}
+		chamadasPendentes.remove(numDestino);
 	}
 
 	private void buscarEstacao(NumCelular numDestino) {
@@ -155,7 +192,13 @@ public class EstacaoBase extends Thread {
 		msg.definirCodigo(BUSCAR_ESTACAO);
 		msg.definirNumeroDestino(numDestino);
 		msg.definirEstacao(this);
-		servidorCentral.send(msg);
+		boolean enviado = servidorCentral.send(msg);
+
+		if (!enviado) {
+			Celular origem = chamadasPendentes.remove(numDestino);
+			terminarLigacao(origem.obterNumero(), DESTINO_NAO_DISPONIVEL);
+			return;
+		}
 	}
 
 	private void receberLigacao(NumCelular numOrigem,
@@ -170,13 +213,29 @@ public class EstacaoBase extends Thread {
 		// Log.adicionarLog(e.toString());
 		// }
 		// numLigacoes--;
-		chamadasEmAndamento.put(numOrigem, estacaoOrigem);
+
 		Celular celular = celularesLocais.get(numDestino);
 
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RECEBER_LIGACAO);
 		msg.definirNumeroOrigem(numOrigem);
-		celular.send(msg);
+		boolean enviado = celular.send(msg);
+
+		if (!enviado) {
+			msg = new Mensagem();
+			msg.definirCodigo(ERRO);
+			msg.definirCodigoErro(DESTINO_INDISPONIVEL);
+			msg.definirNumeroDestino(numOrigem);
+
+			if (estacaoOrigem == this) {
+				terminarLigacao(numOrigem, CELULAR_OCUPADO);
+				return;
+			}
+
+			estacaoOrigem.send(msg);
+			return;
+		}
+		chamadasEmAndamento.put(numOrigem, estacaoOrigem);
 	}
 
 	private void verificarRespostaCelular(EstadoLigacao estadoLigacao,
@@ -194,16 +253,22 @@ public class EstacaoBase extends Thread {
 			msg.definirCodigo(RECEBER_TERMINO_LIGACAO);
 			chamadasEmAndamento.remove(numeroDestino);
 		}
-		
-		if (estacaoDestino == this){
+
+		if (estacaoDestino == this) {
 			if (estadoLigacao == INICIADA) {
 				informarCelular(numeroDestino, estadoLigacao);
-			}else{
+			} else {
 				terminarLigacao(numeroDestino, estadoLigacao);
 			}
 			return;
 		}
-		estacaoDestino.send(msg);
+
+		// Isso pode ser reduzido para while(!estacaoDestino.send());
+		// TODO verificar lógica
+		boolean enviado = false;
+		while (!enviado) {
+			enviado = estacaoDestino.send(msg);
+		}
 	}
 
 	private void informarCelular(NumCelular numCelular,
@@ -214,6 +279,12 @@ public class EstacaoBase extends Thread {
 		msg.definirCodigo(RESPOSTA_CELULAR);
 		msg.definirEstadoLigacao(estadoLigacao);
 		Celular celular = celularesLocais.get(numCelular);
+
+		// Neste momento o celular está em modo TENTANDO_LIGACAO. Pela
+		// modelagem, ele ficará aguardando
+		// uma resposta da estação base antes de prosseguir com sua execução.
+		// Assim, não é necessário
+		// tratar um erro de envio.
 		celular.send(msg);
 	}
 
@@ -221,28 +292,45 @@ public class EstacaoBase extends Thread {
 			EstadoLigacao estadoLigacao) {
 		// terminarLigacao serve tanto para terminar uma ligação em andamento
 		// quanto para abortar uma inválida.
-		Log.adicionarLog("Estação " + id + ": Terminando ligação de " + numDestino + ". Estado: " + estadoLigacao, 0);
+		Log.adicionarLog("Estação " + id + ": Terminando ligação de "
+				+ numDestino + ". Estado: " + estadoLigacao, 0);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RECEBER_TERMINO_LIGACAO);
 		msg.definirEstadoLigacao(estadoLigacao);
 
+		// Neste momento o celular está em modo TENTANDO_LIGACAO ou EM_LIGACAO.
+		// Pela modelagem, ele está apto a receber mensagens da estação.
 		if (celularesLocais.containsKey(numDestino)) {
 			Celular celular = celularesLocais.get(numDestino);
-			celular.send(msg);
-		} else { //Garantido que os celulares são de estações diferentes 
+			if (!celular.send(msg))
+				Log.adicionarLog("Estação " + id
+						+ ": Envio de término de ligação para celular "
+						+ numDestino + " falhou.", 1);
+		} else { // Garantido que os celulares são de estações diferentes
 			EstacaoBase destino = chamadasEmAndamento.remove(numDestino);
-			destino.send(msg);
+			if (!destino.send(msg))
+				Log.adicionarLog("Estação " + id
+						+ ": Envio de término de ligação para estação "
+						+ destino.obterId() + " falhou.", 1);
 		}
 
 		// numLigacoes++;
 		// notify();
 	}
 
+	private void tratarErro(Mensagem msg) {
+		switch (msg.obterCodigoErro()) {
+		case DESTINO_INDISPONIVEL:
+			terminarLigacao(msg.obterNumeroDestino(), DESTINO_NAO_DISPONIVEL);
+			break;
+		}
+	}
+
 	public int obterId() {
 		return id;
 	}
 
-	public void send(Mensagem msg) {
-		caixaPostal.send(msg);
+	public boolean send(Mensagem msg) {
+		return caixaPostal.send(msg);
 	}
 }
