@@ -20,6 +20,7 @@ private:
 
 public:
 	Portaria(string nome, string texto, int posicaoArquivo);
+	Portaria();
 	virtual ~Portaria();
 
 	string obterNome() const;

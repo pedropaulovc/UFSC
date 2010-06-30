@@ -104,7 +104,7 @@
 #define ARVORE_AVL_H
 
 #include <string>
-#include "Estruturas/ListaEncadeada.h"
+#include "../ListaEncadeada/ListaEncadeada.h"
 
 template<class TipoInfo>
 class NodoAVL {

@@ -13,6 +13,9 @@ Portaria::Portaria(string nome, string texto, int posicaoArquivo) {
 	this->texto = texto;
 }
 
+Portaria::Portaria(){
+}
+
 Portaria::~Portaria() {
 }
 

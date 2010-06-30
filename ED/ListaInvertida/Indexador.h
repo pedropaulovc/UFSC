@@ -21,6 +21,7 @@ public:
 	virtual ~Indexador();
 
 	static Portaria** importarArquivoDados(string caminho, int *tamanhoArquivo);
+	static void gerarArquivoChavesPrimarias(string caminho, Portaria **portarias, int numPortarias);
 };
 
 #endif /* INDEXADOR_H_ */

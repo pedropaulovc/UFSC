@@ -18,7 +18,7 @@
 #include <cstdlib>
 #include <string>
 #include <sstream>
-#include "Estruturas/ListaEncadeada.h"
+#include "../ListaEncadeada/ListaEncadeada.h"
 
 /**
 ALUNOS: Pedro Paulo e Felipe dos Santos
@@ -669,3 +669,20 @@ template<class TipoInfo> NodoAVL<TipoInfo>* NodoAVL<TipoInfo>::maior() {
 		atual = atual->nodoDireita;
 	return atual;
 }
+/* TODO Implementar
+template<class TipoInfo> int NodoAVL<TipoInfo>::exportar(ListaEncadeada<TipoInfo> *lista = NULL){
+	if(lista == NULL)
+		lista = new ListaEncadeada<TipoInfo>();
+
+	NodoSerializado nodo = new NodoSerializado(chave, info); //Presume que o nodo é folha, filhos = -1
+	lista->inserirNoFim(nodo);
+	int posicaoInserido = lista->obterTamanho();
+
+	if(nodoEsquerda != NULL)
+		nodo->definirFilhoEsquerda(nodoEsquerda->exportar(lista));
+	if(nodoDireita != NULL)
+		nodo->definirFilhoDireita(nodoDireita->exportar(lista));
+	return posicaoInserido;
+
+}
+*/

@@ -5,11 +5,13 @@
  *      Author: pedropaulo
  */
 
-#include "Indexador.h"
+
 #include <string>
 #include <sstream>
 #include <fstream>
 #include <cstdlib>
+#include "Indexador.h"
+#include "Estruturas/ArvoreAVL/arvore_avl.h"
 
 using namespace std;
 
@@ -43,3 +45,12 @@ Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) 
 	return NULL;
 }
 
+//TODO Implementar
+void Indexador::gerarArquivoChavesPrimarias(string caminho, Portaria **portarias, int numPortarias){
+	NodoAVL<Portaria> *arvore = new NodoAVL<Portaria>();
+	for(int i = 0; i < numPortarias; i++)
+		arvore->insere(*portarias[i]);
+
+	//arvore->exportar();
+
+}
