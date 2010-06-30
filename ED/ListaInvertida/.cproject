@@ -44,8 +44,11 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="Estruturas" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas"/>
+<entry excluding="ListaEncadeada|Estruturas" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ListaEncadeada"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreAVL"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreBinaria"/>
+<entry excluding="ArvoreBinaria|ArvoreAVL|ListaEncadeada" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas"/>
 </sourceEntries>
 </configuration>
 </storageModule>
@@ -509,8 +512,11 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas"/>
-<entry excluding="Estruturas" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="ListaEncadeada|Estruturas" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreAVL"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreBinaria"/>
+<entry excluding="ArvoreBinaria|ArvoreAVL|ListaEncadeada" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ListaEncadeada"/>
 </sourceEntries>
 </configuration>
 </storageModule>

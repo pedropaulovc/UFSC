@@ -4,13 +4,23 @@
  *  Created on: Jun 26, 2010
  *      Author: pedropaulo
  */
-#include "Indexador.h"
 #include <iostream>
-#include "Interface.h"
+#include "Indexador.h"
+#include "Portaria.h"
 
 using namespace std;
 
 int main(int argc, char **argv){
-	return Interface::executar(argc - 1, &argv[1]);
+	int tamanhoArquivo;
+
+	Portaria **portarias = Indexador::importarArquivoDados("./portarias.dat", &tamanhoArquivo);
+
+	cout << tamanhoArquivo << endl;
+	for(int i = 0; i < tamanhoArquivo; i++){
+		cout << "===================="  << endl;
+		cout << portarias[i]->obterPosicaoArquivo()  << endl;
+		cout << portarias[i]->obterNome() << endl;
+		cout << portarias[i]->obterTexto() << endl;
+	}
 }
 

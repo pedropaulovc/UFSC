@@ -9,13 +9,18 @@
 #define INDEXADOR_H_
 
 #include <string>
-#include "Estruturas/ListaEncadeada.h"
+#include "Portaria.h"
 
 class Indexador {
+
+private:
+	static const char delimitador = '\\';
 
 public:
 	Indexador();
 	virtual ~Indexador();
+
+	static Portaria** importarArquivoDados(string caminho, int *tamanhoArquivo);
 };
 
 #endif /* INDEXADOR_H_ */
