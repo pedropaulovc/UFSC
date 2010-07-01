@@ -42,7 +42,7 @@ public class ServidorCentral extends Thread {
 	}
 
 	private void buscarEstacao(NumCelular numero, EstacaoBase estacaoRequerente) {
-		Log.adicionarLog("Servidor Central: Buscando número " + numero, 0);
+		Log.adicionarLog("Servidor Central: Buscando número " + numero, 1);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(CELULAR_LOCALIZADO);
 		msg.definirEstacao(mapaCelulares.get(numero));

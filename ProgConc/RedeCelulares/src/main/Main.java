@@ -11,10 +11,11 @@ import objetos.NumCelular;
 
 public class Main {
 	public static void main(String[] args) {
-
+		
+		int tempoSimulacao = -1;
 		int numCelulares = 10;
 		int numEstacoes = 5;
-		Log.definirNivelDetalhes(2);
+		Log.definirNivelDetalhes(0);
 		NumCelular.definirMaxNum(numCelulares);
 
 		List<EstacaoBase> estacoes = new ArrayList<EstacaoBase>(numEstacoes);
@@ -32,5 +33,18 @@ public class Main {
 
 		for (int i = 0; i < numCelulares; i++)
 			celulares.get(i).start();
+		if(tempoSimulacao > 0){
+			try {
+				Thread.sleep(tempoSimulacao * 1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			Log.adicionarLog("\nTempo de simulação: " + tempoSimulacao, 0);
+			Log.exibirEstatísticas();
+			
+			System.exit(0);
+		}
+		
 	}
 }

@@ -25,10 +25,6 @@ public class EstacaoBase extends Thread {
 	// synchronized deve-se remodelar essa parte.
 	private int id;
 
-	// FIXME Provavelmente o programa está dando dead lock porque nessa versão a
-	// torre manda mensagens
-	// para ela mesma. Se a caixa estiver cheia ela não sairá do send, logo
-	// nunca voltará ao receive.
 	// TODO Reimplementar os métodos que usam send() para verificar se a
 	// mensagem foi enviada corretamente.
 	// Caso não seja, uma ação de correção para retornar ao estado inicial.
@@ -108,7 +104,7 @@ public class EstacaoBase extends Thread {
 
 	private void desassociarCelular(Celular celular) {
 		Log.adicionarLog("Estação " + id + " desassociando celular "
-				+ celular.obterNumero(), 0);
+				+ celular.obterNumero(), 1);
 
 		Mensagem msg = new Mensagem();
 		NumCelular numCelular = celular.obterNumero();
@@ -139,7 +135,7 @@ public class EstacaoBase extends Thread {
 		// }
 		// numLigacoes--;
 		Log.adicionarLog("Estação " + id + ": " + origem.obterNumero()
-				+ " requisitando ligação com " + numDestino, 0);
+				+ " requisitando ligação com " + numDestino, 1);
 
 		if (origem.obterNumero().equals(numDestino)) {
 			terminarLigacao(origem.obterNumero(), NUMERO_INVALIDO);
@@ -161,7 +157,7 @@ public class EstacaoBase extends Thread {
 		Mensagem msg = new Mensagem();
 		Celular origem = chamadasPendentes.get(numDestino);
 		Log.adicionarLog("Estação " + id + ": completando ligação entre "
-				+ origem.obterNumero() + " e " + numDestino, 0);
+				+ origem.obterNumero() + " e " + numDestino, 1);
 
 		if (estacaoDestino == null) {
 			terminarLigacao(origem.obterNumero(), NUMERO_INVALIDO);
@@ -181,13 +177,14 @@ public class EstacaoBase extends Thread {
 
 		if (!enviado) {
 			terminarLigacao(origem.obterNumero(), DESTINO_NAO_DISPONIVEL);
+			chamadasPendentes.remove(numDestino);
 			return;
 		}
-		chamadasPendentes.remove(numDestino);
+		
 	}
 
 	private void buscarEstacao(NumCelular numDestino) {
-		Log.adicionarLog("Estação " + id + ": Buscando " + numDestino, 0);
+		Log.adicionarLog("Estação " + id + ": Buscando " + numDestino, 1);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(BUSCAR_ESTACAO);
 		msg.definirNumeroDestino(numDestino);
@@ -205,7 +202,7 @@ public class EstacaoBase extends Thread {
 			EstacaoBase estacaoOrigem, NumCelular numDestino) {
 		assert (celularesLocais.containsKey(numDestino));
 		Log.adicionarLog("Estação " + id + ": Recebendo ligação de "
-				+ numOrigem + " para " + numDestino, 0);
+				+ numOrigem + " para " + numDestino, 1);
 		// try {
 		// while (numLigacoes == 0)
 		// wait();
@@ -241,7 +238,7 @@ public class EstacaoBase extends Thread {
 	private void verificarRespostaCelular(EstadoLigacao estadoLigacao,
 			NumCelular numeroDestino) {
 		Log.adicionarLog("Estação " + id + ": Estado da ligação de "
-				+ numeroDestino + ": " + estadoLigacao, 0);
+				+ numeroDestino + ": " + estadoLigacao, 1);
 		Mensagem msg = new Mensagem();
 		msg.definirEstadoLigacao(estadoLigacao);
 		msg.definirNumeroDestino(numeroDestino);
@@ -274,7 +271,7 @@ public class EstacaoBase extends Thread {
 	private void informarCelular(NumCelular numCelular,
 			EstadoLigacao estadoLigacao) {
 		Log.adicionarLog("Estação " + id + ": Informando celular " + numCelular
-				+ ". Estado: " + estadoLigacao, 0);
+				+ ". Estado: " + estadoLigacao, 1);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RESPOSTA_CELULAR);
 		msg.definirEstadoLigacao(estadoLigacao);
@@ -293,7 +290,7 @@ public class EstacaoBase extends Thread {
 		// terminarLigacao serve tanto para terminar uma ligação em andamento
 		// quanto para abortar uma inválida.
 		Log.adicionarLog("Estação " + id + ": Terminando ligação de "
-				+ numDestino + ". Estado: " + estadoLigacao, 0);
+				+ numDestino + ". Estado: " + estadoLigacao, 1);
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RECEBER_TERMINO_LIGACAO);
 		msg.definirEstadoLigacao(estadoLigacao);

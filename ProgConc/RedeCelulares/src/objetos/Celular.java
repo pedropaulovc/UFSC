@@ -29,6 +29,7 @@ public class Celular extends Thread {
 		msg.definirCodigo(ASSOCIAR_CELULAR);
 		msg.definirCelular(this);
 		estacao.send(msg);
+		Log.adicionarLog("Celular " + num + " está na estação " + estacao.obterId(), 0);
 	}
 
 	public void run() {
@@ -77,6 +78,7 @@ public class Celular extends Thread {
 
 	private void fazerLigacao(NumCelular aLigar) {
 		Log.adicionarLog("Celular " + num + ": Ligando para " + aLigar, 0);
+		Log.adicionarTentativaLigacao();
 		assert (status == LIVRE);
 		Mensagem msg = new Mensagem();
 		status = TENTANDO_LIGACAO;
@@ -99,6 +101,7 @@ public class Celular extends Thread {
 	private void receberLigacao(NumCelular origem) {
 		Log.adicionarLog("Celular " + num + ": Recebendo ligação de " + origem
 				+ ". Status antes: " + status, 0);
+		Log.adicionarChamadaRecebida();
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(RESPOSTA_CELULAR);
 		msg.definirNumeroDestino(origem);
