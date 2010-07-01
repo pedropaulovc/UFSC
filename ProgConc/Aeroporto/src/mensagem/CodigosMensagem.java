@@ -1,0 +1,5 @@
+package mensagem;
+
+public enum CodigosMensagem {
+	REQUISICAO_POUSO, REQUISICAO_DECOLAGEM, OPERACAO_AUTORIZADA, OPERACAO_CONCLUIDA 
+}
