@@ -152,6 +152,8 @@ public:
 	int retornaNumeroDeElementosDireita();
 	int retornaNumeroDeElementosEsquerda();
 
+	const TipoInfo* retornaInfo();
+
 	int retornaFatorDesbalanceamento();
 	void atualizaAltura();
 
