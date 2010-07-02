@@ -51,4 +51,12 @@ public class Pista {
 	public int desenfileirarAviao() {
 		return fila.remove();
 	}
+	
+	public String toString(){
+		String saida = new String();
+		for(int i : fila){
+			saida = i + " " + saida;
+		}
+		return saida;
+	}
 }

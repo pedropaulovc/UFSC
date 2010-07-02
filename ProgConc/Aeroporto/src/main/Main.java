@@ -9,8 +9,8 @@ import objetos.TorreControle;
 
 public class Main {
 	public static void main(String[] args) {
-		int numAvioes = 2;
-		Log.definirNivelDetalhes(1);
+		int numAvioes = 20;
+		Log.definirNivelDetalhes(0);
 		int idTorre = 0;
 		CaixaPostal caixas = new CaixaPostal(numAvioes + 1);
 		Aviao[] avioes = new Aviao[numAvioes];
@@ -25,6 +25,12 @@ public class Main {
 		for (int i = 0; i < numAvioes; i++)
 			avioes[i].start();
 
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Mensagem msg = new Mensagem();
 		msg.definirCodigo(CodigosMensagem.INICIAR_SISTEMA);
 		caixas.send(idTorre, msg);

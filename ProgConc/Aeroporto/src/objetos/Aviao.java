@@ -19,6 +19,11 @@ public class Aviao extends Thread {
 		this.idTorre = idTorre;
 		this.caixaPostal = caixaPostal;
 		emSolo = new Random().nextBoolean();
+		
+		if(emSolo)
+			Log.adicionarLog("Avião " + id + " em solo", 0);
+		else
+			Log.adicionarLog("Avião " + id + " voando", 0);
 	}
 
 	public void run() {		
@@ -36,7 +41,7 @@ public class Aviao extends Thread {
 			msg = caixaPostal.receive(id);
 			switch (msg.obterCodigo()) {
 			case OPERACAO_AUTORIZADA:
-				Log.adicionarLog("Avião " + id + " foi autorizado", 0);
+				Log.adicionarLog("Avião " + id + " foi autorizado", 1);
 				emSolo = !emSolo;
 //				msg.definirCodigo(OPERACAO_CONCLUIDA);
 //				msg.definirId(id);
