@@ -5,7 +5,6 @@
  *      Author: pedropaulo
  */
 
-
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -49,64 +48,83 @@ Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) 
 	return NULL;
 }
 
-ListaEncadeada<PortariaSerializada>* Indexador::gerarArquivoChavesPrimarias(string caminho, Portaria **portarias, int numPortarias){
-	NodoAVL<Portaria> *arvore = new NodoAVL<Portaria>();
-	for(int i = 0; i < numPortarias; i++)
+void Indexador::exportarChavesPrimarias(string caminho, Portaria **portarias,
+		int numPortarias) {
+	NodoAVL<Portaria> *arvore = new NodoAVL<Portaria> ();
+
+	for (int i = 0; i < numPortarias; i++)
 		arvore = arvore->insere(*portarias[i]);
 
+	PortariaSerializada **serializadas = new PortariaSerializada*[numPortarias];
 
-	PortariaSerializada **portariasSerializadas = new PortariaSerializada*[numPortarias];
-	ListaEncadeada<PortariaSerializada> *lista = new ListaEncadeada<PortariaSerializada>();
 	int posicaoVaga = 0;
-	exportar2(arvore, portariasSerializadas, &posicaoVaga);
+	serializarArvore(arvore, serializadas, &posicaoVaga);
+
+	ofstream arquivo;
+	arquivo.open(caminho.c_str(), ios::app | ios::out);
+
+	if (arquivo.fail())
+		return;
 
 	for (int i = 0; i < numPortarias; i++) {
-			PortariaSerializada* atual = portariasSerializadas[i];
-			cout << atual->obterNome() << " | " << atual->obterPosicaoArquivo()
-					<< " | " << atual->obterFilhoEsquerda() << " | "
-					<< atual->obterFilhoDireita() << " | " << atual->obterAltura()
-					<< endl;
-		}
+		PortariaSerializada *atual = serializadas[i];
+		arquivo << atual->obterNome() << delimitador
+				<< atual->obterPosicaoArquivo() << delimitador
+				<< atual->obterFilhoEsquerda() << delimitador
+				<< atual->obterFilhoDireita() << delimitador
+				<< atual->obterAltura() << endl;
+	}
+	arquivo.close();
 
-	return lista;
 }
 
-int Indexador::exportar(NodoAVL<Portaria> *arvore, ListaEncadeada<PortariaSerializada> *lista){
-	if(lista == NULL)
+int Indexador::serializarArvore(NodoAVL<Portaria> *arvore,
+		PortariaSerializada **lista, int *posicaoVaga) {
+	if (lista == NULL)
 		return 0;
+	PortariaSerializada* portaria = new PortariaSerializada(
+			arvore->retornaInfo());
+	portaria->definirAltura(arvore->retornaAltura());
 
-	PortariaSerializada* portariaAtual = new PortariaSerializada(arvore->retornaInfo());
-
-	portariaAtual->definirAltura(arvore->retornaAltura());
-
-	lista->adicionarNoFim(portariaAtual);
-	int posicaoInserido = lista->obterTamanho() - 1;
-
-	if(arvore->retornaEsquerda() != NULL)
-		portariaAtual->definirFilhoEsquerda(exportar(arvore->retornaEsquerda(), lista));
-	if(arvore->retornaDireita() != NULL)
-			portariaAtual->definirFilhoDireita(exportar(arvore->retornaDireita(), lista));
-	return posicaoInserido;
-}
-
-int Indexador::exportar2(NodoAVL<Portaria> *arvore, PortariaSerializada **lista, int *posicaoVaga){
-	if(lista == NULL)
-		return 0;
-	PortariaSerializada* portariaAtual = new PortariaSerializada(arvore->retornaInfo());
-	portariaAtual->definirAltura(arvore->retornaAltura());
-
-	lista[*posicaoVaga] = portariaAtual;
+	lista[*posicaoVaga] = portaria;
 	int posicaoInserido = *posicaoVaga;
-	if(arvore->retornaEsquerda() != NULL){
+
+	if (arvore->retornaEsquerda() != NULL) {
 		(*posicaoVaga)++;
-		portariaAtual->definirFilhoEsquerda(exportar2(arvore->retornaEsquerda(), lista, posicaoVaga));
+		portaria->definirFilhoEsquerda(serializarArvore(
+				arvore->retornaEsquerda(), lista, posicaoVaga));
 	}
-	if(arvore->retornaDireita() != NULL){
+	if (arvore->retornaDireita() != NULL) {
 		(*posicaoVaga)++;
-		portariaAtual->definirFilhoDireita(exportar2(arvore->retornaDireita(), lista, posicaoVaga));
+		portaria->definirFilhoDireita(serializarArvore(
+				arvore->retornaDireita(), lista, posicaoVaga));
 	}
 
 	return posicaoInserido;
-
 }
 
+void Indexador::exportarChavesSecundarias(string pasta, string *palavrasChave,
+		int numPalavras, Portaria **portarias, int numPortarias) {
+	ofstream arquivo, arquivoIndice;
+	string palavraAtual;
+
+	arquivoIndice.open((pasta + arquivoIndices).c_str(), ios::trunc | ios::out);
+	for (int i = 0; i < numPalavras; i++) {
+		palavraAtual = palavrasChave[i];
+		arquivoIndice << palavraAtual << delimitador << palavraAtual
+				<< extensao << endl;
+		arquivo.open((pasta + palavraAtual + extensao).c_str(), ios::trunc
+				| ios::out);
+
+		if (arquivo.fail())
+			return;
+
+		for (int i = 0; i < numPortarias; i++) {
+			Portaria *portariaAtual = portarias[i];
+			if (portariaAtual->obterTexto().find(palavraAtual) != string::npos)
+				arquivo << portariaAtual->obterPosicaoArquivo() << delimitador;
+		}
+		arquivo.close();
+	}
+	arquivoIndice.close();
+}

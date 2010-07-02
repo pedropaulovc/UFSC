@@ -13,21 +13,27 @@
 #include "PortariaSerializada.h"
 #include "Estruturas/ListaEncadeada/ListaEncadeada.h"
 #include "Estruturas/ArvoreAVL/arvore_avl.h"
+#include "Estruturas/ArvoreBinaria/NodoBinario.h"
 
 class Indexador {
 
 private:
 	static const char delimitador = '\\';
-	static int exportar(NodoAVL<Portaria> *arvore, ListaEncadeada<PortariaSerializada> *lista);
-	static int exportar2(NodoAVL<Portaria> *arvore, PortariaSerializada **lista, int* posicaoVaga);
+	static int serializarArvore(NodoAVL<Portaria> *arvore,
+			PortariaSerializada **lista, int* posicaoVaga);
 
 public:
 	Indexador();
 	virtual ~Indexador();
 
 	static Portaria** importarArquivoDados(string caminho, int *tamanhoArquivo);
-	static ListaEncadeada<PortariaSerializada>* gerarArquivoChavesPrimarias(string caminho, Portaria **portarias, int numPortarias);
+	static NodoBinario<Portaria> importarChavesPrimarias(string caminho);
+	static void exportarChavesPrimarias(string caminho, Portaria **portarias,
+			int numPortarias);
+	static void exportarChavesSecundarias(string pasta, string *palavrasChave,
+			int numPalavras, Portaria **portarias, int numPortarias);
 
 };
-
+static const string arquivoIndices = "ChavesSecundarias.ndx";
+static const string extensao = ".ndx";
 #endif /* INDEXADOR_H_ */
