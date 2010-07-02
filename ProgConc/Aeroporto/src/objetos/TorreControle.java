@@ -15,6 +15,7 @@ public class TorreControle extends Thread {
 
 	private CaixaPostal caixaPostal;
 	private int pid;
+	private boolean iniciou = false;
 
 	public TorreControle(CaixaPostal caixa, int pid) {
 		this.caixaPostal = caixa;
@@ -25,19 +26,25 @@ public class TorreControle extends Thread {
 
 	public void run() {
 		while (true) {
-			atualizarPistas();
 			Mensagem msg = caixaPostal.receive(pid);
+			Log.adicionarLog("Torre: recebeu mensagem " + msg.obterCodigo()	+ " de " + msg.obterId(), 1);
 			switch (msg.obterCodigo()) {
 			case REQUISICAO_POUSO:
 				requisitarPouso(msg.obterId());
 				break;
 			case REQUISICAO_DECOLAGEM:
-				requsitarDecolagem(msg.obterId());
+				requisitarDecolagem(msg.obterId());
 				break;
 			case OPERACAO_CONCLUIDA:
-				pistas[msg.obterPista()].desenfileirarAviao();
-			default:
+				Log.adicionarLog("Torre recebeu operação concluida do avião "+ msg.obterId(), 1);
 				break;
+			case INICIAR_SISTEMA:
+				iniciou = true;
+				break;
+			}
+			if(iniciou){
+				atualizarPistas();
+				Log.adicionarLog("Torre: terminou de atualizar as pistas", 1);
 			}
 		}
 	}
@@ -46,7 +53,7 @@ public class TorreControle extends Thread {
 		filaEsperaPouso.add(idAviao);
 	}
 
-	private void requsitarDecolagem(int idAviao) {
+	private void requisitarDecolagem(int idAviao) {
 		filaEsperaDecolagem.add(idAviao);
 	}
 
@@ -61,25 +68,32 @@ public class TorreControle extends Thread {
 				if (!filaEsperaPouso.isEmpty()) {
 					pistas[i].tornarModoPouso();
 					aviaoAutorizado = filaEsperaPouso.remove();
-					pistas[i].adicionarAviao(aviaoAutorizado);
 					caixaPostal.send(aviaoAutorizado, msg);
-					Log.adicionarLog("Torre autorizou para pouso avião " + aviaoAutorizado, 0);
+					Log.adicionarLog("Torre autorizou para pouso avião "+ aviaoAutorizado + " na pista " + i, 0);
 				} else if (!filaEsperaDecolagem.isEmpty()) {
 					pistas[i].tornarModoDecolagem();
 					int j = 0;
 					while (j < 3 && !filaEsperaDecolagem.isEmpty()) {
 						aviaoAutorizado = filaEsperaDecolagem.remove();
+						Log.adicionarLog("Avião " + aviaoAutorizado	+ " foi adicionado na fila de decolagem", 1);
 						pistas[i].adicionarAviao(aviaoAutorizado);
 						j++;
 					}
 				}
 			}
 
-			if (pistas[i].estaModoDecolagem() && !pistas[i].estaVazia()){
-				aviaoAutorizado = pistas[i].obterPrimeiroDaFila();
+			if (pistas[i].estaModoDecolagem() && !pistas[i].estaVazia()) {
+				aviaoAutorizado = pistas[i].desenfileirarAviao();
+				Log.adicionarLog("Torre autorizou para decolagem avião "+ aviaoAutorizado + " na pista " + i, 0);
 				caixaPostal.send(aviaoAutorizado, msg);
-				Log.adicionarLog("Torre autorizou para decolagem avião " + aviaoAutorizado, 0);	
 			}
 		}
+	}
+
+	public void adicionarAviao(Aviao aviao) {
+		if (aviao.estaEmSolo())
+			requisitarDecolagem(aviao.obterId());
+		else
+			requisitarPouso(aviao.obterId());
 	}
 }

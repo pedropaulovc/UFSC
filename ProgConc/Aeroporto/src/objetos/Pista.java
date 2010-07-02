@@ -48,7 +48,7 @@ public class Pista {
 		return fila.peek();
 	}
 
-	public void desenfileirarAviao() {
-		fila.remove();
+	public int desenfileirarAviao() {
+		return fila.remove();
 	}
 }
