@@ -30,10 +30,15 @@ public class Aviao extends Thread {
 		while (true) {
 			Mensagem msg = new Mensagem();
 			CodigosMensagem codigo;
-			if (emSolo)
+			int tempoVoando = 4000;
+			if (emSolo){
 				codigo = REQUISICAO_DECOLAGEM;
-			else
+				dormir(0);
+			}
+			else{
 				codigo = REQUISICAO_POUSO;
+				dormir(tempoVoando);
+			}
 			msg.definirCodigo(codigo);
 			msg.definirId(id);
 			caixaPostal.send(idTorre, msg);
@@ -48,15 +53,21 @@ public class Aviao extends Thread {
 //				caixaPostal.send(idTorre, msg);
 				break;
 			}
-			try {
-				sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		}
 	}
 	
+	private void dormir(int tempo) {
+
+		try {
+			sleep(500+tempo);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
 	public boolean estaEmSolo(){
 		return emSolo;
 	}
