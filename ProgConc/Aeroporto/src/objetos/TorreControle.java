@@ -29,6 +29,7 @@ public class TorreControle extends Thread {
 		Mensagem[] msgs = new Mensagem[2]; // Uma mensagem para cada pista
 		int avioesCadastrados = 0;
 		while (true) {
+			dormir();
 			for (int i = 0; i < 2; i++) {
 				msgs[i] = caixaPostal.receive(pid);
 				avioesCadastrados++;
@@ -110,6 +111,15 @@ public class TorreControle extends Thread {
 						+ pistas[i].toString() + aviaoAutorizado, 0);
 				caixaPostal.send(aviaoAutorizado, msg);
 			}
+		}
+	}
+	
+	private void dormir() {
+		try {
+			sleep(300);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
