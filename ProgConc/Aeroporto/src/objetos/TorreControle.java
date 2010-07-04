@@ -27,6 +27,7 @@ public class TorreControle extends Thread {
 	public void run() {
 		Mensagem[] msgs = new Mensagem[2]; // Uma mensagem para cada pista
 		while (true) {
+			dormir();
 			for (int i = 0; i < 2; i++) {
 				msgs[i] = caixaPostal.receive(pid);
 				Log.adicionarLog(
@@ -124,5 +125,15 @@ public class TorreControle extends Thread {
 			requisitarDecolagem(aviao.obterId());
 		else
 			requisitarPouso(aviao.obterId());
+	}
+	
+	private void dormir() {
+
+		try {
+			sleep(300);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

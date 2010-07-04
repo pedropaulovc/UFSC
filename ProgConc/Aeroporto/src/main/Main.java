@@ -9,7 +9,7 @@ import objetos.TorreControle;
 
 public class Main {
 	public static void main(String[] args) {
-		int numAvioes = 20;
+		int numAvioes = 50;
 		Log.definirNivelDetalhes(0);
 		int idTorre = 0;
 		CaixaPostal caixas = new CaixaPostal(numAvioes + 1);

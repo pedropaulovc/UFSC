@@ -30,14 +30,13 @@ public class Aviao extends Thread {
 		while (true) {
 			Mensagem msg = new Mensagem();
 			CodigosMensagem codigo;
-			int tempoVoando = 4000;
 			if (emSolo){
 				codigo = REQUISICAO_DECOLAGEM;
 				dormir(0);
 			}
 			else{
 				codigo = REQUISICAO_POUSO;
-				dormir(tempoVoando);
+				dormir(new Random().nextInt(2300));
 			}
 			msg.definirCodigo(codigo);
 			msg.definirId(id);
