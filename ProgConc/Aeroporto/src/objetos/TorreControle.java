@@ -15,21 +15,23 @@ public class TorreControle extends Thread {
 
 	private CaixaPostal caixaPostal;
 	private int pid;
-	private boolean iniciou = false;
+	private int numAvioes;
 
-	public TorreControle(CaixaPostal caixa, int pid) {
+	public TorreControle(CaixaPostal caixa, int pid, int numAvioes) {
 		this.caixaPostal = caixa;
 		this.pid = pid;
 		for (int i = 0; i < 2; i++)
 			pistas[i] = new Pista();
+		this.numAvioes = numAvioes;
 	}
 
 	public void run() {
 		Mensagem[] msgs = new Mensagem[2]; // Uma mensagem para cada pista
+		int avioesCadastrados = 0;
 		while (true) {
-			dormir();
 			for (int i = 0; i < 2; i++) {
 				msgs[i] = caixaPostal.receive(pid);
+				avioesCadastrados++;
 				Log.adicionarLog(
 						"Torre: recebeu mensagem " + i + " "
 								+ msgs[i].obterCodigo() + " de "
@@ -41,18 +43,9 @@ public class TorreControle extends Thread {
 				case REQUISICAO_DECOLAGEM:
 					requisitarDecolagem(msgs[i].obterId());
 					break;
-				// TODO Analisar
-				case OPERACAO_CONCLUIDA:
-					Log.adicionarLog(
-							"Torre recebeu operação concluida do avião "
-									+ msgs[i].obterId(), 1);
-					break;
-				case INICIAR_SISTEMA:
-					iniciou = true;
-					break;
 				}
 			}
-			if (iniciou) {
+			if (avioesCadastrados >= numAvioes) {
 				atualizarPistas();
 				Log.adicionarLog("Torre: terminou de atualizar as pistas", 1);
 			}
@@ -117,23 +110,6 @@ public class TorreControle extends Thread {
 						+ pistas[i].toString() + aviaoAutorizado, 0);
 				caixaPostal.send(aviaoAutorizado, msg);
 			}
-		}
-	}
-
-	public void adicionarAviao(Aviao aviao) {
-		if (aviao.estaEmSolo())
-			requisitarDecolagem(aviao.obterId());
-		else
-			requisitarPouso(aviao.obterId());
-	}
-	
-	private void dormir() {
-
-		try {
-			sleep(300);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 }

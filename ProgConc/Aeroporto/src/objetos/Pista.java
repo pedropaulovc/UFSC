@@ -6,7 +6,6 @@ import java.util.Queue;
 public class Pista {
 	private Queue<Integer> fila = new LinkedList<Integer>();
 	private boolean paraPouso;
-	private boolean bloqueada;
 
 	public int obterQtdAvioes() {
 		return fila.size();
@@ -30,14 +29,6 @@ public class Pista {
 
 	public void tornarModoDecolagem() {
 		paraPouso = false;
-	}
-
-	public boolean estaBloqueada() {
-		return bloqueada;
-	}
-
-	public void trocarBloqueio() {
-		bloqueada = !bloqueada;
 	}
 
 	public boolean estaModoDecolagem() {
