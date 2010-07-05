@@ -16,7 +16,7 @@ public class ServidorCentral extends Thread {
 	private ServidorCentral() {
 		start();
 	}
-
+ 
 	public static ServidorCentral obterInstancia() {
 		return instancia;
 	}
