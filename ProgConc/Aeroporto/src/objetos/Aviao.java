@@ -35,7 +35,7 @@ public class Aviao extends Thread {
 				dormir(0);
 			} else {
 				codigo = REQUISICAO_POUSO;
-				dormir(new Random().nextInt(2300));
+				
 			}
 			msg.definirCodigo(codigo);
 			msg.definirId(id);
@@ -46,6 +46,7 @@ public class Aviao extends Thread {
 			if (msg.obterCodigo() == OPERACAO_AUTORIZADA) {
 				Log.adicionarLog("Avião " + id + " foi autorizado", 1);
 				emSolo = !emSolo;
+				dormir(new Random().nextInt(7000));
 			}
 		}
 	}

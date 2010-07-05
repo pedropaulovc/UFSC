@@ -26,9 +26,12 @@ public class CaixaPostal {
 		cxVazia[destino].p();
 		cxPostal[destino] = msg;
 		cxCheia[destino].v();
-
 	}
 
+	public boolean caixaCheia(int destino){
+		return cxCheia[destino].obterCont() == 1;
+	}
+	
 	public Mensagem receive(int pid) {
 		Mensagem msg;
 		cxCheia[pid].p();

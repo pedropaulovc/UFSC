@@ -16,5 +16,8 @@ public class Semaforo {
 		cont ++;
 		notify();
 	}
+	public int obterCont() {
+		return cont;
+	}
 
 }

@@ -31,7 +31,10 @@ public class TorreControle extends Thread {
 		while (true) {
 			dormir();
 			for (int i = 0; i < 2; i++) {
-				msgs[i] = caixaPostal.receive(pid);
+				msgs[i] = new Mensagem();
+				msgs[i].definirCodigo(TIMEOUT);
+				if(caixaPostal.caixaCheia(pid))
+					msgs[i] = caixaPostal.receive(pid);
 				avioesCadastrados++;
 				Log.adicionarLog(
 						"Torre: recebeu mensagem " + i + " "
