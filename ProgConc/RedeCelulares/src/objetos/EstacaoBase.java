@@ -8,6 +8,7 @@ import mensagem.CaixaPostal;
 import mensagem.Mensagem;
 import static mensagem.CodigosMensagem.*;
 import static estados.EstadoLigacao.*;
+import static estados.EstadoCelular.*;
 
 public class EstacaoBase extends Thread {
 	private Map<NumCelular, Celular> celularesLocais = new HashMap<NumCelular, Celular>();
@@ -15,8 +16,9 @@ public class EstacaoBase extends Thread {
 	private int idServidor;
 	private int id;
 
-	public EstacaoBase(int id) {
+	public EstacaoBase(int id, int idServidor) {
 		this.id = id;
+		this.idServidor = idServidor;
 	}
 
 	public void run() {
@@ -29,10 +31,16 @@ public class EstacaoBase extends Thread {
 			case RECEBER_LIGACAO:
 				fazerLigacao(msg);
 				break;
+			case CADASTRAR:
+				cadastrarCelular(msg);
 			default:
 				break;
 			}
 		}
+	}
+
+	private void cadastrarCelular(Mensagem msg) {
+		celularesLocais.put(msg.obterOrigem(), msg.obterCelular());		
 	}
 
 	private void fazerLigacao(Mensagem msg) {

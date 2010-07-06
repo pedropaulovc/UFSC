@@ -1,6 +1,7 @@
 package mensagem;
 
 import estados.EstadoLigacao;
+import objetos.Celular;
 import objetos.NumCelular;
 
 public class Mensagem {
@@ -11,10 +12,7 @@ public class Mensagem {
 	private EstadoLigacao estado;
 	private int id;
 	private CaixaPostal caixaPostal = CaixaPostal.obterCaixa();
-
-	public Mensagem() {
-		gerarId();
-	}
+	private Celular celular;
 
 	public void definirCodigo(CodigosMensagem codigo) {
 		this.codigo = codigo;
@@ -54,6 +52,14 @@ public class Mensagem {
 
 	public int obterId() {
 		return id;
+	}
+
+	public void definirCelular(Celular celular) {
+		this.celular = celular;		
+	}
+	
+	public Celular obterCelular(){
+		return celular;
 	}
 
 }

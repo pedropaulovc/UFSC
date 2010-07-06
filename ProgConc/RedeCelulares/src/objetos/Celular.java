@@ -21,17 +21,19 @@ public class Celular extends Thread {
 	public Celular(NumCelular num, int torreAtual) {
 		this.numero = num;
 		this.torreAtual = torreAtual;
+		this.estado = LIVRE;
+		cadastrarNaTorre(torreAtual);
 	}
 
 	public void run() {
 		while (true) {
 			boolean ativo = new Random().nextBoolean();
-			if (ativo) {
+			if (ativo && estado == LIVRE) {
 				fazerLigacao();
 			} else {
 				Mensagem msg = new Mensagem();
 				msg.definirCodigo(TIMEOUT);
-				if(caixaPostal.caixaCheia(numero.obterNumero()))
+				if (caixaPostal.caixaCheia(numero.obterNumero()))
 					msg = caixaPostal.receive(numero.obterNumero());
 				switch (msg.obterCodigo()) {
 				case RECEBER_LIGACAO:
@@ -53,18 +55,22 @@ public class Celular extends Thread {
 		msg.definirCodigo(RECEBER_LIGACAO);
 		msg.definirDestino(numDestino);
 		msg.definirOrigem(numero);
+		msg.gerarId();
 
 		estado = TENTANDO_LIGACAO;
 
 		caixaPostal.send(torreAtual, msg);
 
 		Mensagem msgRecebida = caixaPostal.receive(msg.obterId());
-		Log.adicionarLog("Celular " + numero + " resposta: "
+
+		Log.adicionarLog("Celular " + numero + " recebeu resposta: "
 				+ msgRecebida.obterEstadoLigacao(), 0);
 		if (msgRecebida.obterEstadoLigacao() == COMPLETADA)
 			estado = EM_LIGACAO;
 		else
 			estado = LIVRE;
+		Log.adicionarLog("Novo estado de " + numero + ": " + estado, 1);
+
 	}
 
 	private void receberLigacao(Mensagem msg) {
@@ -79,5 +85,18 @@ public class Celular extends Thread {
 			msgResposta.definirEstadoLigacao(OCUPADO);
 		}
 		caixaPostal.send(msg.obterId(), msgResposta);
+	}
+
+	private void cadastrarNaTorre(int torreAtual) {
+		Mensagem msg = new Mensagem();
+		msg.definirCodigo(CADASTRAR);
+		msg.definirOrigem(numero);
+		msg.definirCelular(this);
+
+		caixaPostal.send(torreAtual, msg);
+	}
+
+	public EstadoCelular obterEstado() {
+		return estado;
 	}
 }

@@ -15,8 +15,10 @@ public class Main {
 		int tempoSimulacao = -1;
 		int numCelulares = 2;
 		int numEstacoes = 1;
+		int idServidor = 0;
 		Log.definirNivelDetalhes(2);
-		NumCelular.definirFaixaNumeros(numCelulares, numEstacoes);
+		NumCelular.definirFaixaNumeros(numEstacoes, numCelulares);
+
 
 		CaixaPostal caixas = CaixaPostal.obterCaixa();
 		for (int i = 0; i < (numCelulares + numEstacoes + 1); i++)
@@ -26,7 +28,7 @@ public class Main {
 		List<Celular> celulares = new ArrayList<Celular>(numCelulares);
 
 		for (int i = 1; i <= numEstacoes; i++) {
-			EstacaoBase estacao = new EstacaoBase(i);
+			EstacaoBase estacao = new EstacaoBase(i, idServidor);
 			estacao.start();
 			estacoes.add(estacao);
 		}

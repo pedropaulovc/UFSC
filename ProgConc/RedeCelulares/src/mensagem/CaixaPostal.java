@@ -27,6 +27,16 @@ public class CaixaPostal {
 		cxVazia.get(pid).v();
 		return (msg);
 	}
+	
+	public Mensagem receive(int pid, int timeout){
+		Mensagem msg;
+		boolean recebido = cxCheia.get(pid).p(timeout);
+		if(!recebido)
+			return null;
+		msg = cxPostal.get(pid);
+		cxVazia.get(pid).v();
+		return (msg);
+	}
 
 	public int gerarNovaCaixaPostal() {
 		cxCheia.add(new Semaforo(0));
