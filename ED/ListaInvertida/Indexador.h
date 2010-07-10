@@ -18,7 +18,7 @@
 class Indexador {
 
 private:
-	static const char delimitador = '\\';
+	static const char delimitador = '|';
 	static int serializarArvore(NodoAVL<Portaria> *arvore,
 			PortariaSerializada **lista, int* posicaoVaga);
 

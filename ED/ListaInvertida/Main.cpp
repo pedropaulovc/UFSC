@@ -13,10 +13,15 @@ using namespace std;
 int main(int argc, char **argv) {
 	int tamanhoArquivo;
 
-	Portaria **portarias = Indexador::importarArquivoDados("./Indices/PadraoPortarias.dat",
-			&tamanhoArquivo);
+	Portaria **portarias = Indexador::importarArquivoDados(
+			"./Indices/portarias.dat", &tamanhoArquivo);
 
-	string palavrasChave[] =  {"Lorem", "Quisque", "elit"};
-	Indexador::exportarChavesSecundarias("./Indices/" ,palavrasChave , 3, portarias, tamanhoArquivo);
+	string palavrasChave[] = { "REITOR", "VICE", "PROFESSOR", "CHEFE",
+			"DEPARTAMENTO", "MECANICA", "ELETRICA", "QUIMICA", "LETRAS",
+			"FILOSOFIA", "HUMANAS", "CIENCIAS", "COMPUTACAO", "SANITARIA",
+			"MATERIAIS", "ENGENHARIA", "INGLES", "ALEMAO", "ITALIANO",
+			"DIREITO" };
+	Indexador::exportarChavesSecundarias("./Indices/", palavrasChave, 20,
+			portarias, tamanhoArquivo);
 }
 
