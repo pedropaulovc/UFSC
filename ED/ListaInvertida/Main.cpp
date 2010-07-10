@@ -16,12 +16,14 @@ int main(int argc, char **argv) {
 	Portaria **portarias = Indexador::importarArquivoDados(
 			"./Indices/portarias.dat", &tamanhoArquivo);
 
-	string palavrasChave[] = { "REITOR", "VICE", "PROFESSOR", "CHEFE",
-			"DEPARTAMENTO", "MECANICA", "ELETRICA", "QUIMICA", "LETRAS",
-			"FILOSOFIA", "HUMANAS", "CIENCIAS", "COMPUTACAO", "SANITARIA",
-			"MATERIAIS", "ENGENHARIA", "INGLES", "ALEMAO", "ITALIANO",
-			"DIREITO" };
-	Indexador::exportarChavesSecundarias("./Indices/", palavrasChave, 20,
-			portarias, tamanhoArquivo);
+//	string palavrasChave[] = { "REITOR", "VICE", "PROFESSOR", "CHEFE",
+//			"DEPARTAMENTO", "MECANICA", "ELETRICA", "QUIMICA", "LETRAS",
+//			"FILOSOFIA", "HUMANAS", "CIENCIAS", "COMPUTACAO", "SANITARIA",
+//			"MATERIAIS", "ENGENHARIA", "INGLES", "ALEMAO", "ITALIANO",
+//			"DIREITO" };
+//	Indexador::exportarChavesSecundarias("./Indices/", palavrasChave, 20,
+//			portarias, tamanhoArquivo);
+
+	Indexador::exportarChavesPrimarias("./Indices/portarias.ndx", portarias, tamanhoArquivo);
 }
 

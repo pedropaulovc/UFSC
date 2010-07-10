@@ -21,6 +21,7 @@ private:
 	static const char delimitador = '|';
 	static int serializarArvore(NodoAVL<Portaria> *arvore,
 			PortariaSerializada **lista, int* posicaoVaga);
+	static Portaria* gerarPortaria(string linha, int posicaoArquivoDados);
 
 public:
 	Indexador();

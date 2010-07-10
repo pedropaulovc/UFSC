@@ -9,12 +9,16 @@
 #include <sstream>
 #include <fstream>
 #include <cstdlib>
+#include <algorithm>
+#include <iterator>
+#include <iostream>
+
 #include "Indexador.h"
 #include "Portaria.h"
 #include "PortariaSerializada.h"
 #include "Estruturas/ArvoreAVL/arvore_avl.h"
 #include "Estruturas/ArvoreAVL/arvore_avl.h"
-#include <iostream>
+
 
 using namespace std;
 
@@ -25,20 +29,19 @@ Indexador::~Indexador() {
 }
 
 Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) {
-	string chave, texto;
+	string chave, texto, linha;
 	Portaria **portarias;
 
 	ifstream myfile(caminho.c_str());
 
 	if (myfile.is_open()) {
-		getline(myfile, chave);
-		*tamanhoArquivo = atoi(chave.c_str());
+		getline(myfile, linha);
+		*tamanhoArquivo = atoi(linha.c_str());
 		portarias = new Portaria*[*tamanhoArquivo];
 
 		for (int i = 0; i < *tamanhoArquivo; i++) {
-			getline(myfile, chave, delimitador);
-			getline(myfile, texto, delimitador);
-			portarias[i] = new Portaria(chave, texto, i);
+			getline(myfile, linha);
+			portarias[i] = gerarPortaria(linha, i);
 		}
 
 		myfile.close();
@@ -46,6 +49,23 @@ Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) 
 	}
 	*tamanhoArquivo = 0;
 	return NULL;
+}
+
+Portaria* Indexador::gerarPortaria(string linha, int posicaoArquivoDados){
+	string *dados = new string[2];
+
+	int i = 0;
+	string::size_type inicio = linha.find_first_not_of(delimitador, 0);
+	string::size_type fim = linha.find_first_of(delimitador, inicio);
+
+	while (fim != string::npos || inicio != string::npos) {
+		dados[i] = linha.substr(inicio, fim - inicio);
+		inicio = linha.find_first_not_of(delimitador, fim);
+		fim = linha.find_first_of(delimitador, inicio);
+		i++;
+	}
+
+	return new Portaria(dados[0], dados[1], posicaoArquivoDados);
 }
 
 void Indexador::exportarChavesPrimarias(string caminho, Portaria **portarias,
@@ -61,7 +81,7 @@ void Indexador::exportarChavesPrimarias(string caminho, Portaria **portarias,
 	serializarArvore(arvore, serializadas, &posicaoVaga);
 
 	ofstream arquivo;
-	arquivo.open(caminho.c_str(), ios::app | ios::out);
+	arquivo.open(caminho.c_str(), ios::trunc | ios::out);
 
 	if (arquivo.fail())
 		return;
