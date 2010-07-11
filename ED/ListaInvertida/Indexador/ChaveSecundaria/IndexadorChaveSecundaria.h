@@ -17,6 +17,7 @@
 #define INDEXADORCHAVESECUNDARIA_H_
 
 #include "../Indexador.h"
+#include "../../Portarias/Portaria.h"
 
 class IndexadorChaveSecundaria: public Indexador {
 public:

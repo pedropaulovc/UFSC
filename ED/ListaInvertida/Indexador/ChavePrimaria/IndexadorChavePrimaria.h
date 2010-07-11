@@ -19,17 +19,17 @@
 #include "../Indexador.h"
 #include "../../Estruturas/ArvoreAVL/arvore_avl.h"
 #include "../../Portarias/Portaria.h"
-#include "../../Portarias/PortariaSerializada.h"
+#include "../../Portarias/PortariaSerial.h"
 #include "../../Estruturas/ArvoreBinaria/NodoBinario.h"
 
 class IndexadorChavePrimaria: public Indexador {
 private:
 	static int serializarArvore(NodoAVL<Portaria> *arvore,
-			PortariaSerializada **lista, int* posicaoVaga);
-	static NodoBinario<PortariaSerializada>* importarArvore(string *nodos, int nodoAtual = 0);
+			PortariaSerial **lista, int* posicaoVaga);
+	static NodoBinario<PortariaSerial>* importarArvore(string *nodos, int nodoAtual = 0);
 
 public:
-	static NodoBinario<PortariaSerializada>* importar(string caminho);
+	static NodoBinario<PortariaSerial>* importar(string caminho);
 	static void
 	exportar(string caminho, Portaria **portarias, int numPortarias);
 };

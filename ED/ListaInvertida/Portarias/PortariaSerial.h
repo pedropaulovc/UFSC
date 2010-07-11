@@ -19,7 +19,7 @@
 #include <string>
 using namespace std;
 
-class PortariaSerializada {
+class PortariaSerial {
 private:
 	string nome;
 	int posicaoArquivo;
@@ -28,8 +28,8 @@ private:
 	int altura;
 
 public:
-	PortariaSerializada(string nome, int posicaoArquivo = -1);
-	virtual ~PortariaSerializada();
+	PortariaSerial(string nome, int posicaoArquivo = -1);
+	virtual ~PortariaSerial();
 
 	void definirFilhoEsquerda(int filhoEsquerda);
 	void definirFilhoDireita(int filhoDireita);
@@ -41,11 +41,11 @@ public:
 	string obterNome();
 	int obterPosicaoArquivo();
 
-	bool operator>(PortariaSerializada& outro) const;
-	bool operator<=(PortariaSerializada& outro) const;
-	bool operator<(PortariaSerializada& outro) const;
-	bool operator!=(PortariaSerializada& outro) const;
-	bool operator==(PortariaSerializada& outro) const;
+	bool operator>(PortariaSerial& outro) const;
+	bool operator<=(PortariaSerial& outro) const;
+	bool operator<(PortariaSerial& outro) const;
+	bool operator!=(PortariaSerial& outro) const;
+	bool operator==(PortariaSerial& outro) const;
 };
 
 #endif /* PORTARIASERIALIZADA_H_ */

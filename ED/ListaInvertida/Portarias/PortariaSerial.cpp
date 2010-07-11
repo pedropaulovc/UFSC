@@ -9,10 +9,10 @@
  utilizando arquivos invertidos.
 
  SOBRE ESSE ARQUIVO:
- Implementação da interface descrita em PortariaSerializada.h.
+ Implementação da interface descrita em PortariaSerial.h.
 */
 
-#include "PortariaSerializada.h"
+#include "PortariaSerial.h"
 
 /**
 ALUNOS: Pedro Paulo e Felipe dos Santos
@@ -26,7 +26,7 @@ VALOR DE RETORNO:
 	ponteiro para a instância criada.
 
 */
-PortariaSerializada::PortariaSerializada(string nome, int posicaoArquivo) {
+PortariaSerial::PortariaSerial(string nome, int posicaoArquivo) {
 	this->nome = nome;
 	this->posicaoArquivo = posicaoArquivo;
 	filhoDireita = -1;
@@ -45,7 +45,7 @@ VALOR DE RETORNO:
 	nenhum
 
 */
-PortariaSerializada::~PortariaSerializada() {
+PortariaSerial::~PortariaSerial() {
 }
 
 /**
@@ -60,7 +60,7 @@ VALOR DE RETORNO:
 	nenhum
 
 */
-void PortariaSerializada::definirFilhoEsquerda(int filhoEsquerda) {
+void PortariaSerial::definirFilhoEsquerda(int filhoEsquerda) {
 	this->filhoEsquerda = filhoEsquerda;
 }
 
@@ -76,7 +76,7 @@ VALOR DE RETORNO:
 	nenhum
 
 */
-void PortariaSerializada::definirFilhoDireita(int filhoDireita) {
+void PortariaSerial::definirFilhoDireita(int filhoDireita) {
 	this->filhoDireita = filhoDireita;
 }
 
@@ -92,7 +92,7 @@ VALOR DE RETORNO:
 	nenhum
 
 */
-void PortariaSerializada::definirAltura(int altura) {
+void PortariaSerial::definirAltura(int altura) {
 	this->altura = altura;
 }
 
@@ -108,7 +108,7 @@ VALOR DE RETORNO:
 	a posição do filho da esquerda
 
 */
-int PortariaSerializada::obterFilhoDireita() {
+int PortariaSerial::obterFilhoDireita() {
 	return filhoDireita;
 }
 
@@ -124,7 +124,7 @@ VALOR DE RETORNO:
 	a posição do filho da direita
 
 */
-int PortariaSerializada::obterFilhoEsquerda() {
+int PortariaSerial::obterFilhoEsquerda() {
 	return filhoEsquerda;
 }
 
@@ -140,7 +140,7 @@ VALOR DE RETORNO:
 	a altura no arquivo de chaves primárias
 
 */
-int PortariaSerializada::obterAltura() {
+int PortariaSerial::obterAltura() {
 	return altura;
 }
 
@@ -156,7 +156,7 @@ VALOR DE RETORNO:
 	o nome da portaria
 
 */
-string PortariaSerializada::obterNome() {
+string PortariaSerial::obterNome() {
 	return nome;
 }
 
@@ -172,7 +172,7 @@ VALOR DE RETORNO:
 	a posição da portaria no arquivo de dados
 
 */
-int PortariaSerializada::obterPosicaoArquivo() {
+int PortariaSerial::obterPosicaoArquivo() {
 	return posicaoArquivo;
 }
 
@@ -188,7 +188,7 @@ VALOR DE RETORNO:
 	se a comparação é verdadeira ou não
 
 */
-bool PortariaSerializada::operator>(PortariaSerializada& outro) const {
+bool PortariaSerial::operator>(PortariaSerial& outro) const {
 	return (nome.compare(outro.nome) > 0);
 }
 
@@ -204,7 +204,7 @@ VALOR DE RETORNO:
 	se a comparação é verdadeira ou não
 
 */
-bool PortariaSerializada::operator<=(PortariaSerializada& outro) const {
+bool PortariaSerial::operator<=(PortariaSerial& outro) const {
 	return (nome.compare(outro.nome) <= 0);
 }
 
@@ -220,7 +220,7 @@ VALOR DE RETORNO:
 	se a comparação é verdadeira ou não
 
 */
-bool PortariaSerializada::operator<(PortariaSerializada& outro) const {
+bool PortariaSerial::operator<(PortariaSerial& outro) const {
 	return (nome.compare(outro.nome) < 0);
 }
 
@@ -236,7 +236,7 @@ VALOR DE RETORNO:
 	se a comparação é verdadeira ou não
 
 */
-bool PortariaSerializada::operator!=(PortariaSerializada& outro) const {
+bool PortariaSerial::operator!=(PortariaSerial& outro) const {
 	return (nome.compare(outro.nome) != 0);
 }
 
@@ -252,6 +252,6 @@ VALOR DE RETORNO:
 	se a comparação é verdadeira ou não
 
 */
-bool PortariaSerializada::operator==(PortariaSerializada& outro) const {
+bool PortariaSerial::operator==(PortariaSerial& outro) const {
 	return (nome.compare(outro.nome) == 0);
 }

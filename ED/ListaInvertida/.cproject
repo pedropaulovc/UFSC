@@ -49,13 +49,14 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreBinaria"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreAVL"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="ChavePrimaria"/>
-<entry excluding="Ipsum|Portaria|ArvoreAVL|Lorem|ArquivoDados|Estruturas|ArvoreBinaria|ListaEncadeada|ChavePrimaria|Indexador|Estruturas2|ChaveSecundaria" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ListaEncadeada"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreBinaria"/>
 <entry excluding="ArvoreBinaria|ListaEncadeada|ArvoreAVL" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="ChavePrimaria"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreAVL"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Interface"/>
+<entry excluding="Interface|Ipsum|Portaria|ArvoreAVL|Lorem|ArquivoDados|Estruturas|ArvoreBinaria|ListaEncadeada|ChavePrimaria|Indexador|Estruturas2|ChaveSecundaria" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>
@@ -519,16 +520,17 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Portarias"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador/ChaveSecundaria"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreBinaria"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ListaEncadeada"/>
-<entry excluding="ArquivoDados|ChaveSecundaria|ChavePrimaria" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador"/>
+<entry excluding="Interface|Ipsum|Lorem|ArvoreBinaria|ArquivoDados|ArvoreAVL|Estruturas2|Indexador|ChaveSecundaria|ChavePrimaria|Portarias|Portaria|ListaEncadeada|Estruturas" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 <entry excluding="ArvoreBinaria|ArvoreAVL|ListaEncadeada" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador/ArquivoDados"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreAVL"/>
-<entry excluding="Ipsum|Lorem|ArvoreBinaria|ArquivoDados|ArvoreAVL|Estruturas2|Indexador|ChaveSecundaria|ChavePrimaria|Portarias|Portaria|ListaEncadeada|Estruturas" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreBinaria"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Interface"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador/ChavePrimaria"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Portarias"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreAVL"/>
+<entry excluding="ArquivoDados|ChaveSecundaria|ChavePrimaria" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador/ArquivoDados"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ListaEncadeada"/>
 </sourceEntries>
 </configuration>
 </storageModule>

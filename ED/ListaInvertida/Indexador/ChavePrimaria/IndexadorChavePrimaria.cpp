@@ -37,7 +37,7 @@ void IndexadorChavePrimaria::exportar(string caminho, Portaria **portarias,
 	for (int i = 0; i < numPortarias; i++)
 		arvore = arvore->insere(*portarias[i]);
 
-	PortariaSerializada **serializadas = new PortariaSerializada*[numPortarias];
+	PortariaSerial **serializadas = new PortariaSerial*[numPortarias];
 
 	int posicaoVaga = 0;
 	serializarArvore(arvore, serializadas, &posicaoVaga);
@@ -51,7 +51,7 @@ void IndexadorChavePrimaria::exportar(string caminho, Portaria **portarias,
 	arquivo << numPortarias << endl;
 
 	for (int i = 0; i < numPortarias; i++) {
-		PortariaSerializada *atual = serializadas[i];
+		PortariaSerial *atual = serializadas[i];
 		arquivo << atual->obterNome() << delimitador
 				<< atual->obterPosicaoArquivo() << delimitador
 				<< atual->obterFilhoEsquerda() << delimitador
@@ -76,11 +76,11 @@ VALOR DE RETORNO:
 
 */
 int IndexadorChavePrimaria::serializarArvore(NodoAVL<Portaria> *arvore,
-		PortariaSerializada **lista, int *posicaoVaga) {
+		PortariaSerial **lista, int *posicaoVaga) {
 	if (lista == NULL)
 		return 0;
 	const Portaria* portaria = arvore->retornaInfo();
-	PortariaSerializada* serializada = new PortariaSerializada(
+	PortariaSerial* serializada = new PortariaSerial(
 			portaria->obterNome(), portaria->obterPosicaoArquivo());
 	serializada->definirAltura(arvore->retornaAltura());
 
@@ -113,7 +113,7 @@ VALOR DE RETORNO:
 	a árvore gerada
 
 */
-NodoBinario<PortariaSerializada>* IndexadorChavePrimaria::importar(
+NodoBinario<PortariaSerial>* IndexadorChavePrimaria::importar(
 		string caminhoArquivoChaves) {
 	ifstream arquivo(caminhoArquivoChaves.c_str());
 	string linha;
@@ -144,16 +144,16 @@ VALOR DE RETORNO:
 	a árvore gerada
 
 */
-NodoBinario<PortariaSerializada>* IndexadorChavePrimaria::importarArvore(string *nodos, int nodoAtual) {
+NodoBinario<PortariaSerial>* IndexadorChavePrimaria::importarArvore(string *nodos, int nodoAtual) {
 	string nodo = nodos[nodoAtual];
 	ListaEncadeada<string> *dados = tokenizar(nodo);
 
 	string chave = *dados->obterDoInicio();
 	int posicaoArquivo = atoi(dados->obterDaPosicao(2)->c_str());
-	PortariaSerializada *novaPortaria = new PortariaSerializada(chave,
+	PortariaSerial *novaPortaria = new PortariaSerial(chave,
 			posicaoArquivo);
-	NodoBinario<PortariaSerializada> *novoNodo = new NodoBinario<
-			PortariaSerializada> (novaPortaria);
+	NodoBinario<PortariaSerial> *novoNodo = new NodoBinario<
+			PortariaSerial> (novaPortaria);
 
 	int filhoEsquerda = atoi(dados->obterDaPosicao(3)->c_str());
 	int filhoDireita = atoi(dados->obterDaPosicao(4)->c_str());
