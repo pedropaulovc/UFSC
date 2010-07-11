@@ -11,7 +11,7 @@
  SOBRE ESSE ARQUIVO:
  Implementação dos métodos descritos em IndexadorChaveSecundaria.h referentes a um indexador de chaves
  secundárias.
-*/
+ */
 
 #include "IndexadorChaveSecundaria.h"
 #include <fstream>
@@ -19,20 +19,20 @@
 #include <sstream>
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	para cada palavra chave a ser indexada, varrer o array contendo todas as portarias em busca dela,
-	em caso de sucesso armazenar uma referência em arquivo invertido para a palavra chave. Gera ainda, um
-	arquivo mestre que referencia todos os arquivos.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ para cada palavra chave a ser indexada, varrer o array contendo todas as portarias em busca dela,
+ em caso de sucesso armazenar uma referência em arquivo invertido para a palavra chave. Gera ainda, um
+ arquivo mestre que referencia todos os arquivos.
 
-PARÂMETROS:
-	a pasta a ser utilizada para armazenar os índices, um array contendo as palavras chave a serem buscadas,
-	o número de palavras chave contidas no array, um array de portarias a serem lidas e o número de portarias
+ PARÂMETROS:
+ a pasta a ser utilizada para armazenar os índices, um array contendo as palavras chave a serem buscadas,
+ o número de palavras chave contidas no array, um array de portarias a serem lidas e o número de portarias
 
-VALOR DE RETORNO:
-	nenhum
+ VALOR DE RETORNO:
+ nenhum
 
-*/
+ */
 void IndexadorChaveSecundaria::exportar(string pasta, string *palavrasChave,
 		int numPalavras, Portaria **portarias, int numPortarias) {
 	ofstream arquivoSaida, arquivoIndice;
@@ -53,7 +53,7 @@ void IndexadorChaveSecundaria::exportar(string pasta, string *palavrasChave,
 		int qtd = 0;
 		for (int j = 0; j < numPortarias; j++) {
 			Portaria *portariaAtual = portarias[j];
-			if (portariaAtual->obterTexto().find(palavraAtual) != string::npos){
+			if (portariaAtual->obterTexto().find(palavraAtual) != string::npos) {
 				buffer << portariaAtual->obterPosicaoArquivo() << delimitador;
 				qtd++;
 			}
@@ -63,4 +63,37 @@ void IndexadorChaveSecundaria::exportar(string pasta, string *palavrasChave,
 		arquivoSaida.close();
 	}
 	arquivoIndice.close();
+}
+
+ListaEncadeada<Portaria>* IndexadorChaveSecundaria::importar(string pasta,
+		string palavraChave) {
+
+	string linha;
+	int posicao;
+	ListaEncadeada<Portaria>* portarias = new ListaEncadeada<Portaria> ();
+	ListaEncadeada<string>* dados;
+	Portaria* portariaAtual;
+	int numeroChaves;
+
+	ifstream myfile((pasta + palavraChave + extensao).c_str());
+
+	if (myfile.is_open()) {
+		getline(myfile, linha);
+		numeroChaves = atoi(linha.c_str());
+
+		getline(myfile, linha);
+		dados = tokenizar(linha);
+
+		for(int i = 1; i <= dados->obterTamanho(); i++){
+			posicao = atoi(dados->obterDaPosicao(i)->c_str());
+			portariaAtual = Indexador::lerEntrada("./Indices/portarias.dat", posicao);
+			portarias->adicionarNoFim(portariaAtual);
+		}
+
+		myfile.close();
+		delete dados;
+
+		return portarias;
+	}
+	return NULL;
 }

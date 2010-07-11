@@ -32,7 +32,13 @@ int main(int argc, char **argv) {
 
 	PortariaSerializada *aBuscar = new PortariaSerializada("281_GR_2006");
 	NodoBinario<PortariaSerializada> *arvore = IndexadorChavePrimaria::importar("./Indices/portarias.ndx");
-	int posicao = arvore->buscar(aBuscar)->obterPosicaoArquivo();
-	cout << Indexador::lerEntrada("./Indices/portarias.dat",posicao)->obterTexto();
+
+
+	ListaEncadeada<Portaria>* listaInvertidaALEMAO = IndexadorChaveSecundaria::importar("./Indices/","ALEMAO");
+
+	for(int i = 1; i <= listaInvertidaALEMAO->obterTamanho(); i++)
+		cout << listaInvertidaALEMAO->obterDaPosicao(i)->obterNome() << endl;
+
+	return 0;
 }
 

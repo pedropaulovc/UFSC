@@ -22,6 +22,7 @@ class IndexadorChaveSecundaria: public Indexador {
 public:
 	static void exportar(string pasta, string *palavrasChave, int numPalavras,
 			Portaria **portarias, int numPortarias);
+	static ListaEncadeada<Portaria>* importar(string pasta, string palavraChave);
 };
 
 #endif /* INDEXADORCHAVESECUNDARIA_H_ */
