@@ -41,10 +41,13 @@ Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) 
 	ifstream arquivoDados(caminho.c_str());
 
 	if (arquivoDados.is_open()) {
+		//Lendo o tamanho do arquivo de dados e gerando um array de portarias de tamanho correspondente
 		getline(arquivoDados, linha);
 		*tamanhoArquivo = atoi(linha.c_str());
 		portarias = new Portaria*[*tamanhoArquivo];
 
+		//Para cada entrada no arquivo de dados, parsear a linha
+		//e gerar uma portaria com os dados extraídos
 		for (int i = 0; i < *tamanhoArquivo; i++) {
 			getline(arquivoDados, linha);
 			dados = tokenizar(linha);
@@ -64,7 +67,8 @@ Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) 
  ALUNOS: Pedro Paulo e Felipe dos Santos
  PROPÓSITO:
  ler uma string formatada contendo diversos campos divididos por um delimitador e dividí-la,
- gerando uma lista contendo os campos divididos.
+ gerando uma lista contendo os campos divididos. Exemplo: lorem|ipsum|dolor -> lista[0] = lorem,
+ lista[1] = ipsum, lista[2] = dolor.
 
  PARÂMETROS:
  a string a ser lida
@@ -79,6 +83,7 @@ ListaEncadeada<string>* Indexador::tokenizar(string linha) {
 	string::size_type inicio = linha.find_first_not_of(delimitador, 0);
 	string::size_type fim = linha.find_first_of(delimitador, inicio);
 
+	//Enquanto houver campos a serem lidos, lê-los e gravar na lista
 	while (fim != string::npos || inicio != string::npos) {
 		dados->adicionarNoFim(new string(linha.substr(inicio, fim - inicio)));
 		inicio = linha.find_first_not_of(delimitador, fim);
@@ -102,7 +107,7 @@ ListaEncadeada<string>* Indexador::tokenizar(string linha) {
  posição referente a entrada recebida
 
  */
- Portaria* Indexador::lerEntrada(string caminho, int numeroEntrada) {
+Portaria* Indexador::lerEntrada(string caminho, int numeroEntrada) {
 	string linha;
 	ListaEncadeada<string> *dados;
 	Portaria* portaria;
@@ -111,17 +116,19 @@ ListaEncadeada<string>* Indexador::tokenizar(string linha) {
 	ifstream arquivoDados(caminho.c_str());
 
 	if (arquivoDados.is_open()) {
+		//Lendo o tamanho do arquivo de dados
 		getline(arquivoDados, linha);
-
 		int tamanhoArquivo = atoi(linha.c_str());
 
-		if (numeroEntrada > tamanhoArquivo) {
+		//Salvaguarda para pedidos inválidos
+		if (numeroEntrada > tamanhoArquivo)
 			return NULL;
-		}
 
-		for(i = 0 ; i < numeroEntrada; i++)
+		//Varrendo o arquivo até a posição desejada
+		for (i = 0; i < numeroEntrada; i++)
 			getline(arquivoDados, linha);
 
+		//Obtendo a linha desejada, parseando-a e gerando uma portaria com os dados obtidos.
 		getline(arquivoDados, linha);
 		dados = tokenizar(linha);
 		portaria = new Portaria(*(dados->obterDoInicio()),

@@ -39,7 +39,9 @@ void IndexadorChaveSecundaria::exportar(string pasta, string *palavrasChave,
 	stringstream buffer;
 	string palavraAtual;
 
+	//Para cada palavra chave a ser buscada, faça:
 	for (int i = 0; i < numPalavras; i++) {
+		//Obter a palavra chave atual e abrir o arquivo coorrespondente
 		palavraAtual = palavrasChave[i];
 		arquivoSaida.open((pasta + palavraAtual + extensao).c_str(), ios::trunc
 				| ios::out);
@@ -47,15 +49,21 @@ void IndexadorChaveSecundaria::exportar(string pasta, string *palavrasChave,
 		if (arquivoSaida.fail())
 			cout << "Problema no arquivo de saída" << endl;
 		int qtd = 0;
+		//Para cada portaria, faça:
 		for (int j = 0; j < numPortarias; j++) {
+			//Se a portaria contém a palavra buscada, armazenar em
+			//um buffer uma referência a essa portaria
 			Portaria *portariaAtual = portarias[j];
 			if (portariaAtual->obterTexto().find(palavraAtual) != string::npos) {
 				buffer << portariaAtual->obterPosicaoArquivo() << delimitador;
 				qtd++;
 			}
 		}
+		//Gravar o tamanho da lista invertida e as referências armazenadas
 		arquivoSaida << qtd << endl << buffer.str();
+		//Limpando o buffer
 		buffer.str("");
+		//Fechando o arquivo da palavra chave atual
 		arquivoSaida.close();
 	}
 }
@@ -88,12 +96,16 @@ ListaEncadeada<Portaria>* IndexadorChaveSecundaria::importar(string pasta,
 	ifstream arquivoListaInvertida((pasta + palavraChave + extensao).c_str());
 
 	if (arquivoListaInvertida.is_open()) {
+		//Obtendo o tamanho da lista invertida
 		getline(arquivoListaInvertida, linha);
 		numeroChaves = atoi(linha.c_str());
 
+		//Parseando a lista invertida
 		getline(arquivoListaInvertida, linha);
 		dados = tokenizar(linha);
 
+		//Para cada referência armazenada, obter a portaria correspondente do arquivo de dados
+		//e armazenar na lista a ser retornada
 		for(int i = 1; i <= dados->obterTamanho(); i++){
 			posicao = atoi(dados->obterDaPosicao(i)->c_str());
 			portariaAtual = Indexador::lerEntrada(arquivoDados, posicao);

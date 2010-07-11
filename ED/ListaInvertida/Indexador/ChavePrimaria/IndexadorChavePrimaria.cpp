@@ -34,6 +34,7 @@ void IndexadorChavePrimaria::exportar(string caminho, Portaria **portarias,
 		int numPortarias) {
 	NodoAVL<Portaria> *arvore = new NodoAVL<Portaria> ();
 
+	//Populando árvore
 	for (int i = 0; i < numPortarias; i++)
 		arvore = arvore->insere(*portarias[i]);
 
@@ -50,6 +51,7 @@ void IndexadorChavePrimaria::exportar(string caminho, Portaria **portarias,
 
 	arquivo << numPortarias << endl;
 
+	//Gravando a árvore serializada no arquivo
 	for (int i = 0; i < numPortarias; i++) {
 		PortariaSerial *atual = serializadas[i];
 		arquivo << atual->obterNome() << delimitador
@@ -79,19 +81,23 @@ int IndexadorChavePrimaria::serializarArvore(NodoAVL<Portaria> *arvore,
 		PortariaSerial **lista, int *posicaoVaga) {
 	if (lista == NULL)
 		return 0;
+	//Obtendo a portaria a ser serializada.
 	const Portaria* portaria = arvore->retornaInfo();
 	PortariaSerial* serializada = new PortariaSerial(
 			portaria->obterNome(), portaria->obterPosicaoArquivo());
 	serializada->definirAltura(arvore->retornaAltura());
 
+	//Adicionando a portaria serializada na lista
 	lista[*posicaoVaga] = serializada;
 	int posicaoInserido = *posicaoVaga;
 
+	//Iniciando a recursividade: serializando os filhos à esquerda
 	if (arvore->retornaEsquerda() != NULL) {
 		(*posicaoVaga)++;
 		serializada->definirFilhoEsquerda(serializarArvore(
 				arvore->retornaEsquerda(), lista, posicaoVaga));
 	}
+	//Agora serializando os filhos à direita
 	if (arvore->retornaDireita() != NULL) {
 		(*posicaoVaga)++;
 		serializada->definirFilhoDireita(serializarArvore(
@@ -120,14 +126,14 @@ NodoBinario<PortariaSerial>* IndexadorChavePrimaria::importar(
 
 	if (arquivo.fail())
 		return NULL;
-
+	//Obtendo o tamanho do arquivo de chaves primárias
 	getline(arquivo, linha);
 	int tamanhoArquivo = atoi(linha.c_str());
 	string *nodosSerializados = new string[tamanhoArquivo];
 
 	for (int i = 0; i < tamanhoArquivo; i++)
 		getline(arquivo, nodosSerializados[i]);
-
+	//Reconstituindo a árvore
 	return importarArvore(nodosSerializados);
 }
 
@@ -145,9 +151,11 @@ VALOR DE RETORNO:
 
 */
 NodoBinario<PortariaSerial>* IndexadorChavePrimaria::importarArvore(string *nodos, int nodoAtual) {
+	//Lendo o nodo atual e tokenizando-o
 	string nodo = nodos[nodoAtual];
 	ListaEncadeada<string> *dados = tokenizar(nodo);
 
+	//Regenerando a portaria e criando o nodo binário para contê-lo
 	string chave = *dados->obterDoInicio();
 	int posicaoArquivo = atoi(dados->obterDaPosicao(2)->c_str());
 	PortariaSerial *novaPortaria = new PortariaSerial(chave,
@@ -155,6 +163,7 @@ NodoBinario<PortariaSerial>* IndexadorChavePrimaria::importarArvore(string *nodo
 	NodoBinario<PortariaSerial> *novoNodo = new NodoBinario<
 			PortariaSerial> (novaPortaria);
 
+	//Recursividade: importando os filhos da esquerda e depois os filhos da direita
 	int filhoEsquerda = atoi(dados->obterDaPosicao(3)->c_str());
 	int filhoDireita = atoi(dados->obterDaPosicao(4)->c_str());
 	if(filhoEsquerda != -1)

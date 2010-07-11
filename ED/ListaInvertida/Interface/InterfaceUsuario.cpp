@@ -1,9 +1,16 @@
-/*
- * InterfaceUsuario.cpp
- *
- *  Created on: Jul 11, 2010
- *      Author: pedropaulo
- */
+/**
+ TÍTULO:        Implementação buscador textual usando listas invertidas
+ ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+ MATÉRIA:       INE5408
+ PRAZO:         12 de julho de 2010
+
+ PROPÓSITO:
+ Este programa é uma implementação do enunciado do projeto de implementação II, um buscador textual
+ utilizando arquivos invertidos.
+
+ SOBRE ESSE ARQUIVO:
+ Implementação dos métodos descritos em InterfaceUsuario.h referentes ao interfaceamento com o usuário.
+*/
 
 #include <cstdlib>
 #include <iostream>
@@ -83,8 +90,10 @@ void InterfaceUsuario::buscarChavePrimaria() {
 	cout << "Forneça o nome da portaria a ser buscada: ";
 	cin >> portaria;
 
+	//Obtendo a portaria buscada ou NULL caso não seja encontrada
 	resultado = arvore->buscar(new PortariaSerial(portaria));
 
+	//Exibindo o resultado ao usuário
 	if (resultado == NULL)
 		cout << "Portaria não encontrada." << endl;
 	else
@@ -115,19 +124,24 @@ void InterfaceUsuario::buscarChaveSecundaria() {
 		cin >> opcao;
 	} while (opcao != 'S' && opcao != 'N' && opcao != 's' && opcao != 'n');
 
+	//Obtendo a lista de portarias contendo o termo buscado
 	lista1 = obterBuscaSecundaria();
 
+	//Caso não seja feita busca conjuntiva, o resultado está pronto
 	if (opcao == 'N' || opcao == 'n') {
 		resultado = lista1;
 	} else {
+		//Em caso de busca conjuntiva, obter a próxima expressão a ser buscada
 		lista2 = obterBuscaSecundaria();
 
+		//Realizar a intersecção entre as listas segundo algoritmo fornecido
 		if (lista1->obterTamanho() > lista2->obterTamanho())
 			resultado = lista1->intersecao(lista2);
 		else
 			resultado = lista2->intersecao(lista1);
 	}
 
+	//Exibindo o resultado encontrado ao usuário
 	int numPortarias = resultado->obterTamanho();
 	cout << numPortarias << " portarias encontradas: " << endl;
 	for (int i = 1; i <= numPortarias; i++) {
@@ -153,13 +167,17 @@ VALOR DE RETORNO:
 ListaEncadeada<Portaria>* InterfaceUsuario::obterBuscaSecundaria() {
 	ListaEncadeada<Portaria> *lista;
 	string termo;
+	//Enquanto não seja fornecido um termo válido, repita a operação.
 	do {
 		cout << "Forneça o termo a ser buscado: ";
 		cin >> termo;
 
+		//Transformando a palavra buscada para caixa alta
 		transform(termo.begin(), termo.end(), termo.begin(), ::toupper);
+		//Carregar a lista invertida e gerar uma lista de portarias que contêm a palavra
 		lista = IndexadorChaveSecundaria::importar(pastaChavesSecundarias,
 				termo, caminhoDados);
+		//Se a busca não teve sucesso, informe ao usuário.
 		if (lista == NULL)
 			cout << "Termo não indexado." << endl;
 	} while (lista == NULL);
@@ -187,14 +205,16 @@ void InterfaceUsuario::gerarIndices() {
 		cin >> opcao;
 	} while (opcao != 'S' && opcao != 'N' && opcao != 's' && opcao != 'n');
 
-	cout << " - Importando arquivo de dados" << endl;
+	cout << " - Importando arquivo de dados... ";
 	Portaria **portarias = Indexador::importarArquivoDados(caminhoDados,
 			&numPortarias);
+	cout << "Pronto." << endl;
 
 	if (opcao == 'N' || opcao == 'n') {
-		cout << " - Gerando arquivo de chaves primárias" << endl;
+		cout << " - Gerando arquivo de chaves primárias... ";
 		IndexadorChavePrimaria::exportar(caminhoChavesPrimarias, portarias,
 				numPortarias);
+		cout << "Pronto." << endl;
 
 		string palavrasChave[] = { "REITOR", "VICE", "PROFESSOR", "CHEFE",
 				"DEPARTAMENTO", "MECANICA", "ELETRICA", "QUIMICA", "LETRAS",
@@ -202,13 +222,15 @@ void InterfaceUsuario::gerarIndices() {
 				"MATERIAIS", "ENGENHARIA", "INGLES", "ALEMAO", "ITALIANO",
 				"DIREITO" };
 
-		cout << " - Gerando arquivo de chaves secundárias" << endl;
+		cout << " - Gerando arquivo de chaves secundárias... ";
 		IndexadorChaveSecundaria::exportar(pastaChavesSecundarias,
 				palavrasChave, 20, portarias, numPortarias);
+		cout << "Pronto." << endl;
 	}
 
-	cout << " - Importando arquivo de chaves primárias" << endl << endl;
+	cout << " - Importando arquivo de chaves primárias... ";
 	arvore = IndexadorChavePrimaria::importar(caminhoChavesPrimarias);
+	cout << "Pronto." << endl << endl;
 }
 
 /**
