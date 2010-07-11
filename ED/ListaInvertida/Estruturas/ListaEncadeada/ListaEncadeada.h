@@ -424,7 +424,7 @@ int ListaEncadeada<T>::posicao(T* info) {
 
 template<class T>
 ListaEncadeada<T>* ListaEncadeada<T>::intersecao(ListaEncadeada<T>* outraLista) {
-	ListaEncadeada<string> *novaLista = new ListaEncadeada<string> ();
+	ListaEncadeada<T> *novaLista = new ListaEncadeada<T> ();
 	T* elementoAtual;
 
 	for(int i = 1; i <= this->tamanho; i++){

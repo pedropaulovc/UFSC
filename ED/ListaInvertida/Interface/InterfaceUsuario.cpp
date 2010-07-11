@@ -5,12 +5,19 @@
  *      Author: pedropaulo
  */
 
+#include <cstdlib>
+#include <iostream>
+#include <algorithm>
 #include "InterfaceUsuario.h"
 #include "../Indexador/Indexador.h"
 #include "../Indexador/ChavePrimaria/IndexadorChavePrimaria.h"
 #include "../Indexador/ChaveSecundaria/IndexadorChaveSecundaria.h"
+#include "../Portarias/Portaria.h"
 
 InterfaceUsuario::InterfaceUsuario() {
+	caminhoDados = "./Indices/portarias.dat";
+	caminhoChavesPrimarias = "./Indices/portarias.ndx";
+	pastaChavesSecundarias = "./Indices/";
 }
 
 InterfaceUsuario::~InterfaceUsuario() {
@@ -26,25 +33,92 @@ void InterfaceUsuario::iniciar() {
 		exibeMenu();
 		cin >> opcao;
 
+		if (opcao == 1)
+			buscarChavePrimaria();
+		if (opcao == 2)
+			buscarChaveSecundaria();
 	} while (opcao != 0);
+}
+
+void InterfaceUsuario::buscarChavePrimaria() {
+	string portaria;
+	PortariaSerial *resultado;
+
+	cout << "Forneça o nome da portaria a ser buscada: ";
+	cin >> portaria;
+
+	resultado = arvore->buscar(new PortariaSerial(portaria));
+
+	if (resultado == NULL)
+		cout << "Portaria não encontrada." << endl;
+	else
+		cout << Indexador::lerEntrada(caminhoDados,
+				resultado->obterPosicaoArquivo())->obterTexto();
+}
+
+void InterfaceUsuario::buscarChaveSecundaria() {
+	char opcao;
+	string termo1, termo2;
+	ListaEncadeada<Portaria> *lista1, *lista2, *resultado;
+	Portaria *atual;
+	do {
+		cout << "Deseja realizar busca conjuntiva? (S ou N): ";
+		cin >> opcao;
+	} while (opcao != 'S' && opcao != 'N' && opcao != 's' && opcao != 'n');
+
+	lista1 = obterBuscaSecundaria();
+
+	if (opcao == 'N' || opcao == 'n') {
+		resultado = lista1;
+	} else {
+		lista2 = obterBuscaSecundaria();
+
+		if (lista1->obterTamanho() > lista2->obterTamanho())
+			resultado = lista1->intersecao(lista2);
+		else
+			resultado = lista2->intersecao(lista1);
+	}
+
+	int numPortarias = resultado->obterTamanho();
+	cout << numPortarias << " portarias encontradas: " << endl;
+	for (int i = 1; i <= numPortarias; i++) {
+		atual = resultado->obterDaPosicao(i);
+		cout << "Portaria " << atual->obterNome() << endl;
+		cout << atual->obterTexto() << endl;
+	}
+}
+
+ListaEncadeada<Portaria>* InterfaceUsuario::obterBuscaSecundaria() {
+	ListaEncadeada<Portaria> *lista;
+	string termo;
+	do {
+		cout << "Forneça o termo a ser buscado: ";
+		cin >> termo;
+
+		transform(termo.begin(), termo.end(), termo.begin(), ::toupper);
+		lista = IndexadorChaveSecundaria::importar(pastaChavesSecundarias,
+				termo, caminhoDados);
+		if (lista == NULL)
+			cout << "Termo não indexado." << endl;
+	} while (lista == NULL);
+	return lista;
 }
 
 void InterfaceUsuario::gerarIndices() {
 	char opcao;
 	string caminho;
 	do {
-		cout << endl << "Deseja usar os arquivos de índice prontos? (S ou N)" << endl;
+		cout << endl << "Deseja usar os arquivos de índice prontos? (S ou N): ";
 		cin >> opcao;
 	} while (opcao != 'S' && opcao != 'N' && opcao != 's' && opcao != 'n');
 
-	cout << "Importando arquivo de dados" << endl;
-	Portaria **portarias = Indexador::importarArquivoDados(
-			"./Indices/portarias.dat", &numPortarias);
+	cout << " - Importando arquivo de dados" << endl;
+	Portaria **portarias = Indexador::importarArquivoDados(caminhoDados,
+			&numPortarias);
 
 	if (opcao == 'N' || opcao == 'n') {
-		cout << "Gerando arquivo de chaves primárias" << endl;
-		;
-		IndexadorChavePrimaria::exportar("./Indices/portarias.ndx", portarias,
+		cout << " - Gerando arquivo de chaves primárias" << endl;
+		IndexadorChavePrimaria::exportar(caminhoChavesPrimarias, portarias,
 				numPortarias);
 
 		string palavrasChave[] = { "REITOR", "VICE", "PROFESSOR", "CHEFE",
@@ -52,14 +126,14 @@ void InterfaceUsuario::gerarIndices() {
 				"FILOSOFIA", "HUMANAS", "CIENCIAS", "COMPUTACAO", "SANITARIA",
 				"MATERIAIS", "ENGENHARIA", "INGLES", "ALEMAO", "ITALIANO",
 				"DIREITO" };
-		cout << "Gerando arquivo de chaves secundárias" << endl;
-		;
-		IndexadorChaveSecundaria::exportar("./Indices/", palavrasChave, 20,
-				portarias, numPortarias);
+
+		cout << " - Gerando arquivo de chaves secundárias" << endl;
+		IndexadorChaveSecundaria::exportar(pastaChavesSecundarias,
+				palavrasChave, 20, portarias, numPortarias);
 	}
 
-	cout << "Importando arquivo de chaves primárias" << endl;
-	arvore = IndexadorChavePrimaria::importar("./Indices/portarias.ndx");
+	cout << " - Importando arquivo de chaves primárias" << endl << endl;
+	arvore = IndexadorChavePrimaria::importar(caminhoChavesPrimarias);
 }
 
 void InterfaceUsuario::exibeMenu() {

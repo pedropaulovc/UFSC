@@ -35,16 +35,12 @@
  */
 void IndexadorChaveSecundaria::exportar(string pasta, string *palavrasChave,
 		int numPalavras, Portaria **portarias, int numPortarias) {
-	ofstream arquivoSaida, arquivoIndice;
+	ofstream arquivoSaida;
 	stringstream buffer;
 	string palavraAtual;
 
-	arquivoIndice.open((pasta + arquivoIndices).c_str(), ios::trunc | ios::out);
-	arquivoIndice << numPalavras << endl;
 	for (int i = 0; i < numPalavras; i++) {
 		palavraAtual = palavrasChave[i];
-		arquivoIndice << palavraAtual << delimitador << palavraAtual
-				<< extensao << endl;
 		arquivoSaida.open((pasta + palavraAtual + extensao).c_str(), ios::trunc
 				| ios::out);
 
@@ -62,11 +58,10 @@ void IndexadorChaveSecundaria::exportar(string pasta, string *palavrasChave,
 		buffer.str("");
 		arquivoSaida.close();
 	}
-	arquivoIndice.close();
 }
 
 ListaEncadeada<Portaria>* IndexadorChaveSecundaria::importar(string pasta,
-		string palavraChave) {
+		string palavraChave, string arquivoDados) {
 
 	string linha;
 	int posicao;
@@ -86,7 +81,7 @@ ListaEncadeada<Portaria>* IndexadorChaveSecundaria::importar(string pasta,
 
 		for(int i = 1; i <= dados->obterTamanho(); i++){
 			posicao = atoi(dados->obterDaPosicao(i)->c_str());
-			portariaAtual = Indexador::lerEntrada("./Indices/portarias.dat", posicao);
+			portariaAtual = Indexador::lerEntrada(arquivoDados, posicao);
 			portarias->adicionarNoFim(portariaAtual);
 		}
 

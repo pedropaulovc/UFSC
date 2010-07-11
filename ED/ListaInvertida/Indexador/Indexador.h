@@ -25,7 +25,6 @@ public:
 	static ListaEncadeada<string>* tokenizar(string linha);
 	static Portaria* lerEntrada(string caminho, int numeroEntrada);
 };
-static const string arquivoIndices = "ChavesSecundarias.ndx";
 static const string extensao = ".ndx";
 static const char delimitador = '|';
 #endif /* INDEXADOR_H_ */

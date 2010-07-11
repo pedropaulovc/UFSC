@@ -17,6 +17,10 @@ using namespace std;
 
 class InterfaceUsuario {
 private:
+	string caminhoDados;
+	string caminhoChavesPrimarias;
+	string pastaChavesSecundarias;
+
 	Portaria **portarias;
 	NodoBinario<PortariaSerial> *arvore;
 	int numPortarias;
@@ -26,10 +30,14 @@ public:
 	virtual ~InterfaceUsuario();
 
 	void iniciar();
+
+private:
 	void exibeIntroducao();
 	void exibeMenu();
 	void gerarIndices();
-
+	void buscarChavePrimaria();
+	void buscarChaveSecundaria();
+	ListaEncadeada<Portaria>* obterBuscaSecundaria();
 };
 
 #endif /* INTERFACEUSUARIO_H_ */
