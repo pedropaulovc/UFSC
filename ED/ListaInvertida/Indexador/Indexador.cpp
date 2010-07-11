@@ -10,7 +10,7 @@
 
  SOBRE ESSE ARQUIVO:
  Implementação dos métodos descritos em Indexador.h referentes a um Indexador Genérico.
-*/
+ */
 
 #include <string>
 #include <sstream>
@@ -19,21 +19,20 @@
 
 #include "Indexador.h"
 
-
 using namespace std;
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	ler o arquivo de dados fornecido, parseá-lo e gerar um array de portarias para uso posterior.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ ler o arquivo de dados fornecido, parseá-lo e gerar um array de portarias para uso posterior.
 
-PARÂMETROS:
-	caminho do arquivo a ser lido e ponteiro para campo onde será escrito o tamanho do array gerado
+ PARÂMETROS:
+ caminho do arquivo a ser lido e ponteiro para campo onde será escrito o tamanho do array gerado
 
-VALOR DE RETORNO:
-	array contendo as portarias geradas.
+ VALOR DE RETORNO:
+ array contendo as portarias geradas.
 
-*/
+ */
 Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) {
 	string linha;
 	Portaria **portarias;
@@ -61,20 +60,19 @@ Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) 
 	return NULL;
 }
 
-
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	ler uma string formatada contendo diversos campos divididos por um delimitador e dividí-la,
-	gerando uma lista contendo os campos divididos.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ ler uma string formatada contendo diversos campos divididos por um delimitador e dividí-la,
+ gerando uma lista contendo os campos divididos.
 
-PARÂMETROS:
-	a string a ser lida
+ PARÂMETROS:
+ a string a ser lida
 
-VALOR DE RETORNO:
-	lista contendo os campos lidos da string
+ VALOR DE RETORNO:
+ lista contendo os campos lidos da string
 
-*/
+ */
 ListaEncadeada<string>* Indexador::tokenizar(string linha) {
 	ListaEncadeada<string> *dados = new ListaEncadeada<string> ();
 
@@ -88,5 +86,37 @@ ListaEncadeada<string>* Indexador::tokenizar(string linha) {
 	}
 
 	return dados;
+}
+
+ Portaria* Indexador::lerEntrada(string caminho, int numeroEntrada) {
+	string linha;
+	ListaEncadeada<string> *dados;
+	Portaria* portaria;
+	int i;
+
+	ifstream myfile(caminho.c_str());
+
+	if (myfile.is_open()) {
+		getline(myfile, linha);
+
+		int tamanhoArquivo = atoi(linha.c_str());
+
+		if (numeroEntrada > tamanhoArquivo) {
+			return NULL;
+		}
+
+		for(i = 0 ; i < numeroEntrada; i++)
+			getline(myfile, linha);
+
+		getline(myfile, linha);
+		dados = tokenizar(linha);
+		portaria = new Portaria(*(dados->obterDoInicio()),
+				*(dados->obterDaPosicao(2)), i);
+		delete dados;
+		myfile.close();
+		return portaria;
+	}
+
+	return NULL;
 }
 

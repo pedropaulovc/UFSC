@@ -40,6 +40,7 @@ void IndexadorChaveSecundaria::exportar(string pasta, string *palavrasChave,
 	string palavraAtual;
 
 	arquivoIndice.open((pasta + arquivoIndices).c_str(), ios::trunc | ios::out);
+	arquivoIndice << numPalavras << endl;
 	for (int i = 0; i < numPalavras; i++) {
 		palavraAtual = palavrasChave[i];
 		arquivoIndice << palavraAtual << delimitador << palavraAtual

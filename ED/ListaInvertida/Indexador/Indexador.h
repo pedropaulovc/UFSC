@@ -23,7 +23,7 @@ class Indexador {
 public:
 	static Portaria** importarArquivoDados(string caminho, int *tamanhoArquivo);
 	static ListaEncadeada<string>* tokenizar(string linha);
-
+	static Portaria* lerEntrada(string caminho, int numeroEntrada);
 };
 static const string arquivoIndices = "ChavesSecundarias.ndx";
 static const string extensao = ".ndx";
