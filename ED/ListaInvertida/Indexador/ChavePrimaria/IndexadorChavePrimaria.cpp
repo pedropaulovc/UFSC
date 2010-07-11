@@ -1,13 +1,35 @@
-/*
- * IndexadorChavePrimaria.cpp
- *
- *  Created on: Jul 11, 2010
- *      Author: pedropaulo
- */
+/**
+ TÍTULO:        Implementação buscador textual usando listas invertidas
+ ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+ MATÉRIA:       INE5408
+ PRAZO:         12 de julho de 2010
+
+ PROPÓSITO:
+ Este programa é uma implementação do enunciado do projeto de implementação II, um buscador textual
+ utilizando arquivos invertidos.
+
+ SOBRE ESSE ARQUIVO:
+ Implementação dos métodos descritos em IndexadorChavePrimaria.h referentes a um indexador de chaves
+ primárias.
+*/
+
 
 #include "IndexadorChavePrimaria.h"
 #include <fstream>
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	ler um array de portarias, gerar uma árvore AVL contendo referências a todos os elementos dados e
+	por fim serializar essa árvore em um caminho fornecido.
+
+PARÂMETROS:
+	o caminho do arquivo de chaves primárias, o array de portarias e seu tamanho.
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void IndexadorChavePrimaria::exportar(string caminho, Portaria **portarias,
 		int numPortarias) {
 	NodoAVL<Portaria> *arvore = new NodoAVL<Portaria> ();
@@ -39,6 +61,20 @@ void IndexadorChavePrimaria::exportar(string caminho, Portaria **portarias,
 	arquivo.close();
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Função auxiliar de exportar. Funciona de maneira recursiva armazenando em um array fornecido
+	uma portaria serializada por chamada segundo o percurso PreOrdem.
+
+PARÂMETROS:
+	a árvore a ser serializada, o array onde serão armazenadas as portarias serializadas e um
+	ponteiro apontando para a primeira posição vaga do array, por padrão, 0.
+
+VALOR DE RETORNO:
+	posição onde foi inserida a portaria atual.
+
+*/
 int IndexadorChavePrimaria::serializarArvore(NodoAVL<Portaria> *arvore,
 		PortariaSerializada **lista, int *posicaoVaga) {
 	if (lista == NULL)
@@ -65,6 +101,18 @@ int IndexadorChavePrimaria::serializarArvore(NodoAVL<Portaria> *arvore,
 	return posicaoInserido;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	ler um arquivo de chaves primárias gerado previamente e retornando a árvore reconstituída
+
+PARÂMETROS:
+	o caminho do arquivo de chaves primárias
+
+VALOR DE RETORNO:
+	a árvore gerada
+
+*/
 NodoBinario<PortariaSerializada>* IndexadorChavePrimaria::importar(
 		string caminhoArquivoChaves) {
 	ifstream arquivo(caminhoArquivoChaves.c_str());
@@ -83,8 +131,20 @@ NodoBinario<PortariaSerializada>* IndexadorChavePrimaria::importar(
 	return importarArvore(nodosSerializados, tamanhoArquivo);
 }
 
-NodoBinario<PortariaSerializada>* IndexadorChavePrimaria::importarArvore(string *nodos,
-		int numNodos, int nodoAtual) {
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	função auxiliar de importar. Funciona recursivamente gerando um novo nodo binário por chamada
+	contendo no campo de informações um ponteiro para a portaria reconstituída.
+
+PARÂMETROS:
+	um array contendo todos os nodos a serem importados e a posição a ser lida do array, por padrão, 0.
+
+VALOR DE RETORNO:
+	a árvore gerada
+
+*/
+NodoBinario<PortariaSerializada>* IndexadorChavePrimaria::importarArvore(string *nodos, int nodoAtual) {
 	string nodo = nodos[nodoAtual];
 	ListaEncadeada<string> *dados = tokenizar(nodo);
 
@@ -98,9 +158,9 @@ NodoBinario<PortariaSerializada>* IndexadorChavePrimaria::importarArvore(string 
 	int filhoEsquerda = atoi(dados->obterDaPosicao(3)->c_str());
 	int filhoDireita = atoi(dados->obterDaPosicao(4)->c_str());
 	if(filhoEsquerda != -1)
-		novoNodo->alterarFilhoEsquerda(importarArvore(nodos, numNodos, filhoEsquerda));
+		novoNodo->alterarFilhoEsquerda(importarArvore(nodos, filhoEsquerda));
 	if(filhoDireita != -1)
-		novoNodo->alterarFilhoDireita(importarArvore(nodos, numNodos, filhoDireita));
+		novoNodo->alterarFilhoDireita(importarArvore(nodos, filhoDireita));
 
 	delete dados;
 	return novoNodo;

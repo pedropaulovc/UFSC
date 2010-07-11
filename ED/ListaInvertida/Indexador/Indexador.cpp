@@ -1,9 +1,16 @@
-/*
- * Indexador.cpp
- *
- *  Created on: Jun 26, 2010
- *      Author: pedropaulo
- */
+/**
+ TÍTULO:        Implementação buscador textual usando listas invertidas
+ ALUNOS:        Pedro Paulo Vezzá Campos - 09132033 e Felipe dos Santos Silveira - 09132014
+ MATÉRIA:       INE5408
+ PRAZO:         12 de julho de 2010
+
+ PROPÓSITO:
+ Este programa é uma implementação do enunciado do projeto de implementação II, um buscador textual
+ utilizando arquivos invertidos.
+
+ SOBRE ESSE ARQUIVO:
+ Implementação dos métodos descritos em Indexador.h referentes a um Indexador Genérico.
+*/
 
 #include <string>
 #include <sstream>
@@ -15,6 +22,18 @@
 
 using namespace std;
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	ler o arquivo de dados fornecido, parseá-lo e gerar um array de portarias para uso posterior.
+
+PARÂMETROS:
+	caminho do arquivo a ser lido e ponteiro para campo onde será escrito o tamanho do array gerado
+
+VALOR DE RETORNO:
+	array contendo as portarias geradas.
+
+*/
 Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) {
 	string linha;
 	Portaria **portarias;
@@ -42,6 +61,20 @@ Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) 
 	return NULL;
 }
 
+
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	ler uma string formatada contendo diversos campos divididos por um delimitador e dividí-la,
+	gerando uma lista contendo os campos divididos.
+
+PARÂMETROS:
+	a string a ser lida
+
+VALOR DE RETORNO:
+	lista contendo os campos lidos da string
+
+*/
 ListaEncadeada<string>* Indexador::tokenizar(string linha) {
 	ListaEncadeada<string> *dados = new ListaEncadeada<string> ();
 
