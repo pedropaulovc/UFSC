@@ -9,17 +9,18 @@
 #define PORTARIASERIALIZADA_H_
 
 #include <string>
-#include "Portaria.h"
 using namespace std;
 
-class PortariaSerializada : public Portaria {
+class PortariaSerializada {
 private:
+	string nome;
+	int posicaoArquivo;
 	int filhoEsquerda;
 	int filhoDireita;
 	int altura;
 
 public:
-	PortariaSerializada(const Portaria* portaria);
+	PortariaSerializada(string nome, int posicaoArquivo);
 	virtual ~PortariaSerializada();
 
 	void definirFilhoEsquerda(int filhoEsquerda);
@@ -29,6 +30,8 @@ public:
 	int obterFilhoEsquerda();
 	int obterFilhoDireita();
 	int obterAltura();
+	string obterNome();
+	int obterPosicaoArquivo();
 };
 
 #endif /* PORTARIASERIALIZADA_H_ */

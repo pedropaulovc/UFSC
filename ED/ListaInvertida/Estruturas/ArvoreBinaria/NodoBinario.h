@@ -9,10 +9,7 @@
 #define NODOBINARIO_H_
 
 #include <cstdlib>
-//TODO: Eliminar dependência de EDs do C++
-#include <list>
-#include <stack>
-#include <iostream>
+#include "../ListaEncadeada/ListaEncadeada.h"
 
 using namespace std;
 
@@ -24,8 +21,8 @@ private:
 	T* info;
 
 public:
-	NodoBinario(T* info, NodoBinario<T>* filhoEsquerda,
-			NodoBinario<T>* filhoDireita);
+	NodoBinario(T* info, NodoBinario<T>* filhoEsquerda = NULL,
+			NodoBinario<T>* filhoDireita = NULL);
 	virtual ~NodoBinario();
 
 	void alterarFilhoEsquerda(NodoBinario<T>* filho);
@@ -36,18 +33,14 @@ public:
 	NodoBinario<T>* obterFilhoDireita();
 	T* obterInfo();
 
-	void percorrePreOrdemRecursivo(std::list<T*>* lista);
-	void percorreEmOrdemRecursivo(std::list<T*>* lista);
-	void percorrePosOrdemRecursivo(std::list<T*>* lista);
-
-	std::list<T*>* percorrePreOrdemIterativo();
-	std::list<T*>* percorreEmOrdemIterativo();
-	std::list<T*>* percorrePosOrdemIterativo();
+	ListaEncadeada<T>* percorrePreOrdemRecursivo(ListaEncadeada<T>* lista = NULL);
+	ListaEncadeada<T>* percorreEmOrdemRecursivo(ListaEncadeada<T>* lista = NULL);
+	ListaEncadeada<T>* percorrePosOrdemRecursivo(ListaEncadeada<T>* lista = NULL);
 };
 
 template<class T>
-NodoBinario<T>::NodoBinario(T* info = NULL, NodoBinario<T>* filhoEsquerda = NULL,
-		NodoBinario<T>* filhoDireita = NULL) {
+NodoBinario<T>::NodoBinario(T* info, NodoBinario<T>* filhoEsquerda,
+		NodoBinario<T>* filhoDireita) {
 	this->info = info;
 	this->filhoEsquerda = filhoEsquerda;
 	this->filhoDireita = filhoDireita;
@@ -88,86 +81,40 @@ T* NodoBinario<T>::obterInfo() {
 }
 
 template<class T>
-void NodoBinario<T>::percorrePreOrdemRecursivo(std::list<T*>* lista = NULL) {
+ListaEncadeada<T>* NodoBinario<T>::percorrePreOrdemRecursivo(ListaEncadeada<T>* lista) {
 	if (lista == NULL)
-		lista = new list<T*> ();
+		lista = new ListaEncadeada<T> ();
 
-	lista->push_back(this->info);
+	lista->adicionarNoFim(this->info);
 	if (filhoEsquerda != NULL)
 		filhoEsquerda->percorrePreOrdemRecursivo(lista);
 	if (filhoDireita != NULL)
 		filhoDireita->percorrePreOrdemRecursivo(lista);
+	return lista;
 }
 
 template<class T>
-void NodoBinario<T>::percorreEmOrdemRecursivo(std::list<T*>* lista = NULL) {
+ListaEncadeada<T>* NodoBinario<T>::percorreEmOrdemRecursivo(ListaEncadeada<T>* lista) {
 	if (lista == NULL)
-		lista = new list<T*> ();
+		lista = new ListaEncadeada<T> ();
 
 	if (filhoEsquerda != NULL)
 		filhoEsquerda->percorreEmOrdemRecursivo(lista);
-	lista->push_back(this->info);
+	lista->adicionarNoFim(this->info);
 	if (filhoDireita != NULL)
 		filhoDireita->percorreEmOrdemRecursivo(lista);
+	return lista;
 }
 
 template<class T>
-void NodoBinario<T>::percorrePosOrdemRecursivo(std::list<T*>* lista = NULL) {
+ListaEncadeada<T>* NodoBinario<T>::percorrePosOrdemRecursivo(ListaEncadeada<T>* lista) {
 	if (lista == NULL)
-		lista = new list<T*> ();
+		lista = new ListaEncadeada<T> ();
 
 	if (filhoEsquerda != NULL)
 		filhoEsquerda->percorrePosOrdemRecursivo(lista);
 	if (filhoDireita != NULL)
 		filhoDireita->percorrePosOrdemRecursivo(lista);
-	lista->push_back(this->info);
+	lista->adicionarNoFim(this->info);
 }
-
-template<class T>
-std::list<T*>* NodoBinario<T>::percorreEmOrdemIterativo() {
-	std::stack<NodoBinario<T>*>* pilha = new stack<NodoBinario<T>*> ();
-	std::list<T*>* lista = new list<T*> ();
-
-	NodoBinario<T>* nodoAtual = this;
-
-	do {
-		while (nodoAtual != NULL) {
-			pilha->push(nodoAtual);
-			nodoAtual = nodoAtual->obterFilhoEsquerda();
-		}
-
-		if (pilha->empty())
-			return lista;
-
-		nodoAtual = pilha->top();
-		pilha->pop();
-		lista->push_back(nodoAtual->obterInfo());
-		nodoAtual = nodoAtual->obterFilhoDireita();
-	} while (true);
-}
-
-template<class T>
-std::list<T*>* NodoBinario<T>::percorrePreOrdemIterativo() {
-	std::stack<NodoBinario<T>*>* pilha = new stack<NodoBinario<T>*> ();
-	std::list<T*>* lista = new list<T*> ();
-
-	NodoBinario<T>* nodoAtual = this;
-
-	do {
-		while (nodoAtual != NULL) {
-			lista->push_back(nodoAtual->obterInfo());
-			pilha->push(nodoAtual);
-			nodoAtual = nodoAtual->obterFilhoEsquerda();
-		}
-
-		if (pilha->empty())
-			return lista;
-
-		nodoAtual = pilha->top();
-		pilha->pop();
-
-		nodoAtual = nodoAtual->obterFilhoDireita();
-	} while (true);
-}
-
 #endif /* NODOBINARIO_H_ */

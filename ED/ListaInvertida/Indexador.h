@@ -21,14 +21,17 @@ private:
 	static const char delimitador = '|';
 	static int serializarArvore(NodoAVL<Portaria> *arvore,
 			PortariaSerializada **lista, int* posicaoVaga);
-	static Portaria* gerarPortaria(string linha, int posicaoArquivoDados);
+	static NodoBinario<PortariaSerializada>* importarArvore(string *nodos,
+			int numNodos, int nodoAtual = 0);
+	static ListaEncadeada<string>* tokenizar(string linha);
 
 public:
 	Indexador();
 	virtual ~Indexador();
 
 	static Portaria** importarArquivoDados(string caminho, int *tamanhoArquivo);
-	static NodoBinario<Portaria> importarChavesPrimarias(string caminho);
+	static NodoBinario<PortariaSerializada>* importarChavesPrimarias(
+			string caminho);
 	static void exportarChavesPrimarias(string caminho, Portaria **portarias,
 			int numPortarias);
 	static void exportarChavesSecundarias(string pasta, string *palavrasChave,

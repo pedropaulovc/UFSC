@@ -9,16 +9,12 @@
 #include <sstream>
 #include <fstream>
 #include <cstdlib>
-#include <algorithm>
-#include <iterator>
-#include <iostream>
 
 #include "Indexador.h"
 #include "Portaria.h"
 #include "PortariaSerializada.h"
 #include "Estruturas/ArvoreAVL/arvore_avl.h"
 #include "Estruturas/ArvoreAVL/arvore_avl.h"
-
 
 using namespace std;
 
@@ -29,8 +25,9 @@ Indexador::~Indexador() {
 }
 
 Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) {
-	string chave, texto, linha;
+	string linha;
 	Portaria **portarias;
+	ListaEncadeada<string> *dados;
 
 	ifstream myfile(caminho.c_str());
 
@@ -41,7 +38,10 @@ Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) 
 
 		for (int i = 0; i < *tamanhoArquivo; i++) {
 			getline(myfile, linha);
-			portarias[i] = gerarPortaria(linha, i);
+			dados = tokenizar(linha);
+			portarias[i] = new Portaria(*(dados->obterDoInicio()),
+					*(dados->obterDaPosicao(2)), i);
+			delete dados;
 		}
 
 		myfile.close();
@@ -51,21 +51,19 @@ Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) 
 	return NULL;
 }
 
-Portaria* Indexador::gerarPortaria(string linha, int posicaoArquivoDados){
-	string *dados = new string[2];
+ListaEncadeada<string>* Indexador::tokenizar(string linha) {
+	ListaEncadeada<string> *dados = new ListaEncadeada<string> ();
 
-	int i = 0;
 	string::size_type inicio = linha.find_first_not_of(delimitador, 0);
 	string::size_type fim = linha.find_first_of(delimitador, inicio);
 
 	while (fim != string::npos || inicio != string::npos) {
-		dados[i] = linha.substr(inicio, fim - inicio);
+		dados->adicionarNoFim(new string(linha.substr(inicio, fim - inicio)));
 		inicio = linha.find_first_not_of(delimitador, fim);
 		fim = linha.find_first_of(delimitador, inicio);
-		i++;
 	}
 
-	return new Portaria(dados[0], dados[1], posicaoArquivoDados);
+	return dados;
 }
 
 void Indexador::exportarChavesPrimarias(string caminho, Portaria **portarias,
@@ -86,6 +84,8 @@ void Indexador::exportarChavesPrimarias(string caminho, Portaria **portarias,
 	if (arquivo.fail())
 		return;
 
+	arquivo << numPortarias << endl;
+
 	for (int i = 0; i < numPortarias; i++) {
 		PortariaSerializada *atual = serializadas[i];
 		arquivo << atual->obterNome() << delimitador
@@ -95,32 +95,73 @@ void Indexador::exportarChavesPrimarias(string caminho, Portaria **portarias,
 				<< atual->obterAltura() << endl;
 	}
 	arquivo.close();
-
 }
 
 int Indexador::serializarArvore(NodoAVL<Portaria> *arvore,
 		PortariaSerializada **lista, int *posicaoVaga) {
 	if (lista == NULL)
 		return 0;
-	PortariaSerializada* portaria = new PortariaSerializada(
-			arvore->retornaInfo());
-	portaria->definirAltura(arvore->retornaAltura());
+	const Portaria* portaria = arvore->retornaInfo();
+	PortariaSerializada* serializada = new PortariaSerializada(
+			portaria->obterNome(), portaria->obterPosicaoArquivo());
+	serializada->definirAltura(arvore->retornaAltura());
 
-	lista[*posicaoVaga] = portaria;
+	lista[*posicaoVaga] = serializada;
 	int posicaoInserido = *posicaoVaga;
 
 	if (arvore->retornaEsquerda() != NULL) {
 		(*posicaoVaga)++;
-		portaria->definirFilhoEsquerda(serializarArvore(
+		serializada->definirFilhoEsquerda(serializarArvore(
 				arvore->retornaEsquerda(), lista, posicaoVaga));
 	}
 	if (arvore->retornaDireita() != NULL) {
 		(*posicaoVaga)++;
-		portaria->definirFilhoDireita(serializarArvore(
+		serializada->definirFilhoDireita(serializarArvore(
 				arvore->retornaDireita(), lista, posicaoVaga));
 	}
 
 	return posicaoInserido;
+}
+
+NodoBinario<PortariaSerializada>* Indexador::importarChavesPrimarias(
+		string caminhoArquivoChaves) {
+	ifstream arquivo(caminhoArquivoChaves.c_str());
+	string linha;
+
+	if (arquivo.fail())
+		return NULL;
+
+	getline(arquivo, linha);
+	int tamanhoArquivo = atoi(linha.c_str());
+	string *nodosSerializados = new string[tamanhoArquivo];
+
+	for (int i = 0; i < tamanhoArquivo; i++)
+		getline(arquivo, nodosSerializados[i]);
+
+	return importarArvore(nodosSerializados, tamanhoArquivo);
+}
+
+NodoBinario<PortariaSerializada>* Indexador::importarArvore(string *nodos,
+		int numNodos, int nodoAtual) {
+	string nodo = nodos[nodoAtual];
+	ListaEncadeada<string> *dados = tokenizar(nodo);
+
+	string chave = *dados->obterDoInicio();
+	int posicaoArquivo = atoi(dados->obterDaPosicao(2)->c_str());
+	PortariaSerializada *novaPortaria = new PortariaSerializada(chave,
+			posicaoArquivo);
+	NodoBinario<PortariaSerializada> *novoNodo = new NodoBinario<
+			PortariaSerializada> (novaPortaria);
+
+	int filhoEsquerda = atoi(dados->obterDaPosicao(3)->c_str());
+	int filhoDireita = atoi(dados->obterDaPosicao(4)->c_str());
+	if(filhoEsquerda != -1)
+		novoNodo->alterarFilhoEsquerda(importarArvore(nodos, numNodos, filhoEsquerda));
+	if(filhoDireita != -1)
+		novoNodo->alterarFilhoDireita(importarArvore(nodos, numNodos, filhoDireita));
+
+	delete dados;
+	return novoNodo;
 }
 
 void Indexador::exportarChavesSecundarias(string pasta, string *palavrasChave,
