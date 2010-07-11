@@ -85,13 +85,13 @@ ListaEncadeada<Portaria>* IndexadorChaveSecundaria::importar(string pasta,
 	Portaria* portariaAtual;
 	int numeroChaves;
 
-	ifstream myfile((pasta + palavraChave + extensao).c_str());
+	ifstream arquivoListaInvertida((pasta + palavraChave + extensao).c_str());
 
-	if (myfile.is_open()) {
-		getline(myfile, linha);
+	if (arquivoListaInvertida.is_open()) {
+		getline(arquivoListaInvertida, linha);
 		numeroChaves = atoi(linha.c_str());
 
-		getline(myfile, linha);
+		getline(arquivoListaInvertida, linha);
 		dados = tokenizar(linha);
 
 		for(int i = 1; i <= dados->obterTamanho(); i++){
@@ -100,7 +100,7 @@ ListaEncadeada<Portaria>* IndexadorChaveSecundaria::importar(string pasta,
 			portarias->adicionarNoFim(portariaAtual);
 		}
 
-		myfile.close();
+		arquivoListaInvertida.close();
 		delete dados;
 
 		return portarias;

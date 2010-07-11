@@ -38,22 +38,22 @@ Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) 
 	Portaria **portarias;
 	ListaEncadeada<string> *dados;
 
-	ifstream myfile(caminho.c_str());
+	ifstream arquivoDados(caminho.c_str());
 
-	if (myfile.is_open()) {
-		getline(myfile, linha);
+	if (arquivoDados.is_open()) {
+		getline(arquivoDados, linha);
 		*tamanhoArquivo = atoi(linha.c_str());
 		portarias = new Portaria*[*tamanhoArquivo];
 
 		for (int i = 0; i < *tamanhoArquivo; i++) {
-			getline(myfile, linha);
+			getline(arquivoDados, linha);
 			dados = tokenizar(linha);
 			portarias[i] = new Portaria(*(dados->obterDoInicio()),
 					*(dados->obterDaPosicao(2)), i);
 			delete dados;
 		}
 
-		myfile.close();
+		arquivoDados.close();
 		return portarias;
 	}
 	*tamanhoArquivo = 0;
@@ -108,10 +108,10 @@ ListaEncadeada<string>* Indexador::tokenizar(string linha) {
 	Portaria* portaria;
 	int i;
 
-	ifstream myfile(caminho.c_str());
+	ifstream arquivoDados(caminho.c_str());
 
-	if (myfile.is_open()) {
-		getline(myfile, linha);
+	if (arquivoDados.is_open()) {
+		getline(arquivoDados, linha);
 
 		int tamanhoArquivo = atoi(linha.c_str());
 
@@ -120,14 +120,14 @@ ListaEncadeada<string>* Indexador::tokenizar(string linha) {
 		}
 
 		for(i = 0 ; i < numeroEntrada; i++)
-			getline(myfile, linha);
+			getline(arquivoDados, linha);
 
-		getline(myfile, linha);
+		getline(arquivoDados, linha);
 		dados = tokenizar(linha);
 		portaria = new Portaria(*(dados->obterDoInicio()),
 				*(dados->obterDaPosicao(2)), i);
 		delete dados;
-		myfile.close();
+		arquivoDados.close();
 		return portaria;
 	}
 
