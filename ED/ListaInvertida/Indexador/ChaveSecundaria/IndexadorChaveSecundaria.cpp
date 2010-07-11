@@ -60,6 +60,21 @@ void IndexadorChaveSecundaria::exportar(string pasta, string *palavrasChave,
 	}
 }
 
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Lê o arquivo referente a sua palavra chave e cria uma
+ lista com as portarias em que a palavra está presente.
+
+ PARÂMETROS:
+ A pasta onde estão os arquivos de índice
+ A palavra chave que será lida
+ O caminho para o arquivo .dat de onde será lida a lista
+
+ VALOR DE RETORNO:
+ Um ponteiro para uma lista de portarias.
+
+ */
 ListaEncadeada<Portaria>* IndexadorChaveSecundaria::importar(string pasta,
 		string palavraChave, string arquivoDados) {
 

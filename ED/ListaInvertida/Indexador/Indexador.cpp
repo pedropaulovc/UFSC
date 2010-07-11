@@ -87,7 +87,21 @@ ListaEncadeada<string>* Indexador::tokenizar(string linha) {
 
 	return dados;
 }
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ obter uma portaria a partir de um número de entrada no arquivo .dat.
+ essencial para não trabalhar com todas as portarias em memória.
 
+ PARÂMETROS:
+ O caminho do arquivo .dat
+ O número da entrada que será lida
+
+ VALOR DE RETORNO:
+ Um ponteiro para uma portaria presente na
+ posição referente a entrada recebida
+
+ */
  Portaria* Indexador::lerEntrada(string caminho, int numeroEntrada) {
 	string linha;
 	ListaEncadeada<string> *dados;

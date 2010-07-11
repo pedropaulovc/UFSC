@@ -422,6 +422,18 @@ int ListaEncadeada<T>::posicao(T* info) {
 	return -1;
 }
 
+/**
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ retorna uma lista composta pelos elementos que estão contidos em ambas a listas.
+
+ PARÂMETROS:
+ a lista usada para comparação
+
+ VALOR DE RETORNO:
+ uma lista composta somente por elementos presentes nas duas listas
+
+ */
 template<class T>
 ListaEncadeada<T>* ListaEncadeada<T>::intersecao(ListaEncadeada<T>* outraLista) {
 	ListaEncadeada<T> *novaLista = new ListaEncadeada<T> ();
