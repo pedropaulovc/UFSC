@@ -15,6 +15,8 @@
 
 #include "IndexadorChaveSecundaria.h"
 #include <fstream>
+#include <iostream>
+#include <sstream>
 
 /**
 ALUNOS: Pedro Paulo e Felipe dos Santos
@@ -33,7 +35,8 @@ VALOR DE RETORNO:
 */
 void IndexadorChaveSecundaria::exportar(string pasta, string *palavrasChave,
 		int numPalavras, Portaria **portarias, int numPortarias) {
-	ofstream arquivo, arquivoIndice;
+	ofstream arquivoSaida, arquivoIndice;
+	stringstream buffer;
 	string palavraAtual;
 
 	arquivoIndice.open((pasta + arquivoIndices).c_str(), ios::trunc | ios::out);
@@ -41,18 +44,22 @@ void IndexadorChaveSecundaria::exportar(string pasta, string *palavrasChave,
 		palavraAtual = palavrasChave[i];
 		arquivoIndice << palavraAtual << delimitador << palavraAtual
 				<< extensao << endl;
-		arquivo.open((pasta + palavraAtual + extensao).c_str(), ios::trunc
+		arquivoSaida.open((pasta + palavraAtual + extensao).c_str(), ios::trunc
 				| ios::out);
 
-		if (arquivo.fail())
-			return;
-
-		for (int i = 0; i < numPortarias; i++) {
-			Portaria *portariaAtual = portarias[i];
-			if (portariaAtual->obterTexto().find(palavraAtual) != string::npos)
-				arquivo << portariaAtual->obterPosicaoArquivo() << delimitador;
+		if (arquivoSaida.fail())
+			cout << "Problema no arquivo de saída" << endl;
+		int qtd = 0;
+		for (int j = 0; j < numPortarias; j++) {
+			Portaria *portariaAtual = portarias[j];
+			if (portariaAtual->obterTexto().find(palavraAtual) != string::npos){
+				buffer << portariaAtual->obterPosicaoArquivo() << delimitador;
+				qtd++;
+			}
 		}
-		arquivo.close();
+		arquivoSaida << qtd << endl << buffer.str();
+		buffer.str("");
+		arquivoSaida.close();
 	}
 	arquivoIndice.close();
 }

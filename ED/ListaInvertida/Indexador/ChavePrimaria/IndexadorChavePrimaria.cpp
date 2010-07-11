@@ -128,7 +128,7 @@ NodoBinario<PortariaSerializada>* IndexadorChavePrimaria::importar(
 	for (int i = 0; i < tamanhoArquivo; i++)
 		getline(arquivo, nodosSerializados[i]);
 
-	return importarArvore(nodosSerializados, tamanhoArquivo);
+	return importarArvore(nodosSerializados);
 }
 
 /**
