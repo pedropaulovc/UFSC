@@ -48,20 +48,21 @@ public:
 	bool contem(T* info);
 	int posicao(T* info);
 
+	ListaEncadeada<T>* intersecao(ListaEncadeada<T>* outraLista);
 };
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	Construtor da lista encadeada.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ Construtor da lista encadeada.
 
-PARÂMETROS:
-	nenhum
+ PARÂMETROS:
+ nenhum
 
-VALOR DE RETORNO:
-	ponteiro para a nova lista
+ VALOR DE RETORNO:
+ ponteiro para a nova lista
 
-*/
+ */
 template<class T>
 ListaEncadeada<T>::ListaEncadeada() {
 	tamanho = 0;
@@ -69,67 +70,67 @@ ListaEncadeada<T>::ListaEncadeada() {
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	destrutor da lista encadeada.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ destrutor da lista encadeada.
 
-PARÂMETROS:
-	nenhum
+ PARÂMETROS:
+ nenhum
 
-VALOR DE RETORNO:
-	nenhum
+ VALOR DE RETORNO:
+ nenhum
 
-*/
+ */
 template<class T>
 ListaEncadeada<T>::~ListaEncadeada() {
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	retorna verdadeiro se a lista está vazia e falso se não.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ retorna verdadeiro se a lista está vazia e falso se não.
 
-PARÂMETROS:
-	nenhum
+ PARÂMETROS:
+ nenhum
 
-VALOR DE RETORNO:
-	valor booleano se a lista está vazia.
+ VALOR DE RETORNO:
+ valor booleano se a lista está vazia.
 
-*/
+ */
 template<class T>
 bool ListaEncadeada<T>::listaVazia() {
 	return tamanho == 0;
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	retorna o tamanho da lista encadeada
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ retorna o tamanho da lista encadeada
 
-PARÂMETROS:
-	nenhum
+ PARÂMETROS:
+ nenhum
 
-VALOR DE RETORNO:
-	o tamanho da lista encadeada.
+ VALOR DE RETORNO:
+ o tamanho da lista encadeada.
 
-*/
+ */
 template<class T>
 int ListaEncadeada<T>::obterTamanho() {
 	return tamanho;
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	adiciona um dado na primeira posição da lista encadeada.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ adiciona um dado na primeira posição da lista encadeada.
 
-PARÂMETROS:
-	o dado a ser armazenado.
+ PARÂMETROS:
+ o dado a ser armazenado.
 
-VALOR DE RETORNO:
-	1 se a operação foi realizada.
+ VALOR DE RETORNO:
+ 1 se a operação foi realizada.
 
-*/
+ */
 template<class T>
 int ListaEncadeada<T>::adicionarNoInicio(T* info) {
 	Elemento<T>* novoElemento = new Elemento<T> (info, primeiro);
@@ -139,17 +140,17 @@ int ListaEncadeada<T>::adicionarNoInicio(T* info) {
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	adiciona um dado em uma posição arbitrária da lista encadeada.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ adiciona um dado em uma posição arbitrária da lista encadeada.
 
-PARÂMETROS:
-	a posição a ser inserida e o dado.
+ PARÂMETROS:
+ a posição a ser inserida e o dado.
 
-VALOR DE RETORNO:
-	1 em caso de sucesso ou -1 em caso de erro.
+ VALOR DE RETORNO:
+ 1 em caso de sucesso ou -1 em caso de erro.
 
-*/
+ */
 template<class T>
 int ListaEncadeada<T>::adicionarNaPosicao(T* info, int posicao) {
 	if (posicao > this->tamanho + 1 || posicao < 1)
@@ -177,34 +178,34 @@ int ListaEncadeada<T>::adicionarNaPosicao(T* info, int posicao) {
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	adiciona um elemento na última posição da lista encadeada.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ adiciona um elemento na última posição da lista encadeada.
 
-PARÂMETROS:
-	o dado a ser armazenado.
+ PARÂMETROS:
+ o dado a ser armazenado.
 
-VALOR DE RETORNO:
-	1 em caso de sucesso ou -1 em caso de erro.
+ VALOR DE RETORNO:
+ 1 em caso de sucesso ou -1 em caso de erro.
 
-*/
+ */
 template<class T>
 int ListaEncadeada<T>::adicionarNoFim(T* info) {
 	return adicionarNaPosicao(info, tamanho + 1);
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	adiciona um elemento segundo a ordem definida pelo tipo de dados que a lista encadeada armazena.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ adiciona um elemento segundo a ordem definida pelo tipo de dados que a lista encadeada armazena.
 
-PARÂMETROS:
-	o dado a ser inserido.
+ PARÂMETROS:
+ o dado a ser inserido.
 
-VALOR DE RETORNO:
-	1 em caso de sucesso
+ VALOR DE RETORNO:
+ 1 em caso de sucesso
 
-*/
+ */
 template<class T>
 int ListaEncadeada<T>::adicionarEmOrdem(T* info) {
 	if (listaVazia())
@@ -227,59 +228,59 @@ int ListaEncadeada<T>::adicionarEmOrdem(T* info) {
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	retorna o primeiro elemento da lista ou NULL caso esteja vazia
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ retorna o primeiro elemento da lista ou NULL caso esteja vazia
 
-PARÂMETROS:
-	nenhum
+ PARÂMETROS:
+ nenhum
 
-VALOR DE RETORNO:
-	o primeiro elemento da lista ou NULL caso esteja vazia
+ VALOR DE RETORNO:
+ o primeiro elemento da lista ou NULL caso esteja vazia
 
-*/
+ */
 template<class T>
 T* ListaEncadeada<T>::obterDoInicio() {
-	if(listaVazia())
+	if (listaVazia())
 		return NULL;
 
 	return primeiro->getInfo();
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	retorna o último elemento da lista ou NULL caso esteja vazia
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ retorna o último elemento da lista ou NULL caso esteja vazia
 
-PARÂMETROS:
-	nenhum
+ PARÂMETROS:
+ nenhum
 
-VALOR DE RETORNO:
-	o último elemento da lista ou NULL caso esteja vazia
+ VALOR DE RETORNO:
+ o último elemento da lista ou NULL caso esteja vazia
 
-*/
+ */
 template<class T>
 T* ListaEncadeada<T>::obterDoFim() {
-	if(listaVazia())
+	if (listaVazia())
 		return NULL;
 
 	return obterDaPosicao(tamanho);
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	retorna um elemento de uma posição arbitrária da lista ou NULL caso a lista não contenha
-	elemento nessa posição.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ retorna um elemento de uma posição arbitrária da lista ou NULL caso a lista não contenha
+ elemento nessa posição.
 
-PARÂMETROS:
-	nenhum
+ PARÂMETROS:
+ nenhum
 
-VALOR DE RETORNO:
-	um elemento de uma posição arbitrária da lista ou NULL caso a lista não contenha
-	elemento nessa posição.
+ VALOR DE RETORNO:
+ um elemento de uma posição arbitrária da lista ou NULL caso a lista não contenha
+ elemento nessa posição.
 
-*/
+ */
 template<class T>
 T* ListaEncadeada<T>::obterDaPosicao(int posicao) {
 	if (posicao > tamanho || posicao < 1)
@@ -289,7 +290,7 @@ T* ListaEncadeada<T>::obterDaPosicao(int posicao) {
 
 	Elemento<T>* atual = primeiro;
 	int posicaoAtual = 1;
-	while(posicaoAtual != posicao){
+	while (posicaoAtual != posicao) {
 		atual = atual->getProximo();
 		posicaoAtual++;
 	}
@@ -298,17 +299,17 @@ T* ListaEncadeada<T>::obterDaPosicao(int posicao) {
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	remove um elemento da primeira posição da lista e o retorna, ou retorna NULL caso a lista esteja vazia.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ remove um elemento da primeira posição da lista e o retorna, ou retorna NULL caso a lista esteja vazia.
 
-PARÂMETROS:
-	nenhum
+ PARÂMETROS:
+ nenhum
 
-VALOR DE RETORNO:
-	o elemento removido ou NULL caso a lista esteja vazia.
+ VALOR DE RETORNO:
+ o elemento removido ou NULL caso a lista esteja vazia.
 
-*/
+ */
 template<class T>
 T* ListaEncadeada<T>::removerDoInicio() {
 	if (listaVazia())
@@ -322,26 +323,26 @@ T* ListaEncadeada<T>::removerDoInicio() {
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	remove um elemento de posição arbitrária da lista e o retorna, ou retorna NULL caso a lista não
-	contenha elemento nessa posição.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ remove um elemento de posição arbitrária da lista e o retorna, ou retorna NULL caso a lista não
+ contenha elemento nessa posição.
 
-PARÂMETROS:
-	nenhum
+ PARÂMETROS:
+ nenhum
 
-VALOR DE RETORNO:
-	o elemento removido ou NULL caso a lista não contenha elemento nessa posição.
+ VALOR DE RETORNO:
+ o elemento removido ou NULL caso a lista não contenha elemento nessa posição.
 
-*/
+ */
 template<class T>
-T* ListaEncadeada<T>::removerDaPosicao(int posicao){
-	if(listaVazia())
+T* ListaEncadeada<T>::removerDaPosicao(int posicao) {
+	if (listaVazia())
 		return NULL;
-	if(posicao > tamanho || posicao < 1)
+	if (posicao > tamanho || posicao < 1)
 		return NULL;
 
-	if(posicao == 1)
+	if (posicao == 1)
 		return removerDoInicio();
 
 	Elemento<T> *penultimoElemento, *ultimoElemento;
@@ -349,7 +350,7 @@ T* ListaEncadeada<T>::removerDaPosicao(int posicao){
 
 	ultimoElemento = primeiro;
 
-	while(posicao != posicaoAtual && ultimoElemento->getProximo() != NULL){
+	while (posicao != posicaoAtual && ultimoElemento->getProximo() != NULL) {
 		penultimoElemento = ultimoElemento;
 		ultimoElemento = ultimoElemento->getProximo();
 		posicaoAtual++;
@@ -361,59 +362,59 @@ T* ListaEncadeada<T>::removerDaPosicao(int posicao){
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	remove um elemento da última posição da lista e o retorna, ou retorna NULL caso a lista esteja vazia.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ remove um elemento da última posição da lista e o retorna, ou retorna NULL caso a lista esteja vazia.
 
-PARÂMETROS:
-	nenhum
+ PARÂMETROS:
+ nenhum
 
-VALOR DE RETORNO:
-	o elemento removido ou NULL caso a lista esteja vazia.
+ VALOR DE RETORNO:
+ o elemento removido ou NULL caso a lista esteja vazia.
 
-*/
+ */
 template<class T>
-T* ListaEncadeada<T>::removerDoFim(){
+T* ListaEncadeada<T>::removerDoFim() {
 	return removerDaPosicao(tamanho);
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	retorna um valor booleano informando se a lista encadeada contém referência para o valor
-	fornecido via parâmetro
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ retorna um valor booleano informando se a lista encadeada contém referência para o valor
+ fornecido via parâmetro
 
-PARÂMETROS:
-	o valor a ser buscado
+ PARÂMETROS:
+ o valor a ser buscado
 
-VALOR DE RETORNO:
-	verdadeiro caso a lista contenha o elemento, falso em caso contrário
+ VALOR DE RETORNO:
+ verdadeiro caso a lista contenha o elemento, falso em caso contrário
 
-*/
+ */
 template<class T>
-bool ListaEncadeada<T>::contem(T* info){
+bool ListaEncadeada<T>::contem(T* info) {
 	return posicao(info) != -1;
 }
 
 /**
-ALUNOS: Pedro Paulo e Felipe dos Santos
-PROPÓSITO:
-	retorna a posição do dado informado via parâmetro na lista encadeada ou -1 caso o
-	elemento não esteja presente.
+ ALUNOS: Pedro Paulo e Felipe dos Santos
+ PROPÓSITO:
+ retorna a posição do dado informado via parâmetro na lista encadeada ou -1 caso o
+ elemento não esteja presente.
 
-PARÂMETROS:
-	o valor a ter sua posição buscada
+ PARÂMETROS:
+ o valor a ter sua posição buscada
 
-VALOR DE RETORNO:
-	a posição do dado ou -1 caso ele não pertença à lista.
+ VALOR DE RETORNO:
+ a posição do dado ou -1 caso ele não pertença à lista.
 
-*/
+ */
 template<class T>
-int ListaEncadeada<T>::posicao(T* info){
+int ListaEncadeada<T>::posicao(T* info) {
 	Elemento<T>* elemento = primeiro;
 
-	for(int i = 1; i <= tamanho; i++){
-		if(*elemento->getInfo() == *info)
+	for (int i = 1; i <= tamanho; i++) {
+		if (*elemento->getInfo() == *info)
 			return i;
 		elemento = elemento->getProximo();
 	}
@@ -421,5 +422,18 @@ int ListaEncadeada<T>::posicao(T* info){
 	return -1;
 }
 
+template<class T>
+ListaEncadeada<T>* ListaEncadeada<T>::intersecao(ListaEncadeada<T>* outraLista) {
+	ListaEncadeada<string> *novaLista = new ListaEncadeada<string> ();
+	T* elementoAtual;
+
+	for(int i = 1; i <= this->tamanho; i++){
+		elementoAtual = obterDaPosicao(i);
+		if(outraLista->contem(elementoAtual))
+			novaLista->adicionarNoInicio(elementoAtual);
+	}
+
+	return novaLista;
+}
 
 #endif /* LISTAENCADEADA_H_ */

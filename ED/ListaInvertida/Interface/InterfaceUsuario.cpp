@@ -35,7 +35,7 @@ void InterfaceUsuario::gerarIndices() {
 	do {
 		cout << endl << "Deseja usar os arquivos de índice prontos? (S ou N)" << endl;
 		cin >> opcao;
-	} while (opcao != 'S' || opcao != 'N' || opcao != 's' || opcao != 'n');
+	} while (opcao != 'S' && opcao != 'N' && opcao != 's' && opcao != 'n');
 
 	cout << "Importando arquivo de dados" << endl;
 	Portaria **portarias = Indexador::importarArquivoDados(
