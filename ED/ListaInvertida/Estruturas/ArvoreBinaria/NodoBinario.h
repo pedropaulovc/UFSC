@@ -33,6 +33,8 @@ public:
 	NodoBinario<T>* obterFilhoDireita();
 	T* obterInfo();
 
+	T* buscar(T* outro);
+
 	ListaEncadeada<T>* percorrePreOrdemRecursivo(ListaEncadeada<T>* lista = NULL);
 	ListaEncadeada<T>* percorreEmOrdemRecursivo(ListaEncadeada<T>* lista = NULL);
 	ListaEncadeada<T>* percorrePosOrdemRecursivo(ListaEncadeada<T>* lista = NULL);
@@ -78,6 +80,22 @@ NodoBinario<T>* NodoBinario<T>::obterFilhoDireita() {
 template<class T>
 T* NodoBinario<T>::obterInfo() {
 	return this->info;
+}
+
+template<class T>
+T* NodoBinario<T>::buscar(T* outro){
+	NodoBinario<T>* atual = this;
+
+	while(atual != NULL){
+		T infoAtual = *atual->obterInfo();
+		if(infoAtual == *outro)
+			return &infoAtual;
+		if(*outro > infoAtual)
+			atual = atual->obterFilhoDireita();
+		if(*outro < infoAtual)
+			atual = atual->obterFilhoEsquerda();
+	}
+	return NULL;
 }
 
 template<class T>

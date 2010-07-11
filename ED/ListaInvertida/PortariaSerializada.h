@@ -20,7 +20,7 @@ private:
 	int altura;
 
 public:
-	PortariaSerializada(string nome, int posicaoArquivo);
+	PortariaSerializada(string nome, int posicaoArquivo = -1);
 	virtual ~PortariaSerializada();
 
 	void definirFilhoEsquerda(int filhoEsquerda);
@@ -32,6 +32,12 @@ public:
 	int obterAltura();
 	string obterNome();
 	int obterPosicaoArquivo();
+
+	bool operator>(PortariaSerializada& outro) const;
+	bool operator<=(PortariaSerializada& outro) const;
+	bool operator<(PortariaSerializada& outro) const;
+	bool operator!=(PortariaSerializada& outro) const;
+	bool operator==(PortariaSerializada& outro) const;
 };
 
 #endif /* PORTARIASERIALIZADA_H_ */

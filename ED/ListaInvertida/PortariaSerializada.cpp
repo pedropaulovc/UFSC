@@ -48,3 +48,23 @@ string PortariaSerializada::obterNome() {
 int PortariaSerializada::obterPosicaoArquivo() {
 	return posicaoArquivo;
 }
+
+bool PortariaSerializada::operator>(PortariaSerializada& outro) const {
+	return (nome.compare(outro.nome) > 0);
+}
+
+bool PortariaSerializada::operator<=(PortariaSerializada& outro) const {
+	return (nome.compare(outro.nome) <= 0);
+}
+
+bool PortariaSerializada::operator<(PortariaSerializada& outro) const {
+	return (nome.compare(outro.nome) < 0);
+}
+
+bool PortariaSerializada::operator!=(PortariaSerializada& outro) const {
+	return (nome.compare(outro.nome) != 0);
+}
+
+bool PortariaSerializada::operator==(PortariaSerializada& outro) const {
+	return (nome.compare(outro.nome) == 0);
+}
