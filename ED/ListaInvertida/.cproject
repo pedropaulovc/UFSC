@@ -19,7 +19,12 @@
 <folderInfo id="cdt.managedbuild.config.gnu.exe.debug.463478387." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.exe.debug.861518661" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.debug">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.exe.debug.809131898" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.debug"/>
-<builder buildPath="${workspace_loc:/ListaInvertida/Debug}" id="cdt.managedbuild.target.gnu.builder.exe.debug.944512198" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.debug"/>
+<builder buildPath="${workspace_loc:/ListaInvertida/Debug}" id="cdt.managedbuild.target.gnu.builder.exe.debug.944512198" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.debug">
+<outputEntries>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Debug"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Release"/>
+</outputEntries>
+</builder>
 <tool id="cdt.managedbuild.tool.gnu.archiver.base.704003024" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2083830365" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug">
 <option id="gnu.cpp.compiler.exe.debug.option.optimization.level.1231360269" name="Optimization Level" superClass="gnu.cpp.compiler.exe.debug.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
@@ -44,11 +49,13 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="ListaEncadeada|Estruturas" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ListaEncadeada"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreAVL"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreBinaria"/>
-<entry excluding="ArvoreBinaria|ArvoreAVL|ListaEncadeada" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreAVL"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="ChavePrimaria"/>
+<entry excluding="Ipsum|Portaria|ArvoreAVL|Lorem|ArquivoDados|Estruturas|ArvoreBinaria|ListaEncadeada|ChavePrimaria|Indexador|Estruturas2|ChaveSecundaria" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ListaEncadeada"/>
+<entry excluding="ArvoreBinaria|ListaEncadeada|ArvoreAVL" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas"/>
 </sourceEntries>
 </configuration>
 </storageModule>
@@ -512,11 +519,16 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="ListaEncadeada|Estruturas" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreAVL"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Portarias"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador/ChaveSecundaria"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreBinaria"/>
-<entry excluding="ArvoreBinaria|ArvoreAVL|ListaEncadeada" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ListaEncadeada"/>
+<entry excluding="ArquivoDados|ChaveSecundaria|ChavePrimaria" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador"/>
+<entry excluding="ArvoreBinaria|ArvoreAVL|ListaEncadeada" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador/ArquivoDados"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Estruturas/ArvoreAVL"/>
+<entry excluding="Ipsum|Lorem|ArvoreBinaria|ArquivoDados|ArvoreAVL|Estruturas2|Indexador|ChaveSecundaria|ChavePrimaria|Portarias|Portaria|ListaEncadeada|Estruturas" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Indexador/ChavePrimaria"/>
 </sourceEntries>
 </configuration>
 </storageModule>

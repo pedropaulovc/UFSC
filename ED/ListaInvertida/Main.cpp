@@ -5,9 +5,11 @@
  *      Author: pedropaulo
  */
 #include <iostream>
-#include "Indexador.h"
-#include "Portaria.h"
-#include "PortariaSerializada.h"
+#include "Indexador/Indexador.h"
+#include "Indexador/ChavePrimaria/IndexadorChavePrimaria.h"
+#include "Indexador/ChaveSecundaria/IndexadorChaveSecundaria.h"
+#include "Portarias/Portaria.h"
+#include "Portarias/PortariaSerializada.h"
 #include "Estruturas/ArvoreBinaria/NodoBinario.h"
 
 using namespace std;
@@ -23,13 +25,13 @@ int main(int argc, char **argv) {
 			"FILOSOFIA", "HUMANAS", "CIENCIAS", "COMPUTACAO", "SANITARIA",
 			"MATERIAIS", "ENGENHARIA", "INGLES", "ALEMAO", "ITALIANO",
 			"DIREITO" };
-	Indexador::exportarChavesSecundarias("./Indices/", palavrasChave, 20,
+	IndexadorChaveSecundaria::exportar("./Indices/", palavrasChave, 20,
 			portarias, tamanhoArquivo);
 
-	Indexador::exportarChavesPrimarias("./Indices/portarias.ndx", portarias, tamanhoArquivo);
+	IndexadorChavePrimaria::exportar("./Indices/portarias.ndx", portarias, tamanhoArquivo);
 
 	PortariaSerializada *aBuscar = new PortariaSerializada("281_GR_2006");
-	NodoBinario<PortariaSerializada> *arvore = Indexador::importarChavesPrimarias("./Indices/portarias.ndx");
+	NodoBinario<PortariaSerializada> *arvore = IndexadorChavePrimaria::importar("./Indices/portarias.ndx");
 	cout << arvore->buscar(aBuscar)->obterPosicaoArquivo();
 }
 

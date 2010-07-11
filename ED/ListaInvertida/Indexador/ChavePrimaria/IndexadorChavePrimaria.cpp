@@ -1,72 +1,14 @@
 /*
- * Indexador.cpp
+ * IndexadorChavePrimaria.cpp
  *
- *  Created on: Jun 26, 2010
+ *  Created on: Jul 11, 2010
  *      Author: pedropaulo
  */
 
-#include <string>
-#include <sstream>
+#include "IndexadorChavePrimaria.h"
 #include <fstream>
-#include <cstdlib>
 
-#include "Indexador.h"
-#include "Portaria.h"
-#include "PortariaSerializada.h"
-#include "Estruturas/ArvoreAVL/arvore_avl.h"
-#include "Estruturas/ArvoreAVL/arvore_avl.h"
-
-using namespace std;
-
-Indexador::Indexador() {
-}
-
-Indexador::~Indexador() {
-}
-
-Portaria** Indexador::importarArquivoDados(string caminho, int *tamanhoArquivo) {
-	string linha;
-	Portaria **portarias;
-	ListaEncadeada<string> *dados;
-
-	ifstream myfile(caminho.c_str());
-
-	if (myfile.is_open()) {
-		getline(myfile, linha);
-		*tamanhoArquivo = atoi(linha.c_str());
-		portarias = new Portaria*[*tamanhoArquivo];
-
-		for (int i = 0; i < *tamanhoArquivo; i++) {
-			getline(myfile, linha);
-			dados = tokenizar(linha);
-			portarias[i] = new Portaria(*(dados->obterDoInicio()),
-					*(dados->obterDaPosicao(2)), i);
-			delete dados;
-		}
-
-		myfile.close();
-		return portarias;
-	}
-	*tamanhoArquivo = 0;
-	return NULL;
-}
-
-ListaEncadeada<string>* Indexador::tokenizar(string linha) {
-	ListaEncadeada<string> *dados = new ListaEncadeada<string> ();
-
-	string::size_type inicio = linha.find_first_not_of(delimitador, 0);
-	string::size_type fim = linha.find_first_of(delimitador, inicio);
-
-	while (fim != string::npos || inicio != string::npos) {
-		dados->adicionarNoFim(new string(linha.substr(inicio, fim - inicio)));
-		inicio = linha.find_first_not_of(delimitador, fim);
-		fim = linha.find_first_of(delimitador, inicio);
-	}
-
-	return dados;
-}
-
-void Indexador::exportarChavesPrimarias(string caminho, Portaria **portarias,
+void IndexadorChavePrimaria::exportar(string caminho, Portaria **portarias,
 		int numPortarias) {
 	NodoAVL<Portaria> *arvore = new NodoAVL<Portaria> ();
 
@@ -97,7 +39,7 @@ void Indexador::exportarChavesPrimarias(string caminho, Portaria **portarias,
 	arquivo.close();
 }
 
-int Indexador::serializarArvore(NodoAVL<Portaria> *arvore,
+int IndexadorChavePrimaria::serializarArvore(NodoAVL<Portaria> *arvore,
 		PortariaSerializada **lista, int *posicaoVaga) {
 	if (lista == NULL)
 		return 0;
@@ -123,7 +65,7 @@ int Indexador::serializarArvore(NodoAVL<Portaria> *arvore,
 	return posicaoInserido;
 }
 
-NodoBinario<PortariaSerializada>* Indexador::importarChavesPrimarias(
+NodoBinario<PortariaSerializada>* IndexadorChavePrimaria::importar(
 		string caminhoArquivoChaves) {
 	ifstream arquivo(caminhoArquivoChaves.c_str());
 	string linha;
@@ -141,7 +83,7 @@ NodoBinario<PortariaSerializada>* Indexador::importarChavesPrimarias(
 	return importarArvore(nodosSerializados, tamanhoArquivo);
 }
 
-NodoBinario<PortariaSerializada>* Indexador::importarArvore(string *nodos,
+NodoBinario<PortariaSerializada>* IndexadorChavePrimaria::importarArvore(string *nodos,
 		int numNodos, int nodoAtual) {
 	string nodo = nodos[nodoAtual];
 	ListaEncadeada<string> *dados = tokenizar(nodo);
@@ -162,30 +104,4 @@ NodoBinario<PortariaSerializada>* Indexador::importarArvore(string *nodos,
 
 	delete dados;
 	return novoNodo;
-}
-
-void Indexador::exportarChavesSecundarias(string pasta, string *palavrasChave,
-		int numPalavras, Portaria **portarias, int numPortarias) {
-	ofstream arquivo, arquivoIndice;
-	string palavraAtual;
-
-	arquivoIndice.open((pasta + arquivoIndices).c_str(), ios::trunc | ios::out);
-	for (int i = 0; i < numPalavras; i++) {
-		palavraAtual = palavrasChave[i];
-		arquivoIndice << palavraAtual << delimitador << palavraAtual
-				<< extensao << endl;
-		arquivo.open((pasta + palavraAtual + extensao).c_str(), ios::trunc
-				| ios::out);
-
-		if (arquivo.fail())
-			return;
-
-		for (int i = 0; i < numPortarias; i++) {
-			Portaria *portariaAtual = portarias[i];
-			if (portariaAtual->obterTexto().find(palavraAtual) != string::npos)
-				arquivo << portariaAtual->obterPosicaoArquivo() << delimitador;
-		}
-		arquivo.close();
-	}
-	arquivoIndice.close();
 }
