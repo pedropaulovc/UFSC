@@ -14,6 +14,18 @@
 #include "../Indexador/ChaveSecundaria/IndexadorChaveSecundaria.h"
 #include "../Portarias/Portaria.h"
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Constrói uma interface para interagir com o usuário
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 InterfaceUsuario::InterfaceUsuario() {
 	caminhoDados = "./Indices/portarias.dat";
 	caminhoChavesPrimarias = "./Indices/portarias.ndx";
@@ -23,6 +35,18 @@ InterfaceUsuario::InterfaceUsuario() {
 InterfaceUsuario::~InterfaceUsuario() {
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	loop principal da interface.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void InterfaceUsuario::iniciar() {
 	int opcao;
 
@@ -40,6 +64,18 @@ void InterfaceUsuario::iniciar() {
 	} while (opcao != 0);
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Interface para fazer pesquisas por chaves primárias.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void InterfaceUsuario::buscarChavePrimaria() {
 	string portaria;
 	PortariaSerial *resultado;
@@ -56,6 +92,19 @@ void InterfaceUsuario::buscarChavePrimaria() {
 				resultado->obterPosicaoArquivo())->obterTexto();
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Interface para fazer pesquisas por chaves
+	secundárias. Incluindo buscas conjuntivas.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void InterfaceUsuario::buscarChaveSecundaria() {
 	char opcao;
 	string termo1, termo2;
@@ -88,6 +137,19 @@ void InterfaceUsuario::buscarChaveSecundaria() {
 	}
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	Interface para obter uma lista invertida específica.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	Um ponteiro para a lista de portarias referentes
+	a palavra chave informada.
+
+*/
 ListaEncadeada<Portaria>* InterfaceUsuario::obterBuscaSecundaria() {
 	ListaEncadeada<Portaria> *lista;
 	string termo;
@@ -104,6 +166,19 @@ ListaEncadeada<Portaria>* InterfaceUsuario::obterBuscaSecundaria() {
 	return lista;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	gera os arquivos de índice ou carrega os já prontos,
+	dependendo da escolha do usuário.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void InterfaceUsuario::gerarIndices() {
 	char opcao;
 	string caminho;
@@ -136,12 +211,36 @@ void InterfaceUsuario::gerarIndices() {
 	arvore = IndexadorChavePrimaria::importar(caminhoChavesPrimarias);
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	mostra o menu de pesquisas.
+
+PARÂMETROS:
+	nenhum
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void InterfaceUsuario::exibeMenu() {
 	cout << "Escola a opção desejada: " << endl << "0 - Sair" << endl
 			<< "1 - Buscar por chave primária " << endl
 			<< "2 - Buscar por chave secundária" << endl;
 }
 
+/**
+ALUNOS: Pedro Paulo e Felipe dos Santos
+PROPÓSITO:
+	mostra o menu inicial.
+
+PARÂMETROS:
+	o caminho do arquivo de chaves primárias, o array de portarias e seu tamanho.
+
+VALOR DE RETORNO:
+	nenhum
+
+*/
 void InterfaceUsuario::exibeIntroducao() {
 	cout
 			<< "PROJETO DE IMPLEMENTAÇÃO 2 - BUSCADOR TEXTUAL USANDO LISTAS INVERTIDAS\n"
