@@ -28,7 +28,6 @@ private:
 	string caminhoChavesPrimarias;
 	string pastaChavesSecundarias;
 
-	Portaria **portarias;
 	NodoBinario<PortariaSerial> *arvore;
 	int numPortarias;
 
