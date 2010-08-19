@@ -8,10 +8,12 @@
 #ifndef ARGUMENTOS_H_
 #define ARGUMENTOS_H_
 
+int verbose = 0;
+
 void exibirAjuda();
-void exibirVariaveis(char **envp);
+void exibirVariaveisAmbiente(char **envp);
 void exibirArgumentos(int argc, char **argv);
-void exibirVariavel(char *var);
+void exibirVariavelAmbiente(char *var);
 
 
 #endif /* ARGUMENTOS_H_ */
