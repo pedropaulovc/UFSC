@@ -94,7 +94,7 @@ void exibirVariaveisAmbiente(char **envp) {
 		puts("Exibindo todas as variáveis de ambiente: ");
 	int i = 0;
 	while (envp[i] != NULL) {
-		printf("%s\n", envp[i]);
+		printf("envp[%d] = '%s'\n",i , envp[i]);
 		i++;
 	}
 	puts("");
@@ -103,6 +103,6 @@ void exibirVariaveisAmbiente(char **envp) {
 void exibirVariavelAmbiente(char *var) {
 	if (verbose)
 		puts("Exibindo variável específica de ambiente: ");
-	printf("%s = %s\n", var, getenv(var));
+	printf("%s = '%s'\n", var, getenv(var));
 	puts("");
 }
