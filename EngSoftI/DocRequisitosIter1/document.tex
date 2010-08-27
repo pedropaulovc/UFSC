@@ -238,6 +238,12 @@ o pedido.
 
 \item[Extensões:]\hfill
 \begin{description}
+	\item[1a.] A delegação não foi enviada para a Secretaria.
+	\begin{enumerate}
+		\item O Administrador é notificado da impossibilidade de envio.
+		\item O problema permanece como pendente.
+	\end{enumerate}
+
 	\item[2a.] A delegação não foi respondida pela Secretaria.
 	\begin{enumerate}
  		\item O problema permanece como pendente.
@@ -255,7 +261,6 @@ o pedido.
 
 
 
-
 \section{Back-end Secretaria: Receber Delegação \label{caso-receber-delegacao}}
 \begin{description}
 \item[Escopo:] Sistema Back-end Secretaria
@@ -270,16 +275,11 @@ um Administrador.
 ao pedido pendente.
 \item[Fluxo Básico ou Cenário Principal:]\hfill
 \begin{enumerate}
-%   \item O Administrador seleciona e envia o pedido pendente a ser delegado à
-%   Secretaria.
   \item O atendente recebe o pedido. O problema é solucionado e o atendente
   informa a resolução.
   \item O Atendente fornece suas credenciais e envia a resposta do problema.
   \item O Back-end deve armazenar a confirmação de recebimento, a resposta
   do problema proposta e o atendente que resolveu o problema.
-% TODO mover para caso de uso certo. 
-%   O pedido de suporte permanece pendente até um Administrador confirmar a
-%   solução do Atendente.
 \end{enumerate}
 
 \item[Extensões:]\hfill
@@ -301,6 +301,112 @@ ao pedido pendente.
 
 \end{description}
 
+
+
+\section{Back-end: Adição de Usuários}
+\begin{description}
+\item[Escopo:] Sistema Back-end
+\item[Nível:] Meta do Administrador
+\item[Ator Primário:] Administrador
+\item[Stakeholders e seus interesses:] \hfill \\
+Administrador: Deseja adicionar administradores ou atendentes.
+
+\item[Pré-condições:] O sistema está operante. O Administrador está logado.
+\item[Pós-condições:] O usuário foi adicionado.
+\item[Fluxo Básico ou Cenário Principal:]\hfill
+\begin{enumerate}
+  \item O Administador fornece o login e senha do usuário a ser criado.
+  \item O Administrador fornece o grupo do novo usuário (Administrador ou
+  Atendente)
+  \item A operação é executada.
+\end{enumerate}
+
+\item[Extensões:]\hfill
+\begin{description}
+	\item[1a.] O usuário novo já existe.
+	\begin{enumerate}
+ 		\item O Back-end informa ao Administrador que o usuário já existe.
+ 		\item O Back-end requisita um novo login.
+ 		\item \emph{O passo anterior repete-se enquanto o usuário fornecido já
+ 		existir.}
+	\end{enumerate}
+
+\end{description}
+\item[Requisitos especiais:] Nenhum.
+\item[Tecnologia:] Nenhuma.
+\item[Freqüência de Ocorrência:] Raramente.
+
+\end{description}
+
+
+
+\section{Back-end: Remoção de Usuários}
+\begin{description}
+\item[Escopo:] Sistema Back-end
+\item[Nível:] Meta do Administrador
+\item[Ator Primário:] Administrador
+\item[Stakeholders e seus interesses:] \hfill \\
+Administrador: Deseja remover administradores ou atendentes.
+
+\item[Pré-condições:] O sistema está operante. O Administrador está logado.
+\item[Pós-condições:] O usuário foi removido.
+\item[Fluxo Básico ou Cenário Principal:]\hfill
+\begin{enumerate}
+  \item O Administador fornece o login do usuário a ser removido.
+  \item A operação é executada.
+\end{enumerate}
+
+\item[Extensões:]\hfill
+\begin{description}
+	\item[1a.] O usuário não existe.
+	\begin{enumerate}
+ 		\item O Back-end informa ao Administrador que o usuário não existe.
+	\end{enumerate}
+
+\end{description}
+\item[Requisitos especiais:] Nenhum.
+\item[Tecnologia:] Nenhuma.
+\item[Freqüência de Ocorrência:] Raramente.
+
+\end{description}
+
+\section{Back-end: Alterar Usuários}
+\begin{description}
+\item[Escopo:] Sistema Back-end
+\item[Nível:] Meta do Administrador
+\item[Ator Primário:] Administrador
+\item[Stakeholders e seus interesses:] \hfill \\
+Administrador: Deseja alterar administradores ou atendentes.
+
+\item[Pré-condições:] O sistema está operante. O Administrador está logado.
+\item[Pós-condições:] O usuário foi alterado.
+\item[Fluxo Básico ou Cenário Principal:]\hfill
+\begin{enumerate}
+  \item O Administador fornece o login do usuário a ser alterado.
+  \item O Administrador altera os campos de login, senha ou grupo do
+  usuário.
+  \item A operação é executada.
+\end{enumerate}
+
+\item[Extensões:]\hfill
+\begin{description}
+	\item[1a.] O usuário não existe.
+	\begin{enumerate}
+ 		\item O Back-end informa ao Administrador que o usuário não existe.
+	\end{enumerate}
+	\item[2a.] O login e/ou senha estão em branco.
+	\begin{enumerate}
+ 		\item O Back-end informa ao Administrador que o campo está em branco.
+ 		\item O Back-end impede a operação de ser concluída enquanto o campo
+ 		permancer em branco.
+	\end{enumerate}	
+
+\end{description}
+\item[Requisitos especiais:] Nenhum.
+\item[Tecnologia:] Nenhuma.
+\item[Freqüência de Ocorrência:] Raramente.
+
+\end{description}
 
 
 \chapter{Requisitos Não Funcionais}
