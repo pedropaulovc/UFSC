@@ -30,7 +30,7 @@ Tecnológico\par Universidade Federal de Santa Catarina}
 
 \chapter{Perfil do Cliente e Visão do Problema}
 O LabUFSC é um dos maiores maiores laboratórios de informática da UFSC, com um
-parque de aproximadamente 180 máquinas. Como forma de melhorar o serviço de 
+parque de 194 máquinas. Como forma de melhorar o serviço de 
 suporte e manutenção dos equipamentos o laboratório demanda de um software de
 help desk.
 
@@ -171,13 +171,137 @@ registrado no Back-end.
 \item[Freqüência de Ocorrência:] Regular.
 
 \end{description}
-\section{Back-end: Geração de Relatórios}
-     Caso 5: Adminstrador $\rightarrow$ Back-end: O Administrador deverá gerar
-     relatórios tais como a evolução do número de pedidos, resoluções, tempo médio de resposta, dentre outros, usando como base os pedidos registrados, resolvidos ou não.
+\section{Back-end: Gerar de Relatórios}
+\begin{description}
+\item[Escopo:] Sistema Back-end
+\item[Nível:] Meta do Administrador
+\item[Ator Primário:] Administrador
+\item[Stakeholders e seus interesses:] \hfill \\
+Administrador: Deseja obter de maneira fácil relatórios que permitam coletar
+estatísticas sobre os pedidos de suporte.
 
-\section{Back-end Secretaria: Informar Problema}
-     Caso 6: Atendente $\rightarrow$ Back-end Secretaria: O Atendente será
-     notificado de pedidos pendentes redirecionados por um Administrador. O primeiro apenas confirmará o recebimento da notificação, não sendo responsável por marcar o problema como resolvido.
+\item[Pré-condições:] O sistema está operante e o Administrador realizou o \emph{login}
+no Back-end
+\item[Pós-condições:]  É gerado o relatório requisitado pelo Administrador.
+\item[Fluxo Básico ou Cenário Principal:]\hfill
+\begin{enumerate}
+  \item O Administrador informa o relatório desejado. As possibilidades de
+  relatórios são: Número de pedidos, número de resoluções, tempo médio de
+  resposta.
+  \item O Back-end gerará o relatório pedido tendo como período de coleta os
+  últimos 30 dias.
+\end{enumerate}
+
+\item[Extensões:]\hfill
+\begin{description}
+	\item[*a.] A qualquer momento, o sistema falha: \hfill
+	\begin{enumerate}
+ 		\item O sistema deve ser reiniciado manualmente.
+ 		\item O Administrador deve informar suas credenciais novamente.
+	\end{enumerate} 
+\end{description}
+\item[Requisitos especiais:] Nenhum.
+\item[Tecnologia:] O relatório será gerado em formato de texto puro.
+\item[Freqüência de Ocorrência:] Raramente.
+
+\end{description}
+
+
+
+\section{Back-end: Delegar Problema}
+\begin{description}
+\item[Escopo:] Sistema Back-end
+\item[Nível:] Meta do Administrador
+\item[Ator Primário:] Administrador
+\item[Stakeholders e seus interesses:] \hfill \\
+Administrador: Deseja delegar uma resolução de um pedido pendente à Secretaria.
+
+\item[Pré-condições:] O sistema e a rede estão operantes e o Administrador
+realizou o \emph{login} no Back-end. Há pelo menos um pedido
+pendente.
+
+\item[Pós-condições:] O Administrador confirmou a solução do problema e encerrou
+o pedido.
+\item[Fluxo Básico ou Cenário Principal:]\hfill
+\begin{enumerate}
+  \item O Administrador seleciona e envia o pedido pendente a ser delegado à
+  Secretaria.
+  \item \emph{Há a execução do caso de uso descrito na seção
+  \ref{caso-receber-delegacao}}
+  \item O Administrador recebe a resposta enviada por um Atendente através do
+  Back-end Secretaria.
+  \item O Administrador confirma a solução do pedido e encerra-o.
+  \item O Back-end deve armazenar a confirmação de recebimento, a resposta
+  do problema proposta e o atendente que resolveu o problema. O pedido de
+  suporte permanece pendente até um Administrador confirmar a solução do Atendente.
+\end{enumerate}
+
+\item[Extensões:]\hfill
+\begin{description}
+	\item[2a.] A delegação não foi respondida pela Secretaria.
+	\begin{enumerate}
+ 		\item O problema permanece como pendente.
+	\end{enumerate}
+		
+	\item[4a.] O Administrador não confirma a resolução do problema. 
+	\begin{enumerate}
+ 		\item O problema permanece como pendente.
+	\end{enumerate} 
+\end{description}
+\item[Requisitos especiais:] Nenhum.
+\item[Tecnologia:] Nenhuma.
+\item[Freqüência de Ocorrência:] Regular.
+\end{description}
+
+
+
+
+\section{Back-end Secretaria: Receber Delegação \label{caso-receber-delegacao}}
+\begin{description}
+\item[Escopo:] Sistema Back-end Secretaria
+\item[Nível:] Meta do Atendente
+\item[Ator Primário:] Atendente
+\item[Stakeholders e seus interesses:] \hfill \\
+Atendente: Deseja ser notificado quando houver um pedido pendente delegado por
+um Administrador.
+
+\item[Pré-condições:] O sistema e a rede estão operantes.
+\item[Pós-condições:] Um atendente recebeu um notificação de problema referente
+ao pedido pendente.
+\item[Fluxo Básico ou Cenário Principal:]\hfill
+\begin{enumerate}
+%   \item O Administrador seleciona e envia o pedido pendente a ser delegado à
+%   Secretaria.
+  \item O atendente recebe o pedido. O problema é solucionado e o atendente
+  informa a resolução.
+  \item O Atendente fornece suas credenciais e envia a resposta do problema.
+  \item O Back-end deve armazenar a confirmação de recebimento, a resposta
+  do problema proposta e o atendente que resolveu o problema.
+% TODO mover para caso de uso certo. 
+%   O pedido de suporte permanece pendente até um Administrador confirmar a
+%   solução do Atendente.
+\end{enumerate}
+
+\item[Extensões:]\hfill
+\begin{description}
+	\item[2a.] O Atendente não foi capaz de solucionar o problema.
+	\begin{enumerate}
+ 		\item O Atendente informa a incapacidade de resolução.
+	\end{enumerate} 
+	
+	\item[3a.] O Atendente fornece credenciais inválidas. 
+	\begin{enumerate}
+ 		\item O Back-end Secretaria pede novamente as credenciais.
+ 		\item \emph{O passo anterior é repetido até que haja credenciais válidas.}
+	\end{enumerate} 
+\end{description}
+\item[Requisitos especiais:] Nenhum.
+\item[Tecnologia:] Nenhuma.
+\item[Freqüência de Ocorrência:] Regular.
+
+\end{description}
+
+
 
 \chapter{Requisitos Não Funcionais}
 \begin{itemize}
