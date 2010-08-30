@@ -1,7 +1,7 @@
 \documentclass[brazil,times]{abnt}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{hyperref}
+\usepackage[pdfborder={0 0 0}]{hyperref}
 \makeatletter
 \usepackage{babel}
 \makeatother
@@ -110,7 +110,7 @@ matrícula válida (segundo regras descritas na Especificação Suplementar).
 
 
 
-\section{Back-end: Notificar Problema}
+\section{Back-end: Receber Notificação do Problema}
 \begin{description}
 \item[Escopo:] Sistema Back-end
 \item[Nível:] Meta do Administrador
@@ -127,6 +127,7 @@ registrado no Back-end.
   \item O sistema notifica o Administrador de pedidos pendentes.
   \item O administrador analisa o problema e aciona o sistema de resolução
   remota.
+  \item \emph{Há a execução do caso de uso descrito na seção \ref{Acessar-Remotamente}}
   \item O problema é resolvido pelo administrador.
   \item O administrador marca o problema como resolvido.
   \item O administrador registra a solução.
@@ -406,6 +407,50 @@ Administrador: Deseja alterar administradores ou atendentes.
 \item[Requisitos especiais:] Nenhum.
 \item[Tecnologia:] Nenhuma.
 \item[Freqüência de Ocorrência:] Raramente.
+
+\end{description}
+
+
+
+\section{Back-end: Acessar Remotamente} \label{Acessar-Remotamente}
+\begin{description}
+\item[Escopo:] Sistema Back-end
+\item[Nível:] Meta do Administrador
+\item[Ator Primário:] Administrador
+\item[Stakeholders e seus interesses:] \hfill \\
+Administrador: Deseja ter acesso remoto à máquina que enviou um pedido de
+suporte.
+
+\item[Pré-condições:] O sistema e a rede estão operantes. O Administrador está
+logado. Há um pedido de suporte pendente e o Administrador decidiu resolve-lo
+remotamente.
+\item[Pós-condições:] A máquina que enviou o pedido foi acessada remotamente e o
+problema foi sanado.
+\item[Fluxo Básico ou Cenário Principal:]\hfill
+\begin{enumerate}
+  \item O administrador solicita ao Back-end a conexão à máquina que fez o
+  pedido.
+  \item O Back-end disponibiliza uma linha de comando interativa que se
+  comunica com o Front-end do usuário que realizou o pedido, na qual o
+  Administrador possa executar comandos.
+  
+\end{enumerate}
+
+\item[Extensões:]\hfill
+\begin{description}
+	\item[2a.] O Administrador deseja utilizar atalhos para comandos frequentes.
+	\begin{enumerate}
+ 		\item O Back-end disponibiliza um conjunto predefinido de
+  comandos(reiniciar a máquina, reiniciar a rede, atualizar o sistema
+  operacional, desligar a máquina) para facilitar a administração.
+	\end{enumerate} 
+
+\end{description}
+\item[Requisitos especiais:] Nenhum.
+\item[Tecnologia:] Os comandos predefinidos são independentes de plataforma. O
+Front-end deve ser responsável por traduzir os comandos para seus
+correspondentes em cada plataforma.
+\item[Freqüência de Ocorrência:] Rara.
 
 \end{description}
 
