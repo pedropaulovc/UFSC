@@ -5,6 +5,7 @@
 \makeatletter
 \usepackage{babel}
 \makeatother
+\usepackage{graphicx}
 \begin{document}
 
 \autor{Pedro Paulo Vezzá Campos \\ Rafael Elias Pedretti
@@ -40,7 +41,7 @@ pedido de suporte através de uma interface denominada “Front-end”. Tal pedi
 será registrado em uma interface restrita à equipe de manutenção, o “Back-end”,
 que poderá tratar o problema de diferentes maneiras: Delegação (À equipe da
 secretaria do laboratório), resolução remota ou presencial. Ao final do
-processo um administrador poderá marcar um problema como resolvido ou não,
+processo um Administrador poderá marcar um problema como resolvido ou não,
 adicionando informações relevantes ao problema.
 
 O sistema deverá armazenar as ocorrências para consulta posterior pela equipe
@@ -48,7 +49,7 @@ de manutenção. Deve ser possível a geração de relatórios diversos, tais co
 evolução do número de pedidos, resoluções, tempo médio de resposta, dentre
 outros.
 
-Há, ainda, a possibilidade de um administrador configurar o sistema para um
+Há, ainda, a possibilidade de um Administrador configurar o sistema para um
 modo automático de operação, que consiste em armazenar e redirecionar os
 pedidos de suporte para a equipe da secretaria, que tomará apenas consentimento
 do problema através da interface de “Back-end Secretaria”, podendo ou não resolvê-lo.
@@ -60,6 +61,70 @@ Não há restrições de tempo rígidas, sendo tolerável tempos de resposta do
 sistema (excetuado tempo de transmissão da rede) de aproximadamente 1 segundo.
 
 \chapter{Requisitos Funcionais}
+\section{Descrição Breve dos Casos de Uso}
+\begin{description}
+  \item[Reportar Problema:] O usuário informa sua matrícula e uma descrição do
+  problema encontrado. O Front-end tentará informar via rede o Back-end do
+  pedido de suporte. Em caso de sucesso, o pedido é registrado no Back-end. O
+  Front-end então informa o usuário do sucesso ou fracasso da notificação.
+  \item[Verificar Novos Problemas:] O Administrador verifica o Back-end em
+  busca de pedidos pendentes de suporte. Ao encontrá-los pode utilizar
+  diferentes abordagens: Assistência remota, presencial ou delegação.
+  \item[Gerar Relatório:] O Administrador pode gerar relatórios tais como a
+  evolução do número de pedidos, resoluções, tempo médio de resposta através dos
+  dados coletados nos últimos 30 dias.
+  \item[Delegar Problema:] Especifica o funcionamento do ato de delegação de
+  tarefas de um Administrador para um Atendente. Caso de uso incluso no caso
+  ``Verificar Novos Problemas''.
+  \item[Receber Delegação:] Contraparte do caso de uso anterior, apresentando a
+  perspectiva do Atendente ao receber uma delegação de atendimento de um
+  Administrador.
+  \item[Adicionar Usuário:] Explica o funcionamento da função de adição de novos
+  usuários no sistema.
+  \item[Remover Usuário:] Explica o funcionamento da função de remoção usuários
+  do sistema.
+  \item[Alterar Usuário:] Explica o funcionamento da função de alteração de
+  dados de usuários do sistema.
+  \item[Acessar Remotamente:] Especifica o funcionamento do ato de um
+  Administrador acessar remotamente e enviar comandos a uma máquina utilizando o
+  Back-end.
+  \item[Configuração de Modo Automático:] Em caso de ausência de um
+  Administrador no local, especifica um funcionamento especial do sistema, realizando
+  delegações automáticas aos Atendentes.
+  \item[Recebimento de Delegação em Modo Automático:] Apresenta a perspectiva de
+  funcionamento do Back-end Secretaria em caso de acionamento do modo
+  automático.
+\end{description}
+
+\subsection{Cronograma de implementação dos casos de uso}
+Para a Iteração 1 estão planejados todos os casos de uso descritos
+anteriormente, à exceção dos dois últimos, que foram alocados para a Iteração 2.
+
+\section{Diagrama de Casos de Uso}
+%\usepackage{graphics} is needed for \includegraphics
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[width=\linewidth]{diagramas/diagramaDeUso.png}
+  \caption[Diagrama de Casos de Uso da Iteração 1]{Diagrama de Casos de Uso da Iteração 1}
+  \label{diagrama-casos-uso}
+\end{center}
+\end{figure}
+
+\newpage
+
+\section{Diagrama de Classes Conceituais}
+%\usepackage{graphics} is needed for \includegraphics
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[width=\linewidth]{diagramas/diagramaConceitual.png}
+  \caption[Diagrama de classes conceituais para os casos de uso
+  da Iteração 1]{Diagrama de classes conceituais para os casos de uso
+  da Iteração 1}
+  \label{diagrama-conceitual}
+\end{center}
+\end{figure}
+
+
 \section{Front-end: Reportar Problema}
 \begin{description}
 \item[Escopo:] Sistema Front-end
@@ -88,7 +153,7 @@ matrícula válida (segundo regras descritas na Especificação Suplementar).
 	\item[*a.] A qualquer momento, o sistema ou a rede falha:
 		\begin{enumerate}
  			\item O sistema informa o usuário da incapacidade de envio e sugere chamar    
-  			pessoalmente um atendente.
+  			pessoalmente um Atendente.
   			\item  O sistema tenta periodicamente reestabelecer a conexão.
 		\end{enumerate}
 
@@ -120,20 +185,20 @@ Administrador: Deseja ser notificado de novos pedidos e que os pedidos
 sejam registrados.
 \item[Pré-condições:] O sistema e a rede estão operantes. Há, pelo menos, um pedido 
 pendente.
-\item[Pós-condições:]  É emitida uma notificação ao administrador e o pedido é        
+\item[Pós-condições:]  É emitida uma notificação ao Administrador e o pedido é        
 registrado no Back-end.
 \item[Fluxo Básico ou Cenário Principal:]\hfill
 \begin{enumerate}
   \item O Administrador localiza no Back-end um pedido pendente.
-  \item O administrador analisa o problema e aciona o sistema de resolução
+  \item O Administrador analisa o problema e aciona o sistema de resolução
   remota.
   \item \emph{Há a execução do caso de uso descrito na seção \ref{Acessar-Remotamente}}
-  \item O problema é resolvido pelo administrador.
-  \item O administrador anota a solução empregada.
-  \item O administrador marca o problema como resolvido.
+  \item O problema é resolvido pelo Administrador.
+  \item O Administrador anota a solução empregada.
+  \item O Administrador marca o problema como resolvido.
   \item O Back-end deve armazenar o problema do usuário, a resposta proposta e
-  o administrador que resolveu o problema.
-  \item O administrador recebe uma notificação de armazenamento da solução.
+  o Administrador que resolveu o problema.
+  \item O Administrador recebe uma notificação de armazenamento da solução.
   \item \emph{Repete os passos de 1 a 8 enquanto houver pedidos pendentes.}
 \end{enumerate}
 
@@ -145,12 +210,12 @@ registrado no Back-end.
  		reiniciado manualmente.
 	\end{enumerate} 
 
-	\item[2a.] O administrador decide fazer atendimento presencial:
+	\item[2a.] O Administrador decide fazer atendimento presencial:
 	\begin{enumerate}
-  		\item O administrador resolve localmente o problema.
+  		\item O Administrador resolve localmente o problema.
 	\end{enumerate}
 
-	\item[2b.] O administrador delega o problema à secretaria:
+	\item[2b.] O Administrador delega o problema à secretaria:
 	\begin{enumerate}
   		\item \em{É executado o caso de uso descrito na seção
   		\ref{delegar-problema}}
@@ -158,12 +223,12 @@ registrado no Back-end.
 
 	\item[3a.] O problema é resolvido pela Secretaria:
 	\begin{enumerate}
-  		\item A secretaria notifica o administrador da resolução do problema.
+  		\item A secretaria notifica o Administrador da resolução do problema.
 	\end{enumerate}
 
 	\item[3b.] O problema não é resolvido pela Secretaria:
 	\begin{enumerate}
-  		\item A secretaria notifica o administrador da não resolução do problema.
+  		\item A secretaria notifica o Administrador da não resolução do problema.
 	\end{enumerate}
 
 	\item[(4-7)a.] O problema não foi resolvido:
@@ -176,8 +241,37 @@ registrado no Back-end.
 \item[Tecnologia:] Nenhuma.
 \item[Freqüência de Ocorrência:] Regular.
 
+%\usepackage{graphics} is needed for \includegraphics
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[scale=0.65]{diagramas/diagramaDeSequenciaProblema.png}
+  \caption[Diagrama de sequência do sistema para verificar novos problemas
+  ]{Diagrama de sequência do sistema para verificar novos problemas}
+  \label{diagrama-sequencia-problema}
+\end{center}
+\end{figure}
+\item[Contrato:] EnviaComando
+\begin{description}
+  \item[Operação:] EnviaComando(comando)
+  \item[Referências cruzadas:] caso de uso Verificar Novos Problemas
+  \item[Pré-condições:] \hfill
+  	\begin{itemize}
+  		\item O sistema e a rede estão operantes;
+  		\item O Front-end remoto está conectado ao Back-end;
+  		\item \underline{comando} é uma instrução válida, executável pelo Front-end
+  		remoto.
+	\end{itemize}
+  \item[Pré-condições:] \hfill
+  	\begin{itemize}
+  		\item O comando foi executado;
+  		\item As informações retornadas pelo comando são fornecidas ao Back-end;
+	\end{itemize}
 \end{description}
-\section{Back-end: Gerar Relatórios}
+
+\end{description}
+
+
+\section{Back-end: Gerar Relatório}
 \begin{description}
 \item[Escopo:] Sistema Back-end
 \item[Nível:] Meta do Administrador
@@ -214,7 +308,7 @@ no Back-end
 
 
 
-\section{Back-end: Delegar Problema \label{delegar-problema}}
+\section{Back-end: Delegar Problema}\label{delegar-problema}
 \begin{description}
 \item[Escopo:] Sistema Back-end
 \item[Nível:] Meta do Administrador
@@ -238,7 +332,7 @@ o pedido.
   Back-end Secretaria.
   \item O Administrador confirma a solução do pedido e encerra-o.
   \item O Back-end deve armazenar a confirmação de recebimento, a resposta
-  do problema proposta e o atendente que resolveu o problema. O pedido de
+  do problema proposta e o Atendente que resolveu o problema. O pedido de
   suporte permanece pendente até um Administrador confirmar a solução do Atendente.
 \end{enumerate}
 
@@ -264,6 +358,17 @@ o pedido.
 \item[Tecnologia:] Nenhuma.
 \item[Freqüência de Ocorrência:] Regular.
 \end{description}
+\newpage
+%\usepackage{graphics} is needed for \includegraphics
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[scale=0.65]{diagramas/diagramaDeSequenciaDelegar.png}
+  \caption[Diagrama de sequência do sistema para delegar um
+  problema]{Diagrama de sequência do sistema para delegar um
+  problema}
+  \label{diagrama-sequencia-delegar}
+\end{center}
+\end{figure}
 
 
 
@@ -277,18 +382,18 @@ Atendente: Deseja ser notificado quando houver um pedido pendente delegado por
 um Administrador.
 
 \item[Pré-condições:] O sistema e a rede estão operantes.
-\item[Pós-condições:] Um atendente recebeu um notificação de problema referente
+\item[Pós-condições:] Um Atendente recebeu um notificação de problema referente
 ao pedido pendente.
 \item[Fluxo Básico ou Cenário Principal:]\hfill
 \begin{enumerate}
-  \item O atendente verifica pedidos pendentes.
+  \item O Atendente verifica pedidos pendentes.
   \item O problema é solucionado
   \item O Atendente informa a resolução.
   \item O Atendente fornece suas credenciais 
   \item O Atendente envia a resposta do problema.
   \item O Back-end Secretaria confirma o envio da resposta
   \item O Back-end deve armazenar a confirmação de recebimento, a resposta
-  do problema proposta e o atendente que resolveu o problema.
+  do problema proposta e o Atendente que resolveu o problema.
 \end{enumerate}
 
 \item[Extensões:]\hfill
@@ -312,13 +417,13 @@ ao pedido pendente.
 
 
 
-\section{Back-end: Adicionar Usuários}
+\section{Back-end: Adicionar Usuário}
 \begin{description}
 \item[Escopo:] Sistema Back-end
 \item[Nível:] Meta do Administrador
 \item[Ator Primário:] Administrador
 \item[Stakeholders e seus interesses:] \hfill \\
-Administrador: Deseja adicionar administradores ou atendentes.
+Administrador: Deseja adicionar Administradores ou Atendentes.
 
 \item[Pré-condições:] O sistema está operante. O Administrador está logado.
 \item[Pós-condições:] O usuário foi adicionado.
@@ -349,13 +454,13 @@ Administrador: Deseja adicionar administradores ou atendentes.
 
 
 
-\section{Back-end: Remover Usuários}
+\section{Back-end: Remover Usuário}
 \begin{description}
 \item[Escopo:] Sistema Back-end
 \item[Nível:] Meta do Administrador
 \item[Ator Primário:] Administrador
 \item[Stakeholders e seus interesses:] \hfill \\
-Administrador: Deseja remover administradores ou atendentes.
+Administrador: Deseja remover Administradores ou Atendentes.
 
 \item[Pré-condições:] O sistema está operante. O Administrador está logado.
 \item[Pós-condições:] O usuário foi removido.
@@ -379,13 +484,13 @@ Administrador: Deseja remover administradores ou atendentes.
 
 \end{description}
 
-\section{Back-end: Alterar Usuários}
+\section{Back-end: Alterar Usuário}
 \begin{description}
 \item[Escopo:] Sistema Back-end
 \item[Nível:] Meta do Administrador
 \item[Ator Primário:] Administrador
 \item[Stakeholders e seus interesses:] \hfill \\
-Administrador: Deseja alterar administradores ou atendentes.
+Administrador: Deseja alterar Administradores ou Atendentes.
 
 \item[Pré-condições:] O sistema está operante. O Administrador está logado.
 \item[Pós-condições:] O usuário foi alterado.
@@ -435,7 +540,7 @@ remotamente.
 problema foi sanado.
 \item[Fluxo Básico ou Cenário Principal:]\hfill
 \begin{enumerate}
-  \item O administrador solicita ao Back-end a conexão à máquina que fez o
+  \item O Administrador solicita ao Back-end a conexão à máquina que fez o
   pedido.
   \item O Back-end disponibiliza uma linha de comando interativa que se
   comunica com o Front-end do usuário que realizou o pedido, na qual o
@@ -469,8 +574,10 @@ correspondentes em cada plataforma.
   \item O sistema não possui restrição de desempenho maior que 1 segundo de
   tempo de resposta
   \item O Front-end deve ser o mais simples e intuitivo quanto possível
-%  \item  Os Back-ends devem possuir um sistema de controle de acesso que evite
-%  usos indevidos do sistema.
+  \item O sistema deve oferecer suporte a avisos sonoros para notificar
+  Administradores e Atendentes.
+  \item Dados sigilosos como senhas de Administradores e Atendentes devem ser
+  criptografados.
 \end{itemize}
 
 \chapter{Glossário}
