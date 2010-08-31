@@ -110,7 +110,7 @@ matrícula válida (segundo regras descritas na Especificação Suplementar).
 
 
 
-\section{Back-end: Receber Notificação do Problema}
+\section{Back-end: Verificar Novos Problemas}
 \begin{description}
 \item[Escopo:] Sistema Back-end
 \item[Nível:] Meta do Administrador
@@ -124,14 +124,17 @@ pendente.
 registrado no Back-end.
 \item[Fluxo Básico ou Cenário Principal:]\hfill
 \begin{enumerate}
-  \item O sistema notifica o Administrador de pedidos pendentes.
+  \item O Administrador localiza no Back-end um pedido pendente.
   \item O administrador analisa o problema e aciona o sistema de resolução
   remota.
   \item \emph{Há a execução do caso de uso descrito na seção \ref{Acessar-Remotamente}}
   \item O problema é resolvido pelo administrador.
+  \item O administrador anota a solução empregada.
   \item O administrador marca o problema como resolvido.
-  \item O administrador registra a solução.
-  \item \emph{Repete os passos de 1 a 5 enquanto houver pedidos pendentes.}
+  \item O Back-end deve armazenar o problema do usuário, a resposta proposta e
+  o administrador que resolveu o problema.
+  \item O administrador recebe uma notificação de armazenamento da solução.
+  \item \emph{Repete os passos de 1 a 8 enquanto houver pedidos pendentes.}
 \end{enumerate}
 
 \item[Extensões:]\hfill
@@ -149,7 +152,8 @@ registrado no Back-end.
 
 	\item[2b.] O administrador delega o problema à secretaria:
 	\begin{enumerate}
-  		\item A secretaria é notificada do problema.
+  		\item \em{É executado o caso de uso descrito na seção
+  		\ref{delegar-problema}}
 	\end{enumerate}
 
 	\item[3a.] O problema é resolvido pela Secretaria:
@@ -162,7 +166,7 @@ registrado no Back-end.
   		\item A secretaria notifica o administrador da não resolução do problema.
 	\end{enumerate}
 
-	\item[(4-5)a.] O problema não foi resolvido:
+	\item[(4-7)a.] O problema não foi resolvido:
 	\begin{enumerate}
   		\item O problema continua como pendente até ser resolvido.
 	\end{enumerate}
@@ -210,7 +214,7 @@ no Back-end
 
 
 
-\section{Back-end: Delegar Problema}
+\section{Back-end: Delegar Problema \label{delegar-problema}}
 \begin{description}
 \item[Escopo:] Sistema Back-end
 \item[Nível:] Meta do Administrador
@@ -277,9 +281,12 @@ um Administrador.
 ao pedido pendente.
 \item[Fluxo Básico ou Cenário Principal:]\hfill
 \begin{enumerate}
-  \item O atendente recebe o pedido. O problema é solucionado e o atendente
-  informa a resolução.
-  \item O Atendente fornece suas credenciais e envia a resposta do problema.
+  \item O atendente verifica pedidos pendentes.
+  \item O problema é solucionado
+  \item O Atendente informa a resolução.
+  \item O Atendente fornece suas credenciais 
+  \item O Atendente envia a resposta do problema.
+  \item O Back-end Secretaria confirma o envio da resposta
   \item O Back-end deve armazenar a confirmação de recebimento, a resposta
   do problema proposta e o atendente que resolveu o problema.
 \end{enumerate}
@@ -291,7 +298,7 @@ ao pedido pendente.
  		\item O Atendente informa a incapacidade de resolução.
 	\end{enumerate} 
 	
-	\item[3a.] O Atendente fornece credenciais inválidas. 
+	\item[4a.] O Atendente fornece credenciais inválidas. 
 	\begin{enumerate}
  		\item O Back-end Secretaria pede novamente as credenciais.
  		\item \emph{O passo anterior é repetido até que haja credenciais válidas.}
