@@ -5,18 +5,12 @@
  *      Author: pedropaulovc
  */
 
-#include <string>
-#include <cstring>
+#include <gtest/gtest.h>
 #include "Grafo.h"
-using namespace std;
-
-struct eqstr{
-  bool operator()(const char* s1, const char* s2) const {
-    return strcmp(s1,s2)==0;
-  }
-};
+#include <vector>
 
 
 int main(int argc, char **argv){
-	Grafo<const char*, eqstr> *grafo = new Grafo<const char*, eqstr>();
+	::testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
 }

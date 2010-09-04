@@ -1,0 +1,146 @@
+/*
+ * TestesGrafo.cpp
+ *
+ *  Created on: Sep 3, 2010
+ *      Author: pedropaulo
+ */
+
+#include <gtest/gtest.h>
+#include "Grafo.h"
+#include <cstdlib>
+#include <string>
+#include <list>
+#include <iostream>
+
+using namespace std;
+
+class TestesGrafo: public ::testing::Test {
+
+protected:
+	Grafo<string> *grafo;
+
+	TestesGrafo() {
+	}
+
+	~TestesGrafo() {
+	}
+
+	void SetUp() {
+		grafo = new Grafo<string> ();
+	}
+
+	void TearDown() {
+		delete grafo;
+	}
+};
+
+TEST_F(TestesGrafo, testaGrafoVazio)
+{
+	vector<string> vertices = grafo->obterVertices();
+	ASSERT_EQ(0, grafo->obterOrdem());
+	ASSERT_EQ(NULL, grafo->obterVerticeAleatorio());
+	ASSERT_EQ(0, vertices.size());
+}
+
+TEST_F(TestesGrafo, testaInsercaoVertice)
+{
+	grafo->adicionaVertice("A");
+	grafo->adicionaVertice("B");
+	grafo->adicionaVertice("C");
+
+	vector<string> v = grafo->obterVertices();
+	ASSERT_EQ(3, v.size());
+	ASSERT_EQ("A", v[0]);
+	ASSERT_EQ("B", v[1]);
+	ASSERT_EQ("C", v[2]);
+
+	ASSERT_EQ(0, grafo->obterGrau("A"));
+	ASSERT_EQ(0, grafo->obterGrau("B"));
+	ASSERT_EQ(0, grafo->obterGrau("C"));
+
+	ASSERT_EQ(0, grafo->obterAdjacentes("A").size());
+	ASSERT_EQ(0, grafo->obterAdjacentes("B").size());
+	ASSERT_EQ(0, grafo->obterAdjacentes("C").size());
+	ASSERT_EQ(0, grafo->obterAdjacentes("D").size());
+}
+
+TEST_F(TestesGrafo, testaRemocaoVertice)
+{
+	grafo->adicionaVertice("A");
+	grafo->adicionaVertice("B");
+	grafo->adicionaVertice("C");
+
+	ASSERT_EQ(3, grafo->obterVertices().size());
+
+	grafo->removeVertice("A");
+	ASSERT_EQ(2, grafo->obterVertices().size());
+	grafo->removeVertice("A");
+	ASSERT_EQ(2, grafo->obterVertices().size());
+	grafo->removeVertice("B");
+	ASSERT_EQ(1, grafo->obterVertices().size());
+	grafo->removeVertice("C");
+	ASSERT_EQ(0, grafo->obterVertices().size());
+}
+
+TEST_F(TestesGrafo, testaConexao)
+{
+	grafo->adicionaVertice("A");
+	grafo->adicionaVertice("B");
+	grafo->adicionaVertice("C");
+	grafo->adicionaVertice("D");
+
+	grafo->conecta("A", "B");
+	grafo->conecta("A", "D");
+
+	ASSERT_EQ(2, grafo->obterAdjacentes("A").size());
+	ASSERT_EQ("B", grafo->obterAdjacentes("A")[0]);
+	ASSERT_EQ("D", grafo->obterAdjacentes("A")[1]);
+
+	ASSERT_EQ(1, grafo->obterAdjacentes("B").size());
+	ASSERT_EQ("A", grafo->obterAdjacentes("B")[0]);
+
+	ASSERT_EQ(0, grafo->obterAdjacentes("C").size());
+
+	ASSERT_EQ(1, grafo->obterAdjacentes("D").size());
+	ASSERT_EQ("A", grafo->obterAdjacentes("D")[0]);
+}
+
+TEST_F(TestesGrafo, testaDesconectar)
+{
+	grafo->adicionaVertice("A");
+	grafo->adicionaVertice("B");
+	grafo->adicionaVertice("C");
+	grafo->adicionaVertice("D");
+
+	grafo->conecta("A", "B");
+	grafo->conecta("A", "D");
+	grafo->desconecta("A", "D");
+
+	ASSERT_EQ(1, grafo->obterAdjacentes("A").size());
+	ASSERT_EQ("B", grafo->obterAdjacentes("A")[0]);
+
+	ASSERT_EQ(1, grafo->obterAdjacentes("B").size());
+	ASSERT_EQ("A", grafo->obterAdjacentes("B")[0]);
+
+	ASSERT_EQ(0, grafo->obterAdjacentes("C").size());
+
+	ASSERT_EQ(0, grafo->obterAdjacentes("D").size());
+}
+
+TEST_F(TestesGrafo, testaVerticeAleatorio)
+{
+	grafo->adicionaVertice("A");
+	grafo->adicionaVertice("B");
+	grafo->adicionaVertice("C");
+	grafo->adicionaVertice("D");
+	grafo->adicionaVertice("E");
+	grafo->adicionaVertice("F");
+	grafo->adicionaVertice("G");
+	grafo->adicionaVertice("H");
+	grafo->adicionaVertice("I");
+	grafo->adicionaVertice("J");
+	grafo->adicionaVertice("K");
+	grafo->adicionaVertice("L");
+
+	ASSERT_NE(*(grafo->obterVerticeAleatorio()), *(grafo->obterVerticeAleatorio()));
+}
