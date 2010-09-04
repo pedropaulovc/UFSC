@@ -31,7 +31,7 @@ public:
 	int obterOrdem();
 	vector<T> obterVertices();
 	vector<T> obterAdjacentes(T const &v);
-	T*  obterVerticeAleatorio();
+	T  obterVerticeAleatorio();
 	int obterGrau(T const &v);
 
 	bool ehRegular();

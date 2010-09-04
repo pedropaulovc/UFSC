@@ -38,7 +38,6 @@ TEST_F(TestesGrafo, testaGrafoVazio)
 {
 	vector<string> vertices = grafo->obterVertices();
 	ASSERT_EQ(0, grafo->obterOrdem());
-	ASSERT_EQ(NULL, grafo->obterVerticeAleatorio());
 	ASSERT_EQ(0, vertices.size());
 }
 
@@ -92,16 +91,16 @@ TEST_F(TestesGrafo, testaConexao)
 	grafo->conecta("A", "B");
 	grafo->conecta("A", "D");
 
-	ASSERT_EQ(2, grafo->obterAdjacentes("A").size());
+	ASSERT_EQ(2, grafo->obterGrau("A"));
 	ASSERT_EQ("B", grafo->obterAdjacentes("A")[0]);
 	ASSERT_EQ("D", grafo->obterAdjacentes("A")[1]);
 
-	ASSERT_EQ(1, grafo->obterAdjacentes("B").size());
+	ASSERT_EQ(1, grafo->obterGrau("B"));
 	ASSERT_EQ("A", grafo->obterAdjacentes("B")[0]);
 
-	ASSERT_EQ(0, grafo->obterAdjacentes("C").size());
+	ASSERT_EQ(0, grafo->obterGrau("C"));
 
-	ASSERT_EQ(1, grafo->obterAdjacentes("D").size());
+	ASSERT_EQ(1, grafo->obterGrau("D"));
 	ASSERT_EQ("A", grafo->obterAdjacentes("D")[0]);
 }
 
@@ -142,5 +141,26 @@ TEST_F(TestesGrafo, testaVerticeAleatorio)
 	grafo->adicionaVertice("K");
 	grafo->adicionaVertice("L");
 
-	ASSERT_NE(*(grafo->obterVerticeAleatorio()), *(grafo->obterVerticeAleatorio()));
+	ASSERT_NE(grafo->obterVerticeAleatorio(), grafo->obterVerticeAleatorio());
 }
+
+TEST_F(TestesGrafo, testaRegular)
+{
+	grafo->adicionaVertice("A");
+	grafo->adicionaVertice("B");
+	grafo->adicionaVertice("C");
+	grafo->adicionaVertice("D");
+	grafo->adicionaVertice("E");
+
+	grafo->conecta("A", "B");
+	ASSERT_FALSE(grafo->ehRegular());
+	grafo->conecta("B", "C");
+	ASSERT_FALSE(grafo->ehRegular());
+	grafo->conecta("D", "C");
+	ASSERT_FALSE(grafo->ehRegular());
+	grafo->conecta("D", "E");
+	ASSERT_FALSE(grafo->ehRegular());
+	grafo->conecta("E", "A");
+	ASSERT_TRUE(grafo->ehRegular());
+}
+

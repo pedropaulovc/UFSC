@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
+#include <iostream>
 #include <list>
 #include "Grafo.h"
 
@@ -51,11 +52,9 @@ vector<T> Grafo<T>::obterVertices() {
 }
 
 template<class T>
-T* Grafo<T>::obterVerticeAleatorio() {
+T Grafo<T>::obterVerticeAleatorio() {
 	vector<T> v = obterVertices();
-	if (v.size() == 0)
-		return NULL;
-	return &(v[rand() % v.size()]);
+	return v[rand() % v.size()];
 }
 
 template<class T>
@@ -72,7 +71,15 @@ int Grafo<T>::obterGrau(T const &v) {
 
 template<class T>
 bool Grafo<T>::ehRegular() {
-	return 0;
+	int n = obterGrau(obterVerticeAleatorio());
+	int tam = obterOrdem();
+
+	vector<T> vert = obterVertices();
+	for(int i = 0; i < tam; i++){
+		if(obterGrau(vert[i]) != n)
+			return false;
+	}
+	return true;
 }
 
 template<class T>
