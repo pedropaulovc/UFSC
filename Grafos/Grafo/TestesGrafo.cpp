@@ -164,3 +164,44 @@ TEST_F(TestesGrafo, testaRegular)
 	ASSERT_TRUE(grafo->ehRegular());
 }
 
+TEST_F(TestesGrafo, testaCompleto)
+{
+	grafo->adicionaVertice("A");
+	grafo->adicionaVertice("B");
+	grafo->adicionaVertice("C");
+	grafo->adicionaVertice("D");
+
+	grafo->conecta("A", "B");
+	ASSERT_FALSE(grafo->ehCompleto());
+	grafo->conecta("A", "C");
+	ASSERT_FALSE(grafo->ehCompleto());
+	grafo->conecta("A", "D");
+	ASSERT_FALSE(grafo->ehCompleto());
+	grafo->conecta("B", "C");
+	ASSERT_FALSE(grafo->ehCompleto());
+	grafo->conecta("B", "D");
+	ASSERT_FALSE(grafo->ehCompleto());
+	grafo->conecta("C", "D");
+	ASSERT_TRUE(grafo->ehCompleto());
+}
+
+TEST_F(TestesGrafo, testaFechoTransitivo)
+{
+	grafo->adicionaVertice("A");
+	grafo->adicionaVertice("B");
+	grafo->adicionaVertice("C");
+	grafo->adicionaVertice("D");
+	grafo->adicionaVertice("E");
+	grafo->adicionaVertice("F");
+	grafo->adicionaVertice("G");
+	grafo->adicionaVertice("H");
+
+	grafo->conecta("A", "B");
+	grafo->conecta("A", "C");
+	grafo->conecta("C", "D");
+	grafo->conecta("D", "E");
+	grafo->conecta("F", "G");
+
+	set<string> fecho = grafo->obterFechoTransitivo("A");
+	ASSERT_EQ(4, fecho.size());
+}

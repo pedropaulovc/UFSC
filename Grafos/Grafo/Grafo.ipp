@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <list>
+#include <set>
 #include "Grafo.h"
 
 template<class T>
@@ -84,12 +85,37 @@ bool Grafo<T>::ehRegular() {
 
 template<class T>
 bool Grafo<T>::ehCompleto() {
-	return 0;
+	int n = obterOrdem() - 1;
+
+	vector<T> vert = obterVertices();
+	for(int i = 0; i < n + 1; i++){
+		if(obterGrau(vert[i]) != n)
+			return false;
+	}
+	return true;
 }
 
 template<class T>
-bool Grafo<T>::obterFechoTransitivo(T const &v) {
-	return 0;
+set<T> Grafo<T>::obterFechoTransitivo(T const &v) {
+	set<T> vazio = *(new set<T>());
+	return procuraFechoTransitivo(v, vazio);
+}
+
+template<class T>
+set<T> Grafo<T>::procuraFechoTransitivo(T const &v, set<T> &visitados){
+	set<T> ft = *(new set<T>());
+	visitados.insert(v);
+	vector<T> adjacentes = obterAdjacentes(v);
+	int nAdj = adjacentes.size();
+
+	for(int i = 0; i < nAdj; i++){
+		cout << i << endl;
+		if(visitados.find(adjacentes[i]) == visitados.end()){
+			set<T> fecho = procuraFechoTransitivo(adjacentes[i], visitados);
+			ft.insert(fecho.begin(), fecho.end());
+		}
+	}
+	return ft;
 }
 
 template<class T>

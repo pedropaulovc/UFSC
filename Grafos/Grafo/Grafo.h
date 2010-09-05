@@ -11,6 +11,7 @@
 #include <map>
 #include <list>
 #include <vector>
+#include <set>
 using namespace std;
 using namespace __gnu_cxx;
 
@@ -18,6 +19,8 @@ template <class T>
 class Grafo {
 private:
 	map<T const, list<T> > vertices;
+
+	set<T> procuraFechoTransitivo(T const &v, set<T> &visitados);
 
 public:
 	Grafo();
@@ -36,7 +39,7 @@ public:
 
 	bool ehRegular();
 	bool ehCompleto();
-	bool obterFechoTransitivo(T const &v);
+	set<T> obterFechoTransitivo(T const &v);
 	bool ehConexo();
 	bool ehArvore();
 
