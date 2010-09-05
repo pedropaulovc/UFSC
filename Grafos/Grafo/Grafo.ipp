@@ -60,7 +60,7 @@ T Grafo<T>::obterVerticeAleatorio() {
 
 template<class T>
 vector<T> Grafo<T>::obterAdjacentes(T const &v) {
-	vector<T> clone = *(new vector<T>());
+	vector<T> clone = *(new vector<T> ());
 	copy(vertices[v].begin(), vertices[v].end(), back_inserter(clone));
 	return clone;
 }
@@ -76,8 +76,8 @@ bool Grafo<T>::ehRegular() {
 	int tam = obterOrdem();
 
 	vector<T> vert = obterVertices();
-	for(int i = 0; i < tam; i++){
-		if(obterGrau(vert[i]) != n)
+	for (int i = 0; i < tam; i++) {
+		if (obterGrau(vert[i]) != n)
 			return false;
 	}
 	return true;
@@ -88,8 +88,8 @@ bool Grafo<T>::ehCompleto() {
 	int n = obterOrdem() - 1;
 
 	vector<T> vert = obterVertices();
-	for(int i = 0; i < n + 1; i++){
-		if(obterGrau(vert[i]) != n)
+	for (int i = 0; i < n + 1; i++) {
+		if (obterGrau(vert[i]) != n)
 			return false;
 	}
 	return true;
@@ -97,20 +97,20 @@ bool Grafo<T>::ehCompleto() {
 
 template<class T>
 set<T> Grafo<T>::obterFechoTransitivo(T const &v) {
-	set<T> vazio = *(new set<T>());
+	set<T> vazio = *(new set<T> ());
 	return procuraFechoTransitivo(v, vazio);
 }
 
 template<class T>
-set<T> Grafo<T>::procuraFechoTransitivo(T const &v, set<T> &visitados){
-	set<T> ft = *(new set<T>());
+set<T> Grafo<T>::procuraFechoTransitivo(T const &v, set<T> &visitados) {
+	set<T> ft = *(new set<T> ());
 	visitados.insert(v);
+	ft.insert(v);
 	vector<T> adjacentes = obterAdjacentes(v);
 	int nAdj = adjacentes.size();
 
-	for(int i = 0; i < nAdj; i++){
-		cout << i << endl;
-		if(visitados.find(adjacentes[i]) == visitados.end()){
+	for (int i = 0; i < nAdj; i++) {
+		if (visitados.find(adjacentes[i]) == visitados.end()) {
 			set<T> fecho = procuraFechoTransitivo(adjacentes[i], visitados);
 			ft.insert(fecho.begin(), fecho.end());
 		}
@@ -120,10 +120,48 @@ set<T> Grafo<T>::procuraFechoTransitivo(T const &v, set<T> &visitados){
 
 template<class T>
 bool Grafo<T>::ehConexo() {
-	return 0;
+	vector<T> vertices = obterVertices();
+	set<T> setVertices = *(new set<T> ());
+	copy(vertices.begin(), vertices.end(), inserter(setVertices,
+			setVertices.end()));
+	return setVertices == obterFechoTransitivo(obterVerticeAleatorio());
 }
 
 template<class T>
 bool Grafo<T>::ehArvore() {
-	return 0;
+	//T v = obterVerticeAleatorio();
+	//set<T> visitados = *(new set<T>());
+	//return ehConexo() && !haCicloCom(v, v, v, visitados);
+
+	int numArestas = 0;
+	for (typename map<T, list<T> >::iterator it = vertices.begin(); it
+			!= vertices.end(); ++it) {
+		numArestas += it->second.size();
+	}
+	numArestas /= 2;
+
+	return ehConexo() && numArestas == obterOrdem() - 1;
+}
+
+//FIXME O Algoritmo não funciona ainda
+template<class T>
+bool Grafo<T>::haCicloCom(T const &v, T const &vAtual, T const &vAnterior, set<
+		T> &visitados) {
+	if (visitados.find(v) != visitados.end()) {
+		return vAtual == v;
+	}
+	visitados.insert(vAtual);
+
+	vector<T> adj = obterAdjacentes(v);
+	int nAdj = adj.size();
+	for (int i = 0; i < nAdj; i++) {
+		T vAdj = adj[i];
+		if (vAdj != vAnterior) {
+			if (haCicloCom(v, vAdj, vAtual, visitados)) {
+				return true;
+			}
+		}
+	}
+	visitados.erase(vAtual);
+	return false;
 }

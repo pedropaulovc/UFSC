@@ -203,5 +203,49 @@ TEST_F(TestesGrafo, testaFechoTransitivo)
 	grafo->conecta("F", "G");
 
 	set<string> fecho = grafo->obterFechoTransitivo("A");
-	ASSERT_EQ(4, fecho.size());
+	ASSERT_EQ(5, fecho.size());
+	ASSERT_TRUE(fecho.end() != fecho.find("A"));
+	ASSERT_TRUE(fecho.end() != fecho.find("B"));
+	ASSERT_TRUE(fecho.end() != fecho.find("C"));
+	ASSERT_TRUE(fecho.end() != fecho.find("D"));
+	ASSERT_TRUE(fecho.end() != fecho.find("E"));
+}
+
+
+TEST_F(TestesGrafo, testaConexo)
+{
+	grafo->adicionaVertice("A");
+	grafo->adicionaVertice("B");
+	grafo->adicionaVertice("C");
+	grafo->adicionaVertice("D");
+	grafo->adicionaVertice("E");
+
+	grafo->conecta("A", "B");
+	ASSERT_FALSE(grafo->ehConexo());
+	grafo->conecta("A", "C");
+	ASSERT_FALSE(grafo->ehConexo());
+	grafo->conecta("C", "D");
+	ASSERT_FALSE(grafo->ehConexo());
+	grafo->conecta("C", "E");
+	ASSERT_TRUE(grafo->ehConexo());
+}
+
+TEST_F(TestesGrafo, testaArvore)
+{
+	grafo->adicionaVertice("A");
+	grafo->adicionaVertice("B");
+	grafo->adicionaVertice("C");
+	grafo->adicionaVertice("D");
+	grafo->adicionaVertice("E");
+
+	grafo->conecta("A", "B");
+	ASSERT_FALSE(grafo->ehArvore());
+	grafo->conecta("A", "C");
+	ASSERT_FALSE(grafo->ehArvore());
+	grafo->conecta("C", "D");
+	ASSERT_FALSE(grafo->ehArvore());
+	grafo->conecta("C", "E");
+	ASSERT_TRUE(grafo->ehArvore());
+	grafo->conecta("E", "A");
+	ASSERT_FALSE(grafo->ehArvore());
 }

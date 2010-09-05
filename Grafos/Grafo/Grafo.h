@@ -21,6 +21,7 @@ private:
 	map<T const, list<T> > vertices;
 
 	set<T> procuraFechoTransitivo(T const &v, set<T> &visitados);
+	bool haCicloCom(T const &v, T const &vAtual, T const &vAnterior, set<T> &visitados);
 
 public:
 	Grafo();
