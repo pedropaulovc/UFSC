@@ -10,33 +10,33 @@
 
 #include <map>
 #include <list>
+#include <vector>
+#include <algorithm>
 using namespace std;
+using namespace __gnu_cxx;
 
 template <class T>
 class Digrafo {
 private:
-	map<T*, list<T*>*> vertices;
+	map<T const, list<T> > vertices;
 
 public:
 	Digrafo();
 	virtual ~Digrafo();
 
-	void adicionaVertice(T* v);
-	void removeVertice(T* v);
-	void conecta(T* v1, T* v2);
-	void desconecta(T* v1, T* v2);
+	void adicionaVertice(T const &v);
+	void removeVertice(T const &v);
+	void conecta(T const &v1, T const &v2);
+	void desconecta(T const &v1, T const &v2);
 
 	int obterOrdem();
-	list<T*> obterVertices();
-	list<T*> obterAdjacentes(T* v);
-	T*  obterVerticeAleatorio();
-	int obterGrau(T* v);
+	vector<T> obterVertices();
+	vector<T> obterSucessores(T const &v);
+	vector<T> obterAntecessores(T const &v);
+	T  obterVerticeAleatorio();
 
-	bool ehRegular();
-	bool ehCompleto();
-	bool obterFechoTransitivo(T* v);
-	bool ehConexo();
-	bool ehArvore();
+	int obterGrauEmissao(T const &v);
+	int obterGrauRecepcao(T const &v);
 
 };
 

@@ -13,7 +13,6 @@
 #include <vector>
 #include <set>
 using namespace std;
-using namespace __gnu_cxx;
 
 template <class T>
 class Grafo {

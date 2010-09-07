@@ -1,6 +1,4 @@
-#include <cstdio>
 #include <cstdlib>
-#include <iostream>
 #include <list>
 #include <set>
 #include "Grafo.h"

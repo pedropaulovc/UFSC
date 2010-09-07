@@ -5,11 +5,23 @@
  *      Author: pedropaulovc
  */
 
+#include <iostream>
 #include <gtest/gtest.h>
 #include "Grafo.h"
-#include <vector>
 
-int main(int argc, char **argv){
+void exibirIntroducao();
+
+int main(int argc, char **argv) {
+	exibirIntroducao();
+
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
+}
+
+void exibirIntroducao() {
+	cout << "INE5413 - GRAFOS" << endl;
+	cout << "IMPLEMENTAÇÃO DE ESTRUTURA BÁSICA DE GRAFOS" << endl;
+	cout
+			<< "ALUNOS: PEDRO PAULO VEZZÁ CAMPOS E TARCÍSIO EDUARDO MOREIRA CROCOMO"
+			<< endl;
 }
