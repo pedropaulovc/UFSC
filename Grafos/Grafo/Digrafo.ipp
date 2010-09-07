@@ -1,8 +1,10 @@
 /*
  * Digrafo.ipp
  *
- *  Created on: Sep 4, 2010
- *      Author: pedropaulo
+ *	INE5413 - Grafos
+ *  Alunos: Pedro Paulo Vezzá Campos e Tarcisio Eduardo Moreira Crocomo
+ *
+ *  Sobre a classe: Contém a implementação lógica da estrutura básica de um digrafo.
  */
 
 #ifndef DIGRAFO_IPP_
@@ -21,7 +23,7 @@ Digrafo<T>::~Digrafo() {
 
 template<class T>
 void Digrafo<T>::adicionaVertice(T const &v) {
-	list < T > lista = *(new list<T> ());
+	list<T> lista = *(new list<T> ());
 	this->vertices[v] = lista;
 }
 
@@ -47,7 +49,7 @@ int Digrafo<T>::obterOrdem() {
 
 template<class T>
 vector<T> Digrafo<T>::obterVertices() {
-	vector < T > v = *(new vector<T> ());
+	vector<T> v = *(new vector<T> ());
 	for (typename map<T, list<T> >::iterator it = vertices.begin(); it
 			!= vertices.end(); ++it) {
 		v.push_back(it->first);
@@ -57,13 +59,13 @@ vector<T> Digrafo<T>::obterVertices() {
 
 template<class T>
 T Digrafo<T>::obterVerticeAleatorio() {
-	vector < T > v = obterVertices();
+	vector<T> v = obterVertices();
 	return v[rand() % v.size()];
 }
 
 template<class T>
 vector<T> Digrafo<T>::obterSucessores(T const &v) {
-	vector < T > sucessores = *(new vector<T> ());
+	vector<T> sucessores = *(new vector<T> ());
 	copy(vertices[v].begin(), vertices[v].end(), back_inserter(sucessores));
 	return sucessores;
 }
@@ -76,7 +78,7 @@ vector<T> Digrafo<T>::obterAntecessores(T const &v) {
 	for (typename map<T, list<T> >::iterator it = vertices.begin(); it
 			!= vertices.end(); ++it) {
 		sucessores = it->second;
-		if(find(sucessores.begin(), sucessores.end(), v) != sucessores.end()){
+		if (find(sucessores.begin(), sucessores.end(), v) != sucessores.end()) {
 			antecessores.push_back(it->first);
 		}
 	}

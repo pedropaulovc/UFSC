@@ -1,3 +1,12 @@
+/*
+ * Grafo.ipp
+ *
+ *	INE5413 - Grafos
+ *  Alunos: Pedro Paulo Vezzá Campos e Tarcisio Eduardo Moreira Crocomo
+ *
+ *  Sobre a classe: Contém a implementação lógica da estrutura básica de um grafo.
+ */
+
 #include <cstdlib>
 #include <list>
 #include <set>

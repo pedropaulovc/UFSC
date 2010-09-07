@@ -1,8 +1,11 @@
 /*
  * Grafo.h
  *
- *  Created on: Aug 26, 2010
- *      Author: pedropaulovc
+ *	INE5413 - Grafos
+ *  Alunos: Pedro Paulo Vezzá Campos e Tarcisio Eduardo Moreira Crocomo
+ *
+ *  Sobre a classe: Contém as assinaturas dos métodos da estrutura básica
+ *  de um grafo.
  */
 
 #ifndef GRAFO_H_

@@ -1,8 +1,10 @@
 /*
  * TestesDigrafo.cpp
  *
- *  Created on: Sep 3, 2010
- *      Author: pedropaulo
+ *	INE5413 - Grafos
+ *  Alunos: Pedro Paulo Vezzá Campos e Tarcisio Eduardo Moreira Crocomo
+ *
+ *  Sobre a classe: Contém os testes unitários da classe Digrafo.
  */
 
 #include <gtest/gtest.h>

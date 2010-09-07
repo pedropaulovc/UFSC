@@ -1,8 +1,13 @@
 /*
  * Main.cpp
  *
- *  Created on: Aug 26, 2010
- *      Author: pedropaulovc
+ *	INE5413 - Grafos
+ *  Alunos: Pedro Paulo Vezzá Campos e Tarcisio Eduardo Moreira Crocomo
+ *
+ *  Sobre a classe: Exibe a apresentação do programa e invoca a rotina
+ *  de execução dos testes unitários.
+ *
+ *  Dependências do programa: Bibliotecas "gtest" e "pthread".
  */
 
 #include <iostream>
@@ -22,6 +27,6 @@ void exibirIntroducao() {
 	cout << "INE5413 - GRAFOS" << endl;
 	cout << "IMPLEMENTAÇÃO DE ESTRUTURA BÁSICA DE GRAFOS" << endl;
 	cout
-			<< "ALUNOS: PEDRO PAULO VEZZÁ CAMPOS E TARCÍSIO EDUARDO MOREIRA CROCOMO"
+			<< "ALUNOS: PEDRO PAULO VEZZÁ CAMPOS E TARCISIO EDUARDO MOREIRA CROCOMO"
 			<< endl;
 }

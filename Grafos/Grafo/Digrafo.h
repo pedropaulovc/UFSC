@@ -1,8 +1,11 @@
 /*
  * Digrafo.h
  *
- *  Created on: Sep 4, 2010
- *      Author: pedropaulo
+ *	INE5413 - Grafos
+ *  Alunos: Pedro Paulo Vezzá Campos e Tarcisio Eduardo Moreira Crocomo
+ *
+ *  Sobre a classe: Contém as assinaturas dos métodos da estrutura básica
+ *  de um digrafo.
  */
 
 #ifndef DIGRAFO_H_
