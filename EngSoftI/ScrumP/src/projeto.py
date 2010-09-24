@@ -4,6 +4,7 @@ Created on 24/09/2010
 
 @author: pepe
 '''
+from estoria import Estoria
 
 class Projeto(object):
     '''
@@ -15,7 +16,8 @@ class Projeto(object):
         self.__time = time
         self.__productOwner = productOwner
         self.__scrumMaster = scrumMaster
-        self.__id = id        
+        self.__id = id
+        self.__prodBackLog = {}
         
     def obterNome(self):
         return self.__nome
@@ -42,3 +44,7 @@ class Projeto(object):
             return True
         
         return False
+    
+    def adicionarEstoria(self,id,tarefas):
+        #FIXME: gerar id
+        self.__prodBackLog[id] = Estoria(id, tarefas)
