@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_Q_Nuscf7Ed-4PPLd9Tx4FQ" name="ClassesProjeto">
+  <elementImport xmi:id="_RD4zUMf7Ed-4PPLd9Tx4FQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_REFnoMf7Ed-4PPLd9Tx4FQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_REFnocf7Ed-4PPLd9Tx4FQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_REFnosf7Ed-4PPLd9Tx4FQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_bDHckMf7Ed-4PPLd9Tx4FQ" name="Projeto"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_bjp90Mf7Ed-4PPLd9Tx4FQ" name="ProductBackLog">
+    <ownedAttribute xmi:id="__LTO4Mf_Ed-4PPLd9Tx4FQ" name="estorias" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_cKgicMf7Ed-4PPLd9Tx4FQ" name="Tarefa">
+    <ownedAttribute xmi:id="_2urn4Mf_Ed-4PPLd9Tx4FQ" name="nivelDificuldade" aggregation="composite"/>
+    <ownedAttribute xmi:id="_3_l2IMf_Ed-4PPLd9Tx4FQ" name="tempoEstimado" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_co5uoMf7Ed-4PPLd9Tx4FQ" name="Estoria">
+    <ownedAttribute xmi:id="_z3c8EMf_Ed-4PPLd9Tx4FQ" name="tarefas" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_dG55QMf7Ed-4PPLd9Tx4FQ" name="Sprint">
+    <ownedAttribute xmi:id="_F_Az0Mf_Ed-4PPLd9Tx4FQ" name="SprintBackLog" aggregation="composite">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_kNUlgMf_Ed-4PPLd9Tx4FQ" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_uMWacMf_Ed-4PPLd9Tx4FQ" name="duracao" aggregation="composite"/>
+    <ownedAttribute xmi:id="_vWAxMMf_Ed-4PPLd9Tx4FQ" name="burnDownChart" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_422VoMf8Ed-4PPLd9Tx4FQ" name="SprintBackLog"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_7T4_0Mf8Ed-4PPLd9Tx4FQ" name="Usuario" isAbstract="true">
+    <ownedAttribute xmi:id="_Q_0gwMf9Ed-4PPLd9Tx4FQ" name="login" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_S4nOYMf9Ed-4PPLd9Tx4FQ" name="senha" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_TL1FUMf9Ed-4PPLd9Tx4FQ" name="nome" visibility="private" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_F-BAMMf9Ed-4PPLd9Tx4FQ" name="TeamMember">
+    <generalization xmi:id="_YdE8gMf9Ed-4PPLd9Tx4FQ" general="_7T4_0Mf8Ed-4PPLd9Tx4FQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_G8CusMf9Ed-4PPLd9Tx4FQ" name="ScrumMaster">
+    <generalization xmi:id="_W3CLwMf9Ed-4PPLd9Tx4FQ" general="_7T4_0Mf8Ed-4PPLd9Tx4FQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_IVrbIMf9Ed-4PPLd9Tx4FQ" name="ProductOwner">
+    <generalization xmi:id="_X4zx0Mf9Ed-4PPLd9Tx4FQ" general="_7T4_0Mf8Ed-4PPLd9Tx4FQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_JguR8Mf9Ed-4PPLd9Tx4FQ" name="Administrador">
+    <generalization xmi:id="_ZEycwMf9Ed-4PPLd9Tx4FQ" general="_7T4_0Mf8Ed-4PPLd9Tx4FQ"/>
+  </packagedElement>
+</uml:Package>
