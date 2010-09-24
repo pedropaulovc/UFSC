@@ -7,11 +7,12 @@ Created on 24/09/2010
 from excecoes import UsuarioExistente, UsuarioNaoExistente
 from projeto import Projeto
 from usuario import Usuario
-import uuid
+from identidade import Id
 
 class ScrumP(object):    
     
     def __init__(self):
+        self.__gerarId = Id()
         self.__listaUsuarios = {}
         self.__listaProjetos= {}
     
@@ -29,7 +30,7 @@ class ScrumP(object):
         for usuario in membros:
             if not self.__listaUsuarios.has_key(usuario):
                 raise UsuarioNaoExistente
-        id = uuid.uuid4()
+        id = self.__gerarId.gerarIdProjeto()
         projeto = Projeto(nome, time, prodOwn, scrumMaster, id)
         self.__listaProjetos[id] = projeto
         return id
