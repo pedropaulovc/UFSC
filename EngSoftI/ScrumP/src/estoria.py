@@ -12,11 +12,11 @@ class Estoria(object):
 
 
     def __init__(self,id,tarefas):
-        self.__tarefas = {}
         self.__id = id
+        self.__tarefas = tarefas
 
     def obterId(self):
         return self.__id
     
-    def criarEstoria(self,tarefas):
-        self.__init__(id,tarefas)
+    def obterTarefas(self):
+        return self.__tarefas

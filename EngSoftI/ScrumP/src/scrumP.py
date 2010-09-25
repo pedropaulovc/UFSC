@@ -8,7 +8,6 @@ from excecoes import UsuarioExistente, UsuarioNaoExistente, ProjetoNaoExistente
 from projeto import Projeto
 from usuario import Usuario
 from identidade import Id
-from tarefa import Tarefa
 
 class ScrumP(object):    
     
@@ -35,13 +34,14 @@ class ScrumP(object):
         self.__listaProjetos[id] = projeto
         return id
     
-    def criarEstoria(self,tarefas,idProjeto):
-        id = self.__gerarId.gerarIdEstoria()
-        self.__listaProjetos[idProjeto].criarEstoria(id,tarefas)
+    def criarEstoria(self,idProjeto,tarefas):
+        return self.__listaProjetos[idProjeto].adicionarEstoria(tarefas)
     
-    def criarTarefa(self, dificuldade, tempoEst, nome, requisitos=None):
-        id = Id.gerarIdTarefa()
-        return Tarefa(dificuldade, tempoEst, nome, requisitos)
+    def obterEstoria(self,idProjeto,idEstoria):
+        return self.__listaProjetos[idProjeto].obterEstoria(idEstoria)
+    
+    def criarTarefa(self,idProjeto, dificuldade, tempoEst, nome, requisitos=[]):
+        return self.__listaProjetos[idProjeto].adicionarTarefa(dificuldade, tempoEst, nome, requisitos)
     
     def obterListaProjetosParticipados(self, login):
         participados = []
@@ -49,6 +49,6 @@ class ScrumP(object):
             if projeto.participa(login):
                 participados.append(projeto.obterId())
         return participados
-    
+        
     #TODO: criar projeto atual, refatorar, verificar criação estorias e tarefas 
     #Ideia para refatoração: Criar fábricas de projetos, usuários, etc.

@@ -23,31 +23,31 @@ class Id(object):
     __backLog = 0
     __estoria = 0
     
-    def gerarIdProjeto():
+    def gerarIdProjeto(): #@NoSelf
         id = "PROJ-" + str(Id.__projeto)
         Id.__projeto += 1 
         return id
     gerarIdProjeto = Callable(gerarIdProjeto)
     
-    def gerarIdSprint():
+    def gerarIdSprint(): #@NoSelf
         id = "SPR-" + str(Id.__sprint)
         Id.__sprint += 1 
         return id
     gerarIdSprint = Callable(gerarIdSprint)
     
-    def gerarIdTarefa():
+    def gerarIdTarefa(): #@NoSelf
         id = "TAR-" + str(Id.__tarefa)
         Id.__tarefa += 1 
         return id
     gerarIdTarefa = Callable(gerarIdTarefa)
     
-    def gerarIdBackLog():
+    def gerarIdBackLog(): #@NoSelf
         id = "BKL-" + str(Id.__backLog)
         Id.__backLog += 1 
         return id
     gerarIdBackLog = Callable(gerarIdBackLog)
     
-    def gerarIdEstoria():
+    def gerarIdEstoria(): #@NoSelf
         id = "EST-" + str(Id.__estoria)
         Id.__estoria += 1 
         return id
