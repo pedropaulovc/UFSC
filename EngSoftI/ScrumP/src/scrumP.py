@@ -4,7 +4,7 @@ Created on 24/09/2010
 
 @author: pepe
 '''
-from excecoes import UsuarioExistente, UsuarioNaoExistente
+from excecoes import UsuarioExistente, UsuarioNaoExistente, ProjetoNaoExistente
 from projeto import Projeto
 from usuario import Usuario
 from identidade import Id
@@ -13,11 +13,10 @@ from tarefa import Tarefa
 class ScrumP(object):    
     
     def __init__(self):
-        self.__gerarId = Id()
         self.__listaUsuarios = {}
-        self.__listaProjetos= {}
+        self.__listaProjetos = {}
     
-    def criarUsuario(self,nome,login, senha):
+    def criarUsuario(self, nome, login, senha):
         if not self.__listaUsuarios.has_key(login):
             usuario = Usuario(nome, login, senha) 
             self.__listaUsuarios[login] = usuario
@@ -31,7 +30,7 @@ class ScrumP(object):
         for usuario in membros:
             if not self.__listaUsuarios.has_key(usuario):
                 raise UsuarioNaoExistente
-        id = self.__gerarId.gerarIdProjeto()
+        id = Id.gerarIdProjeto()
         projeto = Projeto(nome, time, prodOwn, scrumMaster, id)
         self.__listaProjetos[id] = projeto
         return id
@@ -40,8 +39,8 @@ class ScrumP(object):
         id = self.__gerarId.gerarIdEstoria()
         self.__listaProjetos[idProjeto].criarEstoria(id,tarefas)
     
-    def criarTarefa(self,dificuldade,tempoEst,nome, requisitos=None):
-        id = self.__gerarId.gerarIdTarefa()
+    def criarTarefa(self, dificuldade, tempoEst, nome, requisitos=None):
+        id = Id.gerarIdTarefa()
         return Tarefa(dificuldade, tempoEst, nome, requisitos)
     
     def obterListaProjetosParticipados(self, login):
@@ -52,3 +51,4 @@ class ScrumP(object):
         return participados
     
     #TODO: criar projeto atual, refatorar, verificar criação estorias e tarefas 
+    #Ideia para refatoração: Criar fábricas de projetos, usuários, etc.

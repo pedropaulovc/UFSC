@@ -3,8 +3,16 @@
 Created on 24/09/2010
 
 @author: pepe
+
+Receita de métodos e atributos estáticos retirados de
+http://code.activestate.com/recipes/52304-static-methods-aka-class-methods-in-python/
+Pydev reclama dos métodos não terem self mas código funciona, é possível desabilitar
+os erros
 '''
-#FIXME: estatic
+class Callable:
+    def __init__(self, anycallable):
+        self.__call__ = anycallable
+
 class Id(object):
     '''
     classdocs
@@ -15,30 +23,32 @@ class Id(object):
     __backLog = 0
     __estoria = 0
     
-    def __init__(self):
-        self.__projeto = 0    
-    
-    def gerarIdProjeto(self):
-        id = "PROJ-" + str(self.__class__.__projeto)
-        self.__class__.__projeto += 1 
+    def gerarIdProjeto():
+        id = "PROJ-" + str(Id.__projeto)
+        Id.__projeto += 1 
         return id
+    gerarIdProjeto = Callable(gerarIdProjeto)
     
-    def gerarIdSprint(self):
-        id = "SPR-" + str(self.__class__.__sprint)
-        self.__class__.__sprint += 1 
+    def gerarIdSprint():
+        id = "SPR-" + str(Id.__sprint)
+        Id.__sprint += 1 
         return id
+    gerarIdSprint = Callable(gerarIdSprint)
     
-    def gerarIdTarefa(self):
-        id = "TAR-" + str(self.__class__.__tarefa)
-        self.__class__.__tarefa += 1 
+    def gerarIdTarefa():
+        id = "TAR-" + str(Id.__tarefa)
+        Id.__tarefa += 1 
         return id
+    gerarIdTarefa = Callable(gerarIdTarefa)
     
-    def gerarIdBackLog(self):
-        id = "BKL-" + str(self.__class__.__backLog)
-        self.__class__.__backLog += 1 
+    def gerarIdBackLog():
+        id = "BKL-" + str(Id.__backLog)
+        Id.__backLog += 1 
         return id
+    gerarIdBackLog = Callable(gerarIdBackLog)
     
-    def gerarIdEstoria(self):
-        id = "EST-" + str(self.__class__.__estoria)
-        self.__class__.__estoria += 1 
+    def gerarIdEstoria():
+        id = "EST-" + str(Id.__estoria)
+        Id.__estoria += 1 
         return id
+    gerarIdEstoria = Callable(gerarIdEstoria)

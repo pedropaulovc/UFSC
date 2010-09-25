@@ -13,3 +13,6 @@ class UsuarioExistente(Excecoes):
 
 class UsuarioNaoExistente(Excecoes):
     pass
+
+class ProjetoNaoExistente(Excecoes):
+    pass
