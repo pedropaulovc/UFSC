@@ -21,3 +21,10 @@ class ListaProjetos(object):
         
     def obterEstoria(self,idProjeto,idEstoria):
         return self.__listaProjetos.get(idProjeto).obterEstoria(idEstoria)
+    
+    def obterProjetosParticipados(self, login):
+        participados = []
+        for projeto in self.__listaProjetos.values():
+            if projeto.usuarioParticipa(login):
+                participados.append(projeto.obterId())
+        return participados

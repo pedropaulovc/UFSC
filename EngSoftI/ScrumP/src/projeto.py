@@ -37,7 +37,7 @@ class Projeto(object):
     def obterId(self):
         return self.__id
     
-    def participa(self, login):
+    def usuarioParticipa(self, login):
         for usuario in self.__time:
             if usuario == login:
                 return True

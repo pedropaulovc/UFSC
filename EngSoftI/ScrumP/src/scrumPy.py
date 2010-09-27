@@ -10,16 +10,17 @@ from fabricaProjetos import FabricaProjetos
 from listaProjetos import ListaProjetos
 from listaUsuarios import ListaUsuarios
 
-class ScrumP(object):    
+class ScrumPy(object):    
     
     def __init__(self):
         self.__listaUsuarios = ListaUsuarios()
         self.__listaProjetos = ListaProjetos()
     
-    def criarUsuario(self, nome, login, senha):
+    def cadastrarUsuario(self, nome, login, senha):
         self.__listaUsuarios.cadastrarUsuario(nome, login, senha)
     
     def criarProjeto(self, nome, time, prodOwn, scrumMaster):
+        self.__listaUsuarios.contemUsuarios(time)
         projeto = FabricaProjetos.criarProjeto(nome, time, prodOwn, scrumMaster)
         self.__listaProjetos.adicionarProjeto(projeto)
     
@@ -33,12 +34,8 @@ class ScrumP(object):
     def criarTarefa(self,idProjeto, dificuldade, tempoEst, nome, requisitos=[]):
         return self.__listaProjetos.criarTarefa(idProjeto,dificuldade, tempoEst, nome, requisitos)
     
-    def obterListaProjetosParticipados(self, login):
-        participados = []
-        for projeto in self.__listaProjetos.values():
-            if projeto.participa(login):
-                participados.append(projeto.obterId())
-        return participados
+    def obterProjetosParticipados(self, login):
+        return self.__listaProjetos.obterProjetosParticipados(login)
         
     #TODO: criar projeto atual, refatorar 
     #Ideia para refatoração: Criar fábricas de projetos, usuários, etc.

@@ -4,10 +4,10 @@ Created on 24/09/2010
 
 @author: pepe
 '''
-from scrumP import ScrumP
+from scrumPy import ScrumPy
 
 if __name__ == '__main__':
-    instScrump = ScrumP()
+    instScrump = ScrumPy()
     instScrump.criarUsuario("Um", "um", "123")
     instScrump.criarUsuario("Dois", "dois", "123")
     instScrump.criarUsuario("ProdOwn", "prod", "123")

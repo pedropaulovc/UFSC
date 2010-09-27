@@ -11,7 +11,7 @@ class Excecoes(Exception):
 class UsuarioJaExiste(Excecoes):
     pass
 
-class UsuarioNaoExistente(Excecoes):
+class UsuarioNaoExiste(Excecoes):
     pass
 
 class ProjetoNaoExistente(Excecoes):
