@@ -20,5 +20,3 @@ class Tarefa(object):
         
     def obterId(self):
         return self.__id
-    
-    

@@ -8,7 +8,7 @@ Created on 24/09/2010
 class Excecoes(Exception):
     pass
 
-class UsuarioExistente(Excecoes):
+class UsuarioJaExiste(Excecoes):
     pass
 
 class UsuarioNaoExistente(Excecoes):

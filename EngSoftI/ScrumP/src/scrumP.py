@@ -4,44 +4,34 @@ Created on 24/09/2010
 
 @author: pepe
 '''
-from excecoes import UsuarioExistente, UsuarioNaoExistente, ProjetoNaoExistente
-from projeto import Projeto
-from usuario import Usuario
-from identidade import Id
+
+from fabricaEstorias import FabricaEstorias
+from fabricaProjetos import FabricaProjetos
+from listaProjetos import ListaProjetos
+from listaUsuarios import ListaUsuarios
 
 class ScrumP(object):    
     
     def __init__(self):
-        self.__listaUsuarios = {}
-        self.__listaProjetos = {}
+        self.__listaUsuarios = ListaUsuarios()
+        self.__listaProjetos = ListaProjetos()
     
     def criarUsuario(self, nome, login, senha):
-        if not self.__listaUsuarios.has_key(login):
-            usuario = Usuario(nome, login, senha) 
-            self.__listaUsuarios[login] = usuario
-        else:
-            raise UsuarioExistente
+        self.__listaUsuarios.cadastrarUsuario(nome, login, senha)
     
     def criarProjeto(self, nome, time, prodOwn, scrumMaster):
-        membros = time
-        membros.append(prodOwn)
-        membros.append(scrumMaster)
-        for usuario in membros:
-            if not self.__listaUsuarios.has_key(usuario):
-                raise UsuarioNaoExistente
-        id = Id.gerarIdProjeto()
-        projeto = Projeto(nome, time, prodOwn, scrumMaster, id)
-        self.__listaProjetos[id] = projeto
-        return id
+        projeto = FabricaProjetos.criarProjeto(nome, time, prodOwn, scrumMaster)
+        self.__listaProjetos.adicionarProjeto(projeto)
     
     def criarEstoria(self,idProjeto,tarefas):
-        return self.__listaProjetos[idProjeto].adicionarEstoria(tarefas)
+        estoria = FabricaEstorias.criarEstoria(tarefas)
+        self.__listaProjetos.adicionarEstoria(estoria, idProjeto)
     
     def obterEstoria(self,idProjeto,idEstoria):
-        return self.__listaProjetos[idProjeto].obterEstoria(idEstoria)
+        return self.__listaProjetos.obterEstoria(idProjeto, idEstoria)
     
     def criarTarefa(self,idProjeto, dificuldade, tempoEst, nome, requisitos=[]):
-        return self.__listaProjetos[idProjeto].adicionarTarefa(dificuldade, tempoEst, nome, requisitos)
+        return self.__listaProjetos.criarTarefa(idProjeto,dificuldade, tempoEst, nome, requisitos)
     
     def obterListaProjetosParticipados(self, login):
         participados = []
@@ -50,5 +40,5 @@ class ScrumP(object):
                 participados.append(projeto.obterId())
         return participados
         
-    #TODO: criar projeto atual, refatorar, verificar criação estorias e tarefas 
+    #TODO: criar projeto atual, refatorar 
     #Ideia para refatoração: Criar fábricas de projetos, usuários, etc.
