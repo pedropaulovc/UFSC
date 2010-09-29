@@ -11,7 +11,7 @@ class Estoria(object):
     '''
 
 
-    def __init__(self,id,tarefas):
+    def __init__(self,id,nome,tarefas):
         self.__id = id
         self.__tarefas = tarefas
 

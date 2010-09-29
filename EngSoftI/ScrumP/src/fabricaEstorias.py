@@ -25,9 +25,9 @@ class FabricaEstorias(object):
         return id
     __gerarIdEstoria = Callable(__gerarIdEstoria)
     
-    def criarEstoria(tarefas): #@NoSelf
+    def criarEstoria(nome,tarefas): #@NoSelf
         id = FabricaEstorias.__gerarIdEstoria()
-        estoria = Estoria(id,tarefas)
+        estoria = Estoria(id,nome,tarefas)
         return estoria
     criarEstoria = Callable(criarEstoria)
     
