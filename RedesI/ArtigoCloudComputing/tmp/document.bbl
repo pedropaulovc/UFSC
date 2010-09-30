@@ -1,0 +1,99 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{1.42.2.1 }
+
+\bibitem{above-clouds}
+\abntrefinfo{Armbrust et al.}{ARMBRUST et al.}{2009}
+{ARMBRUST, M. et al. \emph{Above the Clouds: A Berkeley View of Cloud
+  Computing}. Feb 2009. Dispon{\'\i}vel em:
+  $<$\url{http://www.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-28.html}$>%
+$.}
+
+\bibitem{stallman-cloud}
+\abntrefinfo{Johnson}{JOHNSON}{2009}
+{JOHNSON, B. \emph{Cloud computing is a trap, warns GNU founder Richard
+  Stallman}. setembro 2009.
+Dispon{\'\i}vel em:
+  $<$\url{http://www.guardian.co.uk/technology/2008/sep/29/cloud.computing.ric%
+hard.stallman}$>$.}
+
+\bibitem{controlling-data-in-cloud}
+\abntrefinfo{Chow et al.}{CHOW et al.}{2009}
+{CHOW, R. et al. Controlling data in the cloud: outsourcing computation without
+  outsourcing control. In:  \emph{CCSW '09: Proceedings of the 2009 ACM
+  workshop on Cloud computing security}. New York, NY, USA: ACM, 2009. p.
+  85--90.
+ISBN 978-1-60558-784-4.}
+
+\bibitem{whats-new-about-cloud-security}
+\abntrefinfo{Chen, Paxson e Katz}{CHEN; PAXSON; KATZ}{2010}
+{CHEN, Y.; PAXSON, V.; KATZ, R.~H. \emph{What's New About Cloud Computing
+  Security?}
+[S.l.], 2010.}
+
+\bibitem{technical-security-issues}
+\abntrefinfo{Jensen et al.}{JENSEN et al.}{2009}
+{JENSEN, M. et al. On technical security issues in cloud computing. In:
+  \emph{CLOUD '09: Proceedings of the 2009 IEEE International Conference on
+  Cloud Computing}. Washington, DC, USA: IEEE Computer Society, 2009. p.
+  109--116.
+ISBN 978-0-7695-3840-2.}
+
+\bibitem{eucalyptus-system}
+\abntrefinfo{Nurmi et al.}{NURMI et al.}{2009}
+{NURMI, D. et al. The eucalyptus open-source cloud-computing system. In:
+  \emph{CCGRID '09: Proceedings of the 2009 9th IEEE/ACM International
+  Symposium on Cluster Computing and the Grid}. Washington, DC, USA: IEEE
+  Computer Society, 2009. p. 124--131.
+ISBN 978-0-7695-3622-4.}
+
+\bibitem{towards-cloud-definition}
+\abntrefinfo{Vaquero et al.}{VAQUERO et al.}{2009}
+{VAQUERO, L.~M. et al. A break in the clouds: towards a cloud definition.
+\emph{SIGCOMM Comput. Commun. Rev.}, ACM, New York, NY, USA, v.~39, n.~1, p.
+  50--55, 2009.
+ISSN 0146-4833.}
+
+\bibitem{cloud-computing-grid-computing-compared}
+\abntrefinfo{Foster et al.}{FOSTER et al.}{2008}
+{FOSTER, I. et al. \emph{Cloud Computing and Grid Computing 360-Degree
+  Compared}. nov. 2008.
+1 -10~p.}
+
+\bibitem{cloud-issues-research-implementations}
+\abntrefinfo{Vouk}{VOUK}{2008}
+{VOUK, M. Cloud computing - issues, research and implementations. In:
+  \emph{Information Technology Interfaces, 2008. ITI 2008. 30th International
+  Conference on}. [S.l.: s.n.], 2008. p. 31 --40.
+ISSN 1330-1012.}
+
+\bibitem{case-for-cloud-computing}
+\abntrefinfo{Grossman}{GROSSMAN}{2009}
+{GROSSMAN, R. The case for cloud computing.
+\emph{IT Professional}, v.~11, n.~2, p. 23 --27, mar. 2009.
+ISSN 1520-9202.}
+
+\bibitem{market-oriented-cloud-hype-reality}
+\abntrefinfo{Buyya, Yeo e Venugopal}{BUYYA; YEO; VENUGOPAL}{2008}
+{BUYYA, R.; YEO, C.~S.; VENUGOPAL, S. Market-oriented cloud computing: Vision,
+  hype, and reality for delivering it services as computing utilities. In:
+  \emph{High Performance Computing and Communications, 2008. HPCC '08. 10th
+  IEEE International Conference on}. [S.l.: s.n.], 2008. p. 5 --13.}
+
+\bibitem{ensuring-data-storage-security}
+\abntrefinfo{Wang et al.}{WANG et al.}{2009}
+{WANG, C. et al. Ensuring data storage security in cloud computing. In:
+  \emph{Quality of Service, 2009. IWQoS. 17th International Workshop on}.
+  [S.l.: s.n.], 2009. p. 1 --9.
+ISSN 1548-615X.}
+
+\bibitem{new-network-security-cloud}
+\abntrefinfo{Huang e Yang}{HUANG; YANG}{2010}
+{HUANG, W.; YANG, J. New network security based on cloud computing. In:
+  \emph{Education Technology and Computer Science (ETCS), 2010 Second
+  International Workshop on}. [S.l.: s.n.], 2010. v.~3, p. 604 --609.}
+
+\end{thebibliography}

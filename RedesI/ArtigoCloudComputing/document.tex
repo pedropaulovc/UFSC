@@ -1,0 +1,93 @@
+\documentclass[brazil,12pt]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\makeatletter
+\usepackage{babel}
+\makeatother
+\usepackage[pdfborder={0 0 0}]{hyperref}
+
+\begin{document}
+
+\title{Um Panorama das Técnicas de Segurança em Cloud Computing}
+\author{Pedro Paulo Vezzá Campos}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+A Computação em Nuvem, ou Cloud Computing vem avançando tanto no mercado
+empresarial quanto para usuários finais como uma forma de
+reduzir custos e facilitar a manutenção ao delegá-la a empresas especializadas.
+Porém, ao mesmo tempo surgem diversos questionamentos quanto à segurança dos dados confiados a
+empresas terceiras. Neste artigo em formato de \emph{survey} será abordado o
+estado da arte nas técnicas de proteção produzidas para Cloud Computing.  
+\end{abstract}
+
+\section{Motivação}
+Cloud Computing é um novo nicho de mercado que tornou-se mais atrativo com o
+barateamento de insumos necessários à computação como energia, poder de
+processamento, armazenamento e transmissão de dados, permitindo uma economia de
+escala \cite{above-clouds}. Através da Computação em nuvem, surgiu a noção de
+computação como um serviço, elástico, virtualmente ilimitado e pago apenas pela
+porção realmente utilizada, muito similar ao sistema de distribuição elétrica.
+
+Diante desse cenário, \emph{players} como Amazon, Google,
+Microsoft, HP, IBM dentre outros, adentraram essa área oferecendo diversas
+modalidades de Cloud Computing, desde a mais abstrata, SaaS ou Software como
+Serviço, na qual é fornecido um software pronto para ser utilizado utilizando
+recursos da nuvem, até a mais básica, IaaS ou Infraestrutura como Serviço, que
+permitem uma personalização da computação desde o nível de \emph{kernel} até
+camadas superiores.
+
+Por outro lado, críticas e dúvidas são levantadas por opositores dessa
+tecnologia. Um exemplo é Richard Stallman, evangelista do software livre, que
+afirma em uma tradução livre:
+
+\begin{quote}
+``É estupidez. É pior que estupidez: É uma campanha de marketing. Alguém está
+dizendo que isso é inevitável — e sempre que você ouvir alguém falando isso, é
+muito provável que seja um conjunto de empresas realizando campanha para
+torná-lo verdade.'' \cite{stallman-cloud}
+\end{quote}
+
+Em \cite{controlling-data-in-cloud} são apresentados diversas preocupações com
+Cloud Computing, categorizadas segundo a listagem abaixo. Ao longo desse
+trabalho serão apresentados e discutidos os itens contidos em cada uma dessas
+categorias.
+\begin{itemize}
+  \item Segurança tradicional
+  \item Disponibilidade
+  \item Controle de dados por terceiros
+\end{itemize}
+
+\section{Objetivos}
+Neste trabalho serão apresentados inicialmente os conceitos fundamentais da área
+de Cloud Computing como forma de fundamentação para as próximas seções.
+Posteriormente, serão apresentados os mais importantes tópicos de preocupação de
+usuários e administradores de sistemas a respeito da Computação nas Nuvens.
+Por fim, serão apresentados os últimos avanços na área de segurança,
+apresentados por diversos pesquisadores da área.
+
+\section{Trabalhos Correlatos}
+
+Em \cite{whats-new-about-cloud-security} há uma comparação com técnicas antigas
+e recentes de proteção em sistemas computacionais
+
+-- Cont --
+
+Já em \cite{controlling-data-in-cloud} os autores discorrem elencando 
+
+
+\section{Conceitos básicos}
+
+\section{Técnicas tradicionais de segurança}
+
+\section{As novas possibilidades de ataques e defesas}
+
+
+
+security as a service -> frameworks para segurança, criptografia
+\nocite{*}
+\bibliographystyle{abnt-num}
+\bibliography{bibliografia}
+\end{document}
