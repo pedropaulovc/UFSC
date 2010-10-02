@@ -1,22 +1,13 @@
 #-*- coding: utf-8 -*-
-'''
-Created on 24/09/2010
-
-@author: pepe
-'''
-
 class Estoria(object):
-    '''
-    classdocs
-    '''
+	def __init__(self, nome, tarefas, id, descricao):
+		self.__nome = nome
+		self.__tarefas = tarefas
+		self.__id = id
+		self.__descricao = descricao
 
+	def obterTarefas(self):
+		return self.__tarefas
 
-    def __init__(self,id,nome,tarefas):
-        self.__id = id
-        self.__tarefas = tarefas
-
-    def obterId(self):
-        return self.__id
-    
-    def obterTarefas(self):
-        return self.__tarefas
+	def obterId(self):
+		return self.__id

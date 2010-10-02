@@ -1,5 +1,6 @@
+#-*- coding: utf-8 -*-
 '''
-Created on 24/09/2010
+Created on 02/10/2010
 
-@author: pepe
+@author: PedroPaulo
 '''
