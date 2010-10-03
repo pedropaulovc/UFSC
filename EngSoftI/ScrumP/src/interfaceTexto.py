@@ -6,6 +6,7 @@ Created on 02/10/2010
 '''
 from scrumPy import ScrumPy
 def main():
+    exibirIntroducao()
     scrumPy = ScrumPy()
     
     ##################
@@ -103,6 +104,7 @@ def main():
         
 
 def exibirMenu():
+    print "Escolha uma opção:"
     print "cu - Criar Usuário"
     print "lu - Logar Usuário"
     print "ou - Obter Usuários"
@@ -116,6 +118,10 @@ def exibirMenu():
     print "ct - Criar Tarefa"
     print "mtc - Marcar Tarefa como Concluída"
     
+def exibirIntroducao():
+    print "INE5417 - ENGENHARIA DE SOFTWARE I"
+    print "ITERAÇÃO 1 - SCRUMPY"
+    print "ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI\n"
 
 if __name__ == "__main__":
     main()
