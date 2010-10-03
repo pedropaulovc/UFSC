@@ -30,7 +30,8 @@ def main():
             login = None
             while login != "":
                 login = raw_input()
-                time += login
+                if login != "":
+                    time += login
             prodOwner = raw_input("Forneça o Product Owner: ")
             scrumMaster = raw_input("Forneça o Scrum Master: ")
             scrumPy.criarProjeto(nome, time, prodOwner, scrumMaster)
@@ -42,22 +43,50 @@ def main():
         elif opcao == "oe":
             print scrumPy.obterEstorias()
         elif opcao == "csb":
-#            duracao = int(raw_input("Forneça a duração: "))
-#            print "Forneça uma id de estória por linha. Uma linha em branco encerra a lista"
-#            estoriasEscolhidas = []
-#            estoria = None
-#            while estoria != "":
-#                estoria = raw_input()
-#                estoriasEscolhidas += estoria
-#            print "Forneça uma id de estória por linha. Uma linha em branco encerra a lista"
-#            scrumPy.criarSprintBackLog(duracao, estoriasEscolhidas, mapaTarefasMembros)
-            pass
+            duracao = int(raw_input("Forneça a duração: "))
+            print "Forneça uma id de estória por linha. Uma linha em branco encerra a lista"
+            estoriasEscolhidas = []
+            estoria = None
+            while estoria != "":
+                estoria = raw_input()
+                if estoria != "":
+                    estoriasEscolhidas += estoria
+            print "Forneça uma id de tarefa e um login separados por vírgula por linha. Uma linha em branco encerra a lista"
+            mapaTarefasMembros = {}
+            linhaStr = None
+            while linhaStr != "":
+                linhaStr = raw_input()
+                if linhaStr != "":
+                    linha = linhaStr.split(",")
+                    mapaTarefasMembros[linha[0]] = linha[1]
+            scrumPy.criarSprintBackLog(duracao, estoriasEscolhidas, mapaTarefasMembros)
         elif opcao == "ot":
-            pass
+            tarefas = []
+            tarefas = scrumPy.obterTarefas()
+            for idTarefa in tarefas:
+                print idTarefa
         elif opcao == "ce":
-            pass
+            nome = raw_input("Forneça o nome: ")
+            descricao = raw_input("Forneça a descrição: ")
+            print "Forneça um idTarefa por linha. Uma linha em branco encerra a lista"
+            tarefas = []
+            id = None
+            while login != "":
+                id = raw_input()
+                tarefas += id
+            scrumPy.criarEstoria(nome, descricao, tarefas)
         elif opcao == "ct":
-            pass
+            nome = raw_input("Forneça o nome: ")
+            descricao = raw_input("Forneça a descricao: ")
+            dificuldade = raw_input("Forneça a dificuldade: ")
+
+            print "Forneça um idTarefa por linha. Uma linha em branco encerra a lista"
+            tarefas = []
+            id = None
+            while login != "":
+                id = raw_input()
+                tarefas += id
+            scrumPy.criarTarefa(nome, descricao, dificuldade, tarefas)
         elif opcao == "mtc":
             scrumPy.obterTarefas()
             idTarefa = raw_input("Forneça o IdTarefa: ")
