@@ -8,6 +8,13 @@ from scrumPy import ScrumPy
 def main():
     scrumPy = ScrumPy()
     
+    ##################
+    ##Bloco de aceleração de input. Remover antes do release##
+    scrumPy.cadastrarUsuario("Pedro Paulo", "pp", "pp")
+    scrumPy.logarUsuario("pp", "pp")
+    scrumPy.criarProjeto("Projeto", ["pp"], "pp", "pp")
+    ##################
+    
     while True:
         exibirMenu()
         opcao = raw_input()
@@ -31,7 +38,7 @@ def main():
             while login != "":
                 login = raw_input()
                 if login != "":
-                    time += login
+                    time += [login]
             prodOwner = raw_input("Forneça o Product Owner: ")
             scrumMaster = raw_input("Forneça o Scrum Master: ")
             scrumPy.criarProjeto(nome, time, prodOwner, scrumMaster)
@@ -50,7 +57,7 @@ def main():
             while estoria != "":
                 estoria = raw_input()
                 if estoria != "":
-                    estoriasEscolhidas += estoria
+                    estoriasEscolhidas += [estoria]
             print "Forneça uma id de tarefa e um login separados por vírgula por linha. Uma linha em branco encerra a lista"
             mapaTarefasMembros = {}
             linhaStr = None
@@ -73,7 +80,7 @@ def main():
             id = None
             while login != "":
                 id = raw_input()
-                tarefas += id
+                tarefas += [id]
             scrumPy.criarEstoria(nome, descricao, tarefas)
         elif opcao == "ct":
             nome = raw_input("Forneça o nome: ")
@@ -85,7 +92,7 @@ def main():
             id = None
             while login != "":
                 id = raw_input()
-                tarefas += id
+                tarefas += [id]
             scrumPy.criarTarefa(nome, descricao, dificuldade, tarefas)
         elif opcao == "mtc":
             scrumPy.obterTarefas()

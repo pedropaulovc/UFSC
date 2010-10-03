@@ -16,10 +16,10 @@ class Projeto(object):
 	
 	# @ParamType login 
 	def usuarioParticipa(self, login):
-		return self.__time.contains(login) or self.__scrumMaster == login or self.__productOwner == login
+		return login in self.__time or self.__scrumMaster == login or self.__productOwner == login
 
 	def obterId(self):
-		return id
+		return self.__id
 
 	def obterInfo(self):
 		return (self.__nome, self.__id)

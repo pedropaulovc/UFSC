@@ -8,3 +8,6 @@ class Usuario(object):
 	# @ParamType senha 
 	def verificarSenha(self, senha):
 		return senha == self.__senha
+	
+	def obterLogin(self):
+		return self.__login

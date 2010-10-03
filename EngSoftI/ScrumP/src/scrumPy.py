@@ -2,7 +2,7 @@
 from fabricaProjetos import FabricaProjetos
 from listaProjetos import ListaProjetos
 from listaUsuarios import ListaUsuarios
-from excecoes import ProjetoNaoExiste, DuracaoInvalida
+from excecoes import ProjetoNaoExiste, DuracaoInvalida, UsuarioNaoLogado
 
 # 3 Situações do Scrum:
 #	- Usuário não logado:
@@ -61,6 +61,8 @@ class ScrumPy(object):
 		self.__listaUsuarios.cadastrarUsuario(nome, login, senha)
 
 	def obterUsuarios(self):
+		if self.__usuarioAtual == None:
+			raise UsuarioNaoLogado
 		# Informa o login de todos os usuários cadastrados no sistema.
 		return self.__listaUsuarios.obterUsuarios()
 
@@ -69,16 +71,21 @@ class ScrumPy(object):
 	# @ParamType prodOwner 
 	# @ParamType scrumMaster 
 	def criarProjeto(self, nome, time, prodOwner, scrumMaster):
+		if self.__usuarioAtual == None:
+			raise UsuarioNaoLogado
+		#TODO: Verificar se usuário é scrumMaster (?)
 		# Primeiro, verifica se todos os logins informados são validos.
 		# Após isso, delega a criação de um novo projeto à fabrica de projetos,
 		# informando todos os logins necessários: nome, time, prodOwner e
 		# scrumMaster. Por fim, registra este projeto na lista de projetos.
 		logins = time + [prodOwner, scrumMaster]
 		self.__listaUsuarios.verificarUsuarios(logins)
-		projeto = FabricaProjetos.criarProjeto(self, nome, time, prodOwner, scrumMaster)
+		projeto = FabricaProjetos.criarProjeto(nome, time, prodOwner, scrumMaster)
 		self.__listaProjetos.adicionarProjeto(projeto)
 
 	def obterProjetosParticipados(self):
+		if self.__usuarioAtual == None:
+			raise UsuarioNaoLogado
 		# Informa todos os projetos com participação do usuário atual.
 		return self.__listaProjetos.obterProjParticipados(self.__usuarioAtual.obterLogin())
 

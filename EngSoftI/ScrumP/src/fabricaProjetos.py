@@ -14,7 +14,8 @@ class FabricaProjetos(object):
 	def criarProjeto(nome, time, productOwner, scrumMaster): #@NoSelf
 		id = FabricaProjetos.__gerarIdProjeto()
 		return Projeto(nome, time, productOwner, scrumMaster, id)
-
+	criarProjeto = Callable(criarProjeto)
+	
 	def __gerarIdProjeto(): #@NoSelf
 		id = "PROJ-" + str(FabricaProjetos.__projeto)
 		FabricaProjetos.__projeto += 1 

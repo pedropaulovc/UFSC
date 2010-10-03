@@ -11,7 +11,7 @@ class ListaProjetos(object):
 		
 		for projeto in projetos:
 			if projeto.usuarioParticipa(login):
-				participados += projeto.obterId()
+				participados += [projeto.obterId()]
 		return participados
 		
 	# @ParamType idProjeto 

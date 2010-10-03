@@ -31,3 +31,6 @@ class TarefaNaoExiste(Excecoes):
 
 class UsuarioNaoExiste(Excecoes):
     pass
+
+class UsuarioNaoLogado(Excecoes):
+    pass

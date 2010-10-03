@@ -9,4 +9,4 @@ class FabricaUsuarios(object):
 	def criarUsuario(nome, login, senha):#@NoSelf
 		usuario = Usuario(nome, login, senha)
 		return usuario
-	criarEstoria = Callable(criarUsuario)
+	criarUsuario = Callable(criarUsuario)
