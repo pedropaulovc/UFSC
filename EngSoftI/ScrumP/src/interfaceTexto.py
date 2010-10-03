@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 '''
 Created on 02/10/2010
 
@@ -21,16 +22,35 @@ def main():
             senha = raw_input("Forneça senha: ")
             scrumPy.logarUsuario(login, senha)
         elif opcao == "ou":
-            pass
+            print scrumPy.obterUsuarios()
         elif opcao == "cp":
-            pass
+            nome = raw_input("Forneça o nome do projeto: ")
+            print "Forneça um login do time por linha. Uma linha em branco encerra a lista"
+            time = []
+            login = None
+            while login != "":
+                login = raw_input()
+                time += login
+            prodOwner = raw_input("Forneça o Product Owner: ")
+            scrumMaster = raw_input("Forneça o Scrum Master: ")
+            scrumPy.criarProjeto(nome, time, prodOwner, scrumMaster)
         elif opcao == "opp":
-            pass
+            print scrumPy.obterProjetosParticipados()
         elif opcao == "ap":
-            pass
+            idProj = raw_input("Forneça o Id do projeto: ")
+            print scrumPy.abrirProjeto(idProj)
         elif opcao == "oe":
-            pass
+            print scrumPy.obterEstorias()
         elif opcao == "csb":
+#            duracao = int(raw_input("Forneça a duração: "))
+#            print "Forneça uma id de estória por linha. Uma linha em branco encerra a lista"
+#            estoriasEscolhidas = []
+#            estoria = None
+#            while estoria != "":
+#                estoria = raw_input()
+#                estoriasEscolhidas += estoria
+#            print "Forneça uma id de estória por linha. Uma linha em branco encerra a lista"
+#            scrumPy.criarSprintBackLog(duracao, estoriasEscolhidas, mapaTarefasMembros)
             pass
         elif opcao == "ot":
             pass
@@ -39,7 +59,9 @@ def main():
         elif opcao == "ct":
             pass
         elif opcao == "mtc":
-            pass
+            scrumPy.obterTarefas()
+            idTarefa = raw_input("Forneça o IdTarefa: ")
+            scrumPy.marcarTarefaConcluida(idTarefa)
         else:
             print "Opção inválida"
         
@@ -58,7 +80,6 @@ def exibirMenu():
     print "ct - Criar Tarefa"
     print "mtc - Marcar Tarefa como Concluída"
     
-    
-    
+
 if __name__ == "__main__":
     main()

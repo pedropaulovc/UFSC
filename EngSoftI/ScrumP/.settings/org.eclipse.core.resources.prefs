@@ -1,4 +1,4 @@
-#Sat Oct 02 22:01:50 BRT 2010
+#Sun Oct 03 00:36:16 BRT 2010
 eclipse.preferences.version=1
 encoding//src/__init__.py=utf-8
 encoding//src/estoria.py=utf-8
@@ -7,6 +7,7 @@ encoding//src/fabricaEstorias.py=utf-8
 encoding//src/fabricaProjetos.py=utf-8
 encoding//src/fabricaTarefas.py=utf-8
 encoding//src/fabricaUsuarios.py=utf-8
+encoding//src/interfaceTexto.py=utf-8
 encoding//src/listaProjetos.py=utf-8
 encoding//src/listaTarefas.py=utf-8
 encoding//src/listaUsuarios.py=utf-8
