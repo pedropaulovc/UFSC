@@ -55,7 +55,7 @@ class Projeto(object):
 
 	# @ParamType idTarefa 
 	def marcarTarefaConcluida(self, idTarefa):
-		# TODO - Remove apenas da ListaTarefas do projeto, não da estoria.
+		# TODO: - Remove apenas da ListaTarefas do projeto, não da estoria.
 		self.__listaTarefas.marcarConcluida(idTarefa)
 
 	def obterTarefas(self):

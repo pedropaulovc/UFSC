@@ -24,6 +24,9 @@ from excecoes import ProjetoNaoExiste, DuracaoInvalida
 #		- Usuário é TeamMember
 #			- marcarTarefaConcluída
 
+#Alterações:
+# obterInfoProjeto -> abrirProjeto
+
 class ScrumPy(object):
 	# O ScrumPy gerencia toda a parte lógica e a comunicação
 	# com a Interface com o Usuário (ScrumPy é uma Fachada).
@@ -80,7 +83,7 @@ class ScrumPy(object):
 		return self.__listaProjetos.obterProjParticipados(self.__usuarioAtual.obterLogin())
 
 	# @ParamType idProj 
-	def obterInfoProjeto(self, idProj):
+	def abrirProjeto(self, idProj):
 		# TODO - Porque o metodo retorna o id tbm? Já que o id é um parametro, não há necessidade...
 		# Informa o nome e o id do projeto cuja id foi informada e
 		# registra o projeto como atual no sistema.
@@ -145,7 +148,7 @@ class ScrumPy(object):
 	# @ParamType descricao 
 	# @ParamType dificuldade 
 	# @ParamType tarefasPreRequisitos 
-	def criartarefa(self, nome, descricao, dificuldade, tarefasPreRequisitos):
+	def criarTarefa(self, nome, descricao, dificuldade, tarefasPreRequisitos):
 		# TODO - letra maiuscula
 		# Delega criação de uma Tarefa ao projeto atual.
 		self.__projetoAtual.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisitos)
