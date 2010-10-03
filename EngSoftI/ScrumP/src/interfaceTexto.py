@@ -6,7 +6,8 @@ Created on 02/10/2010
 '''
 from scrumPy import ScrumPy
 from excecoes import UsuarioNaoExiste, LoginJaExiste, UsuarioNaoLogado,\
-    SemProjetoAberto
+    SemProjetoAberto, ProjetoNaoExiste, TarefaNaoExiste, TarefaJaExiste,\
+    EstoriaNaoExiste, DuracaoInvalida
 from excecoes import SenhaInvalida
 def main():
     exibirIntroducao()
@@ -46,10 +47,15 @@ def main():
             senha = raw_input("Forneça senha: ")
             try:
                 scrumPy.logarUsuario(login, senha)
-            except (UsuarioNaoExiste, SenhaInvalida):
-                print "Usuário ou senha incorretos"
+            except (UsuarioNaoExiste):
+                print "Usuário não existe."
+            except (SenhaInvalida):
+                print "Senha incorreta."
         elif opcao == "ou":
-            print scrumPy.obterUsuarios()
+            try:
+                print scrumPy.obterUsuarios()
+            except (UsuarioNaoLogado):
+                print "Usuário não está logado."
         elif opcao == "cp":
             nome = raw_input("Forneça o nome do projeto: ")
             print "Forneça um login do time por linha. Uma linha em branco encerra a lista"
@@ -61,14 +67,28 @@ def main():
                     time += [login]
             prodOwner = raw_input("Forneça o Product Owner: ")
             scrumMaster = raw_input("Forneça o Scrum Master: ")
-            scrumPy.criarProjeto(nome, time, prodOwner, scrumMaster)
+            try:
+                scrumPy.criarProjeto(nome, time, prodOwner, scrumMaster)
+            except (UsuarioNaoExiste):
+                print "Algum usuário enviado não existe"
+            except (UsuarioNaoLogado):
+                print "Usuário não está logado."
         elif opcao == "opp":
-            print scrumPy.obterProjetosParticipados()
+            try:
+                print scrumPy.obterProjetosParticipados()
+            except (UsuarioNaoLogado):
+                print "Usuário não está logado."
         elif opcao == "ap":
             idProj = raw_input("Forneça o Id do projeto: ")
-            print scrumPy.abrirProjeto(idProj)
+            try:
+                print scrumPy.abrirProjeto(idProj)
+            except (ProjetoNaoExiste):
+                print "Projeto não existe"
         elif opcao == "oe":
-            print scrumPy.obterEstorias()
+            try:
+                print "(tarefas, estorias):", scrumPy.obterEstorias()
+            except (ProjetoNaoExiste):
+                print "Nenhum projeto aberto."
         elif opcao == "csb":
             duracao = int(raw_input("Forneça a duração: "))
             print "Forneça uma id de estória por linha. Uma linha em branco encerra a lista"
@@ -86,7 +106,16 @@ def main():
                 if linhaStr != "":
                     linha = linhaStr.split(",")
                     mapaTarefasMembros[linha[0]] = linha[1]
-            scrumPy.criarSprintBackLog(duracao, estoriasEscolhidas, mapaTarefasMembros)
+            try:
+                scrumPy.criarSprintBackLog(duracao, estoriasEscolhidas, mapaTarefasMembros)
+            except (TarefaNaoExiste):
+                print "Alguma tarefa fornecida não existe"
+            except (UsuarioNaoExiste):
+                print "Algum usuário fornecido não existe"
+            except (EstoriaNaoExiste):
+                print "Alguma estória fornecida não existe"
+            except (DuracaoInvalida):
+                print "Duração fornecida <= 0"
         elif opcao == "ot":
             print scrumPy.obterTarefas()
         elif opcao == "ce":
@@ -110,11 +139,17 @@ def main():
             while id != "":
                 id = raw_input()
                 tarefas += [id]
-            scrumPy.criarTarefa(nome, descricao, dificuldade, tarefas)
+            try:
+                scrumPy.criarTarefa(nome, descricao, dificuldade, tarefas)
+            except (TarefaJaExiste):
+                print "Nome de tarefa já existe"
         elif opcao == "mtc":
             scrumPy.obterTarefas()
             idTarefa = raw_input("Forneça o IdTarefa: ")
-            scrumPy.marcarTarefaConcluida(idTarefa)
+            try:
+                scrumPy.marcarTarefaConcluida(idTarefa)
+            except (TarefaNaoExiste):
+                print "Tarefa não existe."
         else:
             print "Opção inválida"
         
