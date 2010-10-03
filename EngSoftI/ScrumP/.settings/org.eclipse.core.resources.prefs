@@ -1,4 +1,4 @@
-#Sat Oct 02 14:53:37 BRT 2010
+#Sat Oct 02 22:01:50 BRT 2010
 eclipse.preferences.version=1
 encoding//src/__init__.py=utf-8
 encoding//src/estoria.py=utf-8
@@ -16,6 +16,8 @@ encoding//src/scrumPy.py=utf-8
 encoding//src/sprintBackLog.py=utf-8
 encoding//src/tarefa.py=utf-8
 encoding//src/usuario.py=utf-8
+encoding//src/view/__init__.py=utf-8
+encoding//src/view/visao.py=utf-8
 encoding//src_old/estoria.py=utf-8
 encoding//src_old/projeto.py=utf-8
 encoding//src_old/scrumPy.py=utf-8
