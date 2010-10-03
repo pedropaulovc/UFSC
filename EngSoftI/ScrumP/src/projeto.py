@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 # By Juarez 03-out 15:41
 # 		modificado: 	obterTarefasDeEstorias(estorias)
 #			old:	tarefas = estoria.obterTarefas()
