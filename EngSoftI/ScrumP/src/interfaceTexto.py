@@ -1,3 +1,12 @@
+# By Juarez 03-out 15:41
+# modificado elif "ce" e elif "ct":
+#            while id != "":
+#                id = raw_input()
+# >>> add:       if id != "":
+#                    tarefas += [id]
+
+# TODO: - obterInfoSprintBackLog()
+
 #-*- coding: utf-8 -*-
 '''
 Created on 02/10/2010
@@ -126,7 +135,8 @@ def main():
             id = None
             while id != "":
                 id = raw_input()
-                tarefas += [id]
+                if id != "":
+                    tarefas += [id]
             scrumPy.criarEstoria(nome, descricao, tarefas)
         elif opcao == "ct":
             nome = raw_input("Forneça o nome: ")
@@ -138,7 +148,8 @@ def main():
             id = None
             while id != "":
                 id = raw_input()
-                tarefas += [id]
+                if id != "":
+                    tarefas += [id]
             try:
                 scrumPy.criarTarefa(nome, descricao, dificuldade, tarefas)
             except (TarefaJaExiste):

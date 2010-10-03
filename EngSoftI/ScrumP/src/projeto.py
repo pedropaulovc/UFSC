@@ -1,3 +1,9 @@
+# By Juarez 03-out 15:41
+# 		modificado: 	obterTarefasDeEstorias(estorias)
+#			old:	tarefas = estoria.obterTarefas()
+#			new:	story = self.__productBackLog.obterEstoria(estoria)
+#					tarefas = story.obterTarefas()
+
 #-*- coding: utf-8 -*-
 from listaTarefas import ListaTarefas
 from sprintBackLog import SprintBackLog
@@ -31,7 +37,8 @@ class Projeto(object):
 	def obterTarefasDeEstorias(self, estorias):
 		listaTarefas = []
 		for estoria in estorias:
-			tarefas = estoria.obterTarefas()
+			story = self.__productBackLog.obterEstoria(estoria)
+			tarefas = story.obterTarefas()
 			listaTarefas += tarefas
 		return listaTarefas
 

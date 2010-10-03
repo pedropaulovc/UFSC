@@ -1,3 +1,6 @@
+# By Juarez 03-out 15:41
+# 		adicionado: 	obterEstoria(idEstoria)
+
 #-*- coding: utf-8 -*-
 from excecoes import EstoriaNaoExiste
 from fabricaEstorias import FabricaEstorias
@@ -20,5 +23,11 @@ class ProductBackLog(object):
 		estoria = FabricaEstorias.criarEstoria(nome, descricao, tarefas)
 		self.__listaEstorias[estoria.obterId()] = estoria
 		
+	# @ParamType idEstoria
+	def obterEstoria(self, idEstoria):
+		estoria = self.__listaEstoria.get(idEstoria)
+		if estoria == None:
+			raise EstoriaNaoExiste
+		return estoria
 
 
