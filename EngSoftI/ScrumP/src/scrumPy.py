@@ -2,7 +2,8 @@
 from fabricaProjetos import FabricaProjetos
 from listaProjetos import ListaProjetos
 from listaUsuarios import ListaUsuarios
-from excecoes import ProjetoNaoExiste, DuracaoInvalida, UsuarioNaoLogado
+from excecoes import ProjetoNaoExiste, DuracaoInvalida, UsuarioNaoLogado,\
+	SemProjetoAberto
 
 # 3 Situações do Scrum:
 #	- Usuário não logado:
@@ -160,5 +161,12 @@ class ScrumPy(object):
 		# Delega criação de uma Tarefa ao projeto atual.
 		self.__projetoAtual.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisitos)
 
-
-
+	def obterUsuarioAtual(self):
+		if self.__usuarioAtual == None:
+			raise UsuarioNaoLogado
+		return self.__usuarioAtual.obterLogin()
+	
+	def obterProjetoAtual(self):
+		if self.__projetoAtual == None:
+			raise SemProjetoAberto
+		return self.__projetoAtual.obterId()

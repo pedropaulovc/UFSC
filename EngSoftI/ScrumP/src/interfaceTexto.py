@@ -5,6 +5,9 @@ Created on 02/10/2010
 @author: PedroPaulo
 '''
 from scrumPy import ScrumPy
+from excecoes import UsuarioNaoExiste, LoginJaExiste, UsuarioNaoLogado,\
+    SemProjetoAberto
+from excecoes import SenhaInvalida
 def main():
     exibirIntroducao()
     scrumPy = ScrumPy()
@@ -20,15 +23,31 @@ def main():
         exibirMenu()
         opcao = raw_input()
         
-        if opcao == "cu":
+        if opcao == "oua":
+            try:
+                print scrumPy.obterUsuarioAtual()
+            except (UsuarioNaoLogado):
+                print "Sem usuário logado."
+        elif opcao == "opa":
+            try:
+                print scrumPy.obterProjetoAtual()
+            except (SemProjetoAberto):
+                print "Sem projeto aberto."
+        elif opcao == "cu":
             nome = raw_input("Forneça nome usuário: ")
             login = raw_input("Forneça login: ")
             senha = raw_input("Forneça senha: ")
-            scrumPy.cadastrarUsuario(nome, login, senha)
+            try:
+                scrumPy.cadastrarUsuario(nome, login, senha)
+            except (LoginJaExiste):
+                print "Login já existe."
         elif opcao == "lu":
             login = raw_input("Forneça login: ")
             senha = raw_input("Forneça senha: ")
-            scrumPy.logarUsuario(login, senha)
+            try:
+                scrumPy.logarUsuario(login, senha)
+            except (UsuarioNaoExiste, SenhaInvalida):
+                print "Usuário ou senha incorretos"
         elif opcao == "ou":
             print scrumPy.obterUsuarios()
         elif opcao == "cp":
@@ -69,17 +88,14 @@ def main():
                     mapaTarefasMembros[linha[0]] = linha[1]
             scrumPy.criarSprintBackLog(duracao, estoriasEscolhidas, mapaTarefasMembros)
         elif opcao == "ot":
-            tarefas = []
-            tarefas = scrumPy.obterTarefas()
-            for idTarefa in tarefas:
-                print idTarefa
+            print scrumPy.obterTarefas()
         elif opcao == "ce":
             nome = raw_input("Forneça o nome: ")
             descricao = raw_input("Forneça a descrição: ")
             print "Forneça um idTarefa por linha. Uma linha em branco encerra a lista"
             tarefas = []
             id = None
-            while login != "":
+            while id != "":
                 id = raw_input()
                 tarefas += [id]
             scrumPy.criarEstoria(nome, descricao, tarefas)
@@ -88,10 +104,10 @@ def main():
             descricao = raw_input("Forneça a descricao: ")
             dificuldade = raw_input("Forneça a dificuldade: ")
 
-            print "Forneça um idTarefa por linha. Uma linha em branco encerra a lista"
+            print "Forneça um idTarefa pré-requisito por linha. Uma linha em branco encerra a lista"
             tarefas = []
             id = None
-            while login != "":
+            while id != "":
                 id = raw_input()
                 tarefas += [id]
             scrumPy.criarTarefa(nome, descricao, dificuldade, tarefas)
@@ -105,17 +121,19 @@ def main():
 
 def exibirMenu():
     print "Escolha uma opção:"
-    print "cu - Criar Usuário"
-    print "lu - Logar Usuário"
-    print "ou - Obter Usuários"
-    print "cp - Criar Projeto"
+    print "oua - Obter Usuário Atual"
+    print "opa - Obter Projeto Atual"
+    print "cu  - Criar Usuário"
+    print "lu  - Logar Usuário"
+    print "ou  - Obter Usuários"
+    print "cp  - Criar Projeto"
     print "opp - Obter Projetos Participados"
-    print "ap - Abrir Projeto"
-    print "oe - Obter Estorias"
+    print "ap  - Abrir Projeto"
+    print "oe  - Obter Estorias"
     print "csb - Criar Sprint BackLog"
-    print "ot - Obter Tarefas"
-    print "ce - Criar Estoria"
-    print "ct - Criar Tarefa"
+    print "ot  - Obter Tarefas"
+    print "ce  - Criar Estoria"
+    print "ct  - Criar Tarefa"
     print "mtc - Marcar Tarefa como Concluída"
     
 def exibirIntroducao():

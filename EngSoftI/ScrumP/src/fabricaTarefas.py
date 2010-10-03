@@ -13,7 +13,7 @@ class FabricaTarefas(object):
 	# @ParamType tarefasPreRequisito 
 	def criarTarefa(nome, descricao, dificuldade, tarefasPreRequisito):#@NoSelf
 		id = FabricaTarefas.__gerarIdTarefa()
-		return Tarefa(nome, descricao, dificuldade, tarefasPreRequisito)
+		return Tarefa(id, nome, descricao, dificuldade, tarefasPreRequisito)
 	criarTarefa = Callable(criarTarefa)
 
 	def __gerarIdTarefa(): #@NoSelf
