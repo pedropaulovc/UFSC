@@ -1,0 +1,110 @@
+\documentclass[brazil,times,12pt]{abnt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\makeatletter
+\usepackage{babel}
+\makeatother
+\begin{document}
+
+\autor{Pedro Paulo Vezzá Campos}
+
+\titulo{Prática de Gerência de Redes Usando Ferramenta SNMP}
+
+\comentario{Trabalho apresentado para avaliação na disciplina INE5414, do
+curso de Bacharelado em Ciências da Computação, turma 04208, da Universidade   
+Federal de Santa Catarina, ministrada pelo professor Carlos Becker Westphall}
+
+\instituicao{Departamento de Informática e Estatística \par Centro
+Tecnológico \par Universidade Federal de Santa Catarina}
+
+\local{Santa Catarina - SC, Brasil}
+
+\data{\today}
+
+\capa
+
+\folhaderosto
+
+% \tableofcontents
+%\chapter{}
+\section*{Introdução à Gerência de Redes}
+A gerência de redes está associada ao controle de atividades e ao monitoramento
+do uso de recursos da rede. Suas atribuições incluem: Obter informações da
+rede; Tratar estas informações, possibilitando um diagnóstico; E encaminhar as
+soluções dos problemas. Para cumprir estes objetivos, funções de gerência devem
+ser embutidas nos diversos componentes de uma rede, possibilitando descobrir,
+prever e reagir a problemas. \cite{duarte:gerencia_redes}
+
+\subsection*{Modelos de gerência}
+Há vários modelos diferentes de gerência de redes. Na gerência centralizada, um
+único processo gerente controla a gerência. Pela sua natureza centralizada, esse
+modelo é vulnerável em redes grandes. Já na gerência descentralizada as
+atividades de gerência são distribuídas, e vários nós da rede rodam gerentes. O
+gerenciamento também pode ser feito de forma hierárquica, nesse sentido, cada
+nó fica sendo responsável por um tipo de atividade gerencial. \cite{wiki:network_management}
+
+Na gerência reativa há o alerta aos administradores dos problemas ocorridos,
+passando a atuar em sua solução. Por outro lado, na gerência pró-ativa os
+processos gerentes também alteram as configurações dos dispositivos e recursos
+da rede como forma de auto-gerência.
+
+\subsection*{Termos da Gerência de Redes}
+\begin{description}
+\item[Gerente] Um computador conectado a rede que executa o software de protocolo de gerenciamento
+que solicita informações dos agentes. O sistema de gerenciamento também é chamado de console de 
+gerenciamento.
+\item[Agente] Um processo (software) que roda em um recurso, elemento ou sistema gerenciado, que exporta
+uma base de dados de gerenciamento (MIB) para os que o gerente possa ter acesso aos mesmos.
+\item[MIB] Management Information Base – Base de dados de gerenciamento – é uma tabela onde são 
+armazenados os dados de gerenciamento coletados que serão enviados ao gerente.
+\item[Protocolo de gerenciamento] Fornece os mecanismos de comunicação entre o
+gerente e o agente. \cite{wiki:gerencia_redes}
+\end{description}
+	
+\section*{O protocolo SNMP}
+O protocolo SNMP (\emph{Simple Network Management Protocol}) faz parte do
+conjunto de protocolos da Internet, como foi definido pela \emph{Internet
+Engineering Task Force} ou IETF. Ele é usado em sistemas de gerenciamento para
+monitorar dispositivos de rede procurando por condições que possuam necessidade
+de administração. O SNMP consiste de uma série de padrões, incluindo um
+protocolo de nível de aplicação e um sistema de banco de dados. Seu
+funcionamento deriva do modelo de hierarquisas da orientação a objetos.
+
+No protocolo SNMP, as informações sobre a rede são expostas na forma de
+variáveis nos sistemas gerenciados, que descrevem a configuração desses mesmos
+sistemas. Essas variáveis podem ser consultadas e (possivelmente) alteradas
+pelos processos gerentes. \cite{wiki:snmp}
+
+\section*{Experimento Prático}
+Para este trabalho prático foi realizado o acompanhamento de variáveis SNMP em
+um \emph{access-point} Linksys WRT54G rodando o firmware dd-wrt em sua última
+versão estável. Suas funções são de fornecer acesso à Internet via Internet sem
+fio (802.11g), além de cumprir tarefa como servidor DHCP.
+
+O próprio firmware já possuia embutido um \emph{daemon} SNMP embutido, sendo
+somente necessário habilitá-lo via interface web e configurá-lo via SSH,
+conforme instruções em: \cite{ddwrt:snmp}. Como ferramenta para visualizar os
+dados informados pelo \emph{access-point} foi utilizada a ferramenta Getif.
+
+O monitoramento do servidor foi realizado durante aproximadamente 24 horas e os
+valores coletados foram os seguintes:
+
+\begin{center}
+% use packages: array
+\begin{tabular}{ll}
+Variável & Valor \\ 
+tcpOutRsts:  & 16811 \\
+tcpAttemptFails:  & 1774 \\ 
+tcpInSegs:  & 185707102 \\ 
+tcpOutSegs:  & 87452074 \\
+tcpActiveOpens:  & 7538 \\  
+tcpRetransSegs:  & 98771 
+\end{tabular}
+\end{center}
+
+\bibliographystyle{abnt-num}
+\bibliography{bibliografia}
+\end{document}
