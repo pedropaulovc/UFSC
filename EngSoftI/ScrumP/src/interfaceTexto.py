@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 # By Juarez 03-out 15:41
 # modificado elif "ce" e elif "ct":
 #            while id != "":
@@ -6,8 +7,6 @@
 #                    tarefas += [id]
 
 # TODO: - obterInfoSprintBackLog()
-
-#-*- coding: utf-8 -*-
 '''
 Created on 02/10/2010
 

@@ -11,10 +11,11 @@ try:
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-class DialogoLogin(object):
+class DialogoLogin(QtCore.QThread):
     
     def __init__(self):
         self.__dados = ("","")
+        QtCore.QThread.__init__(self)
     
     def setupUi(self, Dialog):
         self.Dialog = Dialog
@@ -67,7 +68,7 @@ class DialogoLogin(object):
         self.gridLayout.addItem(spacerItem2, 8, 0, 1, 1)
 
         self.retranslateUi(Dialog)
-        QtCore.QObject.connect(self.__botoesCancelOk, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
+        QtCore.QObject.connect(self.__botoesCancelOk, QtCore.SIGNAL(_fromUtf8("accepted()")), self.__definirDados)
         QtCore.QObject.connect(self.__botoesCancelOk, QtCore.SIGNAL(_fromUtf8("rejected()")), Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
@@ -76,7 +77,7 @@ class DialogoLogin(object):
         self.__labelLogin.setText(QtGui.QApplication.translate("Dialog", "Login:", None, QtGui.QApplication.UnicodeUTF8))
         self.__labelSenha.setText(QtGui.QApplication.translate("Dialog", "Senha:", None, QtGui.QApplication.UnicodeUTF8))
 
-    def __enviarDados(self):
+    def __definirDados(self):
         login = self.__login.text()
         login = str(login.toUtf8())
         senha = self.__senha.text()

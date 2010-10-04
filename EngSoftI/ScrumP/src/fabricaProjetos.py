@@ -1,8 +1,5 @@
 #-*- coding: utf-8 -*-
 from projeto import Projeto
-class Callable:
-	def __init__(self, anycallable):
-		self.__call__ = anycallable
 
 class FabricaProjetos(object):
 	# @ParamType nome 
@@ -11,14 +8,13 @@ class FabricaProjetos(object):
 	# @ParamType scrumMaster 
 	__projeto = 0
 	
-	def criarProjeto(nome, time, productOwner, scrumMaster): #@NoSelf
+	@staticmethod
+	def criarProjeto(nome, time, productOwner, scrumMaster):
 		id = FabricaProjetos.__gerarIdProjeto()
 		return Projeto(nome, time, productOwner, scrumMaster, id)
-	criarProjeto = Callable(criarProjeto)
 	
-	def __gerarIdProjeto(): #@NoSelf
+	@staticmethod
+	def __gerarIdProjeto():
 		id = "PROJ-" + str(FabricaProjetos.__projeto)
 		FabricaProjetos.__projeto += 1 
 		return id
-	__gerarIdProjeto = Callable(__gerarIdProjeto)
-

@@ -1,9 +1,6 @@
 #-*- coding: utf-8 -*-
 from estoria import Estoria
 
-class Callable:
-	def __init__(self, anycallable):
-		self.__call__ = anycallable
 
 class FabricaEstorias(object):
 	# @ParamType nome 
@@ -11,15 +8,15 @@ class FabricaEstorias(object):
 	# @ParamType tarefas 
 	__estoria = 0
 	
-	def criarEstoria(nome, descricao, tarefas): #@NoSelf
+	@staticmethod
+	def criarEstoria(nome, descricao, tarefas):
 		id = FabricaEstorias.__gerarIdEstoria()
 		estoria = Estoria(nome, tarefas, id, descricao)
 		return estoria
-	criarEstoria = Callable(criarEstoria)
 
-	def __gerarIdEstoria(): #@NoSelf
+	@staticmethod
+	def __gerarIdEstoria():
 		id = "EST-" + str(FabricaEstorias.__estoria)
 		FabricaEstorias.__estoria += 1 
 		return id
-	__gerarIdEstoria = Callable(__gerarIdEstoria)
 

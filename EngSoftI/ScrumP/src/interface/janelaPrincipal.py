@@ -8,10 +8,11 @@ try:
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-class JanelaPrincipal(object):
+class JanelaPrincipal(QtCore.QThread):
     
     def __init__(self,scrumpy):
         self.__scrumpy = scrumpy
+        QtCore.QThread.__init__(self)
     
     def setupUi(self, janelaPrincipal):
         janelaPrincipal.setObjectName(_fromUtf8("janelaPrincipal"))
@@ -125,6 +126,7 @@ class JanelaPrincipal(object):
                 self.__mensagemErroLogin()
             except SenhaInvalida:
                 self.__mensagemErroLogin()
+        del janela, dialogoLogin
             
     def __mensagemErroLogin(self):
         mensagem  = QtGui.QMessageBox()
