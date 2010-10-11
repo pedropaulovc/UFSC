@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 from tarefa import Tarefa
-from recursos.Singleton import Singleton
+from recursos.singleton import Singleton
 
 
 class FabricaTarefas(Singleton):

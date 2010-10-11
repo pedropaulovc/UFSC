@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 from usuario import Usuario
-from recursos.Singleton import Singleton
+from recursos.singleton import Singleton
 
 class FabricaUsuarios(Singleton):
 	

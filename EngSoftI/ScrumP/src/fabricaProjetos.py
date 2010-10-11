@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 from projeto import Projeto
-from recursos.Singleton import Singleton
+from recursos.singleton import Singleton
 
 class FabricaProjetos(Singleton):
 

@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 from estoria import Estoria
-from recursos.Singleton import Singleton
+from recursos.singleton import Singleton
 
 
 class FabricaEstorias(Singleton):
