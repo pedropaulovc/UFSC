@@ -11,7 +11,8 @@ class ListaUsuarios(object):
 	def cadastrarUsuario(self, nome, login, senha):
 		if self.__listaUsuarios.has_key(login):
 			raise LoginJaExiste
-		usuario = FabricaUsuarios.criarUsuario(nome, login, senha)
+		fabricaUsuarios = FabricaUsuarios.getInstance()
+		usuario = fabricaUsuarios.criarUsuario(nome, login, senha)
 		self.__listaUsuarios[login] = usuario
 
 	def obterUsuarios(self):
@@ -35,5 +36,3 @@ class ListaUsuarios(object):
 			raise SenhaInvalida
 		return usuario
 		
-
-

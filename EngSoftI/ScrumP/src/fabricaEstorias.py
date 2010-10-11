@@ -1,22 +1,18 @@
 #-*- coding: utf-8 -*-
 from estoria import Estoria
+from recursos.Singleton import Singleton
 
 
-class FabricaEstorias(object):
-	# @ParamType nome 
-	# @ParamType descricao 
-	# @ParamType tarefas 
+class FabricaEstorias(Singleton):
+
 	__estoria = 0
-	
-	@staticmethod
-	def criarEstoria(nome, descricao, tarefas):
-		id = FabricaEstorias.__gerarIdEstoria()
+
+	def criarEstoria(self, nome, descricao, tarefas):
+		id = self.__gerarIdEstoria()
 		estoria = Estoria(nome, tarefas, id, descricao)
 		return estoria
 
-	@staticmethod
-	def __gerarIdEstoria():
+	def __gerarIdEstoria(self):
 		id = "EST-" + str(FabricaEstorias.__estoria)
 		FabricaEstorias.__estoria += 1 
 		return id
-

@@ -27,6 +27,3 @@ class ListaProjetos(object):
 	# @ParamType projeto 
 	def adicionarProjeto(self, projeto):
 		self.__listaProjetos[projeto.obterId()] = projeto
-
-	
-

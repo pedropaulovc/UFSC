@@ -18,5 +18,3 @@ class Tarefa(object):
 	# @ParamType idMembro 
 	def definirResponsavel(self, idMembro):
 		self.__responsavel = idMembro
-
-

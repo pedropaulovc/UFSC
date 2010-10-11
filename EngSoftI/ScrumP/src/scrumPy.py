@@ -81,7 +81,8 @@ class ScrumPy(object):
 		# scrumMaster. Por fim, registra este projeto na lista de projetos.
 		logins = time + [prodOwner, scrumMaster]
 		self.__listaUsuarios.verificarUsuarios(logins)
-		projeto = FabricaProjetos.criarProjeto(nome, time, prodOwner, scrumMaster)
+		fabricaProjetos = FabricaProjetos.getInstance()
+		projeto = fabricaProjetos.criarProjeto(nome, time, prodOwner, scrumMaster)
 		self.__listaProjetos.adicionarProjeto(projeto)
 
 	def obterProjetosParticipados(self):

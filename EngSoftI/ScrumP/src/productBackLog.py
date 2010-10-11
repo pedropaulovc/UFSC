@@ -20,12 +20,13 @@ class ProductBackLog(object):
 			
 	# @ParamType estoria 
 	def criarEstoria(self, nome, descricao, tarefas):
-		estoria = FabricaEstorias.criarEstoria(nome, descricao, tarefas)
+		fabrica = FabricaEstorias.getInstance()
+		estoria = fabrica.criarEstoria(nome, descricao, tarefas)
 		self.__listaEstorias[estoria.obterId()] = estoria
 		
 	# @ParamType idEstoria
 	def obterEstoria(self, idEstoria):
-		estoria = self.__listaEstoria.get(idEstoria)
+		estoria = self.__listaEstorias.get(idEstoria)
 		if estoria == None:
 			raise EstoriaNaoExiste
 		return estoria

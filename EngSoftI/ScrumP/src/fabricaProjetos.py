@@ -1,20 +1,16 @@
 #-*- coding: utf-8 -*-
 from projeto import Projeto
+from recursos.Singleton import Singleton
 
-class FabricaProjetos(object):
-	# @ParamType nome 
-	# @ParamType time 
-	# @ParamType productOwner 
-	# @ParamType scrumMaster 
+class FabricaProjetos(Singleton):
+
 	__projeto = 0
 	
-	@staticmethod
-	def criarProjeto(nome, time, productOwner, scrumMaster):
-		id = FabricaProjetos.__gerarIdProjeto()
+	def criarProjeto(self, nome, time, productOwner, scrumMaster):
+		id = self.__gerarIdProjeto()
 		return Projeto(nome, time, productOwner, scrumMaster, id)
 	
-	@staticmethod
-	def __gerarIdProjeto():
+	def __gerarIdProjeto(self):
 		id = "PROJ-" + str(FabricaProjetos.__projeto)
 		FabricaProjetos.__projeto += 1 
 		return id

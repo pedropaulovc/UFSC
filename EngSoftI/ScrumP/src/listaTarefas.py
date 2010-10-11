@@ -25,7 +25,8 @@ class ListaTarefas(object):
 		for tarefa in tarefas:
 			if nome == tarefa.obterNome():
 				raise TarefaJaExiste
-		tarefa = FabricaTarefas.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisito)
+		fabricaTarefas = FabricaTarefas.getInstance()
+		tarefa = fabricaTarefas.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisito)
 		self.__listaTarefas[tarefa.obterId()] = tarefa
 		
 
@@ -43,5 +44,3 @@ class ListaTarefas(object):
 			idMembro = mapaTarefasMembros.get(idTarefa)
 			tarefa = self.__listaTarefas.get(idTarefa)
 			tarefa.definirResponsavel(idMembro)
-
-

@@ -1,22 +1,16 @@
 #-*- coding: utf-8 -*-
 from tarefa import Tarefa
+from recursos.Singleton import Singleton
 
 
-class FabricaTarefas(object):
-	__tarefa = 0
+class FabricaTarefas(Singleton):
+	__tarefa = 0 
 	
-	# @ParamType nome 
-	# @ParamType descricao 
-	# @ParamType dificuldade 
-	# @ParamType tarefasPreRequisito 
-	
-	@staticmethod
-	def criarTarefa(nome, descricao, dificuldade, tarefasPreRequisito):
-		id = FabricaTarefas.__gerarIdTarefa()
+	def criarTarefa(self, nome, descricao, dificuldade, tarefasPreRequisito):
+		id = self.__gerarIdTarefa()
 		return Tarefa(id, nome, descricao, dificuldade, tarefasPreRequisito)
 
-	@staticmethod
-	def __gerarIdTarefa():
+	def __gerarIdTarefa(self):
 		id = "TAR-" + str(FabricaTarefas.__tarefa)
 		FabricaTarefas.__tarefa += 1 
 		return id
