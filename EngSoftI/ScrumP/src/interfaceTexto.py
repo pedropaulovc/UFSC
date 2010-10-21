@@ -7,7 +7,6 @@ Created on 02/10/2010
 '''
 from scrumPy import ScrumPy
 from excecoes import *
-from excecoes import SenhaInvalida
 def main():
     exibirIntroducao()
     scrumPy = ScrumPy()
@@ -27,12 +26,12 @@ def main():
             try:
                 print scrumPy.obterUsuarioAtual()
             except (UsuarioNaoLogado):
-                print "Sem usuário logado."
+                print "Usuário não está logado."
         elif opcao == "opa":
             try:
                 print scrumPy.obterProjetoAtual()
             except (SemProjetoAberto):
-                print "Sem projeto aberto."
+                print "Nenhum projeto aberto."
         elif opcao == "cu":
             nome = raw_input("Forneça nome usuário: ")
             login = raw_input("Forneça login: ")
@@ -41,6 +40,10 @@ def main():
                 scrumPy.cadastrarUsuario(nome, login, senha)
             except (LoginJaExiste):
                 print "Login já existe."
+            except (UsuarioNaoLogado):
+                print "Usuário não está logado."
+            except (UsuarioSemPermissao):
+                print "Usuário não tem permissão para a opção escolhida."
         elif opcao == "lu":
             login = raw_input("Forneça login: ")
             senha = raw_input("Forneça senha: ")
@@ -72,6 +75,8 @@ def main():
                 print "Algum usuário enviado não existe"
             except (UsuarioNaoLogado):
                 print "Usuário não está logado."
+            except (UsuarioSemPermissao):
+                print "Usuário não tem permissão para a opção escolhida."
         elif opcao == "opp":
             try:
                 print scrumPy.obterProjetosParticipados()
@@ -82,11 +87,13 @@ def main():
             try:
                 print scrumPy.abrirProjeto(idProj)
             except (ProjetoNaoExiste):
-                print "Projeto não existe"
+                print "Projeto não existe."
+            except (NaoParticipaDoProjeto):
+                print "Usuário não participa do projeto escolhido."
         elif opcao == "oe":
             try:
                 print "(tarefas, estorias):", scrumPy.obterEstorias()
-            except (ProjetoNaoExiste):
+            except (SemProjetoAberto):
                 print "Nenhum projeto aberto."
         elif opcao == "csb":
             duracao = int(raw_input("Forneça a duração: "))
@@ -115,6 +122,12 @@ def main():
                 print "Alguma estória fornecida não existe"
             except (DuracaoInvalida):
                 print "Duração fornecida <= 0"
+            except (SemProjetoAberto):
+                print "Nenhum projeto aberto."
+            except (UsuarioSemPermissao):
+                print "Usuário não tem permissão para a opção escolhida."
+            except (UsuarioNaoLogado):
+                print "Usuário não está logado."
         elif opcao == "ot":
             print scrumPy.obterTarefas()
         elif opcao == "ce":
@@ -127,7 +140,14 @@ def main():
                 id = raw_input()
                 if id != "":
                     tarefas += [id]
-            scrumPy.criarEstoria(nome, descricao, tarefas)
+            try:
+                scrumPy.criarEstoria(nome, descricao, tarefas)
+            except (SemProjetoAberto):
+                print "Nenhum projeto aberto."
+            except (UsuarioSemPermissao):
+                print "Usuário não tem permissão para a opção escolhida."
+            except (UsuarioNaoLogado):
+                print "Usuário não está logado."
         elif opcao == "ct":
             nome = raw_input("Forneça o nome: ")
             descricao = raw_input("Forneça a descricao: ")
@@ -144,6 +164,13 @@ def main():
                 scrumPy.criarTarefa(nome, descricao, dificuldade, tarefas)
             except (TarefaJaExiste):
                 print "Nome de tarefa já existe"
+            # TODO: Já Modificado!!! -> Como estamos usando o projetoAtual, deve-se verificar se há Projeto Aberto.    
+            except (SemProjetoAberto):
+                print "Nenhum projeto aberto."
+            except (UsuarioSemPermissao):
+                print "Usuário não tem permissão para a opção escolhida."
+            except (UsuarioNaoLogado):
+                print "Usuário não está logado."
         elif opcao == "mtc":
             scrumPy.obterTarefas()
             idTarefa = raw_input("Forneça o IdTarefa: ")
@@ -151,6 +178,13 @@ def main():
                 scrumPy.marcarTarefaConcluida(idTarefa)
             except (TarefaNaoExiste):
                 print "Tarefa não existe."
+            except (SemProjetoAberto):
+                print "Nenhum projeto aberto."
+            except (UsuarioSemPermissao):
+                print "Usuário não tem permissão para a opção escolhida."
+            except (UsuarioNaoLogado):
+                print "Usuário não está logado."
+
         else:
             print "Opção inválida"
         

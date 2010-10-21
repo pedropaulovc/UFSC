@@ -1,5 +1,5 @@
 #-*- coding: utf-8 -*-
-from excecoes import UsuarioNaoLogado, ProjetoNaoExiste, DuracaoInvalida, \
+from excecoes import UsuarioNaoLogado, DuracaoInvalida, \
 	SemProjetoAberto, UsuarioSemPermissao, NaoParticipaDoProjeto
 from fabricaProjetos import FabricaProjetos
 from listaProjetos import ListaProjetos
@@ -7,10 +7,10 @@ from listaUsuarios import ListaUsuarios
 
 # 3 Situações do Scrum:
 #	- Usuário não logado:
-#		-	cadastrarUsuario
 #		-	logarUsuario
 #		?	obterUsuarios
 #	- Usuário logado:
+#		-	cadastrarUsuario
 #		- criarProjeto
 #		- obterProjetosPraticipados
 #		- obterInfoProjeto (abrirProjeto)
@@ -219,9 +219,12 @@ class ScrumPy(object):
 		'''
 		Delega criação de uma Tarefa ao projeto atual.
 		'''
-		
+	# TODO: Já Modificado!!! -> Como estamos usando o projetoAtual, deve-se verificar se há Projeto Aberto.	
 		if self.__usuarioAtual.obterLogin() != self.__projetoAtual.obterScrumMaster():
 			raise UsuarioSemPermissao
+		
+		if self.__projetoAtual == None:
+			raise SemProjetoAberto
 		
 		self.__projetoAtual.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisitos)
 
