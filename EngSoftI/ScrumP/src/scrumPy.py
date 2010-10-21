@@ -1,9 +1,9 @@
 #-*- coding: utf-8 -*-
+from excecoes import UsuarioNaoLogado, ProjetoNaoExiste, DuracaoInvalida, \
+	SemProjetoAberto, UsuarioSemPermissao, NaoParticipaDoProjeto
 from fabricaProjetos import FabricaProjetos
 from listaProjetos import ListaProjetos
 from listaUsuarios import ListaUsuarios
-from excecoes import UsuarioNaoLogado, ProjetoNaoExiste, DuracaoInvalida, \
-	SemProjetoAberto
 
 # 3 Situações do Scrum:
 #	- Usuário não logado:
@@ -67,6 +67,11 @@ class ScrumPy(object):
 		Delega o cadastro de um novo usuário à lista de usuários, 
 		informando o nome, login e senha do novo usuário.
 		'''
+		if self.__usuarioAtual == None:
+			raise UsuarioNaoLogado
+		
+		if not self.__listaUsuarios.ehAdmin(self.__usuarioAtual.obterLogin()):
+			raise UsuarioSemPermissao
 		self.__listaUsuarios.cadastrarUsuario(nome, login, senha)
 
 	def obterUsuarios(self):
@@ -90,7 +95,9 @@ class ScrumPy(object):
 		'''
 		if self.__usuarioAtual == None:
 			raise UsuarioNaoLogado
-		#TODO: Verificar se usuário é scrumMaster (?)
+		
+		if not self.__listaUsuarios.ehAdmin(self.__usuarioAtual.obterLogin()):
+			raise UsuarioSemPermissao
 		
 		logins = time + [prodOwner, scrumMaster]
 		self.__listaUsuarios.verificarUsuarios(logins)
@@ -108,13 +115,19 @@ class ScrumPy(object):
 
 	# @ParamType idProj 
 	def abrirProjeto(self, idProj):
-		# TODO - Porque o metodo retorna o id tbm? Já que o id é um parametro, não há necessidade...
+		
 		'''
 		Informa o nome e o id do projeto cuja id foi informada e
 		registra o projeto como atual no sistema.
 		'''
+		projetosParticipados = self.obterProjetosParticipados()		
+		
 		projeto = self.__listaProjetos.obterProjeto(idProj)
-		info = self.__listaProjetos.obterInfoProjeto(idProj)
+		
+		if projeto not in projetosParticipados:
+			raise NaoParticipaDoProjeto
+		
+		info = projeto.obterInfo()
 		self.__definirProjetoAtual(projeto)
 		return info
 
@@ -123,7 +136,8 @@ class ScrumPy(object):
 		Informa todas as estorias e tarefas do projeto atual.
 		'''
 		if self.__projetoAtual == None:
-			raise ProjetoNaoExiste
+			raise SemProjetoAberto
+		
 		estorias = self.__projetoAtual.obterEstorias()
 		tarefas = self.__projetoAtual.obterTarefasDeEstorias(estorias)
 		return (tarefas, estorias)
@@ -139,14 +153,18 @@ class ScrumPy(object):
 	# @ParamType estoriasEscolhidas 
 	# @ParamType mapaTarefasMembros 
 	def criarSprintBackLog(self, duracao, estoriasEscolhidas, mapaTarefasMembros):
-		# TODO - Verificar se o usuário atual tem permissão(ou ocultar a opção na interface).
-		# TODO - Verificar se há um projeto aberto(ou ocultar a opção na interface).
 		'''
 		Verifica se a duração da sprint é valida, se os usuários existem.
 		Delega  a verificação da existencia das estorias, das tarefas, a
 		definição dos responsáveis das respectivas tarefas e delega a 
 		criação da sprintBackLog ao projeto atual.
 		'''
+		if self.__projetoAtual == None:
+			raise SemProjetoAberto
+
+		if self.__projetoAtual.obterProdOwner() != self.__usuarioAtual.obterLogin():
+			raise UsuarioSemPermissao
+				
 		if duracao <= 0:
 			raise DuracaoInvalida
 		self.__projetoAtual.verificarEstorias(estoriasEscolhidas)
@@ -160,20 +178,31 @@ class ScrumPy(object):
 	# @ParamType descricao 
 	# @ParamType tarefas 
 	def criarEstoria(self, nome, descricao, tarefas):
-		# TODO - Verificar Tarefas(ou defini-las em conjunto na IU).
+		
 		'''
 		Delega a criação de uma estoria ao projeto atual, informando
 		o nome, descrição e tarefas dados.
 		'''
+		if self.__projetoAtual == None:
+			raise SemProjetoAberto
+		
+		if self.__projetoAtual.obterProdOwner() != self.__usuarioAtual.obterLogin():
+			raise UsuarioSemPermissao
+		
 		self.__projetoAtual.criarEstoria(nome, descricao, tarefas)
 
 	# @ParamType idTarefa 
 	def marcarTarefaConcluida(self, idTarefa):
-		# TODO - Remove apenas da ListaTarefas do projeto, não da estoria.
 		'''
 		Delega a definição de uma tarefa concluída ao projeto atual que
 		removendo-a da lista de tarefas.
 		'''
+		if self.__projetoAtual == None:
+			raise SemProjetoAberto
+		
+		if not self.__projetoAtual.pertenceAoTime(self.__usuarioAtual.obterLogin()):
+			raise UsuarioSemPermissao
+		
 		self.__projetoAtual.marcarTarefaConcluida(idTarefa)
 
 	def obterTarefas(self):
@@ -187,10 +216,13 @@ class ScrumPy(object):
 	# @ParamType dificuldade 
 	# @ParamType tarefasPreRequisitos 
 	def criarTarefa(self, nome, descricao, dificuldade, tarefasPreRequisitos):
-		# TODO - letra maiuscula
 		'''
 		Delega criação de uma Tarefa ao projeto atual.
 		'''
+		
+		if self.__usuarioAtual.obterLogin() != self.__projetoAtual.obterScrumMaster():
+			raise UsuarioSemPermissao
+		
 		self.__projetoAtual.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisitos)
 
 	def obterUsuarioAtual(self):

@@ -30,6 +30,12 @@ class Projeto(object):
 
 	def obterInfo(self):
 		return (self.__nome, self.__id)
+	
+	def obterProdOwner(self):
+		return self.__productOwner
+	
+	def obterScrumMaster(self):
+		return self.__scrumMaster
 
 	def obterEstorias(self):
 		return self.__productBackLog.obterEstorias()
@@ -43,6 +49,9 @@ class Projeto(object):
 			listaTarefas += tarefas
 		return listaTarefas
 
+	def pertenceAoTime(self, login):
+		return login in self.__time
+	
 	# @ParamType estoriasEscolhidas 
 	def verificarEstorias(self, estoriasEscolhidas):
 		self.__productBackLog.verificarEstorias(estoriasEscolhidas)
@@ -63,7 +72,6 @@ class Projeto(object):
 
 	# @ParamType idTarefa 
 	def marcarTarefaConcluida(self, idTarefa):
-		# TODO: - Remove apenas da ListaTarefas do projeto, não da estoria.
 		self.__listaTarefas.marcarConcluida(idTarefa)
 
 	def obterTarefas(self):

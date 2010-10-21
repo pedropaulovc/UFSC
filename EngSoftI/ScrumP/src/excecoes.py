@@ -37,3 +37,9 @@ class UsuarioNaoLogado(Excecoes):
 
 class SemProjetoAberto(Excecoes):
     pass
+
+class UsuarioSemPermissao(Excecoes):
+    pass
+
+class NaoParticipaDoProjeto(Excecoes):
+    pass

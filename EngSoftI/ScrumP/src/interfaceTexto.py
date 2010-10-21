@@ -1,11 +1,4 @@
 #-*- coding: utf-8 -*-
-# By Juarez 03-out 15:41
-# modificado elif "ce" e elif "ct":
-#            while id != "":
-#                id = raw_input()
-# >>> add:       if id != "":
-#                    tarefas += [id]
-
 # TODO: - obterInfoSprintBackLog()
 '''
 Created on 02/10/2010
@@ -13,9 +6,7 @@ Created on 02/10/2010
 @author: PedroPaulo
 '''
 from scrumPy import ScrumPy
-from excecoes import UsuarioNaoExiste, LoginJaExiste, UsuarioNaoLogado,\
-    SemProjetoAberto, ProjetoNaoExiste, TarefaNaoExiste, TarefaJaExiste,\
-    EstoriaNaoExiste, DuracaoInvalida
+from excecoes import *
 from excecoes import SenhaInvalida
 def main():
     exibirIntroducao()

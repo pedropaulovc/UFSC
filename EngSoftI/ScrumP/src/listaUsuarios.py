@@ -2,8 +2,12 @@
 from excecoes import UsuarioNaoExiste, SenhaInvalida, LoginJaExiste
 from fabricaUsuarios import FabricaUsuarios
 class ListaUsuarios(object):
+	
 	def __init__(self):
-		self.__listaUsuarios = {}
+		fabricaUsuarios = FabricaUsuarios.getInstance()
+		admin = fabricaUsuarios.criarUsuario('admin', 'admin', 'admin')
+		self.__listaUsuarios = {'admin': admin}
+		self.__administradores = ['admin']
 	
 	# @ParamType nome 
 	# @ParamType login 
