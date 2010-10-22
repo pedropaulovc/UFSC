@@ -169,6 +169,8 @@ class InterfaceTexto(object):
 
     def __criarProjeto(self):
         nome = raw_input("Forneça o nome do projeto: ")
+        print "Usuários disponíveis: "
+        self.__obterUsuarios()
         print "Forneça um login do time por linha. Uma linha em branco encerra a lista"
         time = []
         login = None
