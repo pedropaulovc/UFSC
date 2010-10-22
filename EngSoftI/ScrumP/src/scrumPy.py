@@ -60,6 +60,9 @@ class ScrumPy(object):
 		'''		
 		self.__usuarioAtual = usuario
 
+	def __verificarSeUsuarioLogado(self):
+		if self.__usuarioAtual == None:
+			raise UsuarioNaoLogado
 	# @ParamType nome 
 	# @ParamType login 
 	# @ParamType senha 
@@ -68,8 +71,7 @@ class ScrumPy(object):
 		Delega o cadastro de um novo usuário à lista de usuários, 
 		informando o nome, login e senha do novo usuário.
 		'''
-		if self.__usuarioAtual == None:
-			raise UsuarioNaoLogado
+		self.__verificarSeUsuarioLogado()
 		
 		if not self.__listaUsuarios.ehAdmin(self.__usuarioAtual.obterLogin()):
 			raise UsuarioSemPermissao
@@ -79,8 +81,8 @@ class ScrumPy(object):
 		'''
 		Informa o login de todos os usuários cadastrados no sistema.
 		'''
-		if self.__usuarioAtual == None:
-			raise UsuarioNaoLogado
+		self.__verificarSeUsuarioLogado()
+		
 		return self.__listaUsuarios.obterUsuarios()
 
 	# @ParamType nome 
@@ -94,8 +96,7 @@ class ScrumPy(object):
 		informando todos os logins necessários: nome, time, prodOwner e
 		scrumMaster. Por fim, registra este projeto na lista de projetos.
 		'''
-		if self.__usuarioAtual == None:
-			raise UsuarioNaoLogado
+		self.__verificarSeUsuarioLogado()
 		
 		if not self.__listaUsuarios.ehAdmin(self.__usuarioAtual.obterLogin()):
 			raise UsuarioSemPermissao
@@ -111,8 +112,8 @@ class ScrumPy(object):
 		'''
 		Informa todos os projetos com participação do usuário atual.
 		'''
-		if self.__usuarioAtual == None:
-			raise UsuarioNaoLogado
+		self.__verificarSeUsuarioLogado()
+		
 		return self.__listaProjetos.obterProjParticipados(self.__usuarioAtual.obterLogin())
 
 	# @ParamType idProj 
@@ -224,8 +225,7 @@ class ScrumPy(object):
 		'''
 		Delega criação de uma Tarefa ao projeto atual.
 		'''
-		if self.__usuarioAtual == None:
-			raise UsuarioNaoLogado
+		self.__verificarSeUsuarioLogado()
 		
 		login = self.__usuarioAtual.obterLogin()
 		if login != self.__projetoAtual.obterScrumMaster() and \
@@ -241,8 +241,8 @@ class ScrumPy(object):
 		'''
 		Retorna o usuário atualmente logando no ScrumPy.
 		'''
-		if self.__usuarioAtual == None:
-			raise UsuarioNaoLogado
+		self.__verificarSeUsuarioLogado()
+		
 		return self.__usuarioAtual.obterLogin()
 	
 	def obterProjetoAtual(self):
