@@ -43,3 +43,6 @@ class UsuarioSemPermissao(Excecoes):
 
 class NaoParticipaDoProjeto(Excecoes):
     pass
+
+class TarefaJaConcluida(Excecoes):
+    pass

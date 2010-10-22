@@ -1,5 +1,5 @@
 #-*- coding: utf-8 -*-
-from excecoes import TarefaNaoExiste, TarefaJaExiste
+from excecoes import TarefaNaoExiste, TarefaJaExiste, TarefaJaConcluida
 from fabricaTarefas import FabricaTarefas
 class ListaTarefas(object):
 	def __init__(self):
@@ -38,11 +38,16 @@ class ListaTarefas(object):
 		
 
 	# @ParamType tarefas 
-	def verificarTarefas(self, tarefas):
+	def verificarTarefasExistem(self, tarefas):
 		for tarefa in tarefas:
 			if tarefa not in self.__listaTarefas and tarefa not in self.__listaTarefasConcluidas:
 				raise TarefaNaoExiste
-
+	
+	def verificarTarefasPendentes(self, tarefas):
+		for tarefa in tarefas:
+			if tarefa not in self.__listaTarefas:
+				raise TarefaJaConcluida
+	
 	# @ParamType mapaTarefasMembros 
 	def definirResponsaveis(self, mapaTarefasMembros):
 		idsTarefas = mapaTarefasMembros.keys()

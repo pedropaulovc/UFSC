@@ -141,10 +141,16 @@ class ScrumPy(object):
 		if self.__projetoAtual == None:
 			raise SemProjetoAberto
 		
+		mapaEstoriasTarefas = []
 		estorias = self.__projetoAtual.obterEstorias()
-		tarefas = self.__projetoAtual.obterTarefasDeEstorias(estorias)
-		return (tarefas, estorias)
-
+		for estoria in estorias:
+			tarefas = self.__projetoAtual.obterTarefasDeEstoria(estoria)
+			mapaEstoriasTarefas.append((estoria, tarefas))
+		return mapaEstoriasTarefas
+	
+	def obterTarefasDeEstoria(self, estoria):
+		return self.__projetoAtual.obterTarefasDeEstoria(estoria)
+		
 	# @ParamType projeto 
 	def __definirProjetoAtual(self, projeto):
 		'''
@@ -171,7 +177,7 @@ class ScrumPy(object):
 		if duracao <= 0:
 			raise DuracaoInvalida
 		self.__projetoAtual.verificarEstorias(estoriasEscolhidas)
-		self.__projetoAtual.verificarTarefas(mapaTarefasMembros.keys())
+		self.__projetoAtual.verificarTarefasExistem(mapaTarefasMembros.keys())
 		self.__listaUsuarios.verificarUsuarios(mapaTarefasMembros.values())
 		self.__projetoAtual.definirResponsaveis(mapaTarefasMembros)
 		self.__projetoAtual.criarSprintBackLog(estoriasEscolhidas, duracao)
@@ -192,6 +198,7 @@ class ScrumPy(object):
 		if self.__projetoAtual.obterProdOwner() != self.__usuarioAtual.obterLogin():
 			raise UsuarioSemPermissao
 		
+		self.__projetoAtual.verificarTarefasPendentes(tarefas)
 		self.__projetoAtual.criarEstoria(nome, descricao, tarefas)
 
 	# @ParamType idTarefa 
@@ -235,7 +242,7 @@ class ScrumPy(object):
 		if self.__projetoAtual == None:
 			raise SemProjetoAberto
 		
-		self.__projetoAtual.verificarTarefas(tarefasPreRequisitos)
+		self.__projetoAtual.verificarTarefasExistem(tarefasPreRequisitos)
 		self.__projetoAtual.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisitos, estimativa)
 
 	def obterUsuarioAtual(self):

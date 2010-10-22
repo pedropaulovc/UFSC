@@ -41,13 +41,8 @@ class Projeto(object):
 		return self.__productBackLog.obterEstorias()
 
 	# @ParamType estorias 
-	def obterTarefasDeEstorias(self, estorias):
-		listaTarefas = []
-		for estoria in estorias:
-			story = self.__productBackLog.obterEstoria(estoria)
-			tarefas = story.obterTarefas()
-			listaTarefas += tarefas
-		return listaTarefas
+	def obterTarefasDeEstoria(self, estoria):
+		return self.__productBackLog.obterEstoria(estoria).obterTarefas()
 
 	def pertenceAoTime(self, login):
 		return login in self.__time
@@ -57,9 +52,12 @@ class Projeto(object):
 		self.__productBackLog.verificarEstorias(estoriasEscolhidas)
 
 	# @ParamType tarefas 
-	def verificarTarefas(self, tarefas):
-		self.__listaTarefas.verificarTarefas(tarefas)
+	def verificarTarefasExistem(self, tarefas):
+		self.__listaTarefas.verificarTarefasExistem(tarefas)
 
+	def verificarTarefasPendentes(self, tarefas):
+		self.__listaTarefas.verificarTarefasPendentes(tarefas)
+		
 	# @ParamType mapaTarefasMembros 
 	def definirResponsaveis(self, mapaTarefasMembros):
 		self.__listaTarefas.definirResponsaveis(mapaTarefasMembros)

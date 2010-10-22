@@ -14,7 +14,7 @@ def main():
     scrumPy = ScrumPy()
     
     ##################
-    ##Bloco de aceleração de input. Remover antes do release##
+    ##Bloco de aceleração de input.##
     scrumPy.logarUsuario("admin", "admin")
     scrumPy.cadastrarUsuario("t0", "t0","t0")
     scrumPy.cadastrarUsuario("t1", "t1","t1")
@@ -32,7 +32,9 @@ def main():
     scrumPy.marcarTarefaConcluida("TAR-0")
     scrumPy.logarUsuario("p", "p")
     scrumPy.abrirProjeto("PROJ-0")
-
+    scrumPy.criarEstoria("Estória teste 0", "Testando estória 0", ['TAR-1', 'TAR-2'])
+    scrumPy.criarEstoria("Estória teste 1", "Testando estória 1", ['TAR-2', 'TAR-3'])
+    scrumPy.criarSprintBackLog(32, ['EST-0'], {'TAR-1': 't0', 'TAR-2': 'admin'})
     ##################
     
     while True:
@@ -113,11 +115,13 @@ def main():
                 print "Usuário não está logado."
         elif opcao == "oe":
             try:
-                print "(tarefas, estorias):", scrumPy.obterEstorias()
+                print "Estória - Tarefas"
+                for estoria, tarefas in scrumPy.obterEstorias():
+                    print "{0} - {1}".format(estoria, tarefas)
             except (SemProjetoAberto):
                 print "Nenhum projeto aberto."
         elif opcao == "csb":
-            duracao = int(raw_input("Forneça a duração: "))
+            duracao = raw_input("Forneça a duração: ")
             print "Forneça uma id de estória por linha. Uma linha em branco encerra a lista"
             estoriasEscolhidas = []
             estoria = None
@@ -125,16 +129,17 @@ def main():
                 estoria = raw_input()
                 if estoria != "":
                     estoriasEscolhidas += [estoria]
-            print "Forneça uma id de tarefa e um login separados por vírgula por linha. Uma linha em branco encerra a lista"
+    
             mapaTarefasMembros = {}
-            linhaStr = None
-            while linhaStr != "":
-                linhaStr = raw_input()
-                if linhaStr != "" and linhaStr.find(",") != -1:
-                    linha = linhaStr.split(",")
-                    mapaTarefasMembros[linha[0]] = linha[1]
             try:
+                for estoria in estoriasEscolhidas:
+                    tarefas = scrumPy.obterTarefasDeEstoria(estoria)
+                    print "Forneça o usuário responsável por cada tarefa de {0}: ".format(estoria)
+                    for tarefa in tarefas:
+                        membro = raw_input(tarefa + ": ")
+                        mapaTarefasMembros[tarefa] = membro
                 scrumPy.criarSprintBackLog(duracao, estoriasEscolhidas, mapaTarefasMembros)
+                print "Sprint BackLog criado com sucesso."
             except (TarefaNaoExiste):
                 print "Alguma tarefa fornecida não existe"
             except (UsuarioNaoExiste):
@@ -158,6 +163,13 @@ def main():
         elif opcao == "ce":
             nome = raw_input("Forneça o nome: ")
             descricao = raw_input("Forneça a descrição: ")
+            
+            criarTarefa = "s"
+            while criarTarefa == "s":
+                criarTarefa = raw_input("Deseja criar uma tarefa? S/[N] ").lower()
+                if criarTarefa == "s":
+                    __criarTarefa(scrumPy)
+
             print "Forneça um idTarefa por linha. Uma linha em branco encerra a lista"
             tarefas = []
             id = None
@@ -173,37 +185,13 @@ def main():
                 print "Usuário não tem permissão para a opção escolhida."
             except (UsuarioNaoLogado):
                 print "Usuário não está logado."
-        elif opcao == "ct":
-            nome = raw_input("Forneça o nome: ")
-            descricao = raw_input("Forneça a descricao: ")
-            dificuldade = raw_input("Forneça a dificuldade: ")
-            estimativa = raw_input("Forneça a estimativa: ")
-            try:
-                tarefas = scrumPy.obterTarefas()
-            except (SemProjetoAberto):
-                print "Nenhum projeto aberto."
-            
-            tarefasPreRequisito = []
-            if tarefas[0] != [] or tarefas[1] != []:
-                __exibirTarefas(tarefas)
-                print "Forneça um idTarefa pré-requisito por linha. Uma linha em branco encerra a lista"
-                id = None
-                while id != "":
-                    id = raw_input()
-                    if id != "":
-                        tarefasPreRequisito += [id]
-            try:
-                scrumPy.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisito, estimativa)
-            except (TarefaJaExiste):
-                print "Nome de tarefa já existe"
             except (TarefaNaoExiste):
-                print "Uma tarefa fornecida não existe"
-            except (SemProjetoAberto):
-                print "Nenhum projeto aberto."
-            except (UsuarioSemPermissao):
-                print "Usuário não tem permissão para a opção escolhida."
-            except (UsuarioNaoLogado):
-                print "Usuário não está logado."
+                print "Uma tarefa fornecida não existe."
+            except (TarefaJaConcluida):
+                print "Uma tarefa fornecida já foi concluída"
+            
+        elif opcao == "ct":
+            __criarTarefa(scrumPy)
         elif opcao == "mtc":
             try:
                 scrumPy.obterTarefas()
@@ -258,6 +246,38 @@ def __exibirTarefas(tarefas):
         print "Tarefas concluídas: "
     for concluida in tarefas[1]:
         print concluida
+
+def __criarTarefa(scrumPy):
+    nome = raw_input("Forneça o nome: ")
+    descricao = raw_input("Forneça a descricao: ")
+    dificuldade = raw_input("Forneça a dificuldade: ")
+    estimativa = raw_input("Forneça a estimativa: ")
+    try:
+        tarefas = scrumPy.obterTarefas()
+    except (SemProjetoAberto):
+        print "Nenhum projeto aberto."
+    tarefasPreRequisito = []
+    if tarefas[0] != [] or tarefas[1] != []:
+        __exibirTarefas(tarefas)
+        print "Forneça um idTarefa pré-requisito por linha. Uma linha em branco encerra a lista"
+        id = None
+        while id != "":
+            id = raw_input()
+            if id != "":
+                tarefasPreRequisito += [id]
+    
+    try:
+        scrumPy.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisito, estimativa)
+    except (TarefaJaExiste):
+        print "Nome de tarefa já existe"
+    except (TarefaNaoExiste):
+        print "Uma tarefa fornecida não existe"
+    except (SemProjetoAberto):
+        print "Nenhum projeto aberto."
+    except (UsuarioSemPermissao):
+        print "Usuário não tem permissão para a opção escolhida."
+    except (UsuarioNaoLogado):
+        print "Usuário não está logado."
 
 if __name__ == "__main__":
     main()
