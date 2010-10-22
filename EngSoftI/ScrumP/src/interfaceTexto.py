@@ -7,6 +7,8 @@ Created on 02/10/2010
 '''
 from scrumPy import ScrumPy
 from excecoes import *
+
+
 def main():
     exibirIntroducao()
     scrumPy = ScrumPy()
@@ -14,12 +16,23 @@ def main():
     ##################
     ##Bloco de aceleração de input. Remover antes do release##
     scrumPy.logarUsuario("admin", "admin")
+    scrumPy.cadastrarUsuario("t0", "t0","t0")
+    scrumPy.cadastrarUsuario("t1", "t1","t1")
+    scrumPy.cadastrarUsuario("s", "s","s")
     scrumPy.cadastrarUsuario("p", "p","p")
-    scrumPy.cadastrarUsuario("j", "j","j")
-    scrumPy.cadastrarUsuario("r", "r","r")
-    scrumPy.cadastrarUsuario("f", "f","f")
-    scrumPy.criarProjeto("Projeto Teste", ["admin", "p"], "j", "r")
+    scrumPy.criarProjeto("Projeto Teste", ["admin", "t0"], "p", "s")
+    scrumPy.logarUsuario("p", "p")
     scrumPy.abrirProjeto("PROJ-0")
+    scrumPy.criarTarefa("Tarefa teste 0", "Testando tarefa 0", "2", [], "5")
+    scrumPy.criarTarefa("Tarefa teste 1", "Testando tarefa 1", "2", [], "5")
+    scrumPy.criarTarefa("Tarefa teste 2", "Testando tarefa 2", "1", ['TAR-0'], "3")
+    scrumPy.criarTarefa("Tarefa teste 3", "Testando tarefa 3", "4", ['TAR-0'], "3")
+    scrumPy.logarUsuario("t0", "t0")
+    scrumPy.abrirProjeto("PROJ-0")
+    scrumPy.marcarTarefaConcluida("TAR-0")
+    scrumPy.logarUsuario("p", "p")
+    scrumPy.abrirProjeto("PROJ-0")
+
     ##################
     
     while True:
@@ -138,9 +151,10 @@ def main():
                 print "Usuário não está logado."
         elif opcao == "ot":
             try:
-                print scrumPy.obterTarefas()
+                __exibirTarefas(scrumPy.obterTarefas())
             except (SemProjetoAberto):
                 print "Nenhum projeto aberto."
+                
         elif opcao == "ce":
             nome = raw_input("Forneça o nome: ")
             descricao = raw_input("Forneça a descrição: ")
@@ -163,18 +177,27 @@ def main():
             nome = raw_input("Forneça o nome: ")
             descricao = raw_input("Forneça a descricao: ")
             dificuldade = raw_input("Forneça a dificuldade: ")
-
-            print "Forneça um idTarefa pré-requisito por linha. Uma linha em branco encerra a lista"
-            tarefas = []
-            id = None
-            while id != "":
-                id = raw_input()
-                if id != "":
-                    tarefas += [id]
+            estimativa = raw_input("Forneça a estimativa: ")
             try:
-                scrumPy.criarTarefa(nome, descricao, dificuldade, tarefas)
+                tarefas = scrumPy.obterTarefas()
+            except (SemProjetoAberto):
+                print "Nenhum projeto aberto."
+            
+            tarefasPreRequisito = []
+            if tarefas[0] != [] or tarefas[1] != []:
+                __exibirTarefas(tarefas)
+                print "Forneça um idTarefa pré-requisito por linha. Uma linha em branco encerra a lista"
+                id = None
+                while id != "":
+                    id = raw_input()
+                    if id != "":
+                        tarefasPreRequisito += [id]
+            try:
+                scrumPy.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisito, estimativa)
             except (TarefaJaExiste):
                 print "Nome de tarefa já existe"
+            except (TarefaNaoExiste):
+                print "Uma tarefa fornecida não existe"
             except (SemProjetoAberto):
                 print "Nenhum projeto aberto."
             except (UsuarioSemPermissao):
@@ -187,7 +210,7 @@ def main():
                 idTarefa = raw_input("Forneça o IdTarefa: ")
                 scrumPy.marcarTarefaConcluida(idTarefa)
             except (TarefaNaoExiste):
-                print "Tarefa não existe."
+                print "Não há tarefa pendente com o ID fornecido."
             except (SemProjetoAberto):
                 print "Nenhum projeto aberto."
             except (UsuarioSemPermissao):
@@ -220,6 +243,21 @@ def exibirIntroducao():
     print "INE5417 - ENGENHARIA DE SOFTWARE I"
     print "ITERAÇÃO 1 - SCRUMPY"
     print "ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI"
+
+def __exibirTarefas(tarefas):
+    if tarefas[0] == []:
+        print "Sem tarefas pendentes"
+    else:
+        print "Tarefas pendentes: "
+    for tarefa in tarefas[0]:
+        print tarefa
+        
+    if tarefas[1] == []:
+        print "Sem tarefas concluídas"
+    else:
+        print "Tarefas concluídas: "
+    for concluida in tarefas[1]:
+        print concluida
 
 if __name__ == "__main__":
     main()

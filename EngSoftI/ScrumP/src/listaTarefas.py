@@ -15,25 +15,32 @@ class ListaTarefas(object):
 		self.__listaTarefasConcluidas[idTarefa] = tarefa
 
 	def obterTarefas(self):
-		return self.__listaTarefas.keys()
+		tarefas = []
+		tarefasConcluidas = []
+		for tarefa in self.__listaTarefas.values():
+			tarefas.append(tarefa.__repr__())
+		for tarefaConcluida in self.__listaTarefasConcluidas.values():
+			tarefasConcluidas.append(tarefaConcluida.__repr__())
+		return (tarefas, tarefasConcluidas)
 
 	# @ParamType nome 
 	# @ParamType descricao 
 	# @ParamType dificuldade TarefasPreRequisito 
-	def criarTarefa(self, nome, descricao, dificuldade, tarefasPreRequisito):
+	def criarTarefa(self, nome, descricao, dificuldade, tarefasPreRequisito, estimativa):
 		tarefas = self.__listaTarefas.values()
 		for tarefa in tarefas:
 			if nome == tarefa.obterNome():
 				raise TarefaJaExiste
+			
 		fabricaTarefas = FabricaTarefas.getInstance()
-		tarefa = fabricaTarefas.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisito)
+		tarefa = fabricaTarefas.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisito, estimativa)
 		self.__listaTarefas[tarefa.obterId()] = tarefa
 		
 
 	# @ParamType tarefas 
 	def verificarTarefas(self, tarefas):
 		for tarefa in tarefas:
-			if not self.__listaTarefas.has_key(tarefa.obterId()):
+			if tarefa not in self.__listaTarefas and tarefa not in self.__listaTarefasConcluidas:
 				raise TarefaNaoExiste
 
 	# @ParamType mapaTarefasMembros 

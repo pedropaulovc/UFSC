@@ -81,8 +81,8 @@ class Projeto(object):
 	# @ParamType descricao 
 	# @ParamType dificuldade 
 	# @ParamType tarefasPreRequisitos 
-	def criarTarefa(self, nome, descricao, dificuldade, tarefasPreRequisitos):
-		self.__listaTarefas.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisitos)
+	def criarTarefa(self, nome, descricao, dificuldade, tarefasPreRequisitos, estimativa):
+		self.__listaTarefas.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisitos, estimativa)
 	
 	def criarSprintBackLog(self, estoriasEscolhidas, duracao):
 		self.__sprintBackLog = SprintBackLog(estoriasEscolhidas, duracao)

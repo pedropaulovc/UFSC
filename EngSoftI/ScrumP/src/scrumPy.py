@@ -221,7 +221,7 @@ class ScrumPy(object):
 	# @ParamType descricao 
 	# @ParamType dificuldade 
 	# @ParamType tarefasPreRequisitos 
-	def criarTarefa(self, nome, descricao, dificuldade, tarefasPreRequisitos):
+	def criarTarefa(self, nome, descricao, dificuldade, tarefasPreRequisitos, estimativa):
 		'''
 		Delega criação de uma Tarefa ao projeto atual.
 		'''
@@ -235,7 +235,8 @@ class ScrumPy(object):
 		if self.__projetoAtual == None:
 			raise SemProjetoAberto
 		
-		self.__projetoAtual.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisitos)
+		self.__projetoAtual.verificarTarefas(tarefasPreRequisitos)
+		self.__projetoAtual.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisitos, estimativa)
 
 	def obterUsuarioAtual(self):
 		'''
