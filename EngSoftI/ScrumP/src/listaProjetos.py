@@ -1,4 +1,9 @@
 #-*- coding: utf-8 -*-
+'''
+INE5417 - ENGENHARIA DE SOFTWARE I
+ITERAÇÃO 1 - SCRUMPY
+ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI
+'''
 from excecoes import ProjetoNaoExiste
 class ListaProjetos(object):
 	def __init__(self):

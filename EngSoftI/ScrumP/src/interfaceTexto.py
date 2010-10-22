@@ -1,8 +1,8 @@
 #-*- coding: utf-8 -*-
 '''
-Created on 22/10/2010
-
-@author: PedroPaulo
+INE5417 - ENGENHARIA DE SOFTWARE I
+ITERAÇÃO 1 - SCRUMPY
+ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI
 '''
 from excecoes import UsuarioNaoLogado, SemProjetoAberto, LoginJaExiste, \
     UsuarioSemPermissao, UsuarioNaoExiste, SenhaInvalida, ProjetoNaoExiste, \
@@ -322,8 +322,4 @@ class InterfaceTexto(object):
         print "ot  - Obter Tarefas"
         print "ce  - Criar Estoria"
         print "ct  - Criar Tarefa"
-        print "mtc - Marcar Tarefa como Concluída"
-    
-
-if __name__ == "__main__":
-    InterfaceTexto()
+        print "mtc - Marcar Tarefa como Concluída"   

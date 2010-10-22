@@ -1,10 +1,9 @@
 #-*- coding: utf-8 -*-
 '''
-Created on 24/09/2010
-
-@author: pepe
+INE5417 - ENGENHARIA DE SOFTWARE I
+ITERAÇÃO 1 - SCRUMPY
+ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI
 '''
-
 class Excecoes(Exception):
     pass
 

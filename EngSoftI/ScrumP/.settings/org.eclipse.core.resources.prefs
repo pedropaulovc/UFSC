@@ -1,4 +1,4 @@
-#Fri Oct 22 20:21:50 BRST 2010
+#Fri Oct 22 20:26:29 BRST 2010
 eclipse.preferences.version=1
 encoding//src/__init__.py=utf-8
 encoding//src/estoria.py=utf-8
@@ -11,6 +11,7 @@ encoding//src/interfaceTexto.py=utf-8
 encoding//src/listaProjetos.py=utf-8
 encoding//src/listaTarefas.py=utf-8
 encoding//src/listaUsuarios.py=utf-8
+encoding//src/main.py=utf-8
 encoding//src/productBackLog.py=utf-8
 encoding//src/projeto.py=utf-8
 encoding//src/recursos/Observable.py=utf-8
@@ -18,6 +19,10 @@ encoding//src/recursos/Singleton.py=utf-8
 encoding//src/scrumPy.py=utf-8
 encoding//src/sprintBackLog.py=utf-8
 encoding//src/tarefa.py=utf-8
+encoding//src/testes/testeCriarProjeto.py=utf-8
+encoding//src/testes/testeCriarUsuario.py=utf-8
+encoding//src/testes/testeObterInfoProjeto.py=utf-8
+encoding//src/testes/testesTodos.py=utf-8
 encoding//src/usuario.py=utf-8
 encoding//src/view/__init__.py=utf-8
 encoding//src/view/visao.py=utf-8

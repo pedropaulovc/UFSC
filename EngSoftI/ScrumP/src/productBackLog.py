@@ -1,7 +1,9 @@
-# By Juarez 03-out 15:41
-# 		adicionado: 	obterEstoria(idEstoria)
-
 #-*- coding: utf-8 -*-
+'''
+INE5417 - ENGENHARIA DE SOFTWARE I
+ITERAÇÃO 1 - SCRUMPY
+ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI
+'''
 from excecoes import EstoriaNaoExiste
 from fabricaEstorias import FabricaEstorias
 class ProductBackLog(object):

@@ -1,11 +1,9 @@
 #-*- coding: utf-8 -*-
-# By Juarez 03-out 15:41
-# 		modificado: 	obterTarefasDeEstorias(estorias)
-#			old:	tarefas = estoria.obterTarefas()
-#			new:	story = self.__productBackLog.obterEstoria(estoria)
-#					tarefas = story.obterTarefas()
-
-#-*- coding: utf-8 -*-
+'''
+INE5417 - ENGENHARIA DE SOFTWARE I
+ITERAÇÃO 1 - SCRUMPY
+ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI
+'''
 from listaTarefas import ListaTarefas
 from sprintBackLog import SprintBackLog
 from productBackLog import ProductBackLog

@@ -1,32 +1,14 @@
 #-*- coding: utf-8 -*-
+'''
+INE5417 - ENGENHARIA DE SOFTWARE I
+ITERAÇÃO 1 - SCRUMPY
+ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI
+'''
 from excecoes import UsuarioNaoLogado, DuracaoInvalida, \
 	SemProjetoAberto, UsuarioSemPermissao, NaoParticipaDoProjeto
 from fabricaProjetos import FabricaProjetos
 from listaProjetos import ListaProjetos
 from listaUsuarios import ListaUsuarios
-
-# 3 Situações do Scrum:
-#	- Usuário não logado:
-#		-	logarUsuario
-#		?	obterUsuarios
-#	- Usuário logado:
-#		-	cadastrarUsuario
-#		- criarProjeto
-#		- obterProjetosPraticipados
-#		- obterInfoProjeto (abrirProjeto)
-#	- Projeto aberto:
-#			- obterEstorias
-#			- obterTarefas
-#
-#		- Usuário é ScrumMaster:
-#			- criarSprintBackLog
-#			- criarEstoria
-#			- criartarefa
-#		- Usuário é TeamMember
-#			- marcarTarefaConcluída
-
-#Alterações:
-# obterInfoProjeto -> abrirProjeto
 
 class ScrumPy(object):
 	'''
