@@ -50,6 +50,7 @@ class ScrumPy(object):
 		'''		
 		usuario = self.__listaUsuarios.logarUsuario(login, senha)
 		self.__definirUsuarioAtual(usuario)
+		self.__projetoAtual = None
 
 	# @ParamType usuario 
 	def __definirUsuarioAtual(self, usuario):
@@ -104,6 +105,7 @@ class ScrumPy(object):
 		fabricaProjetos = FabricaProjetos.getInstance()
 		projeto = fabricaProjetos.criarProjeto(nome, time, prodOwner, scrumMaster)
 		self.__listaProjetos.adicionarProjeto(projeto)
+		return projeto.obterId()
 
 	def obterProjetosParticipados(self):
 		'''
@@ -124,7 +126,7 @@ class ScrumPy(object):
 		
 		projeto = self.__listaProjetos.obterProjeto(idProj)
 		
-		if projeto not in projetosParticipados:
+		if idProj not in projetosParticipados:
 			raise NaoParticipaDoProjeto
 		
 		info = projeto.obterInfo()
@@ -224,8 +226,10 @@ class ScrumPy(object):
 		'''
 		if self.__usuarioAtual == None:
 			raise UsuarioNaoLogado
-			
-		if self.__usuarioAtual.obterLogin() != self.__projetoAtual.obterScrumMaster():
+		
+		login = self.__usuarioAtual.obterLogin()
+		if login != self.__projetoAtual.obterScrumMaster() and \
+			login != self.__projetoAtual.obterProdOwner():
 			raise UsuarioSemPermissao
 		
 		if self.__projetoAtual == None:

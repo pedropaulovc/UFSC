@@ -13,9 +13,13 @@ def main():
     
     ##################
     ##Bloco de aceleração de input. Remover antes do release##
-    #scrumPy.logarUsuario("admin", "admin")
-    #scrumPy.cadastrarUsuario("Pedro Paulo", "pp", "pp")    
-    #scrumPy.criarProjeto("Projeto", ["pp"], "pp", "pp")
+    scrumPy.logarUsuario("admin", "admin")
+    scrumPy.cadastrarUsuario("p", "p","p")
+    scrumPy.cadastrarUsuario("j", "j","j")
+    scrumPy.cadastrarUsuario("r", "r","r")
+    scrumPy.cadastrarUsuario("f", "f","f")
+    scrumPy.criarProjeto("Projeto Teste", ["admin", "p"], "j", "r")
+    scrumPy.abrirProjeto("PROJ-0")
     ##################
     
     while True:
@@ -70,7 +74,8 @@ def main():
             prodOwner = raw_input("Forneça o Product Owner: ")
             scrumMaster = raw_input("Forneça o Scrum Master: ")
             try:
-                scrumPy.criarProjeto(nome, time, prodOwner, scrumMaster)
+                id = scrumPy.criarProjeto(nome, time, prodOwner, scrumMaster)
+                print "Foi criado um novo projeto com a ID:", id
             except (UsuarioNaoExiste):
                 print "Algum usuário enviado não existe"
             except (UsuarioNaoLogado):
@@ -85,7 +90,8 @@ def main():
         elif opcao == "ap":
             idProj = raw_input("Forneça o Id do projeto: ")
             try:
-                print scrumPy.abrirProjeto(idProj)
+                aberto = scrumPy.abrirProjeto(idProj)
+                print "Projeto Aberto. Nome: {0}; ID: {1}".format(aberto[0], aberto[1])
             except (ProjetoNaoExiste):
                 print "Projeto não existe."
             except (NaoParticipaDoProjeto):
@@ -194,7 +200,7 @@ def main():
         
 
 def exibirMenu():
-    print "Escolha uma opção:"
+    print "\nEscolha uma opção:"
     print "oua - Obter Usuário Atual"
     print "opa - Obter Projeto Atual"
     print "cu  - Criar Usuário"
@@ -213,7 +219,7 @@ def exibirMenu():
 def exibirIntroducao():
     print "INE5417 - ENGENHARIA DE SOFTWARE I"
     print "ITERAÇÃO 1 - SCRUMPY"
-    print "ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI\n"
+    print "ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI"
 
 if __name__ == "__main__":
     main()
