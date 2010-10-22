@@ -13,9 +13,9 @@ def main():
     
     ##################
     ##Bloco de aceleração de input. Remover antes do release##
-    scrumPy.cadastrarUsuario("Pedro Paulo", "pp", "pp")
-    scrumPy.logarUsuario("pp", "pp")
-    scrumPy.criarProjeto("Projeto", ["pp"], "pp", "pp")
+    #scrumPy.logarUsuario("admin", "admin")
+    #scrumPy.cadastrarUsuario("Pedro Paulo", "pp", "pp")    
+    #scrumPy.criarProjeto("Projeto", ["pp"], "pp", "pp")
     ##################
     
     while True:
@@ -90,6 +90,8 @@ def main():
                 print "Projeto não existe."
             except (NaoParticipaDoProjeto):
                 print "Usuário não participa do projeto escolhido."
+            except (UsuarioNaoLogado):
+                print "Usuário não está logado."
         elif opcao == "oe":
             try:
                 print "(tarefas, estorias):", scrumPy.obterEstorias()
@@ -109,7 +111,7 @@ def main():
             linhaStr = None
             while linhaStr != "":
                 linhaStr = raw_input()
-                if linhaStr != "":
+                if linhaStr != "" and linhaStr.find(",") != -1:
                     linha = linhaStr.split(",")
                     mapaTarefasMembros[linha[0]] = linha[1]
             try:
@@ -129,7 +131,10 @@ def main():
             except (UsuarioNaoLogado):
                 print "Usuário não está logado."
         elif opcao == "ot":
-            print scrumPy.obterTarefas()
+            try:
+                print scrumPy.obterTarefas()
+            except (SemProjetoAberto):
+                print "Nenhum projeto aberto."
         elif opcao == "ce":
             nome = raw_input("Forneça o nome: ")
             descricao = raw_input("Forneça a descrição: ")
@@ -164,7 +169,6 @@ def main():
                 scrumPy.criarTarefa(nome, descricao, dificuldade, tarefas)
             except (TarefaJaExiste):
                 print "Nome de tarefa já existe"
-            # TODO: Já Modificado!!! -> Como estamos usando o projetoAtual, deve-se verificar se há Projeto Aberto.    
             except (SemProjetoAberto):
                 print "Nenhum projeto aberto."
             except (UsuarioSemPermissao):
@@ -172,9 +176,9 @@ def main():
             except (UsuarioNaoLogado):
                 print "Usuário não está logado."
         elif opcao == "mtc":
-            scrumPy.obterTarefas()
-            idTarefa = raw_input("Forneça o IdTarefa: ")
             try:
+                scrumPy.obterTarefas()
+                idTarefa = raw_input("Forneça o IdTarefa: ")
                 scrumPy.marcarTarefaConcluida(idTarefa)
             except (TarefaNaoExiste):
                 print "Tarefa não existe."

@@ -209,6 +209,9 @@ class ScrumPy(object):
 		'''
 		Informa as tarefas do projeto atual(contidas na lista de tarefas).
 		'''
+		if self.__projetoAtual == None:
+			raise SemProjetoAberto
+		
 		return self.__projetoAtual.obterTarefas()
 
 	# @ParamType nome 
@@ -219,7 +222,9 @@ class ScrumPy(object):
 		'''
 		Delega criação de uma Tarefa ao projeto atual.
 		'''
-	# TODO: Já Modificado!!! -> Como estamos usando o projetoAtual, deve-se verificar se há Projeto Aberto.	
+		if self.__usuarioAtual == None:
+			raise UsuarioNaoLogado
+			
 		if self.__usuarioAtual.obterLogin() != self.__projetoAtual.obterScrumMaster():
 			raise UsuarioSemPermissao
 		

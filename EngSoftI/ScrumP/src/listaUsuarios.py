@@ -39,4 +39,6 @@ class ListaUsuarios(object):
 		if not verificado:
 			raise SenhaInvalida
 		return usuario
-		
+	
+	def ehAdmin(self, login):
+		return login in self.__administradores
