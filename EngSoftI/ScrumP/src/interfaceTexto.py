@@ -45,7 +45,7 @@ class InterfaceTexto(object):
             elif opcao == "ce":
                 self.__criarEstoria()
             elif opcao == "ct":
-                self.__criarTarefa(self.__scrumPy)
+                self.__criarTarefa()
             elif opcao == "mtc":
                 self.__marcarTarefaConcluida()
             else:
@@ -250,13 +250,13 @@ class InterfaceTexto(object):
         for concluida in tarefas[1]:
             print concluida
 
-    def __criarTarefa(self,scrumPy):
+    def __criarTarefa(self):
         nome = raw_input("Forneça o nome: ")
         descricao = raw_input("Forneça a descricao: ")
         dificuldade = raw_input("Forneça a dificuldade: ")
         estimativa = raw_input("Forneça a estimativa: ")
         try:
-            tarefas = scrumPy.obterTarefas()
+            tarefas = self.__scrumPy.obterTarefas()
         except (SemProjetoAberto):
             print "Nenhum projeto aberto."
         tarefasPreRequisito = []
@@ -270,7 +270,7 @@ class InterfaceTexto(object):
                     tarefasPreRequisito += [id]
         
         try:
-            scrumPy.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisito, estimativa)
+            self.__scrumPy.criarTarefa(nome, descricao, dificuldade, tarefasPreRequisito, estimativa)
         except (TarefaJaExiste):
             print "Nome de tarefa já existe"
         except (TarefaNaoExiste):
