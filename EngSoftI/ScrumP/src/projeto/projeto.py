@@ -4,7 +4,7 @@ INE5417 - ENGENHARIA DE SOFTWARE I
 ITERAÇÃO 1 - SCRUMPY
 ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI
 '''
-from listaTarefas import ListaTarefas
+from tarefa.listaTarefas import ListaTarefas
 from sprintBackLog import SprintBackLog
 from productBackLog import ProductBackLog
 class Projeto(object):

@@ -4,7 +4,7 @@ INE5417 - ENGENHARIA DE SOFTWARE I
 ITERAÇÃO 1 - SCRUMPY
 ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI
 '''
-from excecoes import UsuarioNaoExiste, SenhaInvalida, LoginJaExiste
+from excecoes.excecoes import UsuarioNaoExiste, SenhaInvalida, LoginJaExiste
 from fabricaUsuarios import FabricaUsuarios
 class ListaUsuarios(object):
 	

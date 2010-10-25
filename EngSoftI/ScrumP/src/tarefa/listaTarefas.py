@@ -4,7 +4,7 @@ INE5417 - ENGENHARIA DE SOFTWARE I
 ITERAÇÃO 1 - SCRUMPY
 ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI
 '''
-from excecoes import TarefaNaoExiste, TarefaJaExiste, TarefaJaConcluida
+from excecoes.excecoes import TarefaNaoExiste, TarefaJaExiste, TarefaJaConcluida
 from fabricaTarefas import FabricaTarefas
 class ListaTarefas(object):
 	def __init__(self):

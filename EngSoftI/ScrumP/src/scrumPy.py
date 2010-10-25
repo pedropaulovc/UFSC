@@ -4,11 +4,11 @@ INE5417 - ENGENHARIA DE SOFTWARE I
 ITERAÇÃO 1 - SCRUMPY
 ALUNOS: PEDRO PAULO V. CAMPOS, RAFAEL E. PEDRETTI, JUAREZ A. PIAZZA SACENTI
 '''
-from excecoes import UsuarioNaoLogado, DuracaoInvalida, \
+from excecoes.excecoes import UsuarioNaoLogado, DuracaoInvalida, \
 	SemProjetoAberto, UsuarioSemPermissao, NaoParticipaDoProjeto
-from fabricaProjetos import FabricaProjetos
-from listaProjetos import ListaProjetos
-from listaUsuarios import ListaUsuarios
+from projeto.fabricaProjetos import FabricaProjetos
+from projeto.listaProjetos import ListaProjetos
+from usuario.listaUsuarios import ListaUsuarios
 
 class ScrumPy(object):
 	'''
@@ -32,7 +32,7 @@ class ScrumPy(object):
 		'''		
 		usuario = self.__listaUsuarios.logarUsuario(login, senha)
 		self.__definirUsuarioAtual(usuario)
-		self.__projetoAtual = None
+		self.__definirProjetoAtual(None)
 
 	# @ParamType usuario 
 	def __definirUsuarioAtual(self, usuario):
@@ -45,6 +45,11 @@ class ScrumPy(object):
 	def __verificarSeUsuarioLogado(self):
 		if self.__usuarioAtual == None:
 			raise UsuarioNaoLogado
+		
+		
+	def __verificarSeUsuarioAdmin(self):
+		if not self.__listaUsuarios.ehAdmin(self.__usuarioAtual.obterLogin()):
+			raise UsuarioSemPermissao
 	# @ParamType nome 
 	# @ParamType login 
 	# @ParamType senha 
@@ -55,8 +60,7 @@ class ScrumPy(object):
 		'''
 		self.__verificarSeUsuarioLogado()
 		
-		if not self.__listaUsuarios.ehAdmin(self.__usuarioAtual.obterLogin()):
-			raise UsuarioSemPermissao
+		self.__verificarSeUsuarioAdmin()
 		self.__listaUsuarios.cadastrarUsuario(nome, login, senha)
 
 	def obterUsuarios(self):
