@@ -73,7 +73,7 @@ class InterfaceTexto(object):
         while criarTarefa == "s":
             criarTarefa = raw_input("Deseja criar uma tarefa? S/[N] ").lower()
             if criarTarefa == "s":
-                self.__criarTarefa(self.__scrumPy)
+                self.__criarTarefa()
         
         print "Forneça um idTarefa por linha. Uma linha em branco encerra a lista"
         tarefas = []
