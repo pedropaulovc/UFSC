@@ -1,0 +1,22 @@
+System Information
+__________________
+*** Academic Edition ***
+Release                          :    9.1.A (Build 1999)
+Host system type                 :    WIN32
+Host information                 :    Windows NT 6.1 Build 7600
+Group ID                         :    0
+
+Installed software                  Version             Release date  Installed on
+__________________________________________________________________________________
+OPNET Core Software                 9.1.A PL1           2010-05-12    2010-10-20  
+OPNET IT Guru Academic Edition      9.1.A PL1           2010-05-12    2010-10-20  
+OPNET IT Guru Documentation Academic Edition  9.1.A PL1           2010-05-12    2010-10-20  
+OPNET IT Guru Models Academic Edition  9.1.A PL1           2010-05-12    2010-10-20  
+OPNET Model Library Academic Edition  9.1.A PL1           2003-03-20    2010-10-20  
+OPNET Model Library Configs Academic Edition  9.1.A PL1           2003-03-20    2010-10-20  
+
+
+Product Options
+_______________
+Wireless                         :    9.1.A
+
