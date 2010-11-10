@@ -20,6 +20,7 @@
 \usepackage{courier}
 \usepackage[T1]{fontenc}
 \usepackage{algorithmic}
+\usepackage{url}
 
 \title{Algoritmos de Roteamento}
 
@@ -119,7 +120,7 @@
 %\usepackage{graphics} is needed for \includegraphics
 \begin{figure}[htp]
 \begin{center}
-  \includegraphics[width=75mm]{Imagens/Cisco-CRS-3.jpeg}
+  \includegraphics[width=73mm]{Imagens/Cisco-CRS-3.jpeg}
   \caption[cisco]{Cisco CRS-3: 322 Tbps, \$60.000}
   \label{cisco}
 \end{center}
@@ -163,7 +164,8 @@
 \frametitle{Sistemas Autônomos}
 \begin{itemize}
   \setlength{\itemsep}{0.7cm}%
-  \item Como tornar escalável e administrável um conjunto de ~2bi de computadores interconectados?
+  \item Como tornar escalável e administrável um conjunto de \textasciitilde2bi de
+  computadores interconectados?
   \item Solução: Agrupar em um SA redes operadas por um ou mais operadores que apresentam uma única política clara de roteamento.
   \item Exemplo: AS11242 - POP-SC - Responsável por 73728 IPs 
 \end{itemize}
@@ -189,6 +191,7 @@ entre $v_1$ e $v_2$  com um custo m\}
 
 \begin{frame}
 \frametitle{Classificação de protocolos de roteamento}
+\framesubtitle{Quanto à vizinhança}
 %\usepackage{graphics} is needed for \includegraphics
 \begin{figure}[htp]
 \begin{center}
@@ -321,7 +324,7 @@ afirmação que a rota $R_{ik}$ é ótima.
   \setlength{\itemsep}{0.7cm}%
   \item Algoritmo distribuído
   \item Cada roteador possui uma tabela (vetor) contendo a melhor distância conhecida até cada destino e a linha de saída preferencial utilizada para alcançá-lo.
-  \item Utilizado na ARPANET: Routing Information Protocol (RIP)
+  \item Utilizado na ARPANET: \emph{Routing Information Protocol} (RIP)
   \item Objetivo: Encontrar o menor caminho
   \begin{itemize}
     \item Algoritmo de Bellman-Ford
@@ -362,6 +365,138 @@ da soma da distância de \emph{i} até um vizinho e deste até \emph{j}.
    	\RETURN TRUE
 \end{algorithmic}
 \end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Vetor Distância}
+%\usepackage{graphics} is needed for \includegraphics
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[width=105mm]{Imagens/VetorDistancia.png}
+  \label{vetor_distancia}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Convergência do Vetor Distância}
+
+\begin{itemize}
+  \item Vetor distância reage bem (linearmente) a boas notícias:
+  %\usepackage{graphics} is needed for \includegraphics
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[width=85mm]{Imagens/ConvergenciaVetorDistancia.jpeg}
+  \label{convergencia_vetor_distancia}
+\end{center}
+\end{figure}
+   \item Já a más notícias\ldots
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Problema da Contagem ao Infinito}
+ %\usepackage{graphics} is needed for \includegraphics
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[width=105mm]{Imagens/ContagemAoInfinito.jpeg}
+  \label{contagem_ao_infinito}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Estado do link}
+
+\begin{itemize}
+  \item Descobrir vizinhos
+  \item Propagar informação
+  \begin{itemize}
+     \item Quem
+     \item Vizinhos
+     \item Número de sequência
+  \end{itemize}
+  \item Criação do mapa da rede
+  \item Recalcular e reenviar em caso de falha
+  \item Cálculo da melhor rota é independente
+  \item OSPF - Open Shortest Path First:
+  \begin{itemize}
+     \item Protocolo muito utilizado em redes internas,
+        baseado em link-state.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Roteamento hierárquico}
+\begin{itemize}
+  \setlength{\itemsep}{0.7cm}%
+  \item Utilizado no roteamento externo (inter-rede)
+  \item \textasciitilde2bi de dispositivos $\to$ 35.000 Sistemas Autônomos
+  (2010)
+  \item Exemplo: Border Gateway Protocol (BGP)
+  \item Responsável por tornar a Internet uma aplicação verdadeiramente distribuída.
+  \item Obediência a leis internacionais e decisões políticas
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Roteamento Hierárquico}
+\begin{itemize}
+  \item Funcionamento básico: Similar ao vetor distância. Roteadores enviam uns
+  aos outros duas informações:
+  \begin{itemize}
+    \item Que eles estão vivos e quais redes (Faixas de IPs) estão sob sua
+    responsabilidade.
+    \item Qual a rota completa que utilizam para chegar ao destino (Solução para
+    o problema da contagem ao infinito!)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Roteamento Hierárquico}
+ %\usepackage{graphics} is needed for \includegraphics
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[width=100mm]{Imagens/RoteamentoHierarquico.png}
+  \label{roteamento_hierarquico}
+\end{center}
+\end{figure}
+\begin{itemize}
+  \item O que acontece se G cair?
+\end{itemize}
+\end{frame}
+
+
+\section{Conclusão}
+\subsection{}
+
+\begin{frame}
+\frametitle{Conclusão}
+\begin{itemize}
+  \setlength{\itemsep}{0.7cm}%
+  \item Grafos e seus algoritmos são ferramentas extremamente úteis em redes de
+  computadores. Permitem a modelagem e solução de diferentes situações encontradas na área.
+  \item A Internet como a conhecemos só existe hoje graças aos avanços no
+  desenvolvimento de melhores e mais eficientes algoritmos de roteamento.
+  \item Não há uma "bala de prata", diferentes algoritmos servem a diferentes
+  propósitos
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Bibliografia}
+\begin{itemize}
+  \item TANENBAUM, A. S. Redes de Computadores. 4 ed. São Paulo: Elsevier, 2003.
+  \item DE CASTRO, M. C. F. Redes Comutadas. setembro de 2002. Disponível em:
+  <\url{http://www.ee.pucrs.br/~decastro/download.html}>.
+  \item CARISSIMI, A. Algoritmos de roteamento. 2008. Disponível em:
+  <\url{http://www.inf.ufrgs.br/~asc/redes/pdf/aula21.pdf}>.
+  \item CAMPONOGARA, E. Caminhos Mínimos Com Uma Fonte. abril de 2009.
+  Disponível em:
+  <\url{http://www.das.ufsc.br/~camponog/Disciplinas/DAS-9003/slides_CLR/l14-shortest-path.pdf}>
+\end{itemize}
 \end{frame}
 
 \end{document}
