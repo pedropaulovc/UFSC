@@ -8,12 +8,14 @@
 
 \mode<presentation>
 {
-\usetheme{Darmstadt}
+\useoutertheme[subsection=false]{miniframes}
+\usetheme{Berlin}
 \setbeamertemplate{navigation symbols}{} 
 \setbeamercovered{dynamic}
+\setbeamertemplate{footline}{}
 }
 
-\beamertemplatetransparentcoveredmedium 
+\hypersetup{pdfstartview={FitH}}
 
 \usepackage[brazil]{babel}
 \usepackage[utf8]{inputenc}
@@ -23,6 +25,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{algorithmic}
 \usepackage{url}
+
 
 \title{Algoritmos de Roteamento}
 
@@ -190,6 +193,18 @@
 \begin{frame}
 \frametitle{Classificação de Protocolos de Roteamento}
 \framesubtitle{Quanto à Vizinhança}
+%\usepackage{graphics} is needed for \includegraphics
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[width=105mm]{Imagens/SistemaAutonomo.png}
+  \label{sistema_autonomo}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Classificação de Protocolos de Roteamento}
+\framesubtitle{Quanto à Vizinhança}
 \begin{block}{Externos}
 G(V,A)\\
 V = \{v $\mid$ v  é um sistema autônomo\}\\
@@ -203,18 +218,6 @@ V = \{v $\mid$ v é nodo da rede de um sistema autônomo\}\\
 A = \{($v_1$, $v_2$, m) $\mid$ $v_1$, $v_2 \in$ V, há uma ligação direta
 entre $v_1$ e $v_2$  com um custo m\}
 \end{block}
-\end{frame}
-
-\begin{frame}
-\frametitle{Classificação de Protocolos de Roteamento}
-\framesubtitle{Quanto à Vizinhança}
-%\usepackage{graphics} is needed for \includegraphics
-\begin{figure}[htp]
-\begin{center}
-  \includegraphics[width=105mm]{Imagens/SistemaAutonomo.png}
-  \label{sistema_autonomo}
-\end{center}
-\end{figure}
 \end{frame}
 
 \begin{frame}
@@ -267,7 +270,7 @@ Se um roteador \emph{J} estiver no caminho ótimo entre os roteadores \emph{I} e
 \begin{block}{Prova (por contradição)}
 Se houvesse uma rota melhor que a enunciada entre \emph{J} e \emph{K}, ela poderia ser
 concatenada a $R_1$ para criar uma rota melhor entre \emph{I} e \emph{K}, contradizendo a
-afirmação que a rota $R_{ik}$ é ótima.
+afirmação que a rota $R_{ik}$ é ótima. $\qed$
 \end{block}
 %\usepackage{graphics} is needed for \includegraphics
 \begin{figure}[htp]
