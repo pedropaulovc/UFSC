@@ -13,6 +13,8 @@
 \setbeamercovered{dynamic}
 }
 
+\beamertemplatetransparentcoveredmedium 
+
 \usepackage[brazil]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{mathptmx}% font definitions, try \usepackage{ae} instead of the following
@@ -146,12 +148,26 @@
 \subsection{}
 
 \begin{frame}
-\frametitle{Modelos de troca de dados}
- 	
+\frametitle{Modelos de Troca de Dados}
+ 	\begin{table}	
+ 	\begin{center}
+		\begin{tabular}{c c}
+		\textbf{Unicast} &
+			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Unicast.png}}\\
+		\textbf{Anycast} & 
+			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Anycast.png}}\\ 
+		\textbf{Multicast} & 
+			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Multicast.png}}\\ 
+		\textbf{Broadcast} & 
+			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Broadcast.png}}\\ 
+		\end{tabular}
+		\label{modelos_troca_dados}
+	\end{center}
+	\end{table}
 \end{frame}
 
 \begin{frame}
-\frametitle{Métricas para classificação de rotas}
+\frametitle{Métricas para Classificação de Rotas}
 \begin{itemize}
   \setlength{\itemsep}{0.7cm}%
   \item Número de hops
@@ -172,8 +188,8 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Classificação de protocolos de roteamento}
-\framesubtitle{Quanto à vizinhança}
+\frametitle{Classificação de Protocolos de Roteamento}
+\framesubtitle{Quanto à Vizinhança}
 \begin{block}{Externos}
 G(V,A)\\
 V = \{v $\mid$ v  é um sistema autônomo\}\\
@@ -190,8 +206,8 @@ entre $v_1$ e $v_2$  com um custo m\}
 \end{frame}
 
 \begin{frame}
-\frametitle{Classificação de protocolos de roteamento}
-\framesubtitle{Quanto à vizinhança}
+\frametitle{Classificação de Protocolos de Roteamento}
+\framesubtitle{Quanto à Vizinhança}
 %\usepackage{graphics} is needed for \includegraphics
 \begin{figure}[htp]
 \begin{center}
@@ -202,8 +218,8 @@ entre $v_1$ e $v_2$  com um custo m\}
 \end{frame}
 
 \begin{frame}
-\frametitle{Classificação de protocolos de roteamento}
-\framesubtitle{Quanto à escolha de rotas}
+\frametitle{Classificação de Protocolos de Roteamento}
+\framesubtitle{Quanto à Escolha de Rotas}
 \begin{itemize}
   \item Estáticos (Não adaptativos)
   \begin{itemize}
@@ -214,7 +230,7 @@ entre $v_1$ e $v_2$  com um custo m\}
   \item Dinâmicos (Adaptativos)
   \begin{itemize}
      \item Vetor distância
-     \item Estado do enlace (\emph{Link State})
+     \item Estado do \emph{link} (\emph{Link State})
      \item Hierárquico 
   \end{itemize}
 \end{itemize}
@@ -232,7 +248,7 @@ entre $v_1$ e $v_2$  com um custo m\}
 \end{frame}
 
 \begin{frame}
-\frametitle{Princípio de otimização}
+\frametitle{Princípio de Otimização}
 \begin{block}{Teorema}
 Se um roteador \emph{J} estiver no caminho ótimo entre os roteadores \emph{I} e \emph{K}, o caminho
 ótimo de \emph{J} a \emph{K} também estará na mesma rota.
@@ -247,7 +263,7 @@ Se um roteador \emph{J} estiver no caminho ótimo entre os roteadores \emph{I} e
 \end{frame}
 
 \begin{frame}
-\frametitle{Princípio de otimização}
+\frametitle{Princípio de Otimização}
 \begin{block}{Prova (por contradição)}
 Se houvesse uma rota melhor que a enunciada entre \emph{J} e \emph{K}, ela poderia ser
 concatenada a $R_1$ para criar uma rota melhor entre \emph{I} e \emph{K}, contradizendo a
@@ -406,7 +422,7 @@ da soma da distância de \emph{i} até um vizinho e deste até \emph{j}.
 \end{frame}
 
 \begin{frame}
-\frametitle{Estado do link}
+\frametitle{Estado do \emph{Link}}
 
 \begin{itemize}
   \item Descobrir vizinhos
@@ -428,7 +444,7 @@ da soma da distância de \emph{i} até um vizinho e deste até \emph{j}.
 \end{frame}
 
 \begin{frame}
-\frametitle{Roteamento hierárquico}
+\frametitle{Roteamento Hierárquico}
 \begin{itemize}
   \setlength{\itemsep}{0.7cm}%
   \item Utilizado no roteamento externo (inter-rede)
