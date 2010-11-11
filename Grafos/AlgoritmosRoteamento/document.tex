@@ -141,7 +141,7 @@
   eficientes
   \item[Estabilidade] Rápida adaptação a mudanças ou problemas na rede
   \item[Robustez] Funcionar por anos sem necessitar reinicialização
-  \item[Justiça] Visar eficiência global sem gerar starvation
+  \item[Justiça] Visar eficiência global sem gerar \emph{starvation}
 \end{description}
 
 \end{frame}
@@ -150,23 +150,65 @@
 \section{Fundamentação}
 \subsection{}
 
+% \begin{frame}
+% \frametitle{Modelos de Troca de Dados}
+%  	\begin{table}	
+%  	\begin{center}
+% 		\begin{tabular}{c c}
+% 		\textbf{Unicast} &
+% 			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Unicast.png}}\\
+% 		\textbf{Anycast} & 
+% 			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Anycast.png}}\\ 
+% 		\textbf{Multicast} & 
+% 			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Multicast.png}}\\ 
+% 		\textbf{Broadcast} & 
+% 			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Broadcast.png}}\\ 
+% 		\end{tabular}
+% 		\label{modelos_troca_dados}
+% 	\end{center}
+% 	\end{table}
+% \end{frame}
+
 \begin{frame}
 \frametitle{Modelos de Troca de Dados}
- 	\begin{table}	
- 	\begin{center}
-		\begin{tabular}{c c}
-		\textbf{Unicast} &
-			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Unicast.png}}\\
-		\textbf{Anycast} & 
-			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Anycast.png}}\\ 
-		\textbf{Multicast} & 
-			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Multicast.png}}\\ 
-		\textbf{Broadcast} & 
-			\parbox[c]{1em}{\includegraphics[width=25mm]{Imagens/Broadcast.png}}\\ 
-		\end{tabular}
-		\label{modelos_troca_dados}
-	\end{center}
-	\end{table}
+\begin{columns}
+  \begin{column}{0.25\textwidth}
+    %\usepackage{graphics} is needed for \includegraphics
+	\begin{figure}[htp]
+		\begin{center}
+	  		\includegraphics[width=25mm]{Imagens/Unicast.png}
+	  		\caption[Unicast]{Unicast}
+		\end{center}
+	\end{figure}
+  \end{column}
+  \begin{column}{0.25\textwidth}
+  	%\usepackage{graphics} is needed for \includegraphics
+	\begin{figure}[htp]
+		\begin{center}
+	  		\includegraphics[width=25mm]{Imagens/Anycast.png}
+	  		\caption[Anycast]{Anycast}
+		\end{center}
+	\end{figure}
+  \end{column}
+  \begin{column}{0.25\textwidth}
+    %\usepackage{graphics} is needed for \includegraphics
+	\begin{figure}[htp]
+		\begin{center}
+	  		\includegraphics[width=25mm]{Imagens/Multicast.png}
+	  		\caption[Multicast]{Multicast}
+		\end{center}
+	\end{figure}
+  \end{column}
+  \begin{column}{0.25\textwidth}
+    %\usepackage{graphics} is needed for \includegraphics
+	\begin{figure}[htp]
+		\begin{center}
+	  		\includegraphics[width=25mm]{Imagens/Broadcast.png}
+		  	\caption[Broadcast]{Broadcast}
+		\end{center}
+	\end{figure}
+  \end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}
@@ -176,6 +218,7 @@
   \item Número de hops
   \item Largura de banda
   \item Custo (monetário)
+  \item Latência
 \end{itemize}
 \end{frame}
 
