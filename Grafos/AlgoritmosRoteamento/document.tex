@@ -411,23 +411,51 @@ da soma da distância de \emph{i} até um vizinho e deste até \emph{j}.
 \end{frame}
 
 \begin{frame}
-\begin{block}{Algoritmo}
-\begin{algorithmic}
-    \STATE Bellman-Ford(G, w, s)
-    \STATE Initialize-Single-Source(G, s)
-    \FOR{i $\gets$ 1 to $\mid$V[G]$\mid$ - 1}
-    	\FORALL{(u, v) $\gets$ E[G]}
-    		\STATE Relax(u, v)
-    	\ENDFOR
-    \ENDFOR 
-    \FORALL{(u, v) $\gets$ E[G]}
-    	\IF{d[v] > d[u] + w(u, v)}
-    		\RETURN FALSE
-    	\ENDIF
-   	\ENDFOR
-   	\RETURN TRUE
-\end{algorithmic}
-\end{block}
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+	\begin{block}{Algoritmo}
+	\begin{algorithmic}
+	    \STATE \textbf{Bellman-Ford}(G, w, s)
+	    \STATE Initialize-Single-Source(G, s)
+	    \FOR{i $\gets$ 1 to $\mid$V[G]$\mid$ - 1}
+	    	\FORALL{(u, v) $\gets$ E[G]}
+	    		\STATE Relax(u, v)
+	    	\ENDFOR
+	    \ENDFOR 
+	    \FORALL{(u, v) $\gets$ E[G]}
+	    	\IF{d[v] > d[u] + w(u, v)}
+	    		\RETURN FALSE
+	    	\ENDIF
+	   	\ENDFOR
+	   	\RETURN TRUE
+	\end{algorithmic}
+	\end{block}
+	\end{column}
+	
+	\begin{column}{0.5\textwidth}
+		\begin{block}{Algoritmo}
+			\begin{algorithmic}
+				\STATE \textbf{Initialize-Single-Source}(G, s)
+				\FORALL{v $\in$ V[G]}
+					\STATE d[v] $\gets \infty$
+					\STATE $\pi$[v] $\gets$ nil
+				\ENDFOR
+				\STATE d[s] = 0
+			\end{algorithmic}
+		\end{block}
+		
+ 		\begin{block}{Algoritmo}
+ 			\begin{algorithmic}
+ 				\STATE \textbf{Relax}(u, v)
+ 				\IF{d[v] > d[u] + w(u, v)}
+ 					\STATE d[v] $\gets$ d[u] + w(u, v)
+ 					\STATE $\pi$[v] $\gets$ u
+				\ENDIF			
+ 			\end{algorithmic}
+ 		\end{block}
+	\end{column}
+\end{columns}
+
 \end{frame}
 
 \begin{frame}
