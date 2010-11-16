@@ -8,20 +8,32 @@ Created on Nov 14, 2010
 from socket import *
 from threading import *
 
-class CamadaRede(object):
+class CamadaRede(Thread):
     '''
     classdocs
     '''
 
     def __init__(self, ender):
+        Thread.__init__(self)
         print "Inciando Camada de Rede ", ender
         self.socket = socket(AF_INET, SOCK_STREAM)
         self.remotos = {}
         self.ender = ender
         
-        ServidorCamadaRede(self).start()
-        ClienteCamadaRede(self).start()
-    
+
+    def run(self):
+        self.iniciarEscuta()
+
+    def iniciarEscuta(self):
+        print "Inciando escuta ", self.ender
+        self.socket.bind(self.ender)
+        self.socket.listen(self.obterTamFila())
+        
+        while True:
+            socketRemoto, enderRemoto = self.socket.accept()
+            print "Foi aceita conexão com ", enderRemoto
+            self.remotos[enderRemoto] = socketRemoto
+        
     @staticmethod
     def obterTamBuf():
         return 1024
@@ -48,29 +60,5 @@ class CamadaRede(object):
         print "Desconectando com", enderRemoto
         self.remotos.pop(enderRemoto).close()
     
-
-class ServidorCamadaRede(Thread):
-    def __init__(self, rede):
-        Thread.__init__(self)
-        self.rede = rede
-    
-    def run(self):
-        print "Inciando servidor ", self.rede.ender
-        self.rede.socket.bind(self.rede.ender)
-        self.rede.socket.listen(self.rede.obterTamFila())
-        
-        while True:
-            socketRemoto, enderRemoto = self.rede.socket.accept()
-            print "Foi aceita conexão com ", enderRemoto
-            self.rede.remotos[enderRemoto] = socketRemoto
-    
-    
-class ClienteCamadaRede(Thread):
-    def __init__(self, rede):       
-        Thread.__init__(self)
-        self.rede = rede
-        
-    def run(self):
-#        print "Inciando cliente ", self.rede.ender
-        pass
-    
+    def obterRemotos(self):
+        return self.remotos
