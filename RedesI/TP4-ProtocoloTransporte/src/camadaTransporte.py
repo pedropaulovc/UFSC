@@ -53,7 +53,7 @@ class CamadaTransporte(object):
         self.camadaRede.enviarPacote(self, pacote)
         
     def daRede(self, pacote):
-        self.recebimentoPacote(pacote, 1)
+        self.chegadaPacote(pacote, 1)
     
     def escutar(self, t):
         i = 1
@@ -109,11 +109,106 @@ class CamadaTransporte(object):
             return -1
     
     def enviar(self, cid, pontBuf, bytes):
-        pass
+        cptr = self.conexoes[cid]
+        if cptr.estado == 'AGUARDANDO':
+            return -3
+        cptr.estado = 'ENVIANDO'
+        cptr.numBytes = 0
+        if cptr.clearRequestRecebido == 0:
+            while cptr.numBytes < bytes:
+                if bytes - cptr.numBytes > 512:
+                    contagem = 512
+                    m = 1
+                else:
+                    contagem = bytes - cptr.numBytes
+                    m = 0
+                for i in xrange(contagem):
+                    self.dados[i] = pontBuf[cptr.numBytes + i]
+                    self.paraRede(cid, 0, m, 'PACOTE_DADOS', self.dados, contagem)
+                    cptr.numBytes += contagem
+            cptr.estado = 'ESTABELECIDO'
+            return 0
+        else:
+            cptr.estado = 'ESTABELECIDO'
+            return -3
     
-    def recebimentoPacote(self, pacote, contagem):
-        pass
+    def receber(self, cid, pontBuf, bytes):
+        cptr = self.conexoes[cid]
+        if cptr.clearRequestRecebido == 0:
+            cptr.estado = 'RECEBENDO'
+            cptr.enderecoBufferUsuario = pontBuf
+            cptr.numBytes = 0
+            self.dados[0] = 'CRED'
+            self.dados[1] = '1'
+            self.paraRede(cid, 1, 0, 'CREDITO', self.dados, 2)
     
+        cptr.estado = 'ESTABELECIDO'
+        if cptr.clearRequestRecebido != 1:
+            return 0
+        return -3
+    
+    def desconectar(self, cid):
+        cptr = self.conexoes[cid]
+        if cptr.clearRequestRecebido == 1:
+            cptr.estado = 'INATIVO'
+            self.paraRede(cid, 0, 0, 'CONF_LIVRE', self.dados, 0)
+        else:
+            cptr.estado = 'DESCONECTADO'
+            self.paraRede(cid, 0, 0, 'REQ_LIVRE', self.dados, 0)
+        return 0
+    
+    def chegadaPacote(self, pacote, contagem):
+        cid = int(pacote.cid)
+        tipo = pacote.pt
+        dados = pacote.p
+        cptr = self.conexoes[cid]
+        if tipo == 'REQ_CHAMADA':
+            cptr.enderecoLocal = int(dados[0])
+            cptr.enderecoRemoto = int(dados[1])
+            if cptr.enderecoLocal == self.endEscuta:
+                self.conexaoEscuta = cid
+                cptr.estado = 'ESTABELECIDO'
+                self.acordar()
+            else:
+                cptr.estado = 'ENFILEIRADO'
+                cptr.timer = 20
+            cptr.clearRequestRecebido = 0
+            cptr.creditos = 0
+        elif tipo == 'CHAMADA_ACEITA' :
+            cptr.estado = 'ESTABELECIDO'
+            self.acordar()
+        elif tipo == 'REQ_LIVRE':
+            cptr.clearRequestRecebido = 1
+            if cptr.estado == 'ESTABELECIDO':
+                cptr.estado = 'INATIVO'
+                self.desconectar(cid)
+            if cptr.estado == 'ESPERANDO' or cptr.estado == 'RECEBENDO' or \
+                cptr.estado == 'ENVIANDO':
+                self.acordar()
+        elif tipo == 'CONF_LIVRE':
+            cptr.estado = 'INATIVO'
+            print "Desconectado"
+        elif tipo == 'CREDITO':
+            cptr.creditos += int(dados[1])
+            if cptr.estado == 'ENVIANDO':
+                self.acordar()
+        elif tipo == 'PACOTE_DADOS':
+            for i in xrange(contagem):
+                cptr.enderecoBufferUsuario[0] = dados[i]
+            
+            cptr.numBytes += contagem
+            self.camadaAplicacao.receberMensagem(cptr.enderecoBufferUsuario[0])
+            
+    def relogio(self):
+        for i in range(1,32):
+            cptr = self.conexoes[i]
+            if cptr.timer > 0:
+                cptr.timer -= 1
+                if cptr.timer == 0:
+                    cptr.estado = 'INATIVO'
+                    self.paraRede(i, 0, 0, 'REQ_LIVRE', self.dados, 0)
+                
+   
 class Conexao(object):
     
     def __init__(self):

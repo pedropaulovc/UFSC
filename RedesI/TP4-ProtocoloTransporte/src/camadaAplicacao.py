@@ -10,8 +10,12 @@ class CamadaAplicacao(object):
     '''
 
 
-    def __init__(selfparams):
-        '''
-        Constructor
-        '''
-        
+    def __init__(self, id):
+        self.id = id
+        self.cid
+    
+    def fecharConexao(self):
+        pass
+    
+    def receberMensagem(self, s):
+        pass
