@@ -11,13 +11,14 @@ class CamadaRede(object):
     '''
     
     def __init__(self):
-        self.origem
-        self.destino
+        self.origem = None
+        self.destino = None
     
     def enviarPacote(self, emissor, pacote):
+        print "Camada de rede enviando pacote"
         if emissor == self.origem:
             receptor = self.destino
         else:
             receptor = self.origem
         
-        receptor.receberRede(pacote)
+        receptor.daRede(pacote)

@@ -4,7 +4,6 @@ Created on Nov 14, 2010
 
 @author: pedropaulovc
 '''
-from camadaRede import CamadaRede
 from pacote import Pacote
 
 class CamadaTransporte(object):
@@ -24,35 +23,40 @@ class CamadaTransporte(object):
         self.erroFechado = -3
         self.erroMenor = -3
         
-        self.endTransporte
-        self.endEscuta
-        self.conexaoEscuta
+        self.endTransporte = None
+        self.endEscuta = None
+        self.conexaoEscuta = None
         self.acordado = True
         self.dados = []
         self.conexoes = []
         
-        self.pacote
+        self.pacote = None
         
         self.camadaRede = camadaRede
-        self.camadaAplicacao
+        self.camadaAplicacao = None
         
         for _ in xrange(self.maxConexoes):
             self.conexoes.append(Conexao())
+            self.dados.append("")
         
     def dormir(self):
+        print "Indo dormir"
         self.acordado = False
         
         while(not self.acordado):
             pass
         
     def acordar(self):
+        print "Acordando"
         self.acordado = True
         
     def paraRede(self, cid, q, m, pt, data, bytes):
+        print "Enviando {0} para {1} a rede".format(pt, cid)
         pacote = Pacote(cid, q, m, pt, data, bytes)
         self.camadaRede.enviarPacote(self, pacote)
         
     def daRede(self, pacote):
+        print "Recebendo dado da rede"
         self.chegadaPacote(pacote, 1)
     
     def escutar(self, t):
@@ -60,8 +64,7 @@ class CamadaTransporte(object):
         encontrado = 0
         
         for i in xrange(self.maxConexoes):
-            if self.conexoes[i].estado != 'ENFILEIRADO' or \
-                self.conexoes[i].enderecoLocal != t:
+            if self.conexoes[i].estado != 'ENFILEIRADO' or self.conexoes[i].enderecoLocal != t:
                 continue
             encontrado = i
             break
@@ -78,6 +81,7 @@ class CamadaTransporte(object):
         return i
     
     def conectar(self, l, r):
+        print "Camada transporte iniciando conexão"
         self.dados[0] = str(r)
         self.dados[1] = str(l)
         
@@ -158,6 +162,7 @@ class CamadaTransporte(object):
         return 0
     
     def chegadaPacote(self, pacote, contagem):
+        print "Chegou pacote"
         cid = int(pacote.cid)
         tipo = pacote.pt
         dados = pacote.p
@@ -212,14 +217,14 @@ class CamadaTransporte(object):
 class Conexao(object):
     
     def __init__(self):
-        self.enderecoLocal
-        self.enderecoRemoto
+        self.enderecoLocal = None
+        self.enderecoRemoto = None
         self.estado = 'INATIVO'
         self.enderecoBufferUsuario = []
-        self.numBytes
-        self.clearRequestRecebido
-        self.timer
-        self.creditos
+        self.numBytes = 0
+        self.clearRequestRecebido = None
+        self.timer = None
+        self.creditos = None
         self.tamBuffer = 100
         
         for _ in xrange(100):
