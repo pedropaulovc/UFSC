@@ -13,6 +13,8 @@ class Ui_MainWindow(object):
     def __init__(self, camAplicOrigem, camAplicDestino):
         self.camAplicOrigem = camAplicOrigem
         self.camAplicDestino = camAplicDestino
+        self.idOrigem = camAplicOrigem.id
+        self.idDestino = camAplicDestino.id
         
         self.__iniciarConexao()
     
@@ -57,8 +59,8 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL("clicked()"), self.__enviarPacote(1,2))
-        QtCore.QObject.connect(self.pushButton_2, QtCore.SIGNAL("clicked()"), self.__enviarPacote(2,1))
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL("clicked()"), lambda o=1, d=2: self.__enviarPacote(o, d))
+        QtCore.QObject.connect(self.pushButton_2, QtCore.SIGNAL("clicked()"),lambda o=2, d=1: self.__enviarPacote(o, d))
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -66,13 +68,11 @@ class Ui_MainWindow(object):
         self.pushButton.setText(QtGui.QApplication.translate("MainWindow", "Enviar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_2.setText(QtGui.QApplication.translate("MainWindow", "Enviar", None, QtGui.QApplication.UnicodeUTF8))
     
-    #TODO: Separar os dois comandos em threads diferentes
     def __iniciarConexao(self):
-        self.camAplicDestino.escutar(2)
-        self.camAplicOrigem.conectar(2)
-    
+        self.camAplicOrigem.conectar(self.camAplicDestino.id)
+        
     def __enviarPacote(self, origem, destino):
-        if origem == 1 and destino == 2:
+        if origem == self.idOrigem and destino == self.idDestino:
             self.camAplicOrigem.enviarMensagem(str(self.lineEdit.text()))
-        elif origem == 2 and destino == 1:
+        elif origem == self.idDestino and destino == self.idOrigem:
             self.camAplicOrigem.enviarMensagem(str(self.lineEdit_2.text()))

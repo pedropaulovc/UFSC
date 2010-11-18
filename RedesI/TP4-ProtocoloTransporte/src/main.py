@@ -24,8 +24,8 @@ if __name__ == '__main__':
     camTransOrigem.camadaAplicacao = camAplicOrigem
     camTransDestino.camadaAplicacao = camAplicDestino
     
-    camAplicDestino.start()    
+    camAplicDestino.start()
     camAplicOrigem.start()
 
-    Interface(camTransOrigem, camTransDestino)
+    Interface(camAplicOrigem, camAplicDestino)
 

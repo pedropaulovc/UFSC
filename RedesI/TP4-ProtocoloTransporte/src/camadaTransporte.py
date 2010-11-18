@@ -23,9 +23,9 @@ class CamadaTransporte(object):
         self.erroFechado = -3
         self.erroMenor = -3
         
-        self.endTransporte = None
-        self.endEscuta = None
-        self.conexaoEscuta = None
+        self.endTransporte = 0
+        self.endEscuta = 0
+        self.conexaoEscuta = 0
         self.acordado = True
         self.dados = []
         self.conexoes = []
@@ -217,14 +217,14 @@ class CamadaTransporte(object):
 class Conexao(object):
     
     def __init__(self):
-        self.enderecoLocal = None
-        self.enderecoRemoto = None
+        self.enderecoLocal = 0
+        self.enderecoRemoto = 0
         self.estado = 'INATIVO'
         self.enderecoBufferUsuario = []
         self.numBytes = 0
-        self.clearRequestRecebido = None
-        self.timer = None
-        self.creditos = None
+        self.clearRequestRecebido = 0
+        self.timer = 0
+        self.creditos = 0
         self.tamBuffer = 100
         
         for _ in xrange(100):

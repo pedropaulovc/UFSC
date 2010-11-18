@@ -4,15 +4,12 @@ Created on Nov 14, 2010
 
 @author: pedropaulovc
 '''
-from camadaTransporte import CamadaTransporte
 from threading import Thread
-from time import sleep
 
 class CamadaAplicacao(Thread):
     '''
     classdocs
     '''
-
 
     def __init__(self, id, camadaTransporte):
         Thread.__init__(self)
@@ -21,16 +18,8 @@ class CamadaAplicacao(Thread):
         self.cid = None
         
     def run(self):
-        pass
-#        if self.id == 1:
-#            self.conectar(2)
-#            sleep(1)
-#            self.enviarMensagem("Olá mundo!")
-#            self.enviarMensagem("Olá mundo!2")
-#        elif self.id == 2:
-#            self.escutar(2)
-#            self.enviarMensagem("Hello world!")
-    
+        self.escutar(self.id)
+
     def conectar(self, remoto):
         print "Camada aplicação conectando"
         self.cid = self.camadaTransporte.conectar(self.id, remoto)
