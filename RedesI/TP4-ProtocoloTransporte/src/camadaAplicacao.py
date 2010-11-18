@@ -21,12 +21,15 @@ class CamadaAplicacao(Thread):
         self.cid = None
         
     def run(self):
-        if self.id == 1:
-            self.conectar(2)
-            sleep(1)
-            self.enviarMensagem("Olá mundo!")
-        elif self.id == 2:
-            self.escutar(2)
+        pass
+#        if self.id == 1:
+#            self.conectar(2)
+#            sleep(1)
+#            self.enviarMensagem("Olá mundo!")
+#            self.enviarMensagem("Olá mundo!2")
+#        elif self.id == 2:
+#            self.escutar(2)
+#            self.enviarMensagem("Hello world!")
     
     def conectar(self, remoto):
         print "Camada aplicação conectando"
@@ -41,7 +44,7 @@ class CamadaAplicacao(Thread):
         self.cid = self.camadaTransporte.escutar(t)
     
     def fecharConexao(self):
-        pass
+        return self.camadaTransporte.desconectar(self.cid);
     
     def enviarMensagem(self, s):
         bytes = [s]

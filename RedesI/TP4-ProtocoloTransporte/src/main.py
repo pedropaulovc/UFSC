@@ -7,7 +7,7 @@ Created on Nov 14, 2010
 from camadaRede import CamadaRede
 from camadaTransporte import CamadaTransporte
 from camadaAplicacao import CamadaAplicacao
-
+from interface.interface import Interface
 
 if __name__ == '__main__':
     camRede = CamadaRede()
@@ -26,4 +26,6 @@ if __name__ == '__main__':
     
     camAplicDestino.start()    
     camAplicOrigem.start()
+
+    Interface(camTransOrigem, camTransDestino)
 
