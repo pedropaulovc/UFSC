@@ -5,13 +5,14 @@ Created on Nov 14, 2010
 @author: pedropaulovc
 '''
 from pacote import Pacote
+import logging
 
 class CamadaTransporte(object):
     '''
     classdocs
     '''
 
-    def __init__(self, camadaRede):
+    def __init__(self, id, camadaRede):
         self.maxConexoes = 32
         self.tamMaxMsg = 8129
         self.tamMaxPacote = 512
@@ -34,32 +35,38 @@ class CamadaTransporte(object):
         
         self.camadaRede = camadaRede
         self.camadaAplicacao = None
+        self.id = id
         
         for _ in xrange(self.maxConexoes):
             self.conexoes.append(Conexao())
             self.dados.append("")
         
-    def dormir(self):
-        print "Indo dormir"
-        self.acordado = False
+        self.__configurarLog()
+
+
         
+    def dormir(self):
+        self.log.info("CT: Indo dormir")
+        
+        self.acordado = False
         while(not self.acordado):
             pass
         
     def acordar(self):
-        print "Acordando"
+        self.log.info("CT: Acordando")
         self.acordado = True
         
     def paraRede(self, cid, q, m, pt, data, bytes):
-        print "Enviando {0} para {1} a rede".format(pt, cid)
+        self.log.info("CT: Enviando {0} para CR".format(pt))
         pacote = Pacote(cid, q, m, pt, data, bytes)
         self.camadaRede.enviarPacote(self, pacote)
         
     def daRede(self, pacote):
-        print "Recebendo dado da rede"
+        self.log.info("CT: Recebendo dado da CR")
         self.chegadaPacote(pacote, 1)
     
     def escutar(self, t):
+        self.log.info("CT: Escutando a rede")
         i = 1
         encontrado = 0
         
@@ -81,7 +88,7 @@ class CamadaTransporte(object):
         return i
     
     def conectar(self, local, remoto):
-        print "Camada transporte iniciando conexão"
+        self.log.info("CT: Iniciando conexão")
         self.dados[0] = str(remoto)
         self.dados[1] = str(local)
         
@@ -113,6 +120,7 @@ class CamadaTransporte(object):
             return -1
     
     def enviar(self, cid, pontBuf, bytes):
+        self.log.info("CT: Enviando dados")
         cptr = self.conexoes[cid]
         if cptr.estado == 'AGUARDANDO':
             return -3
@@ -137,6 +145,7 @@ class CamadaTransporte(object):
             return -3
     
     def receber(self, cid, pontBuf, bytes):
+        self.log.info("CT: Recebendo dados")
         cptr = self.conexoes[cid]
         if cptr.clearRequestRecebido == 0:
             cptr.estado = 'RECEBENDO'
@@ -152,6 +161,7 @@ class CamadaTransporte(object):
         return -3
     
     def desconectar(self, cid):
+        self.log.info("CT: Desconectando")
         cptr = self.conexoes[cid]
         if cptr.clearRequestRecebido == 1:
             cptr.estado = 'INATIVO'
@@ -162,7 +172,7 @@ class CamadaTransporte(object):
         return 0
     
     def chegadaPacote(self, pacote, contagem):
-        print "Chegou pacote"
+        self.log.info("CT: Chegou pacote")
         cid = int(pacote.cid)
         tipo = pacote.pt
         dados = pacote.p
@@ -213,6 +223,13 @@ class CamadaTransporte(object):
                     cptr.estado = 'INATIVO'
                     self.paraRede(i, 0, 0, 'REQ_LIVRE', self.dados, 0)
                 
+    def __configurarLog(self):
+        self.log = logging.getLogger("computador{0}".format(self.id))
+        self.log.setLevel(logging.INFO)
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.INFO)
+        self.log.addHandler(ch)
+   
    
 class Conexao(object):
     

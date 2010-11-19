@@ -12,8 +12,8 @@ from interface.interface import Interface
 if __name__ == '__main__':
     camRede = CamadaRede()
     
-    camTransOrigem = CamadaTransporte(camRede)
-    camTransDestino = CamadaTransporte(camRede)
+    camTransOrigem = CamadaTransporte(1, camRede)
+    camTransDestino = CamadaTransporte(2, camRede)
     
     camRede.origem = camTransOrigem
     camRede.destino = camTransDestino
@@ -24,8 +24,10 @@ if __name__ == '__main__':
     camTransOrigem.camadaAplicacao = camAplicOrigem
     camTransDestino.camadaAplicacao = camAplicDestino
     
+    interface = Interface(camAplicOrigem, camAplicDestino)
+    
     camAplicDestino.start()
     camAplicOrigem.start()
-
-    Interface(camAplicOrigem, camAplicDestino)
-
+    
+    interface.iniciar()
+    

@@ -8,6 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+import logging
 
 class Ui_MainWindow(object):
     def __init__(self, camAplicOrigem, camAplicDestino):
@@ -15,8 +16,7 @@ class Ui_MainWindow(object):
         self.camAplicDestino = camAplicDestino
         self.idOrigem = camAplicOrigem.id
         self.idDestino = camAplicDestino.id
-        
-        self.__iniciarConexao()
+    
     
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -62,13 +62,15 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL("clicked()"), lambda o=1, d=2: self.__enviarPacote(o, d))
         QtCore.QObject.connect(self.pushButton_2, QtCore.SIGNAL("clicked()"),lambda o=2, d=1: self.__enviarPacote(o, d))
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        
+        self.__configurarLog()
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton.setText(QtGui.QApplication.translate("MainWindow", "Enviar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_2.setText(QtGui.QApplication.translate("MainWindow", "Enviar", None, QtGui.QApplication.UnicodeUTF8))
     
-    def __iniciarConexao(self):
+    def iniciarConexao(self):
         self.camAplicOrigem.aplicacao = self
         self.camAplicDestino.aplicacao = self
         self.camAplicOrigem.conectar(self.camAplicDestino.id)
@@ -81,7 +83,25 @@ class Ui_MainWindow(object):
     
     def receberMensagem(self, s, id):
         if id == self.idOrigem:
-            self.plainTextEdit.appendPlainText(s)
+            self.plainTextEdit.appendPlainText(unicode(s))
         elif id == self.idDestino:
-            self.plainTextEdit_3.appendPlainText(s)
-                
+            self.plainTextEdit_3.appendPlainText(unicode(s))
+            
+    def __configurarLog(self):
+        logOrigem = logging.StreamHandler(AdaptadorStreamLogQt(self.plainTextEdit_2))
+        logOrigem.setLevel(logging.INFO)
+        logDestino = logging.StreamHandler(AdaptadorStreamLogQt(self.plainTextEdit_4))
+        logDestino.setLevel(logging.INFO)
+        
+        self.camAplicOrigem.log.addHandler(logOrigem)
+        self.camAplicDestino.log.addHandler(logDestino)
+        
+class AdaptadorStreamLogQt(object):
+    def __init__(self, campo):
+        self.campo = campo
+    
+    def write(self, entrada):
+        self.campo.appendPlainText(unicode(entrada[:-1]))
+    
+    def flush(self):
+        pass

@@ -5,6 +5,7 @@ Created on Nov 14, 2010
 @author: pedropaulovc
 '''
 from threading import Thread
+import logging
 
 class CamadaAplicacao(Thread):
     '''
@@ -18,17 +19,19 @@ class CamadaAplicacao(Thread):
         self.id = id
         self.cid = None
         
+        self.log = logging.getLogger("computador{0}".format(self.id))
+        
     def run(self):
         self.escutar(self.id)
 
     def conectar(self, remoto):
-        print "CA{0} conectando com {1}".format(self.id, remoto)
+        self.log.info("CA: Conectando com {0}".format(remoto))
         self.cid = self.camadaTransporte.conectar(self.id, remoto)
         
         if self.cid > 0:
-            print "Conexão entre {0} e {1} estabelecida: {2}".format(self.id, remoto, self.cid)
+            self.log.info("CA: Conexão entre {0} e {1} estabelecida".format(self.id, remoto))
         else:
-            print "Conexão falhou"
+            self.log.error("CA: Conexão falhou")
     
     def escutar(self, t):
         self.cid = self.camadaTransporte.escutar(t)
@@ -37,11 +40,11 @@ class CamadaAplicacao(Thread):
         return self.camadaTransporte.desconectar(self.cid);
     
     def enviarMensagem(self, s):
-        print "CA{0}: Enviando mensagem: {1}".format(self.id, s)
+        self.log.info("CA: Enviando mensagem: {0}".format(s))
         bytes = [s]
         self.camadaTransporte.enviar(self.cid, bytes, 1)
     
     def receberMensagem(self, origem, s):
-        print "CA{0}: Recebi de {1} mensagem: {2}".format(self.id, origem, s)
+        self.log.info("CA: Recebi mensagem".format(origem, s))
         if self.aplicacao != None:
             self.aplicacao.receberMensagem(s, self.id)

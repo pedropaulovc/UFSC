@@ -13,14 +13,13 @@ class Interface(object):
     classdocs
     '''
     def __init__(self, camAplicOrigem, camAplicDestino):
-        app = QtGui.QApplication(sys.argv)
-        janela = QtGui.QMainWindow()
-        ui = Ui_MainWindow(camAplicOrigem, camAplicDestino)
-        ui.setupUi(janela)
-        janela.show()
-        app.exec_()
+        self.app = QtGui.QApplication(sys.argv)
+        self.janela = QtGui.QMainWindow()
+        self.ui = Ui_MainWindow(camAplicOrigem, camAplicDestino)
+        self.ui.setupUi(self.janela)
+        self.janela.show()
         
-        
-
-
-        
+   
+    def iniciar(self): 
+        self.ui.iniciarConexao()
+        self.app.exec_()
