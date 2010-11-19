@@ -80,10 +80,10 @@ class CamadaTransporte(object):
         self.paraRede(i, 0, 0, 'CHAMADA_ACEITA', self.dados, 0)
         return i
     
-    def conectar(self, l, r):
+    def conectar(self, local, remoto):
         print "Camada transporte iniciando conexão"
-        self.dados[0] = str(r)
-        self.dados[1] = str(l)
+        self.dados[0] = str(remoto)
+        self.dados[1] = str(local)
         
         i = 31
         while self.conexoes[i].estado != 'INATIVO' and i > 0:
@@ -91,8 +91,8 @@ class CamadaTransporte(object):
         
         if self.conexoes[i].estado == 'INATIVO':
             cptr = self.conexoes[i]
-            cptr.enderecoLocal = l
-            cptr.enderecoRemoto = r
+            cptr.enderecoLocal = local
+            cptr.enderecoRemoto = remoto
             cptr.estado = 'AGUARDANDO'
             cptr.clearRequestRecebido = 0
             cptr.creditos = 0
@@ -202,7 +202,7 @@ class CamadaTransporte(object):
                 cptr.enderecoBufferUsuario[0] = dados[i]
             
             cptr.numBytes += contagem
-            self.camadaAplicacao.receberMensagem(cptr.enderecoBufferUsuario[0])
+            self.camadaAplicacao.receberMensagem(cptr.enderecoRemoto, cptr.enderecoBufferUsuario[0])
             
     def relogio(self):
         for i in range(1,32):

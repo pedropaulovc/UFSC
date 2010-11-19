@@ -14,6 +14,7 @@ class CamadaAplicacao(Thread):
     def __init__(self, id, camadaTransporte):
         Thread.__init__(self)
         self.camadaTransporte = camadaTransporte
+        self.aplicacao = None
         self.id = id
         self.cid = None
         
@@ -21,7 +22,7 @@ class CamadaAplicacao(Thread):
         self.escutar(self.id)
 
     def conectar(self, remoto):
-        print "Camada aplicação conectando"
+        print "CA{0} conectando com {1}".format(self.id, remoto)
         self.cid = self.camadaTransporte.conectar(self.id, remoto)
         
         if self.cid > 0:
@@ -36,8 +37,11 @@ class CamadaAplicacao(Thread):
         return self.camadaTransporte.desconectar(self.cid);
     
     def enviarMensagem(self, s):
+        print "CA{0}: Enviando mensagem: {1}".format(self.id, s)
         bytes = [s]
         self.camadaTransporte.enviar(self.cid, bytes, 1)
     
-    def receberMensagem(self, s):
-        print "CA{0}: Recebi mensagem: {1}".format(self.id, s)
+    def receberMensagem(self, origem, s):
+        print "CA{0}: Recebi de {1} mensagem: {2}".format(self.id, origem, s)
+        if self.aplicacao != None:
+            self.aplicacao.receberMensagem(s, self.id)

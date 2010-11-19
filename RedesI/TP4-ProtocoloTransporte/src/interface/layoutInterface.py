@@ -69,10 +69,19 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(QtGui.QApplication.translate("MainWindow", "Enviar", None, QtGui.QApplication.UnicodeUTF8))
     
     def __iniciarConexao(self):
+        self.camAplicOrigem.aplicacao = self
+        self.camAplicDestino.aplicacao = self
         self.camAplicOrigem.conectar(self.camAplicDestino.id)
         
     def __enviarPacote(self, origem, destino):
         if origem == self.idOrigem and destino == self.idDestino:
             self.camAplicOrigem.enviarMensagem(str(self.lineEdit.text()))
         elif origem == self.idDestino and destino == self.idOrigem:
-            self.camAplicOrigem.enviarMensagem(str(self.lineEdit_2.text()))
+            self.camAplicDestino.enviarMensagem(str(self.lineEdit_2.text()))
+    
+    def receberMensagem(self, s, id):
+        if id == self.idOrigem:
+            self.plainTextEdit.appendPlainText(s)
+        elif id == self.idDestino:
+            self.plainTextEdit_3.appendPlainText(s)
+                
