@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \makeatletter
 \usepackage{babel}
+\usepackage{url}
 \makeatother
 \usepackage{listingsutf8}
 \usepackage[pdfborder={0 0 0}]{hyperref}
@@ -17,7 +18,7 @@ basicstyle=\scriptsize,
 showspaces=false,
 showstringspaces=false,
 showtabs=false,
-columns=fullflexible
+% columns=fullflexible
 }
 
 \begin{document}
@@ -45,176 +46,273 @@ Tecnológico \par Universidade Federal de Santa Catarina}
 % \tableofcontents
 %\chapter{}
 \section*{Resumo}
-	
-\section*{Introdução}
-(objetivo, organização do trabalho)
+	Este trabalho apresenta uma implementação do protocolos das camadas de
+	rede, transporte e aplicação, com ênfase na segunda. Para demonstrar o
+	funcionamento de tais protocolos também foi desenvolvida uma aplicação
+	orientada a conexão para apresentar o funcionamento de tais entidades de rede.
+	Como forma de fundamentação, também é apresentada uma introdução teórica,
+	mostrando os principais conceitos na área dos protocolos e camadas da pilha de
+	protocolos do Modelo OSI utilizados durante o trabalho.	
 
-	Para este quarto trabalho prático foi proposto que fosse desenvolvido um
-	software que possibilitasse a comunicação através da interface serial RS-232
-	entre os dois microcomputadores, de tal forma que tudo que for digitado em um
-	dos dois teclados apareça, simultaneamente, na tela de ambos microcomputadores.
+\section*{Introdução}	
+	Este quarto trabalho prático possui como objetivo sedimentar os conhecimentos
+	apreendidos durante o curso da disciplina, apresentando o desenvolvimento de um
+	protocolo de camada de transporte, baseado no exemplo fornecido pela
+	bibliografia da disciplina \cite{tanenbaum:redes-computadores}. Como forma de
+	mostrar seu funcionamento foram desenvolvidos adicionalmente um protocolo
+	orientado a conexão, além das camadas de aplicação e de rede para prover a
+	infraestrutura necessária para o funcionamento correto do aplicativo
+	desenvolvido.
 	
-	Neste realatório serão apresentados uma introdução ao protocolo RS-232, uma
-	descrição das atividades realizadas para cumprir os requisitos impostos e por
-	fim será apresentado o código fonte documentado do programa concluído.
-
+	Este relatório possui a seguinte organização: Primeiramente serão apresentados
+	os conceitos principais das camadas de rede, transporte e aplicação da pilha de
+	protocolos de redes OSI utilizados durante a implementação da aplicação
+	apresentada anteriormente. Posteriormente há uma explanação detalhada dos
+	procedimentos adotados para o desenvolvimento da aplicação. Ainda, são
+	apresentados alguns comentários e conclusões sobre este trabalho. Por fim é
+	apresentado o código fonte comentado da aplicação desenvolvida. 
+	
 \section*{Camada de Rede}
+	No modelo OSI, a camada de rede é a terceira, já no modelo TCP/IP é a segunda.
+	Sua tarefa principal é prover serviços à camada de transporte. Para isso, ela
+	faz uso das primitivas fornecidas pela camada de enlace de dados.
+	
+	A camada de rede e a sua camada inferior, a camada de enlace de dados, possuem
+	propósitos diferentes. A camada de enlade de dados, tem a
+	responsabilidade de transmitir dados entre duas pontas de um canal físico,
+	tendo como preocupações questões como a correção de erros, detecção de
+	colisões e perdas de datagramas. Já a camada de rede é a responsável
+	pela entrega de pacotes da origem ao destino, havendo a possibilidade de ser
+	necessário o roteamento entre hosts intermediários. É na camada de rede que
+	estão imbutidos os protocolos e algoritmos de roteamento, detecção de
+	congestionamento, dentre outros. Ainda, ela é responsável por propiciar uma
+	compatibilidade entre redes diferentes, cada uma com configurações variadas.
+	Ela possui participação no controle da qualidade de serviço (QoS), além de
+	executar funções de controle de erros.
+
+	A camada de rede necessita conhecer diversos parâmetros de configuração para
+	poder fornecer um serviço adequado à camada de transporte. Algumas dessas
+	informações estão descritas abaixo:
+	
+	\begin{itemize}
+		\item O protocolo de rede é orientado a conexão?
+		\item Como controlar o congestionamento da rede?
+		\item Quais são os endereços únicos (globais) da rede?
+		\item Quais são minhas máquinas vizinhas?
+		\item Como devo rotear dados com destino outros computadores?
+	\end{itemize}
+
+	Há duas famílias principais de protocolos de rede, os orientados a conexão,
+	funcionando por circuitos virtuais e os baseados em datagramas. Cada uma dessas
+	abordagens possui vantagens e desvantagens, como é possível ver a seguir:
+	
+	Protocolos de rede orientados a conexão são mais simples de implementar devido
+	a características da própria abordagem, não há a necessidade de controlar
+	congestionamento ou utilizar algoritmos sofisticados para oferecer qualidade de
+	serviço. Ainda, em tais redes não é necessário que os endereços de origem e
+	destino sejam transmitidos em cada pacote. Outra vantagem de se usar
+	protocolos de rede baseados em circuitos virtuais é que a possibilidade de
+	garantir parâmetros de atraso máximo, garantia essa muito importante para a
+	transmissão de dados multimídia, por exemplo. \cite{wiki:network-layer}
+	
+	Como desvantagem, há um custo ao usar essa escolha: A partir do momento que é
+	estabelecido um circuito virtual há a separação de uma porção dos recursos de
+	rede exclusivamente para um único usuário, esteja ele usando a rede ou não.
+	Isso incorre em custos extra aos provedores de serviços de Internet, sendo
+	repassados aos clientes finais, de maneira similar como o que ocorre na
+	telefonia convencional.
+	
+	Já uma camada de rede não orientada a conexão funciona por multiplexação de
+	pacotes, ou seja, os pacotes não possuem uma rota pré-estabelecida como ocorre
+	no caso anterior após o estabelecimento do circuito virtual. Dessa forma, cada
+	pacote deve conter o endereço completo de origem e destino para poder ser
+	roteado. Em uma transmissão entre dois computadores os pacotes podem adotar
+	diversas rotas diferentes, passando por vários países, por exemplo, dependendo
+	da carga da rede no momento do envio do pacote.
+	
+	Uma grande vantagem de seusar uma camada de rede baseada em datagramas é a sua
+	capacidade de distribuir melhor a carga no canal físico, colaborando com menor
+	congestionamento em momentos de grande utilização. Além disso, uma rede
+	baseada em comutação de pacotes é mais tolerante a falhas uma vez que quando
+	um nodo da rede falha os dados podem adotar uma rota alternativa. Um exemplo
+	de protocolo de redes não orientado a conexão é o IP
+	\cite{wiki:internet-layer}, utilizado na Internet.
 
 \section*{Camada de Transporte}
-
+	A camada de transporte é a terceira camada do modelo TCP/IP e a quarta camada
+	segundo o modelo OSI. Ela utiliza os serviços da camada de rede (roteamento de
+	pacotes entre hosts, por exemplo) para atender as requisições dos protocolos de
+	aplicação.
+	
+	A camada de transporte tem um papel muito importante dentre as camadas da
+	pilha de protocolos OSI. Ela é a primeira camada que estabelece uma conexão
+	fim-a-fim, confiável ou não, entre dois processos de aplicação em dois hosts.
+	Para um a camada de aplicação (ou sessão, dependendo do modelo), que usa a
+	interface da camada de transporte, a conexão de rede pode ser vista como uma
+	conexão direta, em que bytes são inseridos em um lado da conexão e após algum
+	tempo aparecem no outro lado. O protocolo de transporte é responsável por
+	iniciar e terminar as conexões entre processos que desejam estabelecer
+	comunicação, fazendo a multiplexação dessas conexões.
+	
+	É nessa camada que os dados que chegam da camada de sessão são quebrados em
+	unidades menores, os pacotes, para que possam ser mais facilmente enviados pela
+	camada de rede. Faz parte da responsabilidade de uma camada de transporte que
+	forneça uma conexão confiável, por exemplo, garantir que os pacotes cheguem
+	ao destino corretamente e em ordem.
+	
+	O código binário do protocolo de transporte geralmente é o último que
+	encontra-se no núcleo (\emph{kernel}) do sistema operacional. As camadas de
+	sessão, apresentação e aplicação, quando existentes, geralmente encontram-se em
+	espaço de usuário, implementadas como bibliotecas, por exemplo. Programas que
+	queriam fazer uso de comunicações HTTP, por exemplo, como um \emph{browser
+	web}, utilizam as bibliotecas HTTP para transmitir e receber os dados que por
+	ventura devam trafegar pela rede.
+	
+	Como forma de suportar várias conexões de transporte ao mesmo tempo, o
+	software responsável por essa camada de rede possui diversas
+	possibilidades:
+	
+	\begin{description}
+  		\item[Multiplexação no tempo] Caso haja apenas uma conexão de rede
+  		disponível, a camada de transporte envia dados de diferentes conexões em
+  		diferentes períodos de tempo.
+  		\item[Exclusividade de conexão] Caso haja alguma aplicação que demande
+  		maiores recursos de redes, há a possibilidade que ela monopolize a conexão,
+  		de forma a fornecer a melhor qualidade de serviço possível a essa aplicação
+  		específica.
+  		\item[Escalonamento] Caso haja mais de uma conexão de rede disponível, é
+  		possível ainda escalonar a utilização, utilizando algoritmos como o
+  		round-robin com as conexões de rede disponíveis, diminuindo assim o
+  		congestionamento nas sub-redes que o host está conectado.
+	\end{description}
+	
 \section*{Camada de Aplicação}
+	A camada de aplicação é sétima camada no modelo OSI e a quarta no modelo
+	TCP/IP. Em ambas é a camada de mais alto nível. Sua característica principal é
+	que ela apresenta uma interface direta com os aplicativos. Seu serviço
+	é prover a eles uma abstração da comunicação em rede, escondendo os detalhes
+	de implementação das camadas mais inferiores. Para isso, ela faz uso da
+	camada de apresentação ou de transporte dependendo do modelo de redes
+	adotado.
+
+	Exemplos de protocolos da camada de aplicação:
+	
+	\begin{itemize}
+		\item BitTorrent
+		\item SSH - \emph{Secure Shell}
+		\item BGP - \emph{Border Gateway Protocol}
+		\item DHCP - \emph{Dynamic Host Configuration Protocol}
+		\item HTTP - \emph{HyperText Transfer Protocol}
+		\item DNS - \emph{Domain Name System}
+		\item NFS - \emph{Network File System}
+		\item FTP - \emph{File Transfer Protocol}
+		\item SNMP - \emph{Simple Network Management Protocol}
+		\item IMAP - \emph{Internet Message Acces Protocol}
+		
+	\end{itemize}
+	
+	A camada de aplicação é responsável transformar os pacotes recebidos da camada
+	inferior em informação reconhecível pela aplicação. Os dados passam a ter um
+	significado maior que apenas um fluxo de bits. Os programas aplicativos, dentre
+	os quais podemos exemplificar os navegadores, players multimídia, clientes de
+	IM, dentre outros geralmente usam de bibliotecas para apresentar ao usuário sua
+	funcionalidade.
+	
+	A interface entre os programas de aplicação e os protocolos da camada de
+	transporte é feita usando-se \emph{sockets}. Um socket pode ser visto como um
+	``tubo'' com um fluxo bidirecional de dados, podendo ter características como
+	criptografia, garantia de entrega de informações, etc. As operações disponíveis
+	em um \emph{socket} são similares às possíveis de realizar em arquivos.
+	Exemplos de operações são o \emph{BIND}, \emph{LISTEN}, \emph{CONNECT},
+	\emph{READ} e \emph{WRITE}. Essas operações são a base do funcionamento de um
+	socket.
+
 
 \section*{Desenvolvimento dos protocolos}
- das camadas 3, 4 e 7 (verificação,
-validação, implementação e testes).
+	Como informa a bibliografia, que forneceu o código base para a implementação do
+	protocolo de transporte:
+	
+	\begin{quote}
+	``Você deve ter em mente a simplicidade da Figura 6.20. Uma entidade de transporte real
+	normalmente verificaria a validade de todos os parâmetros fornecidos, cuidaria
+	da recuperação do funcionamento após uma falha na camada de rede, trataria das
+	colisões de chamadas e seria compatível com um serviço de transporte mais
+	genérico, com interrupções, datagramas e versões sem bloqueio das primitivas
+	SEND e RECEIVE.'' \cite{tanenbaum:redes-computadores}
+	\end{quote}
+	
+	Dessa forma, a camada de transporte desenvolvida nesse trabalho tem
+	características incomuns a uma camada de transporte usual, não implementando o
+	TCP nem o UDP, por exemplo. Dessa forma, não é possível usar aplicativos
+	normais, tais como \emph{browsers}, ou clientes de e-mail para testar o
+	funcionamento da camada de transporte desenvolvida.
+	
+	Sendo assim, foi desenvolvida uma aplicação orientada a conexão como prova de
+	conceito. Tal programa consiste em um programa de bate-papo simples com dois
+	clientes distintos em uma mesma janela para melhor visualização. Toda mensagem
+	enviada por um cliente é enviada ao outro utilizando a infraestrutura de
+	camadas desenvolvida. Como forma de apresentar o funcionamento interno dos
+	protocolos, cada cliente pode ver as primitivas invocadas por cada uma das
+	camadas desde o envio da mensagem por um lado até a chegada dela no outro lado.
+	
+\subsection*{Recursos utilizados}
+	\begin{description}
+	  \item[Ubuntu Linux] Versão 10.10
+	  \item[Python 2.7] Linguagem de programação adotada
+	  \item[PyQt] Biblioteca utilizada no desenvolvimento da interface gráfica com
+	  o usuário.
+	\end{description}
+
+\subsection*{Camada de Rede}
+	Esta camada possui uma implementação simples neste trabalho. Sua tarefa é de
+	realizar o redirecionamento de pacotes enviado por uma camada de transporte
+	para a outra. Para isso, a camada de rede fornece a primitiva
+	\texttt{enviarPacote} às camadas de transporte. Por outro lado, sempre que um
+	novo pacote chega, após a decisão de qual camada de transporte corresponde o
+	pacote, é invocado o método \texttt{daRede} correspondente, enviando o dado à
+	camada superior.
+
+\subsection*{Camada de Transporte}
+	Como descrito anteriormente, a linguagem de programação adotada foi o Python.
+	Como o código fornecido pela bibliografia estava programado em C, o primeiro
+	passo foi realizar uma tradução para a linguagem destino, realizando diversas
+	adaptações necessárias diante da diferença de paradigmas adotados: Estruturado
+	vs. Orientado a Objetos, variáveis globais, definições em tempo de compilação,
+	etc.
+	
+	Ainda, o código fornecido teve algumas implementações faltantes suplantadas:
+	
+	\begin{itemize}
+  		\item \texttt{sleep}, e \texttt{wakeUp} que no programa final tornaram-se
+  		\texttt{dormir} e \texttt{acordar}, cumprem a função de uma barreira da
+  		programação concorrente, bloqueando e reiniciando o funcionamento da camada
+  		de transporte à medida que haja novos eventos para serem tratados.
+  		\item \texttt{fromNet}, e \texttt{toNet} que no programa final tornaram-se
+  		\texttt{daRede} e \texttt{paraRede}, que são métodos de interface com a
+  		camada de rede para o recebimento e envio de pacotes.
+	\end{itemize}
+	
+	Para permitir a interação entre camadas vizinhas houve a necessidade que cada
+	camada tivesse referências às suas vizinhas para permitir um funcionamento
+	síncrono.
+	
+	A camada de transporte possui um vetor que armazena e organiza as conexões
+	atuais, representadas como objetos do tipo \texttt{Conexao}. Cada pacote é
+	representado por objeto da classe \texttt{Pacote}, além disso e eles são
+	enviados à camada de rede através do método interno \texttt{paraRede}, são
+	roteados pela camada de rede, e depois ressurgem na camada de transporte
+	homóloga através do método \texttt{daRede}.
+
+
+\subsection*{Camada de Aplicação}
+\subsection*{Aplicação Prova de Conceito}
+\subsection*{Validação, Verificação e Testes}
+
 
 \section*{Comentários sobre os resultados obtidos}
 
 \section*{Conclusões}
 
-
-
-\section*{Interface RS-232}
-	RS-232 (Conhecido ainda por EIA RS-232C ou ITU V.24) é um protocolo de
-	comunicação serial binária entre um Terminal de Dados, DTE e um Comunicador de
-	Dados, DCE. \cite{wiki:rs232}
-
-	Sua utilização original era conectara um teletipo (TTY) a um modem. Atualmente
-	o RS-232 está na terceira revisão (RS-232C), publicadada em 1969 para
-	adequar-se às características elétricas desses dispositivos. Posteriormente,
-	ele foi utilizado com outros propósitos, tais como conectar equipamentos já
-	existentes. Até os anos 90 o a porta RS-232 foi onipresente nos IBM-PCs sendo a
-	maneira padrão de conectar um modem a um PC.
-	
-	Apesar de ter sido substituída em computadores modernos por barramentos mais
-	velozes e compactos, tais como o USB e o Firewire, o RS-232 ainda possui grande
-	importância como conexão para manutenção de equipamentos eletrônicos como
-	televisões, decodificadores, no-breaks, dentre outros. Ainda, é uma maneira
-	simples de conectar dispositivos remotos, tais como sensores externos que
-	transmitem dados em baixa taxa de transferência.
-	
-	\subsection*{Protocolo}
-	Nesse estilo de codificação há o uso de um bit de início, seguido por sete ou
-	oito bits de dados, possivelmente um bit de paridade, e um, 1,5 ou dois bits de
-	parada. Assim, normalmente são necessários $1 + 8 + 1 = 10$ bits para enviar um
-	único caractere. Portanto a relação entre dados úteis e dados transmitidos é de
-	$7/10 = 0,7$. O padrão define os níveis elétricos correspondentes aos níveis
-	lógicos um e zero, a velocidade de transmissão padrão e os tipos de
-	conectores.\cite{strangio:rs232-standard}
-	
-	O padrão especifica 20 diferentes sinais de conexão, e um conector com formato
-	de ``D'' (fig. \ref{fig:de9}) é comumente usado. São utilizados conectores
-	machos e fêmeas - geralmente os conectores dos cabos são machos e os
-	conectores de dispositivos são fêmeas - e estão disponíveis adaptadores m-m e
-	f-f. Há também os chamados "null modems", que removem a necessidade de um modem
-	interligando os dois terminais ao realizar uma ligação cruzada no cabeamento.
-	Para a realização do trabalho prático foi utilizado um null modem, como será
-	explicado adiante.
-	
-	\begin{figure}[htp]
-	\begin{center}
-		\includegraphics[width=70mm]{imagens/DE9.png}
-		\caption[Diagrama de um conector DE9]{Diagrama de um conector DE9}
-		\label{fig:de9}
-	\end{center}
-	\end{figure}
-	
-	O RS-232 é recomendado para conexões curtas (quinze metros ou menos) devido à
-	grande capacitância gerada por cabos comuns de maior extensão. Os sinais variam
-	de 3 a 15 volts positivos ou negativos, valores próximos de zero não são
-	sinais válidos. O nível lógico um é definido por ser voltagem negativa, a
-	condição de sinal é chamada "marca" e tem significado funcional de OFF
-	(desligado). O nível lógico zero é positivo, a condição de sinal é chamda
-	"espaço", e a função é ON (ligado). Níveis de sinal +-5, +-10, +- 12 e +-15
-	são vistos comumente, dependendo da fonte elétrica
-	disponível.\cite{strangio:rs232-standard}
-	
-	Três são os tipos de sinais nesses fios: terra, transmissão/recepção e
-	"handshake". A tabela \ref{tab:de9} (obtida de \cite{anton:rs232-pinout})
-	descreve de forma detalhada a função de cada um desses pinos:
-
-	\begin{table}[h]
-	\begin{center}
-	\begin{tabular}{|c|c|c|c|}
-		Pino & Sinal & In/Out & Descrição \\
-		1 & DCD & In  & Data Carrier Detect \\
-		2 & RxD & In  & Receive Data \\
-		3 & TxD & Out & Transmit Data \\
-		4 & DTR & Out & Data Terminal Ready \\
-		5 & GND &  -  & Ground \\
-		6 & DSR & In  & Data Set Ready \\
-		7 & RTS & Out & Request to Send \\
-		8 & CTS & In  & Clear to Send \\
-		9 & RI  & In  & Ring Indicator
-	\end{tabular}
-	\end{center}
-	\caption{Pinos do conector DE-9}
-	\label{tab:de9}
-	\end{table}
-	
-	O sinal de terra tem a função de aterrar as outras conexões e é necessário
-	para identificar o 0V. Se os equipamentos estiverem muito longe, o terra 
-	poderá mostrar-se diferente em cada uma das pontas do cabo, podendo gerar
-	falhas na comunicação. Em conectores de 25 pinos, o pino 7 geralmente é o
-	terra (pino 1 e terra do chassis são raramente usados). Neste mesmo conector,
-	os pinos 2 e 3 são os pinos de transmissão e recepção, um dispositivo deve
-	enviar no 2 e receber no 3; o outro deve ser o contrário (se não, essa
-	inversão deve ser feita no fim do cabo, como num cabo para null modem, também
-	chamado de crossover).
-	
-	Há várias configurações de software para conexões seriais. As mais comuns são
-	velocidade e bits de paridade e parada. A velocidade é a quantidade de bits
-	por segundo transmitida de um dispositivo para outro. Taxas comuns de
-	transmissão são 300, 1200, 2400, 9600, 19200, etc. Tipicamente ambos os
-	dispositivos devem estar configurados com a mesma velocidade, alguns
-	dispositivos, porém, podem ser configurados para auto-detectar a velocidade. A
-	paridade pode ser ímpar (todos os caracteres enviados terão um número ímpar de
-	1's), par ou não estar ativada. Normalmente também pode-se escolher nos
-	softwares de comunicação serial entre usar 1 ou 2 bits de parada. \cite{wiki:rs232}
-	
-\section*{Implementação do software de comunicação serial}
-	\subsection*{Recursos utilizados}
-	\begin{description}
-	  \item[Windows XP] Versão 32 bits com SP3
-	  \item[com0com] Software livre que implementa diversos null modens virtuais,
-	  criando portas seriais virtuais utilizadas pelo programa criado.
-	  \item[Python 2.7] Linguagem de programação adotada
-	  \item[PySerial] Biblioteca de interfaceamento com portas seriais fornecidas
-	  pelo sistema operacional.
-	\end{description}
-
-	\subsection*{Detalhamento do experimento}
-	Diante da incapacidade de conectar fisicamente dois computadores por falta de
-	portas DE-9 disponíveis e adaptadores DE-9/USB, foi adotada a opção de simular
-	virtualmente uma porta serial. Para cumprir esse propósito foi adotado o
-	com0com, um software livre exclusivo para Windows que atua como um null modem
-	virtual criando portas seriais virtuais e interconectando-as. Através de uma
-	interface gráfica (Fig \ref{fig:com0com}) intuitiva é possível alterar as configurações
-	de pinagem além de outras opções que permitem simular situações do mundo real como taxas de
-	transferência, ruído, etc.
-	
-	%\usepackage{graphics} is needed for \includegraphics
-	\begin{figure}[htp]
-	\begin{center}
-  		\includegraphics[width=120mm]{imagens/com0com-setup.PNG}
-  		\caption[Interface do com0com]{Interface do com0com}
-  	\label{fig:com0com}
-	\end{center}
-	\end{figure}
-	
-	Após a correta configuração do com0com e teste através do HyperTerminal,
-	ferramenta embutida no Windows XP para comunicação entre dispositivos, 
-	procedeu-se para a codificação do programa propriamente dito. Neste momento,
-	Python apresentou-se como uma solução conveniente devido à facilidade de
-	programação e rápida prototipação. Aliado ao Python há o PySerial, uma
-	biblioteca de funções para interfaceamento entre programas Python e interfaces
-	seriais. Seu funcionamento básico é através da criação de um objeto do tipo
-	``Serial'' que conecta-se a uma porta serial especificada e obedecendo diversas
-	configurações que abrangem desde taxa de transferência, paridade, número de
-	bits de stop, tamanho do byte, etc. O envio de dados é através da função
-	``write()'' que recebe como parâmetro uma string que é enviada ao terminal
-	remoto, já o recebimento de dados ocorre através da função ``read()'' que
-	retorna os caracteres armazenados no buffer da porta.
 	
 	O funcionamento básico do programa é o seguinte: 
 	\begin{itemize}
@@ -227,31 +325,31 @@ validação, implementação e testes).
   		recebimento de dados da porta e outra para o envio de dados
 	\end{itemize}
 
-	\subsection*{Código fonte}
+\section*{Código fonte}
 	Abaixo segue o código fonte documentado do programa. Os pontos críticos do
 	programa encontram-se nas threads, onde é realizado o polling de recebimento e
 	envio de dados, ainda, a função ``iniciarConexao()'' é responsável por coletar
 	as configurações desejadas e iniciar a conexão na porta escolhida.
 	
-	\subsubsection{Inicialização do programa}
+	\subsection*{Inicialização do programa}
 	\lstinputlisting{src/main.py}
 	
-	\subsubsection{Camada de Aplicação}
+	\subsection*{Camada de Aplicação}
 	\lstinputlisting{src/camadaAplicacao.py}
 	
-	\subsubsection{Camada de Transporte}
+	\subsection*{Camada de Transporte}
 	\lstinputlisting{src/camadaTransporte.py}
 	
-	\subsubsection{Camada de Rede}
+	\subsection*{Camada de Rede}
 	\lstinputlisting{src/camadaRede.py}
 
-	\subsubsection{Pacote}
+	\subsection*{Pacote}
 	\lstinputlisting{src/pacote.py}
 
-	\subsubsection{Testes}
+	\subsection*{Testes}
 	\lstinputlisting{src/testes.py}
-
-	\subsubsection{Interface Gráfica}
+	
+	\subsection*{Interface Gráfica}
 	\lstinputlisting{src/interface/interface.py}
 	\lstinputlisting{src/interface/layoutInterface.py}
 
