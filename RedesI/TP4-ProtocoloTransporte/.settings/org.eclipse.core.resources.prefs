@@ -1,7 +1,10 @@
-#Wed Nov 17 22:39:12 BRST 2010
+#Sun Nov 21 12:00:51 BRST 2010
 eclipse.preferences.version=1
 encoding//src/camadaAplicacao.py=utf-8
 encoding//src/camadaRede.py=utf-8
 encoding//src/camadaTransporte.py=utf-8
+encoding//src/interface/interface.py=utf-8
 encoding//src/interface/layoutInterface.py=utf-8
 encoding//src/main.py=utf-8
+encoding//src/pacote.py=utf-8
+encoding//src/testes.py=utf-8

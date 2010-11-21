@@ -1,18 +1,20 @@
 #-*- coding: utf-8 -*-
 '''
-Created on Nov 14, 2010
-
-@author: pedropaulovc
+INE5414 - REDES DE COMPUTADORES I
+TRABALHO PRATICO 4 - IMPLEMENTACAO DE UM PROTOCOLO DA CAMADA DE TRANSPORTE
+ALUNO: PEDRO PAULO VEZZA CAMPOS
 '''
 from pacote import Pacote
 import logging
 
 class CamadaTransporte(object):
-    '''
-    classdocs
-    '''
 
     def __init__(self, id, camadaRede):
+        '''
+        Inicializacao de configuracoes da camada de transporte. O endereco
+        da camada e definido por "id" e a sua camada de rede correspondente
+        e definida por "camadaRede".
+        '''
         self.maxConexoes = 32
         self.tamMaxMsg = 8129
         self.tamMaxPacote = 512
@@ -46,6 +48,10 @@ class CamadaTransporte(object):
 
         
     def dormir(self):
+        '''
+        Suspende a execucao da camada de transporte ate que seja acordada novamente
+        por algum evento.
+        '''
         self.log.info("CT: Indo dormir")
         
         self.acordado = False
@@ -53,19 +59,33 @@ class CamadaTransporte(object):
             pass
         
     def acordar(self):
+        '''
+        Reinicia a execucao da camada de transporte.
+        '''
         self.log.info("CT: Acordando")
         self.acordado = True
         
     def paraRede(self, cid, q, m, pt, data, bytes):
+        '''
+        Metodo invocado pela camada de transporte para montar um pacote e
+        envia-lo a camada de rede.
+        '''
         self.log.info("CT: Enviando {0} para CR".format(pt))
         pacote = Pacote(cid, q, m, pt, data, bytes)
         self.camadaRede.enviarPacote(self, pacote)
         
     def daRede(self, pacote):
+        '''
+        Metodo invocado pela camada de rede para informar a camada de transporte
+        que um novo pacote esta disponivel no buffer da camada de rede.
+        '''
         self.log.info("CT: Recebendo dado da CR")
         self.chegadaPacote(pacote, 1)
     
     def escutar(self, t):
+        '''
+        Metodo para permanecer aguardando por uma nova conexao no endereco "t"
+        '''
         self.log.info("CT: Escutando a rede")
         i = 1
         encontrado = 0
@@ -88,7 +108,10 @@ class CamadaTransporte(object):
         return i
     
     def conectar(self, local, remoto):
-        self.log.info("CT: Iniciando conexão")
+        '''
+        Metodo para tentar estabelecer uma conexao entre "local" e "remoto"
+        '''
+        self.log.info("CT: Iniciando conexao")
         self.dados[0] = str(remoto)
         self.dados[1] = str(local)
         
@@ -120,6 +143,10 @@ class CamadaTransporte(object):
             return -1
     
     def enviar(self, cid, pontBuf, bytes):
+        '''
+        Metodo para enviar um pacote com dados armazenados no endereco
+        "pontBuf" e de tamanho "bytes" bytes a conexao estabelecida previamente "cid".
+        '''
         self.log.info("CT: Enviando dados")
         cptr = self.conexoes[cid]
         if cptr.estado == 'AGUARDANDO':
@@ -145,6 +172,9 @@ class CamadaTransporte(object):
             return -3
     
     def receber(self, cid, pontBuf, bytes):
+        '''
+        O usuario esta preparado para receber uma mensagem. 
+        '''
         self.log.info("CT: Recebendo dados")
         cptr = self.conexoes[cid]
         if cptr.clearRequestRecebido == 0:
@@ -161,6 +191,9 @@ class CamadaTransporte(object):
         return -3
     
     def desconectar(self, cid):
+        '''
+        Metodo invocado para desconectar a conexao estabelecida "cid" 
+        '''
         self.log.info("CT: Desconectando")
         cptr = self.conexoes[cid]
         if cptr.clearRequestRecebido == 1:
@@ -172,6 +205,10 @@ class CamadaTransporte(object):
         return 0
     
     def chegadaPacote(self, pacote, contagem):
+        '''
+        Metodo invocado pela propria camada de transporte para analizar
+        um pacote recebido da camada de rede e fornecer um destino adequado.
+        '''
         self.log.info("CT: Chegou pacote")
         cid = int(pacote.cid)
         tipo = pacote.pt
@@ -215,6 +252,10 @@ class CamadaTransporte(object):
             self.camadaAplicacao.receberMensagem(cptr.enderecoRemoto, cptr.enderecoBufferUsuario[0])
             
     def relogio(self):
+        '''
+        Houve um pulso de relogio. Verifica timeouts de solicitacoes de conexoes 
+        enfileiradas.
+        '''
         for i in range(1,32):
             cptr = self.conexoes[i]
             if cptr.timer > 0:
@@ -224,6 +265,10 @@ class CamadaTransporte(object):
                     self.paraRede(i, 0, 0, 'REQ_LIVRE', self.dados, 0)
                 
     def __configurarLog(self):
+        '''
+        Configura a infraestrutura de log para analise do funcionamento da
+        camada de transporte.
+        '''
         self.log = logging.getLogger("computador{0}".format(self.id))
         self.log.setLevel(logging.INFO)
         ch = logging.StreamHandler()
@@ -234,6 +279,10 @@ class CamadaTransporte(object):
 class Conexao(object):
     
     def __init__(self):
+        '''
+        Definicao de uma conexao utilizada por essa implementacao de
+        camada de transporte. 
+        '''
         self.enderecoLocal = 0
         self.enderecoRemoto = 0
         self.estado = 'INATIVO'

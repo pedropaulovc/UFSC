@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'interface.ui'
-#
-# Created: Wed Nov 17 22:31:08 2010
-#      by: PyQt4 UI code generator 4.7.4
-#
-# WARNING! All changes made in this file will be lost!
-
+#-*- coding: utf-8 -*-
+'''
+INE5414 - REDES DE COMPUTADORES I
+TRABALHO PRATICO 4 - IMPLEMENTACAO DE UM PROTOCOLO DA CAMADA DE TRANSPORTE
+ALUNO: PEDRO PAULO VEZZA CAMPOS
+'''
 from PyQt4 import QtCore, QtGui
 import logging
 
@@ -66,7 +63,7 @@ class Ui_MainWindow(object):
         self.__configurarLog()
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Trabalho Pratico 4 - Implementacao de Camada de Transporte", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton.setText(QtGui.QApplication.translate("MainWindow", "Enviar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_2.setText(QtGui.QApplication.translate("MainWindow", "Enviar", None, QtGui.QApplication.UnicodeUTF8))
     
