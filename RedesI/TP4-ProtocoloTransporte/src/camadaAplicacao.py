@@ -57,6 +57,6 @@ class CamadaAplicacao(Thread):
         '''
         Metodo invocado pela camada de transporte sempre que um novo pacote chega.
         '''
-        self.log.info("CA: Recebi mensagem".format(origem, s))
+        self.log.info("CA: Recebi mensagem: {0}".format(s))
         if self.aplicacao != None:
             self.aplicacao.receberMensagem(s, self.id)

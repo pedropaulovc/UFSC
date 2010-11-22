@@ -305,32 +305,72 @@ Tecnológico \par Universidade Federal de Santa Catarina}
 
 
 \subsection*{Camada de Aplicação}
+	A camada de apresentação provê as primitivas básicas ao programa de bate-papo a
+	ser apresentado posteriormente. Seus métodos principais são \texttt{conectar}, \texttt{escutar},
+	\texttt{enviarMensagem}, \texttt{receberMensagem} e \texttt{fecharConexao}.
+	Tais métodos são responsáveis por estabelecer uma conexão, permanecer
+	aguardando uma nova conexão, enviar uma mensagem, receber uma mensagem que será
+	posteriormente entregue à aplicação e encerrar uma conexão estabelecida,
+	respectivamente. Todos esses serviços prestados pela camada de aplicação
+	utilizam primitivas fornecidas pela camada de transporte.
+	
+	
 \subsection*{Aplicação Prova de Conceito}
-\subsection*{Validação, Verificação e Testes}
+	Como explicado anteriormente, foi desenvolvida um programa de bate-papo
+	simples com dois clientes distintos em uma mesma janela para melhor
+	visualização. Toda mensagem enviada por um cliente é enviada ao outro
+	utilizando a infraestrutura de camadas desenvolvida.
+	
+	Adicionalmente, como forma de apresentar o funcionamento interno dos
+	protocolos, cada cliente pode ver as primitivas invocadas por cada uma das
+	camadas desde o envio da mensagem por um lado até a chegada dela no outro
+	lado.
+	
+	%\usepackage{graphics} is needed for \includegraphics
+	\begin{figure}[htp]
+	\begin{center}
+	  \includegraphics[width=100mm]{imagens/Aplicativo.png}
+	  \caption[aplicativo]{Imagem do funcionamento do aplicativo de prova de
+	  conceito}
+	  \label{aplicativo}
+	\end{center}
+	\end{figure}
 
+
+\subsection*{Validação, Verificação e Testes}
+	A validação e a verificação foram feitas através de máquinas de estados
+	representando o protocolo implementado. Posteriormente à implementação,
+	procedeu-se com a codificação de testes unitários através daa biblioteca
+	PyUnit, embutida na linguagem Python. Através destes testes unitários
+	verificou-se o funcionamento adequado dos protocolos programados.
 
 \section*{Comentários sobre os resultados obtidos}
+	O quarto trabalho prático de INE5414 foi de grande importância para a
+	sedimentação dos conceitos vistos durante o semestre, contribuindo para o
+	objetivo de relacionar teoria e prática em Redes de Computadores. Ainda,
+	permitiu elucidar vários conceitos, principalmente os relacionados ao modelo de
+	redes em camada, o desenvolvimento de protocolos e suas relações com a
+	Engenharia de Software.
+	
+	Apesar dos protocolos e programa produzidos para esse trabalho possuirem apenas
+	caráter didático e não de uso estritamente prático, ainda assim, são
+	importantes ferramentas no aprendizado prático dos conceitos vistos em aula.
 
 \section*{Conclusões}
-
+	Neste trabalho, após uma breve introdução ao problema proposto, foi apresentado
+	inicialmente uma fundamentação teórica em três importantes camadas do modelo
+	OSI e do modelo TCP/IP. 
+		
+	Posteriormente foram apresentadas as principais características do
+	desenvolvimento de um protocolo de transporte orientado a conexão, além de
+	suas camadas vizinhas e de uma aplicação de bate-papo, como prova de conceito.
+	Além disso foram explicados os passos de verificação, validação e testes
+	empregados durante o desenvolvimento do programa.
 	
-	O funcionamento básico do programa é o seguinte: 
-	\begin{itemize}
-  		\item Apresentação do programa ao usuário;
-  		\item Pedido da porta desejada para conexão;
-  		\item Pedido das configurações desejadas de taxa de transmissão, tamanho do
-  		byte e número de bits de stop;
-  		\item Início da conexão
-  		\item Acionamento de duas ``threads'', ambas realizando polling, uma para o
-  		recebimento de dados da porta e outra para o envio de dados
-	\end{itemize}
-
+	Por fim, foram apresentados comentários a respeito do trabalho e o código fonte
+	comentado resultante. 
+	
 \section*{Código fonte}
-	Abaixo segue o código fonte documentado do programa. Os pontos críticos do
-	programa encontram-se nas threads, onde é realizado o polling de recebimento e
-	envio de dados, ainda, a função ``iniciarConexao()'' é responsável por coletar
-	as configurações desejadas e iniciar a conexão na porta escolhida.
-	
 	\subsection*{Inicialização do programa}
 	\lstinputlisting{src/main.py}
 	
@@ -340,11 +380,11 @@ Tecnológico \par Universidade Federal de Santa Catarina}
 	\subsection*{Camada de Transporte}
 	\lstinputlisting{src/camadaTransporte.py}
 	
-	\subsection*{Camada de Rede}
-	\lstinputlisting{src/camadaRede.py}
-
 	\subsection*{Pacote}
 	\lstinputlisting{src/pacote.py}
+	
+	\subsection*{Camada de Rede}
+	\lstinputlisting{src/camadaRede.py}
 
 	\subsection*{Testes}
 	\lstinputlisting{src/testes.py}
