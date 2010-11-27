@@ -15,7 +15,7 @@
 \maketitle
 
 \begin{abstract}
-A Computação em Nuvem, ou cloud computing vem avançando tanto no mercado
+A Computação em Nuvem, ou Cloud Computing vem avançando tanto no mercado
 empresarial quanto para usuários finais como uma forma de
 reduzir custos e facilitar a manutenção ao delegá-los a empresas especializadas.
 Porém, ao mesmo tempo surgem diversos questionamentos quanto à segurança dos
@@ -51,7 +51,7 @@ torná-lo verdade.'' \cite{stallman-cloud}
 \end{quote}
 
 Paralelamente às oportunidades possibliltadas através do uso de cloud computing
-há um aumento das preocupações com a segurança dos dados armazenados na núvem.
+há um aumento das preocupações com a segurança dos dados armazenados na nuvem.
 Frente a isso diversas pesquisas abordaram técnicas tradicionais e inovadoras
 para solucionar esse problema. Neste trabalho serão apresentadas as mais
 importantes dessas propostas apresentadas.
@@ -79,10 +79,10 @@ apresentado um paralelo entre técnicas de ataque e defesa existentes.
 
 \section{Trabalhos Correlatos}
 
-Em \cite{controlling-data-in-cloud} são apresentados diversas preocupações com
-cloud computing, categorizadas segundo três macro áreas, como apresentado
-abaixo. Ao longo desse trabalho serão apresentados e discutidos os itens contidos em cada uma dessas
-categorias.
+Em \cite{controlling-data-in-cloud}, Chow et. al. apresentam diversas
+preocupações com cloud computing, categorizadas segundo três macro áreas, como
+apresentado abaixo. Ao longo desse trabalho serão apresentados e discutidos os
+itens contidos em cada uma dessas categorias.
 \begin{itemize}
   \item Segurança tradicional
   \item Disponibilidade
@@ -104,6 +104,15 @@ seja instalada na mesma máquina física que a máquina virtual alvo e, por fim,
 explorando vulnerabilidades da ferramenta de virtualização conseguir gerar um
 canal lateral entre máquinas virtuais, burlando o isolamento imposto pelo
 \emph{hipervisor}. 
+
+Jensen, et. al. selecionaram em \cite{technical-security-issues} diversas
+questões relacionadas à segurança no contexto da computação em nuvem. Seu
+enfoque principal é voltado ao estudo das técnicas de segurança empregadas em
+protocolos de serviços Web e seus frameworks, tais como SOAP e WS-Security, e
+também às abordagens adotadas por navegadores Web. Uma conclusão derivada de
+suas observações é a necessidade de por um lado fortalecer as técnicas de
+segurança empregadas nessas duas áreas e por outro prover a integração de ambas
+para fortalecer a segurança no uso de aplicações baseadas na nuvem.
 
 \section{Conceitos básicos}
 O significado de cloud computing ainda é motivo de discussão na indústria e
@@ -133,16 +142,16 @@ abaixo:
   a capacidade de configurar a aplicação utilizada. Nesta faixa encontram-se
   serviços tais como o Gmail, Google Apps, Evernote, etc.
   \item[PaaS - Platform-as-a-Service] PaaS, ou Plataforma como um Serviço, é a
-  versão intermediária de computação em núvem. Nesta, o usuário possui o poder
+  versão intermediária de computação em nuvem. Nesta, o usuário possui o poder
   configurar certas varáveis do ambiente de hospedagem. Aqui encontram-se
   serviços tais como o Google App Engine.
   \item[IaaS - Infrastructure-as-a-Service] IaaS, ou Infraestrutura como um
-  Serviço, é a versão mais básica de computação em núvem. Neste ponto o usuário
+  Serviço, é a versão mais básica de computação em nuvem. Neste ponto o usuário
   tem total controle do ambiente desde o kernel até camadas mais superires. Um
   exemplo de IaaS é o Amazon EC2.
 \end{description}
 
-Ainda, há variadas maneiras de implementar uma núvem, variando no
+Ainda, há variadas maneiras de implementar uma nuvem, variando no
 compartilhamento de recursos entre diferentes clientes:
 
 \begin{description}
@@ -150,7 +159,7 @@ compartilhamento de recursos entre diferentes clientes:
   serviço de cloud computing.
   \item[Cloud Comunitáira] Aqui o serviço é fornecido a apenas algumas
   organizações.
-  \item[Cloud Privada] A núvem passa a ser exclusiva de uma organização.
+  \item[Cloud Privada] A nuvem passa a ser exclusiva de uma organização.
   \item[Cloud Híbrida] Uma mistura dos modelos anteriores.
 \end{description}
 
@@ -175,6 +184,23 @@ computing. Algumas das preocupações apresentadas por
   ser dirigida ao provedor de cloud computing. Um ataque pode comprometer a
   infraestrutura de autenticação do sistema e assim permitir o invasor o acesso
   irrestrito a dados sensíveis do usuário.
+  \item[Deficiências de protocolos] Serviços baseados em cloud computing
+  dependem fortemente de protocolos de serviços web, tais como o SOAP, para a
+  troca de informação. Uma vulnerabilidade nesse ponto da interação entre
+  cliente e servidor permite um invasor realizar operações arbitrárias no
+  serviço fazendo-se passar por um usuário legítimo. O serviço Amazon EC2 foi
+  vítima de um ataque conhecido como \emph{wrapping attack} em 2008 devido a
+  vunerabilidades do XML Signature já conhecidas em 2005.
+  \cite{technical-security-issues}
+  \item[Vulnerabilidades na infraestrutura] Em 2008 foi descoberta a
+  possiblidade de ``envenenamento'' de caches DNS com dados inválidos ou
+  maliciosos. Isso tornou o protocolo inseguro, criando a necessidade de uso de
+  uma variante segura, tal como o DNSSEC, e ainda medidas extra de segurança no
+  protocolo de transporte. Outro ponto sensível de ataque são os roteadores,
+  switches e access-points domésticos, dispositivos raramente atualizados e
+  corretamente configurados. Tudo isso leva a uma redução da confiabilidade dos
+  dados recebidos de uma URL sem um devido tratamento de segurança adequado por
+  outros meios.
 \end{description}
 
 \subsection{Disponibilidade}
@@ -188,6 +214,13 @@ computing. Algumas das preocupações apresentadas por
   de atingir um consenso nos resultados obtidos. A Google, por outro lado,
   armazena cópias de dados em diversas máquinas diferentes como forma de
   tolerância a falhas.
+  \item[Estabilidade] Dependendo do nível de criticidade de uma aplicação
+  localizada na nuvem, um contrato garantindo uma disponibilidade
+  pré-estabelecida é necessária. Porém, mesmo com diversas medidas de
+  redundância de dados, enlaces, energia, dentre outros, certas vezes um
+  serviço pode não cumprir o acordo, gerando prejuízos e transtornos aos
+  usuários. Serviços famosos tais como o Gmail e o Amazon EC2 já sofreram com
+  indisponibilidades de 24 e 7 horas respectivamente. \cite{controlling-data-in-cloud}
 \end{description}
 
 
@@ -201,29 +234,57 @@ computing. Algumas das preocupações apresentadas por
   internas à Google, como o BigTable, GFS, dentre outros. Claramente uma solução
   a esse problema é a adoção de padrões livres. Uma amostra dessa tentativa é a
   API GoGrid.
+  \item[Espionagem] Usuários e empresas são muito receosos em fornecer seus
+  dados particulares a terceiros. Um de seus principais medos é o roubo de
+  informação sensível pelo fornecedor dos serviços de cloud computing. Um
+  exemplo disso é o Gmail que logo após seu lançamento foi bastante criticado
+  por utilizar \emph{crawlers} para ler os emails dos usuários a fim de fornecer
+  anúncios contextualizados. Porém, passados 6 anos de seu lançamento tais
+  temores amainaram.
+  \item[Auditabilidade] Ao delegar tarefas a uma empresa fornecedora de serviços
+  de cloud computing, automaticamente há uma diminuição do controle sobre a
+  manipulação de seus dados. Como consequência, diminui-se também a capacidade
+  de auditar as operações em busca de problemas. Dada a natureza dinâmica da
+  computação em nuvem torna-se bastante difícil garantir o isolamento dos dados
+  de outros clientes. Atualmente a auditabilidade ocorre através de documentação
+  e auditorias manuais. \cite{controlling-data-in-cloud}
+  \item[Apreensão de equipamentos] Diante de uma possível de prática de crime
+  por algum cliente de serviço de cloud computing um juiz pode determinar um
+  mandado de busca e apreensão de equipamentos utilizados pelo réu. Como vários
+  clientes coexistem em uma mesma máquina há um risco de que dados de usuários
+  sem relação com o réu sejam recolhidos, podendo não serem retornados após o
+  fim das investigações.
 \end{description}
-
-%   \item[Auditabilidade] 
-%   VM-level attack
-% Cloud provider vulnerabilities.
-% Expanded network attack surface
-% Authentication and Authorization
-% Auditability.
-% Cloud Provider Espionage.
 
 \section{Técnicas tradicionais}
 Na área de técnicas tradicionais de segurança, pode-se incluir a criptografia
-como forma de controlar o acesso a informações privilegiadas armazenadas na nuvem. Ainda, o
-fator humano continua sendo crucial, ataques de engenharia social continuam
-sendo bastante efetivos em conseguir comprometer um sistema.
+como forma de controlar o acesso a informações privilegiadas armazenadas na
+nuvem. O uso de criptografia apresentava um bom nível de segurança até o
+surgimento em 2004 dos primeiros ataques de \emph{phishing}. O \emph{phishing} é
+uma técnica de invasão que consiste em enganar o usuário de um serviço web,
+comumente através de emails falsos, ataques ao DNS, ou nomes de domínio
+semelhantes, fazendo-o fornecer suas credenciais, e/ou dados pessoais.
+\cite{technical-security-issues}
+
+Neste ataque, o invasor aproveita-se da confiança cedida pelo usuário a algum
+serviço conhecido para roubar seus dados. Em uma versão mais elaborada, o agente
+malicioso pode possuir uma autenticação criptográfica como forma de ludibriar
+usuários mais cautelosos. Um resultado disso é a gradual substituição do icônico
+cadeado das interfaces dos navegadores web, um símbolo de falsa segurança,
+por outras metáforas mais apropriadas.
+
+O fator humano ainda é explorado de várias maneiras com sucesso. Uma prova disso
+é que ataques de engenharia social continuam sendo bastante efetivos em
+conseguir comprometer sistemas.
 
 Um exemplo dessa última afirmação foi apresentada na conferência BlackHat USA
 2009. Invasores tiveram acesso a máquinas virtuais instaladas no Amazon EC2
 apenas fornecendo imagens de sistemas operacionais infectadas de maneira
 aparentemente oficial, utilizando nomes como ``fedora\_core''.
+\cite{whats-new-about-cloud-security}
 
 Por outro lado, as organizações devem estar preparadas para a recuperação de
-disastres, dessa forma, backups são essenciais. A ausência de um cuidado simples
+desastres, dessa forma, backups são essenciais. A ausência de um cuidado simples
 pode levar a sérias consequências como é possível encontrar na bibliografia.
 
 No Brasil um caso recente foi o do migre.me: Uma falha catastrófica no servidor
@@ -247,11 +308,31 @@ ataques ao cloud computing e outro apresentando o estado da arte
 das técnicas de defesa na área.
 
 \subsection{Novos ataques}
-No contexto de cloud computing, uma possibilidade pouco explorada anteriormente
-é a de captura do tráfego gerado e a transmissão ativa de dados por um agente
-malicioso. Isso é possível graças ao compartilhamento de recursos realizado pela
-nuvem. Outra possiblidade é a de um invasor conseguir recuperar informações
-sobrescritas ou apagadas por um cliente.
+O nível de virtualização que a computação em nuvem traz possibilita diversos
+novos ataques. Apesar de ainda não haver notícia de alguma grande invasão a
+usuários de cloud computing, já há provas de conceitos disponíveis, tal como a
+decrita em \cite{hey-you-get-off-of-my-cloud}.
+
+Primeiramente através de técnicas tais como o mapeamento da rede da empresa
+fornecedora da nuvem há a possibilidade de um agente malicioso conseguir
+induzir o sistema de alocação de máquinas virtuais a instalar uma máquina
+virtual invasora na mesma máquina física que a máquina virtual alvo. Com isso,
+diversos dos temores elencados anteriormente com respeito a cloud computing
+tornam-se relevantes.
+
+Neste momento, o invasor pode realizar uma escuta passiva em diversas partes da
+máquina física com o intuito de capturar informações sensíveis de seu alvo.
+Pode-se varrer blocos livres do disco rígido em busca de dados removidos
+anteriormente removidos mas não destruidos apropriadamente, ou ainda varrer
+buffers de rede, dados armazenados em caches, dentre outros. Outra abordagem
+possível é explorar uma baixa entropia em números aleatórios gerados para
+recuperar chaves criptográficas.
+
+Elevando o nível de sofisticação do ataque, pode-se explorar vulnerabilidades da
+ferramenta de virtualização para gerar um canal lateral entre máquinas
+virtuais, burlando o isolamento imposto pelo \emph{hipervisor}. Vulnerabilidades
+em diferentes ferramentas, tais como XEN e VMware já foram encontradas,
+permitindo invasões dessa forma. \cite{controlling-data-in-cloud}
 
 Ainda, com a concentração de vários clientes diferentes em somente um local, um
 ataque massivo pode afetar diversos usuários ao mesmo tempo. Um caso
@@ -262,17 +343,46 @@ sofreram interrupção na entrega normal de seus emails. Como medida para corrig
 o problema, agora os clientes devem preencher um formulário junto à Amazon
 informando a necessidade de envio de grandes quantidades de emails para que seja
 requisitado o \emph{whitelisting} da faixa de IPs correspondente àquele usuário
-específico.
+específico. \cite{above-clouds} \cite{whats-new-about-cloud-security}
 
 \subsection{Novas defesas}
-Uma crescente vantagem da computação em núvem é a concentração de
-expertise em segurança. Um único provedor de cloud computing pode diluir os
+Diante das ameaças discutidas anteriormente, há algumas possibilidades de
+solução, algumas paliativas, outras mais efetivas. Primeiramente, um fornecedor
+de serviços de cloud computing pode impedir ou pelo menos desacelerar um invasor
+ao obfuscar tanto a estrutura interna de seus serviços quanto a política de
+alocação de máquinas virtuais, além de impedir testes simples de co-residência
+no intuito de um invasor instalar-se na mesma máquina fisica que seu alvo.
+
+Ainda, com o aperfeiçoamento dos hipervisores, é possível empregar mais medidas
+de mascaramento para minimizar a quantidade de informação que pode ser extraída
+através de canais laterais. Porém, este ponto possui como fraqueza o fato que
+repetidamente novas falhas de segurança são encontradas, abrindo novamente
+margem para um agente malicioso realizar invasões a seus alvos.
+
+Por outro lado, uma crescente vantagem da computação em nuvem é a concentração
+de expertise em segurança. Um único provedor de cloud computing pode diluir os
 custos para manter políticas de segurança e uma equipe de segurança responsável
 por controlar possíveis falhas e repará-las.
 
 Isso leva a uma modalidade de serviços conhecida como
 \emph{Security-as-a-Service} na qual um provedor fornece soluções prontas de
 segurança tais como frameworks, criptografia, antivírus, etc.
+
+Contudo, talvez a solução mais eficaz para os problemas da computação em nuvem é
+a transparência da empresa em admitir os riscos envolvidos, apresentando opções
+diferentes adequadas às necessidades de cada usuário. Clientes interessados em
+soluções de cloud computing mas mais preocupados com seus dados podem aceitar
+pagar um valor extra pela garantia que as máquinas físicas utilizadas por eles
+contenham apenas máquinas virtuais de sua responsabilidade, mesmo que isso
+incorra em uma subutilização de recursos.
+
+Dado que os custos para fornecer essa possibilidade de escolha sejam
+relativamente pequenos, no máximo o preço para alugar um servidor dedicado, por
+exemplo, mesmo grandes clientes podem fazer uso dessa tecnologia sem fortes
+penalidades de gastos diante dos custos totais. Assim, garante-se um serviço
+diferenciado e com uma prova palpável de maior segurança a clientes com
+necessidade especiais de proteção de dados.
+
 
 \section{Conclusão}
 Como foi possível perceber ao longo do artigo a área de segurança em cloud
