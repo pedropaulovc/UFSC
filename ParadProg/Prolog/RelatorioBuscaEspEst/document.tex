@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage[pdfborder={0 0 0}]{hyperref}
 \usepackage{listingsutf8}
+\usepackage{amssymb}
 \makeatletter
 \usepackage{babel}
 \makeatother
@@ -56,14 +57,15 @@ Tecnológico \par Universidade Federal de Santa Catarina}
 	apresentada uma descrição do problema a ser modelado e resolvido. Depois será
 	apresentada a definição dos estados inicial, final e operadores envolvidos. Em
 	seguida será exiblida a representação dos estados em Prolog. Posteriormente
-	será visualizada a implementação da função geradora de sucessores. Por fim, os
-	alunos apresentarão algumas considerações sobre a execução do projeto.
+	será visualizada a implementação da função geradora de sucessores. Ainda, os
+	alunos apresentarão algumas considerações sobre a execução do projeto. Por fim
+	será apresentado o código fonte completo e documentado da aplicação finalizada.
 
 \section*{Descrição do Problema Escolhido}
 	Um fazendeiro viajava com três compras: Um lobo, uma ovelha e alface. Ao
 	retornar para casa ele se deparou com uma margem de um rio, arrendando um barco
 	para realizar a travessia. Porém, o barco arrendado era pequeno e somente
-	comportava o fazendeiro e apenas uma de suas compras.
+	comportava o fazendeiro e no máximo uma de suas compras.
 	
 	Enquanto viajavam junto do fazendeiro nenhuma compra atacava a outra, no
 	entanto, assim que fossem deixados sozinhos o lobo comeria a ovelha e a
@@ -71,11 +73,36 @@ Tecnológico \par Universidade Federal de Santa Catarina}
 	
 	O problema consiste em terminar a travessia tanto do fazendeiro
 	quanto de suas compras para a margem oposta sem permitir que uma compra ataque
-	a outra.
+	a outra. \cite{ptwiki:problema-lobo-ovelha-alface}
 
 \section*{Definição dos Estados Inicial, Final e Operadores}
+	Conforme explicado anteriormente o problema consiste em mover todos os itens de
+	uma margem a outra, portanto foram modelados ambos os lados do rio da seguinte
+	forma:
 	
-
+	\begin{description}
+		\item[Estado Inicial] \hfill \\
+		Margem direita: \{barco, lobo, ovelha, alface\} \\
+		Margem esquerda: $\varnothing$
+		\item[Estado Final] \hfill \\
+		Margem direita: $\varnothing$ \\
+		Margem esquerda: \{barco, lobo, ovelha, alface\}
+		\item[Operadores] \hfill
+			\begin{description}
+				\item[\texttt{moveOvelha/2}] Esta cláusula sempre irá realizar a
+				mudança da ovelha e do barco de margem, uma vez que o problema não
+				impõe restrições ao lobo estar junto da alface.
+				\item[\texttt{moveLobo/2}] Esta cláusula realiza a mudança do lobo e do
+				barco de uma margem a outra somente se a ovelha e a alface não ficarem
+				sozinhas em um lado do rio
+				\item[\texttt{moveAlface/2}] Esta cláusula realiza a mudança da alface e do
+				barco de uma margem a outra somente se o lobo e a ovelha não ficarem
+				sozinhos em um lado do rio 
+				\item[\texttt{moveBarco/2}] Esta cláusula realiza a mudança somente do
+				barco de uma margem a outra com a condição que tanto o lobo e a ovelha
+				quanto a ovelha e a alface não ficarão sozinhos em um lado do rio 
+			\end{description}
+	\end{description}
 
 \section*{Representação dos Estados}
 
