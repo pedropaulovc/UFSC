@@ -4,9 +4,22 @@
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage{listingsutf8}
 \makeatletter
 \usepackage{babel}
 \makeatother
+
+\lstset{
+language=Prolog,
+tabsize=2,
+inputencoding=utf8,
+basicstyle=\scriptsize,
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+% columns=fullflexible
+}
+
 \begin{document}
 
 \autor{Pedro Paulo Vezzá Campos \\ Rafael Elias Pedretti}
@@ -72,6 +85,9 @@ Tecnológico \par Universidade Federal de Santa Catarina}
 
 \section*{Considerações sobre o Trabalho}
 
+
+\chapter*{Código Fonte}
+	\lstinputlisting{src/PedroPaulo_RafaelPedretti_TF.pl}
 
 \bibliographystyle{abnt-num}
 \bibliography{bibliografia}
