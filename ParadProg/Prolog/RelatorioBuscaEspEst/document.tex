@@ -25,7 +25,7 @@ showtabs=false,
 
 \autor{Pedro Paulo Vezzá Campos \\ Rafael Elias Pedretti}
 
-\titulo{Implementação de Problema de Busca em Espaço de Estados utilizando
+\titulo{Implementação de Problema de Busca em Espaço de Estados Utilizando
 Prolog}
 
 \comentario{Trabalho apresentado para avaliação na disciplina INE5416, do
@@ -89,28 +89,63 @@ Tecnológico \par Universidade Federal de Santa Catarina}
 		Margem esquerda: \{barco, lobo, ovelha, alface\}
 		\item[Operadores] \hfill
 			\begin{description}
-				\item[\texttt{moveOvelha/2}] Esta cláusula sempre irá realizar a
+				\item[\texttt{moveOvelha/2}] Este predicado a sempre irá realizar a
 				mudança da ovelha e do barco de margem, uma vez que o problema não
 				impõe restrições ao lobo estar junto da alface.
-				\item[\texttt{moveLobo/2}] Esta cláusula realiza a mudança do lobo e do
+				\item[\texttt{moveLobo/2}] Este predicado realiza a mudança do lobo e do
 				barco de uma margem a outra somente se a ovelha e a alface não ficarem
 				sozinhas em um lado do rio
-				\item[\texttt{moveAlface/2}] Esta cláusula realiza a mudança da alface e do
+				\item[\texttt{moveAlface/2}] Este predicado realiza a mudança da alface e do
 				barco de uma margem a outra somente se o lobo e a ovelha não ficarem
 				sozinhos em um lado do rio 
-				\item[\texttt{moveBarco/2}] Esta cláusula realiza a mudança somente do
+				\item[\texttt{moveBarco/2}] Este predicado realiza a mudança somente do
 				barco de uma margem a outra com a condição que tanto o lobo e a ovelha
 				quanto a ovelha e a alface não ficarão sozinhos em um lado do rio 
 			\end{description}
 	\end{description}
 
 \section*{Representação dos Estados}
+	Para a representação em Prolog foram adotadas listas de átomos como
+	estrutura de dados principal devido a sua flexibilidade e a presença de uma
+	biblioteca de predicados para sua manipulação produzida como atividade
+	prática da disciplina durante o semestre. Os estados do problema estão assim
+	representados:
+	
+	\begin{description}
+		\item[Estado Inicial] \texttt{[[],[barco,ovelha, lobo, alface]]}
+		\item[Estado Intermediário] Alguma combinação dos quatro itens distribuídos
+		nas duas listas segundo as condições abaixo, tal como \texttt{[[lobo,
+		alface],[barco, ovelha]]}
+		\item[Estado Final] \texttt{[[barco,ovelha, lobo, alface],[]]}
+	\end{description}
 
-
+	Por definição, há uma lista mais externa que comporta duas listas internas. A
+	primeira lista interna contém os itens presentes na margem direita e a segunda
+	os itens da margem esquerda. Tais listas são mutuamente exclusivas, sendo a
+	união de ambas sempre igual a \texttt{[barco,ovelha, lobo, alface]}.
+	
+	%TODO: A ordem dos elementos nas listas importa?
+	
 \section*{Implementação da Função Geradora de Sucessores}
-
+	
 
 \section*{Considerações sobre o Trabalho}
+	Este trabalho final de INE5416 proposto pela professora Jerusa foi de grande
+	valia por apresentar como proposta a escolha de um exercício dentre um rol de
+	problemas clássicos que permitem evidenciar ao aluno as vantagens trazidas pelo
+	uso do paradigma lógico para a solução de diversos problemas.
+
+	Através deste trabalho foi possível experimentar diversos problemas inerentes à
+	programação em um paradigma completamente diferente do habitual, treinando as
+	habilidades na abordagem e solução dessas dificuldades.
+	
+	Ainda, este trabalho contribuiu ao resumir bem diversos conceitos vistos
+	durante o semestre abrangendo desde recursão, unificação e listas até culminar no
+	projeto, desenvolvimento e testes de uma aplicação prática. Por outro lado,
+	como os exercícios não demandaram grandes e tediosos esforços de programação os
+	acadêmicos puderam concentrar-se nas modelagens e abordagens de solução
+	adotadas para resolver o problema, as quais foram apresentadas anteriormente
+	neste relatório.
 
 
 \chapter*{Código Fonte}
