@@ -89,7 +89,7 @@ Tecnológico \par Universidade Federal de Santa Catarina}
 		Margem esquerda: \{barco, lobo, ovelha, alface\}
 		\item[Operadores] \hfill
 			\begin{description}
-				\item[\texttt{moveOvelha/2}] Este predicado a sempre irá realizar a
+				\item[\texttt{moveOvelha/2}] Este predicado sempre irá realizar a
 				mudança da ovelha e do barco de margem, uma vez que o problema não
 				impõe restrições ao lobo estar junto da alface.
 				\item[\texttt{moveLobo/2}] Este predicado realiza a mudança do lobo e do
@@ -103,7 +103,6 @@ Tecnológico \par Universidade Federal de Santa Catarina}
 				quanto a ovelha e a alface não ficarão sozinhos em um lado do rio 
 			\end{description}
 	\end{description}
-
 \section*{Representação dos Estados}
 	Para a representação em Prolog foram adotadas listas de átomos como
 	estrutura de dados principal devido a sua flexibilidade e a presença de uma
@@ -127,7 +126,19 @@ Tecnológico \par Universidade Federal de Santa Catarina}
 	%TODO: A ordem dos elementos nas listas importa?
 	
 \section*{Implementação da Função Geradora de Sucessores}
+	Em uma decisão de projeto, os alunos escolheram manter a lógica das restrições
+	aos movimentos válidos, ou seja, garantir que nem lobo e ovelha nem ovelha e
+	alface permaneçam sozinhos, junto com as cláusulas responsáveis por mover os itens de
+	uma margem para outra. Dessa forma, a função geradora de sucessores tornou-se
+	bastante simples. Sua implementação consiste em tentar invocar uma das quatro
+	cláusulas de movimentação de itens, \texttt{moveOvelha/2, moveLobo/2,
+	moveAlface/2 e moveBarco/2}, delegando ao mecanismo de unificação do Prolog a
+	busca por uma transição válida dentre as quatro possíveis.
 	
+	Como algoritmo de busca em espaço de estados foi utilizada a implementação de
+	busca em profundidade (DFS) apresentado por Palazzo em
+	\cite{palazzo:introducao-prolog}.
+		
 
 \section*{Considerações sobre o Trabalho}
 	Este trabalho final de INE5416 proposto pela professora Jerusa foi de grande
