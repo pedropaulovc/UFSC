@@ -74,7 +74,7 @@ class Processor : public Component
     vector<SharedCache *> l1dirarray;
     vector<SharedCache *> l2dirarray;
     vector<NoC *>  nocs;
-    vector<SPM *> spms;
+    SPM              * spm;
     MemoryController * mc;
     NIUController    * niu;
     PCIeController   * pcie;
@@ -83,7 +83,7 @@ class Processor : public Component
     ProcParam procdynp;
     //wire	globalInterconnect;
     //clock_network globalClock;
-    Component core, l2, l3, l1dir, l2dir, noc, mcs, cc, nius, pcies,flashcontrollers, spm;
+    Component core, l2, l3, l1dir, l2dir, noc, mcs, cc, nius, pcies,flashcontrollers, spms;
     int  numCore, numL2, numL3, numNOC, numL1Dir, numL2Dir, numSpm;
     Processor(ParseXML *XML_interface);
     void compute();

@@ -96,13 +96,17 @@ int main(int argc,char *argv[])
 		print_usage(argv[0]);
 	}
 
+	cout << "DEBUG: Debugando" << endl;
 
 	cout<<"McPAT (version "<< VER_MAJOR <<"."<< VER_MINOR
 		<< " of " << VER_UPDATE << ") is computing the target processor...\n "<<endl;
 
+	cout << "DEBUG: Criando objeto ParseXML" << endl;
 	//parse XML-based interface
 	ParseXML *p1= new ParseXML();
+	cout << "DEBUG: Parseando XML" << endl;
 	p1->parse(fb);
+	cout << "DEBUG: Criando objeto processador" << endl;
 	Processor proc(p1);
 	proc.displayEnergy(2, plevel);
 	delete p1;

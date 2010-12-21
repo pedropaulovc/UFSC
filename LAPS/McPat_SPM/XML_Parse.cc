@@ -1403,7 +1403,7 @@ void ParseXML::parse(char* filepath)
 		if (OrderofComponents_3layer>0) OrderofComponents_3layer=OrderofComponents_3layer+1;
 		xNode3=xNode2.getChildNode("component",OrderofComponents_3layer);
 		if (xNode3.isEmpty()==1) {
-			printf("Number of SPMs doesn't match with the amount of data given");
+			printf("Number of SPMs doesn't match with the amount of data given\n");
 			exit(0);
 		}
 		if (strstr(xNode3.getAttribute("id"),"system.spm")!=NULL)
@@ -1423,7 +1423,7 @@ void ParseXML::parse(char* filepath)
 			}
 		}
 		else{
-			printf("Number of SPMs doesn't match with the amount of data given");
+			printf("Number of SPMs doesn't match with the amount of data given\n");
 			exit(0);
 		}
 
@@ -1840,4 +1840,9 @@ void ParseXML::initialize() //Initialize all
 	sys.flashc.type =1;
 	sys.flashc.duty_cycle =1;
 	sys.flashc.total_load_perc=1;
+	//system_spm
+	sys.spm.number_entries=1;
+	sys.spm.read_accesses=1;
+	sys.spm.write_accesses=1;
+	sys.spm.total_accesses=2;
 }

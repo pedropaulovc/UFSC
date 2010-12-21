@@ -62,20 +62,17 @@
 #include <assert.h>
 #include "spm.h"
 
-SPM::SPM(ParseXML *XML_interface, int ithSpm_, InputParameter* interface_ip_)
+SPM::SPM(ParseXML *XML_interface, InputParameter* interface_ip_)
 :XML(XML_interface),
- ithSpm(ithSpm_),
  interface_ip(*interface_ip_)
 {
-  int idx;
-  int tag, data;
   bool is_default, debug;
 
-  double size, line, assoc, banks;
+  double size, line, assoc;
 
   debug           = false;
   is_default=true;//indication for default setup
-
+  set_spm_param();
 
   size                             = spmp.capacity;
   line                             = spmp.blockW;
@@ -85,7 +82,8 @@ SPM::SPM(ParseXML *XML_interface, int ithSpm_, InputParameter* interface_ip_)
   interface_ip.cache_sz            = (int)size;
   interface_ip.line_sz             = (int)line;
   interface_ip.assoc               = 0;
-  interface_ip.nbanks              = 0;
+  interface_ip.fully_assoc         = true;
+  interface_ip.nbanks              = 1;
   interface_ip.out_w               = interface_ip.line_sz;
   interface_ip.access_mode         = 1;
   interface_ip.throughput          = spmp.throughput;
@@ -102,6 +100,11 @@ SPM::SPM(ParseXML *XML_interface, int ithSpm_, InputParameter* interface_ip_)
   interface_ip.num_wr_ports        = 0;
   interface_ip.num_se_rd_ports     = 0;
   interface_ip.force_cache_config  =false;
+
+  unispm.spms = new ArrayST(&interface_ip, spmp.name, Core_device, true, Inorder);
+  unispm.area.set_area(unispm.area.get_area() + unispm.spms->local_result.area);
+  area.set_area(area.get_area() + unispm.spms->local_result.area);
+
 }
 
 void SPM::computeEnergy(bool is_tdp)
@@ -142,6 +145,16 @@ void SPM::displayEnergy(uint32_t indent,bool is_tdp)
 
 void SPM::set_spm_param()
 {
+	//	spmp.name = "SPM";
+	//	interface_ip.data_arr_ram_cell_tech_type    = XML->sys.spm[ithSpm].device_type;//long channel device LSTP
+	//	interface_ip.data_arr_peri_global_tech_type = XML->sys.spm[ithSpm].device_type;
+	//	interface_ip.tag_arr_ram_cell_tech_type     = XML->sys.spm[ithSpm].device_type;
+	//	interface_ip.tag_arr_peri_global_tech_type  = XML->sys.spm[ithSpm].device_type;
+	//	spmp.capacity      = XML->sys.spm[ithSpm].L2_config[0];
+	//	spmp.blockW        = XML->sys.spm[ithSpm].L2_config[1];
+	//	spmp.throughput    = XML->sys.spm[ithSpm].L2_config[4]/spmp.clockRate;
+	//	spmp.latency       = XML->sys.spm[ithSpm].L2_config[5]/spmp.clockRate;
+	//	spmp.duty_cycle    = XML->sys.spm[ithSpm].duty_cycle;
 	spmp.name = "SPM";
 	interface_ip.data_arr_ram_cell_tech_type    = 1;
 	interface_ip.data_arr_peri_global_tech_type = 1;
@@ -152,16 +165,5 @@ void SPM::set_spm_param()
 	spmp.throughput    = 4;
 	spmp.latency       = 1;
 	spmp.duty_cycle    = 1;
-
-//	spmp.name = "SPM";
-//	interface_ip.data_arr_ram_cell_tech_type    = XML->sys.spm[ithSpm].device_type;//long channel device LSTP
-//	interface_ip.data_arr_peri_global_tech_type = XML->sys.spm[ithSpm].device_type;
-//	interface_ip.tag_arr_ram_cell_tech_type     = XML->sys.spm[ithSpm].device_type;
-//	interface_ip.tag_arr_peri_global_tech_type  = XML->sys.spm[ithSpm].device_type;
-//	spmp.capacity      = XML->sys.spm[ithSpm].L2_config[0];
-//	spmp.blockW        = XML->sys.spm[ithSpm].L2_config[1];
-//	spmp.throughput    = XML->sys.spm[ithSpm].L2_config[4]/spmp.clockRate;
-//	spmp.latency       = XML->sys.spm[ithSpm].L2_config[5]/spmp.clockRate;
-//	spmp.duty_cycle    = XML->sys.spm[ithSpm].duty_cycle;
 }
 

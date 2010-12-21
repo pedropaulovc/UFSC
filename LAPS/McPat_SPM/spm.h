@@ -59,7 +59,6 @@
 class SPM :public Component{
   public:
     ParseXML * XML;
-    int ithSpm;
 	InputParameter interface_ip;
     SpmST unispm;
     SPMParam spmp;
@@ -67,7 +66,7 @@ class SPM :public Component{
     statsDef   homenode_rtp_stats;
     statsDef   homenode_stats_t;
 
-    SPM(ParseXML *XML_interface, int ithSpm_, InputParameter* interface_ip_);
+    SPM(ParseXML *XML_interface, InputParameter* interface_ip_);
 	void computeEnergy(bool is_tdp=true);
     void displayEnergy(uint32_t indent = 0,bool is_tdp=true);
     void set_spm_param();
