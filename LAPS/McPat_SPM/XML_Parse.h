@@ -592,7 +592,7 @@ typedef struct{
 	system_L2 L2[64];
 	system_L3 L3[64];
     system_NoC NoC[64];
-	system_spm spm[64];
+	system_spm spm;
     system_mem mem;
 	system_mc mc;
 	system_mc flashc;

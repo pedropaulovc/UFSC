@@ -109,6 +109,7 @@ void ParseXML::parse(char* filepath)
 		if (strcmp(xNode2.getChildNode("param",i).getAttribute("name"),"virtual_address_width")==0) {sys.virtual_address_width=atoi(xNode2.getChildNode("param",i).getAttribute("value"));continue;}
 		if (strcmp(xNode2.getChildNode("param",i).getAttribute("name"),"physical_address_width")==0) {sys.physical_address_width=atoi(xNode2.getChildNode("param",i).getAttribute("value"));continue;}
 		if (strcmp(xNode2.getChildNode("param",i).getAttribute("name"),"virtual_memory_page_size")==0) {sys.virtual_memory_page_size=atoi(xNode2.getChildNode("param",i).getAttribute("value"));continue;}
+		if (strcmp(xNode2.getChildNode("param",i).getAttribute("name"),"number_of_SPMs")==0) {sys.number_spms=atoi(xNode2.getChildNode("param",i).getAttribute("value"));continue;}
 	}
 
 //	if (sys.Private_L2 && sys.number_of_cores!=sys.number_of_L2s)
@@ -1398,6 +1399,33 @@ void ParseXML::parse(char* filepath)
 			printf("some value(s) of number_of_cores/number_of_L2s/number_of_L3s/number_of_NoCs is/are not correct!");
 			exit(0);
 		}
+		//__________________________________________Get system.spm____________________________________________
+		if (OrderofComponents_3layer>0) OrderofComponents_3layer=OrderofComponents_3layer+1;
+		xNode3=xNode2.getChildNode("component",OrderofComponents_3layer);
+		if (xNode3.isEmpty()==1) {
+			printf("Number of SPMs doesn't match with the amount of data given");
+			exit(0);
+		}
+		if (strstr(xNode3.getAttribute("id"),"system.spm")!=NULL)
+		{
+
+			itmp=xNode3.nChildNode("param");
+			for(k=0; k<itmp; k++)
+			{ //get all items of param in system.mem
+				if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"number_entries")==0) {sys.spm.number_entries=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
+			}
+			itmp=xNode3.nChildNode("stat");
+			for(k=0; k<itmp; k++)
+			{ //get all items of stat in system.mem
+				if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"total_accesses")==0) {sys.spm.total_accesses=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
+				if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"read_accesses")==0) {sys.spm.read_accesses=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
+				if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"write_accesses")==0) {sys.spm.write_accesses=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
+			}
+		}
+		else{
+			printf("Number of SPMs doesn't match with the amount of data given");
+			exit(0);
+		}
 
 	}
 }
@@ -1411,6 +1439,7 @@ void ParseXML::initialize() //Initialize all
 	sys.Private_L2 = false;
 	sys.number_of_L3s=1;
 	sys.number_of_NoCs=1;
+	sys.number_spms=1;
 	// All params at the level of 'system'
 	//strcpy(sys.homogeneous_cores,"default");
 	sys.core_tech_node=1;
