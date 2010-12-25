@@ -60,7 +60,6 @@
 #include "XML_Parse.h"
 #include "processor.h"
 #include "version.h"
-#include "spm.h"
 
 
 Processor::Processor(ParseXML *XML_interface)
@@ -70,7 +69,6 @@ Processor::Processor(ParseXML *XML_interface)
  pcie(0),
  flashcontroller(0)
 {
-  cout << "DEBUG: Construtor Processador" << endl;
   /*
    *  placement and routing overhead is 10%, core scales worse than cache 40% is accumulated from 90 to 22nm
    *  There is no point to have heterogeneous memory controller on chip,
@@ -121,7 +119,6 @@ Processor::Processor(ParseXML *XML_interface)
   else
 	  numL2Dir = procdynp.numL2Dir;
 
-  cout << "DEBUG: Construindo cores" << endl;
   for (i = 0;i < numCore; i++)
   {
 		  cores.push_back(new Core(XML,i, &interface_ip));
@@ -151,7 +148,6 @@ Processor::Processor(ParseXML *XML_interface)
 		  }
   }
 
-  cout << "DEBUG: Construindo L2" << endl;
   if (!XML->sys.Private_L2)
   {
   if (numL2 >0)
@@ -184,7 +180,6 @@ Processor::Processor(ParseXML *XML_interface)
 	  }
   }
 
-  cout << "DEBUG: Construindo L3" << endl;
   if (numL3 >0)
 	  for (i = 0;i < numL3; i++)
 	  {
@@ -214,7 +209,6 @@ Processor::Processor(ParseXML *XML_interface)
 
 		  }
 	  }
-  cout << "DEBUG: Construindo L1Dir" << endl;
   if (numL1Dir >0)
 	  for (i = 0;i < numL1Dir; i++)
 	  {
@@ -243,7 +237,7 @@ Processor::Processor(ParseXML *XML_interface)
 			  rt_power = rt_power  + l1dirarray[i]->rt_power;
 		  }
 	  }
-  cout << "DEBUG: Construindo L2Dir" << endl;
+
   if (numL2Dir >0)
 	  for (i = 0;i < numL2Dir; i++)
 	  {
@@ -273,7 +267,6 @@ Processor::Processor(ParseXML *XML_interface)
 		  }
 	  }
 
-  cout << "DEBUG: Construtor MC" << endl;
   if (XML->sys.mc.number_mcs >0 && XML->sys.mc.memory_channels_per_mc>0)
   {
 	  mc = new MemoryController(XML, &interface_ip, MC);
@@ -290,7 +283,6 @@ Processor::Processor(ParseXML *XML_interface)
 
   }
 
-  cout << "DEBUG: Construindo flash controller" << endl;
   if (XML->sys.flashc.number_mcs >0 )//flash controller
   {
 	  flashcontroller = new FlashController(XML, &interface_ip);
@@ -308,7 +300,6 @@ Processor::Processor(ParseXML *XML_interface)
 
   }
 
-  cout << "DEBUG: Construindo NIU" << endl;
   if (XML->sys.niu.number_units >0)
   {
 	  niu = new NIUController(XML, &interface_ip);
@@ -325,7 +316,6 @@ Processor::Processor(ParseXML *XML_interface)
 
   }
 
-  cout << "DEBUG: Construindo PCIe" << endl;
   if (XML->sys.pcie.number_units >0 && XML->sys.pcie.num_channels >0)
   {
 	  pcie = new PCIeController(XML, &interface_ip);
@@ -342,7 +332,6 @@ Processor::Processor(ParseXML *XML_interface)
 
   }
 
-  cout << "DEBUG: Construindo NOC" << endl;
   if (numNOC >0)
   {
 	  for (i = 0;i < numNOC; i++)
@@ -428,24 +417,6 @@ Processor::Processor(ParseXML *XML_interface)
 
 		  }
 	  }
-  }
-
-  cout << "DEBUG: Construindo SPM" << endl;
-  if (XML->sys.spm.number_entries >0)
-  {
-	  cout << "DEBUG: Criando obj SPM" << endl;
-	  spm = new SPM(XML, &interface_ip);
-	  cout << "DEBUG: Computando energia SPM" << endl;
-	  spm->computeEnergy();
-	  spms.area.set_area(spms.area.get_area()+spm->area.get_area()*XML->sys.spm.number_entries);
-	  area.set_area(area.get_area()+spm->area.get_area()*XML->sys.spm.number_entries);
-	  //set_pppm(pppm_t,XML->sys.mc.number_mcs*mc->mcp.clockRate, XML->sys.mc.number_mcs,XML->sys.mc.number_mcs,XML->sys.mc.number_mcs);
-	  spms.power = spm->power*pppm_t;
-	  power = power  + spms.power;
-	  //set_pppm(pppm_t,1/mc->mcp.executionTime, XML->sys.mc.number_mcs,XML->sys.mc.number_mcs,XML->sys.mc.number_mcs);
-	  spms.rt_power = spm->rt_power*pppm_t;
-	  rt_power = rt_power  + spms.rt_power;
-
   }
 
 //  //clock power
@@ -672,18 +643,6 @@ void Processor::displayEnergy(uint32_t indent, int plevel, bool is_tdp)
 					cout << indent_str_next << "Runtime Dynamic = " << pcies.rt_power.readOp.dynamic << " W" << endl;
 					cout <<endl;
 				}
-		if (XML->sys.spm.number_entries >0)
-		{
-			cout <<indent_str<<"Total SPMs: "<<XML->sys.number_spms << " Scratchpad Memories "<<endl;
-			displayDeviceType(XML->sys.device_type, indent);
-			cout << indent_str_next << "Area = " << spms.area.get_area()*1e-6<< " mm^2" << endl;
-			cout << indent_str_next << "Peak Dynamic = " << spms.power.readOp.dynamic << " W" << endl;
-			cout << indent_str_next << "Subthreshold Leakage = "
-				<< (long_channel? spms.power.readOp.longer_channel_leakage:spms.power.readOp.leakage)  <<" W" << endl;
-			cout << indent_str_next << "Gate Leakage = " << spms.power.readOp.gate_leakage << " W" << endl;
-			cout << indent_str_next << "Runtime Dynamic = " << spms.rt_power.readOp.dynamic << " W" << endl;
-			cout <<endl;
-		}
 		cout <<"*****************************************************************************************"<<endl;
 		if (plevel >1)
 		{
@@ -765,7 +724,6 @@ void Processor::set_proc_param()
 	procdynp.numL2   = XML->sys.number_of_L2s;
 	procdynp.numL3   = XML->sys.number_of_L3s;
 	procdynp.numNOC  = XML->sys.number_of_NoCs;
-	procdynp.numSPM  = XML->sys.number_spms;
 	procdynp.numL1Dir  = XML->sys.number_of_L1Directories;
 	procdynp.numL2Dir  = XML->sys.number_of_L2Directories;
 	procdynp.numMC = XML->sys.mc.number_mcs;

@@ -112,13 +112,4 @@ public:
    };
 };
 
-class SpmST :public Component{
-public:
-	ArrayST* spms;
-	powerDef power_t;
-
-	SpmST(){spms=0;};
-	~SpmST(){delete spms; spms=0;};
-};
-
 #endif /* TLB_H_ */

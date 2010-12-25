@@ -205,16 +205,6 @@ public:
     ~CacheDynParam(){};
 };
 
-class SPMParam {
-public:
-	SPMParam(){};
-	SPMParam(ParseXML *XML_interface, int ithSpm_);
-    string name;
-    double    capacity, blockW, duty_cycle;
-    double throughput, latency;
-    ~SPMParam(){};
-};
-
 class MCParam {
 public:
 	MCParam(){};
@@ -258,7 +248,7 @@ public:
 	ProcParam(){};
 	ProcParam(ParseXML *XML_interface, int ithCache_);
     string name;
-    int  numCore, numL2, numL3, numNOC, numSPM, numL1Dir, numL2Dir,numMC, numMCChannel;
+    int  numCore, numL2, numL3, numNOC, numL1Dir, numL2Dir,numMC, numMCChannel;
     bool homoCore, homoL2, homoL3, homoNOC, homoL1Dir, homoL2Dir;
 
     ~ProcParam(){};

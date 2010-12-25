@@ -8,7 +8,6 @@
 		<param name="number_of_L2s" value="4"/> <!-- This number means how many L2 clusters in each cluster there can be multiple banks/ports -->
 		<param name="number_of_L3s" value="0"/> <!-- This number means how many L3 clusters -->
 		<param name="number_of_NoCs" value="1"/>
-		<param name="number_of_SPMs" value="1"/>
 		<param name="homogeneous_cores" value="1"/><!--1 means homo -->
 		<param name="homogeneous_L2s" value="1"/>
 		<param name="homogeneous_L1Directorys" value="1"/>
@@ -242,6 +241,13 @@
 				<param name="BTB_config" value="8192,4,2,1, 1,3"/>
 				<!-- the parameters are capacity,block_width,associativity,bank, throughput w.r.t. core clock, latency w.r.t. core clock,-->
 			</component>
+			<component id="system.core0.spm" name="spm">
+				<param name="spm_config" value="8192,1,1,3,1"/>
+				<!-- the parameters are capacity,bank, throughput w.r.t. core clock, latency w.r.t. core clock, redundancy overhead factor -->
+				<!-- redundancy overhead;//1 no redundancy, 1.25 25% of redundancy overhead -->
+				<stat name="read_accesses" value="200000"/>
+				<stat name="write_accesses" value="27276"/>
+			</component>
 	</component>
 		<component id="system.L1Directory0" name="L1Directory0">
 				<param name="Directory_type" value="0"/>
@@ -436,13 +442,6 @@
 			<stat name="total_load_perc" value="0.7"/> <!-- Percentage of total achived load to total achivable bandwidth  -->
 			<!-- McPAT does not track individual flash controller, instead, it takes the total accesses and calculate 
 			the average power per fc or per channel. This is sufficent for most application -->  			
-		</component>
-<!--**********************************************************************-->
-		<component id="system.spm" name="spm">
-		    <param name="number_entries" value="64"/>
-			<stat name="total_accesses" value="150000"/> 
-			<stat name="read_accesses" value="100000"/> 
-			<stat name="write_accesses" value="50000"/> 
 		</component>
 <!--**********************************************************************-->
 

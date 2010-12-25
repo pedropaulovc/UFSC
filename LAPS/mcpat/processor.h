@@ -62,7 +62,6 @@
 #include "sharedcache.h"
 #include "noc.h"
 #include "iocontrollers.h"
-#include "spm.h"
 
 class Processor : public Component
 {
@@ -74,7 +73,6 @@ class Processor : public Component
     vector<SharedCache *> l1dirarray;
     vector<SharedCache *> l2dirarray;
     vector<NoC *>  nocs;
-    SPM              * spm;
     MemoryController * mc;
     NIUController    * niu;
     PCIeController   * pcie;
@@ -83,8 +81,8 @@ class Processor : public Component
     ProcParam procdynp;
     //wire	globalInterconnect;
     //clock_network globalClock;
-    Component core, l2, l3, l1dir, l2dir, noc, mcs, cc, nius, pcies,flashcontrollers, spms;
-    int  numCore, numL2, numL3, numNOC, numL1Dir, numL2Dir, numSpm;
+    Component core, l2, l3, l1dir, l2dir, noc, mcs, cc, nius, pcies,flashcontrollers;
+    int  numCore, numL2, numL3, numNOC, numL1Dir, numL2Dir;
     Processor(ParseXML *XML_interface);
     void compute();
     void set_proc_param();

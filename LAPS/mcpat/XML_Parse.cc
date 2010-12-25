@@ -109,7 +109,6 @@ void ParseXML::parse(char* filepath)
 		if (strcmp(xNode2.getChildNode("param",i).getAttribute("name"),"virtual_address_width")==0) {sys.virtual_address_width=atoi(xNode2.getChildNode("param",i).getAttribute("value"));continue;}
 		if (strcmp(xNode2.getChildNode("param",i).getAttribute("name"),"physical_address_width")==0) {sys.physical_address_width=atoi(xNode2.getChildNode("param",i).getAttribute("value"));continue;}
 		if (strcmp(xNode2.getChildNode("param",i).getAttribute("name"),"virtual_memory_page_size")==0) {sys.virtual_memory_page_size=atoi(xNode2.getChildNode("param",i).getAttribute("value"));continue;}
-		if (strcmp(xNode2.getChildNode("param",i).getAttribute("name"),"number_of_SPMs")==0) {sys.number_spms=atoi(xNode2.getChildNode("param",i).getAttribute("value"));continue;}
 	}
 
 //	if (sys.Private_L2 && sys.number_of_cores!=sys.number_of_L2s)
@@ -593,6 +592,41 @@ void ParseXML::parse(char* filepath)
 								if (strcmp(xNode4.getChildNode("stat",k).getAttribute("name"),"read_misses")==0) {sys.core[i].BTB.read_misses=atof(xNode4.getChildNode("stat",k).getAttribute("value"));continue;}
 								if (strcmp(xNode4.getChildNode("stat",k).getAttribute("name"),"write_misses")==0) {sys.core[i].BTB.write_misses=atof(xNode4.getChildNode("stat",k).getAttribute("value"));continue;}
 								if (strcmp(xNode4.getChildNode("stat",k).getAttribute("name"),"replacements")==0) {sys.core[i].BTB.replacements=atof(xNode4.getChildNode("stat",k).getAttribute("value"));continue;}
+							}
+						}
+						if (strcmp(xNode4.getAttribute("name"),"spm")==0)
+						{//find system.core0.spm
+							itmp=xNode4.nChildNode("param");
+							for(k=0; k<itmp; k++)
+							{ //get all items of param in system.core0.spm--spm
+								if (strcmp(xNode4.getChildNode("param",k).getAttribute("name"),"spm_config")==0)
+								{
+									strtmp.assign(xNode4.getChildNode("param",k).getAttribute("value"));
+									m=0;
+									for(n=0; n<strtmp.length(); n++)
+									{
+										if (strtmp[n]!=',')
+										{
+											sprintf(chtmp,"%c",strtmp[n]);
+											strcat(chtmp1,chtmp);
+										}
+										else{
+											sys.core[i].spm.spm_config[m]=atof(chtmp1);
+											m++;
+											chtmp1[0]='\0';
+										}
+									}
+									sys.core[i].spm.spm_config[m]=atof(chtmp1);
+									m++;
+									chtmp1[0]='\0';
+									continue;
+								}
+							}
+							itmp=xNode4.nChildNode("stat");
+							for(k=0; k<itmp; k++)
+							{ //get all items of stat in dcache
+								if (strcmp(xNode4.getChildNode("stat",k).getAttribute("name"),"read_accesses")==0) {sys.core[i].dcache.read_accesses=atof(xNode4.getChildNode("stat",k).getAttribute("value"));continue;}
+								if (strcmp(xNode4.getChildNode("stat",k).getAttribute("name"),"write_accesses")==0) {sys.core[i].dcache.write_accesses=atof(xNode4.getChildNode("stat",k).getAttribute("value"));continue;}
 							}
 						}
 					}
@@ -1399,33 +1433,6 @@ void ParseXML::parse(char* filepath)
 			printf("some value(s) of number_of_cores/number_of_L2s/number_of_L3s/number_of_NoCs is/are not correct!");
 			exit(0);
 		}
-		//__________________________________________Get system.spm____________________________________________
-		if (OrderofComponents_3layer>0) OrderofComponents_3layer=OrderofComponents_3layer+1;
-		xNode3=xNode2.getChildNode("component",OrderofComponents_3layer);
-		if (xNode3.isEmpty()==1) {
-			printf("Number of SPMs doesn't match with the amount of data given\n");
-			exit(0);
-		}
-		if (strstr(xNode3.getAttribute("id"),"system.spm")!=NULL)
-		{
-
-			itmp=xNode3.nChildNode("param");
-			for(k=0; k<itmp; k++)
-			{ //get all items of param in system.mem
-				if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"number_entries")==0) {sys.spm.number_entries=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
-			}
-			itmp=xNode3.nChildNode("stat");
-			for(k=0; k<itmp; k++)
-			{ //get all items of stat in system.mem
-				if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"total_accesses")==0) {sys.spm.total_accesses=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
-				if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"read_accesses")==0) {sys.spm.read_accesses=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
-				if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"write_accesses")==0) {sys.spm.write_accesses=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
-			}
-		}
-		else{
-			printf("Number of SPMs doesn't match with the amount of data given\n");
-			exit(0);
-		}
 
 	}
 }
@@ -1439,7 +1446,6 @@ void ParseXML::initialize() //Initialize all
 	sys.Private_L2 = false;
 	sys.number_of_L3s=1;
 	sys.number_of_NoCs=1;
-	sys.number_spms=1;
 	// All params at the level of 'system'
 	//strcpy(sys.homogeneous_cores,"default");
 	sys.core_tech_node=1;
@@ -1642,6 +1648,10 @@ void ParseXML::initialize() //Initialize all
 		sys.core[i].BTB.read_misses=1;
 		sys.core[i].BTB.write_misses=1;
 		sys.core[i].BTB.replacements=1;
+		//system.core?.spm
+		for (j=0; j<20; j++) sys.core[i].spm.spm_config[j]=1;
+		sys.core[i].spm.read_accesses=1;
+		sys.core[i].spm.write_accesses=1;
 	}
 
 	//system_L1directory
@@ -1840,9 +1850,4 @@ void ParseXML::initialize() //Initialize all
 	sys.flashc.type =1;
 	sys.flashc.duty_cycle =1;
 	sys.flashc.total_load_perc=1;
-	//system_spm
-	sys.spm.number_entries=1;
-	sys.spm.read_accesses=1;
-	sys.spm.write_accesses=1;
-	sys.spm.total_accesses=2;
 }

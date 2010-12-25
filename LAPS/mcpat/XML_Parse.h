@@ -168,6 +168,13 @@ typedef struct{
 	double replacements;
 } BTB_systemcore;
 typedef struct{
+	//params
+	double spm_config[20];
+	//stats
+	double read_accesses;
+	double write_accesses;
+} spm_systemcore;
+typedef struct{
 	//all params at the level of system.core(0-n)
 	int clock_rate;
 	bool opt_local;
@@ -302,6 +309,7 @@ typedef struct{
 	dtlb_systemcore dtlb;
 	dcache_systemcore dcache;
 	BTB_systemcore BTB;
+	spm_systemcore spm;
 
 } system_core;
 typedef struct{
@@ -482,15 +490,6 @@ typedef struct{
 } system_mem;
 typedef struct{
 	//params
-	int number_entries;
-	//stats
-	double total_accesses;
-	double read_accesses;
-	double write_accesses;
-
-} system_spm;
-typedef struct{
-	//params
     //Common Param for mc and fc
 	double peak_transfer_rate;
 	int number_mcs;
@@ -551,7 +550,6 @@ typedef struct{
 	int number_of_L3s;
 	int number_of_NoCs;
 	int number_of_dir_levels;
-	int number_spms;
     int domain_size;
     int first_level_dir;
 	// All params at the level of 'system'
@@ -592,7 +590,6 @@ typedef struct{
 	system_L2 L2[64];
 	system_L3 L3[64];
     system_NoC NoC[64];
-	system_spm spm;
     system_mem mem;
 	system_mc mc;
 	system_mc flashc;
