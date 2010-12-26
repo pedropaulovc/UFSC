@@ -918,6 +918,39 @@ LoadStoreU::LoadStoreU(ParseXML* XML_interface, int ithCore_, InputParameter* in
 		  lsq_height=(LSQ->local_result.cache_ht + LoadQ->local_result.cache_ht)*sqrt(cdb_overhead);/*XML->sys.core[ithCore].number_hardware_threads*/
 	  }
 
+	  //spm
+	  if(coredynp.has_spm)
+	  {
+		  size                             = (int)XML->sys.core[ithCore].spm.spm_config[0];
+		  line                             = (int)XML->sys.core[ithCore].spm.spm_config[1];
+		  banks                            = (int)XML->sys.core[ithCore].spm.spm_config[2];
+		  interface_ip.specific_tag        = 0;
+		  interface_ip.tag_w               = 0;
+		  interface_ip.cache_sz            = debug?32768:(int)XML->sys.core[ithCore].spm.spm_config[0];
+		  interface_ip.line_sz             = debug?64:(int)XML->sys.core[ithCore].dcache.dcache_config[1];
+		  interface_ip.assoc               = 1;
+		  interface_ip.nbanks              = debug?1:(int)XML->sys.core[ithCore].spm.spm_config[1];
+		  interface_ip.out_w               = interface_ip.line_sz*8;
+	  	  interface_ip.access_mode         = 0;//debug?0:XML->sys.core[ithCore].spm.spm_config[5];
+	  	  interface_ip.throughput          = debug?1.0/clockRate:XML->sys.core[ithCore].spm.spm_config[3]/clockRate;
+	  	  interface_ip.latency             = debug?3.0/clockRate:XML->sys.core[ithCore].spm.spm_config[4]/clockRate;
+	  	  interface_ip.is_cache            = false;
+	  	  interface_ip.pure_ram            = true;
+	  	  interface_ip.pure_cam            = false;
+	  	  interface_ip.obj_func_dyn_energy = 0;
+	  	  interface_ip.obj_func_dyn_power  = 0;
+	  	  interface_ip.obj_func_leak_power = 0;
+	  	  interface_ip.obj_func_cycle_t    = 1;
+	  	  interface_ip.num_rw_ports    = debug?1:XML->sys.core[ithCore].memory_ports;//usually In-order has 1 and OOO has 2 at least.
+	  	  interface_ip.num_rd_ports    = 0;
+	  	  interface_ip.num_wr_ports    = 0;
+	  	  interface_ip.num_se_rd_ports = 0;
+	  	  spm.spms = new ArrayST(&interface_ip, "spm", Core_device, coredynp.opt_local, coredynp.core_ty);
+	  	  spm.area.set_area(spm.area.get_area()+ spm.spms->local_result.area);
+	  	  area.set_area(area.get_area()+ spm.spms->local_result.area);
+	  	  //output_data_csv(spm.spms.local_result);
+	  }
+
 }
 
 MemManU::MemManU(ParseXML* XML_interface, int ithCore_, InputParameter* interface_ip_, const CoreDynParam & dyn_p_,bool exist_)
@@ -3051,6 +3084,17 @@ void LoadStoreU::computeEnergy(bool is_tdp)
 	    		LoadQ->stats_t.readAc.access = LoadQ->stats_t.writeAc.access = LoadQ->l_ip.num_search_ports*coredynp.LSU_duty_cycle;
 	    		LoadQ->tdp_stats = LoadQ->stats_t;
 	    	}
+
+	    	if(coredynp.has_spm)
+	    	{
+		    	spm.spms->stats_t.readAc.access  = 0.67*spm.spms->l_ip.num_rw_ports*coredynp.LSU_duty_cycle;
+		    	spm.spms->stats_t.readAc.miss    = 0;
+		    	spm.spms->stats_t.readAc.hit     = spm.spms->stats_t.readAc.access - spm.spms->stats_t.readAc.miss;
+		    	spm.spms->stats_t.writeAc.access = 0.33*spm.spms->l_ip.num_rw_ports*coredynp.LSU_duty_cycle;
+		    	spm.spms->stats_t.writeAc.miss   = 0;
+		    	spm.spms->stats_t.writeAc.hit    = spm.spms->stats_t.writeAc.access -	spm.spms->stats_t.writeAc.miss;
+		    	spm.spms->tdp_stats = spm.spms->stats_t;
+	    	}
 	    }
 	    else
 	    {
@@ -3107,10 +3151,27 @@ void LoadStoreU::computeEnergy(bool is_tdp)
 		    	LoadQ->rtp_stats = LoadQ->stats_t;
 	    	}
 
+	    	if(coredynp.has_spm)
+			{
+	    		spm.spms->stats_t.readAc.access  = XML->sys.core[ithCore].spm.read_accesses;
+	    		spm.spms->stats_t.readAc.miss    = 0;
+	    		spm.spms->stats_t.readAc.hit     = spm.spms->stats_t.readAc.access - spm.spms->stats_t.readAc.miss;
+	    		spm.spms->stats_t.writeAc.access = XML->sys.core[ithCore].spm.write_accesses;
+	    		spm.spms->stats_t.writeAc.miss   = 0;
+	    		spm.spms->stats_t.writeAc.hit    = dcache.caches->stats_t.writeAc.access -	spm.spms->stats_t.writeAc.miss;
+	    		spm.spms->rtp_stats = dcache.caches->stats_t;
+			}
 	    }
 
 	dcache.power_t.reset();
 	LSQ->power_t.reset();
+	if(coredynp.has_spm)
+	{
+		spm.power_t.reset();
+		spm.power_t.readOp.dynamic += (spm.spms->stats_t.readAc.access*spm.spms->local_result.power.readOp.dynamic+
+				spm.spms->stats_t.writeAc.access*spm.spms->local_result.power.writeOp.dynamic);
+	}
+
     dcache.power_t.readOp.dynamic	+= (dcache.caches->stats_t.readAc.hit*dcache.caches->local_result.power.readOp.dynamic+
     		dcache.caches->stats_t.readAc.miss*dcache.caches->local_result.power.readOp.dynamic+
     		dcache.caches->stats_t.writeAc.miss*dcache.caches->local_result.tag_array2->power.readOp.dynamic+
@@ -3174,6 +3235,12 @@ void LoadStoreU::computeEnergy(bool is_tdp)
     		LoadQ->power = LoadQ->power_t + LoadQ->local_result.power *pppm_lkg;
     		power     = power + LoadQ->power;
     	}
+
+    	if(coredynp.has_spm)
+    	{
+    		spm.power = spm.power_t + (spm.spms->local_result.power) * pppm_lkg;
+    		power     = power + spm.power;
+    	}
     }
     else
     {
@@ -3200,6 +3267,12 @@ void LoadStoreU::computeEnergy(bool is_tdp)
     		LoadQ->rt_power = LoadQ->power_t + LoadQ->local_result.power *pppm_lkg;
     		rt_power     = rt_power + LoadQ->rt_power;
     	}
+
+    	if(coredynp.has_spm)
+    	{
+    		spm.rt_power = spm.power_t + spm.spms->local_result.power *pppm_lkg;
+    		rt_power     = rt_power + spm.rt_power;
+    	}
     }
 }
 
@@ -3222,6 +3295,19 @@ void LoadStoreU::displayEnergy(uint32_t indent,int plevel,bool is_tdp)
 		cout << indent_str_next << "Gate Leakage = " << dcache.power.readOp.gate_leakage << " W" << endl;
 		cout << indent_str_next << "Runtime Dynamic = " << dcache.rt_power.readOp.dynamic/executionTime << " W" << endl;
 		cout <<endl;
+
+		if(coredynp.has_spm)
+		{
+			cout << indent_str << "SPM:" << endl;
+			cout << indent_str_next << "Area = " << spm.area.get_area()*1e-6<< " mm^2" << endl;
+			cout << indent_str_next << "Peak Dynamic = " << spm.power.readOp.dynamic*clockRate << " W" << endl;
+			cout << indent_str_next << "Subthreshold Leakage = "
+				<< (long_channel? spm.power.readOp.longer_channel_leakage:spm.power.readOp.leakage )<<" W" << endl;
+			cout << indent_str_next << "Gate Leakage = " << spm.power.readOp.gate_leakage << " W" << endl;
+			cout << indent_str_next << "Runtime Dynamic = " << spm.rt_power.readOp.dynamic/executionTime << " W" << endl;
+			cout <<endl;
+		}
+
 		if (coredynp.core_ty==Inorder)
 		{
 			cout << indent_str << "Load/Store Queue:" << endl;
@@ -3262,6 +3348,11 @@ void LoadStoreU::displayEnergy(uint32_t indent,int plevel,bool is_tdp)
 		cout << indent_str_next << "Data Cache    Peak Dynamic = " << dcache.rt_power.readOp.dynamic*clockRate << " W" << endl;
 		cout << indent_str_next << "Data Cache    Subthreshold Leakage = " << dcache.rt_power.readOp.leakage <<" W" << endl;
 		cout << indent_str_next << "Data Cache    Gate Leakage = " << dcache.rt_power.readOp.gate_leakage << " W" << endl;
+
+		cout << indent_str_next << "SPM    Peak Dynamic = " << spm.rt_power.readOp.dynamic*clockRate << " W" << endl;
+		cout << indent_str_next << "SPM    Subthreshold Leakage = " << spm.rt_power.readOp.leakage <<" W" << endl;
+		cout << indent_str_next << "SPM    Gate Leakage = " << spm.rt_power.readOp.gate_leakage << " W" << endl;
+
 		if (coredynp.core_ty==Inorder)
 		{
 			cout << indent_str_next << "Load/Store Queue   Peak Dynamic = " << LSQ->rt_power.readOp.dynamic*clockRate  << " W" << endl;
@@ -4041,6 +4132,7 @@ void Core::set_core_param()
     coredynp.num_alus      = XML->sys.core[ithCore].ALU_per_core;
     coredynp.num_fpus      = XML->sys.core[ithCore].FPU_per_core;
     coredynp.num_muls      = XML->sys.core[ithCore].MUL_per_core;
+    coredynp.has_spm      = XML->sys.core[ithCore].has_spm>0?true:false;
 
 
     coredynp.num_hthreads	     = XML->sys.core[ithCore].number_hardware_threads;

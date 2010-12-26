@@ -112,4 +112,15 @@ public:
    };
 };
 
+class SPM :public Component{
+public:
+  ArrayST* spms;
+  powerDef power_t;//temp value holder for both (max) power and runtime power
+  SPM(){spms=0;};
+  ~SPM(){
+	  if (spms)      {//spms->local_result.cleanup();
+					  delete spms; spms=0;}
+   };
+};
+
 #endif /* TLB_H_ */

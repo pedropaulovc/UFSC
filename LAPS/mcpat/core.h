@@ -168,6 +168,7 @@ class LoadStoreU :public Component {
 	double scktRatio, chip_PR_overhead, macro_PR_overhead;
 	double lsq_height;
 	DataCache dcache;
+	SPM spm;
 	ArrayST * LSQ;//it is actually the store queue but for inorder processors it serves as both loadQ and StoreQ
 	ArrayST * LoadQ;
 	bool exist;
