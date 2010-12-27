@@ -3158,8 +3158,8 @@ void LoadStoreU::computeEnergy(bool is_tdp)
 	    		spm.spms->stats_t.readAc.hit     = spm.spms->stats_t.readAc.access - spm.spms->stats_t.readAc.miss;
 	    		spm.spms->stats_t.writeAc.access = XML->sys.core[ithCore].spm.write_accesses;
 	    		spm.spms->stats_t.writeAc.miss   = 0;
-	    		spm.spms->stats_t.writeAc.hit    = dcache.caches->stats_t.writeAc.access -	spm.spms->stats_t.writeAc.miss;
-	    		spm.spms->rtp_stats = dcache.caches->stats_t;
+	    		spm.spms->stats_t.writeAc.hit    = spm.spms->stats_t.writeAc.access -	spm.spms->stats_t.writeAc.miss;
+	    		spm.spms->rtp_stats = spm.spms->stats_t;
 			}
 	    }
 
