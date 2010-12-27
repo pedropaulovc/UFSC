@@ -3349,10 +3349,12 @@ void LoadStoreU::displayEnergy(uint32_t indent,int plevel,bool is_tdp)
 		cout << indent_str_next << "Data Cache    Subthreshold Leakage = " << dcache.rt_power.readOp.leakage <<" W" << endl;
 		cout << indent_str_next << "Data Cache    Gate Leakage = " << dcache.rt_power.readOp.gate_leakage << " W" << endl;
 
-		cout << indent_str_next << "SPM    Peak Dynamic = " << spm.rt_power.readOp.dynamic*clockRate << " W" << endl;
-		cout << indent_str_next << "SPM    Subthreshold Leakage = " << spm.rt_power.readOp.leakage <<" W" << endl;
-		cout << indent_str_next << "SPM    Gate Leakage = " << spm.rt_power.readOp.gate_leakage << " W" << endl;
-
+		if(coredynp.has_spm)
+		{
+			cout << indent_str_next << "SPM    Peak Dynamic = " << spm.rt_power.readOp.dynamic*clockRate << " W" << endl;
+			cout << indent_str_next << "SPM    Subthreshold Leakage = " << spm.rt_power.readOp.leakage <<" W" << endl;
+			cout << indent_str_next << "SPM    Gate Leakage = " << spm.rt_power.readOp.gate_leakage << " W" << endl;
+		}
 		if (coredynp.core_ty==Inorder)
 		{
 			cout << indent_str_next << "Load/Store Queue   Peak Dynamic = " << LSQ->rt_power.readOp.dynamic*clockRate  << " W" << endl;
